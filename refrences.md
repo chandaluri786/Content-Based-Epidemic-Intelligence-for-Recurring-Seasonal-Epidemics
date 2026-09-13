@@ -1,0 +1,9 @@
+https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1008277&type=printable
+https://publichealth.jmir.org/2022/10/e36211/PDF
+https://ojphi.org/ojs/index.php/ojphi/article/download/4479/3647
+https://link.springer.com/content/pdf/10.1007/978-981-97-4581-4_17.pdf
+https://www.nature.com/articles/s41597-025-05276-2.pdf
+https://aclanthology.org/2024.nlp4pi-1.24.pdf
+https://www.tandfonline.com/doi/pdf/10.1080/15230406.2023.2264753?needAccess=true
+https://etasr.com/index.php/ETASR/article/download/14931/5973
+https://arxiv.org/pdf/2506.19548
