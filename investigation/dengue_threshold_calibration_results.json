@@ -1,0 +1,734 @@
+{
+  "Sao Paulo": {
+    "tier": "large_metro",
+    "city_p75_incidence": 7.68,
+    "flat_onset_count": 6,
+    "relative_onset_count": 6,
+    "flat_onsets": {
+      "2015": {
+        "week": 201505,
+        "incidence": 12.15
+      },
+      "2019": {
+        "week": 201911,
+        "incidence": 11.74
+      },
+      "2021": {
+        "week": 202114,
+        "incidence": 13.62
+      },
+      "2022": {
+        "week": 202213,
+        "incidence": 10.2
+      },
+      "2023": {
+        "week": 202306,
+        "incidence": 10.58
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 20.13
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201505,
+        "incidence": 12.15
+      },
+      "2019": {
+        "week": 201910,
+        "incidence": 9.31
+      },
+      "2021": {
+        "week": 202113,
+        "incidence": 9.35
+      },
+      "2022": {
+        "week": 202213,
+        "incidence": 10.2
+      },
+      "2023": {
+        "week": 202304,
+        "incidence": 8.18
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 20.13
+      }
+    }
+  },
+  "Rio de Janeiro": {
+    "tier": "large_metro",
+    "city_p75_incidence": 6.47,
+    "flat_onset_count": 5,
+    "relative_onset_count": 6,
+    "flat_onsets": {
+      "2015": {
+        "week": 201514,
+        "incidence": 10.24
+      },
+      "2016": {
+        "week": 201607,
+        "incidence": 13.17
+      },
+      "2019": {
+        "week": 201913,
+        "incidence": 11.87
+      },
+      "2023": {
+        "week": 202309,
+        "incidence": 13.13
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 36.54
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201514,
+        "incidence": 10.24
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 8.15
+      },
+      "2019": {
+        "week": 201912,
+        "incidence": 9.53
+      },
+      "2022": {
+        "week": 202218,
+        "incidence": 6.83
+      },
+      "2023": {
+        "week": 202308,
+        "incidence": 7.65
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 36.54
+      }
+    }
+  },
+  "Belo Horizonte": {
+    "tier": "large_metro",
+    "city_p75_incidence": 24.08,
+    "flat_onset_count": 10,
+    "relative_onset_count": 6,
+    "flat_onsets": {
+      "2015": {
+        "week": 201509,
+        "incidence": 16.62
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 111.32
+      },
+      "2017": {
+        "week": 201701,
+        "incidence": 22.53
+      },
+      "2018": {
+        "week": 201801,
+        "incidence": 10.63
+      },
+      "2019": {
+        "week": 201901,
+        "incidence": 11.02
+      },
+      "2020": {
+        "week": 202002,
+        "incidence": 14.83
+      },
+      "2021": {
+        "week": 202101,
+        "incidence": 11.14
+      },
+      "2022": {
+        "week": 202201,
+        "incidence": 10.15
+      },
+      "2023": {
+        "week": 202301,
+        "incidence": 18.4
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 139.22
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201510,
+        "incidence": 24.39
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 111.32
+      },
+      "2019": {
+        "week": 201907,
+        "incidence": 33.79
+      },
+      "2020": {
+        "week": 202007,
+        "incidence": 26.89
+      },
+      "2023": {
+        "week": 202303,
+        "incidence": 25.3
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 139.22
+      }
+    }
+  },
+  "Salvador": {
+    "tier": "mid_metro",
+    "city_p75_incidence": 7.13,
+    "flat_onset_count": 5,
+    "relative_onset_count": 5,
+    "flat_onsets": {
+      "2015": {
+        "week": 201527,
+        "incidence": 11.57
+      },
+      "2019": {
+        "week": 201926,
+        "incidence": 10.25
+      },
+      "2020": {
+        "week": 202003,
+        "incidence": 10.84
+      },
+      "2023": {
+        "week": 202313,
+        "incidence": 10.07
+      },
+      "2024": {
+        "week": 202405,
+        "incidence": 12.83
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201514,
+        "incidence": 9.7
+      },
+      "2019": {
+        "week": 201920,
+        "incidence": 8.52
+      },
+      "2020": {
+        "week": 202002,
+        "incidence": 9.8
+      },
+      "2023": {
+        "week": 202305,
+        "incidence": 7.38
+      },
+      "2024": {
+        "week": 202405,
+        "incidence": 12.83
+      }
+    }
+  },
+  "Fortaleza": {
+    "tier": "mid_metro",
+    "city_p75_incidence": 20.35,
+    "flat_onset_count": 10,
+    "relative_onset_count": 9,
+    "flat_onsets": {
+      "2015": {
+        "week": 201505,
+        "incidence": 11.58
+      },
+      "2016": {
+        "week": 201604,
+        "incidence": 13.66
+      },
+      "2017": {
+        "week": 201701,
+        "incidence": 15.07
+      },
+      "2018": {
+        "week": 201813,
+        "incidence": 10.83
+      },
+      "2019": {
+        "week": 201911,
+        "incidence": 10.01
+      },
+      "2020": {
+        "week": 202005,
+        "incidence": 11.65
+      },
+      "2021": {
+        "week": 202114,
+        "incidence": 16.86
+      },
+      "2022": {
+        "week": 202207,
+        "incidence": 11.09
+      },
+      "2023": {
+        "week": 202306,
+        "incidence": 12.02
+      },
+      "2024": {
+        "week": 202405,
+        "incidence": 10.59
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201509,
+        "incidence": 22.44
+      },
+      "2016": {
+        "week": 201609,
+        "incidence": 20.58
+      },
+      "2017": {
+        "week": 201703,
+        "incidence": 23.56
+      },
+      "2019": {
+        "week": 201914,
+        "incidence": 24.94
+      },
+      "2020": {
+        "week": 202007,
+        "incidence": 20.55
+      },
+      "2021": {
+        "week": 202116,
+        "incidence": 21.37
+      },
+      "2022": {
+        "week": 202211,
+        "incidence": 25.57
+      },
+      "2023": {
+        "week": 202309,
+        "incidence": 27.46
+      },
+      "2024": {
+        "week": 202409,
+        "incidence": 21.65
+      }
+    }
+  },
+  "Recife": {
+    "tier": "mid_metro",
+    "city_p75_incidence": 16.09,
+    "flat_onset_count": 7,
+    "relative_onset_count": 5,
+    "flat_onsets": {
+      "2015": {
+        "week": 201501,
+        "incidence": 21.47
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 75.3
+      },
+      "2019": {
+        "week": 201914,
+        "incidence": 10.04
+      },
+      "2020": {
+        "week": 202027,
+        "incidence": 12.46
+      },
+      "2021": {
+        "week": 202115,
+        "incidence": 11.01
+      },
+      "2023": {
+        "week": 202310,
+        "incidence": 12.78
+      },
+      "2024": {
+        "week": 202405,
+        "incidence": 10.97
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201501,
+        "incidence": 21.47
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 75.3
+      },
+      "2019": {
+        "week": 201918,
+        "incidence": 19.29
+      },
+      "2021": {
+        "week": 202116,
+        "incidence": 17.42
+      },
+      "2024": {
+        "week": 202406,
+        "incidence": 16.19
+      }
+    }
+  },
+  "Porto Alegre": {
+    "tier": "mid_metro",
+    "city_p75_incidence": 2.83,
+    "flat_onset_count": 4,
+    "relative_onset_count": 5,
+    "flat_onsets": {
+      "2016": {
+        "week": 201613,
+        "incidence": 10.95
+      },
+      "2022": {
+        "week": 202210,
+        "incidence": 15.25
+      },
+      "2023": {
+        "week": 202311,
+        "incidence": 14.81
+      },
+      "2024": {
+        "week": 202406,
+        "incidence": 15.03
+      }
+    },
+    "relative_onsets": {
+      "2016": {
+        "week": 201601,
+        "incidence": 3.36
+      },
+      "2019": {
+        "week": 201914,
+        "incidence": 3.43
+      },
+      "2022": {
+        "week": 202209,
+        "incidence": 4.1
+      },
+      "2023": {
+        "week": 202309,
+        "incidence": 6.41
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 4.7
+      }
+    }
+  },
+  "Manaus": {
+    "tier": "small_metro",
+    "city_p75_incidence": 3.56,
+    "flat_onset_count": 5,
+    "relative_onset_count": 7,
+    "flat_onsets": {
+      "2016": {
+        "week": 201603,
+        "incidence": 11.58
+      },
+      "2017": {
+        "week": 201705,
+        "incidence": 10.9
+      },
+      "2021": {
+        "week": 202110,
+        "incidence": 10.41
+      },
+      "2023": {
+        "week": 202351,
+        "incidence": 11.97
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 55.73
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201508,
+        "incidence": 4.14
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 7.16
+      },
+      "2017": {
+        "week": 201701,
+        "incidence": 5.72
+      },
+      "2018": {
+        "week": 201814,
+        "incidence": 3.87
+      },
+      "2021": {
+        "week": 202105,
+        "incidence": 5.5
+      },
+      "2023": {
+        "week": 202310,
+        "incidence": 3.84
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 55.73
+      }
+    }
+  },
+  "Belem": {
+    "tier": "small_metro",
+    "city_p75_incidence": 3.09,
+    "flat_onset_count": 2,
+    "relative_onset_count": 6,
+    "flat_onsets": {
+      "2016": {
+        "week": 201606,
+        "incidence": 11.74
+      },
+      "2024": {
+        "week": 202405,
+        "incidence": 10.9
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201507,
+        "incidence": 4.4
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 5.13
+      },
+      "2017": {
+        "week": 201703,
+        "incidence": 3.6
+      },
+      "2018": {
+        "week": 201805,
+        "incidence": 3.4
+      },
+      "2020": {
+        "week": 202006,
+        "incidence": 3.2
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 3.88
+      }
+    }
+  },
+  "Goiania": {
+    "tier": "small_metro",
+    "city_p75_incidence": 72.03,
+    "flat_onset_count": 10,
+    "relative_onset_count": 8,
+    "flat_onsets": {
+      "2015": {
+        "week": 201501,
+        "incidence": 73.43
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 110.54
+      },
+      "2017": {
+        "week": 201701,
+        "incidence": 35.28
+      },
+      "2018": {
+        "week": 201801,
+        "incidence": 39.19
+      },
+      "2019": {
+        "week": 201901,
+        "incidence": 32.22
+      },
+      "2020": {
+        "week": 202001,
+        "incidence": 13.61
+      },
+      "2021": {
+        "week": 202104,
+        "incidence": 13.48
+      },
+      "2022": {
+        "week": 202201,
+        "incidence": 108.52
+      },
+      "2023": {
+        "week": 202301,
+        "incidence": 43.16
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 40.65
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201501,
+        "incidence": 73.43
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 110.54
+      },
+      "2017": {
+        "week": 201710,
+        "incidence": 75.26
+      },
+      "2018": {
+        "week": 201807,
+        "incidence": 74.47
+      },
+      "2019": {
+        "week": 201911,
+        "incidence": 76.62
+      },
+      "2022": {
+        "week": 202201,
+        "incidence": 108.52
+      },
+      "2023": {
+        "week": 202311,
+        "incidence": 72.89
+      },
+      "2024": {
+        "week": 202404,
+        "incidence": 95.94
+      }
+    }
+  },
+  "Curitiba": {
+    "tier": "mid_metro",
+    "city_p75_incidence": 2.82,
+    "flat_onset_count": 2,
+    "relative_onset_count": 8,
+    "flat_onsets": {
+      "2016": {
+        "week": 201601,
+        "incidence": 16.63
+      },
+      "2024": {
+        "week": 202402,
+        "incidence": 12.61
+      }
+    },
+    "relative_onsets": {
+      "2015": {
+        "week": 201514,
+        "incidence": 4.11
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 16.63
+      },
+      "2017": {
+        "week": 201701,
+        "incidence": 8.21
+      },
+      "2019": {
+        "week": 201910,
+        "incidence": 4.16
+      },
+      "2020": {
+        "week": 202002,
+        "incidence": 4.0
+      },
+      "2022": {
+        "week": 202216,
+        "incidence": 4.11
+      },
+      "2023": {
+        "week": 202312,
+        "incidence": 4.33
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 9.99
+      }
+    }
+  },
+  "Brasilia": {
+    "tier": "large_metro",
+    "city_p75_incidence": 31.71,
+    "flat_onset_count": 9,
+    "relative_onset_count": 7,
+    "flat_onsets": {
+      "2015": {
+        "week": 201511,
+        "incidence": 11.39
+      },
+      "2016": {
+        "week": 201601,
+        "incidence": 20.33
+      },
+      "2017": {
+        "week": 201721,
+        "incidence": 11.0
+      },
+      "2019": {
+        "week": 201905,
+        "incidence": 15.38
+      },
+      "2020": {
+        "week": 202002,
+        "incidence": 15.71
+      },
+      "2021": {
+        "week": 202101,
+        "incidence": 14.86
+      },
+      "2022": {
+        "week": 202201,
+        "incidence": 31.98
+      },
+      "2023": {
+        "week": 202301,
+        "incidence": 33.16
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 319.49
+      }
+    },
+    "relative_onsets": {
+      "2016": {
+        "week": 201605,
+        "incidence": 41.5
+      },
+      "2019": {
+        "week": 201911,
+        "incidence": 38.23
+      },
+      "2020": {
+        "week": 202006,
+        "incidence": 39.15
+      },
+      "2021": {
+        "week": 202118,
+        "incidence": 32.27
+      },
+      "2022": {
+        "week": 202201,
+        "incidence": 31.98
+      },
+      "2023": {
+        "week": 202301,
+        "incidence": 33.16
+      },
+      "2024": {
+        "week": 202401,
+        "incidence": 319.49
+      }
+    }
+  }
+}

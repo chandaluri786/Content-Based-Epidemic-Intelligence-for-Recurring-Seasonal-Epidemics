@@ -1,0 +1,83 @@
+{
+  "Brazil": {
+    "2015": {
+      "date": "20150302",
+      "files_ok": 96,
+      "n_matched_urls": 2,
+      "articles_sampled": [
+        {
+          "url": "http://www.muscatdaily.com/Archive/Oman/Bird-flu-scare-Oman-bans-poultry-import-from-Chandigarh-3vdt",
+          "retrievable": false,
+          "content_marker_hits": 0
+        },
+        {
+          "url": "http://www.menafn.com/1094117010/Bird-flu-scare-Oman-bans-poultry-import-from-Chandigarh",
+          "retrievable": false,
+          "content_marker_hits": 0
+        }
+      ]
+    },
+    "2017": {
+      "date": "20170123",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2019": {
+      "date": "20181231",
+      "files_ok": 90,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2021": {
+      "date": "20211213",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2023": {
+      "date": "20230313",
+      "files_ok": 96,
+      "n_matched_urls": 1,
+      "articles_sampled": [
+        {
+          "url": "https://www.bobfm.co.uk/the-northern-territory-receives-more-than-6-5-million-doses-of-flu-vaccine/",
+          "retrievable": true,
+          "content_marker_hits": 8
+        }
+      ]
+    }
+  },
+  "Indonesia": {
+    "2015": {
+      "date": "20150105",
+      "files_ok": 0,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2017": {
+      "date": "20170102",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2019": {
+      "date": "20181231",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2021": {
+      "date": "20210510",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    },
+    "2023": {
+      "date": "20230116",
+      "files_ok": 96,
+      "n_matched_urls": 0,
+      "articles_sampled": []
+    }
+  }
+}

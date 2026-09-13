@@ -1,0 +1,80 @@
+{
+  "USA_2023w50": {
+    "query": "influenza sourcecountry:unitedstates",
+    "n_found": 0,
+    "articles": []
+  },
+  "Kenya_2023w10": {
+    "query": "influenza sourcecountry:kenya",
+    "n_found": 3,
+    "articles": [
+      {
+        "url": "https://www.standardmedia.co.ke/health/health-science/article/2001469750/virus-outbreaks-what-you-need-to-know",
+        "domain": "standardmedia.co.ke",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.kenyastar.com/news/273683224/j-k-health-secretary-reviews-covid-19-situation-with-stakeholders",
+        "domain": "kenyastar.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.kenyastar.com/news/273625332/failure-of-major-us-lender-sends-eu-stocks-into-retreat",
+        "domain": "kenyastar.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 1
+      }
+    ]
+  },
+  "India_2023w04": {
+    "query": "influenza sourcecountry:india",
+    "n_found": 10,
+    "articles": [
+      {
+        "url": "https://www.livemint.com/economy/india-saw-spike-in-swine-flu-in-2022-death-toll-at-410-11675101432845.html",
+        "domain": "livemint.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.downtoearth.org.in/blog/health/how-do-you-make-a-universal-flu-vaccine-a-microbiologist-explains-87543",
+        "domain": "downtoearth.org.in",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://news.webindia123.com/news/Articles/Health/20230210/4037318.html",
+        "domain": "news.webindia123.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.thehindu.com/sci-tech/science/mammalian-spread-of-h5n1-and-its-pandemic-potential/article66497440.ece",
+        "domain": "thehindu.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.thehindu.com/news/national/kerala/state-issues-alert-against-influenza-along-with-covid-19/article66429179.ece",
+        "domain": "thehindu.com",
+        "language": "English",
+        "retrievable": true,
+        "content_marker_hits": 3
+      }
+    ]
+  },
+  "Indonesia_2023w03": {
+    "query": "influenza sourcecountry:indonesia",
+    "n_found": 0,
+    "articles": []
+  }
+}

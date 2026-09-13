@@ -1,0 +1,1016 @@
+{
+  "Sao Paulo": {
+    "geocode": 3550308,
+    "state": "SP",
+    "tier": "large_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201505,
+        "onset_incidence": 12.15393,
+        "onset_cases": 1498,
+        "peak_incidence": 100.33888,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201911,
+        "onset_incidence": 11.740144,
+        "onset_cases": 1447,
+        "peak_incidence": 32.283367,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202114,
+        "onset_incidence": 13.622461,
+        "onset_cases": 1679,
+        "peak_incidence": 14.214743,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202213,
+        "onset_incidence": 10.198591,
+        "onset_cases": 1257,
+        "peak_incidence": 28.705341,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202306,
+        "onset_incidence": 10.581811,
+        "onset_cases": 1291,
+        "peak_incidence": 25.786505,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 20.13085,
+        "onset_cases": 2456,
+        "peak_incidence": 699.89954,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Rio de Janeiro": {
+    "geocode": 3304557,
+    "state": "RJ",
+    "tier": "large_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201514,
+        "onset_incidence": 10.240352,
+        "onset_cases": 691,
+        "peak_incidence": 23.68174,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201607,
+        "onset_incidence": 13.174635,
+        "onset_cases": 889,
+        "peak_incidence": 46.340927,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201913,
+        "onset_incidence": 11.870509,
+        "onset_cases": 801,
+        "peak_incidence": 27.623756,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202309,
+        "onset_incidence": 13.130393,
+        "onset_cases": 870,
+        "peak_incidence": 28.962326,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 36.538715,
+        "onset_cases": 2421,
+        "peak_incidence": 246.59482,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Belo Horizonte": {
+    "geocode": 3106200,
+    "state": "MG",
+    "tier": "large_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201509,
+        "onset_incidence": 16.61667,
+        "onset_cases": 419,
+        "peak_incidence": 123.01889,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201601,
+        "onset_incidence": 111.3198,
+        "onset_cases": 2807,
+        "peak_incidence": 643.56885,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201701,
+        "onset_incidence": 22.525702,
+        "onset_cases": 568,
+        "peak_incidence": 24.786203,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201801,
+        "onset_incidence": 10.6283245,
+        "onset_cases": 268,
+        "peak_incidence": 15.7838545,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201901,
+        "onset_incidence": 11.024903,
+        "onset_cases": 278,
+        "peak_incidence": 630.0058,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202002,
+        "onset_incidence": 14.832065,
+        "onset_cases": 374,
+        "peak_incidence": 60.83526,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202101,
+        "onset_incidence": 11.143877,
+        "onset_cases": 281,
+        "peak_incidence": 13.800959,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202201,
+        "onset_incidence": 10.15243,
+        "onset_cases": 256,
+        "peak_incidence": 19.5117,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202301,
+        "onset_incidence": 18.401278,
+        "onset_cases": 464,
+        "peak_incidence": 205.2094,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 139.2164,
+        "onset_cases": 3331,
+        "peak_incidence": 1265.653,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Salvador": {
+    "geocode": 2927408,
+    "state": "BA",
+    "tier": "mid_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201527,
+        "onset_incidence": 11.570313,
+        "onset_cases": 334,
+        "peak_incidence": 11.604955,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201926,
+        "onset_incidence": 10.25393,
+        "onset_cases": 296,
+        "peak_incidence": 15.831237,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202003,
+        "onset_incidence": 10.842838,
+        "onset_cases": 313,
+        "peak_incidence": 25.70411,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202313,
+        "onset_incidence": 10.072819,
+        "onset_cases": 263,
+        "peak_incidence": 31.13765,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202405,
+        "onset_incidence": 12.830397,
+        "onset_cases": 335,
+        "peak_incidence": 54.308964,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Fortaleza": {
+    "geocode": 2304400,
+    "state": "CE",
+    "tier": "mid_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201505,
+        "onset_incidence": 11.575918,
+        "onset_cases": 311,
+        "peak_incidence": 151.90135,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201604,
+        "onset_incidence": 13.660328,
+        "onset_cases": 367,
+        "peak_incidence": 122.16129,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201701,
+        "onset_incidence": 15.074748,
+        "onset_cases": 405,
+        "peak_incidence": 137.1616,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201813,
+        "onset_incidence": 10.831486,
+        "onset_cases": 291,
+        "peak_incidence": 16.042511,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201911,
+        "onset_incidence": 10.01261,
+        "onset_cases": 269,
+        "peak_incidence": 24.938473,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202005,
+        "onset_incidence": 11.650361,
+        "onset_cases": 313,
+        "peak_incidence": 31.042816,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202114,
+        "onset_incidence": 16.861385,
+        "onset_cases": 453,
+        "peak_incidence": 77.56982,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202207,
+        "onset_incidence": 11.092037,
+        "onset_cases": 298,
+        "peak_incidence": 97.52059,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202306,
+        "onset_incidence": 12.017763,
+        "onset_cases": 312,
+        "peak_incidence": 30.159964,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202405,
+        "onset_incidence": 10.59258,
+        "onset_cases": 275,
+        "peak_incidence": 30.275518,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Recife": {
+    "geocode": 2611606,
+    "state": "PE",
+    "tier": "mid_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201501,
+        "onset_incidence": 21.470116,
+        "onset_cases": 355,
+        "peak_incidence": 118.47875,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201601,
+        "onset_incidence": 75.29661,
+        "onset_cases": 1245,
+        "peak_incidence": 125.312904,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201914,
+        "onset_incidence": 10.039547,
+        "onset_cases": 166,
+        "peak_incidence": 22.437784,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202027,
+        "onset_incidence": 12.458715,
+        "onset_cases": 206,
+        "peak_incidence": 14.031175,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202115,
+        "onset_incidence": 11.007215,
+        "onset_cases": 182,
+        "peak_incidence": 61.14447,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202310,
+        "onset_incidence": 12.779459,
+        "onset_cases": 191,
+        "peak_incidence": 16.79395,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202405,
+        "onset_incidence": 10.972939,
+        "onset_cases": 164,
+        "peak_incidence": 64.633286,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Porto Alegre": {
+    "geocode": 4314902,
+    "state": "RS",
+    "tier": "mid_metro",
+    "seasons": {
+      "2015": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201613,
+        "onset_incidence": 10.952446,
+        "onset_cases": 163,
+        "peak_incidence": 11.355604,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202210,
+        "onset_incidence": 15.252793,
+        "onset_cases": 227,
+        "peak_incidence": 73.105896,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202311,
+        "onset_incidence": 14.811976,
+        "onset_cases": 208,
+        "peak_incidence": 68.43418,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202406,
+        "onset_incidence": 15.025611,
+        "onset_cases": 211,
+        "peak_incidence": 223.0342,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Manaus": {
+    "geocode": 1302603,
+    "state": "AM",
+    "tier": "small_metro",
+    "seasons": {
+      "2015": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201603,
+        "onset_incidence": 11.578767,
+        "onset_cases": 257,
+        "peak_incidence": 19.868624,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201705,
+        "onset_incidence": 10.902964,
+        "onset_cases": 242,
+        "peak_incidence": 10.902964,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202110,
+        "onset_incidence": 10.407374,
+        "onset_cases": 231,
+        "peak_incidence": 12.074356,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202351,
+        "onset_incidence": 11.97237,
+        "onset_cases": 246,
+        "peak_incidence": 18.445236,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 55.725056,
+        "onset_cases": 1145,
+        "peak_incidence": 62.295258,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Belem": {
+    "geocode": 1501402,
+    "state": "PA",
+    "tier": "small_metro",
+    "seasons": {
+      "2015": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201606,
+        "onset_incidence": 11.736142,
+        "onset_cases": 176,
+        "peak_incidence": 11.736142,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202405,
+        "onset_incidence": 10.897102,
+        "onset_cases": 149,
+        "peak_incidence": 30.058449,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Goiania": {
+    "geocode": 5208707,
+    "state": "GO",
+    "tier": "small_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201501,
+        "onset_incidence": 73.43286,
+        "onset_cases": 1128,
+        "peak_incidence": 288.84894,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201601,
+        "onset_incidence": 110.539894,
+        "onset_cases": 1698,
+        "peak_incidence": 278.36783,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201701,
+        "onset_incidence": 35.28423,
+        "onset_cases": 542,
+        "peak_incidence": 122.583405,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201801,
+        "onset_incidence": 39.190235,
+        "onset_cases": 602,
+        "peak_incidence": 115.812996,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201901,
+        "onset_incidence": 32.22453,
+        "onset_cases": 495,
+        "peak_incidence": 115.6828,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202001,
+        "onset_incidence": 13.605911,
+        "onset_cases": 209,
+        "peak_incidence": 50.12704,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202104,
+        "onset_incidence": 13.475712,
+        "onset_cases": 207,
+        "peak_incidence": 52.600845,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202201,
+        "onset_incidence": 108.52179,
+        "onset_cases": 1667,
+        "peak_incidence": 200.50816,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202301,
+        "onset_incidence": 43.161335,
+        "onset_cases": 663,
+        "peak_incidence": 84.97804,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 40.650894,
+        "onset_cases": 575,
+        "peak_incidence": 275.50702,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Curitiba": {
+    "geocode": 4106902,
+    "state": "PR",
+    "tier": "mid_metro",
+    "seasons": {
+      "2015": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201601,
+        "onset_incidence": 16.6271,
+        "onset_cases": 324,
+        "peak_incidence": 27.403925,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202402,
+        "onset_incidence": 12.608259,
+        "onset_cases": 236,
+        "peak_incidence": 182.44577,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  },
+  "Brasilia": {
+    "geocode": 5300108,
+    "state": "DF",
+    "tier": "large_metro",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201511,
+        "onset_incidence": 11.390607,
+        "onset_cases": 348,
+        "peak_incidence": 31.815142,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201601,
+        "onset_incidence": 20.326342,
+        "onset_cases": 621,
+        "peak_incidence": 57.967712,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201721,
+        "onset_incidence": 10.997827,
+        "onset_cases": 336,
+        "peak_incidence": 10.997827,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 201905,
+        "onset_incidence": 15.383865,
+        "onset_cases": 470,
+        "peak_incidence": 127.09691,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202002,
+        "onset_incidence": 15.711182,
+        "onset_cases": 480,
+        "peak_incidence": 122.31809,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202101,
+        "onset_incidence": 14.860159,
+        "onset_cases": 454,
+        "peak_incidence": 32.797092,
+        "peak_alert_level": 1,
+        "total_weeks_reported": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202201,
+        "onset_incidence": 31.9788,
+        "onset_cases": 977,
+        "peak_incidence": 164.41096,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202301,
+        "onset_incidence": 33.15714,
+        "onset_cases": 1013,
+        "peak_incidence": 134.67339,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": 202401,
+        "onset_incidence": 319.4944,
+        "onset_cases": 9340,
+        "peak_incidence": 879.60156,
+        "peak_alert_level": 2,
+        "total_weeks_reported": 52
+      }
+    }
+  }
+}

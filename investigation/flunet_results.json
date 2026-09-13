@@ -1,0 +1,587 @@
+{
+  "USA": {
+    "name": "United States",
+    "tier": "high_income",
+    "hemisphere": "NH",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 66,
+        "onset_week": "1",
+        "onset_pct_positive": 27.4,
+        "peak_pct_positive": 27.4,
+        "weeks_with_data": 66
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "5",
+        "onset_pct_positive": 42.5,
+        "peak_pct_positive": 64.3,
+        "weeks_with_data": 100
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 13.3,
+        "peak_pct_positive": 63.1,
+        "weeks_with_data": 100
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 25.4,
+        "peak_pct_positive": 67.5,
+        "weeks_with_data": 100
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 12.1,
+        "peak_pct_positive": 68.6,
+        "weeks_with_data": 100
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 23.5,
+        "peak_pct_positive": 68.3,
+        "weeks_with_data": 100
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 100
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "43",
+        "onset_pct_positive": 10.5,
+        "peak_pct_positive": 27.4,
+        "weeks_with_data": 100
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "50",
+        "onset_pct_positive": 13.5,
+        "peak_pct_positive": 33.5,
+        "weeks_with_data": 100
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 13.8,
+        "peak_pct_positive": 48.1,
+        "weeks_with_data": 100
+      }
+    }
+  },
+  "GBR": {
+    "name": "United Kingdom",
+    "tier": "high_income",
+    "hemisphere": "NH",
+    "seasons": {
+      "2015": {
+        "status": "no_data"
+      },
+      "2016": {
+        "status": "no_data"
+      },
+      "2017": {
+        "status": "no_data"
+      },
+      "2018": {
+        "status": "no_data"
+      },
+      "2019": {
+        "status": "no_data"
+      },
+      "2020": {
+        "status": "no_data"
+      },
+      "2021": {
+        "status": "no_data"
+      },
+      "2022": {
+        "status": "no_data"
+      },
+      "2023": {
+        "status": "no_data"
+      },
+      "2024": {
+        "status": "no_data"
+      }
+    }
+  },
+  "JPN": {
+    "name": "Japan",
+    "tier": "high_income",
+    "hemisphere": "NH",
+    "seasons": {
+      "2015": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 53
+      },
+      "2016": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2018": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2019": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 53
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2023": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2024": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      }
+    }
+  },
+  "AUS": {
+    "name": "Australia",
+    "tier": "high_income",
+    "hemisphere": "SH",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 53,
+        "onset_week": "6",
+        "onset_pct_positive": 12.2,
+        "peak_pct_positive": 28.7,
+        "weeks_with_data": 53
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "26",
+        "onset_pct_positive": 10.9,
+        "peak_pct_positive": 28.8,
+        "weeks_with_data": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "4",
+        "onset_pct_positive": 12.4,
+        "peak_pct_positive": 42.9,
+        "weeks_with_data": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "4",
+        "onset_pct_positive": 14.2,
+        "peak_pct_positive": 18.3,
+        "weeks_with_data": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 11.9,
+        "peak_pct_positive": 29.2,
+        "weeks_with_data": 52
+      },
+      "2020": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 53
+      },
+      "2021": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "19",
+        "onset_pct_positive": 11.9,
+        "peak_pct_positive": 16.6,
+        "weeks_with_data": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "23",
+        "onset_pct_positive": 10.8,
+        "peak_pct_positive": 14.5,
+        "weeks_with_data": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "24",
+        "onset_pct_positive": 11.6,
+        "peak_pct_positive": 18.2,
+        "weeks_with_data": 52
+      }
+    }
+  },
+  "BRA": {
+    "name": "Brazil",
+    "tier": "upper_middle_income",
+    "hemisphere": "SH",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 53,
+        "onset_week": "10",
+        "onset_pct_positive": 11.8,
+        "peak_pct_positive": 26.5,
+        "weeks_with_data": 53
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 16.2,
+        "peak_pct_positive": 44.7,
+        "weeks_with_data": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "4",
+        "onset_pct_positive": 18.0,
+        "peak_pct_positive": 36.2,
+        "weeks_with_data": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 28.9,
+        "peak_pct_positive": 125.0,
+        "weeks_with_data": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 51,
+        "onset_week": "1",
+        "onset_pct_positive": 67.5,
+        "peak_pct_positive": 67.5,
+        "weeks_with_data": 51
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 19.4,
+        "peak_pct_positive": 52.1,
+        "weeks_with_data": 100
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "50",
+        "onset_pct_positive": 23.6,
+        "peak_pct_positive": 33.4,
+        "weeks_with_data": 100
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "1",
+        "onset_pct_positive": 36.0,
+        "peak_pct_positive": 36.0,
+        "weeks_with_data": 100
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "11",
+        "onset_pct_positive": 40.3,
+        "peak_pct_positive": 40.3,
+        "weeks_with_data": 100
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "7",
+        "onset_pct_positive": 17.2,
+        "peak_pct_positive": 36.6,
+        "weeks_with_data": 100
+      }
+    }
+  },
+  "IND": {
+    "name": "India",
+    "tier": "lower_middle_income",
+    "hemisphere": "NH",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 53,
+        "onset_week": "4",
+        "onset_pct_positive": 19.5,
+        "peak_pct_positive": 34.4,
+        "weeks_with_data": 53
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "5",
+        "onset_pct_positive": 10.3,
+        "peak_pct_positive": 27.6,
+        "weeks_with_data": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 48,
+        "onset_week": "2",
+        "onset_pct_positive": 12.8,
+        "peak_pct_positive": 32.1,
+        "weeks_with_data": 48
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 20.0,
+        "peak_pct_positive": 32.6,
+        "weeks_with_data": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 25.2,
+        "peak_pct_positive": 29.6,
+        "weeks_with_data": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 48,
+        "onset_week": "8",
+        "onset_pct_positive": 20.6,
+        "peak_pct_positive": 26.8,
+        "weeks_with_data": 48
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 77,
+        "onset_week": "32",
+        "onset_pct_positive": 31.7,
+        "peak_pct_positive": 34.0,
+        "weeks_with_data": 77
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "29",
+        "onset_pct_positive": 19.3,
+        "peak_pct_positive": 29.9,
+        "weeks_with_data": 100
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "4",
+        "onset_pct_positive": 10.1,
+        "peak_pct_positive": 33.3,
+        "weeks_with_data": 100
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 100,
+        "onset_week": "29",
+        "onset_pct_positive": 35.2,
+        "peak_pct_positive": 37.4,
+        "weeks_with_data": 100
+      }
+    }
+  },
+  "KEN": {
+    "name": "Kenya",
+    "tier": "low_income",
+    "hemisphere": "SH_equatorial",
+    "seasons": {
+      "2015": {
+        "status": "no_data"
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 45,
+        "onset_week": "33",
+        "onset_pct_positive": 22.6,
+        "peak_pct_positive": 25.9,
+        "weeks_with_data": 45
+      },
+      "2017": {
+        "status": "no_onset_above_threshold",
+        "weeks_returned": 20
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "8",
+        "onset_pct_positive": 11.3,
+        "peak_pct_positive": 32.3,
+        "weeks_with_data": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "6",
+        "onset_pct_positive": 10.5,
+        "peak_pct_positive": 32.4,
+        "weeks_with_data": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 32,
+        "onset_week": "4",
+        "onset_pct_positive": 12.0,
+        "peak_pct_positive": 31.8,
+        "weeks_with_data": 32
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "7",
+        "onset_pct_positive": 18.0,
+        "peak_pct_positive": 40.0,
+        "weeks_with_data": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "20",
+        "onset_pct_positive": 16.7,
+        "peak_pct_positive": 39.4,
+        "weeks_with_data": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "10",
+        "onset_pct_positive": 28.6,
+        "peak_pct_positive": 28.6,
+        "weeks_with_data": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "6",
+        "onset_pct_positive": 10.6,
+        "peak_pct_positive": 25.3,
+        "weeks_with_data": 52
+      }
+    }
+  },
+  "IDN": {
+    "name": "Indonesia",
+    "tier": "lower_middle_income",
+    "hemisphere": "SH_equatorial",
+    "seasons": {
+      "2015": {
+        "status": "onset_found",
+        "weeks_returned": 53,
+        "onset_week": "2",
+        "onset_pct_positive": 11.1,
+        "peak_pct_positive": 42.3,
+        "weeks_with_data": 53
+      },
+      "2016": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 23.0,
+        "peak_pct_positive": 50.0,
+        "weeks_with_data": 52
+      },
+      "2017": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 22.2,
+        "peak_pct_positive": 57.1,
+        "weeks_with_data": 52
+      },
+      "2018": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 44.6,
+        "peak_pct_positive": 50.0,
+        "weeks_with_data": 52
+      },
+      "2019": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 41.9,
+        "peak_pct_positive": 55.6,
+        "weeks_with_data": 52
+      },
+      "2020": {
+        "status": "onset_found",
+        "weeks_returned": 53,
+        "onset_week": "1",
+        "onset_pct_positive": 42.6,
+        "peak_pct_positive": 62.8,
+        "weeks_with_data": 53
+      },
+      "2021": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "19",
+        "onset_pct_positive": 16.7,
+        "peak_pct_positive": 75.0,
+        "weeks_with_data": 52
+      },
+      "2022": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "1",
+        "onset_pct_positive": 32.1,
+        "peak_pct_positive": 52.0,
+        "weeks_with_data": 52
+      },
+      "2023": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "3",
+        "onset_pct_positive": 10.0,
+        "peak_pct_positive": 67.9,
+        "weeks_with_data": 52
+      },
+      "2024": {
+        "status": "onset_found",
+        "weeks_returned": 52,
+        "onset_week": "3",
+        "onset_pct_positive": 13.1,
+        "peak_pct_positive": 52.6,
+        "weeks_with_data": 52
+      }
+    }
+  }
+}

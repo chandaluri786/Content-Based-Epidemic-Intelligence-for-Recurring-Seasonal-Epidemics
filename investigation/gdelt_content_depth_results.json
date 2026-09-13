@@ -1,0 +1,67 @@
+{
+  "SaoPaulo_2019_severe": {
+    "query": "dengue Sao Paulo",
+    "window": "20190201-20190531",
+    "n_found": 0,
+    "articles": []
+  },
+  "SaoPaulo_2023_typical": {
+    "query": "dengue Sao Paulo",
+    "window": "20230201-20230531",
+    "n_found": 0,
+    "articles": []
+  },
+  "RioDeJaneiro_2019_severe": {
+    "query": "dengue Rio de Janeiro",
+    "window": "20190201-20190531",
+    "n_found": 0,
+    "articles": []
+  },
+  "Belem_2019_severe": {
+    "query": "dengue Belem",
+    "window": "20190201-20190531",
+    "n_found": 1,
+    "articles": [
+      {
+        "url": "http://www.espn.com/mma/story/_/id/26275534/cachoeira-excited-rebound-disastrous-ufc-debut",
+        "domain": "espn.com",
+        "language": "English",
+        "sourcecountry": "United States",
+        "retrievable": true,
+        "text_len": 8183,
+        "content_marker_hits": 0
+      }
+    ]
+  },
+  "Manaus_2019_severe": {
+    "query": "dengue Manaus",
+    "window": "20190201-20190531",
+    "n_found": 2,
+    "articles": [
+      {
+        "url": "https://www.taringa.net/+ciencia_educacion/me-arme-alto-dispositivo-tecnologico-en-el-trabajo-y-te-lo-m_21vgc2",
+        "domain": "taringa.net",
+        "language": "Spanish",
+        "sourcecountry": "Argentina",
+        "retrievable": false,
+        "text_len": 33,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0007065",
+        "domain": "journals.plos.org",
+        "language": "English",
+        "sourcecountry": "United States",
+        "retrievable": true,
+        "text_len": 104050,
+        "content_marker_hits": 7
+      }
+    ]
+  },
+  "Goiania_2019_severe": {
+    "query": "dengue Goiania",
+    "window": "20190201-20190531",
+    "n_found": 0,
+    "articles": []
+  }
+}

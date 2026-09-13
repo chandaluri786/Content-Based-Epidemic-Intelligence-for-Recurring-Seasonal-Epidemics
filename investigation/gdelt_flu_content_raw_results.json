@@ -1,0 +1,185 @@
+{
+  "United States": {
+    "date": "20231211",
+    "note": null,
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 61,
+    "articles_sampled": [
+      {
+        "url": "https://katu.com/news/local/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://newschannel20.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://krcgtv.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://kimatv.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://weartv.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://abc7amarillo.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://myfox28columbus.com/news/nation-world/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://kpic.com/news/local/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://nj1015.com/ixp/854/p/flu-spreading-at-alarming-rates-in-these-new-york-counties/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://kval.com/news/local/human-testing-may-start-on-universal-flu-shot-as-covid-and-flu-cases-rise-cdc-rsv-illness-sick-vaccine-centers-for-disease-control-and-prevention-clinical-trials-strains",
+        "retrievable": true,
+        "content_marker_hits": 7
+      }
+    ]
+  },
+  "United Kingdom": {
+    "date": "20230116",
+    "note": "No WHO FluNet data exists for GBR in any year checked (2018-2023) -- date is a generic NH winter week, not a verified onset.",
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 5,
+    "articles_sampled": [
+      {
+        "url": "https://www.bordertelegraph.com/news/23252716.get-covid-19-flu-vaccinations-week/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.stourbridgenews.co.uk/news/23253472.public-urged-take-steps-stop-spread-flu-covid/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.dudleynews.co.uk/news/23253468.public-urged-take-steps-stop-spread-flu-covid/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.peeblesshirenews.com/news/23252726.get-covid-19-flu-vaccinations-week/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.halesowennews.co.uk/news/23253479.public-urged-take-steps-stop-spread-flu-covid/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      }
+    ]
+  },
+  "Japan": {
+    "date": "20231127",
+    "note": "Peak INF_ALL week (FluNet reports no SPEC_PROCESSED_NB for Japan, so no percent-positive onset could be computed).",
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 6,
+    "articles_sampled": [
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/11/japan-reports-seasons-first-avian-influenza-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://indiaeducationdiary.in/japan-culls-40000-birds-after-1st-avian-flu-outbreak-of-season-reported/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.japanherald.com/news/274046559/japan-confirms-seasons-2nd-bird-flu-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.aa.com.tr/en/asia-pacific/japan-grappling-with-avian-flu-outbreak/3066039",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.latestly.com/quickly/world/japan-confirms-season-s-2nd-bird-flu-outbreak-5589657.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.medindia.net/news/japan-records-second-avian-flu-outbreak-of-the-season-214347-1.htm",
+        "retrievable": true,
+        "content_marker_hits": 6
+      }
+    ]
+  },
+  "Australia": {
+    "date": "20230605",
+    "note": null,
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 4,
+    "articles_sampled": [
+      {
+        "url": "https://www.dailytelegraph.com.au/lifestyle/youre-not-imagining-it-overthecounter-cold-and-flu-tablets-probably-dont-work/news-story/896b275d158836a29041f38212d0f6cf?nk=e055f419eb0e3aa8362698c343605bd7-1685922402",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.mirror.co.uk/news/health/woman-20-thought-flu-doctors-30154049",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.adelaidenow.com.au/lifestyle/health/epidemiologist-warns-aussies-to-increase-vigilance-as-covid-grows-ahead-of-flu-season/news-story/518ba4a4fce137314636fbcdffc1f404?nk=45980bad608c9beaf03e3d1fa72308dc-1685938591",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.abc.net.au/news/2023-06-06/influenza-flu-season-affecting-kids-children-hospital-cases-up/102387982",
+        "retrievable": true,
+        "content_marker_hits": 3
+      }
+    ]
+  },
+  "Brazil": {
+    "date": "20230313",
+    "note": null,
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 1,
+    "articles_sampled": [
+      {
+        "url": "https://www.bobfm.co.uk/the-northern-territory-receives-more-than-6-5-million-doses-of-flu-vaccine/",
+        "retrievable": true,
+        "content_marker_hits": 8
+      }
+    ]
+  },
+  "Indonesia": {
+    "date": "20230116",
+    "note": null,
+    "files_ok": 96,
+    "files_failed": 0,
+    "n_matched_urls": 0,
+    "articles_sampled": []
+  }
+}
