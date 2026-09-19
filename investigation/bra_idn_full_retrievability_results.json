@@ -1,0 +1,4059 @@
+{
+  "BRA": {
+    "iso3": "BRA",
+    "n_matched": 593,
+    "articles": [
+      {
+        "url": "http://www.menafn.com/1094117010/Bird-flu-scare-Oman-bans-poultry-import-from-Chandigarh",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.businesswire.com/news/financialpost/20150303005084/en/Modern-Day-Cold-Flu-Experience-Includes-35",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.princegeorgecitizen.com/news/feds-lift-control-zone-at-b-c-poultry-farms-after-avian-flu-infection-1.1789409",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.muscatdaily.com/Archive/Oman/Bird-flu-scare-Oman-bans-poultry-import-from-Chandigarh-3vdt",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://uk.finance.yahoo.com/news/modern-day-cold-flu-experience-130000843.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://ca.finance.yahoo.com/news/modern-day-cold-flu-experience-130000184.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://chicago.cbslocal.com/2015/03/06/flu-shots-can-sometimes-lead-to-serious-shoulder-injuries/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://africamedianetwork.ning.com/profiles/blogs/modern-day-cold-and-flu-experience-includes-35-billion-sick-days",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.agrimoney.com/news/bird-flu-scare-hits-hog-prices-shares-in-poultry-groups--8066.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://wgno.com/2015/11/04/get-the-skinny-eat-to-beat-cold-and-flu-season-top-immune-boosting-foods/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.brandonsun.com/agriculture/breaking-news/feds-lift-control-zone-at-bc-poultry-farms-after-avian-flu-infection-295984601.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://ecommerce-journal.com/2015/11/californias-first-flu-death-of-season-recorded-in-santa/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newsmax.com/Health/Health-News/exercise-flu-vaccine/2015/11/13/id/702003/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cbc.ca/news/canada/avian-influenza-restrictions-on-b-c-poultry-farms-lifted-by-cfia-1.2991932",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://www.wsj.com/articles/regular-exercise-may-aid-flu-vaccine-in-older-men-1447085585",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.westerlynews.ca/local-news/feds-lift-control-zone-at-b-c-poultry-farms-after-avian-flu-infection-1.1789409",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.moneylife.in/business-wire-news/modern-day-cold-and-flu-experience-includes-35-billion-sick-days-and-coping-on-social-media-according-to-vicks%C2%AE-global-survey/42955.html",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://in.finance.yahoo.com/news/modern-day-cold-flu-experience-130000843.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.rappler.com/thewrap/march-6-2015-edition/ph-bans-poultry-imports-from-california-after-bird-flu-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://thechronicleherald.ca/artslife/1321573-tips-from-alternative-health-expert-on-how-to-keep-flu-colds-at-bay",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://thechronicleherald.ca/artslife/1321573-bruce-wylde-and-the-flu-fighters",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://www.entornointeligente.com/articulo/7607190/TRINIDAD-Y-TOBAGO-Health-Minister-We-can-handle-swine-flu-rss-26122015",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.entornointeligente.com/articulo/7607190/TRINIDAD-Y-TOBAGO-Health-Minister-We-can-handle-swine-flu-26122015",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kcci.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.meatpoultry.com/articles/news_home/Business/2015/10/Bird_flu_lingering_issue_for_P.aspx?ID=%7BB13F843B-A761-4CE0-81CD-983B6A87FD8C%7D&cck=1",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://entornointeligente.com/articulo/7607190/TRINIDAD-Y-TOBAGO-Health-Minister-We-can-handle-swine-flu-26122015",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://m.wfmz.com/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wallstreet-online.de/nachricht/7428680-modern-day-cold-and-flu-experience-includes-35-billion-sick-days-and-coping-on-social-media-according-to-vicks-global-survey",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.news1130.com/2015/02/03/long-recovery-expected-for-poultry-industry-in-b-c-after-avian-flu-expert-2/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.news4jax.com/health/holiday-flu-almost-turns-deadly-for-4yearold",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kwch.com/news/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wdbj7.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cnn.com/2015/12/26/health/holiday-flu-prayers/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.clickondetroit.com/health/holiday-flu-almost-turns-deadly-for-4yearold",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.nbcmontana.com/lifestyle/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.keyt.com/news/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.ky3.com/near-deadly-holiday-flu-case-for-one-girl/21048768_37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.krcrtv.com/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wyff4.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kvor.com/news/holiday-flu-case-nearly-deadly-answered-by-prayers-and-medicine/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.ozarksfirst.com/life-health/holiday-flu-almost-turns-deadly-for-4yearold",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.eastidahonews.com/2015/12/holiday-flu-case-nearly-deadly-answered-by-prayers-and-medicine/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://www.wfmz.com/lifestyle/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kspr.com/news/health/near-deadly-holiday-flu-case-for-one-girl/21051714_37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.localnews8.com/lifestyle/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kkoh.com/news/holiday-flu-case-nearly-deadly-answered-by-prayers-and-medicine/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wmur.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wcvb.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.abc17news.com/lifestyle/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wcyb.com/news/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wxii12.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kesq.com/news/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.krdo.com/health-network/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kvia.com/news/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.630wpro.com/news/holiday-flu-case-nearly-deadly-answered-by-prayers-and-medicine/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.koat.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kctv5.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kxly.com/news/ebola/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wdsu.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wgal.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cleveland19.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wlwt.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wdam.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kfvs12.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.ksla.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.fox10tv.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.foxcarolina.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.WAFF.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wbrc.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kptv.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newschannel6now.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wtvm.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wect.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kswo.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://edition.cnn.com/2015/12/26/health/holiday-flu-prayers/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.dailymail.co.uk/news/article-3375515/The-power-prayer-saved-little-girl-Four-year-old-went-cardiac-arrest-falling-ill-flu-comes-life-mass-doctors-say-Christmas-miracle.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.wsfa.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.14news.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wsvn.com/story/30835373/young-girl-recovers-after-flu-nearly-kills-her",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.modernreaders.com/four-year-old-flu-victim-returns-from-coma/36820/melissa-taylor",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wbtv.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.ktvz.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.WAFB.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.fox19.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.abc-7.com/story/30839083/girl-awake-after-nearly-deadly-flu-case",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.live5news.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newschannel10.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kltv.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kplctv.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.TucsonNewsNow.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.opposingviews.com/i/health/family-says-4-year-old-miraculously-recovered-nearly-deadly-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.walb.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.WLOX.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.fox8live.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.babwnews.com/2015/12/four-year-old-girl-awakens-from-coma-after-near-death-flu-case/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.articlesbase.com/wellness-articles/cold-and-cough-natural-and-herbal-methods-of-treatment-of-cold-and-flu-7366895.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.nbc-2.com/story/30839083/girl-awake-after-nearly-deadly-flu-case",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.hawaiinewsnow.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://demerarawaves.com/2016/01/04/health-care-workers-who-treated-swine-flu-victim-vaccinated/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://wkrg.com/ap/stocks-plunge-wal-mart-closing-154-us-stores-new-bird-flu-strain-discovered-in-indiana/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cbs58.com/story/30840094/girl-awake-after-nearly-deadly-flu-case",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://symptomsofinfection.info/2016/01/clinical-and-epidemiological-features-of-respiratory-virus-infections-in-preschool-children-over-two-consecutive-influenza-seasons-in-southern-brazil/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wnem.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://wpri.com/ap/stocks-plunge-wal-mart-closing-154-us-stores-new-bird-flu-strain-discovered-in-indiana/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://gantdaily.com/2015/12/28/girl-awake-after-nearly-deadly-flu-case/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.mysuncoast.com/business/stocks-plunge-wal-mart-closing-us-stores-new-bird-flu/article_599fbe4f-f483-5e5b-bb43-9e4cc5528ddf.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cbs46.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.news8000.com/health/near-deadly-holiday-flu-case-for-one-girl/37137082",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "http://www.kmov.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newsnow.in/news/iran-reports-outbreaks-of-h5n8-bird-flu-in-tehran-area-oie-reuters",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.menshealth.co.uk/healthy/symptoms-treatment/survive-man-flu",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/11/case-of-h5n8-bird-flu-in-german-farm-turkeys-to-be-culled/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.marketwatch.com/story/global-influenza-vaccines-market-and-forecast-to-2021---size-share-growth-and-trends-analysis-2016-11-24",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/global-influenza-vaccines-market-and-forecast-to-2021---size-share-growth-and-trends-analysis-300368573.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/11/germany-kills-16000-turkeys-92000-chickens-after-detecting-bird-flu-outbreak-business-insider/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.openpr.com/news/387828/Global-Influenza-Vaccines-Market-and-Forecast-to-2021-Size-Share-Growth-and-Trends-Analysis.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.3quarksdaily.com/3quarksdaily/2016/01/from-new-flu-strains-to-refugees-to-obamas-final-moments-as-us-president-a-year-of-big-change-and-ch.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://foreignpolicy.com/2015/12/31/what-will-be-the-big-story-of-2016-refugees-obama-flu-ireland-economy/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://foreignpolicy.com/2015/12/31/what-will-be-the-big-story-of-2016-refugees-obama-flu-ireland-economy/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.yahoo.com/news/southkorea-cull-3-percent-poultry-contain-bird-flu-104912404--finance.html",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.agriculture.com/markets/newswire/skorea-to-cull-3-percent-of-poultry-to-contain-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://flapship.com/2016/11/japan-culling-330000-birds-to-fight-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://health.asiaone.com/health/health-news/s-korea-cull-3-percent-poultry-contain-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.channelnewsasia.com/news/asiapacific/southkorea-to-cull-3-percent-of-poultry-to-contain-bird-flu/3327790.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://timesofoman.com/article/97545/World/Asia/Japan-South-Korea-order-poultry-cull-after-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.foodnavigator-asia.com/Topics/Food-safety/China-s-options-to-tackle-stock-shortages-caused-by-bird-flu-in-Europe",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.foodnavigator-asia.com/Policy/China-s-options-to-tackle-stock-shortages-caused-by-bird-flu-in-Europe",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://news.kuwaittimes.net/website/japan-orders-major-poultry-cull-bird-flu-outbreak/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.thehorse.com/articles/38499/zoetis-em-the-horse-em-partner-for-flu-week",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.openpr.com/news/391423/Americas-Influenza-Vaccines-Market-Persons-Vaccinated-Brand-Analysis-and-Forecast-to-2021.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://avauncer.com/2016/12/01/your-childs-health-flu-vaccine-yes-or-no.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thehansindia.com/posts/index/Health/2016-11-29/South-Korea-to-cull-3-percent-of-poultry-to-contain-bird-flu/266181",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://diy-home-garden.com/2016/12/05/highly-contagious-bird-flu-found-in-japan-culling-start/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thehorse.com/articles/34775/researchers-study-equine-influenza-vaccination-schedules",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thehorse.com/articles/29137/vaccination-to-control-equine-influenza-during-an-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://thecelebritytruth.com/2016/11/highly-contagious-bird-flu-found-in-japan-culling-start/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/un_bird_flu_chief_on_threat_of_migratory_birds_to_europe,_namerica",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.businesswire.com/news/home/20161212005698/en/Americas-Influenza-Vaccines-Market---Persons-Vaccinated",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://finance.yahoo.com/news/americas-influenza-vaccines-market-persons-012400284.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.einnews.com/pr_news/357337812/influenza-vaccines-market-to-reach-with-3-billion-forecast-to-2021",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.channelnewsasia.com/news/asiapacific/south-korea-to-cull-3-percent-of-poultry-to-contain-bird-flu/3327790.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/influenza-vaccine-revenue-forecasts-and-rd-outlook-2016-2026-prospects-for-technologies-including-trivalent-and-quadrivalent-flu-shots-300378589.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://empowerednews.net/influenza-vaccines-market-2016-americas-trends-market-share-industry-size-growth-opportunities-and-forecast-to-2021/18429752/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/bird_flu_outbreak_on_fife_farm",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/americas-influenza-vaccines-market-persons-vaccinated-brand-analysis-and-forecast-to-2021-300375020.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://vouxmagazine.com/2016/11/15/birth-year-may-determine-flu-risk/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/12/bird-flu-found-on-farm-in-big-german-poultry-area/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/12/south-korea-raises-bird-flu-alert-to-highest-level-for-first-time/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.biologynews.net/newsfeed/ScienceNOW/2016/12/01/_Report__Generation_of_influenza_A_viruses_as_live_but_replication_incompetent...",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "http://www.straitstimes.com/asia/east-asia/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.agriculture.com/markets/newswire/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.dailymail.co.uk/wires/reuters/article-4054034/Eggs-short-supply-South-Korea-battles-worst-bird-flu-outbreak.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.tampabay.com/news/health/act-now-swine-flu-capitalism-is-a-limited-time-offer/998180",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://whbl.com/news/articles/2016/dec/21/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.globalmeatnews.com/Analysis/Bird-flu-outbreaks-rock-poultry-sector-amid-improving-prices",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://kfgo.com/news/articles/2016/dec/21/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://whtc.com/news/articles/2016/dec/21/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.businessinsider.com/r-eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak-2016-12",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://food.ndtv.com/food-drinks/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak-1640784",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.channelnewsasia.com/news/asiapacific/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbr/3384038.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://news.asiaone.com/news/asia/eggs-short-supply-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://news.abs-cbn.com/news/12/21/16/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.deentv.co.za/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://m.food.ndtv.com/food-drinks/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak-1640784",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thepoultrysite.com/poultrynews/37951/brazil-issues-flu-health-alert-urging-poultry-keepers-to-protect-birds/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.newsmaker.com.au/news/206695/global-influenza-vaccines-market-trends-and-forecasts-analysis",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.japantimes.co.jp/life/2016/12/23/food/eggs-short-supply-south-korea-battles-bird-flu-outbreak/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://feedstuffs.com/story-avian-influenza-shaking-global-trade-conditions-45-150319",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://kdal610.com/news/articles/2016/dec/21/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://jakartaglobe.id/asia-pacific/eggs-short-supply-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://twnewsjp.com/2016/12/23/flu-cases-down-despite-first-indiana-death-of-season/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://bolsafinanzas.com/2016/12/24/china-reports-new-case-of-h7n9-bird-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/china-confirms-another-human-bird-flu-case-business-insider/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.surfermag.com/blogs/corndogging/the-8-foot-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/belfast-chip-shop-goes-viral-after-delivery-order-for-cold-and-flu-tablets/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.business-standard.com/article/current-affairs/no-chicks-or-eggs-saudi-bans-indian-poultry-products-on-bird-flu-scare-117010300017_1.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.independent.ie/life/health-wellbeing/health-features/how-to-protect-yourself-from-the-dreaded-flu-as-irish-cases-double-35338528.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.sharenet.co.za/news/Eggs_in_short_supply_as_South_Korea_battles_worst_bird_flu_outbreak/839b67702763e1a9fa520afe140e4412",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.surfer.com/blogs/corndogging/the-8-foot-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.agriculture.com/markets/newswire/corrected-eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.therakyatpost.com/uncategorized/2016/12/21/south-korea-faces-egg-shortage-due-to-bird-flu-culling/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.livemint.com/Science/eYNUx89WTX4GJy6I9pfqHL/Eggs-in-short-supply-as-South-Korea-battles-worst-bird-flu-o.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.business-standard.com/article/current-affairs/saudi-bans-indian-poultry-products-on-bird-flu-scare-117010300017_1.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.businessinsider.com/r-eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak-2017-1",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.agweb.com/article/using-doppler-radar-to-track-avian-flu-infected-waterfowl--naa-ashley-davenport/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.openpr.com/news/407541/Influenza-Diagnostics-Market-Global-Industry-Analysis-Size-Share-Growth-Trends-and-Forecast-2016-2024.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.voanews.com/a/chile-bird-flu/3664176.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.rediff.com/business/report/saudi-arabia-bans-indian-poultry-products-over-bird-flu-scare/20170103.htm",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.newsnow.in/news/china-confirms-latest-human-death-from-h7n9-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wattagnet.com/articles/29475-to-prevent-avian-flu-brazil-bans-farm-visits",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.heraldnet.com/news/county-sees-fifth-confirmed-flu-death-two-cases-of-mumps/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.bothell-reporter.com/news/flu-straining-health-systems-in-snohomish-county/",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/flu-season-is-getting-worse-cdc-says-wxyz/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newsradioklbj.com/news/international/duck-cull-frances-foie-gras-region-contain-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/bird-flu-plagued-south-korea-agrees-to-buy-us-eggs/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wattagnet.com/articles/29480-europes-top-poultry-producing-countries-face-avian-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/chinas-fifth-bird-flu-outbreak-hits-goose-farm-in-hunan-province/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/factbox-chinas-fifth-bird-flu-outbreak-hits-goose-farm-in-southern-province-of-hunan/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.openpr.com/news/417575/Flu-Detection-Device-Market-Research-Report-by-Regional-Analysis-North-America-Europe-Asia-Pacific-Latin-America-Middle-East-Africa.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://medicalxpress.com/news/2017-01-alternative-flu-vaccine-medical.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2017/01/macau-native-contracts-bird-flu-after-visit-to-china-xinhua/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://twnewsjp.com/2017/01/15/new-human-death-from-h7n9-bird-flu-registered-in-central/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/global-influenza-vaccines---world-industry-market-outlook-2017-2027-611063475.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.sharenet.co.za/news/Eggs_in_short_supply_as_South_Korea_battles_worst_bird_flu_outbreak/bae84a4ef36fb2f9a6c5536400ab9e3b",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://vouxmagazine.com/2016/12/23/china-confirms-second-bird-flu-infection-as-south-korea/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://twnewsjp.com/2017/01/26/spike-in-flu-cases-affects-idahos-older-residents/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.news-medical.net/news/20170125/Alternative-influenza-vaccine-may-provide-clinical-benefits-and-cost-savings-study-suggests.aspx",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://www.ip-watch.org/2017/01/29/virus-genetic-information-hot-topic-flu-framework-nagoya-needs-time/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.bloomberg.com/news/articles/2017-01-30/growing-hunger-for-brazilian-chicken-as-bird-flu-crisis-spreads-iyjbxsms",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.business-standard.com/article/markets/avian-influenza-hong-kong-bans-poultry-import-from-india-117012501062_1.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.business-standard.com/article/economy-policy/hong-kong-follows-uae-in-halting-poultry-import-from-india-due-to-bird-flu-117012501062_1.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.business-standard.com/article/economy-policy/avian-influenza-hong-kong-bans-poultry-import-from-india-117012501062_1.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.infectioncontroltoday.com/news/2017/01/alternative-flu-vaccine-should-reduce-medical-costs-and-save-lives.aspx",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://scienmag.com/quadrivalent-influenza-vaccine-should-reduce-medical-costs-and-save-lives/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.openpr.com/news/786437/Global-Influenza-Diagnostics-Market-is-Projected-to-Reach-US-0-7674-Billion-by-2022.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.openpr.com/news/800600/Global-Influenza-Diagnostics-Market-Analysis-Size-Share-Growth-Trends-and-Forecast-2016-2024.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.latinpost.com/articles/133769/20170131/global-h5n8-avian-flu-outbreaks-gives-additional-uplifting-news-virus.htm",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.xpats.com/flu-epidemic-belgium-gets-worse",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://androidevo.com/2017/11/04/nebraska-records-first-flu-death-of-season.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.moneytalksnews.com/6-low-cost-ways-to-keep-the-flu-at-bay/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/Flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.pravdareport.com/science/earth/26-01-2017/136716-spanish_flu-0/",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://chiefobserver.com/2017/12/global-flu-vaccine-market-2017-22-gsk-sanofi/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://time.com/5052980/flu-season-2017-flu-shot/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://drleonardcoldwell.com/garlic-soup-recipe-can-defeat-colds-flu-even-norovirus/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.businesslive.co.za/bd/world/americas/2017-01-30-bird-flu-in-europe-may-be-good-news-for-brazil/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://qcostarica.com/when-china-sneezes-latin-america-gets-the-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.yahoo.com/news/flu-shot-not-just-151029054.html",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.smithsonianmag.com/science-nature/where-would-pandemic-flu-wreak-most-havoc-180967556/",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.openpr.com/news/871697/Pharmaceuticals-Industry-Research-Report-on-Swine-Influenza-Market-Size-Share-Growth-Trends-and-Forecast-2017-2025.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://journalstar.com/entertainment/books/review-pale-rider-the-spanish-flu-of-and-how-it/article_575574bd-3e2b-5c94-891a-316a925d73d5.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://ndnr.com/naturopathic-news/supporting-research-for-homeopathic-prophylactic-treatment-for-seasonal-flu/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://currenthollywood.com/2017/12/people-with-egg-allergies-can-get-flu-shot/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.lewrockwell.com/2017/12/no_author/homeopathy-for-the-flu/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Greene-County-hospital-puts-flu-restrictions-in-place--465552193.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Officials-explain-reasons-for-flu-restrictions-at-Greene-County-hospital--465748503.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.hirunews.lk/179451/unidentified-flu-kills-little-boy-in-jaffna",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.businesslive.co.za/bd/companies/retail-and-consumer/2017-12-12-avian-flu-has-woolies-going-cold-turkey-this-christmas/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.wisfarmer.com/story/news/2018/01/04/promising-outlook-poultry-2018-avian-flu-concerns-rising/964565001/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Indiana-now-seeing-widespread-influenza-activity-certain-hospitals-making-visitor-restrictions--466975343.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Its-flu-season-can-you-pass-it-along-to-your-pets--466035153.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Health-agency-Indiana-flu-deaths-reach-25-through-Dec-30-468212423.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Both-Terre-Haute-hospitals-to-have-flu-restrictions-by-Friday--467049083.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.theguardian.com/world/2018/oct/24/african-swine-flu-virus-threatens-pork-production-china-chinese-new-year",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://macaudailytimes.com.mo/growing-hunger-brazilian-chicken-bird-flu-spreads.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.whatech.com/market-research/medical/528385-influenza-drug-s-market-production-regional-analysis-for-the-united-states-europe-china-and-japan-detailed-in-new-research-report",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/25-flu-related-deaths-reported-in-Indiana-as-of-Dec-30-468319793.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.wthitv.com/content/news/Medical-staff-battles-flu-virus-local-hospitals-take-action-469045153.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.tampabay.com/state-health-department-flu-widespread-throughout-louisiana-ap_healthf82d3b0a8ab941b99c3348f10555f2fa",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.independent.co.uk/news/health/human-immune-cells-cows-grown-antibodies-epidemics-stop-treatments-mers-flu-zika-a8149956.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.abc.net.au/news/2018-10-30/is-there-a-lower-incidence-of-cold-and-flu-infections-in-tropics/10381902",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "http://www.bbc.com/future/story/20181023-the-places-that-escaped-the-spanish-flu",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "http://www.military-technologies.net/2018/01/07/influenza-vaccines-market-and-forecast-global-analysis/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.theunion.com/opinion/george-boardman-just-in-time-for-flu-season-anti-vaxxers-peddle-bogus-claims/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://usprwire.com/Detailed/Business/Canine_Influenza_Treatment_Market_Volume_Analysis_size_share_and_Key_Trends_2018-2028_356806.shtml",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://empowerednews.net/influenza-vaccine-market-professional-and-in-depth-industry-analysis-2018-by-top-key-players-gsk-sinovac-changsheng-ccbio-aleph-biomedical-sanofi-lanzhou-institute-of-biological-produc/181376587/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.today.com/health/pediatric-flu-death-emma-splan-6-died-complications-flu-t144026",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://bestwebreporter.com/2018/11/28/influenza-medication-market-research-report/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/global-influenza-vaccines-market-2018-2024-market-is-anticipated-to-exceed-us-5-8-billion-with-biocsl-gsk-novartis-protein-sciences-sanofi-pasteur--seqirus-dominating-300771932.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://brazilbusiness.einnews.com/pr_news/472672935/global-influenza-vaccines-market-report-2018-persons-vaccinated-brand-analysis-size-share-growth-trends-major-deals-forecast-to-2024",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.military-technologies.net/2018/11/25/flu-vaccine-market-trend-revenue-growth-rate-customer-needs-manufacturers-and-forecast-up-to-2022-2/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.military-technologies.net/2018/11/21/global-influenza-medication-market-report-examines-latest-trends-and-key-drivers-supporting-growth-through-2025/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://libertynewsnow.com/seriously-ill-migrants-collecting-at-border-tb-pneumonia-influenza-deadly-parasites/article10401",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.military-technologies.net/2018/11/25/flu-vaccine-market-trend-revenue-growth-rate-customer-needs-manufacturers-and-forecast-up-to-2022/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://canadafreepress.com/article/crisis-of-seriously-ill-migrants-slams-border-patrol-tb-pneumonia-influenza",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.forbes.com/sites/quora/2019/10/22/what-ripple-effects-do-events-like-swine-flu-have-on-agriculture/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://english.vov.vn/economy/imported-pork-floods-vietnam-after-swine-flu-cull-405080.vov",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.sbwire.com/press-releases/canine-influenza-treatment-market-with-current-trends-analysis-2018-2028-1091537.htm",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.news8000.com/news/local-doctors-want-expecting-mothers-to-get-flu-shots-1/974851588",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.europeanpharmaceuticalreview.com/news/103977/seasonal-influenza-vaccine-market-to-be-worth-6-5bn-by-2028/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.biospectrumindia.com/reports-white-papers/59/15063/flu-vaccine-market-to-reach-8-bn-by-2029.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.wrcbtv.com/story/39614469/it-is-a-virus-it-is-deadly-mom-speaks-out-after-losing-6yearold-daughter-to-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://marketresearchwriteup.com/2019/11/08/global-pandemic-influenza-vaccine-market-report-with-study-of-north-america-europe-and-asia-pacific-south-america-middle-east-and-africa-regions/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/seasonal-influenza-vaccines-global-drug-forecast-and-market-analysis-to-2028-300967470.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.judicialwatch.org/blog/2019/01/crisis-of-seriously-ill-migrants-slams-border-patrol-tb-pneumonia-influenza-parasites/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://e.vnexpress.net/news/business/industries/imported-pork-floods-vietnam-after-swine-flu-cull-4000734.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.marketwatch.com/press-release/global-influenza-diagnostics-market-may-see-a-growth-rate-of-686-and-would-reach-the-market-size-of-usd92314-million-by-2024-2019-11-29",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.stockmarketwire.com/article/6668011/Eco-Animal-Health-warns-on-profits-due-to-swine-flu-spots-accounting-errors.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.prnewswire.com/news-releases/seasonal-influenza-epidemiology-forecast-to-2028-300968450.html",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://bostonlifenews.com/2019/11/28/flu-vaccine-market-2019-top-leading-countries-companies-consumption-drivers-trends-forces-analysis-revenue-challenges-and-global-forecast-2026/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://neonnettle.com/news/5948-study-elderberry-is-far-more-effective-at-beating-flu-than-big-pharma-drugs",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/seasonal-influenza-epidemiology-forecast-to-2028-300968450.html",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://www.oleantimesherald.com/news/state/seasonal-influenza-vaccines-global-drug-forecast-and-market-analysis-to/article_b126a0f8-d9f4-539a-9ea8-6eb345e50624.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/global-seasonal-influenza-vaccines-drug-market-analysis--forecast-report-2019-universal-vaccines-will-have-a-market-share-of-18-and-sales-of-1-15b-in-the-8mm-by-2028--300970036.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.dailymail.co.uk/health/article-7717781/Should-TWO-flu-jabs-winter-Injection-wears-faster-think.html",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.thedailytimes.com/business/global-seasonal-influenza-vaccines-drug-forecast-and-market-analysis-to/article_e9d6ea0d-600e-587a-8037-4fa53b5284d2.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/the-global-influenza-vaccine-market-was-valued-at-3-96-billion-in-2018--and-is-projected-to-reach-6-20-billion-by-2026--registering-a-cagr-of-5-9-from-2019-to-2026--300980069.html",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.marketwatch.com/press-release/pandemic-influenza-vaccine-market-expect-massive-growth-2020-2029-astrazeneca-and-glaxosmithkline-2019-12-16",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://menafn.com/1103032358/Influenza-Virus-Vaccine-Market-Growth-and-Forecast-2021-to-2027-Sanofi-Pasteur-Medimmune-GSK-Baxter",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://nypost.com/2020/01/09/six-foods-to-help-fight-one-of-the-deadliest-flu-seasons-in-decades/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://kyn24.com/2021/11/04/united-states-influenza-vaccines-market-evolving-latest-trends-to-lead-global-industry-by-2025/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.independent.co.uk/news/health/flu-deaths-hospital-ill-patient-gps-vaccine-phe-a9244201.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.catholictranscript.org/flu-cases-fill-health-facilities-and-patients-wait-on-the-floor-vaccination-resumes-in-the-afternoon-rio-de-janeiro/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.independent.co.uk/news/health/nhs-beds-hospitals-safety-christmas-flu-norovirus-winter-crisis-a9253481.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.news8000.com/wisconsin-health-officials-confirm-first-pediatric-flu-related-death-of-the-season/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.independent.co.uk/news/uk/home-news/bird-flu-avian-suffolk-chickens-culled-defra-a9241521.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.maravipost.com/characterization-of-swine-influenza-ah1n2-variant-alberta-canada-2020/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.deseret.com/2021/10/25/22744144/doom-patrol-the-lessons-we-failed-to-learn-from-past-pandemics-spanish-flu-1918-world-war",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "https://www.msn.com/en-gb/travel/news/christmas-tree-made-from-covid-and-flu-vaccine-vials-really-sums-up-2021/ar-AARHcjx",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://kyn24.com/2021/12/09/flu-vaccine-market-2021-observational-studies-by-top-companies-forecast-by-2031/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.straitstimes.com/world/europe/bird-flu-is-raging-adding-to-the-risks-for-food-inflation",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.bnnbloomberg.ca/bird-flu-is-raging-adding-to-the-risks-for-food-inflation-1.1694326",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/against-the-influenza-epidemic-the-government-and-the-city-council-of-rio-set-up-12-tents-in-unified-urban-areas/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.news24.com/fin24/Articles/bird-flu-is-raging-adding-to-the-risks-for-food-inflation-20211211",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.catholictranscript.org/the-flu-is-worrying-again/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://financialpost.com/pmn/business-pmn/bird-flu-is-raging-adding-to-the-risks-for-food-inflation",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.cidrap.umn.edu/news-perspective/2021/12/flu-scan-dec-08-2021",
+        "retrievable": true,
+        "content_marker_hits": 13
+      },
+      {
+        "url": "https://www.news24.com/fin24/economy/bird-flu-is-raging-adding-to-the-risks-for-food-inflation-20211211",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.catholictranscript.org/influenza-outbreak-h3n2-cases-increased-1380-in-salvador-in-14-days/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/flu-or-covid-19-experts-explain-the-differences-in-symptoms-and-forms-of-infection-the-health/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/with-omicron-and-flu-doctors-suggest-end-of-year-party-with-a-few-relatives-12-17-2021-balance-and-health/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/h3n2-flu-reaches-11-states-and-sus-blackout-makes-notifications-difficult-the-health/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2021/12/12/bird-flu-is-raging-adding-to-the-risks-for-food-inflation",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.catholictranscript.org/in-pernambuco-influenza-surveillance-sleeps-and-only-confirms-new-h3n2-influenza-case-eight-days-after-positive-patient-diagnosis/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/covid-19-and-influenza-diseases-with-symptoms-that-can-be-confused/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.texasguardian.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.catholictranscript.org/cuyap-city-council-the-ministry-of-health-advises-the-population-of-cases-of-influenza-syndrome/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/is-it-h3n2-flu-or-covid-19-see-the-similarities-and-differences-between-the-symptoms/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/limeira-hospitals-have-seen-an-increase-in-patients-with-flu-like-symptoms-this-week/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.catholictranscript.org/influenza-outbreak-lights-new-warnings-and-a-decline-in-health-stocks-in-the-stock-market-is-the-negative-pressure-exaggerated/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.newyorktelegraph.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.sandiegosun.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.sambafoot.com/en/news/return-of-abel-braga-and-strengthened-cast-make-flu-fans-dream-of-a-happy-new-year-in-2022",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bnnbloomberg.ca/brazil-faces-virus-onslaught-as-influenza-spreads-with-omicron-1.1703032",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.brisbanetimes.com.au/world/south-america/flurona-the-combination-of-covid-and-the-flu-diagnosed-in-brazil-20220105-p59lx2.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.smh.com.au/world/south-america/flurona-the-combination-of-covid-and-the-flu-diagnosed-in-brazil-20220105-p59lx2.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.theage.com.au/world/south-america/flurona-the-combination-of-covid-and-the-flu-diagnosed-in-brazil-20220105-p59lx2.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.catholictranscript.org/with-covid-and-flu-emergency-room-waits-reach-6-hours-in-sao-paulo-01-04-2022-balance-and-health/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.watoday.com.au/world/south-america/flurona-the-combination-of-covid-and-the-flu-diagnosed-in-brazil-20220105-p59lx2.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.news.com.au/world/south-america/flurona-concern-as-people-get-covid-and-flu-at-the-same-time-in-brazil/news-story/2fccbbd3bc760701f231afe923f205e9",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.afr.com/world/south-america/meet-flurona-the-covid-flu-combo-diagnosed-in-brazil-20220105-p59lz9",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.bloombergquint.com/onweb/brazil-faces-virus-onslaught-as-influenza-spreads-with-omicron",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.msn.com/en-us/news/world/what-is-flurona-coronavirus-and-influenza-co-infections-reported-as-omicron-surges/ar-AASsMzp",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.stuff.co.nz/world/us-canada/300490916/what-is-flurona-coronavirus-and-influenza-coinfections-reported-as-omicron-surges",
+        "retrievable": false,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.inform.kz/en/ag-ncia-brasil-explains-difference-between-covid-19-and-flu-symptoms_a3879258",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.fox2detroit.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.fox10phoenix.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.iol.co.za/lifestyle/health/world-has-avoided-a-twindemic-but-as-flu-cases-rise-experts-fear-that-could-change-with-flurona-4737b82a-bb09-5589-9a9c-6e71cfc1f651",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "https://www.foxla.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox5dc.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.q13fox.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox32chicago.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox4news.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox13news.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.fox35orlando.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox6now.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox5atlanta.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox5ny.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.catholictranscript.org/health-professional-is-first-person-with-double-infection-from-influenza-and-covid-19-in-goiania-says-city-council-goias/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.plenglish.com/news/2021/12/09/brazil-reports-over-21000-influenza-a-h3n2-cases/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.ktvu.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.msn.com/en-us/health/medical/don-t-panic-about-flurona-there-s-nothing-unique-about-catching-the-flu-and-covid-19-at-the-same-time/ar-AASvDAh",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.msn.com/en-us/health/medical/flu-coronavirus-or-all-of-the-above-more-unlucky-americans-are-catching-both-at-the-same-time/ar-AASvYnk",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://businesstech.co.za/news/lifestyle/549394/flurona-is-coronavirus-plus-the-flu-heres-what-you-should-know/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.fox29.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.boston.com/news/coronavirus/2022/01/05/what-is-flurona-coronavirus-and-influenza-co-infections-reported-as-omicron-surges/",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "https://www.huffingtonpost.co.uk/entry/flurona-covid-flu-coinfection-omicron_uk_61d8545de4b0bcd2195e5879",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.catholictranscript.org/viracopos-canceled-24-more-flights-amid-coronavirus-and-flu-cases-in-azul-campinas-and-the-region/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.newsweek.com/we-are-blind-brazilian-health-officials-have-big-data-gaps-amid-rise-covid-flu-1667099",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.fox26houston.com/news/flurona-what-you-need-to-know-about-the-flu-covid-19-dual-illness",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.msn.com/en-us/health/medical/flurona-what-happens-when-you-catch-covid-19-and-flu-at-the-same-time/ar-AASBdp4",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.asiaone.com/lifestyle/how-dangerous-flurona-covid-19-and-seasonal-influenza-infection-omicron-spreads",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://o.canada.com/news/canada/what-is-flurona-everything-you-need-to-know-about-the-covid-flu-combo",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.dailyheraldtribune.com/news/canada/what-is-flurona-everything-you-need-to-know-about-the-covid-flu-combo",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.news24.com/health24/medical/infectious-diseases/coronavirus/flurona-coinfection-with-covid-19-and-flu-on-the-rise-should-you-be-worried-20220110-2",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.trinidadtimes.com/news/272182961/after-5000-cranes-die-from-bird-flu-israel-acts-to-stop-virus",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://cardealermagazine.co.uk/publish/jan-4-health-sec-blames-flu-and-covid-for-nhs-problems-pm-to-set-out-maths-to-18-plan-food-inflation-rockets-to-new-record/277078",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.aha.org/flurona-and-its-impact-flu-season",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.detroitnews.com/story/news/nation/2022/01/10/what-flurona-coronavirus-and-influenza-co-infections-reported-tdn/9162383002/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://finance.yahoo.com/news/influenza-diagnostics-market-worth-usd-180000947.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.latinamericanpost.com/43248-latin-america-in-short-davos-world-economic-forum-%7C-paho-warns-about-avian-influenza",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.chronicletimes.com/articles/featured-stories/avian-flu-takes-wing/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://en.mercopress.com/2023/02/07/emergency-in-brazil-as-avian-flu-outbreak-reported-in-neighboring-bolivia-poultry-exports-total-us-9-7billion",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://thevoiceslu.com/2022/01/oecs-benefits-from-flu-tablets-donated-by-the-government-of-brazil/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bnnbloomberg.ca/spread-of-bird-flu-worsens-hitting-egg-laying-hens-especially-hard-1.1881544",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.dailymail.co.uk/health/article-11680363/From-Ebola-like-disease-Croatia-bird-flu-Egypt-Biggest-disease-threats-REVEALED.html",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/controlling-the-surge-of-avian-influenza-cases-in-central-and-south-america-woah",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://en.mercopress.com/2023/02/11/brazil-free-of-avian-flu-so-far-exported-a-record-421.000-tons-of-poultry-meat-in-january",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.stripes.com/theaters/us/2023-02-09/bird-flu-spread-worsens-9088628.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "http://newsoninvest.com/2015/12/09/avian-flu-plucks-sales-for-us-turkey-farmers/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ndtv.com/world-news/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry-3785185",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ibtimes.com/bird-flu-spreads-new-countries-threatens-non-stop-war-poultry-3668227",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.nny360.com/news/nationandworld/outbreak-of-bird-flu-worsens-especially-for-egg-laying-hens/article_f579de16-a999-11ed-abc1-ebb990f1e4fa.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://uk.news.yahoo.com/bird-flu-spreads-countries-threatens-111001601.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://news.yahoo.com/bird-flu-spreads-countries-threatens-111001601.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.yahoo.com/news/bird-flu-spreads-countries-threatens-111001601.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.thestar.com.my/news/world/2023/02/15/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.bloomberg.com/news/articles/2023-02-15/bird-flu-sent-egg-prices-soaring-now-threat-moves-to-chicken",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bnnbloomberg.ca/bird-flu-sent-egg-prices-soaring-now-the-threat-moves-to-chicken-1.1884427",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.country-guide.ca/daily/more-south-american-nations-report-bird-flu-cases/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://japantoday.com/category/world/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry2",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.manitobacooperator.ca/daily/more-south-american-nations-report-bird-flu-cases/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.livemint.com/news/world/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry-11676475032080.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.voanews.com/a/more-south-american-nations-report-bird-flu-cases-brazil-remains-free/6965296.html",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.asiaone.com/world/bird-flu-spreads-new-countries-threatens-non-stop-war-poultry",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.marketscreener.com/quote/stock/JBS-S-A-6499588/news/More-South-American-nations-report-bird-flu-cases-Brazil-remains-free-42998604/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com/news-releases/zhongchao-inc-announces-introduction-of-indian-anti-influenza-drugs-to-china-301734097.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.lbcgroup.tv/news/world/687483/bird-flu-spreads-to-new-countries-threatens-non-st/en",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://en.mercopress.com/2023/02/16/one-detection-prompts-declaration-of-avian-flu-emergency-in-uruguay",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.agcanada.com/daily/more-south-american-nations-report-bird-flu-cases",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.agweek.com/business/markets/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.stabroeknews.com/2023/02/16/news/world/more-south-american-nations-report-bird-flu-cases-brazil-remains-free/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/south-american-countries-report-further-avian-influenza-outbreaks",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/avian-influenza-threatens-non-stop-war-on-poultry",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://thefrontierpost.com/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.voanews.com/a/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry/6965710.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.devdiscourse.com/article/headlines/2356135-more-south-american-nations-report-bird-flu-cases-brazil-remains-free",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.geo.tv/latest/471242-bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://tribune.com.pk/story/2401548/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/guatemala-reports-avian-influenza-outbreak-in-wild-birds",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.bworldonline.com/world/2023/02/16/505239/avian-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.devdiscourse.com/article/health/2357388-guatemala-reports-outbreak-of-h5n1-bird-flu-in-wild-birds---woah",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://finance.yahoo.com/news/influenza-vaccine-market-projected-reach-183500376.html",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "https://news.yahoo.com/bird-flu-alarm-drives-world-083536614.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://whbl.com/2023/02/17/factbox-bird-flu-vaccination-policies-by-country/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.newdelhitimes.com/more-south-american-nations-report-bird-flu-cases-brazil-remains-free/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.ibtimes.com/bird-flu-alarm-drives-world-towards-once-shunned-vaccines-3669102",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://wkzo.com/2023/02/17/factbox-bird-flu-vaccination-policies-by-country/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.asiaone.com/world/bird-flu-alarm-drives-world-towards-once-shunned-vaccines",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://whbl.com/2023/02/17/bird-flu-alarm-drives-world-towards-once-shunned-vaccines/",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://wkzo.com/2023/02/17/bird-flu-alarm-drives-world-towards-once-shunned-vaccines/",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.theepochtimes.com/bird-flu-continues-to-spread-worldwide-threatening-poultry-supplies_5061683.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.tanzanianewsreports.com/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thestkittsnevisobserver.com/bird-flu-alarm-drives-world-towards-once-shunned-vaccines/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/articles/weekly-global-protein-digest-argentinas-beef-price-controls-world-bird-flu-accelerating-at-faster-pace-asf-in-hong-kong",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.nbcnews.com/science/science-news/bird-flu-alarm-drives-world-shunned-vaccines-rcna71213",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.foxnews.com/world/global-bird-flu-alarm-prompts-countries-reconsider-once-shunned-vaccines",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.rnz.co.nz/news/world/484460/argentina-reports-new-cases-of-bird-flu-in-its-territory",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://kfgo.com/2023/02/18/argentina-reports-new-cases-of-bird-flu-in-its-territory/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.thecattlesite.com/articles/weekly-global-protein-digest-argentinas-beef-price-controls-world-bird-flu-accelerating-at-faster-pace-asf-in-hong-kong",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.newdelhitimes.com/bird-flu-spreads-to-new-countries-threatens-non-stop-war-on-poultry/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://kelo.com/2023/02/18/argentina-reports-new-cases-of-bird-flu-in-its-territory/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://whbl.com/2023/02/18/argentina-reports-new-cases-of-bird-flu-in-its-territory/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://wsau.com/2023/02/18/argentina-reports-new-cases-of-bird-flu-in-its-territory/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://menafn.com/1105598903/Clover-Enters-Into-Exclusive-Agreement-To-Commercialize-Quadrivalent-Seasonal-Influenza-Vaccine-In-Mainland-China",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://markets.buffalonews.com/buffnews/article/gnwcq-2023-2-19-clover-enters-into-exclusive-agreement-to-commercialize-quadrivalent-seasonal-influenza-vaccine-in-mainland-china",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.devdiscourse.com/article/health/2358639-argentina-reports-new-cases-of-bird-flu-in-its-territory",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://brazilbusiness.einnews.com/pr_news/617935653/clover-enters-into-exclusive-agreement-to-commercialize-quadrivalent-seasonal-influenza-vaccine-in-mainland-china",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://markets.financialcontent.com/stocks/article/gnwcq-2023-2-19-clover-enters-into-exclusive-agreement-to-commercialize-quadrivalent-seasonal-influenza-vaccine-in-mainland-china",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.pharmaceutical-technology.com/news/clover-adimmune-influenza-vaccine/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.asiaone.com/business/clover-enters-exclusive-agreement-commercialize-quadrivalent-seasonal-influenza-vaccine",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://en.mercopress.com/2023/02/21/argentina-ups-security-measures-as-number-of-avian-flu-cases-grows",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://tuoitrenews.vn/news/international/20230219/argentina-reports-new-cases-of-bird-flu-in-its-territory/71655.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://finance.yahoo.com/news/influenza-diagnostic-global-market-report-184600899.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.wallstreet-online.de/nachricht/16579071-clover-enters-into-exclusive-agreement-to-commercialize-quadrivalent-seasonal-influenza-vaccine-mainland-china",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/argentina-reports-new-cases-of-bird-flu-in-its-territory",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.latintimes.com/16-countries-latin-america-declare-emergency-state-bird-flu-raises-panic-542730",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.floridastatesman.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.theusnews.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.bangladeshsun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.jamaicantimes.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.utahindependent.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.albuquerqueexpress.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.californiatelegraph.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.hawaiitelegraph.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.sheppnews.com.au/world/bird-flu-kills-hundreds-of-sea-lions-pelicans-in-peru/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.europesun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.taiwansun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://news.yahoo.com/bird-flu-kills-sea-lions-153112758.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.philippinetimes.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.iranherald.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.pakistantelegraph.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.phoenixherald.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.stlouisstar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.memphissun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://whbl.com/2023/02/21/bird-flu-kills-sea-lions-and-thousands-of-pelicans-in-perus-protected-areas/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.argentinastar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.texasguardian.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.oklahomastar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.africaleader.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.torontotelegraph.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.srilankasource.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.northkoreatimes.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.oklahomacitysun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.newswest9.com/story/30833146/dying-girls-christmas-miracle-life-after-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.londonmercury.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.tennesseedaily.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bostonstar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.parisguardian.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://buenosairesherald.com/society/bird-flu-is-not-a-risk-for-the-general-public-government-says",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://buenosairesherald.com/business/agro/government-summit-as-bird-flu-cases-surge",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.saltlakecitysun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.massachusettssun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.dallassun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.haitisun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.newzealandstar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.atlantaleader.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/avian-influenza-kills-sea-lions-and-pelicans-in-perus-protected-areas",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.sydneysun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.cincinnatisun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.asiabulletin.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.nashvilleherald.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.vaildaily.com/news/avian-flu-and-you-how-you-can-help-protect-local-bird-populations/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.israelherald.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.neworleanssun.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.foxnews.com/world/bird-flu-kills-sea-lions-thousands-pelicans-perus-protected-areas",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.singaporestar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://newsinfo.inquirer.net/1733337/bird-flu-kills-sea-lions-and-thousands-of-pelicans-in-perus-protected-areas",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.baltimorestar.com/news/273550933/no-end-in-sight-as-us-bird-flu-outbreak-enters-year-two",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kelo.com/2023/02/21/bird-flu-kills-sea-lions-and-thousands-of-pelicans-in-perus-protected-areas/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.thestkittsnevisobserver.com/bird-flu-kills-sea-lions-and-thousands-of-pelicans-in-perus-protected-areas/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://brazilbusiness.einnews.com/pr_news/620449856/influenza-diagnostic-market-size-share-and-growth-analysis-for-2023-2032",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.manitobacooperator.ca/farm-it-manitoba/bird-flu-alarm-drives-world-towards-once-shunned-vaccines/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/02/bird-flu-alarm-drives-world-towards-once-shunned-vaccines",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.indiatoday.in/world/story/bird-flu-kills-sea-lions-and-pelicans-in-perus-protected-area-2337861-2023-02-22",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.themalaymailonline.com/world/article/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://whbl.com/2023/03/15/chile-culls-40000-poultry-amid-industrial-bird-flu-outbreak/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.fijitimes.com/bird-flu-kills-sea-lions-and-thousands-of-pelicans-in-perus-protected-areas/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/study-h5n1-avian-flu-seal-deaths-reveals-multiple-lineages",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://outbreaknewstoday.com/avian-influenza-update-in-argentina-96804/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.foxnews.com/world/chile-detects-new-bird-flu-outbreak-industrial-facility",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://kelo.com/2023/03/21/chile-detects-new-bird-flu-outbreak-in-industrial-facility/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://buenosairesherald.com/business/agro/bird-flu-government-to-compensate-producers",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/03/chile-detects-first-industrial-avian-influenza-outbreak",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.wgmd.com/chile-culls-whopping-40000-poultry-after-detecting-1st-bird-flu-case-in-the-industry/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/study-h5n1-avian-flu-seal-deaths-reveals-multiple-lineages",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.bloomberg.com/news/articles/2023-03-25/brazil-president-lula-postpones-trip-to-china-after-catching-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bloomberg.com/news/articles/2023-03-27/brazil-s-lula-is-recovering-from-flu-and-working-from-home",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bnnbloomberg.ca/brazil-s-lula-is-recovering-from-flu-and-working-from-home-1.1901038",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.foxnews.com/world/chile-culls-whopping-40000-poultry-detecting-1st-bird-flu-case-industry",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://news.yahoo.com/brazil-lula-recovering-flu-working-171325381.html",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://en.mercopress.com/2023/12/10/bird-flu-expanding-in-antarctica-high-mortality-among-elephant-seals",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.scmp.com/news/asia/southeast-asia/article/3244566/singapore-suspends-poultry-imports-parts-japan-us-and-other-countries-over-bird-flu-fears",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://www.medgadget.com/2017/01/global-influenza-vaccines-market-share-growth-and-trends-analysis-2021-forecast-report.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.channelnewsasia.com/singapore/bird-flu-h5n1-singapore-suspends-poultry-imports-japan-us-sfa-3977486",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/france-orders-third-avian-flu-vaccine-dose-ducks-risk-area",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "https://news.yahoo.com/bird-flu-kills-over-900-102409236.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://economictimes.indiatimes.com/news/environment/flora-fauna/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil/articleshow/105905954.cms",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.todayonline.com/singapore/singapore-suspends-poultry-imports-regions-japan-us-and-other-countries-hit-bird-flu-outbreak-2322361",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.scmp.com/news/world/americas/article/3244687/brazil-authorities-scrambles-isolate-bird-flu-virus-killed-900-seals-sea-lions",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.reuters.com/world/americas/bird-flu-kills-over-900-seals-sea-lions-south-brazil-2023-12-11/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.straitstimes.com/world/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://timesofindia.indiatimes.com/home/environment/flora-fauna/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil/articleshow/105905954.cms",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://wsau.com/2023/12/11/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.theepochtimes.com/world/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil-5545129",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.medgadget.com/2017/10/flu-vaccine-market-drivers-and-opportunities-forecasts-from-2017-to-2022.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://english.aawsat.com/varieties/4721066-bird-flu-kills-over-900-seals-sea-lions-south-brazil",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.foodformzansi.co.za/icymi-bird-flu-threatens-2023-chicken-imports/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://dunyanews.tv/en/Health/777079-Bird-flu-kills-over-900-seals,-sea-lions-in-south-Brazil",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.stabroeknews.com/2023/12/11/news/regional/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/12/avian-influenza-kills-over-900-seals-sea-lions-in-south-brazil",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://dailycommercenews.com/2017/11/21/influenza-diagnostics-market-global-analysis-2017-abbott/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://thefrontierpost.com/bird-flu-kills-over-900-seals-sea-lions-in-south-brazil/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.thehindu.com/sci-tech/science/significance-of-an-influenza-a-h1n2v-case-in-the-uk/article67642195.ece",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://learningenglish.voanews.com/a/bird-flu-kills-hundreds-of-seals-sea-lions-in-brazil/7393785.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.saltwire.com/prince-edward-island/news/world/brazil-steers-clear-of-bird-flu-boosts-chicken-production-lobby-group-abpa-says-100922381/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://news.yahoo.com/brazil-steers-clear-bird-flu-134402656.html",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.aol.com/brazil-steers-clear-bird-flu-134402097.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.latinamericanpost.com/46216-brazil-battles-bird-flu-as-seal-and-sea-lion-deaths-surge",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.pharmiweb.com/press-release/2023-12-27/influenza-vaccine-market-to-hit-1012-billion-by-2030-north-america-is-expected-to-provide-lucrat",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.marketscreener.com/news/latest/Brazil-Mexico-eye-regional-avian-flu-plan-to-keep-trade-flowing-45661389/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.postcourier.com.pg/bird-flu-kills-seals-sea-lions/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://kfgo.com/2023/12/19/brazil-steers-clear-of-bird-flu-boosts-chicken-production-lobby-group-abpa-says/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://latinamericanpost.com/americas/environment-en/brazil-battles-bird-flu-as-seal-and-sea-lion-deaths-surge/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.saltwire.com/cape-breton/news/brazil-mexico-eye-regional-avian-flu-plan-to-keep-trade-flowing-100925200/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thestandard.com.hk/section-news/section/8/258927/Old-timers-lead-Flu",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.agweb.com/opinion/flu-bug",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2024/01/mexico-brazil-carve-out-regional-avian-influenza-plan",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.marketscreener.com/news/latest/Brazil-dodges-bird-flu-threat-to-post-record-chicken-exports-industry-lobby-45693079/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thepoultrysite.com/news/2023/12/brazil-steers-clear-of-avian-influenza-boosts-chicken-production",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kelo.com/2024/01/02/brazil-mexico-eye-regional-avian-flu-plan-to-keep-trade-flowing/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.devdiscourse.com/article/headlines/2742429-bird-flu-kills-over-900-seals-sea-lions-in-south-brazil",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.aol.com/news/brazil-dodges-bird-flu-threat-150545611.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.saltwire.com/halifax/news/brazil-dodges-bird-flu-threat-to-post-record-chicken-exports-industry-lobby-100926589/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.saltwire.com/cape-breton/news/brazil-dodges-bird-flu-threat-to-post-record-chicken-exports-industry-lobby-100926589/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://news.yahoo.com/brazil-dodges-bird-flu-threat-150545155.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://geneticliteracyproject.org/2024/01/15/regulatory-death-march-as-the-avian-flu-crosses-the-species-barrier-and-targets-animals-and-humans-a-gene-editing-solution-is-in-focus-heres-why-its-unlikely-us-regulators-will-em/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.theglobeandmail.com/business/article-brazil-mexico-eye-regional-avian-flu-plan-to-keep-trade-flowing/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.livescience.com/animals/seals/bird-flu-wipes-out-over-95-of-southern-elephant-seal-pups-in-catastrophic-mass-death",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.electronicsweekly.com/blogs/mannerisms/consumer/uk-best-for-flu-immunisation-2024-01/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.telegraph.co.uk/global-health/science-and-disease/bird-flu-kills-17000-elephant-seal-pups-in-argentina/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.esmmagazine.com/supply-chain/brazil-dodges-bird-flu-threat-to-post-record-chicken-exports-industry-lobby-says-256873",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.yahoo.com/lifestyle/bird-flu-wipes-over-95-105940446.html",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://menafn.com/1107822465/Cold-And-Flu-Supplements-Market-Growth-Outlook-Forecast-2024-2032",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://forextv.com/top-news/influenza-diagnostics-market-expected-to-achieve-over-us-3-08-billion-by-2033-with-a-6-1-cagr-according-to-persistence-market-research/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://news.mongabay.com/2024/01/in-argentina-scientists-scramble-to-study-seal-colonies-hit-hard-by-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.wattagnet.com/poultry-meat/diseases-health/avian-influenza/article/15664007/brazil-hpai-situation-in-sea-mammals-is-resolved",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://dailycaller.com/2024/02/08/emergency-alerts-world-health-organization-influenza-virus-brazil-cambodia/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.esmmagazine.com/supply-chain/philippines-bans-poultry-imports-from-belgium-france-to-halt-bird-flu-spread-256964",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.thecattlesite.com/articles/weekly-global-protein-digest---avian-influenza-vaccine-us-ag-outlook-forum-forecast",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.cbc.ca/kidsnews/post/watch-avian-flu-is-in-canada-what-does-that-mean-for-birds-and-humans",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.thepoultrysite.com/articles/weekly-global-protein-digest---avian-influenza-vaccine-us-ag-outlook-forum-forecast",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.medgadget.com/2019/11/antiviral-drugs-market-continues-to-expand-clinical-research-to-grow-stronger-as-zika-ebola-and-influenza-become-household-names-market-research-future-analysis.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.medgadget.com/2019/12/global-influenza-vaccine-market-in-depth-research-2020-2025-by-industry-analysis-size-share-trends-and-key-players-profiles-csl-sanofi-altimmune.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.washingtonpost.com/world/2022/01/04/twindemic-coronavirus-flu-outbreak-2021-israel-brazil-australia/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.washingtonpost.com/business/coronavirus--flu-fluronashould-you-be-worried-about-it/2022/01/05/bfab637e-6e60-11ec-b1e2-0539da8f4451_story.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.globenewswire.com/news-release/2023/02/16/2610162/0/en/Influenza-Vaccine-Market-is-projected-to-Reach-US-13-58-Billion-by-2030-at-a-CAGR-of-8-8-during-the-forecast-period-2023-2030-Data-By-Contrive-Datum-Insights.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.globenewswire.com/news-release/2023/02/19/2611074/0/en/Clover-Enters-into-Exclusive-Agreement-to-Commercialize-Quadrivalent-Seasonal-Influenza-Vaccine-in-Mainland-China.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bobfm.co.uk/the-northern-territory-receives-more-than-6-5-million-doses-of-flu-vaccine/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.bobfm.co.uk/city-hall-teams-visit-cras-in-the-capital-to-vaccinate-the-target-audience-against-influenza/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.medgadget.com/2024/01/exploring-the-soaring-growth-of-the-global-influenza-vaccine-market-from-us-8-78-billion-to-us-22-71-billion-by-2032-astute-analytix.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.medgadget.com/2024/01/explosive-growth-forecasted-global-influenza-vaccine-equipment-market-set-to-reach-us-51-53-billion-by-2032-astute-analytica.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.globenewswire.com/news-release/2024/01/31/2821252/0/en/Global-Microneedle-Flu-Vaccine-Market-Research-Report-2024-Market-to-Almost-Double-to-3-04-Billion-by-2034-Driven-by-Government-Initiatives-and-Funding.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      }
+    ]
+  },
+  "IDN": {
+    "iso3": "IDN",
+    "n_matched": 216,
+    "articles": [
+      {
+        "url": "http://www.ameripublications.com/chaos-at-kuala-lumpur-airport-after-airasia-pilots-down-with-flu/28541",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://chinadigitaltimes.net/2005/11/caijing-articles-on-avian-flu-china-has-had-the-flu-for-a-long-time/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://crofsblogs.typepad.com/h5n1/2015/11/indonesianorth-jakarta-boy-tests-negative-for-bird-flu-gets-discharged-from-hospital.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://poultryproductionnews.blogspot.com/2015/10/h5n2-avian-influenza-returns-to-taiwan.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "http://www.telegraph.co.uk/news/worldnews/europe/france/12033898/Japan-bans-French-foie-gras-imports-over-bird-flu-virus.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://iusbpreface.com/2016/01/15/bird-flu-discovered-at-dubois-co-turkey-farm-92133/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://en.yibada.com/articles/97571/20151226/chinese-herbal-medicine-flu-gets-fda-test-approval.htm",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.customstoday.com.pk/japan-bans-french-foie-gras-imports-over-bird-flu-virus/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://metro.co.uk/2016/01/14/man-flu-is-real-oestrogen-helps-women-fight-the-bug-5621882/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.innovationtoronto.com/2012/07/bird-flu-vaccine-to-be-rolled-out-in-2013-after-breakthrough/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.dw.com/en/a-never-ending-story-bird-flu-strikes-again/a-18900235",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "http://quadrangleonline.com/2016/01/15/a-late-start-to-the-flu-season/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.dailymail.co.uk/health/article-3320802/Antibiotics-DON-T-cure-flu-bacteria-NOT-humans-resistant-say-experts-warn-post-antibiotic-era-common-colds-kill-again.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.sott.net/article/305846-The-Health-and-Wellness-Show-Vaccines-and-Flu-Shots",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "http://quadrangleonline.com/2016/01/18/9-more-in-turkey-farms-infected-with-bird-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kvor.com/news/avian-flu-fast-facts/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.630wpro.com/news/avian-flu-fast-facts/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.nhs.uk/news/2016/11November/Pages/First-time-flu-infection-may-affect-lifetime-immunity.aspx",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.kkoh.com/news/avian-flu-fast-facts/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://news.pia.gov.ph/article/view/1291479192410/da-8-reconstitutes-provincial-avian-influenza-task-force",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://health.asiaone.com/health/health-news/suspected-bird-flu-hits-ducks-indonesian-province",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.rappler.com/world/regions/asia-pacific/indonesia/bahasa/englishedition/114717-airasia-pilot-flu-canceled-flights",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://ipolitics.ca/2016/01/18/the-sprout-south-korea-shuts-down-u-s-poultry-imports-over-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://www.worldpoultry.net/Broilers/Health/2015/11/Vaccination-against-avian-influenza-2711508W/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.cidrap.umn.edu/news-perspective/2016/11/flu-scan-nov-11-2016",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "https://www.nursingtimes.net/clinical-archive/infection-control/first-time-flu-infection-may-affect-lifetime-immunity/7013433.article",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/global-influenza-vaccines-market-and-forecast-to-2021---size-share-growth-and-trends-analysis-300368573.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.occrp.org/en/daily/5738-indonesia-former-health-minister-and-fan-of-bird-flu-conspiracy-theories-detained",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.marketwatch.com/story/global-influenza-vaccines-market-and-forecast-to-2021---size-share-growth-and-trends-analysis-2016-11-24",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/bird_flu_statement_from_agriculture_minister_and_reaction_from_poultry_farm",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/authorities_respond_to_bird_flu_in_germany",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/h5n1_bird_flu_strain_suspected_at_poultry_farm_in_southern_germany",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.openpr.com/news/387828/Global-Influenza-Vaccines-Market-and-Forecast-to-2021-Size-Share-Growth-and-Trends-Analysis.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.producer.com/market_update/feed-grains-bird-flu-outbreaks-watched/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsblogged.com/h5n8-bird-flu-latest-news/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://directorsblog.nih.gov/2016/11/22/birth-year-predicts-bird-flu-risk/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/Germany_Bird_Flu_Cases",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://jakarta.coconuts.co/2015/11/04/north-jakarta-boy-who-owns-pet-chickens-suspected-having-bird-flu",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://wn.com/bird_flu_in_germany",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.saharasamay.com/regional-news/national-capital-region-news/676601940/avian-flu-three-more-birds-die-in-delhi.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.housepricecrash.co.uk/forum/index.php?/topic/228120-bird-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://jakarta.coconuts.co/2015/11/05/north-jakarta-boy-tests-negative-bird-flu-gets-discharged-hospital",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://bsccomment.com/2016/01/18/indiana-officials-no-new-bird-flu-infections-reported5fe.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://avauncer.com/2016/12/08/bird-flu-risk-poultry-owners-told-to-keep-birds-inside.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.marketwatch.com/story/asia-and-australasia-influenza-vaccines-market-persons-vaccinated-brand-analysis-and-forecast-to-2021-2016-12-17",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://health.asiaone.com/health/health-news/indonesian-woman-dies-bird-flu-health-ministry",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/bird_flu_worries_spread_in_europe",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.agcanada.com/cns_feed/feed-grains-bird-flu-outbreaks-watched",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.prnewswire.com/news-releases/asia-and-australasia-influenza-vaccines-market-persons-vaccinated-brand-analysis-and-forecast-to-2021-300380475.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://finance.yahoo.com/news/asia-australasia-influenza-vaccines-market-211600965.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://blogs.cfr.org/asia/2016/12/02/bird-flu-north-korean-coal-crunch-and-more/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://wn.com/un_bird_flu_chief_on_threat_of_migratory_birds_to_europe,_namerica",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thehindubusinessline.com/news/world/japan-begins-culling-210000-birds-to-stop-avian-flu/article9432859.ece",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://au.news.yahoo.com/world/a/33600656/japan-culling-210-000-birds-amid-spreading-avian-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.antaranews.com/en/news/108059/dutch-destroy-190000-ducks-in-first-bird-flu-cull",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "http://in-cyprus.com/generic-copy-of-roche-flu-pill-tamiflu-hits-u-s-market/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.thehindubusinessline.com/news/world/japan-culling-210000-birds-to-stop-avian-flu/article9432859.ece",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.dailymail.co.uk/wires/reuters/article-4031492/MEDIA-Indonesia-bans-live-poultry-imports-countries-bird-flu-cases--Kontan.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://flapship.com/2016/12/avian-flu-found-in-dead-birds-in-three-new-areas-of-uk/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://wn.com/bird_flu_outbreak_on_fife_farm",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/Bird_flu_virus_that_killed_Chinese_man_won",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://wn.com/my_response_-_bird_flu_chicken_farm_cull_begins_at_craigies_poultry_farm",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.surfer.com/blogs/corndogging/the-8-foot-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://en.tempo.co/read/news/2016/12/20/240829130/Hong-Kong-Confirms-First-Case-of-Bird-Flu-This-Season",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/12/new-japan-bird-flu-outbreak-brings-fresh-cull-of-chickens-as-asia-spread-fears-grow/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://newsviewsnreviews.com/2016/12/eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://en.tempo.co/read/news/2016/12/23/309830051/China-Reports-First-Human-Fatalities-from-Bird-Flu",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "http://sglinks.com/pages/86949888-china-confirms-latest-human-death-from-h7n9-bird-flu-east",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://health.asiaone.com/health/health-news/indonesia-braces-new-outbreak-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.marketwatch.com/story/h5n8-bird-flu-pandemic-now-disruptive-in-south-africa-might-have-been-controlled-by-specific-replikins-vaccines-and-blockers-available-since-2013-2017-11-10",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.surfermag.com/blogs/corndogging/the-8-foot-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://news.asiaone.com/news/asia/indonesia-braces-new-outbreak-bird-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com/news-releases/h5n8-bird-flu-pandemic-now-disruptive-in-south-africa-might-have-been-controlled-by-specific-replikins-vaccines-and-blockers-available-since-2013-300554055.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.cnbc.com/2017/10/25/on-20th-anniversary-of-asian-flu-markets-still-feeling-the-effects.html",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.nytimes.com/2017/11/17/health/bird-flu-asia.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.brantnews.com/news-story/7688105-the-flu-season-is-coming-get-your-flu-shot-before-the-virus-strikes/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.pireport.org/articles/2005/11/03/vanuatu-wary-bird-flu-exposure",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.pireport.org/articles/2004/02/05/bird-flu-death-toll-reaches-16",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.thejakartapost.com/academia/2017/11/07/is-asia-prepared-to-face-the-next-flu-outbreak.html",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "http://www.antaranews.com/en/news/108470/ireland-urges-poultry-owners-to-remain-vigilant-against-bird-flu",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://mobile.nytimes.com/2017/11/17/health/bird-flu-asia.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.hindustantimes.com/columns/flu-warning-infections-likely-to-soar-in-2018/story-X2XbKFDoBM46rvN5brQR9O.html",
+        "retrievable": true,
+        "content_marker_hits": 11
+      },
+      {
+        "url": "http://indiatoday.intoday.in/story/winter-illnesses-common-cold-cough-sick-flu-season-change-fever-lifest/1/1075904.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://news.abs-cbn.com/business/10/30/17/bounty-agro-sees-p12-billion-revenue-after-bird-flu-scare",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wisfarmer.com/story/news/2018/01/04/promising-outlook-poultry-2018-avian-flu-concerns-rising/964565001/",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://jakartainformer.com/150132/indonesia-fears-avian-flu-in-2017/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://alironbilbao.com/2018/01/united-kingdom-startup-developing-flu-jab-attracts-20m/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.wbur.org/hereandnow/2017/12/20/1918-flu-pandemic",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://outbreaknewstoday.com/avian-influenza-humans-2017-hong-kong-officials-break-67035/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "http://www.antaranews.com/en/news/108801/hong-kong-confirms-second-bird-flu-death-this-winter--d",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "http://www.thehindubusinessline.com/economy/agri-business/poultry-sector-unfazed-over-bird-flu-outbreak-in-bengaluru/article10017180.ece",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://markets.businessinsider.com/news/stocks/H5N8-Bird-Flu-Pandemic-Now-Disruptive-in-South-Africa-Might-Have-Been-Controlled-by-Specific-Replikins-Vaccines-and-Blockers-Available-Since-2013-1007592671",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://slate.com/technology/2018/10/spanish-flu-1918-influenza-pandemic-name-misnomer.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.whatech.com/market-research/medical/528385-influenza-drug-s-market-production-regional-analysis-for-the-united-states-europe-china-and-japan-detailed-in-new-research-report",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "http://radio.wpsu.org/post/key-lesson-1918-flu-pandemic-tell-truth-one-historian-says",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "http://www.staradvertiser.com/2017/11/20/nyt/bird-flu-is-spreading-in-asia-experts-quietly-warn/",
+        "retrievable": true,
+        "content_marker_hits": 10
+      },
+      {
+        "url": "http://wwno.org/post/key-lesson-1918-flu-pandemic-tell-truth-one-historian-says",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.pbs.org/newshour/show/news-wrap-migrant-boy-who-died-in-u-s-custody-had-the-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://naplesherald.com/2018/01/07/life-moxie-flu-season-get-immune-system-ready/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ndtv.com/world-news/on-deadly-lion-air-737-max-jet-captain-had-the-flu-copilot-was-a-sub-2123996",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.prnewswire.com:443/news-releases/global-influenza-vaccines-market-2018-2024-market-is-anticipated-to-exceed-us-5-8-billion-with-biocsl-gsk-novartis-protein-sciences-sanofi-pasteur--seqirus-dominating-300771932.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://galusaustralis.com/2019/12/208754/influenza-therapeutics-market-drivers-is-responsible-to-for-increasing-market-share-forecast-2026/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://brazilbusiness.einnews.com/pr_news/472672935/global-influenza-vaccines-market-report-2018-persons-vaccinated-brand-analysis-size-share-growth-trends-major-deals-forecast-to-2024",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://newsline.com/2018/10/22/down-with-the-spanish-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://naplesherald.com/2018/01/07/life-moxie-flu-season-get-immune-system-ready/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kxlh.com/cnn-health/2018/12/26/avian-flu-fast-facts/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.military-technologies.net/2018/01/07/influenza-vaccines-market-and-forecast-global-analysis/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kbzk.com/cnn-health/2018/12/26/avian-flu-fast-facts/",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.timesofisrael.com/liveblog_entry/40-year-old-dies-of-flu-complications-in-ramat-gan/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thenews.com.pk/latest/585734-tens-of-thousands-of-pigs-killed-by-swine-flu",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.independent.co.uk/voices/anti-vaxxers-flu-shot-newborn-baby-pregnant-a9255891.html",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "http://bostonlifenews.com/2019/11/28/flu-vaccine-market-2019-top-leading-countries-companies-consumption-drivers-trends-forces-analysis-revenue-challenges-and-global-forecast-2026/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.pharmiweb.com/press-release/2021-03-12/seasonal-influenza-market-size-2021-industry-growth-latest-trends-technology-updates-developmen",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.independent.co.uk/news/world/americas/bre-payton-death-latest-fox-news-federalist-meningitis-swine-flu-dead-a8703061.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.weeklytimesnow.com.au/news/national/avian-influenza-outbreak-chink-in-flu-control/news-story/33030586cbb21666eafdd3d1505b4926?nk=443ac9d8e4071d74cf4df7f5c0050b0e-1510148041",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.theepochtimes.com/songwriter-of-ccp-flu-blues-on-communism-and-spirituality_3799131.html",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.pharmiweb.com/press-release/2021-05-17/global-avian-influenza-vaccines-market-2021growth-opportunities-advancement-current-trends-covid-1",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thejakartapost.com/travel/2019/12/13/influenza-the-souvenir-you-dont-want-to-bring-home-from-your-travels.html",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.thejakartapost.com/news/2019/12/14/influenza-souvenir-you-dont-want-bring-home.html",
+        "retrievable": true,
+        "content_marker_hits": 7
+      },
+      {
+        "url": "https://www.msn.com/en-us/news/world/gates-sees-deaths-at-flu-level-germany-cases-jump-virus-update/ar-AAQPsCy",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://ksusentinel.com/2021/04/18/global-influenza-diagnostics-market-to-amass-massive-roi-over-2021-2026-market-research-store/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://ksusentinel.com/2021/04/25/comprehensive-report-on-influenza-drugs-and-vaccines-market-2021-trends-growth-demand-opportunities-forecast-to-2027-bristol-myers-squibb-sanofi-pasteur-roche-astrazeneca-pfizer-etc/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://en.antaranews.com/news/169934/nthu-research-team-develops-groundbreaking-influenza-vaccine",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://indianexpress.com/article/lifestyle/health/jaiphal-winter-common-cold-flu-nutmeg-powder-join-pain-immunity-benefits-6106393/",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.msn.com/en-us/news/world/large-israel-bird-flu-outbreak-kills-2-000-wild-cranes/ar-AAS9UDo",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.texasguardian.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.newyorktelegraph.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.france24.com/en/live-news/20211226-large-israel-bird-flu-outbreak-kills-2-000-wild-cranes",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ipsnews.net/2021/12/africa-bargain-hard-covid-vaccine-equity-lessons-indonesia-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.msn.com/en-us/news/world/large-israel-bird-flu-outbreak-kills-2-000-wild-cranes/ar-AAS9UDo",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://en.antaranews.com/news/200453/indonesians-over-60-prioritized-to-receive-influenza-vaccination",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://english.ahram.org.eg/NewsContent/2/8/452168/World/Region/Large-Israel-bird-flu-outbreak-kills-,-wild-cranes.aspx",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.ipsnews.net/2021/12/africa-bargain-hard-covid-vaccine-equity-lessons-indonesia-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.independent.co.uk/news/world/americas/us-border-guatemala-boy-migrant-dies-how-flu-felipe-gomez-alonzo-a8701586.html",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.ndtv.com/world-news/bird-flu-outbreak-kills-2-000-wild-cranes-in-israel-2673112",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.msn.com/en-us/news/world/large-israel-bird-flu-outbreak-kills-2000-wild-cranes/ar-AAS9UDo",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.rfi.fr/en/middle-east/20211226-large-israel-bird-flu-outbreak-kills-2-000-wild-cranes",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://phys.org/news/2021-12-large-israel-bird-flu-outbreak.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.sandiegosun.com/news/271949740/influenza-drugs-market-report-2021-exponential-growth-by-market-size-share-trends-and-analysis-to-2026",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.webmd.com/cold-and-flu/flu-guide/what-know-about-bird-flu",
+        "retrievable": true,
+        "content_marker_hits": 11
+      },
+      {
+        "url": "https://www.straitstimes.com/world/middle-east/large-israel-bird-flu-outbreak-kills-2000-wild-cranes",
+        "retrievable": true,
+        "content_marker_hits": 1
+      },
+      {
+        "url": "https://www.dawn.com/news/1665981/bird-flu-outbreak-kills-2000-cranes-in-israel",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.msn.com/en-xl/africa/other/most-serious-damage-to-wildlife-at-least-5200-cranes-killed-by-bird-flu-in-israel/ar-AASd9Az",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.euronews.com/2021/12/28/most-serious-damage-to-wildlife-at-least-5-200-cranes-killed-by-bird-flu-in-israel",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://brazilbusiness.einnews.com/pr_news/600555736/global-influenza-diagnostics-market-drivers-trends-and-restraints-for-2022-2031",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.urdupoint.com/en/miscellaneous/large-israel-bird-flu-outbreak-kills-2000-wi-1436017.html",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.news-medical.net/news/20221113/Survey-assesses-prevalence-of-H5N8-influenza-in-birds.aspx",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.euronews.com/green/2021/12/28/most-serious-damage-to-wildlife-at-least-5-200-cranes-killed-by-bird-flu-in-israel",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.channelstv.com/2021/12/26/large-israel-bird-flu-outbreak-kills-2000-wild-cranes/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.vox.com/future-perfect/2022/11/22/23472207/bird-flu-vaccine-turkey-prices-chickens-hens-cull-depopulation",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.foodnavigator-asia.com/Article/2021/11/11/Potential-gamechanger-Singapore-firm-unveils-herbal-supplement-to-support-immunity-and-fight-cold-and-flu-symptoms",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ipsnews.net/wp-content/cache/all/2021/12/africa-bargain-hard-covid-vaccine-equity-lessons-indonesia-avian-flu/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://www.hawaiitelegraph.com/news/273129103/white-house-urges-americans-to-get-covid-flu-shots-before-year-end",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.calcuttanews.net/news/273129103/white-house-urges-americans-to-get-covid-flu-shots-before-year-end",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.africa.com/africa-should-bargain-hard-for-covid-vaccine-equity-lessons-from-indonesia-during-avian-flu/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.hellenicshippingnews.com/risk-of-avian-flu-outbreak-in-asia-keeps-feed-corn-demand-outlook-in-check/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://www.dailymail.co.uk/sciencetech/article-10348195/Thousands-cranes-killed-bird-flu-northern-Israel.html",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.floridastatesman.com/news/273129103/white-house-urges-americans-to-get-covid-flu-shots-before-year-end",
+        "retrievable": true,
+        "content_marker_hits": 3
+      },
+      {
+        "url": "https://www.saltlakecitysun.com/news/273129103/white-house-urges-americans-to-get-covid-flu-shots-before-year-end",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://kvia.com/news/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://localnews8.com/news/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-6/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.enca.com/life/2000-wild-cranes-killed-israel-bird-flu-outbreak",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://ktvz.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-2/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://abc17news.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://ktvz.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-6/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://abc17news.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-2/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://ktvz.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://muscatinejournal.com/news/national/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_34e46e69-0fb1-51e3-884a-10960215bf17.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://tucson.com/news/national/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_fdee36b9-dcd5-5d6e-93fe-1fee6af88f34.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://abc17news.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-3/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://krdo.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-4/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://wcfcourier.com/news/national/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_e2bde58c-7b5b-52f6-978f-b41dcf2a2905.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://krdo.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-6/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://krdo.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-5/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.jacksonprogress-argus.com/news/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_ed5656d7-cec2-5049-a19e-4804b50d8fdb.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.rockdalenewtoncitizen.com/news/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_1784d7c1-39c0-57c5-a4cb-4301613ebe4b.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.thestranger.com/slog-am/2022/12/06/78756135/slog-am-voters-head-to-polls-in-georgia-flu-hits-washington-with-a-vengeance-its-time-to-go-goblin-mode",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://localnews8.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-6/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://krdo.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-3/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://localnews8.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-2/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://localnews8.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-5/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://localnews8.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-4/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.macaubusiness.com/large-israel-bird-flu-outbreak-kills-2000-wild-cranes/",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "https://localnews8.com/news/national-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.erienewsnow.com/story/47873217/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.marketwatch.com/press-release/anti-influenza-drugs-market-latest-trends-size-key-players-revenue-and-forecast-2028-2022-12-17",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kvia.com/news/us-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-3/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.news-daily.com/news/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine/article_c3fa34d4-5d0c-5876-bd47-591f23501577.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://localnews8.com/news/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-5/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.argentinastar.com/news/273275559/for-second-week-us-reports-declining-cases-of-flu",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.africaleader.com/news/273275559/for-second-week-us-reports-declining-cases-of-flu",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.newsweek.com/grizzly-bear-bird-flu-montana-highly-contagious-1774579",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.ndtv.com/feature/3-grizzly-bears-euthanised-in-us-after-testing-positive-for-highly-pathogenic-avian-flu-3703321",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.newzealandstar.com/news/273275559/for-second-week-us-reports-declining-cases-of-flu",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.sandiegosun.com/news/273275559/for-second-week-us-reports-declining-cases-of-flu",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://localnews8.com/news/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-3/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://kvia.com/news/us-world/cnn-national/2022/12/06/5-things-to-know-for-dec-6-georgia-runoff-hawaii-volcano-scotus-flu-ukraine-2/",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.wgbh.org/news/local-news/2023/01/03/trial-is-now-testing-the-promise-of-mrna-technology-to-make-better-flu-vaccines",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.parisguardian.com/news/273275559/for-second-week-us-reports-declining-cases-of-flu",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://www.soompi.com/article/1560265wpp/seventeens-the8-to-sit-out-upcoming-jakarta-concert-due-to-flu-symptoms",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.funtrivia.com/quiz/history/influenza-412745.html",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "https://en.tempo.co/read/1806305/covid-19-vs-influenza-check-the-differences",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://geneticliteracyproject.org/2024/01/15/regulatory-death-march-as-the-avian-flu-crosses-the-species-barrier-and-targets-animals-and-humans-a-gene-editing-solution-is-in-focus-heres-why-its-unlikely-us-regulators-will-em/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.pharmiweb.com/press-release/2023-12-27/influenza-vaccine-market-to-hit-1012-billion-by-2030-north-america-is-expected-to-provide-lucrat",
+        "retrievable": true,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://schema-root.org/science/biology/human/diseases/infections/viral/flu/h5n1/",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.asiaone.com/world/daily-roundup-doctors-advise-public-mask-crowded-places-amid-rise-covid-19-flu-cases-and",
+        "retrievable": true,
+        "content_marker_hits": 2
+      },
+      {
+        "url": "http://www.hngn.com/articles/254344/20231127/first-human-infected-new-swine-flu-detected-uk-ukhsa-now.htm",
+        "retrievable": true,
+        "content_marker_hits": 6
+      },
+      {
+        "url": "https://en.vietnamplus.vn/thailand-intensifies-flu-vaccination-for-workers-in-travel-tourism/275980.vnp",
+        "retrievable": true,
+        "content_marker_hits": 5
+      },
+      {
+        "url": "https://en.vietnamplus.vn/cambodia-records-first-case-of-bird-flu-in-humans-in-2024/276875.vnp",
+        "retrievable": true,
+        "content_marker_hits": 4
+      },
+      {
+        "url": "https://www.diplomaticourier.com/posts/lessons-covid-influenza-protections-older-adults",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.dailymail.co.uk/health/article-11680363/From-Ebola-like-disease-Croatia-bird-flu-Egypt-Biggest-disease-threats-REVEALED.html",
+        "retrievable": true,
+        "content_marker_hits": 8
+      },
+      {
+        "url": "https://www.cidrap.umn.edu/avian-influenza-bird-flu/quick-takes-more-beyfortus-doses-rsv-avian-flu-iowa-farm-gain-function-hot",
+        "retrievable": true,
+        "content_marker_hits": 9
+      },
+      {
+        "url": "https://www.feednavigator.com/Article/2023/12/22/Bird-flu-threat-looms-for-global-chicken-industry",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.talkvietnam.com/tag/where-flu-shot-near-me/",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "http://www.medgadget.com/2016/12/asia-and-australasia-influenza-vaccines-market-2016-share-trend-segmentation-and-forecast-to-2021.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      },
+      {
+        "url": "https://www.medgadget.com/2019/12/global-influenza-vaccine-market-in-depth-research-2020-2025-by-industry-analysis-size-share-trends-and-key-players-profiles-csl-sanofi-altimmune.html",
+        "retrievable": false,
+        "content_marker_hits": 0
+      }
+    ]
+  }
+}

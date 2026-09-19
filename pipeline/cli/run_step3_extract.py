@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 from pipeline.common.io_jsonl import read_jsonl_tolerant
 from pipeline.config import GROQ_EXTRACTION_MODEL_POOL
 from pipeline.extraction.extraction_store import ExtractionStore
+from pipeline.extraction.geo_crosscheck import classify_geo_match
 from pipeline.extraction.llm_client import (
     DailyQuotaExceeded,
     ExtractionFailure,
@@ -103,13 +104,28 @@ def main() -> None:
                 model=client.last_used_model,
             )
         else:
-            store.record(
-                url,
-                stamp=stamp,
-                status="extracted",
-                extraction=result.model_dump(),
-                model=client.last_used_model,
+            extraction = result.model_dump()
+            geo_verdict = classify_geo_match(
+                primary_country=extraction["primary_country"], gdelt_country=args.country
             )
+            if geo_verdict == "disagree":
+                store.record(
+                    url,
+                    stamp=stamp,
+                    status="excluded_geo_mismatch",
+                    extraction=extraction,
+                    reason=f"geo_mismatch: gdelt_tag={args.country}, "
+                    f"primary_country={extraction['primary_country']}",
+                    model=client.last_used_model,
+                )
+            else:
+                store.record(
+                    url,
+                    stamp=stamp,
+                    status="extracted",
+                    extraction=extraction,
+                    model=client.last_used_model,
+                )
         completed_this_run += 1
         llm_calls_this_run += 1
 

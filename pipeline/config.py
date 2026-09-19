@@ -20,20 +20,25 @@ class CountryDef(NamedTuple):
     included_in_gdelt_cohort: bool
 
 
-# UK/GBR has zero WHO FluNet records (structural gap) -> UKHSA dashboard instead.
-# JPN's FluNet records lack a specimen-processed denominator -> peak-count proxy.
-# BRA/IDN are computed for ground-truth documentation only; confirmed thin GDELT
-# flu content (33% retrievable/content-rich vs the >=60%/>=50% bar) excludes them
-# from GDELT ingestion (Step 2) and the detection/lead-time test (Step 6).
+# UK/GBR has zero WHO FluNet records (structural gap -> UKHSA dashboard) and JPN's
+# FluNet records lack a specimen-processed denominator (-> peak-count proxy); both
+# are computed for ground-truth documentation only. Team decision: excluded from
+# GDELT ingestion (Step 2) and the detection/lead-time test (Step 6) to keep a
+# uniform 6-country cohort with one onset-detection method (flat FluNet
+# positivity_2wk threshold), no per-country exceptions.
+# BRA/IDN use that same flat method and are included in the cohort despite
+# confirmed thinner GDELT flu content (33% retrievable/content-rich vs the
+# >=60%/>=50% bar for the other countries) -- a disclosed limitation, not an
+# oversight; see dev/active/flu-pipeline/context.md.
 COUNTRIES: dict[str, CountryDef] = {
     "USA": CountryDef("United States", "high_income", "NH", "positivity_2wk", True),
-    "GBR": CountryDef("United Kingdom", "high_income", "NH", "positivity_2wk", True),
-    "JPN": CountryDef("Japan", "high_income", "NH", "peak_count_proxy", True),
+    "GBR": CountryDef("United Kingdom", "high_income", "NH", "positivity_2wk", False),
+    "JPN": CountryDef("Japan", "high_income", "NH", "peak_count_proxy", False),
     "AUS": CountryDef("Australia", "high_income", "SH", "positivity_2wk", True),
-    "BRA": CountryDef("Brazil", "upper_middle_income", "SH", "positivity_2wk", False),
+    "BRA": CountryDef("Brazil", "upper_middle_income", "SH", "positivity_2wk", True),
     "IND": CountryDef("India", "lower_middle_income", "NH", "positivity_2wk", True),
     "KEN": CountryDef("Kenya", "low_income", "SH_equatorial", "positivity_2wk", True),
-    "IDN": CountryDef("Indonesia", "lower_middle_income", "SH_equatorial", "positivity_2wk", False),
+    "IDN": CountryDef("Indonesia", "lower_middle_income", "SH_equatorial", "positivity_2wk", True),
 }
 
 # UK has no FluNet data at all; UKHSA covers England only, not Scotland/Wales/NI.
@@ -111,6 +116,19 @@ CONTENT_MARKERS: list[str] = [
 
 RETRIEVABLE_MIN_TEXT_LEN = 200
 
+# Content-richness structural scoring (pipeline/gdelt/content_richness.py),
+# replacing the demonstrated-unreliable CHALLENGE_MARKERS keyword blocklist
+# (investigation/check_aus_ind_usa_full_audit.py: 148/10,451 AUS articles
+# flagged, but sampled ones had 6,000+ real characters -- a stray keyword
+# inside genuine long-form text, not real boilerplate). Placeholder values,
+# calibrated empirically in Phase 3b validation against the 148 known AUS
+# false positives and the near-threshold short USA examples before being
+# treated as final -- see dev/active/flu-pipeline/context.md.
+CONTENT_RICHNESS_MIN_SENTENCES = 3
+CONTENT_RICHNESS_STTR_WINDOW_WORDS = 100  # standardized TTR window, length-independent
+CONTENT_RICHNESS_MIN_TYPE_TOKEN_RATIO = 0.4
+CONTENT_RICHNESS_MIN_AVG_CHUNK_WORDS = 6.0
+
 # ---------------------------------------------------------------------------
 # LLM extraction (Step 3)
 # ---------------------------------------------------------------------------
@@ -146,6 +164,14 @@ MAX_ARTICLE_CHARS = 1500  # cut from 6000 after discovering Groq's 200K TPD/mode
 # real bottleneck (not the 1000 RPD first found) -- news articles front-load key facts, so
 # quality was spot-checked at this length against full-length extractions before adopting it.
 EXTRACTION_MAX_TOKENS = 300  # our JSON schema output is small; previously unbounded
+# gpt-oss-120b/20b are reasoning models -- confirmed empirically that their default
+# reasoning effort spends 100-400+ completion tokens on hidden reasoning before emitting
+# any JSON, which blew EXTRACTION_MAX_TOKENS on nearly every call once the schema's
+# primary_country field (geo cross-check) made the judgment harder. "low" keeps the
+# response inside budget without raising max_tokens, which would directly cut the
+# TPD-bound daily throughput; qwen3.8-27b (not a reasoning model) accepts the param
+# without error and simply ignores it.
+GROQ_REASONING_EFFORT = "low"
 EXTRACTION_MAX_RETRIES = 3
 EXTRACTION_BACKOFF_BASE_SECONDS = 2.0
 

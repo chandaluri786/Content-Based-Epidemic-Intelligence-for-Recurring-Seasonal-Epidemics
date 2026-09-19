@@ -153,6 +153,19 @@ class TestGroqExtractionClient:
         client = GroqExtractionClient(client=fake_openai_client, model="some-model-name")
         assert client.model == "some-model-name"
 
+    def test_passes_low_reasoning_effort_to_stay_within_the_completion_budget(self):
+        # gpt-oss models spend completion tokens on hidden reasoning before
+        # emitting JSON -- confirmed empirically that the default effort
+        # blows the EXTRACTION_MAX_TOKENS budget on this schema's primary_country
+        # judgment (reasoning_tokens alone exceeded 300), causing
+        # json_validate_failed on nearly every real call. "low" keeps the
+        # response inside budget without needing to raise max_tokens (which
+        # would directly cut the Groq TPD-bound daily throughput).
+        client, openai_client, _ = make_client([fake_response(json.dumps(VALID_PAYLOAD))])
+        client.extract("text", country_hint="Kenya")
+        _, kwargs = openai_client.chat.completions.create.call_args
+        assert kwargs["reasoning_effort"] == "low"
+
     def test_passes_country_hint_into_the_prompt(self):
         client, openai_client, _ = make_client([fake_response(json.dumps(VALID_PAYLOAD))])
         client.extract("article body", country_hint="Kenya")

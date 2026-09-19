@@ -1,0 +1,12 @@
+{
+  "known_mismatch": {
+    "n_tested": 4,
+    "n_correctly_excluded": 4
+  },
+  "specificity_guard": {
+    "n_tested": 22,
+    "n_correctly_kept": 22,
+    "pass_rate_pct": 100.0,
+    "wrongly_excluded": []
+  }
+}

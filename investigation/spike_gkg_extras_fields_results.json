@@ -1,0 +1,118 @@
+[
+  {
+    "stamp": "20150302063000",
+    "total_lines": 2189,
+    "title_present": 0,
+    "title_empty": 2189,
+    "title_present_pct": 0.0,
+    "disease_theme_samples": {
+      "GENERAL_HEALTH": 966,
+      "WB_621_HEALTH_NUTRITION_AND_POPULATION": 821,
+      "WB_1406_DISEASES": 444,
+      "WB_1427_NON_COMMUNICABLE_DISEASE_AND_INJURY": 250,
+      "WB_1331_HEALTH_TECHNOLOGIES": 224,
+      "WB_635_PUBLIC_HEALTH": 201,
+      "WB_639_REPRODUCTIVE_MATERNAL_AND_CHILD_HEALTH": 146,
+      "HEALTH_VACCINATION": 141,
+      "WB_642_CHILD_HEALTH": 139,
+      "WB_1458_HEALTH_PROMOTION_AND_DISEASE_PREVENTION": 113
+    },
+    "translation_flagged": 0,
+    "translation_flagged_pct": 0.0,
+    "pre_filter_candidate_counts": {
+      "KEN": 21,
+      "USA": 750,
+      "BRA": 23,
+      "IND": 189,
+      "AUS": 418,
+      "IDN": 19
+    }
+  },
+  {
+    "stamp": "20151125193000",
+    "total_lines": 3999,
+    "title_present": 0,
+    "title_empty": 3999,
+    "title_present_pct": 0.0,
+    "disease_theme_samples": {
+      "GENERAL_HEALTH": 1462,
+      "WB_621_HEALTH_NUTRITION_AND_POPULATION": 1363,
+      "CRISISLEX_C03_WELLBEING_HEALTH": 996,
+      "WB_1406_DISEASES": 691,
+      "WB_1427_NON_COMMUNICABLE_DISEASE_AND_INJURY": 548,
+      "WB_1331_HEALTH_TECHNOLOGIES": 388,
+      "WB_635_PUBLIC_HEALTH": 345,
+      "TAX_DISEASE_CANCER": 184,
+      "WB_1458_HEALTH_PROMOTION_AND_DISEASE_PREVENTION": 170,
+      "WB_2165_HEALTH_EMERGENCIES": 120
+    },
+    "translation_flagged": 0,
+    "translation_flagged_pct": 0.0,
+    "pre_filter_candidate_counts": {
+      "USA": 1718,
+      "AUS": 91,
+      "KEN": 25,
+      "IND": 130,
+      "BRA": 36,
+      "IDN": 13
+    }
+  },
+  {
+    "stamp": "20221227190000",
+    "total_lines": 1528,
+    "title_present": 1526,
+    "title_empty": 2,
+    "title_present_pct": 99.9,
+    "disease_theme_samples": {
+      "GENERAL_HEALTH": 676,
+      "WB_621_HEALTH_NUTRITION_AND_POPULATION": 669,
+      "CRISISLEX_C03_WELLBEING_HEALTH": 346,
+      "UNGP_HEALTHCARE": 292,
+      "WB_1406_DISEASES": 290,
+      "WB_1427_NON_COMMUNICABLE_DISEASE_AND_INJURY": 270,
+      "WB_635_PUBLIC_HEALTH": 249,
+      "TAX_DISEASE_COVID": 219,
+      "TAX_DISEASE_COVID_19": 207,
+      "WB_2165_HEALTH_EMERGENCIES": 183
+    },
+    "translation_flagged": 0,
+    "translation_flagged_pct": 0.0,
+    "pre_filter_candidate_counts": {
+      "USA": 703,
+      "IND": 103,
+      "IDN": 15,
+      "AUS": 37,
+      "BRA": 17,
+      "KEN": 3
+    }
+  },
+  {
+    "stamp": "20151026113000",
+    "total_lines": 3552,
+    "title_present": 0,
+    "title_empty": 3552,
+    "title_present_pct": 0.0,
+    "disease_theme_samples": {
+      "GENERAL_HEALTH": 1499,
+      "WB_621_HEALTH_NUTRITION_AND_POPULATION": 1175,
+      "CRISISLEX_C03_WELLBEING_HEALTH": 902,
+      "WB_1406_DISEASES": 603,
+      "WB_1427_NON_COMMUNICABLE_DISEASE_AND_INJURY": 493,
+      "WB_1331_HEALTH_TECHNOLOGIES": 328,
+      "WB_635_PUBLIC_HEALTH": 323,
+      "TAX_DISEASE_CANCER": 241,
+      "WB_1458_HEALTH_PROMOTION_AND_DISEASE_PREVENTION": 207,
+      "WB_2165_HEALTH_EMERGENCIES": 91
+    },
+    "translation_flagged": 0,
+    "translation_flagged_pct": 0.0,
+    "pre_filter_candidate_counts": {
+      "BRA": 41,
+      "USA": 1099,
+      "IND": 382,
+      "IDN": 60,
+      "AUS": 252,
+      "KEN": 28
+    }
+  }
+]

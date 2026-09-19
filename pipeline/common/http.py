@@ -12,6 +12,16 @@ import requests
 DEFAULT_TIMEOUT_SECONDS = 30
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
+# requests' own default ("python-requests/x.y.z") gets blocked or served a
+# stub/redirect page by several mainstream news outlets (confirmed empirically
+# against Daily Mail, Business Standard, Yahoo News, Zawya, iHeartRadio -- see
+# dev/active/flu-pipeline/context.md). A standard browser UA is not full bot
+# evasion, but it clears this specific, identified failure mode.
+DEFAULT_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+)
+
 
 class RequestFailedError(Exception):
     """Raised when a GET request fails and either isn't retryable or exhausts retries."""
@@ -35,10 +45,11 @@ def get_with_retry(
     exponential backoff (backoff_base * 2**attempt seconds). Non-retryable HTTP
     errors (e.g. 404) raise immediately without consuming a retry."""
     last_error: Exception | None = None
+    request_headers = {"User-Agent": DEFAULT_USER_AGENT, **(headers or {})}
 
     for attempt in range(max_retries):
         try:
-            response = requests.get(url, params=params, headers=headers, timeout=timeout)
+            response = requests.get(url, params=params, headers=request_headers, timeout=timeout)
         except requests.exceptions.RequestException as exc:
             last_error = exc
         else:

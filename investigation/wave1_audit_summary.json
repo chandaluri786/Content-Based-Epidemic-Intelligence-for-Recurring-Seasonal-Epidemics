@@ -1,0 +1,47 @@
+[
+  {
+    "iso3": "USA",
+    "n": 800,
+    "retrievable": 379,
+    "retrievable_pct": 47.38,
+    "old_retrievable_pct": 46.6,
+    "content_rich_before_geo": 345,
+    "content_rich_pct_before_geo": 43.12,
+    "old_content_rich_pct": 42.75,
+    "geo_mismatch_excluded": 81,
+    "content_rich_after_geo": 264,
+    "content_rich_pct_after_geo": 33.0,
+    "retrievable_pass": false,
+    "content_rich_pass_after_geo": false
+  },
+  {
+    "iso3": "AUS",
+    "n": 10451,
+    "retrievable": 4778,
+    "retrievable_pct": 45.72,
+    "old_retrievable_pct": 49.79,
+    "content_rich_before_geo": 4188,
+    "content_rich_pct_before_geo": 40.07,
+    "old_content_rich_pct": 45.05,
+    "geo_mismatch_excluded": 1886,
+    "content_rich_after_geo": 2302,
+    "content_rich_pct_after_geo": 22.03,
+    "retrievable_pass": false,
+    "content_rich_pass_after_geo": false
+  },
+  {
+    "iso3": "IND",
+    "n": 4255,
+    "retrievable": 2601,
+    "retrievable_pct": 61.13,
+    "old_retrievable_pct": 61.55,
+    "content_rich_before_geo": 2439,
+    "content_rich_pct_before_geo": 57.32,
+    "old_content_rich_pct": 58.36,
+    "geo_mismatch_excluded": 922,
+    "content_rich_after_geo": 1517,
+    "content_rich_pct_after_geo": 35.65,
+    "retrievable_pass": true,
+    "content_rich_pass_after_geo": false
+  }
+]

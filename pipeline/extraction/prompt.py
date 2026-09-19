@@ -1,13 +1,17 @@
 """Few-shot prompt builder for Step 3 extraction.
 
-5 fixed examples (not retrieved/dynamic), chosen to cover the judgment calls
+6 fixed examples (not retrieved/dynamic), chosen to cover the judgment calls
 the LLM has to make: a real signal, an explainer that mentions flu without
 reporting an event, a genuinely ambiguous case, a mistagged story (mirroring
 the "story about a different country mistagged to Brazil" pattern already
-seen in the spike data), and animal/avian flu with no human cases -- added
+seen in the spike data), animal/avian flu with no human cases -- added
 after a real pilot run found 35.7% of USA's matched URLs were avian/bird flu
 content (2023's H5N1 outbreak), and the model initially marked a
-poultry-trade avian-flu article as relevant=True before this example existed.
+poultry-trade avian-flu article as relevant=True before this example existed
+-- and an incidental-mention case, teaching that `primary_country` tracks
+the article's true main subject, not any country merely named in passing
+(the same failure mode confirmed separately in GDELT's own V2Locations tags:
+e.g. an Australian bird-flu story mistagged to 132 India-matched articles).
 
 Kept deliberately terse (short example texts, compact JSON, tight header):
 after discovering Groq's real bottleneck is a 200K tokens/day/model cap (not
@@ -44,6 +48,7 @@ FEW_SHOT_EXAMPLES: list[FewShotExample] = [
             "strain": "h3n2",
             "location_mentioned": "Nairobi",
             "confidence": 0.95,
+            "primary_country": "KEN",
         },
     },
     {
@@ -60,6 +65,7 @@ FEW_SHOT_EXAMPLES: list[FewShotExample] = [
             "strain": "not_mentioned",
             "location_mentioned": None,
             "confidence": 0.9,
+            "primary_country": None,
         },
     },
     {
@@ -76,6 +82,7 @@ FEW_SHOT_EXAMPLES: list[FewShotExample] = [
             "strain": "unspecified",
             "location_mentioned": None,
             "confidence": 0.3,
+            "primary_country": None,
         },
     },
     {
@@ -92,6 +99,25 @@ FEW_SHOT_EXAMPLES: list[FewShotExample] = [
             "strain": "not_mentioned",
             "location_mentioned": None,
             "confidence": 0.95,
+            "primary_country": "BRA",
+        },
+    },
+    {
+        "kind": "incidental_mention_negative",
+        "article_text": (
+            "Japan's health ministry reported a sharp rise in flu hospitalizations across "
+            "Tokyo this week, with three deaths confirmed. Health officials in India said "
+            "their own case numbers remained stable and did not classify it as unusual."
+        ),
+        "output": {
+            "disease_signal": True,
+            "relevant": True,
+            "severity": "severe",
+            "symptoms": [],
+            "strain": "not_mentioned",
+            "location_mentioned": "Tokyo",
+            "confidence": 0.85,
+            "primary_country": "JPN",
         },
     },
     {
@@ -108,6 +134,7 @@ FEW_SHOT_EXAMPLES: list[FewShotExample] = [
             "strain": "not_mentioned",
             "location_mentioned": "Midwest",
             "confidence": 0.9,
+            "primary_country": "USA",
         },
     },
 ]
@@ -117,7 +144,16 @@ SYSTEM_PROMPT_HEADER = (
     "comparison against WHO FluNet data. JSON only, matching the schema. Mark "
     "relevant=true ONLY for reported human flu cases -- not explainers, unrelated "
     "'flu'-adjacent stories, or animal/avian/swine flu with no human infections "
-    "(a real disease event, but not human seasonal flu). Examples:\n"
+    "(a real disease event, but not human seasonal flu). Also set primary_country: "
+    "the article's true main-subject country (where the reported case/event is "
+    "occurring). The Country tag given below is GDELT's own automated geotagging, "
+    "which is sometimes wrong (e.g. a syndicated wire story mistagged to an "
+    "unrelated country) -- verify it against the article text itself rather than "
+    "assuming it's correct. Match that tag only when the article text actually "
+    "supports it; use a different cohort code or 'other' when a different country "
+    "is clearly the real subject, or null only when genuinely ambiguous with no "
+    "confident primary subject. A country just named in passing is not the primary "
+    "subject. Examples:\n"
 )
 
 
@@ -132,7 +168,10 @@ def _build_system_prompt() -> str:
 def build_extraction_messages(article_text: str, country_hint: str) -> list[dict[str, str]]:
     """Build the system + user chat messages for one extraction call."""
     truncated_text = article_text[:MAX_ARTICLE_CHARS]
-    user_content = f"Country: {country_hint}\nArticle: {truncated_text}"
+    user_content = (
+        f"GDELT-assigned country tag (verify, don't assume): {country_hint}\n"
+        f"Article: {truncated_text}"
+    )
     return [
         {"role": "system", "content": _build_system_prompt()},
         {"role": "user", "content": user_content},

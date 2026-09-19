@@ -1,0 +1,156 @@
+FLU/INFLUENZA TERM-MATCHING LOGIC -- EXACT CURRENT STATE
+==========================================================
+Generated for manual review. Two separate, independent term-matching gates
+exist in the pipeline, applied at two different stages. This file quotes
+both verbatim, in full, with no interpretation added.
+
+
+GATE 1 of 2: STEP 2 -- URL-LEVEL FLU/INFLUENZA TERM FILTER
+==========================================================
+This is the gate that determines whether a GDELT-indexed article URL ever
+becomes a "matched article" at all (i.e. whether it ends up as a line in
+data/gdelt_matched/{COUNTRY}.jsonl). It runs BEFORE the article is ever
+fetched -- it only ever looks at the URL string itself, never the article's
+actual text or title (GDELT's GKG feed gives a URL per record; the article
+body is not fetched until Step 3).
+
+Source: pipeline/config.py
+
+    FLU_TERM_REGEX = r"(?:^|[-_/])(flu|influenza)(?:[-_/]|$)"
+
+Source: pipeline/gdelt/flu_filter.py (full file)
+
+    """URL-level flu-candidate filter (Step 2), reusing the word-boundary regex
+    already validated in the feasibility spike -- a naive `"flu" in url` substring
+    match false-positived on "fluid", "hydrofluoric", "influencer", "Flutter
+    Entertainment", etc.
+    """
+
+    import re
+
+    from pipeline.config import FLU_TERM_REGEX, GDELT_FIPS_COUNTRY_CODE
+    from pipeline.gdelt.gkg_parser import GkgRecord
+
+    FLU_TERM_RE = re.compile(FLU_TERM_REGEX, re.IGNORECASE)
+
+
+    def find_matching_countries(record: GkgRecord, target_countries: list[str]) -> list[str]:
+        """Return every target ISO3 country whose GDELT FIPS code is mentioned in
+        this record's locations, provided the URL also contains a genuine
+        flu/influenza term. Checks all target countries in one pass so a single
+        day's parsed lines can be filtered against the whole cohort at once."""
+        if not FLU_TERM_RE.search(record.url):
+            return []
+
+        return [
+            iso3
+            for iso3 in target_countries
+            if GDELT_FIPS_COUNTRY_CODE.get(iso3) in record.country_codes
+        ]
+
+WHAT THIS ACTUALLY MATCHES (mechanics of the regex):
+  - Case-insensitive (re.IGNORECASE).
+  - Matches "flu" or "influenza" as a URL path/slug "word" -- i.e. immediately
+    preceded by either the start of the string or one of - _ /, AND
+    immediately followed by either one of - _ / or the end of the string.
+  - This means it WILL match: ".../flu-season-...", "flu_shot", "/flu/",
+    "influenza-vaccine", a URL ending exactly in ".../flu" or "...influenza".
+  - This means it will NOT match: "fluid", "influencer", "hydrofluoric",
+    "Flutter" (no delimiter boundary around "flu"/"influenza") -- this was a
+    deliberate fix for exactly these false positives (see docstring).
+  - It also will NOT match "flu"/"influenza" appearing only in URL query
+    parameters in a way that isn't delimited by - _ / (e.g. as part of a
+    longer un-delimited alphanumeric token), and will NOT match at all if
+    the term only appears in the article's actual title/body text but not
+    anywhere in the URL string itself.
+  - A single article can be written into MORE THAN ONE country's matched
+    file: `find_matching_countries` returns every target country whose FIPS
+    code appears anywhere in the record's GDELT V2Locations, with no
+    single-country tie-break -- so an article mentioning both, say, US and
+    UK locations is matched to both USA.jsonl and GBR.jsonl if the URL also
+    passes the regex above.
+
+
+GATE 2 of 2: STEP 3 (pre-LLM) -- CONTENT-RICHNESS KEYWORD PREFILTER
+====================================================================
+This is a SEPARATE, LATER gate. It only ever runs on articles that already
+passed Gate 1 above AND were successfully fetched (retrievable). It looks at
+the fetched article's actual TEXT (not the URL), and its only purpose is to
+decide whether it's worth spending an LLM extraction call on the article --
+it is a cost gate, not the relevance judgment itself (that's made by the LLM
+in the same call as the rest of extraction, on articles that pass this gate).
+
+Source: pipeline/config.py
+
+    CONTENT_MARKERS: list[str] = [
+        "case",
+        "cases",
+        "hospitaliz",
+        "death",
+        "outbreak",
+        "epidemic",
+        "strain",
+        "h1n1",
+        "h3n2",
+        "influenza b",
+        "surge",
+        "vaccine",
+        "severe",
+        "world health organization",
+    ]
+
+Source: pipeline/extraction/relevance.py (full file)
+
+    """Rule-based relevance pre-filter (Step 4), applied before any LLM call.
+
+    An article must contain at least `min_markers` of the validated content-marker
+    terms before it's worth spending an LLM call on. This is a cost gate only --
+    the actual relevant/confidence judgment on surviving articles is made by the
+    LLM in the same structured-output call as the rest of extraction (see
+    llm_client.py), not by this prefilter and not by a second LLM call.
+    """
+
+    from pipeline.config import CONTENT_MARKERS
+
+
+    def passes_rule_prefilter(text: str, min_markers: int = 1) -> bool:
+        lowered = text.lower()
+        hits = sum(1 for marker in CONTENT_MARKERS if marker in lowered)
+        return hits >= min_markers
+
+WHAT THIS ACTUALLY MATCHES (mechanics):
+  - Case-insensitive (lowercases the whole text first).
+  - Plain substring containment for each marker in CONTENT_MARKERS -- no word
+    boundaries, no regex. E.g. "case" as a marker will also match inside
+    "caseworker", "showcase", "suitcase", etc. (unlike Gate 1's regex, this
+    list has no delimiter-boundary protection against substring false
+    positives).
+  - Default threshold is min_markers=1 (any single marker hit is enough to
+    pass) -- production code (pipeline/cli/run_step3_extract.py) calls
+    passes_rule_prefilter(article.text) with no override, i.e. uses this
+    default of 1.
+  - Note "flu" and "influenza" themselves are NOT in this list at all --
+    an article can pass Gate 1 (URL contains "flu") but fail this gate if
+    its body text never uses any of the 14 markers above (e.g. a short
+    stub, or body text that only mentions "flu" generically without any of
+    "case/hospitaliz/death/outbreak/epidemic/strain/h1n1/h3n2/influenza b/
+    surge/vaccine/severe/world health organization").
+
+
+A THIRD, RELATED LIST (not a gate, informational) -- used only in ad hoc
+investigation/check_*.py audit scripts (not in the production pipeline
+itself) for scoring "content-rich" in the retrievability/content-depth
+audits already run this session. It is an exact duplicate of CONTENT_MARKERS
+above, copy-pasted into each investigation script rather than imported from
+pipeline/config.py:
+
+    CONTENT_MARKERS = [
+        "case", "cases", "hospitaliz", "death", "outbreak", "epidemic", "strain",
+        "h1n1", "h3n2", "influenza b", "surge", "vaccine", "severe",
+        "world health organization",
+    ]
+
+(seen verbatim in investigation/check_ken_full_retrievability.py,
+investigation/check_aus_ind_usa_full_audit.py,
+investigation/check_bra_idn_full_retrievability.py, and
+investigation/geo_heuristic_recheck.py)

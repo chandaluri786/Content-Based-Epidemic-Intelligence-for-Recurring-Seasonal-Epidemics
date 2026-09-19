@@ -1,7 +1,10 @@
+from typing import get_args
+
 import pytest
 from pydantic import ValidationError
 
-from pipeline.extraction.schema import ArticleExtraction
+from pipeline.config import COUNTRIES
+from pipeline.extraction.schema import ArticleExtraction, CohortCountry
 
 
 @pytest.mark.unit
@@ -106,3 +109,60 @@ class TestArticleExtraction:
         schema = ArticleExtraction.model_json_schema()
         assert "confidence" in schema["properties"]
         assert "severity" in schema["properties"]
+
+    def test_primary_country_defaults_to_none(self):
+        extraction = ArticleExtraction(
+            disease_signal=True,
+            relevant=True,
+            severity="mild",
+            symptoms=[],
+            strain="unspecified",
+            location_mentioned=None,
+            confidence=0.5,
+        )
+        assert extraction.primary_country is None
+
+    def test_accepts_a_cohort_country_code(self):
+        extraction = ArticleExtraction(
+            disease_signal=True,
+            relevant=True,
+            severity="mild",
+            symptoms=[],
+            strain="unspecified",
+            location_mentioned=None,
+            confidence=0.5,
+            primary_country="KEN",
+        )
+        assert extraction.primary_country == "KEN"
+
+    def test_accepts_other_for_a_confident_non_cohort_country(self):
+        extraction = ArticleExtraction(
+            disease_signal=True,
+            relevant=True,
+            severity="mild",
+            symptoms=[],
+            strain="unspecified",
+            location_mentioned=None,
+            confidence=0.5,
+            primary_country="other",
+        )
+        assert extraction.primary_country == "other"
+
+    def test_rejects_a_country_code_outside_the_cohort_and_not_other(self):
+        with pytest.raises(ValidationError):
+            ArticleExtraction(
+                disease_signal=True,
+                relevant=True,
+                severity="mild",
+                symptoms=[],
+                strain="unspecified",
+                location_mentioned=None,
+                confidence=0.5,
+                primary_country="FRA",
+            )
+
+
+@pytest.mark.unit
+class TestCohortCountry:
+    def test_matches_the_configured_cohort_exactly(self):
+        assert set(get_args(CohortCountry)) == set(COUNTRIES.keys())

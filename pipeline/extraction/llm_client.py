@@ -35,6 +35,7 @@ from pipeline.config import (
     GROQ_API_BASE_URL,
     GROQ_MIN_INTERVAL_SECONDS,
     GROQ_MODEL,
+    GROQ_REASONING_EFFORT,
 )
 from pipeline.extraction.prompt import build_extraction_messages
 from pipeline.extraction.schema import ArticleExtraction
@@ -115,6 +116,7 @@ class GroqExtractionClient:
                     messages=messages,
                     response_format=_RESPONSE_FORMAT,
                     max_tokens=EXTRACTION_MAX_TOKENS,
+                    reasoning_effort=GROQ_REASONING_EFFORT,
                 )
                 content = response.choices[0].message.content
                 data = json.loads(content)

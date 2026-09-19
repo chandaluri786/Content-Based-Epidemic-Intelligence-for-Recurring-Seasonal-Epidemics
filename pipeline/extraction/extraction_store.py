@@ -5,7 +5,12 @@ Doubles as both the resumability manifest (is_done(url) lets a run skip
 already-processed URLs) and the persisted results Step 5's join reads. `stamp`
 is the GDELT snapshot timestamp the URL was matched under, propagated through
 so epi-week assignment downstream uses ingestion time, not article-fetch time.
-status is one of "extracted", "skipped_prefilter", "not_retrievable", "failed".
+status is one of "extracted", "skipped_prefilter", "not_retrievable", "failed",
+"excluded_geo_mismatch". The last is a successful extraction whose
+`extraction["primary_country"]` disagreed with the country this file is for
+(see pipeline/extraction/geo_crosscheck.py) -- the full extraction payload is
+kept (nothing is deleted), just excluded from downstream content-signal
+detection, so the exclusion is auditable and reversible if the rule changes.
 `model` records which pooled model actually produced the extraction (None for
 statuses that never reached an LLM call), so per-model quality can be audited.
 """

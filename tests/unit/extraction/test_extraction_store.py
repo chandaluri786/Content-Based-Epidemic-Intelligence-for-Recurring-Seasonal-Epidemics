@@ -61,3 +61,17 @@ class TestExtractionStore:
         records = list(store.iter_records())
         assert records[0]["reason"] == "boom"
         assert records[0]["extraction"] is None
+
+    def test_excluded_geo_mismatch_keeps_the_full_extraction_payload(self, tmp_path):
+        store = ExtractionStore(str(tmp_path / "store.jsonl"))
+        store.record(
+            "http://example.com/a",
+            stamp="20230101000000",
+            status="excluded_geo_mismatch",
+            extraction={"primary_country": "USA", "relevant": True},
+            reason="geo_mismatch: gdelt_tag=KEN, primary_country=USA",
+        )
+        record = next(iter(store.iter_records()))
+        assert record["status"] == "excluded_geo_mismatch"
+        assert record["extraction"] == {"primary_country": "USA", "relevant": True}
+        assert record["reason"] == "geo_mismatch: gdelt_tag=KEN, primary_country=USA"

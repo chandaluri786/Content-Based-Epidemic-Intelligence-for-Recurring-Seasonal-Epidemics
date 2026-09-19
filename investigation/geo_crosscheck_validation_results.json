@@ -1,0 +1,566 @@
+{
+  "case1_brazil": {
+    "label": "Case 1: Brazil/bobfm.co.uk (known bad, n=1)",
+    "records": [
+      {
+        "url": "https://www.bobfm.co.uk/the-northern-territory-receives-more-than-6-5-million-doses-of-flu-vaccine/",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      }
+    ],
+    "classified": 1,
+    "disagree": 1,
+    "disagree_rate": 1.0
+  },
+  "case2_kenya_bad": {
+    "label": "Case 2: Kenya wire story (known bad)",
+    "records": [
+      {
+        "url": "https://www.king5.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.ksdk.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.cbs19.tv/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://santamariatimes.com/news/state-and-regional/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_478dfc28-51ec-54fa-84f0-f899b71ba580.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.kagstv.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.timesargus.com/news/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_d4948b06-66da-5cfb-9d03-bf335a78c6ca.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.seattlepi.com/news/article/more-hospitals-are-requiring-masks-as-flu-and-18588055.php",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.durangoherald.com/articles/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.thereminder.ca/the-mix/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge-8054450",
+        "outcome": "skipped_prefilter"
+      },
+      {
+        "url": "https://www.virginislandsdailynews.com/ap/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_ae458611-fae1-5ac0-9538-47cbc3d0dcaf.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.thedailystar.com/news/state/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_13792e72-2fd7-5ddd-9b62-a15ce0a6ed17.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.texarkanagazette.com/news/2024/jan/04/more-hospitals-are-requiring-masks-as-flu-and/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.ctinsider.com/shorelinenews/article/more-hospitals-are-requiring-masks-as-flu-and-18588055.php",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.kgw.com/article/news/health/coronavirus/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.news-gazette.com/news/nation-world/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_f8493a40-a7f6-573e-a964-6c6ae70bcceb.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.thedailycitizen.com/more-hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/article_c5524571-dd8f-5c79-b798-497938254143.html",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.news4jax.com/health/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.kvue.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://wtop.com/national/2024/01/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.winnipegfreepress.com/arts-and-life/life/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.bangordailynews.com/2024/01/03/nation/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.tribstar.com/region/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_fa243467-dab2-5715-bbef-48d4b246d58f.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.kob.com/news/health/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.stalbertgazette.com/lifestyle-news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge-8054533",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.berkshireeagle.com/ap/state/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_00986cc9-4a85-5646-8a58-4a3f224131e6.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.wtva.com/news/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_edb2fc51-1eb5-5d00-9ade-b37811711ebf.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.pressenterpriseonline.com/apnews/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.meridianstar.com/news/nation_and_world/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_b1fa79db-f446-5ca2-ac98-159df1bada77.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.rutlandherald.com/features/health/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_3496e48c-42f9-5155-bf6c-70915945daef.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.recorderonline.com/news/national_news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_de3ae319-91cd-57ef-969d-0e7a71f582f2.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.mankatofreepress.com/news/state_national_news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_15848f34-0ac2-5869-9bb8-47650c620895.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.wsls.com/health/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.richmondregister.com/ap/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_55ecf4e8-d0e8-50ce-b065-f31fb4aff7a1.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.heraldbulletin.com/news/nation_world/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_137ab284-362c-53f3-92a2-b209c4f5ad19.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.wktv.com/news/local/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_767fac21-19fc-500a-802e-42fbe45366c7.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://gazette.com/ap/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_c4c641fd-12ae-5ebf-87a6-a1b7a8fdc7a3.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.wvnews.com/statejournal/newsfeed/us/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_e008b0de-df56-5360-bd58-274dc3baaaee.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.smdailyjournal.com/news/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_3355f393-2fe3-56e5-87f3-c26d43d33e5f.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.newspressnow.com/news/national_news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_533e96ff-8bc3-5db2-ab32-eecf526a9917.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.ksat.com/health/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.ironmountaindailynews.com/news/local-news/2024/01/more-hospitals-requiring-masks-as-flu-covid-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.twincities.com/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://amsterdamnews.com/news/2024/01/05/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.13newsnow.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.krgv.com/news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.ctinsider.com/fairfield/news/article/more-hospitals-are-requiring-masks-as-flu-and-18588055.php",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.coastreporter.net/the-mix/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge-8054450",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.idahopress.com/ap_news/us/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_1fb992d2-0a9d-5fbb-93d2-dfe0a9c6c100.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.abc10.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.kokomotribune.com/news/nation_world_news/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_805e8c5c-0629-5c14-ae65-f4c98e9cce1e.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://smdp.com/2024/01/05/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.greenfieldreporter.com/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.clickorlando.com/health/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.middletownpress.com/news/article/more-hospitals-are-requiring-masks-as-flu-and-18588055.php",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.ivpressonline.com/news/nation/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_8fe52947-4744-5257-8023-e9f4b58cb958.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.wdio.com/front-page/world-national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.12newsnow.com/article/news/nation-world/hospitals-requiring-masks-as-flu-and-covid-19-cases-surge/507-40a9dc84-58e8-4aa8-9eee-f787bc7b589e",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://tribtown.com/2024/01/03/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/",
+        "outcome": "classified",
+        "primary_country": "USA",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.wboc.com/news/national/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_300395db-76fd-5c41-9049-d7495439687f.html",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.bdtonline.com/news/nation_world/more-hospitals-are-requiring-masks-as-flu-and-covid-19-cases-surge/article_a9ab1d08-7add-5488-ac23-b751e2ac9f0a.html",
+        "outcome": "not_retrievable"
+      }
+    ],
+    "classified": 14,
+    "disagree": 9,
+    "disagree_rate": 0.6428571428571429
+  },
+  "case3_india_bad": {
+    "label": "Case 3: India/Australia bird-flu cluster (known bad)",
+    "records": [
+      {
+        "url": "https://www.dailyliberal.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2623",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.batemansbaypost.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.bendigoadvertiser.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.dungogchronicle.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.camdencourier.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2999",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.edenmagnet.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2895",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.gloucesteradvocate.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2835",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.muswellbrookchronicle.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2829",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.gleninnesexaminer.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2799",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.cessnockadvertiser.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2832",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.moreechampion.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.tenterfieldstar.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=2865",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.juneesoutherncross.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=1757",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.hawkesburygazette.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=30776",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.armidaleexpress.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.margaretrivermail.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=30776",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.merimbulanewsweekly.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.illawarramercury.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.therural.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=1784",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://www.theadvocate.com.au/story/8637577/australias-first-human-case-of-bird-flu-detected-in-victoria/?cs=9676",
+        "outcome": "classified",
+        "primary_country": "AUS",
+        "verdict": "disagree"
+      }
+    ],
+    "classified": 18,
+    "disagree": 16,
+    "disagree_rate": 0.8888888888888888
+  },
+  "specificity_kenya_good": {
+    "label": "Specificity guard: Kenya known-genuine outlets",
+    "records": [
+      {
+        "url": "https://www.standardmedia.co.ke/nairobi/article/2001464559/flu-diarrhoea-top-nairobi-residents-disease-burden",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.standardmedia.co.ke/evewoman/article/2001464584/report-flu-diarrhoea-top-nairobi-residents-disease-burden",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://www.standardmedia.co.ke/health/article/2001464584/report-flu-diarrhoea-top-nairobi-residents-disease-burden",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.businessdailyafrica.com/lifestyle/fitness/Kenya-flu-vaccine-policy-health-babies/4258372-4918512-oj9v3b/",
+        "outcome": "classified",
+        "primary_country": null,
+        "verdict": "ambiguous"
+      },
+      {
+        "url": "https://www.businessdailyafrica.com/economy/results-of-KNH-patient-with-flu-like-symptoms/3946234-5436804-x5stnw/",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.standardmedia.co.ke/health/article/2001440475/health-ministry-allays-fears-of-a-flu-outbreak-amid-rising-cases",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.kenyans.co.ke/news/75815-medics-explain-countrywide-flu-outbreak",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.capitalfm.co.ke/news/2022/05/wear-a-mask-and-go-for-covid-test-if-you-have-flu-symptoms-oguna/",
+        "outcome": "classified",
+        "primary_country": "KEN",
+        "verdict": "agree"
+      }
+    ],
+    "classified": 7,
+    "disagree": 0,
+    "disagree_rate": 0.0
+  },
+  "specificity_india_good": {
+    "label": "Specificity guard: India known-genuine outlets",
+    "records": [
+      {
+        "url": "https://www.thehindu.com/news/national/kerala/bird-flu-culling-begins-in-azhoor-panchayat-in-thiruvananthapuram/article66356827.ece",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.indiatoday.in/india/story/bird-flu-h5n1-avian-influenza-death-aiims-delhi-staff-isolation-1830556-2021-07-20",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.ndtv.com/india-news/after-meghalayas-first-swine-flu-death-in-2018-public-warning-issued-1939352",
+        "outcome": "not_retrievable"
+      },
+      {
+        "url": "https://timesofindia.indiatimes.com/city/vadodara/swine-flu-claims-mans-life/articleshow/66611660.cms",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "http://indiatoday.intoday.in/story/haryana-bird-flu-hisar-epidemic/1/803568.html",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.thehindu.com/news/cities/Madurai/palani-farmer-dies-of-swine-flu/article25531991.ece",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "http://indianexpress.com/article/cities/ahmedabad/bird-flu-scare-helpline-founder-alleges-lapses-by-gujarat-govt-dept-4461176/",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "http://www.thehindu.com/news/cities/Kochi/wild-birds-free-of-avian-influenza/article9290017.ece",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.newindianexpress.com/cities/delhi/2021/jul/21/child-dies-of-bird-flu-first-casualty-in-india-due-toavian-influenza-2333182.html",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.indiatoday.in/world/story/vladimir-putin-likely-isolate-bunker-amid-flu-outbreak-kremlin-report-2309506-2022-12-15",
+        "outcome": "classified",
+        "primary_country": "other",
+        "verdict": "disagree"
+      },
+      {
+        "url": "https://timesofindia.indiatimes.com/city/ahmedabad/gujarat-now-india-no-3-in-swine-flu-cases-2-more-die/articleshow/66517259.cms",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://timesofindia.indiatimes.com/city/pune/pune-swine-flu-surges-2nd-only-to-covid-in-positivity-rate/articleshow/93039655.cms",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://timesofindia.indiatimes.com/city/hyderabad/90-swine-flu-cases-in-state-fall-under-ghmc-jurisdiction/articleshow/66603423.cms",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://www.business-standard.com/article/current-affairs/bird-flu-in-kerala-preventive-measures-to-be-taken-says-health-minister-123010800445_1.html",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      },
+      {
+        "url": "https://indianexpress.com/article/explained/what-is-h9n2-avian-influenza-which-has-infected-indian-child-6213193/",
+        "outcome": "classified",
+        "primary_country": "IND",
+        "verdict": "agree"
+      }
+    ],
+    "classified": 14,
+    "disagree": 1,
+    "disagree_rate": 0.07142857142857142
+  }
+}
