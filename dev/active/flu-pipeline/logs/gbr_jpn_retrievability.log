@@ -1,0 +1,154 @@
+=== GBR ===
+  [GBR] 100/3707 fetched
+  [GBR] 200/3707 fetched
+  [GBR] 300/3707 fetched
+  [GBR] 400/3707 fetched
+  [GBR] 500/3707 fetched
+  [GBR] 600/3707 fetched
+  [GBR] 700/3707 fetched
+  [GBR] 800/3707 fetched
+  [GBR] 900/3707 fetched
+  [GBR] 1000/3707 fetched
+  [GBR] 1100/3707 fetched
+  [GBR] 1200/3707 fetched
+  [GBR] 1300/3707 fetched
+  [GBR] 1400/3707 fetched
+  [GBR] 1500/3707 fetched
+  [GBR] 1600/3707 fetched
+  [GBR] 1700/3707 fetched
+  [GBR] 1800/3707 fetched
+  [GBR] 1900/3707 fetched
+  [GBR] 2000/3707 fetched
+  [GBR] 2100/3707 fetched
+  [GBR] 2200/3707 fetched
+  [GBR] 2300/3707 fetched
+  [GBR] 2400/3707 fetched
+  [GBR] 2500/3707 fetched
+  [GBR] 2600/3707 fetched
+  [GBR] 2700/3707 fetched
+  [GBR] 2800/3707 fetched
+  [GBR] 2900/3707 fetched
+  [GBR] 3000/3707 fetched
+  [GBR] 3100/3707 fetched
+  [GBR] 3200/3707 fetched
+  [GBR] 3300/3707 fetched
+  [GBR] 3400/3707 fetched
+  [GBR] 3500/3707 fetched
+  [GBR] 3600/3707 fetched
+  [GBR] 3700/3707 fetched
+  [GBR] 3707/3707 fetched
+=== JPN ===
+  [JPN] 100/3000 fetched
+  [JPN] 200/3000 fetched
+  [JPN] 300/3000 fetched
+  [JPN] 400/3000 fetched
+  [JPN] 500/3000 fetched
+  [JPN] 600/3000 fetched
+  [JPN] 700/3000 fetched
+  [JPN] 800/3000 fetched
+  [JPN] 900/3000 fetched
+  [JPN] 1000/3000 fetched
+  [JPN] 1100/3000 fetched
+  [JPN] 1200/3000 fetched
+  [JPN] 1300/3000 fetched
+  [JPN] 1400/3000 fetched
+  [JPN] 1500/3000 fetched
+  [JPN] 1600/3000 fetched
+  [JPN] 1700/3000 fetched
+  [JPN] 1800/3000 fetched
+  [JPN] 1900/3000 fetched
+  [JPN] 2000/3000 fetched
+  [JPN] 2100/3000 fetched
+  [JPN] 2200/3000 fetched
+  [JPN] 2300/3000 fetched
+  [JPN] 2400/3000 fetched
+  [JPN] 2500/3000 fetched
+  [JPN] 2600/3000 fetched
+  [JPN] 2700/3000 fetched
+  [JPN] 2800/3000 fetched
+  [JPN] 2900/3000 fetched
+  [JPN] 3000/3000 fetched
+
+=== SUMMARY: full matched-set retrievability/content-depth, GBR/JPN ===
+
+GBR: 3707 matched, 1922/3707 retrievable (51.8%, threshold >=60%), 1737/3707 content-rich (46.9%, threshold >=50%)
+  Content-rich hits represent 1494 distinct underlying stories (vs 1737 raw content-rich matches -- a ratio near 1.0 means genuine breadth, well below 1.0 means a few stories syndicated widely).
+  Largest content-rich story clusters:
+      28x  experts-slam-utterly-false-claims-australians-given-budget-flu-vaccine
+      27x  flu-mum-sarah-hawthorn-discharged-from-hospital-recovering-at-home
+      18x  women-may-be-better-than-men-at-battling-the-flu
+      13x  laid-up-with-man-flu-it-s-real-researcher-says
+      12x  turbo-influenza-vaccine-to-be-rolled-out-in-australia-after-deaths-in-horror-sea
+  All-matches syndication clusters (>= 10 URLs sharing one slug):
+      64x  laid-up-with-man-flu-its-real-researcher-says
+      42x  this-flu-season-nothing-to-sneeze-at
+      39x  experts-slam-utterly-false-claims-australians-given-budget-flu-vaccine
+      37x  deadly-australian-flu-infecting-thousands-in-uk
+      35x  researchers-claim-the-man-flu-does-exit
+      33x  does-he-have-man-flu-one-researcher-claims-its-for-real
+      33x  nhs-issue-nine-telltale-signs-of-australian-flu-as-teenager-dies-after-contracti
+      32x  flu-mum-sarah-hawthorn-discharged-from-hospital-recovering-at-home
+      28x  laid-up-with-man-flu-it-s-real-researcher-says
+      23x  flu-hotspots-revealed-map-shows-areas-worst-affected-by-flu-as-aussie-strain-hit
+      21x  laid-up-with-man-flu-its-real-researcher-claims
+      18x  the-man-flu-is-real-study
+      18x  women-may-be-better-than-men-at-battling-the-flu
+      18x  vaccine-warning-as-australian-flu-threat-grows-1-8316033
+      17x  turbo-influenza-vaccine-to-be-rolled-out-in-australia-after-deaths-in-horror-sea
+      16x  get-set-to-fight-flu-1-4584792
+      15x  queensland-government-to-provide-free-flu-vaccines
+      14x  flu-case-numbers-spiking-across-canada-but-peak-could-be-few-weeks-off-experts
+      12x  everything-you-need-to-know-about-this-year-s-flu-jab-and-why-you-should-get-it-
+      12x  queensland-government-to-provide-free-flu-vaccines-for-children
+      12x  nhs-issue-telltale-signs-of-australian-flu-as-teenager-dies-after-contracting-vi
+      12x  latest-flu-advice-catch-it-bin-it-kill-it-1-8330995
+      11x  free-flu-jabs-for-those-high-at-risk-1-8188959
+      11x  experts-recommend-flu-jab-as-fears-grow-of-worst-uk-epidemic-for-50-years-1-8804
+      11x  7984059-nasty-flu-season-may-be-in-the-offing-experts
+      11x  review-of-scientific-studies-suggests-man-flu-may-be-more-intense-researcher
+      11x  man-flu-real-scientists-say-men-experience-worse-symptoms
+      11x  man-flu-is-real-scientists-say-men-experience-worse-symptoms
+      11x  map-allows-you-to-keep-tabs-on-flu-hotspots-in-sussex-1-8317355
+      11x  8042779-flu-cases-spiking-heralding-peak-in-epidemic
+      11x  when-the-flu-wiped-out-millions
+      11x  flu-rates-spike-by-85-per-cent-in-a-week-local-health-bosses-say-1-8766407
+      10x  flu-cases-showing-up-earlier-than-usual-could-be-harbinger-of-bad-season-experts
+      10x  man-flu-may-be-real-canadian-doctor-argues
+      10x  more-cases-of-influenza-b-detected-this-flu-season-health-officials
+      10x  google-venture-arm-backs-uk-universal-flu-vaccine-company
+  Total in clusters: 701/3707 (18.9%); of nominal content-rich, 160/1737 are clustered/syndicated.
+
+JPN: 3000 matched, 964/3000 retrievable (32.1%, threshold >=60%), 793/3000 content-rich (26.4%, threshold >=50%)
+  Content-rich hits represent 652 distinct underlying stories (vs 793 raw content-rich matches -- a ratio near 1.0 means genuine breadth, well below 1.0 means a few stories syndicated widely).
+  Largest content-rich story clusters:
+      17x  bird-flu-crisis-opens-export-egg-markets-in-asia
+       6x  what-japanese-flu-what-symptoms-14179414
+       5x  eight-countries-suspend-french-poultry-imports-after-bird-flu-outbreak-20151204-
+       5x  japan-culling-210000-birds-amid-spreading-avian-flu
+       5x  japan-culling-122000-more-birds-for-avian-flu
+  All-matches syndication clusters (>= 10 URLs sharing one slug):
+     112x  2019-11-14-kiss-cancels-australian-tour-as-paul-stanley-battles-flu-complication
+      95x  bird-flu-plagued-south-korea-agrees-to-buy-us-eggs
+      59x  qa-details-about-the-latest-round-of-bird-flu
+      41x  french-foie-gras-producers-unworried-by-bird-flu-outbreak
+      36x  q-a-details-about-the-latest-round-of-bird-flu
+      33x  nhs-issue-nine-telltale-signs-of-australian-flu-as-teenager-dies-after-contracti
+      31x  france-bird-flu-outbreak-in-chickens
+      18x  highly-contagious-bird-flu-found-in-japan-culling-start
+      17x  alternative-cold-and-flu-remedies-to-try-this-season
+      17x  bird-flu-crisis-opens-export-egg-markets-in-asia
+      16x  hong-kong-confirms-2nd-bird-flu-death
+      14x  hong-kong-confirms-first-case-of-bird-flu-this-season
+      13x  japan-culling-210000-birds-amid-spreading-avian-flu
+      12x  new-japan-bird-flu-outbreak-brings-fresh-cull-of-chickens-as-asia-spread-fears-g
+      12x  nhs-issue-telltale-signs-of-australian-flu-as-teenager-dies-after-contracting-vi
+      11x  health-birdflu-japan
+      10x  japan-culling-330000-birds-to-fight-avian-flu
+      10x  south-korea-orders-record-cull-of-poultry-to-contain-bird-flu
+      10x  eggs-in-short-supply-as-south-korea-battles-worst-bird-flu-outbreak
+      10x  france-finds-bird-flu-in-new-part-of-country
+      10x  bird-flu-spreads-to-10th-japanese-prefecture
+  Total in clusters: 587/3000 (19.6%); of nominal content-rich, 55/793 are clustered/syndicated.
+
+Combined: 6707 matched, 2886/6707 retrievable (43.0%), 2530/6707 content-rich (37.7%), representing 2146 distinct stories combined (note: story identity isn't deduplicated across countries, so this is a simple sum).
+Results written to /Users/aditya.rallapalli/Code/projects/capstone-project/investigation/gbr_jpn_full_retrievability_results.json

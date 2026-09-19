@@ -1,0 +1,15 @@
+=== KEN: 163 matched articles ===
+  30/163 fetched
+  60/163 fetched
+  90/163 fetched
+  120/163 fetched
+  150/163 fetched
+  163/163 fetched
+
+=== SUMMARY: full matched-set retrievability/content-depth, KEN ===
+KEN: 163 matched, 44/163 retrievable (27.0%, threshold >=60%), 41/163 content-rich (25.2%, threshold >=50%)
+
+Wire-story contamination: 117/163 (71.8%) of all matched articles are the same syndicated AP story, unrelated to Kenya.
+Of 41 nominally content-rich matches: 22 are the wire story, 19 are genuine (non-wire-story) content.
+
+Results written to /Users/aditya.rallapalli/Code/projects/capstone-project/investigation/ken_full_retrievability_results.json

@@ -1,0 +1,26 @@
+=== BRA ===
+  [BRA] 50/593 fetched
+  [BRA] 100/593 fetched
+  [BRA] 150/593 fetched
+  [BRA] 200/593 fetched
+  [BRA] 250/593 fetched
+  [BRA] 300/593 fetched
+  [BRA] 350/593 fetched
+  [BRA] 400/593 fetched
+  [BRA] 450/593 fetched
+  [BRA] 500/593 fetched
+  [BRA] 550/593 fetched
+  [BRA] 593/593 fetched
+=== IDN ===
+  [IDN] 50/216 fetched
+  [IDN] 100/216 fetched
+  [IDN] 150/216 fetched
+  [IDN] 200/216 fetched
+  [IDN] 216/216 fetched
+
+=== SUMMARY: full matched-set retrievability/content-depth, BRA/IDN ===
+BRA: 593 matched, 227/593 retrievable (38.3%), 193/593 content-rich (32.5%)
+IDN: 216 matched, 100/216 retrievable (46.3%), 92/216 content-rich (42.6%)
+
+Combined: 809 matched, 327/809 retrievable (40.4%, threshold >=60%), 285/809 content-rich (35.2%, threshold >=50%)
+Results written to /Users/aditya.rallapalli/Code/projects/capstone-project/investigation/bra_idn_full_retrievability_results.json

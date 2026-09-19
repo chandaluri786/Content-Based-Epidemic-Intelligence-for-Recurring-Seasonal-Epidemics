@@ -1,0 +1,146 @@
+=== AUS (full set) ===
+  10451 URLs to fetch for retrievability/content-depth
+    200/10451 fetched
+    400/10451 fetched
+    600/10451 fetched
+    800/10451 fetched
+    1000/10451 fetched
+    1200/10451 fetched
+    1400/10451 fetched
+    1600/10451 fetched
+    1800/10451 fetched
+    2000/10451 fetched
+    2200/10451 fetched
+    2400/10451 fetched
+    2600/10451 fetched
+    2800/10451 fetched
+    3000/10451 fetched
+    3200/10451 fetched
+    3400/10451 fetched
+    3600/10451 fetched
+    3800/10451 fetched
+    4000/10451 fetched
+    4200/10451 fetched
+    4400/10451 fetched
+    4600/10451 fetched
+    4800/10451 fetched
+    5000/10451 fetched
+    5200/10451 fetched
+    5400/10451 fetched
+    5600/10451 fetched
+    5800/10451 fetched
+    6000/10451 fetched
+    6200/10451 fetched
+    6400/10451 fetched
+    6600/10451 fetched
+    6800/10451 fetched
+    7000/10451 fetched
+    7200/10451 fetched
+    7400/10451 fetched
+    7600/10451 fetched
+    7800/10451 fetched
+    8000/10451 fetched
+    8200/10451 fetched
+    8400/10451 fetched
+    8600/10451 fetched
+    8800/10451 fetched
+    9000/10451 fetched
+    9200/10451 fetched
+    9400/10451 fetched
+    9600/10451 fetched
+    9800/10451 fetched
+    10000/10451 fetched
+    10200/10451 fetched
+    10400/10451 fetched
+    10451/10451 fetched
+  Running country-relevance spot-check (40 URLs)...
+=== IND (full set) ===
+  4255 URLs to fetch for retrievability/content-depth
+    200/4255 fetched
+    400/4255 fetched
+    600/4255 fetched
+    800/4255 fetched
+    1000/4255 fetched
+    1200/4255 fetched
+    1400/4255 fetched
+    1600/4255 fetched
+    1800/4255 fetched
+    2000/4255 fetched
+    2200/4255 fetched
+    2400/4255 fetched
+    2600/4255 fetched
+    2800/4255 fetched
+    3000/4255 fetched
+    3200/4255 fetched
+    3400/4255 fetched
+    3600/4255 fetched
+    3800/4255 fetched
+    4000/4255 fetched
+    4200/4255 fetched
+    4255/4255 fetched
+  Running country-relevance spot-check (40 URLs)...
+=== USA (sample n=800) ===
+  800 URLs to fetch for retrievability/content-depth
+    200/800 fetched
+    400/800 fetched
+    600/800 fetched
+    800/800 fetched
+  Running country-relevance spot-check (40 URLs)...
+
+
+=== CONSOLIDATED AUDIT SUMMARY ===
+
+AUS: n=10451
+  Retrievable: 5204/10451 (49.8%, threshold >=60%)
+  Content-rich: 4708/10451 (45.0%, threshold >=50%)
+  Challenge/boilerplate flagged among retrievable: 148/5204
+  Distinct stories among content-rich: 2323/4708
+  Largest content-rich clusters:
+    210x its-flu-season-again-heres-how-to-sidestep-the-sniffles-this-year
+    166x 2017-12-06-flu-season-kicks-off-early-and-it-may-be-a-nasty-one
+    138x supermarket-coles-caps-egg-sales-amid-bird-flu-outbreak
+    116x should-i-get-flu-and-covid-vaccines-at-the-same-time
+    97x now-is-the-time-to-be-washing-your-hands-of-the-flu-threat
+  Country-relevance spot-check: 20/22 mention the country/demonym/major city
+  Examples with NO country-relevance keyword found:
+    https://www.geelongadvertiser.com.au/coronavirus/key-differences-between-influenza-and-covid/news-story/dbcd4c4881590ab7970ced36a55993b1&memtype=anonymous&mode=premium&nk=d02de44686ffcef61c49d999d9463749-1651469508
+    https://www.cairnspost.com.au/news/queensland/family-holiday-to-brisbane-turned-deadly-as-son-falls-ill-with-influenza-on-plane/news-story/ec4de94437e01f2206fa3b7a1ea14d26&memtype=anonymous&mode=premium&nk=0f67aa8b4d84a9a210cce8e9f3f742c0-1650347209
+
+IND: n=4255
+  Retrievable: 2619/4255 (61.6%, threshold >=60%)
+  Content-rich: 2483/4255 (58.4%, threshold >=50%)
+  Challenge/boilerplate flagged among retrievable: 27/2619
+  Distinct stories among content-rich: 1832/2483
+  Largest content-rich clusters:
+    132x australias-first-human-case-of-bird-flu-detected-in-victoria
+    99x bird-flu-at-second-farm-as-farmers-on-high-alert
+    49x a-frightful-plague-rampant-all-over-the-world-the-forgotten-horrors-of-the-spani
+    28x coronavirus--punjab-to-set-up-flu-corners-in-pvt-govt-hospitals
+    22x bird-flu-outbreak-sparks-mass-cull-of-farmed-chickens
+  Country-relevance spot-check: 17/19 mention the country/demonym/major city
+  Examples with NO country-relevance keyword found:
+    https://www.thestar.com.my/news/nation/2022/07/27/high-demand-for-fever-flu-and-cough-medicines
+    https://www.lifehacker.com.au/2024/05/bird-flu-is-hitting-australian-farms-and-the-first-human-case-has-been-reported-heres-what-we-know/
+
+USA: n=800
+  Retrievable: 373/800 (46.6%, threshold >=60%)
+  Content-rich: 342/800 (42.8%, threshold >=50%)
+  Challenge/boilerplate flagged among retrievable: 13/373
+  Distinct stories among content-rich: 319/342
+  Largest content-rich clusters:
+    4x 2020-01-13-four-year-old-girl-goes-blind-after-contracting-the-flu
+    3x 2019-12-13-stomach-flu-sickens-over-100-students-and-staff-at-washington-school
+    3x flu-season-hits-massachusetts-early
+    3x dog-flu-virus-spreading-across-united-states
+    2x why-it-s-your-job-to-get-a-flu-shot
+  Country-relevance spot-check: 18/25 mention the country/demonym/major city
+  Examples with NO country-relevance keyword found:
+    https://www.kshb.com/news/local-news/2-confirmed-avian-influenza-cases-put-kansas-department-of-agriculture-farmers-on-high-alert
+    http://www.wlky.com/article/flu-activity-in-kentucky-now-classified-as-widespread/14481822
+    https://www.wvtm13.com/article/avian-flu-detected-at-alabama-chicken-farm/45742453
+    http://www.4029tv.com/article/flu-kills-7-people-in-northwest-arkansas/14586052
+    http://thefucomics.com/2017/12/texas-view-fewer-people-are-taking-flu-vaccine/
+    http://wishtv.com/2017/12/29/indiana-hospitals-taking-steps-to-prevent-flu-virus-spread/
+    https://6abc.com/cvs-cold-flu-medicine-removed-from-shelves-allergies/13942144/
+
+Results written to /Users/aditya.rallapalli/Code/projects/capstone-project/investigation/{aus,ind,usa}_full_audit_results.json
