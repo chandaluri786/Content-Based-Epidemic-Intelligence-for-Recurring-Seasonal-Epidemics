@@ -19,10 +19,10 @@ import argparse
 import json
 import logging
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
-from config import RUN_SUMMARY_PATH, STUDY_YEARS, TARGET_COUNTRIES
+from config import COMPLETED_DAYS_PATH, RUN_SUMMARY_PATH, STUDY_YEARS, TARGET_COUNTRIES
 from models import CountrySeasonWindow, ExtractedArticle, MatchedArticle
 from pipeline import gkg_downloader, gkg_parser, windows
 from pipeline.article_fetcher import fetch_html
@@ -90,16 +90,24 @@ def _to_iso_datetime(gkg_timestamp: str) -> str:
     return datetime.strptime(gkg_timestamp, "%Y%m%d%H%M%S").isoformat()
 
 
-def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_urls: set[str]) -> list[StoredArticleSummary]:
-    """Stages 6-10. Each unique URL is fetched, cleaned, and stored at most
-    once for the whole run. Returns a lightweight summary of every article
-    actually stored, for the end-of-run per-window report."""
+def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_ids: set[str]) -> list[StoredArticleSummary]:
+    """Stages 6-10. Each unique GDELT record is fetched, cleaned, and stored
+    at most once. Deduped on gkg_record_id, not url: record_id is
+    deterministic -- the same raw GDELT file + line always parses to the
+    same record_id -- which is exactly what's needed to recognize "this
+    day's file was already processed in an earlier run" (the actual
+    mechanism behind duplicate storage on overlapping windows: see
+    _day_needs_processing below). seen_ids is seeded from
+    storage.already_stored_ids() by the caller, so this also catches
+    duplicates across separate runs, not just within one. Returns a
+    lightweight summary of every article actually stored, for the
+    end-of-run per-window report."""
     stored: list[StoredArticleSummary] = []
 
     for candidate in candidates:
-        if candidate.record.url in seen_urls:
+        if candidate.record.record_id in seen_ids:
             continue
-        seen_urls.add(candidate.record.url)
+        seen_ids.add(candidate.record.record_id)
 
         html = fetch_html(candidate.record.url)
         if html is None:
@@ -183,6 +191,35 @@ def _log_and_save_report(report: list[dict], summary_path: str = RUN_SUMMARY_PAT
     logger.info("Window summary written to %s", path)
 
 
+def _load_completed_days(path: str) -> dict[date, set[str]]:
+    """Each entry: a calendar day -> the set of countries whose candidates
+    were already checked for that day in some previous run. Day + country
+    set together, not day alone -- see _day_needs_processing for why."""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    raw: dict[str, list[str]] = json.loads(p.read_text())
+    return {date.fromisoformat(day): set(countries) for day, countries in raw.items()}
+
+
+def _save_completed_days(completed: dict[date, set[str]], path: str) -> None:
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    serializable = {day.isoformat(): sorted(countries) for day, countries in completed.items()}
+    p.write_text(json.dumps(serializable, indent=2))
+
+
+def _day_needs_processing(day: date, requested_countries: set[str], completed: dict[date, set[str]]) -> bool:
+    """A day can be skipped only if every country this run cares about was
+    already checked for that day in some earlier run. If a later run asks
+    for a country that wasn't part of that earlier check (e.g. an earlier
+    run only covered --countries USA and this one adds IND), the day must
+    be reprocessed -- a day's checkpoint entry is a lower bound on what's
+    been checked, never an upper bound on what COULD be found there."""
+    already_checked = completed.get(day, set())
+    return not requested_countries.issubset(already_checked)
+
+
 def run_test_timestamp(timestamp: str, countries: list[str]) -> None:
     """Smoke-test mode: skips Stage 1/2 entirely (no FluNet call, no real
     season window) and runs Stages 3-10 against exactly one GDELT file.
@@ -210,7 +247,8 @@ def run_test_timestamp(timestamp: str, countries: list[str]) -> None:
     logger.info("Test file %s: %d raw lines, %d candidates after Stage 5", file_url, len(lines), len(candidates))
 
     storage = get_storage_backend()
-    stored = fetch_clean_and_store(candidates, storage, seen_urls=set())
+    seen_ids = storage.already_stored_ids()
+    stored = fetch_clean_and_store(candidates, storage, seen_ids)
     logger.info("Test file %s: %d articles stored after Stages 8-9", file_url, len(stored))
 
     test_date = datetime.strptime(timestamp, "%Y%m%d%H%M%S").date()
@@ -262,16 +300,30 @@ def main() -> None:
         len(unique_days), len(cohort_windows),
     )
 
+    requested_countries = set(args.countries)
+    completed_days = _load_completed_days(COMPLETED_DAYS_PATH)
+    days_to_process = sorted(
+        day for day in unique_days if _day_needs_processing(day, requested_countries, completed_days)
+    )
+    skipped_count = len(unique_days) - len(days_to_process)
+    if skipped_count:
+        logger.info(
+            "Skipping %d day(s) already fully checked for %s in a previous run (see %s)",
+            skipped_count, sorted(requested_countries), COMPLETED_DAYS_PATH,
+        )
+
     storage = get_storage_backend()
-    seen_urls: set[str] = set()  # dedupe fetch+clean across the whole run, not just per-day
+    seen_ids: set[str] = storage.already_stored_ids()  # dedupe across this run AND prior runs, by gkg_record_id
     target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in args.countries}
 
     all_stored: list[StoredArticleSummary] = []
-    for day in sorted(unique_days):
+    for day in days_to_process:
         candidates = find_candidates_for_day(day, target_countries)
-        all_stored.extend(fetch_clean_and_store(candidates, storage, seen_urls))
+        all_stored.extend(fetch_clean_and_store(candidates, storage, seen_ids))
+        completed_days[day] = completed_days.get(day, set()) | requested_countries
+        _save_completed_days(completed_days, COMPLETED_DAYS_PATH)  # save after each day, not just at the end
 
-    logger.info("Done. %d unique articles fetched across the run.", len(seen_urls))
+    logger.info("Done. %d new unique article(s) stored this run.", len(all_stored))
 
     report = build_window_report(cohort_windows, all_stored, target_countries)
     _log_and_save_report(report)

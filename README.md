@@ -66,6 +66,7 @@ likely to need changing:
 | `MIN_FLU_THEME_HITS_ALONE`, `COOCCURRENCE_PROXIMITY_CHARS` | 2, 1000 | Content-richness thresholds (Stage 9). |
 | `STORAGE_BACKEND` | `"local"` | `"local"` or `"gdrive"` — see below. |
 | `RUN_SUMMARY_PATH` | `./output/run_summary.json` | Where the end-of-run per-window count report is written — see section 7, "Run summary report." Always local, regardless of `STORAGE_BACKEND`. |
+| `COMPLETED_DAYS_PATH` | `./output/completed_days.json` | The cross-run day checkpoint — see section 4, Stage 3 "Cross-run day checkpoint." Always local, regardless of `STORAGE_BACKEND`. Delete this file to force every day to be reprocessed on the next run. |
 
 ### Environment variables (storage)
 
@@ -174,6 +175,21 @@ downloaded twice.
 GDELT publishes a new file every 15 minutes (96/day) at a fixed,
 predictable URL — no search endpoint, no auth. This stage downloads
 everything for each needed day; all filtering happens later.
+
+**Cross-run day checkpoint.** Before downloading, `run_pipeline.py` checks
+`COMPLETED_DAYS_PATH` (default `./output/completed_days.json`) — a record
+of which calendar days were already fully processed, and for which
+countries, in a previous run. A day is skipped only if *every* country the
+current run is asking for was already checked for that day
+(`_day_needs_processing`); asking for an additional country later forces
+that day to be reprocessed rather than silently skipped, since the
+checkpoint is a lower bound on what's been checked, never an upper bound on
+what could be found there. Progress is saved after each day, not just at
+the end, so an interrupted run doesn't lose what it already finished. This
+exists because country-season windows overlap in calendar time by design
+(see section 6), so separate runs frequently need the same day more than
+once — without this, that day's 96 files would be redownloaded and
+re-filtered every time.
 
 ### Stage 4 — Parse (`pipeline/gkg_parser.py`)
 **The key structural change from the original pipeline.** Each raw line has
@@ -291,6 +307,34 @@ for the exact schema. Both backends bucket output by calendar year (the
 article's own GKG scan year — see section 7) so a consumer can retrieve
 just the year(s) it wants. Pluggable backend — see section 2's
 configuration table and section 6's note on the storage decision.
+
+**Duplicate-storage prevention, keyed on `gkg_record_id`.** At the start of
+a run, `storage.already_stored_ids()` loads every `gkg_record_id` already
+persisted by a previous run; `fetch_clean_and_store` skips any candidate
+whose `record_id` is already in that set, before fetching it. `gkg_record_id`
+(GDELT's own field, format `{15-minute-file-timestamp}-{sequential-line-
+number}`) was chosen over the article URL because it's **deterministic**:
+parsing the same raw GDELT file + line always produces the same ID, every
+time — confirmed empirically (747/747 distinct IDs within one real file,
+zero recurrence of the same URL with a different ID across a 20-file,
+12,100-record sample spanning two separate days).
+
+This is a *different* safety net from the Stage 3 day-checkpoint above, not
+a redundant one — the checkpoint avoids wasted recompute, this guarantees
+no duplicate storage regardless of *why* a day gets reprocessed. Concrete
+cases where a day is reprocessed even with the checkpoint in place, and
+this dedup is what actually prevents the duplicate:
+- **A later run asks for an additional country.** The checkpoint forces
+  reprocessing (correctly — the new country was never checked), which
+  would re-fetch and re-store the country that *was* already checked,
+  without this.
+- **A crash or interruption mid-day.** Articles are written as they're
+  found, but a day is only marked complete in the checkpoint after its
+  whole loop finishes — a restart reprocesses that day from scratch.
+- **The checkpoint file is lost but the stored output isn't** (deleted/
+  reset `completed_days.json` pointed at existing output) — every day
+  looks unchecked, so everything would be reprocessed and, without this,
+  re-stored.
 
 ### Deliberately not in this pipeline
 Two things from the original design are **not** implemented here: geo-tag
@@ -452,7 +496,7 @@ filter on `locations` the same way.
 
 | Field | Meaning |
 |---|---|
-| `gkg_record_id` | GDELT's own ID for this record. Kept as the storage key (and the Drive file's name) -- not one of the five content fields, just an identifier. |
+| `gkg_record_id` | GDELT's own ID for this record (format `{15-minute-file-timestamp}-{sequential-line-number}`), deterministic and unique across the whole dataset -- confirmed empirically, see section 4's Stage 10 note. Kept as the storage key (and the Drive file's name), and is also the cross-run deduplication key -- not one of the five content fields, just an identifier. |
 | `url` | The article's source URL. |
 | `datetime` | The GKG record's own scan timestamp (field 2 of the raw line), reformatted from GDELT's `YYYYMMDDHHMMSS` to ISO 8601. This is metadata *about when GDELT saw the article*, not a publish date extracted from the page itself -- trafilatura's own date/author/title extraction was dropped entirely (see `pipeline/content_extractor.py`) since none of it makes it into this schema. |
 | `themes` | Only the flu-specific theme hits that made this article a candidate (Stage 5's `FLU_INCLUDE_THEMES` matches), each with its character offset -- not the article's full (often 20-50 entry) raw theme list. |

@@ -177,3 +177,15 @@ GDRIVE_TOKEN_PATH = os.environ.get("PIPELINE_GDRIVE_TOKEN_PATH", "./token.json")
 # ---------------------------------------------------------------------------
 
 RUN_SUMMARY_PATH = os.environ.get("PIPELINE_RUN_SUMMARY_PATH", "./output/run_summary.json")
+
+# ---------------------------------------------------------------------------
+# Cross-run checkpoint -- lets a later run skip a calendar day it already
+# fully downloaded/filtered/fetched in an earlier run, instead of redoing
+# that work every time two runs' windows share a day (expected, since
+# country-season windows overlap -- see README section 6). Always written
+# locally, same reasoning as RUN_SUMMARY_PATH. See
+# run_pipeline.py::_day_needs_processing for how this stays safe across
+# runs that request different country sets.
+# ---------------------------------------------------------------------------
+
+COMPLETED_DAYS_PATH = os.environ.get("PIPELINE_COMPLETED_DAYS_PATH", "./output/completed_days.json")

@@ -46,6 +46,23 @@ class StorageBackend(ABC):
     def write(self, article: ExtractedArticle) -> None:
         """Persist one article record."""
 
+    def already_stored_ids(self) -> set[str]:
+        """Every gkg_record_id already persisted by a previous run -- used
+        by run_pipeline.py to seed cross-run deduplication, so overlapping
+        windows across separate runs never store the same GDELT record
+        twice. gkg_record_id, not url: it's deterministic (same raw GDELT
+        file + line always parses to the same record_id), which is exactly
+        the property needed to recognize "this day's file was already
+        processed in an earlier run" -- see run_pipeline.py's module
+        docstring for why this is the right key for that specific case.
+
+        Default: none. Override where it's actually cheap to enumerate --
+        see LocalStorageBackend. Not yet implemented for
+        GoogleDriveStorageBackend (not in active use yet); a run against
+        gdrive storage will only dedupe within that single run until this
+        is added there too."""
+        return set()
+
 
 class LocalStorageBackend(StorageBackend):
     """Appends one JSON line per article to a year-bucketed file:
@@ -67,6 +84,21 @@ class LocalStorageBackend(StorageBackend):
         path = year_dir / "matched_articles.jsonl"
         with path.open("a", encoding="utf-8") as f:
             f.write(json.dumps(_to_dict(article)) + "\n")
+
+    def already_stored_ids(self) -> set[str]:
+        """Reads every year's matched_articles.jsonl under base_dir and
+        collects their gkg_record_id fields. Cheap here since it's just
+        local file reads -- see the ABC docstring for why this exists."""
+        ids: set[str] = set()
+        if not self._base_dir.exists():
+            return ids
+        for jsonl_path in self._base_dir.glob("*/matched_articles.jsonl"):
+            with jsonl_path.open(encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        ids.add(json.loads(line)["gkg_record_id"])
+        return ids
 
 
 class GoogleDriveStorageBackend(StorageBackend):
