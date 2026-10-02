@@ -101,14 +101,17 @@ def test_is_flu_candidate_false_when_location_matches_but_no_relevant_theme():
     assert flu_theme_hits(record) == []
 
 
-def test_is_flu_candidate_false_when_exclude_theme_present():
-    """An avian-flu theme overrides a human-flu theme match, even when
-    both appear on the same record and a target country is mentioned."""
+def test_is_flu_candidate_true_even_when_exclude_theme_also_present():
+    """Explicit decision (see theme_matcher.py docstring): has_theme_match()
+    only checks for an include-listed theme and does not check
+    FLU_EXCLUDE_THEMES, so a record carrying both a human-flu theme and an
+    animal-flu theme still passes. has_excluded_theme() is kept correct and
+    available, but it's no longer consulted by is_flu_candidate()."""
     record = parse_line(_build_raw_line(
         "https://x", "TAX_DISEASE_FLU,10;TAX_DISEASE_AVIAN_INFLUENZA,20", _US_LOCATION,
     ))
     assert has_excluded_theme(record)
-    assert not is_flu_candidate(record, _TEST_COUNTRIES)
+    assert is_flu_candidate(record, _TEST_COUNTRIES)
 
 
 def test_location_filter_respects_the_passed_in_country_set():

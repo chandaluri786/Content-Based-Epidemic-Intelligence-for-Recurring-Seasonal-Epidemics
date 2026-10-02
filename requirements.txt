@@ -1,4 +1,6 @@
 requests>=2.31
 trafilatura>=2.0
-boto3>=1.34   # only required if PIPELINE_STORAGE_BACKEND=s3
+google-api-python-client>=2.100   # only required if PIPELINE_STORAGE_BACKEND=gdrive
+google-auth-httplib2>=0.2         # only required if PIPELINE_STORAGE_BACKEND=gdrive
+google-auth-oauthlib>=1.2         # only required if PIPELINE_STORAGE_BACKEND=gdrive
 pytest>=7.4   # only required to run tests/

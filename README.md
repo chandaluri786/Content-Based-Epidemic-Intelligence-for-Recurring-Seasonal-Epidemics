@@ -18,25 +18,36 @@ later phase.
 ```bash
 pip install -r requirements.txt
 
+# Smoke test first: skip Stage 1/2 (no FluNet call) and run Stages 3-10
+# against exactly one GDELT file (one 15-minute timestamp):
+python run_pipeline.py --test-timestamp 20230115121500 --countries USA IND
+
 # Local filesystem storage (default, zero config):
-python run_pipeline.py --countries USA AUS IND --start-year 2023
+python run_pipeline.py --countries USA AUS IND --start-year 2020 --end-year 2023
 
 # Run the unit tests (no network required):
 pytest
 ```
 
-Output lands in `./output/extracted_articles/matched_articles.jsonl` by
-default -- one JSON object per line, one file total. Every stored article
-mentions at least one of the requested cohort countries (Stage 5's location
-filter) and carries its full, unfiltered `locations` list (not narrowed to
-just the matched country -- see section 7). See "Configuration" below to
-point this at S3 instead, or to change which countries/years run.
+Output lands in `./output/extracted_articles/{year}/matched_articles.jsonl`
+by default -- one JSON object per line, one file per calendar year (bucketed
+by each article's own GKG scan year). Every stored article mentions at
+least one of the requested cohort countries (Stage 5's location filter) and
+carries its full, unfiltered `locations` list (not narrowed to just the
+matched country -- see section 7). See "Configuration" below to point this
+at Google Drive instead, or to change which countries/years run.
+
+Every real run (not `--test-timestamp`) also prints, and saves to
+`./output/run_summary.json`, a per-(country, season-year)-window count of
+how many articles were stored -- see section 7, "Run summary report."
 
 This pipeline makes real, live network calls (WHO's FluNet API and GDELT's
 public file mirror) -- there is no offline/mock mode. A full run across all
 six configured countries and the full 2015-2024 study window is a
 multi-hour job (GDELT publishes 96 files/day per calendar day needed); see
-"Performance expectations" below before running it unscoped.
+"Performance expectations" below before running it unscoped. Use
+`--test-timestamp` first to confirm everything works before committing to
+a real run.
 
 ---
 
@@ -50,32 +61,51 @@ likely to need changing:
 | `TARGET_COUNTRIES` | USA, AUS, BRA, IND, KEN, IDN | The cohort. Maps ISO3 to GDELT's FIPS 10-4 location code (these differ — confirm a new country's real FIPS code against live data before adding it, don't assume). |
 | `STUDY_YEARS` | 2015-2024 | Earliest/latest season years ground truth is pulled for. |
 | `WEEKS_BEFORE_ONSET` / `WEEKS_AFTER_ONSET` | 10 / 2 | How wide each country-season's ingestion window is around its FluNet onset date. |
-| `FLU_INCLUDE_THEMES` / `FLU_EXCLUDE_THEMES` | see file | The exhaustively-verified theme list that drives half of candidate matching (Stage 5's theme condition). Don't edit without re-reading section 4's derivation. |
+| `FLU_INCLUDE_THEMES` | see file | The exhaustively-verified theme list that drives half of candidate matching (Stage 5's theme condition — presence of any of these themes is sufficient). Don't edit without re-reading section 4's derivation. |
+| `FLU_EXCLUDE_THEMES` | see file | Exhaustively-verified, but **not currently used** by Stage 5's gate (`has_theme_match()` no longer checks it — explicit decision). Kept for reference and possible future reinstatement; see Stage 5 below. |
 | `MIN_FLU_THEME_HITS_ALONE`, `COOCCURRENCE_PROXIMITY_CHARS` | 2, 1000 | Content-richness thresholds (Stage 9). |
-| `STORAGE_BACKEND` | `"local"` | `"local"` or `"s3"` — see below. |
+| `STORAGE_BACKEND` | `"local"` | `"local"` or `"gdrive"` — see below. |
+| `RUN_SUMMARY_PATH` | `./output/run_summary.json` | Where the end-of-run per-window count report is written — see section 7, "Run summary report." Always local, regardless of `STORAGE_BACKEND`. |
 
 ### Environment variables (storage)
 
-No cloud provider had been confirmed at the time this was built (see
-"Open decisions" in section 6) — S3 is wired up as the default real cloud
-option, local filesystem storage is the zero-config default.
+Decided: Google Drive, not an AWS/cloud-provider bucket. Local filesystem
+storage is the zero-config default.
 
 | Variable | Required for | Default |
 |---|---|---|
 | `PIPELINE_STORAGE_BACKEND` | — | `local` |
 | `PIPELINE_LOCAL_STORAGE_DIR` | local backend | `./output/extracted_articles` |
-| `PIPELINE_S3_BUCKET` | S3 backend | *(none — must be set)* |
-| `PIPELINE_S3_PREFIX` | S3 backend | `flu-extraction/` |
-| `AWS_REGION` | S3 backend | `us-east-1` |
-| AWS credentials | S3 backend | via the standard boto3 resolution chain (env vars, `~/.aws/credentials`, IAM role) — never hardcoded here |
+| `PIPELINE_GDRIVE_FOLDER_ID` | gdrive backend | *(none — must be set)* |
+| `PIPELINE_GDRIVE_CREDENTIALS_PATH` | gdrive backend | `./credentials.json` |
+| `PIPELINE_GDRIVE_TOKEN_PATH` | gdrive backend | `./token.json` |
 
-Example S3 run:
+**One-time Google Drive setup** (do this once, before the first `gdrive`
+run):
+1. In [Google Cloud Console](https://console.cloud.google.com/), create a
+   project (or reuse one), then enable the **Google Drive API** for it
+   (APIs & Services → Enable APIs and Services → search "Google Drive API").
+2. Go to APIs & Services → Credentials → Create Credentials → OAuth client
+   ID → Application type **Desktop app**. Download the resulting JSON and
+   save it as `credentials.json` in the directory you'll run the pipeline
+   from (or point `PIPELINE_GDRIVE_CREDENTIALS_PATH` at it).
+3. Go to APIs & Services → OAuth consent screen, set it to **Testing**, and
+   add your own Google account under "Test users" (required while the app
+   is unverified — fine for personal/project use, no Google review needed).
+4. In Google Drive, create (or pick) a destination folder, open it, and
+   copy the ID out of its URL: `https://drive.google.com/drive/folders/<ID>`.
+5. First run with `PIPELINE_STORAGE_BACKEND=gdrive` opens a browser window
+   asking you to log in and grant access to "see, edit, create, and delete
+   only the specific Google Drive files you use with this app" (the
+   `drive.file` scope — it cannot see your other Drive files). After you
+   approve, the token is cached to `token.json` and later runs won't
+   prompt again (until the token is revoked or deleted).
+
+Example Google Drive run:
 ```bash
-export PIPELINE_STORAGE_BACKEND=s3
-export PIPELINE_S3_BUCKET=my-flu-extraction-bucket
-export AWS_ACCESS_KEY_ID=...
-export AWS_SECRET_ACCESS_KEY=...
-python run_pipeline.py --countries USA
+export PIPELINE_STORAGE_BACKEND=gdrive
+export PIPELINE_GDRIVE_FOLDER_ID=1AbCdEfGhIjKlMnOpQrStUvWxYz
+python run_pipeline.py --countries USA --start-year 2020 --end-year 2023
 ```
 
 ### CLI flags
@@ -86,7 +116,18 @@ python run_pipeline.py --countries USA
               filter (Stage 5) -- `--countries USA` means only US onsets
               build windows, AND only articles mentioning the US pass the
               location condition. The two aren't independently scopable.
---start-year  Earliest season year to pull ground truth for (default: earliest STUDY_YEARS)
+--start-year  Earliest season year to pull ground truth for, inclusive
+              (default: earliest STUDY_YEARS)
+--end-year    Latest season year to pull ground truth for, inclusive
+              (default: latest STUDY_YEARS). Must be >= --start-year.
+--test-timestamp YYYYMMDDHHMMSS
+              Smoke-test mode. Skips Stage 1/2 entirely (no FluNet call,
+              no real season window) and runs Stages 3-10 against exactly
+              one GDELT file, e.g. 20230115121500. Ignores
+              --start-year/--end-year. Prints/saves a report the same way
+              a real run does, but against a single synthetic one-day
+              window (country "TEST") instead of a real season window --
+              see section 7, "Run summary report."
 ```
 
 ---
@@ -159,16 +200,26 @@ genuinely flu-themed articles in a real sample. GDELT's theme tags are
 computed from the article's actual (translated, where non-English) content,
 so matching on theme presence instead removes that language dependency
 entirely. A record passes this condition if it carries at least one theme
-from `FLU_INCLUDE_THEMES` and **none** from `FLU_EXCLUDE_THEMES` — the
-exclude list (bird/avian/canine/equine/feline flu) wins even if an include
-theme is also present, since this project studies human seasonal/pandemic
-influenza, not animal-to-animal strains. Both lists were derived by
-**exhaustively reading all 8,528 `TAX_DISEASE_*` theme codes** in GDELT's
-published taxonomy (see section 5, source list), not by guessing likely
-substrings — see the inline comments in `config.py` for what was
-deliberately left out and why (e.g. "stomach flu" is gastroenteritis, not
-influenza; *Haemophilus influenzae* is a bacterium historically misnamed,
-not the influenza virus).
+from `FLU_INCLUDE_THEMES` — presence of an include-listed theme is
+sufficient on its own; **absence of an exclude-listed theme is not
+checked and is not required.** `FLU_EXCLUDE_THEMES` (bird/avian/canine/
+equine/feline flu) and the `has_excluded_theme()` function that checks it
+both still exist in `config.py`/`theme_matcher.py` — exhaustively verified
+and kept available — but `has_theme_match()` no longer calls
+`has_excluded_theme()`. Explicit, known consequence: a record tagged with
+both a human-flu theme and an animal-flu theme (e.g. `TAX_DISEASE_FLU` +
+`TAX_DISEASE_AVIAN_INFLUENZA` on the same article) now passes this
+condition, where an earlier version of this gate would have rejected it —
+this matters because the original pipeline's own pilot found roughly 36%
+of its early matches were avian/poultry stories carrying both kinds of
+tag. Both lists were derived by **exhaustively reading all 8,528
+`TAX_DISEASE_*` theme codes** in GDELT's published taxonomy (see section
+5, source list), not by guessing likely substrings — see the inline
+comments in `config.py` for what was deliberately left out and why (e.g.
+"stomach flu" is gastroenteritis, not influenza; *Haemophilus influenzae*
+is a bacterium historically misnamed, not the influenza virus). If the
+exclude check ever needs to be reinstated, re-wire `has_excluded_theme()`
+back into `has_theme_match()` in `pipeline/theme_matcher.py`.
 
 **Condition 2, location match.** A flat presence check — does at least one
 of the requested cohort countries' FIPS codes appear anywhere in the
@@ -236,8 +287,10 @@ organization "Global Initiative on Sharing Avian Influenza Data."
 ### Stage 10 — Storage (`pipeline/storage.py`)
 Only ever called for articles that passed **both** Stage 8 and Stage 9.
 One record per article, trimmed to five fields plus an ID — see section 7
-for the exact schema. Pluggable backend — see section 2's configuration
-table and section 6's note on the cloud-provider decision.
+for the exact schema. Both backends bucket output by calendar year (the
+article's own GKG scan year — see section 7) so a consumer can retrieve
+just the year(s) it wants. Pluggable backend — see section 2's
+configuration table and section 6's note on the storage decision.
 
 ### Deliberately not in this pipeline
 Two things from the original design are **not** implemented here: geo-tag
@@ -294,9 +347,10 @@ of pages. Worth spot-checking against this project's own messier real
 cases (JS-heavy sites, non-English pages) before treating its output as
 ground truth for labeling.
 
-**boto3** (optional, Stage 10 S3 backend) — AWS's official Python SDK, used
-only if `STORAGE_BACKEND=s3`. Imported lazily in `pipeline/storage.py` so
-it's not a hard dependency for local-only runs.
+**google-api-python-client / google-auth-oauthlib** (optional, Stage 10
+Google Drive backend) — Google's official Python client and OAuth helper,
+used only if `STORAGE_BACKEND=gdrive`. Imported lazily in
+`pipeline/storage.py` so they're not a hard dependency for local-only runs.
 
 ---
 
@@ -305,11 +359,11 @@ it's not a hard dependency for local-only runs.
 - **`TAX_DISEASE_JUNGLE_FLU`** — low-volume (17 occurrences GDELT-wide),
   ambiguous theme. Not in either theme list in `config.py`. Resolve and add
   it to the appropriate set with a comment once its meaning is confirmed.
-- **Cloud storage provider** — never explicitly specified. S3 was
-  implemented as the default real-cloud backend on that basis; confirm this
-  is actually the right choice, and implement `GcsStorageBackend` /
-  `AzureBlobStorageBackend` in `pipeline/storage.py` following
-  `S3StorageBackend`'s pattern if not.
+- **Storage destination — resolved: Google Drive**, not an AWS/cloud-
+  provider bucket. Implemented as `GoogleDriveStorageBackend` in
+  `pipeline/storage.py`, using per-user OAuth credentials (not a service
+  account — see section 2's one-time setup steps for why). Requires
+  `PIPELINE_GDRIVE_FOLDER_ID` to be set and a one-time interactive login.
 - **Headless-browser fetching** — not implemented. Before adding it,
   diagnose what fraction of current retrieval failures are genuinely
   JS-rendering gaps (which a headless browser fixes) versus bot-blocking
@@ -348,22 +402,37 @@ because it already passed both quality gates -- see Stages 8-9 -- so
 storing that fact again would be redundant). The same JSON shape is used
 by both backends.
 
+**Bucketed by year.** Both backends group output into one bucket per
+calendar year, so you can fetch just the year(s) you want instead of
+scanning everything. `year` is the year of the article's own `datetime`
+field (the GKG record's scan timestamp) -- it is **not** a country-season
+year, since no single season year is attributable to a record once it
+could match any requested country (see section 6, "Stage 5's location
+condition is a gate, not an attribution", and the discussion of cross-
+country window overlap). If you need "articles from country X's Nth flu
+season specifically," filter further on `datetime` within that season's
+own window bounds (recomputable from Stage 1 / `pipeline/ground_truth.py`
+for that country) and on `locations` containing X -- this pipeline buckets
+by year only, not by season or country.
+
 ### Local backend (default)
 ```
-{LOCAL_STORAGE_DIR}/matched_articles.jsonl
+{LOCAL_STORAGE_DIR}/{year}/matched_articles.jsonl
 ```
-A single file, one JSON object per line, append-only. Filter in your own
-tooling by inspecting each line's `locations` list (e.g.
-`jq 'select(.locations[].country_fips == "IN")'`) -- there's no separate
-country field or per-country file to rely on instead.
+One file per year, one JSON object per line within it, append-only. Pick
+the year(s) you want by just opening that subdirectory, then filter
+further in your own tooling by inspecting each line's `locations` list
+(e.g. `jq 'select(.locations[].country_fips == "IN")'`) -- there's no
+separate country field or per-country file to rely on instead.
 
-### S3 backend
+### Google Drive backend
 ```
-s3://{bucket}/{prefix}/{gkg_record_id}.json
+{PIPELINE_GDRIVE_FOLDER_ID}/{year}/{gkg_record_id}.json
 ```
-One object per article, keyed by its GDELT record ID -- no per-country
-nesting. List objects under the prefix and filter on `locations` the same
-way.
+One subfolder per year under the configured root folder (created
+automatically on first use), one file per article inside it, keyed by its
+GDELT record ID -- no per-country nesting. Open the year's subfolder and
+filter on `locations` the same way.
 
 ### Record schema
 ```json
@@ -383,12 +452,57 @@ way.
 
 | Field | Meaning |
 |---|---|
-| `gkg_record_id` | GDELT's own ID for this record. Kept as the storage key (and the S3 object's filename) -- not one of the five content fields, just an identifier. |
+| `gkg_record_id` | GDELT's own ID for this record. Kept as the storage key (and the Drive file's name) -- not one of the five content fields, just an identifier. |
 | `url` | The article's source URL. |
 | `datetime` | The GKG record's own scan timestamp (field 2 of the raw line), reformatted from GDELT's `YYYYMMDDHHMMSS` to ISO 8601. This is metadata *about when GDELT saw the article*, not a publish date extracted from the page itself -- trafilatura's own date/author/title extraction was dropped entirely (see `pipeline/content_extractor.py`) since none of it makes it into this schema. |
 | `themes` | Only the flu-specific theme hits that made this article a candidate (Stage 5's `FLU_INCLUDE_THEMES` matches), each with its character offset -- not the article's full (often 20-50 entry) raw theme list. |
 | `locations` | **Every** location GDELT found in the article, full and unfiltered -- not narrowed to just the cohort country (or countries) that satisfied Stage 5's location condition (see section 4, "Stage 5 -> condition 2"). Each entry is `{name, country_fips, offset}`; the richer raw fields (lat/lon, ADM1/ADM2, feature ID -- see `models.LocationHit`) are dropped here as GIS detail not needed for text-relevance labeling. |
 | `article` | The cleaned article text from Stage 7 (trafilatura). |
+
+### Run summary report
+
+Every run of `run_pipeline.py` (`--test-timestamp` included) ends by
+printing, and writing to `RUN_SUMMARY_PATH` (default
+`./output/run_summary.json`, always local regardless of `STORAGE_BACKEND`
+-- it's a small report, not pipeline output data), a count of stored
+articles for each `(country, season_year)` window built in Stage 1/2
+(`run_pipeline.py::build_window_report`):
+
+```json
+[
+  {
+    "country": "USA",
+    "season_year": 2023,
+    "window_start": "2023-10-06",
+    "window_end": "2024-02-23",
+    "total_articles": 212,
+    "per_country_counts": {"USA": 204, "IND": 9, "AUS": 0}
+  }
+]
+```
+
+- `total_articles` -- every stored article whose `datetime` falls inside
+  that window, **regardless of which country it mentions**.
+- `per_country_counts` -- of that same subset, how many mention each
+  requested country.
+
+Two kinds of overlap show up here on purpose, not as bugs:
+1. **A window's total can include articles about a different cohort
+   country.** Stage 3 downloads the *union* of every requested country's
+   window days (see section 6), and Stage 5's location filter checks
+   against the full requested country set, not just the country whose
+   window caused a given day to be downloaded. So "USA, season 2023" above
+   including 9 India-mentioning articles means 9 articles happened to fall
+   on a day inside USA's window that also (by presence-only match) mention
+   India -- not that those 9 are part of India's own 2023 season.
+2. **`per_country_counts` can sum to more than `total_articles`** if a
+   single article mentions more than one requested country (e.g. a wire
+   story covering both).
+
+`--test-timestamp` mode reports against one synthetic window
+(`country: "TEST"`, a single-day span) instead of a real season window,
+and writes to `./output/test_run_summary.json` instead of the default
+path, since there's no real FluNet onset involved in that mode.
 
 ---
 

@@ -31,10 +31,11 @@ class CountrySeasonOnset:
     onset_date: date
 
 
-def _fetch_weekly_rows(country_iso3: str, start_year: int) -> list[dict]:
-    """Pulls every weekly FluNet row for one country from start_year
-    onward, following OData pagination ('@odata.nextLink') until exhausted."""
-    filt = f"COUNTRY_CODE eq '{country_iso3}' and ISO_YEAR ge {start_year}"
+def _fetch_weekly_rows(country_iso3: str, start_year: int, end_year: int) -> list[dict]:
+    """Pulls every weekly FluNet row for one country within
+    [start_year, end_year] inclusive, following OData pagination
+    ('@odata.nextLink') until exhausted."""
+    filt = f"COUNTRY_CODE eq '{country_iso3}' and ISO_YEAR ge {start_year} and ISO_YEAR le {end_year}"
     url = (
         f"{FLUNET_API_URL}?$filter={urllib.parse.quote(filt)}"
         f"&$orderby=ISO_WEEKSTARTDATE&$top=1000&$format=json"
@@ -48,12 +49,12 @@ def _fetch_weekly_rows(country_iso3: str, start_year: int) -> list[dict]:
     return rows
 
 
-def compute_season_onsets(country_iso3: str, start_year: int) -> list[CountrySeasonOnset]:
-    """One onset per season that has a defined onset. Seasons without a
-    sustained positivity period above threshold are silently skipped --
-    by design, the pipeline simply produces no ingestion window for that
-    season rather than guessing one."""
-    rows = _fetch_weekly_rows(country_iso3, start_year)
+def compute_season_onsets(country_iso3: str, start_year: int, end_year: int) -> list[CountrySeasonOnset]:
+    """One onset per season year in [start_year, end_year] inclusive that
+    has a defined onset. Seasons without a sustained positivity period
+    above threshold are silently skipped -- by design, the pipeline simply
+    produces no ingestion window for that season rather than guessing one."""
+    rows = _fetch_weekly_rows(country_iso3, start_year, end_year)
 
     by_year: dict[int, list[dict]] = defaultdict(list)
     for row in rows:

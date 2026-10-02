@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+
+# Local-only secrets/state for the Google Drive storage backend -- never commit these
+credentials.json
+token.json
+
+# Pipeline output -- generated data, not source
+output/

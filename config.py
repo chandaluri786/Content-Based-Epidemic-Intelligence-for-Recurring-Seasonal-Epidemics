@@ -72,9 +72,14 @@ FLU_INCLUDE_THEMES: frozenset[str] = frozenset({
     "TAX_DISEASE_ORTHOMYXOVIRIDAE_INFECTIONS",
 })
 
-# Presence of ANY of these overrides an include-theme match, even if both
-# appear on the same record -- this project studies human seasonal/pandemic
-# flu, not animal-to-animal influenza strains that rarely infect humans.
+# NOT CURRENTLY USED by the active Stage 5 gate (pipeline/theme_matcher.py
+# ::has_theme_match no longer checks this set -- explicit decision, see
+# that module's docstring). Originally meant to override an include-theme
+# match when both appear on the same record, since this project studies
+# human seasonal/pandemic flu, not animal-to-animal influenza strains that
+# rarely infect humans. Kept here, still exhaustively verified and correct,
+# in case that check is reinstated -- wire has_excluded_theme() back into
+# has_theme_match() to do so.
 FLU_EXCLUDE_THEMES: frozenset[str] = frozenset({
     "TAX_DISEASE_BIRD_FLU",
     "TAX_DISEASE_AVIAN_FLU",
@@ -103,6 +108,24 @@ GENERIC_HEALTH_THEMES: frozenset[str] = frozenset({
 })
 
 # ---------------------------------------------------------------------------
+# Retrievability threshold -- Stage 8
+#
+# Found on a live test run, not hypothetical: some paywalled sites (e.g.
+# Lee Enterprises' "BLOX" CMS, seen on omaha.com) ship the real article body
+# in the raw HTML pre-obfuscated behind a CSS class like "subscriber-only
+# encrypted-content", meant to be decrypted client-side via JavaScript for
+# subscribers. trafilatura extracts this as if it were real text -- non-
+# empty, plausible length -- but it's actually a substitution-ciphered
+# blob. Measured on that live example: digit-character ratio was 28.8% in
+# the garbled text vs 0.7% and 1.5% in two genuinely-extracted articles
+# from the same test run. Real prose, in any language/script, essentially
+# never has this many digits interspersed within word-like tokens -- see
+# pipeline/quality_gates.py::is_retrievable.
+# ---------------------------------------------------------------------------
+
+MAX_DIGIT_CHAR_RATIO = 0.05
+
+# ---------------------------------------------------------------------------
 # Content-richness thresholds -- Stage 9
 # ---------------------------------------------------------------------------
 
@@ -125,20 +148,32 @@ HTTP_BACKOFF_BASE_SECONDS = 1.0
 # ---------------------------------------------------------------------------
 # Storage -- Stage 10
 #
-# OPEN DECISION, DEFAULTED (see README "Open decisions"): no cloud provider
-# had been specified at the time this pipeline was built. S3 was chosen as
-# the default real cloud backend since it's the most common choice for this
-# kind of workload; a local filesystem backend is also provided for
-# development/testing and needs zero configuration. Swap STORAGE_BACKEND to
-# a different value and implement the corresponding class in
-# pipeline/storage.py if a different provider is actually wanted.
+# Decided: Google Drive, not an AWS/cloud-provider bucket -- a local
+# filesystem backend is also provided for development/testing and needs
+# zero configuration. See README "Storage -> Google Drive" for one-time
+# setup (OAuth client credentials, sharing a destination folder).
 # ---------------------------------------------------------------------------
 
-StorageBackendName = Literal["local", "s3"]
+StorageBackendName = Literal["local", "gdrive"]
 STORAGE_BACKEND: StorageBackendName = os.environ.get("PIPELINE_STORAGE_BACKEND", "local")  # type: ignore[assignment]
 
 LOCAL_STORAGE_DIR = os.environ.get("PIPELINE_LOCAL_STORAGE_DIR", "./output/extracted_articles")
 
-S3_BUCKET_NAME = os.environ.get("PIPELINE_S3_BUCKET", "")
-S3_KEY_PREFIX = os.environ.get("PIPELINE_S3_PREFIX", "flu-extraction/")
-S3_REGION = os.environ.get("AWS_REGION", "us-east-1")
+# The Drive folder articles are uploaded into -- the ID in the folder's own
+# URL (https://drive.google.com/drive/folders/<THIS_PART>), not its name.
+GDRIVE_FOLDER_ID = os.environ.get("PIPELINE_GDRIVE_FOLDER_ID", "")
+# OAuth client secret downloaded from Google Cloud Console (Desktop app
+# credentials) -- used only for the one-time interactive consent.
+GDRIVE_CREDENTIALS_PATH = os.environ.get("PIPELINE_GDRIVE_CREDENTIALS_PATH", "./credentials.json")
+# Where the authorized-user token is cached after the first interactive
+# login, so later runs don't need a browser again.
+GDRIVE_TOKEN_PATH = os.environ.get("PIPELINE_GDRIVE_TOKEN_PATH", "./token.json")
+
+# ---------------------------------------------------------------------------
+# Run summary -- the end-of-run per-window article count report
+# (run_pipeline.py::build_window_report). Always written locally, regardless
+# of STORAGE_BACKEND -- it's a small human-readable report, not pipeline
+# output data, so there's no reason to route it through the Drive API too.
+# ---------------------------------------------------------------------------
+
+RUN_SUMMARY_PATH = os.environ.get("PIPELINE_RUN_SUMMARY_PATH", "./output/run_summary.json")

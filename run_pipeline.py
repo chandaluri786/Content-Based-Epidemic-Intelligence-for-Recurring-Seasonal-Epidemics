@@ -2,7 +2,11 @@
 Top-level orchestration for the GDELT flu-article extraction pipeline.
 
 Usage:
-    python run_pipeline.py --countries USA AUS IND --start-year 2015
+    python run_pipeline.py --countries USA AUS IND --start-year 2015 --end-year 2018
+
+    # Smoke test: skip Stage 1/2 (no FluNet call) and run Stages 3-10 against
+    # exactly one GDELT 15-minute file:
+    python run_pipeline.py --test-timestamp 20230115121500 --countries USA IND
 
 Runs all 10 stages end to end for the requested countries. See README.md
 for the full stage-by-stage explanation, required configuration, and the
@@ -12,11 +16,13 @@ decisions behind this design.
 from __future__ import annotations
 
 import argparse
+import json
 import logging
-from datetime import date, datetime
-from urllib.parse import urlparse
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
 
-from config import STUDY_YEARS, TARGET_COUNTRIES
+from config import RUN_SUMMARY_PATH, STUDY_YEARS, TARGET_COUNTRIES
 from models import CountrySeasonWindow, ExtractedArticle, MatchedArticle
 from pipeline import gkg_downloader, gkg_parser, windows
 from pipeline.article_fetcher import fetch_html
@@ -30,20 +36,31 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger(__name__)
 
 
-def build_cohort_windows(countries: list[str], start_year: int) -> list[CountrySeasonWindow]:
-    """Stage 1 + 2 for every requested country. The cohort does double duty:
-    it drives WHEN the pipeline looks (these windows feed Stage 3's day
+@dataclass(frozen=True)
+class StoredArticleSummary:
+    """Just enough about one stored article to build the per-window count
+    report below -- not the full ExtractedArticle, so a long run doesn't
+    have to hold every article's cleaned text in memory a second time on
+    top of what's already been written to storage."""
+    gkg_datetime: str
+    country_fips_mentioned: frozenset[str]
+
+
+def build_cohort_windows(countries: list[str], start_year: int, end_year: int) -> list[CountrySeasonWindow]:
+    """Stage 1 + 2 for every requested country, restricted to season years
+    in [start_year, end_year] inclusive. The cohort does double duty: it
+    drives WHEN the pipeline looks (these windows feed Stage 3's day
     selection) and, via Stage 5's location filter, WHICH places' content
     gets kept -- the same TARGET_COUNTRIES list backs both."""
     all_windows: list[CountrySeasonWindow] = []
     for country in countries:
-        onsets = compute_season_onsets(country, start_year)
+        onsets = compute_season_onsets(country, start_year, end_year)
         logger.info("Stage 1: %s -- %d season onsets found", country, len(onsets))
         all_windows.extend(windows.build_window(onset) for onset in onsets)
     return all_windows
 
 
-def find_candidates_for_day(day: date, target_countries: dict[str, str]) -> list[MatchedArticle]:
+def find_candidates_for_day(day, target_countries: dict[str, str]) -> list[MatchedArticle]:
     """Stages 3-5 for a single calendar day: download every 15-minute file,
     parse, and run the combined theme+location filter (is_flu_candidate).
     target_countries is exactly the set requested on the CLI, not
@@ -73,9 +90,12 @@ def _to_iso_datetime(gkg_timestamp: str) -> str:
     return datetime.strptime(gkg_timestamp, "%Y%m%d%H%M%S").isoformat()
 
 
-def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_urls: set[str]) -> None:
+def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_urls: set[str]) -> list[StoredArticleSummary]:
     """Stages 6-10. Each unique URL is fetched, cleaned, and stored at most
-    once for the whole run."""
+    once for the whole run. Returns a lightweight summary of every article
+    actually stored, for the end-of-run per-window report."""
+    stored: list[StoredArticleSummary] = []
+
     for candidate in candidates:
         if candidate.record.url in seen_urls:
             continue
@@ -92,15 +112,114 @@ def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_urls: 
         if not (retrievable and rich):
             continue  # storage only ever receives articles that pass both quality gates
 
+        gkg_datetime = _to_iso_datetime(candidate.record.timestamp)
         article = ExtractedArticle(
             gkg_record_id=candidate.record.record_id,
             url=candidate.record.url,
-            gkg_datetime=_to_iso_datetime(candidate.record.timestamp),
+            gkg_datetime=gkg_datetime,
             themes=candidate.flu_theme_hits,
             locations=list(candidate.record.locations),
             article_text=extraction.text or "",
         )
         storage.write(article)
+        stored.append(StoredArticleSummary(
+            gkg_datetime=gkg_datetime,
+            country_fips_mentioned=frozenset(loc.country_fips for loc in article.locations),
+        ))
+
+    return stored
+
+
+def build_window_report(
+    cohort_windows: list[CountrySeasonWindow],
+    stored: list[StoredArticleSummary],
+    target_countries: dict[str, str],
+) -> list[dict]:
+    """For each (country, season_year) window, counts how many stored
+    articles fall inside it by date -- regardless of which country they
+    mention -- and, within that subset, how many mention each requested
+    country.
+
+    Both kinds of overlap are expected, not bugs: a window's total can
+    include articles about a different cohort country (its calendar days
+    can be shared with another country's window -- see README section 6 /
+    section 7 on why `locations` isn't narrowed), and the per-country counts
+    can sum to more than the window's total if a single article mentions
+    more than one requested country.
+    """
+    report: list[dict] = []
+    for window in cohort_windows:
+        in_window = [
+            s for s in stored
+            if window.window_start <= datetime.fromisoformat(s.gkg_datetime).date() <= window.window_end
+        ]
+        per_country_counts = {
+            iso3: sum(1 for s in in_window if fips in s.country_fips_mentioned)
+            for iso3, fips in target_countries.items()
+        }
+        report.append({
+            "country": window.country_iso3,
+            "season_year": window.season_year,
+            "window_start": window.window_start.isoformat(),
+            "window_end": window.window_end.isoformat(),
+            "total_articles": len(in_window),
+            "per_country_counts": per_country_counts,
+        })
+    return report
+
+
+def _log_and_save_report(report: list[dict], summary_path: str = RUN_SUMMARY_PATH) -> None:
+    logger.info("Per-window article counts:")
+    for row in report:
+        logger.info(
+            "  %s season %s (%s to %s): total=%d, per-country=%s",
+            row["country"], row["season_year"], row["window_start"], row["window_end"],
+            row["total_articles"], row["per_country_counts"],
+        )
+
+    path = Path(summary_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, indent=2))
+    logger.info("Window summary written to %s", path)
+
+
+def run_test_timestamp(timestamp: str, countries: list[str]) -> None:
+    """Smoke-test mode: skips Stage 1/2 entirely (no FluNet call, no real
+    season window) and runs Stages 3-10 against exactly one GDELT file.
+    Reports against a single synthetic one-day "window" (country_iso3
+    "TEST") since there's no real season window to report against here --
+    this is for checking the mechanics work, not for real counts."""
+    target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in countries}
+    file_url = gkg_downloader.file_url_for_timestamp(timestamp)
+
+    lines = gkg_downloader.download_file(file_url)
+    if lines is None:
+        logger.warning(
+            "Could not download %s -- that 15-minute slot may have no published file, or the request failed.",
+            file_url,
+        )
+        return
+
+    candidates: list[MatchedArticle] = []
+    for raw_line in lines:
+        record = gkg_parser.parse_line(raw_line)
+        if record is None or not is_flu_candidate(record, target_countries):
+            continue
+        candidates.append(MatchedArticle(record=record, flu_theme_hits=flu_theme_hits(record)))
+
+    logger.info("Test file %s: %d raw lines, %d candidates after Stage 5", file_url, len(lines), len(candidates))
+
+    storage = get_storage_backend()
+    stored = fetch_clean_and_store(candidates, storage, seen_urls=set())
+    logger.info("Test file %s: %d articles stored after Stages 8-9", file_url, len(stored))
+
+    test_date = datetime.strptime(timestamp, "%Y%m%d%H%M%S").date()
+    synthetic_window = CountrySeasonWindow(
+        country_iso3="TEST", season_year=test_date.year, onset_date=test_date,
+        window_start=test_date, window_end=test_date,
+    )
+    report = build_window_report([synthetic_window], stored, target_countries)
+    _log_and_save_report(report, summary_path="./output/test_run_summary.json")
 
 
 def main() -> None:
@@ -112,11 +231,27 @@ def main() -> None:
     )
     parser.add_argument(
         "--start-year", type=int, default=min(STUDY_YEARS),
-        help="Earliest season year to pull ground truth for (default: earliest configured study year).",
+        help="Earliest season year to pull ground truth for, inclusive (default: earliest configured study year).",
+    )
+    parser.add_argument(
+        "--end-year", type=int, default=max(STUDY_YEARS),
+        help="Latest season year to pull ground truth for, inclusive (default: latest configured study year).",
+    )
+    parser.add_argument(
+        "--test-timestamp", metavar="YYYYMMDDHHMMSS",
+        help="Smoke-test mode: skip Stage 1/2 (no FluNet call) and run Stages 3-10 against exactly one "
+             "GDELT file, e.g. 20230115121500. Ignores --start-year/--end-year.",
     )
     args = parser.parse_args()
 
-    cohort_windows = build_cohort_windows(args.countries, args.start_year)
+    if args.test_timestamp:
+        run_test_timestamp(args.test_timestamp, args.countries)
+        return
+
+    if args.end_year < args.start_year:
+        parser.error(f"--end-year ({args.end_year}) must be >= --start-year ({args.start_year})")
+
+    cohort_windows = build_cohort_windows(args.countries, args.start_year, args.end_year)
     if not cohort_windows:
         logger.warning("No onsets found for the requested countries/years -- nothing to do.")
         return
@@ -131,11 +266,15 @@ def main() -> None:
     seen_urls: set[str] = set()  # dedupe fetch+clean across the whole run, not just per-day
     target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in args.countries}
 
+    all_stored: list[StoredArticleSummary] = []
     for day in sorted(unique_days):
         candidates = find_candidates_for_day(day, target_countries)
-        fetch_clean_and_store(candidates, storage, seen_urls)
+        all_stored.extend(fetch_clean_and_store(candidates, storage, seen_urls))
 
     logger.info("Done. %d unique articles fetched across the run.", len(seen_urls))
+
+    report = build_window_report(cohort_windows, all_stored, target_countries)
+    _log_and_save_report(report)
 
 
 if __name__ == "__main__":

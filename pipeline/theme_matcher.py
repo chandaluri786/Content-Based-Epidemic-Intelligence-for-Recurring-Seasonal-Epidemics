@@ -2,12 +2,23 @@
 Stage 5: decide whether a parsed GkgRecord is a flu candidate.
 
 Two independent conditions, both required:
-  1. Theme match -- at least one include-listed theme, none of the
-     exclude-listed (animal-flu) ones. Theme-based, not URL-keyword-based:
-     GDELT's theme tags are computed from the article's actual (translated,
-     where needed) content, so this doesn't share the English-URL-only
-     limitation a keyword filter would have. See README "Stage 5" for the
-     measured evidence behind this choice.
+  1. Theme match -- at least one include-listed theme present. Theme-based,
+     not URL-keyword-based: GDELT's theme tags are computed from the
+     article's actual (translated, where needed) content, so this doesn't
+     share the English-URL-only limitation a keyword filter would have.
+     See README "Stage 5" for the measured evidence behind this choice.
+
+     NOTE, explicit decision: this condition does NOT check
+     FLU_EXCLUDE_THEMES (animal-flu themes) -- an article tagged with both
+     a human-flu theme and an animal-flu theme now PASSES. An earlier
+     version of this function excluded such records; that check was
+     removed on explicit instruction. Known consequence, not hypothetical:
+     the original pipeline's own pilot found ~36% of its early matches
+     were avian/poultry stories carrying both kinds of tag -- those are no
+     longer filtered out here. FLU_EXCLUDE_THEMES and has_excluded_theme()
+     are kept in the codebase (real, verified data) but are unused by this
+     gate; re-wire has_excluded_theme() back into has_theme_match() below
+     if this needs to be revisited.
   2. Location match -- at least one of the six cohort countries appears
      anywhere in the record's locations. A flat presence check,
      deliberately simple: it answers "is this worth keeping at all," not
@@ -33,15 +44,16 @@ def flu_theme_hits(record: GkgRecord) -> list[ThemeHit]:
 
 
 def has_excluded_theme(record: GkgRecord) -> bool:
+    """Not currently used by has_theme_match()/is_flu_candidate() -- see
+    this module's docstring. Kept available (and still correct) in case
+    the exclude check is reinstated later."""
     return any(hit.theme in FLU_EXCLUDE_THEMES for hit in record.themes)
 
 
 def has_theme_match(record: GkgRecord) -> bool:
-    """Condition 1: at least one include-listed theme, none excluded.
-    Exclusion wins even if an include theme is also present on the same
-    record."""
-    if has_excluded_theme(record):
-        return False
+    """Condition 1: at least one include-listed theme present. Does NOT
+    check FLU_EXCLUDE_THEMES -- see this module's docstring for why and
+    the known consequence of that choice."""
     return len(flu_theme_hits(record)) > 0
 
 

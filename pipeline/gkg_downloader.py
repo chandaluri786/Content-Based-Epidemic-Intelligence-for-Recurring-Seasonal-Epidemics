@@ -29,6 +29,14 @@ def file_url_for(day: date, hour: int, minute: int) -> str:
     return f"{GDELT_RAW_MIRROR_BASE}/{timestamp}.gkg.csv.zip"
 
 
+def file_url_for_timestamp(timestamp: str) -> str:
+    """Builds the file URL for an exact GDELT timestamp string
+    (YYYYMMDDHHMMSS, e.g. "20230115121500") -- used by run_pipeline.py's
+    --test-timestamp mode to download exactly one file instead of a whole
+    day's 96."""
+    return f"{GDELT_RAW_MIRROR_BASE}/{timestamp}.gkg.csv.zip"
+
+
 def download_file(url: str) -> list[str] | None:
     """Returns the raw tab-separated lines of one GKG file, or None if the
     request failed or that 15-minute slot has no published file (happens
