@@ -76,6 +76,40 @@ def test_parse_line_returns_none_for_empty_url():
     assert parse_line(raw) is None
 
 
+def test_parse_line_handles_oversized_field_below_raised_limit():
+    """Real scenario, confirmed live (2015-02-22, samoanews.com): GDELT's
+    SharingImage field (index 18, not one this parser reads) can contain a
+    full base64-encoded image, producing a field >131072 bytes -- Python's
+    csv module's default limit. config/gkg_parser.py raises that limit;
+    this confirms a field in that range no longer crashes parsing and the
+    fields this parser actually cares about are still extracted correctly."""
+    fields = [""] * 27
+    fields[0] = "20230115121500-0"
+    fields[1] = "20230115121500"
+    fields[4] = "https://example.com/real-article"
+    fields[8] = "TAX_DISEASE_FLU,10"
+    fields[10] = "1#United States#US#US##39.8#-98.5#US#580"
+    fields[18] = "x" * 200_000  # bigger than the OLD 131072 default limit
+    raw = "\t".join(fields)
+
+    record = parse_line(raw)
+    assert record is not None
+    assert record.url == "https://example.com/real-article"
+    assert len(record.themes) == 1
+
+
+def test_parse_line_returns_none_for_field_exceeding_even_the_raised_limit():
+    """Defense in depth: even if a future record exceeds the raised limit
+    (10,000,000 bytes), parsing should skip it, not crash the whole run."""
+    fields = [""] * 27
+    fields[0] = "20230115121500-0"
+    fields[4] = "https://example.com/x"
+    fields[18] = "x" * 10_000_001
+    raw = "\t".join(fields)
+
+    assert parse_line(raw) is None
+
+
 def test_is_flu_candidate_true_for_theme_and_location_match():
     record = parse_line(_build_raw_line("https://x", "TAX_DISEASE_FLU,10", _US_LOCATION))
     assert has_theme_match(record)

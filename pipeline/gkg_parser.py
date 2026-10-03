@@ -21,6 +21,16 @@ import csv
 
 from models import GkgRecord, LocationHit, ThemeHit
 
+# Python's csv module defaults to a 131072-byte field limit. Confirmed live
+# (2015-02-22, record 20150222230000-1856, samoanews.com): GDELT's
+# SharingImage field (index 18 -- not one this parser even reads) can
+# contain a full base64-encoded image embedded as a data: URI by the source
+# page instead of a real image URL, producing a single field 152,985 bytes
+# long -- well past the default limit, which crashes csv.reader outright.
+# Raised well above that observed case; still far short of sys.maxsize,
+# which can raise OverflowError on platforms where C long is 32-bit.
+csv.field_size_limit(10_000_000)
+
 _IDX_RECORD_ID = 0
 _IDX_TIMESTAMP = 1
 _IDX_URL = 4
@@ -63,9 +73,14 @@ def _parse_locations(field: str) -> tuple[LocationHit, ...]:
 
 def parse_line(raw_line: str) -> GkgRecord | None:
     """Returns None if the line is too short to contain the fields we need,
-    or has no URL -- both confirmed to happen occasionally in real GDELT
-    data, not treated as exceptional errors."""
-    fields = next(csv.reader([raw_line], delimiter="\t"), None)
+    has no URL, or has a field too large even for the raised limit above --
+    all confirmed to happen occasionally in real GDELT data, not treated as
+    exceptional errors. One malformed/oversized record (often in a field
+    this parser doesn't even use) should never crash an entire run."""
+    try:
+        fields = next(csv.reader([raw_line], delimiter="\t"), None)
+    except csv.Error:
+        return None
     if fields is None or len(fields) < _MIN_FIELDS:
         return None
 
