@@ -18,11 +18,19 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
 
-from config import COMPLETED_DAYS_PATH, RUN_SUMMARY_PATH, STUDY_YEARS, TARGET_COUNTRIES
+from config import (
+    COMPLETED_DAYS_PATH,
+    DOWNLOAD_CONCURRENCY,
+    FETCH_CONCURRENCY,
+    RUN_SUMMARY_PATH,
+    STUDY_YEARS,
+    TARGET_COUNTRIES,
+)
 from models import CountrySeasonWindow, ExtractedArticle, MatchedArticle
 from pipeline import gkg_downloader, gkg_parser, windows
 from pipeline.article_fetcher import fetch_html
@@ -64,20 +72,27 @@ def find_candidates_for_day(day, target_countries: dict[str, str]) -> list[Match
     """Stages 3-5 for a single calendar day: download every 15-minute file,
     parse, and run the combined theme+location filter (is_flu_candidate).
     target_countries is exactly the set requested on the CLI, not
-    necessarily the full cohort -- see theme_matcher.countries_mentioned."""
+    necessarily the full cohort -- see theme_matcher.countries_mentioned.
+
+    Downloads run concurrently (DOWNLOAD_CONCURRENCY workers) -- this is
+    I/O-bound (waiting on GDELT's server), so threads help despite the GIL.
+    Parsing/filtering each file's lines stays single-threaded per file;
+    only the downloads themselves overlap. gkg_downloader.download_file has
+    no shared mutable state, so concurrent calls are safe as-is."""
     candidates: list[MatchedArticle] = []
+    file_urls = list(gkg_downloader.iter_day_urls(day))
 
-    for file_url in gkg_downloader.iter_day_urls(day):
-        lines = gkg_downloader.download_file(file_url)
-        if lines is None:
-            continue
-
-        for raw_line in lines:
-            record = gkg_parser.parse_line(raw_line)
-            if record is None or not is_flu_candidate(record, target_countries):
+    with ThreadPoolExecutor(max_workers=DOWNLOAD_CONCURRENCY) as executor:
+        for lines in executor.map(gkg_downloader.download_file, file_urls):
+            if lines is None:
                 continue
 
-            candidates.append(MatchedArticle(record=record, flu_theme_hits=flu_theme_hits(record)))
+            for raw_line in lines:
+                record = gkg_parser.parse_line(raw_line)
+                if record is None or not is_flu_candidate(record, target_countries):
+                    continue
+
+                candidates.append(MatchedArticle(record=record, flu_theme_hits=flu_theme_hits(record)))
 
     logger.info("Stage 5: %s -- %d candidate articles matched", day.isoformat(), len(candidates))
     return candidates
@@ -101,15 +116,30 @@ def fetch_clean_and_store(candidates: list[MatchedArticle], storage, seen_ids: s
     storage.already_stored_ids() by the caller, so this also catches
     duplicates across separate runs, not just within one. Returns a
     lightweight summary of every article actually stored, for the
-    end-of-run per-window report."""
-    stored: list[StoredArticleSummary] = []
+    end-of-run per-window report.
 
+    The dedup check/update and the fetch step are deliberately split into
+    two passes: dedup stays single-threaded first (seen_ids is a plain set,
+    not thread-safe to mutate from multiple threads at once), THEN the
+    actual network fetches -- the slow part -- run concurrently
+    (FETCH_CONCURRENCY workers) across whatever's left after dedup.
+    Extraction/quality-gates/storage.write stay single-threaded too (fast,
+    and storage.write isn't guaranteed safe to call concurrently)."""
+    new_candidates: list[MatchedArticle] = []
     for candidate in candidates:
         if candidate.record.record_id in seen_ids:
             continue
         seen_ids.add(candidate.record.record_id)
+        new_candidates.append(candidate)
 
-        html = fetch_html(candidate.record.url)
+    stored: list[StoredArticleSummary] = []
+    if not new_candidates:
+        return stored
+
+    with ThreadPoolExecutor(max_workers=FETCH_CONCURRENCY) as executor:
+        htmls = list(executor.map(lambda c: fetch_html(c.record.url), new_candidates))
+
+    for candidate, html in zip(new_candidates, htmls):
         if html is None:
             continue
 
@@ -316,15 +346,26 @@ def main() -> None:
     seen_ids: set[str] = storage.already_stored_ids()  # dedupe across this run AND prior runs, by gkg_record_id
     target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in args.countries}
 
-    all_stored: list[StoredArticleSummary] = []
+    new_stored: list[StoredArticleSummary] = []
     for day in days_to_process:
         candidates = find_candidates_for_day(day, target_countries)
-        all_stored.extend(fetch_clean_and_store(candidates, storage, seen_ids))
+        new_stored.extend(fetch_clean_and_store(candidates, storage, seen_ids))
         completed_days[day] = completed_days.get(day, set()) | requested_countries
         _save_completed_days(completed_days, COMPLETED_DAYS_PATH)  # save after each day, not just at the end
 
-    logger.info("Done. %d new unique article(s) stored this run.", len(all_stored))
+    logger.info("Done. %d new unique article(s) stored this run.", len(new_stored))
 
+    # Report against EVERY stored article, read fresh from storage now that
+    # the loop above has finished writing -- this already includes both
+    # new_stored's articles AND every prior run's, so it's used alone here,
+    # not added to new_stored (which would double-count this run's own
+    # articles). Otherwise a job that's been interrupted and resumed more
+    # than once would only ever report the last segment's counts, not the
+    # true cumulative total. See StorageBackend.already_stored_summaries().
+    all_stored = [
+        StoredArticleSummary(gkg_datetime=dt, country_fips_mentioned=fips)
+        for dt, fips in storage.already_stored_summaries()
+    ]
     report = build_window_report(cohort_windows, all_stored, target_countries)
     _log_and_save_report(report)
 

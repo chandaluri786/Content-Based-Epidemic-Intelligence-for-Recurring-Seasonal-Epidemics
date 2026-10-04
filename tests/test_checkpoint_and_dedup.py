@@ -70,3 +70,26 @@ def test_local_backend_already_stored_ids_empty_when_nothing_stored():
     with tempfile.TemporaryDirectory() as d:
         backend = LocalStorageBackend(base_dir=str(Path(d) / "does_not_exist_yet"))
         assert backend.already_stored_ids() == set()
+
+
+def test_local_backend_already_stored_summaries_for_cumulative_reporting():
+    """The fix for a real bug: without this, a job interrupted and resumed
+    more than once would only ever report the LAST segment's counts in
+    run_summary.json, not the true cumulative total across every run."""
+    from models import ExtractedArticle, LocationHit
+
+    with tempfile.TemporaryDirectory() as d:
+        backend = LocalStorageBackend(base_dir=d)
+        backend.write(ExtractedArticle(
+            gkg_record_id="a1", url="https://example.com/a", gkg_datetime="2015-03-15T10:00:00",
+            themes=[], locations=[LocationHit("1", "x", "US", "", "", "", "", "", 0)], article_text="x",
+        ))
+        backend.write(ExtractedArticle(
+            gkg_record_id="b1", url="https://example.com/b", gkg_datetime="2017-01-10T10:00:00",
+            themes=[], locations=[LocationHit("1", "y", "IN", "", "", "", "", "", 0)], article_text="y",
+        ))
+
+        summaries = backend.already_stored_summaries()
+        assert len(summaries) == 2  # not duplicated
+        assert ("2015-03-15T10:00:00", frozenset({"US"})) in summaries
+        assert ("2017-01-10T10:00:00", frozenset({"IN"})) in summaries

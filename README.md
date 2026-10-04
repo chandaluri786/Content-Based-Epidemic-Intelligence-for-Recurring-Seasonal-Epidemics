@@ -67,6 +67,8 @@ likely to need changing:
 | `STORAGE_BACKEND` | `"local"` | `"local"` or `"gdrive"` — see below. |
 | `RUN_SUMMARY_PATH` | `./output/run_summary.json` | Where the end-of-run per-window count report is written — see section 7, "Run summary report." Always local, regardless of `STORAGE_BACKEND`. |
 | `COMPLETED_DAYS_PATH` | `./output/completed_days.json` | The cross-run day checkpoint — see section 4, Stage 3 "Cross-run day checkpoint." Always local, regardless of `STORAGE_BACKEND`. Delete this file to force every day to be reprocessed on the next run. |
+| `DOWNLOAD_CONCURRENCY` | 24 | Concurrent GDELT file downloads per day (Stage 3). Not benchmarked against GDELT's actual rate limits -- lower it if downloads start failing/retrying more than before. |
+| `FETCH_CONCURRENCY` | 16 | Concurrent article fetches per day (Stage 6). Same caveat -- these hit many different third-party sites, not one server. |
 
 ### Environment variables (storage)
 
@@ -191,6 +193,15 @@ exists because country-season windows overlap in calendar time by design
 once — without this, that day's 96 files would be redownloaded and
 re-filtered every time.
 
+**Concurrent downloads.** A day's 96 files are downloaded concurrently
+(`DOWNLOAD_CONCURRENCY` workers, default 24), not one at a time. Added
+after a real multi-year run measured ~7.6 calendar-days/hour fully
+sequential — impractical for a 500+ day job. This is I/O-bound work
+(waiting on GDELT's server), which is exactly where Python threads help
+despite the GIL: a thread spends nearly all its time blocked on a socket,
+not running bytecode. `gkg_downloader.download_file` has no shared mutable
+state, so concurrent calls are safe as-is -- no locking needed.
+
 ### Stage 4 — Parse (`pipeline/gkg_parser.py`)
 **The key structural change from the original pipeline.** Each raw line has
 27 tab-separated fields; the original pipeline read only the URL and a flat
@@ -275,6 +286,16 @@ modes exist (bot-blocking services like Incapsula, and JS-rendered content
 missing from the static HTML) but this project did not measure what
 fraction of failures each one causes before deciding whether browser
 automation is worth its added complexity and cost — see section 6.
+
+Each day's candidate articles are fetched concurrently (`FETCH_CONCURRENCY`
+workers, default 16), same I/O-bound reasoning as Stage 3's concurrent
+downloads. In `run_pipeline.py::fetch_clean_and_store`, this is
+deliberately split into two passes: the `gkg_record_id` dedup check/update
+runs first, single-threaded (a plain `set` isn't safe to mutate from
+multiple threads at once); only the actual network fetches of whatever's
+left after dedup run concurrently. Extraction, quality gates, and
+`storage.write` stay single-threaded after that too (fast, and
+`storage.write` isn't guaranteed safe to call concurrently).
 
 ### Stage 7 — Clean (`pipeline/content_extractor.py`)
 Runs the raw HTML through **trafilatura** to isolate the real article body
@@ -510,7 +531,16 @@ printing, and writing to `RUN_SUMMARY_PATH` (default
 `./output/run_summary.json`, always local regardless of `STORAGE_BACKEND`
 -- it's a small report, not pipeline output data), a count of stored
 articles for each `(country, season_year)` window built in Stage 1/2
-(`run_pipeline.py::build_window_report`):
+(`run_pipeline.py::build_window_report`).
+
+**Cumulative across runs, not just the latest segment.** The report is
+built from `storage.already_stored_summaries()` -- everything currently in
+storage, read fresh after this run's loop finishes -- not just the
+articles this particular invocation stored. This matters once a job gets
+interrupted and resumed more than once (a crash, or stopping deliberately
+to pick up a code change): without this, `run_summary.json` would only
+ever reflect whichever segment happened to run last, silently losing the
+true cumulative totals from every earlier segment.
 
 ```json
 [

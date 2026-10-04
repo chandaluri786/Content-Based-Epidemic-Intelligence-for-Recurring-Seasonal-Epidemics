@@ -141,9 +141,26 @@ HTTP_USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
-HTTP_TIMEOUT_SECONDS = 30
-HTTP_MAX_RETRIES = 2
+HTTP_TIMEOUT_SECONDS = 15
+HTTP_MAX_RETRIES = 1
 HTTP_BACKOFF_BASE_SECONDS = 1.0
+
+# ---------------------------------------------------------------------------
+# Concurrency -- Stages 3 and 6
+#
+# Added after a real multi-year run confirmed fully sequential processing
+# was impractical (measured live: ~7.6 calendar-days/hour -- a 500-day run
+# would take ~65 hours). Both stages are I/O-bound (waiting on network
+# responses), which is exactly where Python threads help despite the GIL --
+# a thread spends nearly all its time blocked on a socket, not running
+# bytecode, so the GIL isn't the bottleneck. Not derived from a formal
+# benchmark against GDELT's or any article site's actual rate limits --
+# starting points; lower them if you start seeing more failed
+# fetches/retries than before, which would indicate a server pushing back.
+# ---------------------------------------------------------------------------
+
+DOWNLOAD_CONCURRENCY = 48  # Stage 3: concurrent GDELT file downloads per day (96 files/day, one source)
+FETCH_CONCURRENCY = 32     # Stage 6: concurrent article fetches per day (many different third-party sites)
 
 # ---------------------------------------------------------------------------
 # Storage -- Stage 10

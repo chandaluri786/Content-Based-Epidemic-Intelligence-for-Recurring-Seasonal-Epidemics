@@ -20,13 +20,23 @@ _HEADERS = {"User-Agent": HTTP_USER_AGENT}
 
 
 def fetch_html(url: str) -> str | None:
-    """Returns the raw HTML, or None if every retry failed."""
+    """Returns the raw HTML, or None if every retry failed.
+
+    Confirmed live, not hypothetical: one real site sent a redirect whose
+    Location header contained invalid UTF-8 bytes, which crashed deep
+    inside requests' own redirect-following code with a UnicodeDecodeError
+    -- not a requests.RequestException, so it wasn't caught here and took
+    down the entire run. Same category of problem as the oversized-CSV-
+    field crash in gkg_parser.py: one malformed response from one site
+    should never crash a multi-hour job. Caught explicitly rather than a
+    blanket `except Exception`, so a genuinely new/unexpected failure mode
+    still surfaces instead of being silently swallowed."""
     for attempt in range(HTTP_MAX_RETRIES + 1):
         try:
             resp = requests.get(url, headers=_HEADERS, timeout=HTTP_TIMEOUT_SECONDS)
             resp.raise_for_status()
             return resp.text
-        except requests.RequestException:
+        except (requests.RequestException, UnicodeDecodeError):
             if attempt < HTTP_MAX_RETRIES:
                 time.sleep(HTTP_BACKOFF_BASE_SECONDS * (2 ** attempt))
     return None

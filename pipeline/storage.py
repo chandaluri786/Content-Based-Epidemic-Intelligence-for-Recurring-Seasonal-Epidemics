@@ -63,6 +63,20 @@ class StorageBackend(ABC):
         is added there too."""
         return set()
 
+    def already_stored_summaries(self) -> list[tuple[str, frozenset[str]]]:
+        """Every previously stored article's (datetime, country_fips set)
+        -- just enough for run_pipeline.py to rebuild a StoredArticleSummary
+        per record, without loading full article text into memory. Used so
+        the end-of-run window report reflects cumulative totals across
+        every run/resume of a long job, not just the segment that happens
+        to run last -- a real, not hypothetical, need once a job gets
+        interrupted and resumed (crash, or stopping to pick up a code
+        change) more than once.
+
+        Default: none. See already_stored_ids() for the same
+        override/gdrive-gap note; this has the identical scope."""
+        return []
+
 
 class LocalStorageBackend(StorageBackend):
     """Appends one JSON line per article to a year-bucketed file:
@@ -99,6 +113,28 @@ class LocalStorageBackend(StorageBackend):
                     if line:
                         ids.add(json.loads(line)["gkg_record_id"])
         return ids
+
+    def already_stored_summaries(self) -> list[tuple[str, frozenset[str]]]:
+        """Reads every year's matched_articles.jsonl under base_dir and
+        collects each record's (datetime, country_fips set) -- see the ABC
+        docstring for why. Deliberately a separate read pass from
+        already_stored_ids() rather than merged into one, to keep each
+        method's purpose (dedup vs. reporting) independently obvious; the
+        extra local disk read is negligible next to this pipeline's actual
+        bottleneck (network I/O)."""
+        summaries: list[tuple[str, frozenset[str]]] = []
+        if not self._base_dir.exists():
+            return summaries
+        for jsonl_path in self._base_dir.glob("*/matched_articles.jsonl"):
+            with jsonl_path.open(encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    record = json.loads(line)
+                    fips = frozenset(loc["country_fips"] for loc in record["locations"])
+                    summaries.append((record["datetime"], fips))
+        return summaries
 
 
 class GoogleDriveStorageBackend(StorageBackend):
