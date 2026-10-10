@@ -1,8 +1,10 @@
 # Sampling: bucketing the articles and drawing the 1,200 to label
 
-This folder puts every stored article into a bucket with word rules, then draws 1,200 articles to label (600 likely useful, 600 likely not useful). A bucket only decides which articles people read. It is never the label.
+This folder puts every eligible article into a bucket with word rules, then draws 1,200 articles to label (600 likely useful, 600 likely not useful). A bucket only decides which articles people read. It is never the label.
 
-The rules and the reasons behind them are in `Project Documents /sampling_algorithm.md`. The labeling rules are in `Project Documents /sampling_and_labeling_guide.md`.
+It reads the de-duplicated pool built by `prepare_pool.py` on the `data-extraction-pipline` branch. An article is eligible only if it is assigned to a country-season (`sampling_season`), and only one article is kept per near-duplicate group, so the same story can't be drawn twice.
+
+The rules and the reasons behind them are in `sampling_algorithm.md` in the team's Project Documents folder (not in this repo). The labeling rules are in [`../sampling_and_labeling_guide.md`](../sampling_and_labeling_guide.md).
 
 ## Files
 
@@ -10,30 +12,31 @@ The rules and the reasons behind them are in `Project Documents /sampling_algori
 |---|---|
 | `patterns.py` | The word patterns (regular expressions), built from reading the 36,508 stored articles and extended after reading the ones the first version missed |
 | `bucketing.py` | Gives one article one bucket, checking the rules in order; the first match wins |
-| `run_sampling.py` | Reads the articles, buckets them, draws the sample, saves the files |
+| `run_sampling.py` | Reads the pool, buckets the eligible articles, draws the sample, saves the files |
+| `test_run_sampling.py` | Tests for reading the pool and drawing (`pytest sampling/`) |
 
 ## How to run
 
 You need Python 3.10 or newer. No extra packages.
 
 ```bash
-cd sampling
-python run_sampling.py
+python sampling/run_sampling.py --pool-dir /path/to/output/pool
 ```
 
-It takes a few minutes. Options: `--data-dir` (default `../../extracted_articles`), `--out-dir` (default `sampling/output`), `--seed` (default 42; the same seed and data give the same sample).
+`--pool-dir` is the `prepare_pool.py` output folder. It must hold `pooled_articles.jsonl`, `season_assignments.jsonl`, `near_dup_groups.jsonl` and `season_windows.json`. Other options: `--out-dir` (default `sampling/output`), `--seed` (default 42; the same seed and pool give the same sample).
 
 Saved in `output/`:
 
 | File | Contents |
 |---|---|
-| `sample_1200.csv` | The sample: id, link, scan date, country, year, bucket, reason |
+| `sample_1200.csv` | The sample: id, link, scan date, country, season, phase, year, bucket, reason, near-duplicate group and its size |
 | `sample_1200.jsonl` | The same plus the article text, one per line. Give this to labelers and the LLM. |
-| `all_articles_buckets.csv` | Every article and its bucket, for checking the rules |
+| `all_articles_buckets.csv` | Every eligible article and its bucket, for checking the rules |
+| `bucket_sizes.json` | How many eligible articles each bucket held, overall and by country. The sample takes a fixed number per bucket, so use these to turn sample rates into pool-wide rates. |
 
 ## How it works
 
-1. **Read.** `run_sampling.py` reads every `matched_articles.jsonl` and notes which of the six study countries each article is tagged with.
+1. **Read.** `run_sampling.py` keeps the pool articles that have a `sampling_season`, then picks one at random from each near-duplicate group. Each article gets its country and season from the pool, and a phase from its date: `early` (10 to 6 weeks before onset), `late` (5 to 1 weeks before) or `post` (onset week to 2 weeks after).
 2. **Bucket.** `bucketing.py` checks, in order:
    1. Junk: spam or blocked page (`X_spam_stub`), under 300 characters (`X_too_short`), index page (`X_listing_garbled`).
    2. No flu word (`N_no_flu_text`).
@@ -63,7 +66,7 @@ Saved in `output/`:
    - are advice or a "what if" (`ADVICE`, `HYPO`), such as "avoid people who are sick with flu"
 
    "Centers for Disease Control and Prevention" is not treated as vaccine or prevention wording.
-3. **Draw.** `QUOTAS` in `run_sampling.py` sets how many to take from each bucket. Inside a bucket, articles are grouped by country and year and taken one group at a time in turn, so every country and year is covered. An article's country is the rarest of its study countries, so Kenya and Indonesia are not hidden behind the USA.
+3. **Draw.** `QUOTAS` in `run_sampling.py` sets how many to take from each bucket. Inside a bucket, articles are grouped by country, season and phase and taken one group at a time in turn, so every country-season and every part of the window is covered, and Kenya and Indonesia are not hidden behind the USA.
 4. **Save.**
 
 To change how many are drawn from a bucket, edit `QUOTAS`. To change what a bucket means, edit its pattern in `patterns.py` or its rule in `bucketing.py`.
@@ -74,7 +77,7 @@ To change how many are drawn from a bucket, edit `QUOTAS`. To change what a buck
 2. Add the wording to the matching pattern in `patterns.py`, or add a new pattern and use it in `bucketing.py`.
 3. Rerun and check three things: the example now lands in the right bucket, the bucket counts did not jump, and a fresh random read of the bucket (about 25 articles) is still mostly correct.
 
-## Latest run (seed 42, 36,508 articles, repeats included)
+## First run (seed 42, 36,508 articles from 2015–2017, repeats included)
 
 | Bucket | Articles |
 |---|---|
@@ -101,10 +104,10 @@ The sample has 1,200 articles: 600 from the useful buckets (numbers 240, trend 2
 
 ## Things to know
 
-- **Repeats are not removed here.** The code assumes the articles were already de-duplicated. The current `extracted_articles` folder still has about 15,000 exact repeats, and the first run's sample had 89 repeated texts out of 1,200. Point `--data-dir` at the de-duplicated data.
+- **Repeats.** Exact repeats are removed by `prepare_pool.py dedup`; near-copies (the same wire story on many sites) by keeping one article per near-duplicate group. The first run, on raw folders, had 89 repeated texts out of 1,200.
 - The rules were checked by reading small samples: about 83 to 88% of `P_A1_counts` and about half of `P_B_trend_response` were really useful. Expect fewer than 600 useful articles after labeling.
-- **One story can fill a bucket.** The 2016 news about Prince having the flu appears in about 370 of the 1,300 unique articles in `P_A2_case_event`. Only 19 of the 570 useful-bucket articles in the sample come from it, but watch for other single stories.
+- **One story can fill a bucket.** In the first run, the 2016 news about Prince having the flu appeared in about 370 of the 1,300 unique articles in `P_A2_case_event`. Near-duplicate groups now catch copies of one wire story, but different write-ups of the same news are separate articles, so still watch for single stories.
 - Single-person illness ("treated for the flu", "battling the flu") counts as useful. About half of those matches are real; the rest are old anecdotes or advice. Labelers decide.
 - There is no `P_C_symptoms_only` bucket. Nothing in the data matched it convincingly.
-- This does not balance the sample by early, middle or late season, and it does not make the development and test split. Those would be separate steps.
+- This does not make the development and test split. Every sampled article carries its `season`, so the split can be applied by season after labeling.
 - Page text was downloaded in 2026, so some pages no longer match what was published.
