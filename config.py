@@ -38,6 +38,29 @@ FLUNET_API_URL = "https://xmart-api-public.who.int/FLUMART/VIW_FNT"
 ONSET_POSITIVITY_THRESHOLD_PCT = 10.0
 ONSET_SUSTAIN_WEEKS = 2
 
+# An onset must be a rising edge: the ONSET_MIN_WEEKS_BELOW weeks right
+# before it must all be under the threshold. Without this, a season still
+# above threshold on January 1 produced a fake "onset" in ISO week 1 (19 of
+# 45 onsets in the 2015-2024 runs) -- see README "Stage 1".
+ONSET_MIN_WEEKS_BELOW = 4
+
+# Per-country exception to ONSET_POSITIVITY_THRESHOLD_PCT. IDN's median
+# weekly positivity (2015-2024) is 20%: it sits at >=10% for 38-49 weeks of
+# most years, so a 10% rising edge exists in only 2 of 10 seasons. Using its
+# own median as the threshold gives 7. Checked for BRA too (15% and 20% add
+# no seasons there), so BRA stays on the default.
+ONSET_THRESHOLD_PCT_BY_COUNTRY: dict[str, float] = {"IDN": 20.0}
+
+# Month each country's season year starts in; season_year is the year the
+# frame starts (USA-2023 = the 2023-24 season). USA follows FluNet's own
+# FLUSEASON "NH" label (the northern season spans the new year). AUS starts
+# in March: with a calendar-year frame, a January summer bump beat the
+# real winter season in 2017 and 2018 (onsets moved from January to July
+# and August). BRA/IND/KEN/IDN are FluNet "YR" (year-round) and use the
+# calendar year. Countries not listed default to DEFAULT_SEASON_START_MONTH.
+DEFAULT_SEASON_START_MONTH = 1
+SEASON_START_MONTH: dict[str, int] = {"USA": 7, "AUS": 3}
+
 # ---------------------------------------------------------------------------
 # GDELT ingestion window -- Stages 2-3
 # ---------------------------------------------------------------------------

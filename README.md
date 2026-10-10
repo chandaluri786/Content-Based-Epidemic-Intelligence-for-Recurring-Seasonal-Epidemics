@@ -61,14 +61,17 @@ likely to need changing:
 | `TARGET_COUNTRIES` | USA, AUS, BRA, IND, KEN, IDN | The cohort. Maps ISO3 to GDELT's FIPS 10-4 location code (these differ — confirm a new country's real FIPS code against live data before adding it, don't assume). |
 | `STUDY_YEARS` | 2015-2024 | Earliest/latest season years ground truth is pulled for. |
 | `WEEKS_BEFORE_ONSET` / `WEEKS_AFTER_ONSET` | 10 / 2 | How wide each country-season's ingestion window is around its FluNet onset date. |
+| `ONSET_POSITIVITY_THRESHOLD_PCT`, `ONSET_SUSTAIN_WEEKS`, `ONSET_MIN_WEEKS_BELOW` | 10.0, 2, 4 | The Stage 1 rising-edge onset rule. |
+| `ONSET_THRESHOLD_PCT_BY_COUNTRY` | IDN: 20.0 | Per-country exception to the onset threshold, for countries whose baseline positivity sits above it. |
+| `SEASON_START_MONTH` | USA: 7, AUS: 3, others 1 | Month each country's season year starts in. `season_year` is the year the frame starts. |
 | `FLU_INCLUDE_THEMES` | see file | The exhaustively-verified theme list that drives half of candidate matching (Stage 5's theme condition — presence of any of these themes is sufficient). Don't edit without re-reading section 4's derivation. |
 | `FLU_EXCLUDE_THEMES` | see file | Exhaustively-verified, but **not currently used** by Stage 5's gate (`has_theme_match()` no longer checks it — explicit decision). Kept for reference and possible future reinstatement; see Stage 5 below. |
 | `MIN_FLU_THEME_HITS_ALONE`, `COOCCURRENCE_PROXIMITY_CHARS` | 2, 1000 | Content-richness thresholds (Stage 9). |
 | `STORAGE_BACKEND` | `"local"` | `"local"` or `"gdrive"` — see below. |
 | `RUN_SUMMARY_PATH` | `./output/run_summary.json` | Where the end-of-run per-window count report is written — see section 7, "Run summary report." Always local, regardless of `STORAGE_BACKEND`. |
 | `COMPLETED_DAYS_PATH` | `./output/completed_days.json` | The cross-run day checkpoint — see section 4, Stage 3 "Cross-run day checkpoint." Always local, regardless of `STORAGE_BACKEND`. Delete this file to force every day to be reprocessed on the next run. |
-| `DOWNLOAD_CONCURRENCY` | 24 | Concurrent GDELT file downloads per day (Stage 3). Not benchmarked against GDELT's actual rate limits -- lower it if downloads start failing/retrying more than before. |
-| `FETCH_CONCURRENCY` | 16 | Concurrent article fetches per day (Stage 6). Same caveat -- these hit many different third-party sites, not one server. |
+| `DOWNLOAD_CONCURRENCY` | 48 | Concurrent GDELT file downloads per day (Stage 3); env `PIPELINE_DOWNLOAD_CONCURRENCY`. Not benchmarked against GDELT's actual rate limits -- lower it if downloads start failing/retrying more than before. |
+| `FETCH_CONCURRENCY` | 32 | Concurrent article fetches per day (Stage 6); env `PIPELINE_FETCH_CONCURRENCY`. Same caveat -- these hit many different third-party sites, not one server. |
 
 ### Environment variables (storage)
 
@@ -161,15 +164,47 @@ tests/
 
 ### Stage 1 — Ground truth (`pipeline/ground_truth.py`)
 Pulls weekly influenza test-positivity data from WHO FluNet for each
-country. Onset = the first week of a sustained `ONSET_SUSTAIN_WEEKS`-week
-run where positivity (`INF_ALL / SPEC_PROCESSED_NB`) is `>= ONSET_POSITIVITY_THRESHOLD_PCT`.
-This rule and its thresholds were inherited unchanged from the project's
-original design — they're a reasonable a priori choice, not independently
-re-derived here.
+country. FluNet returns one row per origin source (SENTINEL / NONSENTINEL /
+NOTDEFINED) per week; these are pooled into one weekly positivity
+(`sum INF_ALL / sum SPEC_PROCESSED_NB`). Weeks with no specimens, or with
+more positives than specimens (a FluNet data error), are skipped.
+
+**Onset = a rising edge**, found once per season frame: the first week that
+starts a run of `ONSET_SUSTAIN_WEEKS` weeks at `>= threshold`, immediately
+after `ONSET_MIN_WEEKS_BELOW` weeks below it (the lookback may cross into
+the previous frame). All of those weeks must be consecutive calendar weeks,
+so a reporting gap can't stretch "4 weeks below" over months. Frames with no rising edge get no onset and no window.
+The threshold is `ONSET_POSITIVITY_THRESHOLD_PCT` (10%), except where
+`ONSET_THRESHOLD_PCT_BY_COUNTRY` overrides it.
+
+**Season frames** (`SEASON_START_MONTH`): USA July–June (FluNet labels it
+a northern "NH" season, which spans the new year); AUS March–February (with
+a calendar year, a January summer bump beat the real winter season in 2017
+and 2018); BRA/IND/KEN/IDN calendar year (FluNet "YR"). `season_year` is
+the year the frame starts, so **USA-2023 = the 2023–24 season**.
+
+Why not the original rule: it grouped weeks by calendar `ISO_YEAR` and took
+the first above-threshold run in each, and it treated each origin-source
+row as its own "week". As a result, 19 of 45 onsets in the 2015–2024 runs
+fell in ISO week 1 (positivity carried over from the previous season, not
+a new one), and USA "2023" and "2024" were both the 2023–24 season, with
+windows overlapping by 57 days. IDN gets a 20% threshold because its median
+weekly positivity is 20%: at 10% it has a rising edge in only 2 of 10
+seasons. Run `python prepare_pool.py windows` to print the per-season
+table behind these choices.
+
+The FluNet API never returns `@odata.nextLink`, so rows are paged with
+`$skip`. The original code relied on `nextLink` and silently truncated any
+request at 1,000 rows.
 
 ### Stage 2 — Windows (`pipeline/windows.py`)
 Each country-season gets an ingestion window of `onset − 10 weeks` to
-`onset + 2 weeks`. All windows across the whole cohort are unioned into one
+`onset + 2 weeks`. Windows starting before GDELT's first file
+(`GDELT_EARLIEST_AVAILABLE_DATE`) are dropped, and so is any window that
+shares a day with an earlier window of the **same** country. Cross-country
+overlap is expected and kept. Same-country overlap would let one article
+belong to two seasons of one country, and so to both the calibration (dev)
+and held-out (test) labeling splits. All windows across the whole cohort are unioned into one
 set of unique calendar days, so a day needed by two countries isn't
 downloaded twice.
 

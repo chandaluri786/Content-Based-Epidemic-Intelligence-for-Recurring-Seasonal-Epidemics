@@ -59,13 +59,15 @@ def build_cohort_windows(countries: list[str], start_year: int, end_year: int) -
     in [start_year, end_year] inclusive. The cohort does double duty: it
     drives WHEN the pipeline looks (these windows feed Stage 3's day
     selection) and, via Stage 5's location filter, WHICH places' content
-    gets kept -- the same TARGET_COUNTRIES list backs both."""
-    all_windows: list[CountrySeasonWindow] = []
+    gets kept -- the same TARGET_COUNTRIES list backs both. Windows that
+    start before GDELT's first file, or that overlap an earlier window of
+    the same country, are dropped (see pipeline/windows.py)."""
+    all_onsets = []
     for country in countries:
         onsets = compute_season_onsets(country, start_year, end_year)
         logger.info("Stage 1: %s -- %d season onsets found", country, len(onsets))
-        all_windows.extend(windows.build_window(onset) for onset in onsets)
-    return all_windows
+        all_onsets.extend(onsets)
+    return windows.usable_windows(all_onsets)
 
 
 def find_candidates_for_day(day, target_countries: dict[str, str]) -> list[MatchedArticle]:
