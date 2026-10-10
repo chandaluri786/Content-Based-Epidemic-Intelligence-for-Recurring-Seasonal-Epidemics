@@ -7,3 +7,7 @@ token.json
 
 # Pipeline output -- generated data, not source
 output/
+
+# Raw teammate data (shared via Drive, too large for git) and macOS clutter
+dataset/
+.DS_Store

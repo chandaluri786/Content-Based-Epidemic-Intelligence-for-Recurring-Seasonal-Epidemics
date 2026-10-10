@@ -231,3 +231,13 @@ RUN_SUMMARY_PATH = os.environ.get("PIPELINE_RUN_SUMMARY_PATH", "./output/run_sum
 # ---------------------------------------------------------------------------
 
 COMPLETED_DAYS_PATH = os.environ.get("PIPELINE_COMPLETED_DAYS_PATH", "./output/completed_days.json")
+
+# ---------------------------------------------------------------------------
+# Pooled labeling corpus -- prepare_pool.py (post-pipeline; see README
+# "Pooled labeling corpus"). Every pool output lands in POOL_DIR, including
+# season_windows.json: the full-cohort window list written once by
+# `prepare_pool.py windows`, which season assignment and the dev/test split
+# read instead of calling FluNet again, so the split is reproducible.
+# ---------------------------------------------------------------------------
+
+POOL_DIR = os.environ.get("PIPELINE_POOL_DIR", "./output/pool")

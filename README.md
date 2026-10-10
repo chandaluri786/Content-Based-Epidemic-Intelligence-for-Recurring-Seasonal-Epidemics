@@ -144,6 +144,7 @@ python run_pipeline.py --countries USA --start-year 2020 --end-year 2023
 config.py                   # every tunable constant, in one place
 models.py                   # shared dataclasses passed between stages
 run_pipeline.py             # CLI entry point, orchestrates all 10 stages
+prepare_pool.py             # post-pipeline: pooled labeling corpus (section 9)
 pipeline/
   ground_truth.py           # Stage 1 -- WHO FluNet onset dates
   windows.py                # Stage 2 -- ingestion windows + day union
@@ -154,8 +155,15 @@ pipeline/
   content_extractor.py      # Stage 7 -- trafilatura cleaning
   quality_gates.py          # Stages 8-9 -- retrievability + content-richness
   storage.py                # Stage 10 -- persistence
-tests/
-  test_parsing.py           # unit tests for Stages 4-5 (no network needed)
+dataset_prep/               # pooled-corpus steps driven by prepare_pool.py
+  load.py                   # streaming reader over dataset/<year>/*.jsonl
+  exact_dedup.py            # Step 1 -- dedup by record ID and normalized URL
+  season_report.py          # Step 2 -- full-cohort windows + per-season diagnostics
+  gap_days.py               # Step 2 -- window days missing from the pool
+  season_assign.py          # Step 2 -- country_seasons / sampling_country
+  near_dup.py               # Step 3 -- MinHash LSH near-duplicate groups
+  union_find.py             # shared disjoint-set helper
+tests/                      # unit tests, no network needed
 ```
 
 ---
@@ -629,8 +637,98 @@ path, since there's no real FluNet onset involved in that mode.
 Based on this project's own prior measurements of GDELT's raw-file mirror
 (not estimated from scratch): downloading and parsing all 96 files/day for
 every day a cohort needs runs at roughly 100-150 calendar-days/hour with
-reasonable concurrency (this generated code runs sequentially and is
-slower than that reference point — add concurrency, e.g. a thread pool
-around `gkg_downloader.download_file`, before a full multi-year run). A
+reasonable concurrency (Stages 3 and 6 use thread pools; see
+`DOWNLOAD_CONCURRENCY` and `FETCH_CONCURRENCY`). A
 full 6-country, 2015-2024 run covers on the order of 2,500-3,000 unique
 calendar days.
+
+In practice, article fetching dominates, not GDELT downloads: older
+articles hit many dead sites, and each one waits out
+`HTTP_TIMEOUT_SECONDS` × (1 + `HTTP_MAX_RETRIES`). A 94-day redownload of
+2015–2020 days took about 19.5 hours at 32 fetch workers (~12.5 min/day).
+Fetches spread across many unrelated hosts, so raising
+`PIPELINE_FETCH_CONCURRENCY` is the main lever.
+
+---
+
+## 9. Pooled labeling corpus (`prepare_pool.py`)
+
+Turns every teammate's pipeline output into one corpus ready for the
+labeling sampler (`sampling/` on the `sample-extractor` branch). `dataset/`
+has one folder per year (the article's GKG scan year), holding one file per
+source:
+
+| File | What it is |
+|---|---|
+| `upload.jsonl`, `upload_2.jsonl` | A teammate's pipeline run for that year (`_2` when two teammates uploaded the same year) |
+| `redownload.jsonl` | Days re-fetched because a teammate's run silently lost downloads (days with zero or very few articles) |
+| `gapfill.jsonl` | Days added after the onset fix: window days no teammate run covered |
+
+Run the steps in order. Everything is written to `output/pool/`
+(`PIPELINE_POOL_DIR`).
+
+```bash
+python prepare_pool.py dedup     # Step 1 -> pooled_articles.jsonl, dedup_report.json
+python prepare_pool.py windows   # Step 2 -> season_windows.json, season_diagnostics.json (+ printed table)
+python prepare_pool.py gaps      # Step 2 -> output/gapfill/target_days.txt + seeded completed_days.json
+python prepare_pool.py assign    # Step 2 -> season_assignments.jsonl, season_assignment_report.json
+python prepare_pool.py neardup   # Step 3 -> near_dup_groups.jsonl, near_dup_report.json
+```
+
+**Step 1: exact dedup.** Records sharing a GDELT record ID *or* a
+normalized URL are one article. URLs are compared without scheme, `www.`,
+default port, trailing slash, fragment or tracking parameters, with query
+parameters sorted; path case is kept. Lines with a blank ID or URL, or a
+`datetime` not in `YYYY-MM-DDTHH:MM:SS` form, are skipped and counted as
+bad lines.
+Links are transitive (union-find). The canonical copy is the earliest scan,
+then the longest text. It gains `source_files` (e.g.
+`["2018/redownload.jsonl", "2018/upload.jsonl"]`) and `merged_record_ids`.
+Done in two streaming passes, so article text is never all in memory.
+
+**Step 2: seasons.**
+- `windows` fetches FluNet once for the full cohort and `STUDY_YEARS`.
+  It is the only writer of `season_windows.json`, so a partial
+  `run_pipeline.py --countries ...` run can't overwrite it. The dev/test
+  split should read this file rather than calling FluNet again.
+- `gaps` lists window days with no pooled article (a covered day averages
+  hundreds of matches, so an empty day means it was never processed). It
+  writes a checkpoint that pre-marks every other window day as complete,
+  so a normal run processes only the gaps:
+  ```bash
+  PIPELINE_COMPLETED_DAYS_PATH=output/gapfill/completed_days.json \
+  PIPELINE_LOCAL_STORAGE_DIR=output/gapfill/extracted_articles \
+  PIPELINE_RUN_SUMMARY_PATH=output/gapfill/run_summary.json \
+  python run_pipeline.py
+  ```
+  Then append each `output/gapfill/extracted_articles/<year>/*.jsonl` to
+  `dataset/<year>/gapfill.jsonl` and re-run `dedup`, `assign` and `neardup`.
+- A gap-fill run is bound by waiting, not CPU or fetch workers: days run
+  one at a time, and each waits for its slowest dead-site fetch. Use
+  `gaps --shards N` to split the days into N disjoint
+  `output/gapfill/shard_<i>/` folders (each with its own checkpoint), then
+  run one `run_pipeline.py` per shard side by side, each with that shard's
+  three `PIPELINE_*` paths. Keep the total load on GDELT's mirror modest
+  (e.g. `PIPELINE_DOWNLOAD_CONCURRENCY=6` per shard). Append every
+  shard's `extracted_articles/<year>` files to `dataset/<year>/gapfill.jsonl`;
+  exact dedup removes any overlap.
+- `assign` writes, per article: `country_seasons` (every window containing
+  its date), `sampling_country` (the most-mentioned country among those
+  windows' countries, ties broken by `TARGET_COUNTRIES` order) and
+  `sampling_season`. Articles in no window, or mentioning none of the
+  countries active that day, get no `sampling_country` and stay out of the
+  sample. Same-country overlapping windows raise an error here.
+
+**Step 3: near-duplicate groups.** Lowercase word 5-shingles → MinHash
+(128 permutations) → LSH at Jaccard ≥ 0.8. Each candidate pair is
+re-checked against the MinHash estimate before union-find merges it.
+Texts under 50 words stay singletons. `near_dup_group` is the group's
+smallest `gkg_record_id`. The sampler should take **at most one article
+per group across dev and test combined**. Large single-domain groups in
+the report are usually shared extraction boilerplate (login walls,
+station footers) rather than syndication; their stored text really is
+identical, so grouping them is still correct for labeling.
+
+The pool outputs are sidecar files keyed by `gkg_record_id`, not new
+fields in `pooled_articles.jsonl`, so each step can re-run without
+rewriting about 1.7 GB of article text.
