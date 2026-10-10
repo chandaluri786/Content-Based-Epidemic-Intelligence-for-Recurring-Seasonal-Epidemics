@@ -182,8 +182,10 @@ HTTP_BACKOFF_BASE_SECONDS = 1.0
 # fetches/retries than before, which would indicate a server pushing back.
 # ---------------------------------------------------------------------------
 
-DOWNLOAD_CONCURRENCY = 48  # Stage 3: concurrent GDELT file downloads per day (96 files/day, one source)
-FETCH_CONCURRENCY = 32     # Stage 6: concurrent article fetches per day (many different third-party sites)
+# Stage 3: concurrent GDELT file downloads per day (96 files/day, one source)
+DOWNLOAD_CONCURRENCY = int(os.environ.get("PIPELINE_DOWNLOAD_CONCURRENCY", "48"))
+# Stage 6: concurrent article fetches per day (many different third-party sites)
+FETCH_CONCURRENCY = int(os.environ.get("PIPELINE_FETCH_CONCURRENCY", "32"))
 
 # ---------------------------------------------------------------------------
 # Storage -- Stage 10

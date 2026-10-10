@@ -228,8 +228,17 @@ exists because country-season windows overlap in calendar time by design
 once — without this, that day's 96 files would be redownloaded and
 re-filtered every time.
 
+**Failed downloads are never checkpointed.** A 404 means GDELT published
+no file for that 15-minute slot and is skipped. Any other failure (timeout,
+429/5xx, truncated zip) is retried `HTTP_MAX_RETRIES` times with backoff,
+then raises `DownloadFailed`. The whole day is then skipped *without* being
+marked complete, and the run ends by listing those days, so rerunning the
+same command retries them. An earlier version treated every failure like a
+404, so throttled runs marked days complete with files missing; some
+2015–2020 days had to be redownloaded (`dataset/<year>/redownload.jsonl`).
+
 **Concurrent downloads.** A day's 96 files are downloaded concurrently
-(`DOWNLOAD_CONCURRENCY` workers, default 24), not one at a time. Added
+(`DOWNLOAD_CONCURRENCY` workers, default 48), not one at a time. Added
 after a real multi-year run measured ~7.6 calendar-days/hour fully
 sequential — impractical for a 500+ day job. This is I/O-bound work
 (waiting on GDELT's server), which is exactly where Python threads help
@@ -323,7 +332,7 @@ fraction of failures each one causes before deciding whether browser
 automation is worth its added complexity and cost — see section 6.
 
 Each day's candidate articles are fetched concurrently (`FETCH_CONCURRENCY`
-workers, default 16), same I/O-bound reasoning as Stage 3's concurrent
+workers, default 32), same I/O-bound reasoning as Stage 3's concurrent
 downloads. In `run_pipeline.py::fetch_clean_and_store`, this is
 deliberately split into two passes: the `gkg_record_id` dedup check/update
 runs first, single-threaded (a plain `set` isn't safe to mutate from

@@ -100,6 +100,19 @@ def find_candidates_for_day(day, target_countries: dict[str, str]) -> list[Match
     return candidates
 
 
+def process_day(day: date, target_countries: dict[str, str], storage,
+                seen_ids: set[str]) -> list[StoredArticleSummary] | None:
+    """Stages 3-10 for one day. Returns None, before fetching anything, if
+    any of the day's GKG files failed to download -- the caller must then
+    leave the day unchecked so a rerun retries it."""
+    try:
+        candidates = find_candidates_for_day(day, target_countries)
+    except gkg_downloader.DownloadFailed as exc:
+        logger.error("Stage 3: %s incomplete, skipping the day -- %s", day.isoformat(), exc)
+        return None
+    return fetch_clean_and_store(candidates, storage, seen_ids)
+
+
 def _to_iso_datetime(gkg_timestamp: str) -> str:
     """GKG timestamps are YYYYMMDDHHMMSS strings -- reformatted here to
     ISO 8601 for the stored record, since that's what the schema calls
@@ -261,12 +274,13 @@ def run_test_timestamp(timestamp: str, countries: list[str]) -> None:
     target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in countries}
     file_url = gkg_downloader.file_url_for_timestamp(timestamp)
 
-    lines = gkg_downloader.download_file(file_url)
+    try:
+        lines = gkg_downloader.download_file(file_url)
+    except gkg_downloader.DownloadFailed as exc:
+        logger.warning("Could not download %s after retries: %s", file_url, exc)
+        return
     if lines is None:
-        logger.warning(
-            "Could not download %s -- that 15-minute slot may have no published file, or the request failed.",
-            file_url,
-        )
+        logger.warning("No GKG file published for %s (404).", file_url)
         return
 
     candidates: list[MatchedArticle] = []
@@ -349,11 +363,21 @@ def main() -> None:
     target_countries = {iso3: fips for iso3, fips in TARGET_COUNTRIES.items() if iso3 in args.countries}
 
     new_stored: list[StoredArticleSummary] = []
+    incomplete_days: list[date] = []
     for day in days_to_process:
-        candidates = find_candidates_for_day(day, target_countries)
-        new_stored.extend(fetch_clean_and_store(candidates, storage, seen_ids))
+        stored = process_day(day, target_countries, storage, seen_ids)
+        if stored is None:
+            incomplete_days.append(day)
+            continue
+        new_stored.extend(stored)
         completed_days[day] = completed_days.get(day, set()) | requested_countries
         _save_completed_days(completed_days, COMPLETED_DAYS_PATH)  # save after each day, not just at the end
+
+    if incomplete_days:
+        logger.error(
+            "%d day(s) had GKG files that failed to download and were NOT checkpointed -- rerun the same "
+            "command to retry them: %s", len(incomplete_days), ", ".join(d.isoformat() for d in incomplete_days),
+        )
 
     logger.info("Done. %d new unique article(s) stored this run.", len(new_stored))
 

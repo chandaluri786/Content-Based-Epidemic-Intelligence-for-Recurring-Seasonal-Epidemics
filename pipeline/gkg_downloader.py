@@ -9,12 +9,21 @@ unfiltered bulk download; all filtering happens downstream in Stage 5.
 from __future__ import annotations
 
 import io
+import time
 import zipfile
 from datetime import date, datetime
 
 import requests
 
-from config import GDELT_RAW_MIRROR_BASE, HTTP_TIMEOUT_SECONDS
+from config import GDELT_RAW_MIRROR_BASE, HTTP_BACKOFF_BASE_SECONDS, HTTP_MAX_RETRIES, HTTP_TIMEOUT_SECONDS
+
+HTTP_NOT_FOUND = 404
+
+
+class DownloadFailed(Exception):
+    """A GKG file that should exist could not be downloaded after every
+    retry. Unlike a 404 (no file published for that slot), this means the
+    day's data is incomplete, so the day must not be checkpointed."""
 
 # Every 15-minute mark in a day: 00:00, 00:15, 00:30, ..., 23:45 (96 total)
 _FIFTEEN_MINUTE_MARKS = [(hour, minute) for hour in range(24) for minute in (0, 15, 30, 45)]
@@ -37,21 +46,34 @@ def file_url_for_timestamp(timestamp: str) -> str:
     return f"{GDELT_RAW_MIRROR_BASE}/{timestamp}.gkg.csv.zip"
 
 
-def download_file(url: str) -> list[str] | None:
-    """Returns the raw tab-separated lines of one GKG file, or None if the
-    request failed or that 15-minute slot has no published file (happens
-    occasionally -- GDELT does not guarantee every slot is populated)."""
-    try:
-        resp = requests.get(url, timeout=HTTP_TIMEOUT_SECONDS)
-        resp.raise_for_status()
-    except requests.RequestException:
-        return None
-
-    with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
-        inner_name = zf.namelist()[0]
-        raw_bytes = zf.read(inner_name)
-
+def _unzip_lines(content: bytes) -> list[str]:
+    with zipfile.ZipFile(io.BytesIO(content)) as zf:
+        raw_bytes = zf.read(zf.namelist()[0])
     return raw_bytes.decode("utf-8", errors="replace").splitlines()
+
+
+def download_file(url: str) -> list[str] | None:
+    """Returns the raw tab-separated lines of one GKG file, or None if that
+    15-minute slot has no published file (HTTP 404 -- happens occasionally,
+    GDELT does not guarantee every slot is populated).
+
+    Any other failure (timeout, 429/5xx, truncated zip) is retried with
+    backoff and, if it persists, raises DownloadFailed. An earlier version
+    returned None for every failure, so a slow or throttled connection
+    silently dropped files from days that were then checkpointed as done."""
+    last_error: Exception | None = None
+    for attempt in range(HTTP_MAX_RETRIES + 1):
+        try:
+            resp = requests.get(url, timeout=HTTP_TIMEOUT_SECONDS)
+            if resp.status_code == HTTP_NOT_FOUND:
+                return None
+            resp.raise_for_status()
+            return _unzip_lines(resp.content)
+        except (requests.RequestException, zipfile.BadZipFile) as exc:
+            last_error = exc
+            if attempt < HTTP_MAX_RETRIES:
+                time.sleep(HTTP_BACKOFF_BASE_SECONDS * (2 ** attempt))
+    raise DownloadFailed(f"{url}: {last_error}")
 
 
 def iter_day_urls(day: date):
