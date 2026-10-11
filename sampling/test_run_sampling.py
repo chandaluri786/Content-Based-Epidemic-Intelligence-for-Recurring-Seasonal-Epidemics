@@ -8,7 +8,7 @@ from datetime import date, timedelta
 
 import pytest
 
-from run_sampling import add_buckets, draw, phase_of, read_pool
+from run_sampling import add_buckets, draw, parse_locations, phase_of, read_pool
 
 ONSET = date(2020, 3, 2)
 
@@ -69,6 +69,13 @@ def test_read_pool_adds_phase_and_group_size(pool_dir):
     story = next(a for a in read_pool(pool_dir, random.Random(0)) if a["near_dup_group"] == "A1")
     assert story["phase"] == "late"
     assert story["group_size"] == 3
+
+
+def test_parse_locations_reads_the_pools_python_style_string():
+    raw = "[{'name': 'Otago, Otago, New Zealand', 'country_fips': 'NZ', 'offset': 1555}]"
+    assert parse_locations(raw) == [{"name": "Otago, Otago, New Zealand", "country_fips": "NZ", "offset": 1555}]
+    assert parse_locations([{"name": "Belgian", "country_fips": "BE", "offset": 1361}])[0]["name"] == "Belgian"
+    assert parse_locations("") == [] and parse_locations(None) == [] and parse_locations("not a list[") == []
 
 
 def test_same_seed_gives_same_sample(pool_dir):

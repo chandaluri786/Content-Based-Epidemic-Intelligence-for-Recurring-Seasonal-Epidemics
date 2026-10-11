@@ -7,7 +7,9 @@
 - `sample_1200.csv` lists the same 1,200 articles without the text: id, link, date, country, season, phase, bucket and reason. It shows us the mix. **The bucket is only a guess from word rules, so never use it to decide a label.**
 
 **Your packet** (`<you>` is your name: Jahnavi, Thanya, Manoj or Aditya)
-- `<you>_texts.txt`: read the articles here. Each one has a header like `#7 [1-own] <article_id>`.
+- `<you>_texts.txt`: read the articles here. Each one has a header like `#7 [1-own] <article_id>`, then the scan date, the tagged country, the places mentioned and the link.
+  - The **tagged country** is the one GDELT linked the article to, used only to pick the sample. It is often not where the story happened (a Bangkok Post story can be tagged Indonesia). Always take `country` in the items tab from the article text.
+  - **Places mentioned** are the places GDELT found in the article (`[US]`, `[NZ]`… are its two-letter FIPS country codes, which don't always match the usual ones: `[RP]` is the Philippines, `[SN]` Singapore, `[VM]` Vietnam; `x2` means mentioned twice). They help you see where the story is, but GDELT makes mistakes (e.g. "Belgian" is a nationality, not a place), and it read the page when it was published, so the list can differ from the text we have. Use it as a hint and check the text.
 - `<you>_labels.csv`: one row per article. You write the article-level labels here.
 - `<you>_items.csv`: one row per statement you extract. It starts empty.
 

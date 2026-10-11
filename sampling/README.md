@@ -33,7 +33,7 @@ Saved in `output/`:
 | File                       | Contents                                                                                                                                                                 |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sample_1200.csv`          | The sample: id, link, scan date, country, season, phase, year, bucket, reason, near-duplicate group and its size                                                         |
-| `sample_1200.jsonl`        | The same plus the article text, one per line. Give this to the LLM; labelers get the packets below.                                                                      |
+| `sample_1200.jsonl`        | The same plus the article text and GDELT's place mentions (`locations`: name, country code, offset), one per line. Give this to the LLM; labelers get the packets below.                                                                      |
 | `all_articles_buckets.csv` | Every eligible article and its bucket, for checking the rules                                                                                                            |
 | `bucket_sizes.json`        | How many eligible articles each bucket held, overall and by country. The sample takes a fixed number per bucket, so use these to turn sample rates into pool-wide rates. |
 
@@ -51,7 +51,7 @@ Reads `output/sample_1200.jsonl` and writes `output/labeling/` (options: `--samp
 
 | File | Contents |
 |---|---|
-| `<name>_texts.txt` | The articles to read, numbered to match the label sheet |
+| `<name>_texts.txt` | The articles to read, numbered to match the label sheet. Each header shows the scan date, the tagged country and season, the places GDELT found, and the link. |
 | `<name>_labels.csv` | One row per article: `useful`, `disease`, `strain`, `causes`, `symptoms`, `labeler`, `notes` (blank, to fill in) |
 | `<name>_items.csv` | One row per extracted statement, linked by `article_id` (header only, to fill in) |
 | `assignment_key.csv` | Every article's owner, whether it is in round 1, who checks it, and its bucket |
@@ -127,6 +127,8 @@ Counts include the repeated copies. On the 21,506 unique texts, the new patterns
 The sample has 1,200 articles: 600 from the useful buckets (numbers 240, trend 200, events 130, bird flu in people 30) and 600 from the not-useful buckets. By country: USA 301, India 267, Australia 240, Brazil 178, Indonesia 124, Kenya 90. By year: 2015 373, 2016 504, 2017 323.
 
 ## Things to know
+
+- **The shared sample is the official one.** The `sample_1200.csv` and `sample_1200.jsonl` given to the team were drawn on 2026-10-10 by a version of `run_sampling.py` from just before commit 2c3111e. Rerunning the committed script on the same pool with seed 42 gives the same eligible articles and bucket sizes but a different 1,200. Labeling uses the shared files, so keep a copy of them (`output/` is not in git) and don't redraw. The `locations` field was added to the shared `sample_1200.jsonl` afterwards by looking each article up in the pool, without changing anything else.
 
 - **Repeats.** Exact repeats are removed by `prepare_pool.py dedup`; near-copies (the same wire story on many sites) by keeping one article per near-duplicate group. The first run, on raw folders, had 89 repeated texts out of 1,200.
 - The rules were checked by reading small samples: about 83 to 88% of `P_A1_counts` and about half of `P_B_trend_response` were really useful. Expect fewer than 600 useful articles after labeling.

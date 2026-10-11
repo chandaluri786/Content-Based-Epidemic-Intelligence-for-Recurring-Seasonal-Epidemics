@@ -17,7 +17,7 @@ import csv
 import json
 import random
 import shutil
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -32,6 +32,8 @@ LABEL_COLUMNS = ["row", "round", "article_id", "link", "scan_date", "useful",
 ITEM_COLUMNS = ["article_id", "kind", "number", "status", "total_or_new", "city", "state",
                 "country", "start_date", "end_date", "words", "evidence"]
 KEY_COLUMNS = ["article_id", "owner", "pilot", "checked_by", "bucket"]
+COUNTRY_NAMES = {"USA": "United States", "IND": "India", "AUS": "Australia",
+                 "BRA": "Brazil", "IDN": "Indonesia", "KEN": "Kenya"}
 
 
 def likely_useful(bucket: str) -> bool:
@@ -94,6 +96,23 @@ def packet_rows(name: str, packets: dict, pilots: dict) -> list[tuple[str, dict]
             + [(MAIN_ROUND, r) for r in rest])
 
 
+def country_line(r: dict) -> str:
+    """The sampling country (from GDELT's location tags), which is not always where the story happened."""
+    code = r["country"]
+    return f"tagged country: {COUNTRY_NAMES.get(code, code)} ({code}), season {r['season']}"
+
+
+def places_line(r: dict) -> str:
+    """GDELT's place mentions, each once in order of first mention, with a count when repeated."""
+    counts, first = Counter(), {}
+    for loc in sorted(r.get("locations") or [], key=lambda loc: loc.get("offset") or 0):
+        place = f"{loc['name']} [{loc['country_fips']}]" if loc.get("country_fips") else loc["name"]
+        counts[place] += 1
+        first.setdefault(place, len(first))
+    places = [f"{p} x{counts[p]}" if counts[p] > 1 else p for p in sorted(first, key=first.get)]
+    return "places mentioned: " + ("; ".join(places) if places else "(none tagged)")
+
+
 def write_packet(out_dir: Path, name: str, rows: list[tuple[str, dict]]) -> None:
     with open(out_dir / f"{name}_labels.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=LABEL_COLUMNS)
@@ -106,7 +125,7 @@ def write_packet(out_dir: Path, name: str, rows: list[tuple[str, dict]]) -> None
     with open(out_dir / f"{name}_texts.txt", "w", encoding="utf-8") as f:
         for n, (rnd, r) in enumerate(rows, 1):
             f.write(f"{'=' * 80}\n#{n}  [{rnd}]  {r['record_id']}\n"
-                    f"scan date: {r['scan_date']}\nlink: {r['url']}\n{'-' * 80}\n"
+                    f"scan date: {r['scan_date']}\n{country_line(r)}\n{places_line(r)}\nlink: {r['url']}\n{'-' * 80}\n"
                     f"{r['text'].strip()}\n\n")
 
 

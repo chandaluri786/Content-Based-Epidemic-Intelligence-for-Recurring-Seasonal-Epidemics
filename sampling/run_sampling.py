@@ -9,6 +9,7 @@ Usage:
     python sampling/run_sampling.py --pool-dir /path/to/output/pool --seed 7
 """
 import argparse
+import ast
 import csv
 import json
 import random
@@ -50,6 +51,19 @@ def _read_jsonl(path: Path):
                 yield json.loads(line)
 
 
+def parse_locations(raw) -> list[dict]:
+    """GDELT location mentions ({name, country_fips, offset}); the pool stores them as a Python-style string."""
+    if not raw:
+        return []
+    if isinstance(raw, str):
+        try:
+            raw = ast.literal_eval(raw)
+        except (ValueError, SyntaxError):
+            return []
+    return [{"name": loc.get("name", ""), "country_fips": loc.get("country_fips", ""), "offset": loc.get("offset")}
+            for loc in raw if isinstance(loc, dict)]
+
+
 def _one_per_group(groups: dict[str, dict], rng: random.Random) -> set[str]:
     """Pick one record ID at random from each near-duplicate group."""
     members = defaultdict(list)
@@ -78,7 +92,7 @@ def read_pool(pool_dir: Path, rng: random.Random) -> list[dict]:
         scan_date = date.fromisoformat(rec["datetime"][:10])
         articles.append({
             "record_id": record_id, "url": rec["url"], "scan_date": scan_date.isoformat(), "year": scan_date.year,
-            "text": rec.get("article") or "",
+            "text": rec.get("article") or "", "locations": parse_locations(rec.get("locations")),
             "country": season["sampling_country"], "season": season["sampling_season"],
             "phase": phase_of(scan_date, onsets[season["sampling_season"]]),
             "near_dup_group": group["near_dup_group"], "group_size": group["group_size"],
@@ -142,7 +156,7 @@ def save(out_dir: Path, articles: list[dict], sample: list[dict]) -> None:
             w.writerows(rows)
     with open(out_dir / "sample_1200.jsonl", "w", encoding="utf-8") as f:   # includes the article text
         for a in sample:
-            f.write(json.dumps({k: a[k] for k in COLUMNS + ["text"]}, ensure_ascii=False) + "\n")
+            f.write(json.dumps({k: a[k] for k in COLUMNS + ["text", "locations"]}, ensure_ascii=False) + "\n")
     (out_dir / "bucket_sizes.json").write_text(json.dumps(bucket_sizes(articles), indent=2), encoding="utf-8")
 
 

@@ -8,7 +8,7 @@ from collections import Counter
 import pytest
 
 from make_label_packets import (LABELERS, PILOT_PER_SIDE, assignment_key, checker_of, likely_useful,
-                                make_packets, packet_rows, partner_of, write_packet)
+                                make_packets, packet_rows, partner_of, places_line, write_packet)
 from run_sampling import QUOTAS
 
 BUCKETS = {**{b: n for b, n in QUOTAS.items() if b != "JUNK"},
@@ -18,7 +18,7 @@ BUCKETS = {**{b: n for b, n in QUOTAS.items() if b != "JUNK"},
 @pytest.fixture
 def sample():
     return [{"record_id": f"{bucket}-{i}", "url": f"https://x.com/{bucket}/{i}", "scan_date": "2020-03-01",
-             "bucket": bucket, "text": f"article {i} in {bucket}"}
+             "country": "KEN", "season": "KEN-2020", "bucket": bucket, "text": f"article {i} in {bucket}"}
             for bucket, n in BUCKETS.items() for i in range(n)]
 
 
@@ -82,4 +82,16 @@ def test_written_label_sheet_has_no_bucket_and_blank_labels(sample, tmp_path):
     assert len(rows) == 320 and "bucket" not in rows[0]  # 20 own + 20 partner's + 280 round 2
     assert all(r["labeler"] == "Manoj" and r["useful"] == "" for r in rows)
     assert (tmp_path / "Manoj_items.csv").read_text(encoding="utf-8-sig").startswith("article_id,kind,")
-    assert "#1  [1-own]" in (tmp_path / "Manoj_texts.txt").read_text(encoding="utf-8")
+    texts = (tmp_path / "Manoj_texts.txt").read_text(encoding="utf-8")
+    assert "#1  [1-own]" in texts
+    assert "tagged country: Kenya (KEN), season KEN-2020" in texts
+    assert "places mentioned: (none tagged)" in texts
+
+
+def test_places_line_lists_each_place_once_in_order_of_first_mention():
+    locations = [{"name": "American", "country_fips": "US", "offset": 3015},
+                 {"name": "Belgian", "country_fips": "BE", "offset": 1782},
+                 {"name": "Belgian", "country_fips": "BE", "offset": 1361},
+                 {"name": "Otago, Otago, New Zealand", "country_fips": "NZ", "offset": 1555}]
+    assert places_line({"locations": locations}) == (
+        "places mentioned: Belgian [BE] x2; Otago, Otago, New Zealand [NZ]; American [US]")
