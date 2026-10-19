@@ -6,14 +6,14 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 
 | set | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
-| all | 104 | 397 | 208 | 803 |
+| all | 104 | 397 | 207 | 803 |
 
 | labeler | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
 | Aditya | 26 | 104 | 50 | 196 |
 | Jahnavi | 26 | 99 | 49 | 201 |
 | Manoj | 27 | 100 | 54 | 200 |
-| Thanya | 25 | 94 | 55 | 206 |
+| Thanya | 25 | 94 | 54 | 206 |
 
 | country | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
@@ -22,7 +22,7 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 | IDN | 2 | 27 | 8 | 67 |
 | IND | 30 | 107 | 67 | 212 |
 | KEN | 1 | 18 | 8 | 58 |
-| USA | 41 | 110 | 78 | 227 |
+| USA | 41 | 110 | 77 | 227 |
 
 | year | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 | 2018 | 11 | 45 | 22 | 89 |
 | 2019 | 3 | 17 | 9 | 48 |
 | 2021 | 3 | 35 | 11 | 80 |
-| 2022 | 16 | 79 | 27 | 141 |
+| 2022 | 16 | 79 | 26 | 141 |
 | 2023 | 16 | 59 | 18 | 100 |
 | 2024 | 16 | 53 | 45 | 133 |
 
@@ -44,7 +44,7 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 | N_flu_idiom | 0 | 10 | 1 | 20 |
 | N_history_only | 1 | 14 | 1 | 26 |
 | N_no_flu_text | 0 | 14 | 0 | 36 |
-| N_other_disease | 0 | 20 | 1 | 40 |
+| N_other_disease | 0 | 20 | 0 | 40 |
 | N_other_flu_mention | 5 | 49 | 9 | 101 |
 | N_research | 0 | 13 | 0 | 27 |
 | P_A1_counts | 45 | 80 | 91 | 160 |
@@ -107,14 +107,14 @@ Each tag needs min(3, half its total) dev articles. 6 swaps between matched grou
 | kind:cases | 50 | 83 | 3 |
 | kind:deaths | 31 | 62 | 3 |
 | kind:hospitalized | 16 | 22 | 3 |
-| kind:trend | 67 | 124 | 3 |
+| kind:trend | 67 | 123 | 3 |
 | no:N_animal_flu | 23 | 49 | 3 |
 | no:N_awareness | 36 | 70 | 3 |
 | no:N_business_policy | 6 | 13 | 3 |
 | no:N_flu_idiom | 10 | 19 | 3 |
 | no:N_history_only | 13 | 25 | 3 |
 | no:N_no_flu_text | 14 | 36 | 3 |
-| no:N_other_disease | 20 | 39 | 3 |
+| no:N_other_disease | 20 | 40 | 3 |
 | no:N_other_flu_mention | 44 | 92 | 3 |
 | no:N_research | 13 | 27 | 3 |
 | no:P_A1_counts | 35 | 69 | 3 |
@@ -137,16 +137,20 @@ Each tag needs min(3, half its total) dev articles. 6 swaps between matched grou
 | trend:percentage | 6 | 15 | 3 |
 | trend:strain_share | 5 | 6 | 3 |
 | trend:zero_or_low | 5 | 8 | 3 |
-| yes:word_rules_said_not_useful | 9 | 18 | 3 |
+| yes:word_rules_said_not_useful | 9 | 17 | 3 |
 
 Tags that could not reach their minimum: none.
 
 ## Check rows that still disagree with the owner
 
-| article | owner | owner says | checker | checker says |
-|---|---|---|---|---|
-| 20221106180000-54 | Thanya | yes | Jahnavi | no |
-| 20240212170000-2059 | Aditya | yes | Manoj | no |
-| 20181030023000-1998 | Aditya | yes | Manoj | no |
+None.
 
-The owner's label is used. Settle these with the team.
+## Label corrections after the split (2026-10-19)
+
+The 3 round-1 check rows that disagreed were settled by the rulebook. The split itself did not change.
+
+| article | set | decision |
+|---|---|---|
+| 20221106180000-54 | test | `no`: flu is only named in a list in an RSV vaccine article (Thanya's label changed; Jahnavi's check was right) |
+| 20240212170000-2059 | test | `yes`: a named rider was suffering from flu at this week's event (Aditya's label stands) |
+| 20181030023000-1998 | test | `yes`: "There has already been a flu-related death in Florida this year." (Aditya's label stands) |

@@ -822,7 +822,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20221103213000-161,test,Thanya,yes,P_A1_counts,USA,2022,20221103213000-161,count:open_total; count:period_total; date:so_far_this_year; kind:cases; kind:deaths; kind:hospitalized; kind:trend
 20221104220000-721,dev,Manoj,yes,P_A1_counts,USA,2022,20221104220000-721,count:open_total; date:last_week; date:past_week; date:this_season; kind:cases; kind:deaths; kind:hospitalized; kind:trend
 20221106061500-104,dev,Thanya,yes,P_A2_case_event,USA,2022,20221106061500-104,date:since; date:weekday; kind:cases
-20221106180000-54,test,Thanya,yes,N_other_disease,USA,2022,20221106180000-54,kind:trend; note:in_passing; yes:word_rules_said_not_useful
+20221106180000-54,test,Thanya,no,N_other_disease,USA,2022,20221106180000-54,no:N_other_disease; note:in_passing
 20221107220000-1,dev,Aditya,yes,P_A1_counts,USA,2022,20221107220000-1,count:new_and_total; count:period_total; date:last_week; date:so_far_this_year; kind:cases; kind:deaths; kind:trend
 20221108161500-876,dev,Manoj,no,N_no_flu_text,USA,2022,20221108161500-876,no:N_no_flu_text
 20221109214500-1128,test,Aditya,no,N_other_flu_mention,USA,2022,20221109214500-1128,no:N_other_flu_mention
