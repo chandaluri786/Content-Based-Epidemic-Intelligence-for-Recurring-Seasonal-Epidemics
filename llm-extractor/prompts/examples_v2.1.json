@@ -348,6 +348,22 @@
           "evidence": [
             "Influenza numbers remain low, with 12 cases reported across the state for the week ended Oct. 19."
           ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Montana",
+          "country": "USA",
+          "start_date": "2024-10-13",
+          "end_date": "2024-10-19",
+          "words": "influenza numbers decrease",
+          "evidence": [
+            "COVID-19, influenza numbers decrease in Montana MISSOULA, Mont."
+          ]
         }
       ]
     }
