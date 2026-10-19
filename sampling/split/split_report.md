@@ -6,28 +6,28 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 
 | set | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
-| all | 104 | 397 | 207 | 803 |
+| all | 106 | 397 | 207 | 803 |
 
 | labeler | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
 | Aditya | 26 | 104 | 50 | 196 |
-| Jahnavi | 26 | 99 | 49 | 201 |
+| Jahnavi | 27 | 99 | 49 | 201 |
 | Manoj | 27 | 100 | 54 | 200 |
-| Thanya | 25 | 94 | 54 | 206 |
+| Thanya | 26 | 94 | 54 | 206 |
 
 | country | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
-| AUS | 28 | 91 | 41 | 150 |
+| AUS | 29 | 91 | 41 | 150 |
 | BRA | 2 | 44 | 6 | 89 |
 | IDN | 2 | 27 | 8 | 67 |
-| IND | 30 | 107 | 67 | 212 |
+| IND | 31 | 107 | 67 | 212 |
 | KEN | 1 | 18 | 8 | 58 |
 | USA | 41 | 110 | 77 | 227 |
 
 | year | dev useful | dev total | test useful | test total |
 |---|---|---|---|---|
 | 2015 | 6 | 25 | 16 | 44 |
-| 2016 | 18 | 49 | 39 | 100 |
+| 2016 | 20 | 49 | 39 | 100 |
 | 2017 | 15 | 35 | 21 | 68 |
 | 2018 | 11 | 45 | 22 | 89 |
 | 2019 | 3 | 17 | 9 | 48 |
@@ -47,8 +47,8 @@ Dev and test keep the natural share of useful articles. Few-shot examples come f
 | N_other_disease | 0 | 20 | 0 | 40 |
 | N_other_flu_mention | 5 | 49 | 9 | 101 |
 | N_research | 0 | 13 | 0 | 27 |
-| P_A1_counts | 45 | 80 | 91 | 160 |
-| P_A2_case_event | 18 | 44 | 34 | 86 |
+| P_A1_counts | 46 | 80 | 91 | 160 |
+| P_A2_case_event | 19 | 44 | 34 | 86 |
 | P_B_trend_response | 27 | 66 | 55 | 134 |
 | X_listing_garbled | 0 | 2 | 0 | 2 |
 | X_spam_stub | 0 | 2 | 0 | 2 |
@@ -92,7 +92,7 @@ Each tag needs min(3, half its total) dev articles. 6 swaps between matched grou
 | count:comparison_nearby | 9 | 7 | 3 |
 | count:new_and_total | 14 | 17 | 3 |
 | count:open_total | 17 | 30 | 3 |
-| count:period_total | 33 | 48 | 3 |
+| count:period_total | 34 | 48 | 3 |
 | date:last_month | 1 | 0 | 1 |
 | date:last_week | 7 | 11 | 3 |
 | date:none_stated | 3 | 3 | 3 |
@@ -102,9 +102,9 @@ Each tag needs min(3, half its total) dev articles. 6 swaps between matched grou
 | date:this_season | 5 | 13 | 3 |
 | date:week_ending | 3 | 7 | 3 |
 | date:week_number | 2 | 1 | 2 |
-| date:weekday | 14 | 30 | 3 |
+| date:weekday | 15 | 30 | 3 |
 | date:yesterday | 3 | 2 | 3 |
-| kind:cases | 50 | 83 | 3 |
+| kind:cases | 52 | 83 | 3 |
 | kind:deaths | 31 | 62 | 3 |
 | kind:hospitalized | 16 | 22 | 3 |
 | kind:trend | 67 | 123 | 3 |
@@ -117,19 +117,19 @@ Each tag needs min(3, half its total) dev articles. 6 swaps between matched grou
 | no:N_other_disease | 20 | 40 | 3 |
 | no:N_other_flu_mention | 44 | 92 | 3 |
 | no:N_research | 13 | 27 | 3 |
-| no:P_A1_counts | 35 | 69 | 3 |
-| no:P_A2_case_event | 26 | 52 | 3 |
+| no:P_A1_counts | 34 | 69 | 3 |
+| no:P_A2_case_event | 25 | 52 | 3 |
 | no:P_B_trend_response | 39 | 79 | 3 |
 | no:X_listing_garbled | 2 | 2 | 2 |
 | no:X_spam_stub | 2 | 2 | 2 |
 | no:X_too_short | 5 | 11 | 3 |
 | no:Z_zoonotic_human | 5 | 10 | 3 |
-| no:word_rules_said_useful | 105 | 210 | 3 |
+| no:word_rules_said_useful | 103 | 210 | 3 |
 | note:animal | 15 | 35 | 3 |
 | note:forecast | 5 | 16 | 3 |
 | note:in_passing | 14 | 35 | 3 |
 | note:no_country | 4 | 4 | 3 |
-| note:past | 3 | 13 | 3 |
+| note:past | 4 | 13 | 3 |
 | place:several_countries | 7 | 11 | 3 |
 | place:territory | 3 | 4 | 3 |
 | status:suspected | 6 | 11 | 3 |
@@ -154,3 +154,7 @@ The 3 round-1 check rows that disagreed were settled by the rulebook. The split 
 | 20221106180000-54 | test | `no`: flu is only named in a list in an RSV vaccine article (Thanya's label changed; Jahnavi's check was right) |
 | 20240212170000-2059 | test | `yes`: a named rider was suffering from flu at this week's event (Aditya's label stands) |
 | 20181030023000-1998 | test | `yes`: "There has already been a flu-related death in Florida this year." (Aditya's label stands) |
+| 20160620113000-1875 | dev | `yes`: the Prime Minister has the flu, from Saturday; one named person is enough (Thanya's label changed) |
+| 20161106151500-1403 | dev | `yes`: "in the year 2016, only one case has been reported so far" is a current running total (Jahnavi's label changed) |
+
+The last two were found on 2026-10-19 while choosing the prompt v2.1 examples. The counts and tags above include all five corrections.

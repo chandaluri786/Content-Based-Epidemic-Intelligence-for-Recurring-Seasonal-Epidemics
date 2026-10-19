@@ -142,7 +142,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20160610191500-642,test,Thanya,no,N_research,AUS,2016,20160610191500-642,no:N_research
 20160615013000-2211,test,Aditya,yes,N_flu_idiom,AUS,2016,20160615013000-2211,kind:trend; yes:word_rules_said_not_useful
 20160616050000-1176,dev,Jahnavi,no,P_A1_counts,AUS,2016,20160616050000-1176,no:P_A1_counts; no:word_rules_said_useful
-20160620113000-1875,dev,Thanya,no,P_A2_case_event,AUS,2016,20160620113000-1875,no:P_A2_case_event; no:word_rules_said_useful
+20160620113000-1875,dev,Thanya,yes,P_A2_case_event,AUS,2016,20160620113000-1875,date:weekday; kind:cases
 20160622043000-1923,test,Manoj,no,N_other_flu_mention,AUS,2016,20160622043000-1923,no:N_other_flu_mention
 20160627141500-54,test,Aditya,no,N_awareness,AUS,2016,20160627141500-54,no:N_awareness
 20160628083000-553,test,Manoj,yes,N_other_flu_mention,AUS,2016,20160628083000-553,kind:trend; yes:word_rules_said_not_useful
@@ -166,7 +166,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20161019004500-1708,test,Thanya,yes,P_A1_counts,USA,2016,20161019004500-1708,kind:cases
 20161102013000-271,test,Manoj,no,N_other_flu_mention,USA,2016,20161102013000-271,no:N_other_flu_mention
 20161104000000-139,test,Thanya,yes,P_A2_case_event,IND,2016,20161104000000-139,kind:trend
-20161106151500-1403,dev,Jahnavi,no,P_A1_counts,IND,2016,20161106151500-1403,no:P_A1_counts; no:word_rules_said_useful
+20161106151500-1403,dev,Jahnavi,yes,P_A1_counts,IND,2016,20161106151500-1403,count:period_total; kind:cases; note:past
 20161107063000-1588,test,Thanya,no,N_animal_flu,USA,2016,20161107063000-1588,no:N_animal_flu; note:animal; note:in_passing
 20161108000000-1934,test,Aditya,no,P_A1_counts,IND,2016,20161108000000-1934,no:P_A1_counts; no:word_rules_said_useful
 20161108004500-448,test,Manoj,no,N_other_flu_mention,IND,2016,20161108004500-448,no:N_other_flu_mention
