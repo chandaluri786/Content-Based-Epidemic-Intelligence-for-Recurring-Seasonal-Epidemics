@@ -49,7 +49,7 @@ def reply(city=None, state=None, country=None):
         "city": city, "state": state, "country": country, "start_date": None, "end_date": None,
         "words": None, "evidence": [GOOD_QUOTE],
     }
-    return {"useful": True, "borderline": False, "reason": "x", "items": [item], "findings": []}
+    return {"useful": True, "borderline": False, "reason": "x", "items": [item]}
 
 
 class PlaceCheckerTest(unittest.TestCase):

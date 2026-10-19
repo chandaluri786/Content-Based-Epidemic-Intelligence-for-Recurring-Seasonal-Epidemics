@@ -26,8 +26,8 @@ from flu_extractor.metrics import (
 
 
 def item(kind="cases", number=658, state="New York", country="USA", start=None, end="2016-12-30",
-         status=None, total_or_new="total", words=None, evidence=("a quote",)):
-    return {"kind": kind, "strain": None, "number": number, "status": status, "total_or_new": total_or_new,
+         status=None, total_or_new="total", words=None, evidence=("a quote",), strain=None):
+    return {"kind": kind, "strain": strain, "number": number, "status": status, "total_or_new": total_or_new,
             "city": None, "state": state, "country": country, "start_date": start, "end_date": end,
             "words": words, "evidence": list(evidence)}
 
@@ -68,6 +68,24 @@ class ExactMatchTest(unittest.TestCase):
         # The model repeats an item the human wrote once: one match, one extra.
         result = self.exact([item()], [item(), item()])
         self.assertEqual((len(result.matched), len(result.missed), len(result.extra)), (1, 0, 1))
+
+
+class StrainNameTest(unittest.TestCase):
+    def exact(self, human_strain, model_strain):
+        return match_items([item(strain=human_strain)], [item(strain=model_strain)], EXACT_KEY_FIELDS)
+
+    def test_names_for_the_same_strain_match(self):
+        for human, model in (("swine flu", "H1N1"), ("2009 H1N1", "h1n1"), ("bird flu", "avian influenza"),
+                             ("A(H5N2)", "H5N2"), ("Influenza A & B", "influenza (A&B)")):
+            with self.subTest(human=human, model=model):
+                self.assertEqual(len(self.exact(human, model).matched), 1)
+                self.assertEqual(differing_fields(item(strain=human), item(strain=model)), [])
+
+    def test_a_subtype_code_does_not_match_a_generic_name(self):
+        for human, model in (("H5N1", "bird flu"), ("H1N1", "H3N2"), ("H1N1", None)):
+            with self.subTest(human=human, model=model):
+                self.assertEqual(len(self.exact(human, model).matched), 0)
+                self.assertEqual(differing_fields(item(strain=human), item(strain=model)), ["strain"])
 
 
 class DifferingFieldsTest(unittest.TestCase):

@@ -3,9 +3,9 @@
 Use it to see exactly why an item matched or did not. Nothing is abbreviated.
 
 Examples (from the llm-extractor folder, with the virtual environment active):
-    python inspect_row.py results/run_20261018_165443 6
-    python inspect_row.py results/run_20261018_165443 6 --article    # also print the article text
-    python inspect_row.py results/run_20261018_165443 6 --offline     # do not look up places online
+    python inspect_row.py results/run_20261018_165443 20161230170000-2179
+    python inspect_row.py results/run_20261018_165443 20161230170000-2179 --article   # also print the text
+    python inspect_row.py results/run_20261018_165443 20161230170000-2179 --offline   # no online place lookups
 """
 
 import argparse
@@ -50,24 +50,26 @@ def print_item_pair(title: str, human: dict | None, model: dict | None) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("run_dir", type=Path, help="run folder created by run_extraction.py")
-    parser.add_argument("row", type=int, help="row number of the article")
+    parser.add_argument("article_id", help="the article's ID, e.g. 20161230170000-2179")
     parser.add_argument("--article", action="store_true", help="also print the article text")
     parser.add_argument("--offline", action="store_true", help="do not look up place names online")
     args = parser.parse_args()
 
     records = read_run_records(args.run_dir / "raw_results.jsonl")
-    if args.row not in records:
-        raise SystemExit(f"Row {args.row} is not in {args.run_dir}. Rows there: {sorted(records)[:20]}")
+    article_id = args.article_id
+    if article_id not in records:
+        raise SystemExit(f"{article_id} is not in {args.run_dir}. Articles there: {sorted(records)[:20]}")
     articles = load_articles(config.ARTICLES_PATH)
     labels = load_human_labels(config.HUMAN_LABELS_PATH)
 
     place_checker = PlaceChecker(config.PLACE_CACHE_PATH, offline=args.offline)
-    evaluation = evaluate_run({args.row: records[args.row]}, articles, labels, place_checker)
+    evaluation = evaluate_run({article_id: records[article_id]}, articles, labels, place_checker)
     if not evaluation.rows:
-        raise SystemExit(f"Row {args.row} has no human label, so there is nothing to compare with.")
-    result, article, record = evaluation.rows[0], articles[args.row], records[args.row]
+        raise SystemExit(f"{article_id} has no human label, so there is nothing to compare with.")
+    result, article, record = evaluation.rows[0], articles[article_id], records[article_id]
 
-    print(f"ROW {article.row}   article_id {article.article_id}   scan_date {article.scan_date}")
+    print(f"ARTICLE {article.article_id}   labeler {article.labeler}   split {article.split}   "
+          f"scan_date {article.scan_date}")
     print(f"link: {article.link}")
     if args.article:
         print(f"\n--- article text ---\n{article.text}\n--- end of article ---")

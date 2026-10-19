@@ -1,7 +1,7 @@
 # Flu news LLM extractor
 
 Runs a large language model over human-influenza news articles, extracts structured
-findings, and scores the result against human labels. For each article the model says:
+facts, and scores the result against human labels. For each article the model says:
 
 - whether the article is **useful** (does it contain a current human flu statement?), and
 - the **items** it reports: `cases`, `deaths`, `hospitalized` or `trend`, with place, dates,
@@ -12,6 +12,10 @@ OpenAI-compatible API. The prompt is a system prompt plus solved examples that a
 every request (few-shot prompting). Everything the extractor reads is inside this folder
 (`prompts/` and `data/`), so it does not depend on where the capstone files are on disk.
 
+The data is the team's 1,200 hand-labeled articles (four labelers), split into **dev** (397
+articles, tune the prompt on these) and **test** (803 articles, run once at the end). The split is
+frozen in `repo-sampling/sampling/split/dev_test_split.csv`. Runs use dev unless you ask for test.
+
 ## Contents
 
 1. [Quick start](#1-quick-start)
@@ -20,7 +24,7 @@ every request (few-shot prompting). Everything the extractor reads is inside thi
 4. [Commands](#4-commands)
 5. [Configuration](#5-configuration)
 6. [Prompt versions](#6-prompt-versions)
-7. [Which rows are run](#7-which-rows-are-run)
+7. [Which articles are run](#7-which-articles-are-run)
 8. [How results are scored](#8-how-results-are-scored)
 9. [Automatic checks](#9-automatic-checks)
 10. [Output files](#10-output-files)
@@ -46,10 +50,10 @@ chmod 600 .env                # only you can read it
 
 # every session: activate the environment, then
 python -m unittest discover tests                      # 1. the logic works (no API, no internet)
-python run_extraction.py --rows 6                      # 2. ONE API call; prints the run folder name
+python run_extraction.py --ids 20161230170000-2179     # 2. ONE API call; prints the run folder name
 python evaluate_run.py results/run_<timestamp>         # 3. score it, write the reports
-python inspect_row.py results/run_<timestamp> 6        # 4. read that article field by field
-python run_extraction.py                               # 5. all 257 rows (about 257 API calls)
+python inspect_row.py results/run_<timestamp> 20161230170000-2179   # 4. read that article field by field
+python run_extraction.py                               # 5. all dev articles (373 API calls with prompt v2.1)
 python evaluate_run.py results/run_<timestamp>         # 6. score the full run, then read report.md
 ```
 
@@ -78,15 +82,16 @@ Order of execution:
 
 | # | Function (module) | Input | Output |
 |---|---|---|---|
-| 1 | `load_articles` (`data_loading.py`) | `data/articles.json` | `{row: Article}` |
-| 2 | `load_human_labels` (`data_loading.py`) | `data/human_labels.json` | `{row: HumanLabel}` |
+| 1 | `load_articles` (`data_loading.py`) | `data/articles.json` | `{article_id: Article}` |
+| 2 | `load_human_labels` (`data_loading.py`) | `data/human_labels.json` | `{article_id: HumanLabel}` |
 | 3 | `load_examples` (`prompt.py`) | the examples JSON file | list of example dicts |
-| 4 | `default_rows_to_run` (`evaluation.py`) or `parse_row_spec` | labels, example rows; or the `--rows` text | sorted list of row numbers |
-| 5 | `rows_already_done` | an existing `raw_results.jsonl` (when resuming) | set of rows to skip |
-| 6 | `load_system_prompt`, `build_prefix_messages` (`prompt.py`) | system prompt file, examples | the shared part of every request (see below) |
-| 7 | `create_client` (`llm_client.py`) | settings from `config.py` and the API key | an `OpenAI` client |
+| 4 | `default_ids_to_run` (`evaluation.py`) or `parse_id_spec` | labels, split, example IDs; or the `--ids` text | sorted list of article IDs |
+| 5 | `check_test_guard` | the chosen IDs, the examples, `--final` | stops the run if it would touch test articles without `--final`, or with examples from test |
+| 6 | `ids_already_done` | an existing `raw_results.jsonl` (when resuming) | set of article IDs to skip |
+| 7 | `load_system_prompt`, `build_prefix_messages` (`prompt.py`) | system prompt file, examples | the shared part of every request (see below) |
+| 8 | `create_client` (`llm_client.py`) | settings from `config.py` and the API key | an `OpenAI` client |
 
-Then, for each row (up to `--workers` at the same time), `extract_article` (`extractor.py`) runs:
+Then, for each article (up to `--workers` at the same time), `extract_article` (`extractor.py`) runs:
 
 | # | Function | Input | Output |
 |---|---|---|---|
@@ -101,7 +106,7 @@ the run: the error is stored in the record.
 
 1. a `system` message: the instructions (`system_prompt_*.txt`);
 2. for each solved example, a `user` message with the example article, then an `assistant`
-   message with the human answer as JSON (43 pairs for prompt v2.0). This is how the model
+   message with the human answer as JSON (24 pairs for prompt v2.1). This is how the model
    learns the task and the reply format from worked examples; its weights do not change;
 3. a final `user` message with the article to process.
 
@@ -127,52 +132,53 @@ automatic retries on rate-limit, timeout and server errors.
 
 | # | Function | Input | Output |
 |---|---|---|---|
-| 1 | `read_run_records` (`evaluation.py`) | `raw_results.jsonl` | `{row: record}` (a later line replaces an earlier one) |
+| 1 | `read_run_records` (`evaluation.py`) | `raw_results.jsonl` | `{article_id: record}` (a later line replaces an earlier one) |
 | 2 | `load_articles`, `load_human_labels` | the data files | as in step 1 |
 | 3 | `PlaceChecker(cache, offline)` (`places.py`) | `data/place_lookups.json`, `--offline` flag | the place checker |
 | 4 | `evaluate_run` (`evaluation.py`) | records, articles, labels, place checker | an `Evaluation` |
 | 5 | `write_report` (`report.py`) | the `Evaluation`, the run folder | `report.md`, `row_results.csv`, `item_comparison.csv` |
 
-Inside `evaluate_run`, each row that has a human label gets a **status**:
+Inside `evaluate_run`, each article that has a human label gets a **status**:
 
 | Status | Meaning |
 |---|---|
 | `api_error` | the call failed after all retries |
 | `unparseable` | the reply was not valid JSON, or was cut off at `max_tokens` |
 | `malformed` | valid JSON that breaks the reply format (`find_shape_errors`) |
-| `scored` | everything is fine; the row enters the numbers |
+| `scored` | everything is fine; the article enters the numbers |
 
-Rows that are not `scored` are left out of every score and listed in section 4 of `report.md`.
-Rows that are scored then get the rule checks (`find_rule_violations`), exact item matching
+Articles that are not `scored` are left out of every score and listed in section 4 of `report.md`.
+Articles that are scored then get the rule checks (`find_rule_violations`), exact item matching
 (`match_items` with `EXACT_KEY_FIELDS`), and their contribution to the usefulness and item tallies.
 
 ## 3. Data formats
 
-**`data/articles.json`**: a list with one object per article (320). The fields are already
-separated, so nothing has to be parsed from text at run time.
+**`data/articles.json`**: a list with one object per article (1,200), ordered by `article_id`.
+The fields are already separated, so nothing has to be parsed from text at run time.
 
 ```json
-{"row": 6, "article_id": "20161230170000-2179", "scan_date": "2016-12-30",
+{"article_id": "20161230170000-2179", "labeler": "Jahnavi", "split": "test", "scan_date": "2016-12-30",
  "link": "http://cbs6albany.com/news/local/influenza-forcing-ny-hospitals-to-adjust-visitation-rules",
  "article": "Influenza forcing NY hospitals to adjust visitation rules\nALBANY, N.Y. (AP) -- ..."}
 ```
 
-`row` is the row number in the labeling sheet and links an article to its label. `scan_date`
-is the day the article was collected; the prompt uses it to turn "yesterday" into a date.
+`article_id` links an article to its label, to the run log and to the prompt examples. `labeler`
+is who owns the article's label, and `split` is `dev` or `test`. `scan_date` is the day the article
+was collected; the prompt uses it to turn "yesterday" into a date.
 
 **`data/human_labels.json`**: the answer key, one object per article.
 
 ```json
-{"row": 6, "article_id": "20161230170000-2179", "useful": true, "needs_relook": false,
+{"article_id": "20161230170000-2179", "labeler": "Jahnavi", "split": "test", "useful": true,
  "items": [{"kind": "cases", "strain": null, "number": 658, "status": null, "total_or_new": "total",
             "city": null, "state": "New York", "country": "USA",
             "start_date": null, "end_date": "2016-12-30", "words": null,
             "evidence": ["Some 658 flu-related hospitalizations in New York have been reported so far this flu season."]}]}
 ```
 
-`useful` is `true`, `false`, or `null` when the sheet has no label (rows 109 and 152).
-`needs_relook` marks the 20 rows the labeler is unsure about. Each item has the same fields as
-the model's items, so the two can be compared field by field.
+`useful` is `true` or `false` (311 of the 1,200 are useful). Each item has the same fields as the
+model's items, so the two can be compared field by field. The labels follow the rulebook in
+`repo-sampling/sampling_and_labeling_guide.md`.
 
 **The model's reply** (one JSON object; its format is defined in the system prompt):
 
@@ -181,8 +187,7 @@ the model's items, so the two can be compared field by field.
  "items": [{"kind": "trend", "strain": null, "number": null, "status": null, "total_or_new": null,
             "city": null, "state": "New York", "country": "USA",
             "start_date": "2016-12-30", "end_date": "2016-12-30",
-            "words": "widespread and prevalent", "evidence": ["exact quote from the article"]}],
- "findings": []}
+            "words": "widespread and prevalent", "evidence": ["exact quote from the article"]}]}
 ```
 
 | Field | Meaning |
@@ -197,17 +202,21 @@ the model's items, so the two can be compared field by field.
 | `start_date`, `end_date` | `YYYY-MM-DD` or null |
 | `words` | only for `trend` items: the words that describe the trend; null otherwise |
 | `evidence` | non-empty list of exact quotes from the article |
-| `findings` | statements about when a flu season starts, peaks or ends: `[{"country": ..., "finding": "<sentence copied from the article>"}]` |
 
-**Solved examples** (`prompts/examples_*.json`): a list of objects with `example`, `source_row`,
+Prompt v2.0 also asks for `findings` (season start and peak sentences). The rulebook dropped them,
+so the key is no longer required and is ignored when a reply still has it.
+
+**Solved examples** (`prompts/examples_*.json`): a list of objects with `example`, `article_id`,
 `teaches`, `scan_date`, `link`, `article` and `answer` (same shape as a model reply). Only
 `scan_date`, `link`, `article` and `answer` are sent to the model. `teaches` is a note for people.
-`source_row` is the article's row in the labeling sheet: those rows are never scored.
+`article_id` names the labeled article the example comes from: those articles are never scored.
+New examples must come from dev. (The v2.0 examples also keep `source_row`, their row in Jahnavi's
+sheet.)
 
 **One log line** (`raw_results.jsonl`):
 
 ```json
-{"row": 6, "article_id": "...", "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+{"article_id": "20161230170000-2179", "split": "dev", "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
  "finish_reason": "stop", "prompt_tokens": 28225, "completion_tokens": 198, "seconds": 6.1,
  "raw_reply": "{\"useful\": true, ...}", "parsed": {...the reply as an object...},
  "parse_error": null, "api_error": null}
@@ -227,16 +236,17 @@ used so that lines can be appended safely and nothing is lost if a run is interr
 
 | Option | Meaning |
 |---|---|
-| `--rows 1-20,47` | run exactly these rows, even rows that are normally excluded (see section 7) |
-| `--limit N` | run only the first N of the selected rows |
-| `--exclude-file FILE` | extra rows to leave out, one number per line (`#` starts a comment); ignored when `--rows` is given |
+| `--ids ID1,ID2` or `--ids @FILE` | run exactly these articles (a file has one ID per line, `#` starts a comment), even examples |
+| `--split dev\|test` | the split to run when `--ids` is not given (default `dev`) |
+| `--final` | allow test articles. Use it once, for the final test run (see section 7) |
+| `--limit N` | run only the first N of the selected articles |
+| `--exclude-file FILE` | extra article IDs to leave out, one per line; ignored when `--ids` is given |
 | `--workers N` | requests at the same time (default 3). Lower it if you see rate-limit errors |
-| `--run-dir DIR` | continue an existing run folder: rows that already have a reply are skipped |
+| `--run-dir DIR` | continue an existing run folder: articles that already have a reply are skipped |
 
-Each run writes a new folder `results/run_<date>_<time>/`. With `--run-dir`, only rows whose call
-**failed with an API error** are retried. A row whose reply was invalid JSON counts as done: to
-retry it, delete its line from `raw_results.jsonl`. Records are written in the order they finish,
-not in row order.
+Each run writes a new folder `results/run_<date>_<time>/`. With `--run-dir`, only articles whose call
+**failed with an API error** are retried. An article whose reply was invalid JSON counts as done: to
+retry it, delete its line from `raw_results.jsonl`. Records are written in the order they finish.
 
 ### `evaluate_run.py RUN_DIR`: score a run
 
@@ -247,7 +257,7 @@ not in row order.
 Writes `report.md`, `row_results.csv` and `item_comparison.csv` into the run folder, and prints a
 short summary. New place names are looked up online, about one per second, and saved.
 
-### `inspect_row.py RUN_DIR ROW`: read one article field by field
+### `inspect_row.py RUN_DIR ARTICLE_ID`: read one article field by field
 
 | Option | Meaning |
 |---|---|
@@ -264,15 +274,26 @@ It uses the same scoring code as the reports, so what it shows is what gets coun
 
 ```bash
 python scripts/build_data_files.py                     # rewrites data/articles.json and data/human_labels.json
-python scripts/build_data_files.py --capstone-dir /path/to/capstone
+python scripts/build_data_files.py --sampling-dir /path/to/repo-sampling
 python scripts/build_data_files.py --with-prompts      # ALSO overwrites the active files in prompts/
 ```
 
-`data/` is a snapshot of the capstone labeling files (Jahnavi's sheets). Run this only when the
-labels change. It is the only code that knows where the capstone folder is. By default it leaves
-`prompts/` alone; `--with-prompts` overwrites the active prompt files with prompt v2.0, taken from
-`prompt_versions/llm_extraction_prompt_v2.0.md` and from the capstone examples file
-(`Project Documents /llm_extraction_examples_v2.0.jsonl`, which is not copied into this project).
+`data/` is a snapshot of the `repo-sampling` worktree: the article texts from
+`sampling/output/sample_1200.jsonl`, the four labelers' sheets in `sampling/output/labeling/`
+(`<Name>_labels.csv` and `<Name>_items.csv`), and the split in `sampling/split/dev_test_split.csv`.
+Each article's answer comes from the labeler who owns it; the round-1 check rows are skipped.
+Evidence cells are split into quotes at `||`. Run it only when a label changes. It is the only code
+that knows where those files are.
+
+Before writing anything it checks that the three sources fit together and stops with a list of
+problems if not: 1,200 articles in each, every `useful` is yes or no and agrees with the split,
+every `yes` has items and every `no` has none, and every item has a valid kind, status,
+total_or_new, a country, `YYYY-MM-DD` dates, a whole `number` and no empty quote.
+
+By default it leaves `prompts/` alone. `--with-prompts` overwrites the active prompt files with
+prompt v2.0, taken from `prompt_versions/llm_extraction_prompt_v2.0.md` and from the capstone
+examples file (`Project Documents /llm_extraction_examples_v2.0.jsonl` under `--capstone-dir`, not
+copied into this project). That file has no `article_id`, so add it again if you ever use this.
 
 ## 5. Configuration
 
@@ -285,7 +306,7 @@ Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in
 | `NVIDIA_MODEL_ID` | `.env` (optional) | `nvidia/nemotron-3.5-lightning-30b-a3b` |
 | `NVIDIA_BASE_URL` | `.env` (optional) | `https://integrate.api.nvidia.com/v1` |
 | `RESULTS_DIR` | `.env` (optional) | `llm-extractor/results` |
-| `SYSTEM_PROMPT_PATH`, `EXAMPLES_PATH` | `config.py` | `prompts/system_prompt_v2.0.txt`, `prompts/examples_v2.0.json` |
+| `SYSTEM_PROMPT_PATH`, `EXAMPLES_PATH` | `config.py` | `prompts/system_prompt_v2.1.txt`, `prompts/examples_v2.1.json` |
 | `ARTICLES_PATH`, `HUMAN_LABELS_PATH`, `PLACE_CACHE_PATH` | `config.py` | `data/articles.json`, `data/human_labels.json`, `data/place_lookups.json` |
 | `TEMPERATURE`, `MAX_TOKENS` | `config.py` | 0, 4000 |
 | `REQUEST_TIMEOUT_SECONDS`, `MAX_RETRIES` | `config.py` | 300, 4 |
@@ -300,29 +321,32 @@ the item matching rules are at the top of `flu_extractor/metrics.py`.
 the system prompt (`.txt`, instructions only) and the examples (`.json`). They are named in
 `config.py` (`SYSTEM_PROMPT_PATH`, `EXAMPLES_PATH`); no other file in `prompts/` is read.
 
-**`prompt_versions/` is the archive**: the full prompt documents, one file per version, for
-tracking drafts and older versions. No code reads it, except `scripts/build_data_files.py
---with-prompts`, which can regenerate the active v2.0 files from `llm_extraction_prompt_v2.0.md`.
+**`prompt_versions/` is the archive**: the full prompt documents, one file per version, plus the
+example selection for each version from v2.1 on.
 
 | File | What it is |
 |---|---|
 | `prompt_versions/llm_extraction_prompt_v1.0.md` | prompt v1.0, the full document (earlier version, 14 solved examples) |
-| `prompt_versions/llm_extraction_prompt_v2.0.md` | prompt v2.0, the full document: notes, instructions, 43 solved examples, reply schema, scoring notes. **This is the active version.** Its instructions are `prompts/system_prompt_v2.0.txt` and its examples are `prompts/examples_v2.0.json` |
+| `prompt_versions/llm_extraction_prompt_v2.0.md` | prompt v2.0 (43 examples, the old rules, `findings`). Its files `prompts/system_prompt_v2.0.txt` and `prompts/examples_v2.0.json` are kept |
+| `prompt_versions/llm_extraction_prompt_v2.1.md` | prompt v2.1, **the active version**: the rules copied from the rulebook (`repo-sampling/sampling_and_labeling_guide.md`), what changed since v2.0, the example table, the reply schema and how to tune |
+| `prompt_versions/examples_v2.1_selection.json` | which 24 dev articles are the v2.1 examples, with `teaches`, `reason`, and the lines kept for trimmed articles |
 
-A full document holds more than the model is sent (change notes, the reply schema, scoring
-advice). The model receives only the instructions and the examples, as split into `prompts/`.
-Add each new draft to `prompt_versions/` with its version in the file name.
+A full document holds more than the model is sent (change notes, the reply schema, tuning
+advice). The model receives only the instructions and the examples, as built into `prompts/`.
 
-To make a new version active:
-1. Create its two files and put them in `prompts/`: the instructions as a plain `.txt` file (for
-   v2.0 this is the text inside the code fence under "## 1. Instructions") and the examples as a
-   `.json` file. The project only automates this for v2.0 (`build_data_files.py --with-prompts`);
-   for any other version you make the two files yourself. The previous active files are not kept
-   in `prompt_versions/` (it holds full documents), so keep a copy somewhere if you need them.
+To make a new version (for example v2.2):
+1. Copy the document and the selection file to the new version number and make the change in them.
+   A rule wording changes only when the rulebook already says it.
+2. Run `python scripts/build_prompt_files.py v2.2`. It writes `prompts/system_prompt_v2.2.txt` (the
+   code fence under "## 1. Instructions") and `prompts/examples_v2.2.json`. Each answer is copied
+   from `data/human_labels.json`, so it always equals the human label. It stops, writing nothing,
+   if an example is a test article, is chosen twice, loses an evidence quote to trimming, or the
+   useful / not-useful mix is uneven. It prints the example count and the prompt size.
 2. If the file names changed, update the two paths in `config.py`.
-3. The examples file must keep the fields listed in section 3. Its `source_row` values decide
-   which rows are never scored, so changing the examples changes the excluded rows automatically.
-4. Try `python run_extraction.py --rows 6` first, then a full run.
+3. The examples file must keep the fields listed in section 3. Its `article_id` values decide
+   which articles are never scored, so changing the examples changes the excluded articles
+   automatically. Take examples from dev only; a test article among them blocks the final test run.
+4. Try `python run_extraction.py --limit 1` first, then a full run.
 
 Two things to know:
 - `run_config.json` in each run folder records the **file names** used, not their contents. If you
@@ -332,18 +356,27 @@ Two things to know:
   different items on two runs). A small change in a score between two prompt versions may be noise;
   compare on the full set.
 
-## 7. Which rows are run
+## 7. Which articles are run
 
-Without `--rows`, a run covers every row of `human_labels.json` except:
-- rows with no human label (`useful` is null: rows 109 and 152),
-- rows marked `needs_relook` (the 20 rows the labeler is unsure about),
-- the rows whose solved answers are inside the prompt (the `source_row` values of the examples file;
-  scoring them would be cheating, because the model has seen their answers),
-- rows in `--exclude-file`, if given.
+Without `--ids`, a run covers every article of one split (`--split`, default `dev`) except:
+- the articles whose solved answers are inside the prompt (the `article_id` values of the examples
+  file; scoring them would be cheating, because the model has seen their answers),
+- articles in `--exclude-file`, if given.
 
-For prompt v2.0 that leaves **257 rows (48 useful)**. `--rows` bypasses these exclusions and runs
-exactly the rows named. There is no separate test split yet: the same Jahnavi data is used for
-both tuning and scoring.
+| Split | Articles | Useful | What it is for |
+|---|---|---|---|
+| dev | 397 | 106 | tuning: read the errors, change the prompt, pick examples |
+| test | 803 | 207 | the final score: run once, after tuning, and do not tune on what it shows |
+
+Both splits keep the natural share of useful articles (about 26%), so precision on test means what
+it will mean on real news. For prompt v2.1 a dev run covers **373 articles (94 useful)**: its 24
+examples are left out. (For v2.0 it was 383 articles, without its 14 dev examples.)
+
+`--ids` bypasses the exclusions and runs exactly the articles named. Test articles, whether from
+`--split test` or named in `--ids`, need `--final`. Even with `--final`, the run stops if any
+prompt example is a test article, because the model would have seen that answer. Prompt v2.0 has
+29 test articles among its 43 examples, so it can be scored on dev but never on test. The final
+test score must come from a prompt (v2.1 or later) whose examples all come from dev.
 
 ## 8. How results are scored
 
@@ -387,18 +420,22 @@ shows which kind of field is going wrong.
 and place but are not an exact match, they share one line, with `differing_fields` naming what
 differs and the two values side by side.
 
-**Findings** (the `findings` list in the reply) are not scored, only checked (rule a).
+**Strain names.** The rulebook writes the strain as the article names it and matches names up when
+scoring. `STRAIN_SYNONYMS` in `metrics.py` maps a few names to one spelling before comparing:
+"swine flu", "2009 H1N1" and "influenza A/H1pdm" count as "H1N1"; "bird flu", "bird flue" and
+"avian influenza" count as "avian flu"; "A(H5N2)" counts as "H5N2". Subtype codes such as H5N1 are
+never merged with "bird flu", because the rulebook asks for the code when the article gives both.
 
 ## 9. Automatic checks
 
-Reply format errors make a row `malformed` (not scored): missing keys, `useful` not true/false,
+Reply format errors make an article `malformed` (not scored): missing keys, `useful` not true/false,
 a kind other than the four, an invalid date, a place that is not text or null, evidence that is
-not a non-empty list of text, malformed `findings`. Rule violations do **not** stop a row from
-being scored; they are reported so you can read those rows with care:
+not a non-empty list of text. Rule violations do **not** stop an article from
+being scored; they are reported so you can read those articles with care:
 
 | Rule | Check |
 |---|---|
-| (a) | every evidence quote and finding sentence is an exact piece of the article |
+| (a) | every evidence quote is an exact piece of the article |
 | (b) | `words` is null unless the kind is `trend` |
 | (d) | `city`, `state`, `country` are null or a real place of that kind |
 | (e) | `start_date` is not after `end_date` |
@@ -436,7 +473,9 @@ not a state, "California" is not a country, and "Southern Hemisphere", "Europe",
   do not lower `MIN_SECONDS_BETWEEN_REQUESTS` in `places.py`).
 - **If the service is unreachable** the value is reported as "could not be checked". It is never
   guessed and nothing is saved, so the next run asks again.
-- The 83 distinct place values in the labels and the prompt examples were all found.
+- The 83 distinct place values in Jahnavi's labels and the prompt examples were all found. The four
+  sheets hold 183 distinct place values, and about 100 of them are not saved yet, so the first full
+  evaluation looks them up online (roughly two minutes).
 
 Limits: a match means a place with that name exists *somewhere* ("Harmanli" matched villages in
 Turkey); the geocoder forgives misspelled cities ("Mumbay" matched Mumbai, "Sidney" matched Sydney,
@@ -455,11 +494,11 @@ Per run, in `results/run_<date>_<time>/` (the `results/` folder is ignored by gi
 |---|---|
 | `raw_results.jsonl` | one line per article: raw reply, parsed reply, finish reason, token counts, seconds, errors |
 | `run_config.json` | model, prompt file names, temperature, max tokens, start time of the run |
-| `report.md` | section 1 usefulness; 2 item correctness (2.1 exact, 2.2 item sets, 2.3 looser); 3 rule checks, with the evidence summary; 4 coverage (rows not scored and why) |
-| `row_results.csv` | per article: `status`, human and model usefulness, `borderline`, `human_items`, `model_items`, `items_exact_matched`, `items_missing`, `items_extra`, `item_set_outcome`, `rule_violations`, `problems`, the model's `reason` |
-| `item_comparison.csv` | one line per item. `outcome`: `exact match`, `same kind and place` (not exact; `differing_fields` names what differs), `missing from model` (human item only) or `extra from model` (model item only). Shared columns: kind, strain, city, state, country. Side by side (`human_…`, `model_…`): number, status, total_or_new, start_date, end_date, words, evidence |
+| `report.md` | section 1 usefulness; 2 item correctness (2.1 exact, 2.2 item sets, 2.3 looser); 3 rule checks, with the evidence summary; 4 coverage (articles not scored and why) |
+| `row_results.csv` | per article: `article_id`, `labeler`, `split`, `status`, human and model usefulness, `borderline`, `human_items`, `model_items`, `items_exact_matched`, `items_missing`, `items_extra`, `item_set_outcome`, `rule_violations`, `problems`, the model's `reason` |
+| `item_comparison.csv` | one line per item, with `article_id`, `labeler` and `split`. `outcome`: `exact match`, `same kind and place` (not exact; `differing_fields` names what differs), `missing from model` (human item only) or `extra from model` (model item only). Shared columns: kind, strain, city, state, country. Side by side (`human_…`, `model_…`): number, status, total_or_new, start_date, end_date, words, evidence |
 
-Read `report.md` in this order: section 4 (how many rows could not be scored), section 3 (rule
+Read `report.md` in this order: section 4 (how many articles could not be scored), section 3 (rule
 violations), section 1 (usefulness), section 2 (items). Then open `item_comparison.csv` or
 `inspect_row.py` to see why items fail.
 
@@ -473,22 +512,26 @@ Needs no API key and no internet (the place check uses a fake geocoder).
 
 | File | Covers |
 |---|---|
-| `tests/test_checks.py` | rule (a) exact-quote check, findings, shape errors |
-| `tests/test_metrics.py` | exact item matching, the six item-set outcomes, F1 and the usefulness table |
+| `tests/test_checks.py` | rule (a) exact-quote check, shape errors, `findings` no longer required |
+| `tests/test_metrics.py` | exact item matching, strain names, the six item-set outcomes, F1 and the usefulness table |
 | `tests/test_places.py` | the place cache, offline mode, an unreachable service, rule (d) |
+| `tests/test_evaluation.py` | which articles a run covers, the guard on test articles, `--ids` parsing |
+| `tests/test_build_prompt_files.py` | trimming, and the checks on a prompt version's examples |
+| `tests/test_build_data_files.py` | reading the four sheets (owner rows only, both `\|\|` styles) and every data check |
 
 Not covered by tests: the live API call, `report.py`, and the command-line scripts. Check those by
-running a single row (section 1) and reading it with `inspect_row.py`.
+running a single article (section 1) and reading it with `inspect_row.py`.
 
 ## 12. Layout
 
 ```
 prompts/           ACTIVE prompt: system prompt (.txt) and solved examples (.json)
-prompt_versions/   archive: the full prompt documents (v1.0, v2.0, ...), not read by the extractor
-data/              articles.json, human_labels.json, place_lookups.json
+prompt_versions/   the full prompt documents (v1.0, v2.0, v2.1) and each version's example selection
+data/              articles.json, human_labels.json (1,200 each, tagged dev or test), place_lookups.json
 results/           one folder per run (ignored by git)
 scripts/
-  build_data_files.py   refresh data/ from the capstone files (prompts/ only with --with-prompts)
+  build_data_files.py   refresh data/ from repo-sampling (prompts/ only with --with-prompts)
+  build_prompt_files.py build prompts/ for one prompt version from prompt_versions/
 tests/             unit tests (section 11)
 flu_extractor/
   config.py        paths and model settings
@@ -499,40 +542,36 @@ flu_extractor/
   checks.py        reply format check and the automatic rule checks
   places.py        asks the geocoder whether a city/state/country exists; saves the answers
   metrics.py       precision/recall/F1, usefulness scoring, item matching, item-set outcomes
-  evaluation.py    score a whole run against the labels; choose the default rows
+  evaluation.py    score a whole run against the labels; choose the default articles
   report.py        write report.md and the two CSV files
 run_extraction.py  command-line tool: ask the model
 evaluate_run.py    command-line tool: score a run
-inspect_row.py     command-line tool: one article, human vs model, field by field
+inspect_row.py     command-line tool: one article (by ID), human vs model, field by field
 ```
 
 ## 13. Known limitations
 
-- **No held-out test set yet.** Tuning and scoring use the same Jahnavi rows, so scores from
-  repeated prompt tweaks will be optimistic. Reserve a test split before reporting results.
+- **Dev scores are optimistic.** The prompt is tuned by reading dev errors, so dev scores rise
+  partly because of that. Report the one-time test score. Prompt v2.0 cannot have one (section 7).
 - **Run-to-run variation.** The hosted model does not return identical output for identical input,
   even at `temperature=0`. One run is a noisy measurement.
 - **Examples are sent as chat turns.** The v2.0 prompt document allows this, or pasting the examples
   as text inside the system message. Runs made in the text form (the earliest smoke tests) are not
   directly comparable.
-- **Date convention (review these rows by hand).** The prompt dates articles by scan date; the human
+- **Date convention (review these articles by hand).** The prompt dates articles by scan date; the human
   sheets prefer the printed date, then the link date, then the scan date. For an article published
   before the day it was scanned, relative dates ("yesterday", "on Tuesday") are counted from
-  different days, so item dates can differ for that reason alone. Known rows from the project
-  handoff: **40, 47 and 90**. In rows 47 and 90 the human item dates end one day before the scan
-  date; in row 47 the link date is the day before the scan date. The list was made by hand and may
-  be incomplete. The code treats these rows like any other.
+  different days, so item dates can differ for that reason alone. The code treats these articles
+  like any other; check the dates first when an item differs only in them.
 - **Invalid JSON.** The model can put an unescaped `"` inside an evidence string, which breaks the
-  JSON (seen once, before the chat-turn layout). Such rows are reported as not scored. Structured
+  JSON (seen once, before the chat-turn layout). Such articles are reported as not scored. Structured
   output, as the prompt document suggests, is the planned fix; it has not been tried.
 - **Exact matching is demanding on `words`.** For trend items the human `words` is sometimes a short
   summary and sometimes a quote (the prompt notes 9 of 64 are summaries), and a model can phrase it
   differently. Such items count as missing and extra even when they describe the same thing; see
   `differing_fields` in `item_comparison.csv`. To ignore more than case and repeated spaces, edit
   `_normalise` in `flu_extractor/metrics.py`.
-- **Garbled characters.** 15 source articles contain broken characters such as `â`. The prompt tells
+- **Garbled characters.** 49 of the 1,200 articles contain broken characters such as `â`. The prompt tells
   the model to copy evidence "as printed", so this is expected, not a bug in this code.
-- **Human evidence.** One human quote (row 86) does not occur word for word in its article; it
-  appears to join two separate lines.
-- **Cost and speed.** A full run is about 257 calls of roughly 28,000-30,000 prompt tokens each. Hosted
+- **Cost and speed.** A full dev run with prompt v2.1 is 373 calls of about 19,000-22,000 prompt tokens each (v2.0 sent about 28,000-30,000). Measured on 2026-10-19 with 24 dev articles and `--workers 6`: no rate-limit, timeout or server errors, 1-24 s per call (mean 4 s), 33 s for all 24. A full dev run should take about 5-10 minutes, so Nemotron stays the model; DeepSeek V4 Flash is the fallback if limits appear. Hosted
   API quotas and latency are not guaranteed.

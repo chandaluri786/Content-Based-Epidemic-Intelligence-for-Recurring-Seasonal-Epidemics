@@ -1,30 +1,41 @@
-"""One-off converter: copy the capstone source files into this project as JSON.
+"""One-off converter: copy the labeled sample and the dev/test split into this project as JSON.
 
 The extractor itself reads only files inside this folder (`prompts/` and `data/`).
-Run this script when you want to refresh the data files from the capstone sources, for
-example after more labels were added. It is the only code that knows where the
-capstone files live.
+Run this script when you want to refresh the data files, for example after a label was
+corrected. It is the only code that knows where the sampling files live.
 
-    python scripts/build_data_files.py [--capstone-dir PATH] [--with-prompts]
+    python scripts/build_data_files.py [--sampling-dir PATH] [--with-prompts]
 
-Always rewrites (from the capstone folder):
-    labeling/labeling/Jahnavi_texts.txt                    -> data/articles.json
-    labeling/labeling/Jahnavi_labels.csv, Jahnavi_items.csv,
-    labeling/labeling/need_to_relook.csv                   -> data/human_labels.json
+Always rewrites (from the repo-sampling worktree):
+    sampling/output/sample_1200.jsonl                      -> data/articles.json
+    sampling/output/labeling/<Name>_labels.csv, _items.csv,
+    sampling/split/dev_test_split.csv                      -> data/human_labels.json
+    (all four labelers; each article's answer comes from the labeler who owns it)
 
 Only with --with-prompts (this OVERWRITES the active prompt files in prompts/):
     prompt_versions/llm_extraction_prompt_v2.0.md          -> prompts/system_prompt_v2.0.txt
     Project Documents /llm_extraction_examples_v2.0.jsonl  -> prompts/examples_v2.0.json
-    (the first is in this project; the second is read from the capstone folder)
+    (the first is in this project; the second is read from --capstone-dir)
 """
 
 import argparse
 import csv
 import json
 import re
+from datetime import date
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
+
+LABELERS = ("Aditya", "Jahnavi", "Manoj", "Thanya")
+SAMPLE_SIZE = 1200
+# Round-1 check rows double-label someone else's article. Only the owner's answer is used.
+CHECK_ROUND_PREFIX = "1-check"
+VALID_KINDS = {"cases", "deaths", "hospitalized", "trend"}
+VALID_STATUS = {"", "confirmed", "suspected"}
+VALID_TOTAL_OR_NEW = {"", "total", "new"}
+# The most errors printed when the sheets do not pass the checks.
+MAX_ERRORS_SHOWN = 30
 
 # --- System prompt and examples ----------------------------------------------
 
@@ -44,83 +55,164 @@ def convert_examples(jsonl_path: Path) -> list[dict]:
         return [json.loads(line) for line in file if line.strip()]
 
 
-# --- Articles ----------------------------------------------------------------
+# --- Reading the sampling files ----------------------------------------------
 
-# A line of 80 "=" separates articles; a line of 80 "-" separates an article's header from its body.
-_ARTICLE_SEPARATOR = re.compile(r"^={80}$", re.MULTILINE)
-_HEADER_BODY_SEPARATOR = re.compile(r"^-{80}$", re.MULTILINE)
-_TITLE_LINE = re.compile(r"^#(\d+)\s+\[([^\]]+)\]\s+(\S+)\s*$", re.MULTILINE)
-_SCAN_DATE_LINE = re.compile(r"^scan date:\s*(\S+)\s*$", re.MULTILINE)
-_LINK_LINE = re.compile(r"^link:\s*(\S+)\s*$", re.MULTILINE)
+# One evidence cell can hold several quotes separated by "||". Jahnavi put the separator on a
+# line of its own, others wrote " || ", so any whitespace around it is part of the separator.
+EVIDENCE_SEPARATOR = re.compile(r"\s*\|\|\s*")
 
 
-def convert_articles(texts_path: Path) -> list[dict]:
-    """Parse Jahnavi_texts.txt into one record per article."""
-    articles = []
-    for block in _ARTICLE_SEPARATOR.split(texts_path.read_text(encoding="utf-8")):
-        if not block.strip():
-            continue  # the file starts with a separator, so the first block is empty
-        # Split only at the first dashed line: the body itself may contain more of them.
-        header, body = (_HEADER_BODY_SEPARATOR.split(block, maxsplit=1) + [""])[:2]
-        title = _TITLE_LINE.search(header)
-        scan_date = _SCAN_DATE_LINE.search(header)
-        link = _LINK_LINE.search(header)
-        if not (title and scan_date and link):
-            raise ValueError(f"Cannot read the article header:\n{header[:300]}")
-        articles.append({
-            "row": int(title.group(1)),
-            "article_id": title.group(3),
-            "scan_date": scan_date.group(1),
-            "link": link.group(1),
-            "article": body.strip(),
-        })
-    return articles
+def read_rows(path: Path) -> list[dict]:
+    """Read a CSV sheet. "utf-8-sig" removes the byte-order mark some sheets start with;
+    newline="" keeps line breaks inside quoted evidence cells."""
+    with path.open(encoding="utf-8-sig", newline="") as file:
+        return list(csv.DictReader(file))
 
 
-# --- Human labels ------------------------------------------------------------
+def read_sample(jsonl_path: Path) -> dict[str, dict]:
+    """Read sample_1200.jsonl into {article_id: record}."""
+    with jsonl_path.open(encoding="utf-8") as file:
+        records = [json.loads(line) for line in file if line.strip()]
+    return {record["record_id"]: record for record in records}
 
-# In the items sheet one evidence cell holds all quotes of an item, each separated from
-# the next by a line that contains only "||". We split them into a list, the same shape
-# the model returns.
-EVIDENCE_SEPARATOR = "\n||\n"
 
-def convert_human_labels(labels_csv: Path, items_csv: Path, relook_csv: Path) -> list[dict]:
-    """Combine usefulness labels, items and the 'need to relook' flag into one record per article."""
-    def read_rows(path: Path) -> list[dict]:
-        # "utf-8-sig" removes the invisible byte-order mark that Excel puts at the file start.
-        with path.open(encoding="utf-8-sig", newline="") as file:
-            return list(csv.DictReader(file))
+def read_split(split_csv: Path) -> dict[str, dict]:
+    """Read dev_test_split.csv into {article_id: row}."""
+    return {row["article_id"]: row for row in read_rows(split_csv)}
 
-    items_by_article: dict[str, list[dict]] = {}
-    for record in read_rows(items_csv):
-        items_by_article.setdefault(record["article_id"], []).append({
-            "kind": record["kind"],
-            "strain": record["strain"] or None,
-            "number": int(record["number"]) if record["number"] else None,
-            "status": record["status"] or None,
-            "total_or_new": record["total_or_new"] or None,
-            "city": record["city"] or None,
-            "state": record["state"] or None,
-            "country": record["country"] or None,
-            "start_date": record["start_date"] or None,
-            "end_date": record["end_date"] or None,
-            "words": record["words"] or None,
-            "evidence": record["evidence"].split(EVIDENCE_SEPARATOR),
-        })
 
-    relook_rows = {int(record["row"]) for record in read_rows(relook_csv)}
-    labels = []
-    for record in read_rows(labels_csv):
-        row = int(record["row"])
-        answer = record["useful"].strip().lower()
-        labels.append({
-            "row": row,
-            "article_id": record["article_id"],
-            "useful": {"yes": True, "no": False}.get(answer),  # None = no human label
-            "needs_relook": row in relook_rows,
-            "items": items_by_article.get(record["article_id"], []),
-        })
-    return labels
+def convert_item(record: dict) -> dict:
+    """One items-sheet row in the model's reply format (empty cells become None)."""
+    number = record["number"].strip()
+    return {
+        "kind": record["kind"].strip(),
+        "strain": record["strain"].strip() or None,
+        "number": int(number) if number.isdigit() else number or None,  # a non-integer is reported by validate
+        "status": record["status"].strip() or None,
+        "total_or_new": record["total_or_new"].strip() or None,
+        "city": record["city"].strip() or None,
+        "state": record["state"].strip() or None,
+        "country": record["country"].strip() or None,
+        "start_date": record["start_date"].strip() or None,
+        "end_date": record["end_date"].strip() or None,
+        "words": record["words"].strip() or None,
+        "evidence": EVIDENCE_SEPARATOR.split(record["evidence"].strip()),
+    }
+
+
+def read_sheets(labeling_dir: Path) -> dict[str, dict]:
+    """Every labeler's own answers: {article_id: {"labeler", "useful", "items"}}.
+
+    Items are taken from the owner's items file only, and only for the owner's articles, because a
+    file can also hold items for that labeler's check rows.
+    """
+    answers: dict[str, dict] = {}
+    for name in LABELERS:
+        own_rows = [row for row in read_rows(labeling_dir / f"{name}_labels.csv")
+                    if not row["round"].startswith(CHECK_ROUND_PREFIX)]
+        own_ids = {row["article_id"] for row in own_rows}
+        items: dict[str, list[dict]] = {}
+        for record in read_rows(labeling_dir / f"{name}_items.csv"):
+            if record["article_id"] in own_ids:
+                items.setdefault(record["article_id"], []).append(convert_item(record))
+        for row in own_rows:
+            article_id = row["article_id"]
+            if article_id in answers:
+                raise SystemExit(f"{article_id} is owned by both {answers[article_id]['labeler']} and {name}")
+            answers[article_id] = {"labeler": name, "useful": row["useful"].strip().lower(),
+                                   "items": items.get(article_id, [])}
+    return answers
+
+
+# --- Checks ------------------------------------------------------------------
+
+def _is_iso_date(value: str | None) -> bool:
+    if value is None:
+        return True
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return False
+    return True
+
+
+def item_problems(item: dict) -> list[str]:
+    """What is wrong with one converted item (empty list = nothing)."""
+    problems = []
+    if item["kind"] not in VALID_KINDS:
+        problems.append(f"kind {item['kind']!r}")
+    if not (item["number"] is None or isinstance(item["number"], int)):
+        problems.append(f"number {item['number']!r} is not a whole number")
+    if (item["status"] or "") not in VALID_STATUS:
+        problems.append(f"status {item['status']!r}")
+    if (item["total_or_new"] or "") not in VALID_TOTAL_OR_NEW:
+        problems.append(f"total_or_new {item['total_or_new']!r}")
+    if item["country"] is None:
+        problems.append("no country")
+    for field in ("start_date", "end_date"):
+        if not _is_iso_date(item[field]):
+            problems.append(f"{field} {item[field]!r} is not YYYY-MM-DD")
+    if not all(item["evidence"]):
+        problems.append("an evidence quote is empty")
+    return problems
+
+
+def validate(answers: dict[str, dict], sample: dict[str, dict], split: dict[str, dict],
+             expected_size: int = SAMPLE_SIZE) -> list[str]:
+    """Every reason the sheets, the sample and the split do not fit together."""
+    errors = []
+    for name, ids in (("sheets", answers), ("sample", sample), ("split", split)):
+        if len(ids) != expected_size:
+            errors.append(f"the {name} hold {len(ids)} articles, not {expected_size}")
+    for article_id in sorted(set(answers) | set(sample) | set(split)):
+        missing = [name for name, ids in (("sheets", answers), ("sample", sample), ("split", split))
+                   if article_id not in ids]
+        if missing:
+            errors.append(f"{article_id}: not in the {' or the '.join(missing)}")
+            continue
+        answer = answers[article_id]
+        where = f"{article_id} ({answer['labeler']})"
+        if answer["useful"] not in ("yes", "no"):
+            errors.append(f"{where}: useful is {answer['useful']!r}, not yes or no")
+        if answer["useful"] != split[article_id]["useful"]:
+            errors.append(f"{where}: the sheet says useful={answer['useful']}, the split says "
+                          f"{split[article_id]['useful']}")
+        if answer["useful"] == "yes" and not answer["items"]:
+            errors.append(f"{where}: useful is yes but there are no items")
+        if answer["useful"] == "no" and answer["items"]:
+            errors.append(f"{where}: useful is no but there are {len(answer['items'])} items")
+        for number, item in enumerate(answer["items"], start=1):
+            errors += [f"{where} item {number}: {problem}" for problem in item_problems(item)]
+    return errors
+
+
+# --- Building the two data files ---------------------------------------------
+
+def build_records(answers: dict[str, dict], sample: dict[str, dict],
+                  split: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+    """(articles, human labels), one record each per article, ordered by article_id."""
+    articles, labels = [], []
+    for article_id in sorted(answers):
+        answer, source = answers[article_id], sample[article_id]
+        shared = {"article_id": article_id, "labeler": answer["labeler"], "split": split[article_id]["split"]}
+        articles.append({**shared, "scan_date": source["scan_date"], "link": source["url"],
+                         "article": source["text"]})
+        labels.append({**shared, "useful": answer["useful"] == "yes", "items": answer["items"]})
+    return articles, labels
+
+
+def load_checked_records(sampling_dir: Path) -> tuple[list[dict], list[dict]]:
+    """Read the sampling files, stop with a list of problems if they do not fit, else build the records."""
+    output = sampling_dir / "sampling" / "output"
+    answers = read_sheets(output / "labeling")
+    sample = read_sample(output / "sample_1200.jsonl")
+    split = read_split(sampling_dir / "sampling" / "split" / "dev_test_split.csv")
+    errors = validate(answers, sample, split)
+    if errors:
+        shown = "\n  ".join(errors[:MAX_ERRORS_SHOWN])
+        more = f"\n  ... and {len(errors) - MAX_ERRORS_SHOWN} more" if len(errors) > MAX_ERRORS_SHOWN else ""
+        raise SystemExit(f"The sampling files do not pass the checks; nothing was written.\n  {shown}{more}")
+    return build_records(answers, sample, split)
 
 
 # --- Main --------------------------------------------------------------------
@@ -131,22 +223,33 @@ def write_json(path: Path, data) -> None:
     print(f"wrote {path.relative_to(PROJECT_DIR)}")
 
 
+def print_counts(labels: list[dict]) -> None:
+    """Articles and useful articles per split, to compare with the split report."""
+    for split in ("dev", "test"):
+        in_split = [label for label in labels if label["split"] == split]
+        useful = sum(label["useful"] for label in in_split)
+        print(f"  {split}: {len(in_split)} articles, {useful} useful")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--sampling-dir", type=Path, default=PROJECT_DIR.parent.parent / "repo-sampling",
+                        help="the repo-sampling worktree (default: ../../repo-sampling)")
     parser.add_argument("--capstone-dir", type=Path, default=PROJECT_DIR.parent.parent,
-                        help="folder containing 'Project Documents ' and 'labeling' (default: two levels up)")
+                        help="folder containing 'Project Documents ', used only with --with-prompts")
     parser.add_argument("--with-prompts", action="store_true",
                         help="also rewrite prompts/system_prompt_v2.0.txt and prompts/examples_v2.0.json from the "
                              "capstone prompt v2.0. This OVERWRITES the active prompt files; by default they are "
                              "left alone because prompts/ is maintained by hand.")
     args = parser.parse_args()
-    capstone = args.capstone_dir
-    documents = capstone / "Project Documents "  # the folder name really ends with a space
-    labeling = capstone / "labeling" / "labeling"
+
+    # Check everything before writing anything, so a bad sheet never leaves half-updated files.
+    articles, labels = load_checked_records(args.sampling_dir)
 
     if args.with_prompts:
         # The full prompt document lives in this project (prompt_versions/); only the examples
         # file is still read from the capstone folder.
+        documents = args.capstone_dir / "Project Documents "  # the folder name really ends with a space
         system_prompt = extract_system_prompt(
             (PROJECT_DIR / "prompt_versions" / "llm_extraction_prompt_v2.0.md").read_text(encoding="utf-8"))
         (PROJECT_DIR / "prompts").mkdir(exist_ok=True)
@@ -155,11 +258,9 @@ def main() -> None:
         write_json(PROJECT_DIR / "prompts" / "examples_v2.0.json",
                    convert_examples(documents / "llm_extraction_examples_v2.0.jsonl"))
 
-    write_json(PROJECT_DIR / "data" / "articles.json",
-               convert_articles(labeling / "Jahnavi_texts.txt"))
-    write_json(PROJECT_DIR / "data" / "human_labels.json",
-               convert_human_labels(labeling / "Jahnavi_labels.csv", labeling / "Jahnavi_items.csv",
-                                    labeling / "need_to_relook.csv"))
+    write_json(PROJECT_DIR / "data" / "articles.json", articles)
+    write_json(PROJECT_DIR / "data" / "human_labels.json", labels)
+    print_counts(labels)
 
 
 if __name__ == "__main__":

@@ -145,22 +145,21 @@ def _items_section(evaluation: Evaluation) -> list[str]:
 def _evidence_check_lines(scored: list[RowResult]) -> list[str]:
     """Rule (a) in plain numbers: how many quoted passages are not exact copies of the article."""
     quotes_checked = sum(len(item["evidence"]) for r in scored for item in r.model_items)
-    quotes_checked += sum(len(r.model_findings) for r in scored)
     problems = [v for r in scored for v in r.violations if v.startswith("(a)")]
     invented = sum(QUOTE_NOT_FOUND in v for v in problems)
     typography = sum(QUOTE_TYPOGRAPHY_ONLY in v for v in problems)
     empty = sum(QUOTE_EMPTY in v for v in problems)
-    rows_affected = sorted({r.row for r in scored if any(v.startswith("(a)") for v in r.violations)})
+    articles_affected = sorted({r.article_id for r in scored if any(v.startswith("(a)") for v in r.violations)})
     return [
         "### Evidence is copied from the article (rule a)",
         "",
-        f"Every evidence quote and finding sentence the model wrote ({quotes_checked} in total) is looked "
+        f"Every evidence quote the model wrote ({quotes_checked} in total) is looked "
         "up in the article text. Line breaks and repeated spaces are ignored; nothing else.",
         "",
         f"- Not found in the article (reworded, shortened, joined from separate places or invented): **{invented}**",
         f"- Found only after treating curly and straight quotes or dashes as the same (words right, copy not exact): **{typography}**",
         f"- Empty: **{empty}**",
-        f"- Rows affected: {', '.join(map(str, rows_affected)) if rows_affected else 'none'}",
+        f"- Articles affected: {', '.join(articles_affected) if articles_affected else 'none'}",
         "",
         "The check shows that the text exists in the article. It cannot show that the quote supports the item.",
         "",
@@ -200,13 +199,19 @@ def _coverage_section(evaluation: Evaluation) -> list[str]:
     ):
         failed = evaluation.rows_with_status(status)
         if failed:
-            rows = ", ".join(str(r.row) for r in failed)
-            lines.append(f"- Not scored, {status} ({meaning}): **{len(failed)}** - rows {rows}")
+            ids = ", ".join(r.article_id for r in failed)
+            lines.append(f"- Not scored, {status} ({meaning}): **{len(failed)}** - articles {ids}")
     lines.append("")
-    lines.append("Rows that are not scored are left out of every number above, so they do not hurt the scores. "
+    lines.append("Articles that are not scored are left out of every number above, so they do not hurt the scores. "
                  "Retry them before trusting the results.")
     lines.append("")
     return lines
+
+
+def _split_text(evaluation: Evaluation) -> str:
+    """Which split(s) the run's articles come from, e.g. '**dev** (380 articles)'."""
+    counts = Counter(r.split for r in evaluation.rows)
+    return ", ".join(f"**{split}** ({count} articles)" for split, count in sorted(counts.items())) or "none"
 
 
 def write_report(evaluation: Evaluation, run_dir: Path) -> None:
@@ -215,7 +220,7 @@ def write_report(evaluation: Evaluation, run_dir: Path) -> None:
         f"# Extraction report: {run_dir.name}",
         "",
         f"Model: `{config.MODEL_ID}`  |  Prompt: `{config.SYSTEM_PROMPT_PATH.name}` "
-        f"+ `{config.EXAMPLES_PATH.name}`",
+        f"+ `{config.EXAMPLES_PATH.name}`  |  Split: {_split_text(evaluation)}",
         "",
         *_usefulness_section(evaluation),
         *_items_section(evaluation),
@@ -229,7 +234,7 @@ def write_report(evaluation: Evaluation, run_dir: Path) -> None:
 
 def _write_row_results(rows: list[RowResult], path: Path) -> None:
     """One line per article: what the human and the model said, and how the items compare."""
-    columns = ["row", "article_id", "status", "human_useful", "model_useful", "usefulness_correct",
+    columns = ["article_id", "labeler", "split", "status", "human_useful", "model_useful", "usefulness_correct",
                "borderline", "human_items", "model_items", "items_exact_matched", "items_missing",
                "items_extra", "item_set_outcome", "rule_violations", "problems", "model_reason"]
     with path.open("w", encoding="utf-8", newline="") as file:
@@ -238,7 +243,7 @@ def _write_row_results(rows: list[RowResult], path: Path) -> None:
         for r in rows:
             scored = r.status == SCORED
             writer.writerow({
-                "row": r.row, "article_id": r.article_id, "status": r.status,
+                "article_id": r.article_id, "labeler": r.labeler, "split": r.split, "status": r.status,
                 "human_useful": r.human_useful,
                 "model_useful": r.model_useful if scored else "",
                 "usefulness_correct": (r.human_useful == r.model_useful) if scored else "",
@@ -272,7 +277,7 @@ def _write_item_comparison(rows: list[RowResult], path: Path) -> None:
     Evidence is shown for learning how the two differ; it is never part of the score.
     """
     side_by_side = [f"{side}_{name}" for name in _SIDE_BY_SIDE_COLUMNS for side in ("human", "model")]
-    columns = ["row", "article_id", "outcome", "differing_fields", *_SHARED_COLUMNS, *side_by_side,
+    columns = ["article_id", "labeler", "split", "outcome", "differing_fields", *_SHARED_COLUMNS, *side_by_side,
                "human_evidence", "model_evidence"]
     with path.open("w", encoding="utf-8", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=columns)
@@ -289,7 +294,7 @@ def _write_item_comparison(rows: list[RowResult], path: Path) -> None:
             for outcome, human, model in pairs:
                 shared = human or model  # paired items agree on the shared fields, so either side will do
                 line = {
-                    "row": r.row, "article_id": r.article_id, "outcome": outcome,
+                    "article_id": r.article_id, "labeler": r.labeler, "split": r.split, "outcome": outcome,
                     "differing_fields": ", ".join(differing_fields(human, model)) if human and model else "",
                     **{name: shared.get(name) for name in _SHARED_COLUMNS},
                     "human_evidence": _evidence_text(human),

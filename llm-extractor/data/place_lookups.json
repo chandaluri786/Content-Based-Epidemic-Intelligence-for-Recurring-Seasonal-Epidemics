@@ -19,6 +19,11 @@
     "found": true,
     "top_match": "Brasília, Plano Piloto, Distrito Federal, Região Centro-Oeste, 70391-900, Brasil"
   },
+  "city: byculla": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "Byculla West, E Ward, Mumbai Zone 1, Mumbai City District, Maharashtra, 400004, India"
+  },
   "city: chennai": {
     "checked_on": "2026-10-18",
     "found": true,
@@ -144,6 +149,11 @@
     "found": true,
     "top_match": "Azərbaycan"
   },
+  "country: bahrain": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "البحرين"
+  },
   "country: bolivia": {
     "checked_on": "2026-10-18",
     "found": true,
@@ -214,20 +224,40 @@
     "found": true,
     "top_match": "ایران"
   },
+  "country: laos": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "ປະເທດລາວ"
+  },
   "country: micronesia": {
     "checked_on": "2026-10-18",
     "found": true,
     "top_match": "Micronesia"
+  },
+  "country: oman": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "عمان"
   },
   "country: pakistan": {
     "checked_on": "2026-10-18",
     "found": true,
     "top_match": "پاکستان"
   },
+  "country: qatar": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "قطر"
+  },
   "country: russia": {
     "checked_on": "2026-10-18",
     "found": true,
     "top_match": "Россия"
+  },
+  "country: thailand": {
+    "checked_on": "2026-10-19",
+    "found": true,
+    "top_match": "ประเทศไทย"
   },
   "country: turkey": {
     "checked_on": "2026-10-18",

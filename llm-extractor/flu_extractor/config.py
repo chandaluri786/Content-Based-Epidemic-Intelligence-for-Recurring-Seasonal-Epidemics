@@ -25,8 +25,9 @@ PROMPTS_DIR = PROJECT_DIR / "prompts"
 DATA_DIR = PROJECT_DIR / "data"
 
 # The prompt, in two files. To try a new prompt version, add new files and point these at them.
-SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v2.0.txt"  # instructions only
-EXAMPLES_PATH = PROMPTS_DIR / "examples_v2.0.json"           # solved examples, sent as chat turns
+# Build them with `python scripts/build_prompt_files.py <version>`.
+SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v2.1.txt"  # instructions only
+EXAMPLES_PATH = PROMPTS_DIR / "examples_v2.1.json"           # solved examples, sent as chat turns
 
 # Inputs for the run: the articles to send, and the human answers to score against.
 ARTICLES_PATH = DATA_DIR / "articles.json"

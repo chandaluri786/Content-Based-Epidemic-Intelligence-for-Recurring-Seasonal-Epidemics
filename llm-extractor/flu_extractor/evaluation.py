@@ -29,8 +29,9 @@ MALFORMED = "malformed"        # valid JSON, but it breaks the reply schema
 class RowResult:
     """Everything we know about one scored article."""
 
-    row: int
     article_id: str
+    labeler: str
+    split: str
     status: str
     human_useful: bool
     model_useful: bool | None = None
@@ -40,7 +41,6 @@ class RowResult:
     violations: list[str] = field(default_factory=list)  # rule violations (checks a-g)
     human_items: list[dict] = field(default_factory=list)
     model_items: list[dict] = field(default_factory=list)
-    model_findings: list[dict] = field(default_factory=list)
     exact_match: ItemMatch | None = None  # human vs model items, every field but evidence must agree
     near_match: ItemMatch | None = None   # the leftovers of exact_match, paired by kind and place
 
@@ -59,30 +59,30 @@ class Evaluation:
         return [r for r in self.rows if r.status == status]
 
 
-def read_run_records(log_path: Path) -> dict[int, dict]:
-    """Read a run's raw_results.jsonl into {row: record}. A later line for a row replaces an earlier one."""
-    records: dict[int, dict] = {}
+def read_run_records(log_path: Path) -> dict[str, dict]:
+    """Read a run's raw_results.jsonl into {article_id: record}. A later line for an article replaces an earlier one."""
+    records: dict[str, dict] = {}
     with log_path.open(encoding="utf-8") as file:
         for line in file:
             if line.strip():
                 record = json.loads(line)
-                records[record["row"]] = record
+                records[record["article_id"]] = record
     return records
 
 
 def evaluate_run(
-    records: dict[int, dict],
-    articles: dict[int, Article],
-    labels: dict[int, HumanLabel],
+    records: dict[str, dict],
+    articles: dict[str, Article],
+    labels: dict[str, HumanLabel],
     place_checker: PlaceChecker,
 ) -> Evaluation:
     """Score every record in the run against the human labels."""
     row_results = []
-    for row in sorted(records):
-        label = labels.get(row)
-        if label is None or label.useful is None:
-            continue  # nothing to compare with (rows 109 and 152)
-        row_results.append(_evaluate_row(records[row], articles[row], label, place_checker))
+    for article_id in sorted(records):
+        label = labels.get(article_id)
+        if label is None:
+            continue  # an article that is no longer in the labels: nothing to compare with
+        row_results.append(_evaluate_row(records[article_id], articles[article_id], label, place_checker))
 
     scored = [r for r in row_results if r.status == SCORED]
     usefulness = score_usefulness([(r.human_useful, r.model_useful) for r in scored])
@@ -99,8 +99,9 @@ def _evaluate_row(record: dict, article: Article, label: HumanLabel,
     """Classify one record (scored or failed) and, if scorable, run the checks and item matching."""
     human_items = label.items
     result = RowResult(
-        row=record["row"],
         article_id=label.article_id,
+        labeler=label.labeler,
+        split=label.split,
         status=SCORED,
         human_useful=label.useful,
         human_items=human_items,
@@ -122,7 +123,6 @@ def _evaluate_row(record: dict, article: Article, label: HumanLabel,
     result.model_reason = parsed["reason"]
     result.borderline = parsed["borderline"]
     result.model_items = parsed["items"]
-    result.model_findings = parsed["findings"]
     result.violations = find_rule_violations(parsed, article.text, place_checker)
     result.exact_match = match_items(human_items, parsed["items"], EXACT_KEY_FIELDS)
     # Items left over after the exact comparison: pair those of the same kind and place, so that
@@ -131,19 +131,18 @@ def _evaluate_row(record: dict, article: Article, label: HumanLabel,
     return result
 
 
-def default_rows_to_run(
-    labels: dict[int, HumanLabel],
-    example_rows: frozenset[int],
-    extra_excluded_rows: frozenset[int] = frozenset(),
-) -> list[int]:
-    """The rows to run and score. A row is left out when it:
-      - has no human label (useful is None),
-      - is marked needs_relook (the labeler is unsure),
-      - is one of the solved examples inside the prompt (the model has seen its answer), or
-      - is in the extra exclusion set.
+def default_ids_to_run(
+    labels: dict[str, HumanLabel],
+    split: str,
+    example_ids: frozenset[str],
+    extra_excluded_ids: frozenset[str] = frozenset(),
+) -> list[str]:
+    """The articles to run and score: every article of one split, except those that are
+      - one of the solved examples inside the prompt (the model has seen its answer), or
+      - in the extra exclusion set.
     """
-    skipped = example_rows | extra_excluded_rows
+    skipped = example_ids | extra_excluded_ids
     return sorted(
-        row for row, label in labels.items()
-        if label.useful is not None and not label.needs_relook and row not in skipped
+        article_id for article_id, label in labels.items()
+        if label.split == split and article_id not in skipped
     )

@@ -38,11 +38,11 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
     """Call the model for one article and return a record ready to write to the run log.
 
     A failed call never raises: the error is stored in the record so one bad article
-    cannot stop a long run, and the row can be retried later.
+    cannot stop a long run, and the article can be retried later.
     """
     record = {
-        "row": article.row,
         "article_id": article.article_id,
+        "split": article.split,
         "model": config.MODEL_ID,
         "finish_reason": None,
         "prompt_tokens": None,

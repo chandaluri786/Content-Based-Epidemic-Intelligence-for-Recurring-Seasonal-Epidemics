@@ -16,7 +16,7 @@ def load_system_prompt(path: Path) -> str:
 
 
 def load_examples(path: Path) -> list[dict]:
-    """Read the solved examples: records with scan_date, link, article, answer, source_row."""
+    """Read the solved examples: records with article_id, scan_date, link, article and answer."""
     return json.loads(path.read_text(encoding="utf-8"))
 
 

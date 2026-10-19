@@ -2,6 +2,7 @@
   {
     "example": 1,
     "source_row": 202,
+    "article_id": "20180731120000-1708",
     "teaches": "first case of the year; the day named by a weekday",
     "scan_date": "2018-07-31",
     "link": "https://timesofindia.indiatimes.com/city/kolkata/health-dept-issues-swine-flu-alert-in-kolkata/articleshow/65213324.cms",
@@ -34,6 +35,7 @@
   {
     "example": 2,
     "source_row": 216,
+    "article_id": "20161222191500-494",
     "teaches": "not useful: vaccination advice only",
     "scan_date": "2016-12-22",
     "link": "http://www.hngnews.com/cambridge_deerfield/article_fcdfa654-c7b4-11e6-ac8e-fb6a0d37fa3f.html",
@@ -49,6 +51,7 @@
   {
     "example": 3,
     "source_row": 207,
+    "article_id": "20170710080000-1685",
     "teaches": "active season: last month, a count plus an ongoing trend; a finding",
     "scan_date": "2017-07-10",
     "link": "http://www.dailytelegraph.com.au/newslocal/central-coast/not-too-late-to-get-flu-jab-as-dreaded-lurgy-hits-coast/news-story/b030052216f2a3d72c63756ba805eaa9?nk=40b9f54b6d576106c1e509e5589b9808-1499673010",
@@ -103,6 +106,7 @@
   {
     "example": 4,
     "source_row": 203,
+    "article_id": "20171204234500-813",
     "teaches": "a named death with a stated day",
     "scan_date": "2017-12-04",
     "link": "https://www.buzzfeed.com/carolinekee/arizona-woman-dies-from-flu-day-after-diagnosis",
@@ -136,6 +140,7 @@
   {
     "example": 5,
     "source_row": 243,
+    "article_id": "20230113141500-1240",
     "teaches": "not useful: animal-only flu",
     "scan_date": "2023-01-13",
     "link": "https://www.thehindu.com/news/national/kerala/bird-flu-confirmed-at-punnapra/article66374358.ece",
@@ -151,6 +156,7 @@
   {
     "example": 6,
     "source_row": 49,
+    "article_id": "20161218114500-317",
     "teaches": "season starting with no cases yet (trend in summary words); suspected patients",
     "scan_date": "2016-12-18",
     "link": "http://www.hindustantimes.com/delhi/delhi-hospitals-gear-up-as-swine-flu-season-arrives/story-5JhRMG5eFwP0piZV1QygdP.html",
@@ -199,6 +205,7 @@
   {
     "example": 7,
     "source_row": 231,
+    "article_id": "20221223163000-1002",
     "teaches": "not useful: cold-type illness with other causes named",
     "scan_date": "2022-12-23",
     "link": "https://www.thehindu.com/news/cities/Mangalore/jamboree-children-report-cold-cough-and-fever/article66298057.ece",
@@ -214,6 +221,7 @@
   {
     "example": 8,
     "source_row": 208,
+    "article_id": "20230204064500-404",
     "teaches": "earlier this week; about two weeks back; an outbreak trend",
     "scan_date": "2023-02-04",
     "link": "https://timesofindia.indiatimes.com/city/vadodara/swine-flu-scare-at-godhra-medical-college/articleshow/97593955.cms",
@@ -280,6 +288,7 @@
   {
     "example": 9,
     "source_row": 83,
+    "article_id": "20160129010000-168",
     "teaches": "last three months; trend words in summary; a finding",
     "scan_date": "2016-01-29",
     "link": "http://beyazgazete.com/haber/2016/1/29/turkey-aciklamasi-57-people-died-from-swine-flu-in-3-months-3090462.html",
@@ -368,6 +377,7 @@
   {
     "example": 10,
     "source_row": 282,
+    "article_id": "20220531134500-410",
     "teaches": "not useful: flu only as a comparison",
     "scan_date": "2022-05-31",
     "link": "https://www.chemistryworld.com/news/what-is-the-future-of-covid-19-pharmaceuticals/4015690.article",
@@ -383,6 +393,7 @@
   {
     "example": 11,
     "source_row": 143,
+    "article_id": "20170921081500-1730",
     "teaches": "a territory gives its country; epidemic declared; a finding",
     "scan_date": "2017-09-21",
     "link": "http://www.guampdn.com/story/news/2017/09/21/flu-epidemic-hits-guam-says-public-health-agency/687997001/",
@@ -421,6 +432,7 @@
   {
     "example": 12,
     "source_row": 298,
+    "article_id": "20150803221500-1543",
     "teaches": "not useful: counts ended months before the article",
     "scan_date": "2015-08-03",
     "link": "http://indianexpress.com/article/cities/delhi/swine-flu-patients-spent-17-62-times-per-capita-income-on-treatment-study/",
@@ -436,6 +448,7 @@
   {
     "example": 13,
     "source_row": 210,
+    "article_id": "20210818104500-122",
     "teaches": "a toll up to a day; \"more than\" a number; an undated article",
     "scan_date": "2021-08-18",
     "link": "https://eturbonews.com/109276/70-year-old-swiss-tourist-dies-swine-flu-india/",
@@ -485,6 +498,7 @@
   {
     "example": 14,
     "source_row": 211,
+    "article_id": "20220801020000-189",
     "teaches": "a small group in an article about another disease",
     "scan_date": "2022-08-01",
     "link": "https://bangaloremirror.indiatimes.com/bangalore/others/experts-trace-monkeypox-cases-in-india-to-us-and-thailand/articleshow/93261110.cms",
@@ -518,6 +532,7 @@
   {
     "example": 15,
     "source_row": 215,
+    "article_id": "20161124090000-1105",
     "teaches": "not useful: a vaccine launch; Hib is not flu",
     "scan_date": "2016-11-24",
     "link": "http://www.business-standard.com/article/pti-stories/sanofi-pasteur-launches-6-in-1-paediatric-vaccine-in-india-116112400420_1.html",
@@ -533,6 +548,7 @@
   {
     "example": 16,
     "source_row": 251,
+    "article_id": "20161231110000-588",
     "teaches": "human bird flu deaths; Hong Kong counted under China",
     "scan_date": "2016-12-31",
     "link": "http://www.gdnonline.com/Details/152092",
@@ -565,6 +581,7 @@
   {
     "example": 17,
     "source_row": 264,
+    "article_id": "20160105110000-306",
     "teaches": "not useful: totals of a closed year",
     "scan_date": "2016-01-05",
     "link": "http://timesofindia.indiatimes.com/city/ahmedabad/In-2015-city-saw-65-rise-in-fever-related-emergencies/articleshow/50449784.cms",
@@ -580,6 +597,7 @@
   {
     "example": 18,
     "source_row": 129,
+    "article_id": "20181207033000-606",
     "teaches": "a statewide trend stated today",
     "scan_date": "2018-12-07",
     "link": "https://katu.com/news/local/oregon-schools-reporting-increase-in-student-flu-cases",
@@ -621,6 +639,7 @@
   {
     "example": 19,
     "source_row": 192,
+    "article_id": "20150612211500-446",
     "teaches": "events on different days for one patient",
     "scan_date": "2015-06-12",
     "link": "http://indianexpress.com/article/cities/mumbai/45-year-old-woman-dies-of-swine-flu/",
@@ -672,6 +691,7 @@
   {
     "example": 20,
     "source_row": 225,
+    "article_id": "20180305080000-411",
     "teaches": "not useful: flu only in a caption",
     "scan_date": "2018-03-05",
     "link": "https://article.wn.com/view/2018/03/05/The_killer_disease_with_no_vaccine/",
@@ -687,6 +707,7 @@
   {
     "example": 21,
     "source_row": 197,
+    "article_id": "20150713130000-86",
     "teaches": "a positive test with unknown cause of death is a case, not a death",
     "scan_date": "2015-07-13",
     "link": "http://www.medindia.net/news/public-health-officials-in-south-india-on-alert-after-one-case-of-swine-flu-150993-1.htm",
@@ -719,6 +740,7 @@
   {
     "example": 22,
     "source_row": 297,
+    "article_id": "20180824074500-897",
     "teaches": "not useful: a plan to teach about flu",
     "scan_date": "2018-08-24",
     "link": "http://www.xinhuanet.com/english/2018-08/24/c_137415414.htm",
@@ -734,6 +756,7 @@
   {
     "example": 23,
     "source_row": 171,
+    "article_id": "20160214000000-1213",
     "teaches": "trend fallback: people dying, no count",
     "scan_date": "2016-02-14",
     "link": "http://indianexpress.com/article/cities/delhi/will-use-every-inch-of-space-to-double-beds-in-hospitals-satyendar-jain/",
@@ -782,6 +805,7 @@
   {
     "example": 24,
     "source_row": 76,
+    "article_id": "20241109004500-270",
     "teaches": "so far this year; a national agency gives a country only",
     "scan_date": "2024-11-09",
     "link": "https://www.bemidjipioneer.com/health/public-health-services-in-southeast-minnesota-urge-farms-to-take-advantage-of-free-seasonal-flu-shots",
@@ -815,6 +839,7 @@
   {
     "example": 25,
     "source_row": 315,
+    "article_id": "20170713060000-636",
     "teaches": "not useful: an investment remark",
     "scan_date": "2017-07-13",
     "link": "http://www.fool.com.au/2017/07/13/where-i-would-invest-25000-in-the-share-market-today/",
@@ -830,6 +855,7 @@
   {
     "example": 26,
     "source_row": 80,
+    "article_id": "20180713050000-509",
     "teaches": "a death and a hospital total; the hospital city; since April",
     "scan_date": "2018-07-13",
     "link": "https://www.2gb.com/child-influenza-death-sparks-flu-vaccine-warning/",
@@ -880,6 +906,7 @@
   {
     "example": 27,
     "source_row": 128,
+    "article_id": "20191010121500-866",
     "teaches": "not useful, but with a finding on season timing",
     "scan_date": "2019-10-10",
     "link": "https://www.wptv.com/news/state/publix-offers-10-gift-cards-to-get-your-flu-shot",
@@ -900,6 +927,7 @@
   {
     "example": 28,
     "source_row": 46,
+    "article_id": "20180712233000-524",
     "teaches": "week ending and between two dates; the scan date as article date",
     "scan_date": "2018-07-12",
     "link": "http://www.dailymail.co.uk/wires/aap/article-5948789/Child-death-spurs-NSW-flu-vaccine-warning.html",
@@ -980,6 +1008,7 @@
   {
     "example": 29,
     "source_row": 105,
+    "article_id": "20240405130000-1159",
     "teaches": "this week",
     "scan_date": "2024-04-05",
     "link": "https://kffhealthnews.org/morning-breakout/as-bird-flu-spreads-to-more-cows-top-expert-explains-threat-to-humans/",
@@ -1013,6 +1042,7 @@
   {
     "example": 30,
     "source_row": 302,
+    "article_id": "20161212211500-423",
     "teaches": "not useful: norovirus and \"stomach flu\"",
     "scan_date": "2016-12-12",
     "link": "http://kingfm.com/norovirus-outbreaks-reported-in-cheyenne-casper/",
@@ -1028,6 +1058,7 @@
   {
     "example": 31,
     "source_row": 97,
+    "article_id": "20230421074500-899",
     "teaches": "first fortnight; a percentage goes in words",
     "scan_date": "2023-04-21",
     "link": "https://www.bendigoadvertiser.com.au/story/8167589/waning-immunity-and-omicron-sublineages-the-cause-of-covid-rise/",
@@ -1060,6 +1091,7 @@
   {
     "example": 32,
     "source_row": 149,
+    "article_id": "20231212200000-1395",
     "teaches": "not useful: flu as a metaphor",
     "scan_date": "2023-12-12",
     "link": "https://www.the-star.co.ke/counties/coast/2023-12-12-new-sh50m-mikindani-market-to-open-in-january/",
@@ -1075,6 +1107,7 @@
   {
     "example": 33,
     "source_row": 140,
+    "article_id": "20231220124500-515",
     "teaches": "past four weeks; a percentage goes in words",
     "scan_date": "2023-12-20",
     "link": "https://www.cnn.com/2023/12/20/health/holiday-virus-rsv-covid-flu-winter-wellness/",
@@ -1108,6 +1141,7 @@
   {
     "example": 34,
     "source_row": 30,
+    "article_id": "20221010103000-447",
     "teaches": "last week (Monday to Sunday)",
     "scan_date": "2022-10-10",
     "link": "https://nystateofpolitics.com/state-of-politics/new-york/ny-state-of-politics/2022/10/10/new-york-health-officials-launch-campaign-for-flu--covid-shots",
@@ -1140,6 +1174,7 @@
   {
     "example": 35,
     "source_row": 150,
+    "article_id": "20171018120000-472",
     "teaches": "not useful: flu-like symptoms as a side effect",
     "scan_date": "2017-10-18",
     "link": "https://www.prnewswire.com/news-releases/novartis-drug-promacta-shows-long-term-disease-control-for-chronicpersistent-immune-thrombocytopenia-itp-300538507.html",
@@ -1155,6 +1190,7 @@
   {
     "example": 36,
     "source_row": 95,
+    "article_id": "20241207120000-520",
     "teaches": "the broader total is kept over its parts",
     "scan_date": "2024-12-07",
     "link": "https://www.turlockjournal.com/news/local/county-records-first-flu-death-of-season/",
@@ -1204,6 +1240,7 @@
   {
     "example": 37,
     "source_row": 111,
+    "article_id": "20211125214500-727",
     "teaches": "not useful: the nickname \"little flu\" for COVID-19",
     "scan_date": "2021-11-25",
     "link": "https://www.justiceinfo.net/en/84739-bolsonaro-against-brazil-resuming-carnival.html",
@@ -1219,6 +1256,7 @@
   {
     "example": 38,
     "source_row": 137,
+    "article_id": "20240621143000-1462",
     "teaches": "hospitalized over cases when the patient has gone home from hospital",
     "scan_date": "2024-06-21",
     "link": "https://en.antaranews.com/news/316620/indonesia-amps-up-surveillance-to-prevent-bird-flu-in-humans",
@@ -1251,6 +1289,7 @@
   {
     "example": 39,
     "source_row": 87,
+    "article_id": "20240515193000-617",
     "teaches": "a week number with a stated range; several items in one article",
     "scan_date": "2024-05-15",
     "link": "https://reliefweb.int/map/world/epidemic-and-emerging-disease-alerts-pacific-14-may-2024",
@@ -1372,6 +1411,7 @@
   {
     "example": 40,
     "source_row": 173,
+    "article_id": "20220419050000-747",
     "teaches": "not useful: a forecast for the coming winter",
     "scan_date": "2022-04-19",
     "link": "https://www.dailymail.co.uk/news/article-10730175/Babies-extreme-risk-severe-sickness-winter-NOT-Covid.html",
@@ -1387,6 +1427,7 @@
   {
     "example": 41,
     "source_row": 185,
+    "article_id": "20161202200000-369",
     "teaches": "first death of the season; a roundup line that is not about flu is left out",
     "scan_date": "2016-12-02",
     "link": "http://californiahealthline.org/morning-briefing/friday-december-2-2016/",
@@ -1419,6 +1460,7 @@
   {
     "example": 42,
     "source_row": 188,
+    "article_id": "20151118000000-1856",
     "teaches": "not useful: the 1918 pandemic only",
     "scan_date": "2015-11-18",
     "link": "http://www.theobserver.com/2015/11/honoring-americas-veterans/",
@@ -1434,6 +1476,7 @@
   {
     "example": 43,
     "source_row": 117,
+    "article_id": "20170111071500-1522",
     "teaches": "a suspected case; the place filled in from the city",
     "scan_date": "2017-01-11",
     "link": "http://www.hindustantimes.com/lucknow/magh-mela-area-faces-swine-flu-scare/story-V0s9btZSDrboEAhE7NMx1I.html",

@@ -18,6 +18,23 @@ STRICT_KEY_FIELDS = ("kind", "strain", "city", "state", "country", "start_date",
 RELAXED_KEY_FIELDS = ("kind", "strain", "city", "state", "country")
 
 
+# The labeling rulebook writes the strain as the article names it ("swine flu", "H1N1") and says
+# that names are matched up when scoring. Keys and values are in the form _normalise produces
+# (lower case, single spaces). Subtype codes (H5N1, H7N9, ...) are deliberately not merged with
+# generic names such as "bird flu": when an article gives both, the rulebook asks for the code.
+STRAIN_SYNONYMS = {
+    "swine flu": "h1n1",
+    "2009 h1n1": "h1n1",
+    "influenza a/h1pdm": "h1n1",
+    "bird flu": "avian flu",
+    "bird flue": "avian flu",
+    "avian influenza": "avian flu",
+    "a(h5n2)": "h5n2",
+    "type a influenza": "influenza a",
+    "influenza (a&b)": "influenza a & b",
+}
+
+
 def safe_divide(numerator: float, denominator: float) -> float | None:
     """Divide, returning None (shown as 'n/a') instead of crashing when the denominator is 0."""
     return numerator / denominator if denominator else None
@@ -89,14 +106,20 @@ def _normalise(value) -> str:
     return " ".join(str(value).lower().split())
 
 
+def _field_value(item: dict, name: str) -> str:
+    """One field of an item in comparable form; strain names are mapped to one spelling."""
+    value = _normalise(item.get(name))
+    return STRAIN_SYNONYMS.get(value, value) if name == "strain" else value
+
+
 def _item_key(item: dict, key_fields: tuple[str, ...]) -> tuple:
-    return tuple(_normalise(item.get(name)) for name in key_fields)
+    return tuple(_field_value(item, name) for name in key_fields)
 
 
 def differing_fields(human_item: dict, model_item: dict) -> list[str]:
     """Names of the fields (evidence excluded) on which two items disagree."""
     return [name for name in EXACT_KEY_FIELDS
-            if _normalise(human_item.get(name)) != _normalise(model_item.get(name))]
+            if _field_value(human_item, name) != _field_value(model_item, name)]
 
 
 @dataclass

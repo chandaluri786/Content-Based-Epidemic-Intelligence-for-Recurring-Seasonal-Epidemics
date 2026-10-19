@@ -29,15 +29,14 @@ ARTICLE = (
 EVERY_PLACE_IS_REAL = PlaceChecker(lookup=lambda field, value: {"found": True, "top_match": value})
 
 
-def reply(evidence, findings=None, useful=True):
+def reply(evidence, useful=True):
     """A minimal valid model reply with one item carrying the given evidence."""
     item = {
         "kind": "cases", "strain": None, "number": 12, "status": "confirmed", "total_or_new": "new",
         "city": "Springfield", "state": None, "country": None, "start_date": None, "end_date": None,
         "words": None, "evidence": evidence,
     }
-    return {"useful": useful, "borderline": False, "reason": "x", "items": [item],
-            "findings": findings or []}
+    return {"useful": useful, "borderline": False, "reason": "x", "items": [item]}
 
 
 class QuoteCheckTest(unittest.TestCase):
@@ -85,18 +84,16 @@ class RuleViolationTest(unittest.TestCase):
     def test_one_bad_quote_among_good_ones_is_still_reported(self):
         self.assertEqual(len(self.violations(reply([self.GOOD_QUOTE, "Made up sentence."]))), 1)
 
-    def test_invented_finding_sentence_is_reported(self):
-        findings = [{"country": "USA", "finding": "Flu season peaks in March."}]
-        violations = self.violations(reply(["The county total is now 85."], findings))
-        self.assertTrue(any(v.startswith("(a) finding 1") for v in violations))
+    def test_findings_are_not_required(self):
+        parsed = reply([self.GOOD_QUOTE])
+        self.assertNotIn("findings", parsed)
+        self.assertEqual(find_shape_errors(parsed), [])
 
-    def test_genuine_finding_sentence_passes(self):
-        findings = [{"country": "USA", "finding": "The county total is now 85."}]
-        self.assertEqual(self.violations(reply(["The county total is now 85."], findings)), [])
-
-    def test_malformed_findings_are_a_shape_error(self):
-        parsed = reply(["The county total is now 85."], findings=["not an object"])
-        self.assertTrue(any("findings" in e for e in find_shape_errors(parsed)))
+    def test_findings_left_over_from_prompt_v2_0_are_ignored(self):
+        # Prompt v2.0 still asks for findings; an invented sentence there is neither an error nor a violation.
+        parsed = {**reply([self.GOOD_QUOTE]), "findings": [{"country": "USA", "finding": "Made up."}]}
+        self.assertEqual(find_shape_errors(parsed), [])
+        self.assertEqual(self.violations(parsed), [])
 
 
 if __name__ == "__main__":

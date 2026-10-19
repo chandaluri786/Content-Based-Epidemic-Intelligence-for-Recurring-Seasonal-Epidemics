@@ -10,7 +10,9 @@ from datetime import date
 from flu_extractor.places import PLACE_FIELDS, PlaceChecker
 
 VALID_KINDS = {"cases", "deaths", "hospitalized", "trend"}
-REQUIRED_TOP_LEVEL = ("useful", "borderline", "reason", "items", "findings")
+# Prompt v2.0 also asked for "findings" (season start/peak sentences). The rulebook dropped them, so a
+# reply may still carry the key; it is ignored.
+REQUIRED_TOP_LEVEL = ("useful", "borderline", "reason", "items")
 REQUIRED_ITEM_FIELDS = (
     "kind", "strain", "number", "status", "total_or_new", "city", "state",
     "country", "start_date", "end_date", "words", "evidence",
@@ -44,12 +46,6 @@ def find_shape_errors(parsed: dict) -> list[str]:
         errors.append("'useful' is not true/false")
     if not isinstance(parsed["items"], list):
         return errors + ["'items' is not a list"]
-    findings = parsed["findings"]
-    if not (isinstance(findings, list) and all(
-        isinstance(f, dict) and isinstance(f.get("country"), str) and isinstance(f.get("finding"), str)
-        for f in findings
-    )):
-        errors.append("'findings' must be a list of objects with string 'country' and 'finding'")
 
     for index, item in enumerate(parsed["items"], start=1):
         label = f"item {index}"
@@ -125,12 +121,6 @@ def find_rule_violations(parsed: dict, article_text: str, place_checker: PlaceCh
     # (g) a not-useful article has no items
     if not parsed["useful"] and items:
         violations.append("(g) useful is false but items are present")
-
-    # (a) every finding sentence is copied from the article
-    for index, finding in enumerate(parsed["findings"], start=1):
-        problem = find_quote_problem(finding["finding"], article_text)
-        if problem:
-            violations.append(f"(a) finding {index}: sentence {problem}: {finding['finding'][:60]!r}")
 
     for index, item in enumerate(items, start=1):
         label = f"item {index} ({item['kind']})"
