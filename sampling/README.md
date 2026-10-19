@@ -17,6 +17,9 @@ The rules and the reasons behind them are in `sampling_algorithm.md` in the team
 | `make_label_packets.py` | Splits the sample into one labeling packet per team member (see [Labeling packets](#labeling-packets))                                             |
 | `test_make_label_packets.py` | Tests for the split: even mix, round-1 picks, check rotation, same seed gives same packets                                                    |
 | `HOW_TO_LABEL.md`      | Short instructions for labelers, copied into every packet folder                                                                                    |
+| `make_dev_test_split.py` | Splits the 1,200 labeled articles into dev (about 400) and test (about 800) (see [Dev/test split](#devtest-split))                              |
+| `test_make_dev_test_split.py` | Tests for the dev/test split: sizes, useful share, same-story groups, rule coverage, same seed gives same split                             |
+| `split/`               | The frozen split (`dev_test_split.csv`) and its report (`split_report.md`); kept in git                                                            |
 
 ## How to run
 
@@ -56,6 +59,24 @@ Reads `output/sample_1200.jsonl` and writes `output/labeling/` (options: `--samp
 | `<name>_items.csv` | One row per extracted statement, linked by `article_id` (header only, to fill in) |
 | `assignment_key.csv` | Every article's owner, whether it is in round 1, who checks it, and its bucket |
 | `HOW_TO_LABEL.md` | The labeler instructions |
+
+## Dev/test split
+
+Once every sheet follows `sampling_and_labeling_guide.md`, the 1,200 labeled articles are split once into dev (one third) and test (two thirds):
+
+```bash
+python sampling/make_dev_test_split.py
+```
+
+It reads `output/sample_1200.jsonl` and the four labelers' `output/labeling/<name>_{labels,items}.csv`, and writes `split/dev_test_split.csv` (`article_id, split, labeler, useful, bucket, country, year, story_group, tags`) and `split/split_report.md`.
+
+- **Natural mix.** Dev and test both keep the real share of useful articles (about 26%), so dev scores predict test scores. The prompt's few-shot examples are picked from dev only, at about half useful, and are then left out of dev scoring.
+- **Stratified.** Quotas are taken one level at a time: useful or not, then bucket, then labeler, then country.
+- **Same story, same set.** Articles whose texts share at least 30% of their 5-word phrases, share an evidence sentence, or report the same figure (same kind, a number of at least 10, same place, end dates within 3 days) form one story group, and a group goes to one set.
+- **Every rule in dev.** Each article is tagged with the rules it exercises (from its items, its bucket and the harmonising notes). Matched story groups are then swapped until every tag has min(3, half its total) dev articles.
+- **Frozen.** The split is in git. The script refuses to overwrite it; use `--force` only before prompt tuning starts. Never look at model errors on test while tuning.
+
+The first split (seed 42): dev 397 articles (104 useful), test 803 (208 useful); 21 story groups; 6 swaps; every tag met. The 3 round-1 check rows that still disagree with the owner are listed in the report, and the owner's label is used.
 
 ## How it works
 
@@ -135,5 +156,5 @@ The sample has 1,200 articles: 600 from the useful buckets (numbers 240, trend 2
 - **One story can fill a bucket.** In the first run, the 2016 news about Prince having the flu appeared in about 370 of the 1,300 unique articles in `P_A2_case_event`. Near-duplicate groups now catch copies of one wire story, but different write-ups of the same news are separate articles, so still watch for single stories.
 - Single-person illness ("treated for the flu", "battling the flu") counts as useful. About half of those matches are real; the rest are old anecdotes or advice. Labelers decide.
 - There is no `P_C_symptoms_only` bucket. Nothing in the data matched it convincingly.
-- This does not make the development and test split. Every sampled article carries its `season`, so the split can be applied by season after labeling.
+- The development and test split is made after labeling by `make_dev_test_split.py` (see [Dev/test split](#devtest-split)).
 - Page text was downloaded in 2026, so some pages no longer match what was published.
