@@ -1,13 +1,13 @@
 article_id,split,labeler,useful,bucket,country,year,story_group,tags
-20150512054500-40,test,Thanya,yes,P_A1_counts,IND,2015,20150512054500-40,date:since; kind:trend; trend:zero_or_low
+20150512054500-40,test,Thanya,yes,P_A1_counts,IND,2015,20150512054500-40,count:period_total; date:since; kind:cases; kind:deaths; kind:trend; trend:zero_or_low
 20150513004500-2030,test,Thanya,no,N_awareness,IND,2015,20150513004500-2030,no:N_awareness
 20150514061500-1486,test,Jahnavi,no,N_no_flu_text,IND,2015,20150514061500-1486,no:N_no_flu_text
 20150519221500-1084,test,Thanya,no,N_flu_idiom,IND,2015,20150519221500-1084,no:N_flu_idiom
 20150520103000-1172,dev,Thanya,no,P_B_trend_response,IND,2015,20150520103000-1172,no:P_B_trend_response; no:word_rules_said_useful
 20150521081500-1627,test,Jahnavi,no,P_A1_counts,IND,2015,20150521081500-1627,no:P_A1_counts; no:word_rules_said_useful
 20150527174500-462,dev,Thanya,yes,P_A2_case_event,IND,2015,20150527174500-462,count:period_total; kind:deaths; note:in_passing
-20150603061500-239,test,Manoj,no,N_other_flu_mention,IND,2015,20150603061500-239,no:N_other_flu_mention
-20150605213000-2429,test,Jahnavi,no,P_A1_counts,IND,2015,20150605213000-2429,no:P_A1_counts; no:word_rules_said_useful
+20150603061500-239,test,Manoj,yes,N_other_flu_mention,IND,2015,20150603061500-239,kind:cases; yes:word_rules_said_not_useful
+20150605213000-2429,test,Jahnavi,yes,P_A1_counts,IND,2015,20150605213000-2429,count:new_and_total; count:period_total; date:since; kind:cases; kind:deaths
 20150610100000-2065,test,Aditya,no,N_other_disease,IND,2015,20150610100000-2065,no:N_other_disease
 20150612211500-446,test,Jahnavi,yes,P_A2_case_event,IND,2015,20150612211500-446,date:since; kind:deaths; kind:hospitalized
 20150617010000-180,dev,Jahnavi,no,P_B_trend_response,IND,2015,20150617010000-180,no:P_B_trend_response; no:word_rules_said_useful
@@ -70,10 +70,10 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20151229161500-31,dev,Aditya,no,P_B_trend_response,IND,2015,20151229161500-31,no:P_B_trend_response; no:word_rules_said_useful
 20160104153000-1377,dev,Jahnavi,no,N_other_flu_mention,IND,2016,20160104153000-1377,no:N_other_flu_mention
 20160105110000-306,test,Jahnavi,no,N_other_disease,IND,2016,20160105110000-306,no:N_other_disease
-20160107003000-2210,dev,Thanya,yes,Z_zoonotic_human,USA,2016,20160107003000-2210,count:open_total; count:period_total; date:yesterday; kind:cases; strain:animal_flu_in_people
+20160107003000-2210,dev,Thanya,yes,Z_zoonotic_human,USA,2016,20160107003000-2210,count:open_total; count:period_total; date:since; date:yesterday; kind:cases; strain:animal_flu_in_people
 20160112161500-2786,test,Manoj,no,N_awareness,USA,2016,20160112161500-2786,no:N_awareness
 20160112191500-1518,test,Aditya,no,N_no_flu_text,USA,2016,20160112191500-1518,no:N_no_flu_text
-20160113124500-1363,dev,Jahnavi,yes,P_A1_counts,USA,2016,20160113124500-1363,count:period_total; date:since; kind:cases; kind:deaths; status:suspected
+20160113124500-1363,dev,Jahnavi,yes,P_A1_counts,USA,2016,20160113124500-1363,count:period_total; date:since; kind:cases; kind:deaths
 20160113143000-549,test,Manoj,no,N_awareness,IND,2016,20160113143000-549,no:N_awareness
 20160114073000-118,test,Manoj,yes,P_A1_counts,USA,2016,20160114073000-118,count:open_total; kind:deaths; kind:trend; trend:percentage
 20160114111500-1261,test,Jahnavi,yes,P_A1_counts,IND,2016,20160114111500-1261,count:new_and_total; count:open_total; date:weekday; kind:cases; kind:hospitalized
@@ -88,18 +88,18 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20160124063000-1593,test,Jahnavi,yes,P_A2_case_event,IND,2016,20160124063000-1593,date:weekday; kind:cases
 20160125121500-2253,dev,Manoj,no,N_research,USA,2016,20160125121500-2253,no:N_research
 20160125214500-1450,dev,Thanya,no,N_other_flu_mention,USA,2016,20160114154500-826,no:N_other_flu_mention
-20160127031500-887,dev,Manoj,yes,P_A1_counts,USA,2016,20160127031500-887,count:open_total; count:period_total; date:last_week; date:this_season; kind:cases; kind:trend; trend:percentage; trend:zero_or_low
+20160127031500-887,dev,Manoj,yes,P_A1_counts,USA,2016,20160127031500-887,count:open_total; count:period_total; date:last_week; kind:cases; kind:deaths; kind:trend; trend:percentage; trend:zero_or_low
 20160127160000-1692,test,Thanya,yes,P_A2_case_event,USA,2016,20160127160000-1692,date:last_week; date:since; kind:trend
 20160128204500-2120,dev,Manoj,no,N_animal_flu,USA,2016,20160128204500-2120,no:N_animal_flu
 20160129010000-168,dev,Jahnavi,yes,P_A1_counts,USA,2016,20160129010000-168,count:period_total; date:weekday; kind:deaths; kind:trend
 20160129043000-2247,dev,Manoj,yes,Z_zoonotic_human,USA,2016,20160129043000-2247,kind:cases; kind:hospitalized; strain:animal_flu_in_people
 20160130104500-564,dev,Jahnavi,yes,P_A1_counts,IND,2016,20160130104500-564,date:yesterday; kind:cases; status:suspected
-20160130121500-1152,dev,Manoj,yes,P_A1_counts,IND,2016,20160130104500-564,kind:cases
+20160130121500-1152,dev,Manoj,yes,P_A1_counts,IND,2016,20160130104500-564,date:yesterday; kind:cases; status:suspected
 20160201043000-1064,test,Aditya,yes,P_B_trend_response,USA,2016,20160201043000-1064,count:period_total; date:last_week; date:week_ending; kind:cases; kind:trend; trend:percentage; trend:strain_share
 20160201231500-1584,dev,Manoj,no,P_B_trend_response,USA,2016,20160201231500-1584,no:P_B_trend_response; no:word_rules_said_useful
 20160203001500-2155,test,Thanya,yes,P_A2_case_event,USA,2016,20160203001500-2155,kind:trend
 20160203204500-2443,test,Jahnavi,no,N_awareness,USA,2016,20160203204500-2443,no:N_awareness
-20160203234500-584,test,Manoj,yes,N_other_flu_mention,USA,2016,20160203234500-584,kind:deaths; kind:trend; yes:word_rules_said_not_useful
+20160203234500-584,test,Manoj,yes,N_other_flu_mention,USA,2016,20160203234500-584,count:new_and_total; count:open_total; kind:deaths; kind:hospitalized; kind:trend; yes:word_rules_said_not_useful
 20160205020000-230,dev,Manoj,no,P_B_trend_response,IND,2016,20160205020000-230,no:P_B_trend_response; no:word_rules_said_useful
 20160205170000-2309,test,Manoj,yes,N_awareness,IND,2016,20160205170000-2309,date:since; kind:deaths; yes:word_rules_said_not_useful
 20160206010000-2087,test,Manoj,no,N_animal_flu,IND,2016,20160206010000-2087,no:N_animal_flu
@@ -107,7 +107,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20160208150000-1592,test,Thanya,yes,P_A1_counts,IND,2016,20160208150000-1592,count:open_total; kind:cases; kind:deaths
 20160208201500-1688,test,Jahnavi,yes,P_B_trend_response,USA,2016,20160208201500-1688,kind:trend
 20160209031500-353,dev,Aditya,no,N_other_disease,IND,2016,20160209031500-353,no:N_other_disease
-20160210103000-2355,test,Manoj,yes,P_A1_counts,IND,2016,20160210103000-2355,count:open_total; date:yesterday; kind:cases; kind:deaths
+20160210103000-2355,test,Manoj,yes,P_A1_counts,IND,2016,20160210103000-2355,count:open_total; count:period_total; date:yesterday; kind:cases; kind:deaths
 20160210111500-1778,test,Thanya,no,N_history_only,IND,2016,20160210111500-1778,no:N_history_only; note:in_passing
 20160212060000-1296,test,Jahnavi,no,N_business_policy,IND,2016,20160212060000-1296,no:N_business_policy
 20160212091500-1224,test,Manoj,yes,P_A2_case_event,IND,2016,20160212091500-1224,count:new_and_total; count:period_total; date:since; date:weekday; kind:cases; kind:deaths; kind:trend
@@ -126,7 +126,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20160430100000-359,dev,Thanya,no,P_A1_counts,AUS,2016,20160430100000-359,no:P_A1_counts; no:word_rules_said_useful
 20160503060000-2066,dev,Jahnavi,no,N_animal_flu,AUS,2016,20160503060000-2066,no:N_animal_flu
 20160504091500-2907,test,Jahnavi,no,N_awareness,AUS,2016,20160504091500-2907,no:N_awareness
-20160506040000-1996,test,Manoj,yes,P_A1_counts,AUS,2016,20160506040000-1996,date:since; kind:trend
+20160506040000-1996,test,Manoj,yes,P_A1_counts,AUS,2016,20160506040000-1996,count:comparison_nearby; count:period_total; date:since; date:so_far_this_year; kind:cases; kind:trend; trend:percentage
 20160508074500-1617,dev,Thanya,no,N_other_flu_mention,AUS,2016,20160508074500-1617,no:N_other_flu_mention
 20160512230000-1404,dev,Manoj,yes,P_A2_case_event,AUS,2016,20160512230000-1404,kind:trend
 20160512234500-195,test,Aditya,no,N_no_flu_text,AUS,2016,20160512234500-195,no:N_no_flu_text
@@ -187,7 +187,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20161124090000-1105,test,Jahnavi,no,N_awareness,IND,2016,20161124090000-1105,no:N_awareness
 20161124110000-397,test,Aditya,no,N_other_disease,IND,2016,20161124110000-397,no:N_other_disease
 20161130173000-171,test,Thanya,no,N_other_flu_mention,USA,2016,20161130173000-171,no:N_other_flu_mention
-20161202200000-369,dev,Jahnavi,yes,P_A2_case_event,USA,2016,20161202200000-369,date:weekday; kind:deaths
+20161202200000-369,dev,Jahnavi,yes,P_A2_case_event,USA,2016,20161202200000-369,count:new_and_total; count:open_total; date:this_season; date:weekday; kind:deaths; kind:hospitalized
 20161205214500-963,test,Aditya,no,P_B_trend_response,IND,2016,20161205214500-963,no:P_B_trend_response; no:word_rules_said_useful
 20161205221500-184,test,Manoj,no,P_A1_counts,USA,2016,20161205221500-184,no:P_A1_counts; no:word_rules_said_useful
 20161206130000-1631,test,Thanya,no,N_animal_flu,IND,2016,20161206130000-1631,no:N_animal_flu
@@ -213,8 +213,8 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20161227231500-2770,test,Thanya,yes,P_B_trend_response,USA,2016,20161227231500-2770,kind:trend; trend:strain_share
 20161228034500-1203,test,Manoj,yes,P_A1_counts,USA,2016,20161228034500-1203,kind:trend
 20161228180000-1805,dev,Jahnavi,yes,P_B_trend_response,USA,2016,20161228180000-1805,kind:trend
-20161230001500-665,test,Thanya,yes,P_A1_counts,USA,2016,20161230001500-665,count:open_total; date:this_season; kind:cases; kind:hospitalized
-20161230170000-2179,test,Jahnavi,yes,P_A1_counts,USA,2016,20161230170000-2179,count:open_total; date:this_season; kind:cases
+20161230001500-665,test,Thanya,yes,P_A1_counts,USA,2016,20161230001500-665,count:open_total; date:this_season; kind:cases; kind:hospitalized; kind:trend
+20161230170000-2179,test,Jahnavi,yes,P_A1_counts,USA,2016,20161230170000-2179,count:open_total; date:this_season; kind:hospitalized; kind:trend
 20161231040000-1321,test,Jahnavi,no,P_A1_counts,IND,2016,20161231040000-1321,no:P_A1_counts; no:word_rules_said_useful
 20161231110000-588,dev,Jahnavi,yes,N_animal_flu,USA,2016,20161231110000-588,count:open_total; kind:deaths; strain:animal_flu_in_people; yes:word_rules_said_not_useful
 20170101021500-830,test,Aditya,yes,P_A2_case_event,IND,2017,20170101021500-830,date:weekday; kind:cases; status:suspected
@@ -222,7 +222,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20170103224500-1342,test,Aditya,no,N_other_flu_mention,IND,2017,20170103224500-1342,no:N_other_flu_mention
 20170108050000-1330,test,Thanya,no,N_research,IND,2017,20170108050000-1330,no:N_research
 20170111071500-1522,test,Jahnavi,yes,P_B_trend_response,IND,2017,20170111071500-1522,kind:cases; status:suspected
-20170111080000-1117,dev,Aditya,yes,P_A1_counts,IND,2017,20170111080000-1117,count:new_and_total; count:period_total; date:since; kind:cases; kind:deaths
+20170111080000-1117,dev,Aditya,yes,P_A1_counts,IND,2017,20170111080000-1117,count:new_and_total; count:open_total; count:period_total; date:since; kind:cases; kind:deaths
 20170111174500-1282,test,Manoj,no,P_B_trend_response,IND,2017,20170111174500-1282,no:P_B_trend_response; no:word_rules_said_useful
 20170112103000-2299,test,Aditya,no,N_animal_flu,IND,2017,20170112103000-2299,no:N_animal_flu
 20170112173000-229,test,Manoj,yes,N_history_only,IND,2017,20170112173000-229,count:period_total; date:since; date:yesterday; kind:cases; kind:deaths; yes:word_rules_said_not_useful
@@ -230,14 +230,14 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20170117031500-2510,test,Thanya,yes,P_A1_counts,IND,2017,20170117031500-2510,date:weekday; kind:cases
 20170118030000-2605,dev,Manoj,yes,N_other_flu_mention,IND,2017,20170118030000-2605,kind:trend; yes:word_rules_said_not_useful
 20170118223000-1025,test,Aditya,no,N_business_policy,IND,2017,20170118223000-1025,no:N_business_policy
-20170119031500-764,dev,Thanya,yes,P_A1_counts,IND,2017,20170119031500-764,count:period_total; date:since; date:weekday; kind:cases; kind:deaths
+20170119031500-764,dev,Thanya,yes,P_A1_counts,IND,2017,20170119031500-764,count:new_and_total; count:period_total; date:since; date:weekday; kind:cases; kind:deaths
 20170119083000-1556,dev,Jahnavi,yes,P_A2_case_event,IND,2017,20170119031500-764,count:new_and_total; count:period_total; date:since; date:weekday; kind:cases; kind:deaths; kind:hospitalized
 20170119133000-1838,test,Aditya,yes,P_B_trend_response,IND,2017,20170119133000-1838,kind:trend
 20170121073000-690,test,Manoj,yes,P_A2_case_event,IND,2017,20170121073000-690,count:new_and_total; count:open_total; date:this_season; date:weekday; kind:deaths
 20170501060000-1614,dev,Jahnavi,yes,P_B_trend_response,AUS,2017,20170501060000-1614,kind:cases
 20170503081500-1519,test,Aditya,yes,P_A2_case_event,AUS,2017,20170503081500-1519,kind:hospitalized
 20170505043000-827,test,Aditya,no,N_awareness,AUS,2017,20170505043000-827,no:N_awareness
-20170507120000-188,test,Manoj,yes,P_A1_counts,AUS,2017,20170507120000-188,count:period_total; date:so_far_this_year; kind:cases
+20170507120000-188,test,Manoj,yes,P_A1_counts,AUS,2017,20170507120000-188,count:period_total; date:so_far_this_year; date:weekday; kind:cases; kind:trend
 20170510163000-292,test,Thanya,no,N_other_flu_mention,AUS,2017,20170510163000-292,no:N_other_flu_mention
 20170514130000-104,test,Thanya,no,P_A2_case_event,AUS,2017,20170514130000-104,no:P_A2_case_event; no:word_rules_said_useful
 20170516123000-2552,dev,Manoj,no,P_B_trend_response,AUS,2017,20170516123000-2552,no:P_B_trend_response; no:word_rules_said_useful
@@ -268,8 +268,8 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20170709144500-1034,test,Jahnavi,no,N_research,AUS,2017,20170709144500-1034,no:N_research
 20170709230000-1373,dev,Jahnavi,no,N_other_disease,AUS,2017,20170709230000-1373,no:N_other_disease
 20170710080000-1685,dev,Jahnavi,yes,P_A2_case_event,AUS,2017,20170710080000-1685,count:comparison_nearby; count:period_total; date:last_month; kind:cases; kind:trend
-20170711121500-434,test,Thanya,yes,P_A1_counts,AUS,2017,20170711121500-434,count:period_total; date:last_week; kind:cases; kind:deaths; kind:trend; trend:strain_share
-20170712003000-1274,dev,Manoj,yes,P_B_trend_response,AUS,2017,20170712003000-1274,kind:trend; place:several_countries
+20170711121500-434,test,Thanya,yes,P_A1_counts,AUS,2017,20170711121500-434,count:period_total; date:last_week; date:since; kind:cases; kind:deaths; kind:trend; place:several_countries; place:territory; trend:strain_share
+20170712003000-1274,dev,Manoj,yes,P_B_trend_response,AUS,2017,20170712003000-1274,kind:trend; place:several_countries; trend:strain_share
 20170712113000-1353,test,Jahnavi,no,N_no_flu_text,AUS,2017,20170712113000-1353,no:N_no_flu_text
 20170712150000-71,test,Manoj,no,N_flu_idiom,AUS,2017,20170712150000-71,no:N_flu_idiom
 20170713034500-1398,dev,Manoj,no,N_other_flu_mention,AUS,2017,20170713034500-1398,no:N_other_flu_mention
@@ -283,7 +283,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20170928230000-2862,dev,Thanya,no,N_awareness,USA,2017,20170928230000-2862,no:N_awareness
 20170929204500-101,test,Jahnavi,no,N_flu_idiom,USA,2017,20170929204500-101,no:N_flu_idiom
 20171003233000-2458,test,Thanya,no,P_B_trend_response,USA,2017,20171003233000-2458,no:P_B_trend_response; no:word_rules_said_useful; note:forecast; note:in_passing
-20171007013000-1494,dev,Manoj,yes,P_A1_counts,USA,2017,20171007013000-1494,count:new_and_total; count:period_total; date:so_far_this_year; kind:cases; kind:hospitalized
+20171007013000-1494,dev,Manoj,yes,P_A1_counts,USA,2017,20171007013000-1494,count:new_and_total; count:open_total; count:period_total; date:since; date:so_far_this_year; kind:cases; kind:hospitalized; kind:trend
 20171009140000-299,dev,Aditya,yes,Z_zoonotic_human,USA,2017,20171009140000-299,kind:trend; strain:animal_flu_in_people
 20171011213000-513,dev,Jahnavi,no,P_B_trend_response,USA,2017,20171011213000-513,no:P_B_trend_response; no:word_rules_said_useful
 20171013170000-1863,test,Jahnavi,no,X_too_short,USA,2017,20171013170000-1863,no:X_too_short
@@ -307,7 +307,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20171114060000-1795,dev,Jahnavi,no,N_flu_idiom,USA,2017,20171114060000-1795,no:N_flu_idiom
 20171126033000-967,test,Aditya,no,N_awareness,USA,2017,20171126033000-967,no:N_awareness
 20171128214500-257,test,Manoj,no,N_other_disease,USA,2017,20171128214500-257,no:N_other_disease
-20171201021500-1341,dev,Manoj,no,N_other_flu_mention,USA,2017,20171201021500-1341,no:N_other_flu_mention
+20171201021500-1341,dev,Manoj,yes,N_other_flu_mention,USA,2017,20171201021500-1341,kind:cases; yes:word_rules_said_not_useful
 20171201150000-1044,test,Thanya,no,N_research,USA,2017,20171201150000-1044,no:N_research
 20171204234500-813,test,Jahnavi,yes,P_A2_case_event,USA,2017,20171204234500-813,date:weekday; kind:deaths
 20171206181500-18,test,Manoj,yes,P_B_trend_response,USA,2017,20171206181500-18,kind:trend
@@ -443,7 +443,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20181210160000-963,test,Jahnavi,no,N_awareness,USA,2018,20181210160000-963,no:N_awareness
 20181210174500-2522,test,Aditya,no,P_B_trend_response,USA,2018,20181210174500-2522,no:P_B_trend_response; no:word_rules_said_useful; note:past
 20181212191500-754,dev,Jahnavi,no,N_research,USA,2018,20181212191500-754,no:N_research
-20181212233000-1303,test,Manoj,yes,P_A1_counts,USA,2018,20181212233000-1303,count:new_and_total; count:open_total; date:this_season; kind:deaths; kind:trend
+20181212233000-1303,test,Manoj,yes,P_A1_counts,USA,2018,20181212233000-1303,count:new_and_total; count:open_total; date:this_season; kind:cases; kind:deaths; kind:hospitalized; kind:trend
 20181214060000-540,test,Thanya,no,P_A1_counts,USA,2018,20181214060000-540,no:P_A1_counts; no:word_rules_said_useful
 20181214224500-2641,test,Manoj,no,N_flu_idiom,USA,2018,20181214224500-2641,no:N_flu_idiom
 20181217000000-385,dev,Aditya,yes,P_A1_counts,USA,2018,20181217000000-385,kind:hospitalized; kind:trend
@@ -455,7 +455,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20181222184500-1322,dev,Thanya,no,P_B_trend_response,USA,2018,20181222184500-1322,no:P_B_trend_response; no:word_rules_said_useful
 20181223083000-170,test,Manoj,no,N_other_disease,USA,2018,20181223083000-170,no:N_other_disease
 20190123120000-5,test,Thanya,no,N_no_flu_text,KEN,2019,20180106084500-1487,no:N_no_flu_text
-20190126130000-947,test,Thanya,yes,P_A1_counts,KEN,2019,20190126130000-947,count:period_total; kind:cases; kind:deaths; status:suspected
+20190126130000-947,test,Thanya,yes,P_A1_counts,KEN,2019,20190126130000-947,count:new_and_total; count:period_total; date:weekday; kind:cases; kind:deaths; status:suspected
 20190131074500-1262,test,Aditya,no,N_research,KEN,2019,20190131074500-1262,no:N_research
 20190204103000-1527,test,Thanya,no,P_A2_case_event,KEN,2019,20190204103000-1527,no:P_A2_case_event; no:word_rules_said_useful
 20190209191500-1572,test,Manoj,no,N_other_disease,KEN,2019,20190209191500-1572,no:N_other_disease
@@ -497,7 +497,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20191118124500-1206,test,Aditya,yes,P_B_trend_response,USA,2019,20191118124500-1206,kind:trend
 20191119123000-1947,dev,Jahnavi,yes,P_B_trend_response,USA,2019,20191119123000-1947,date:since; kind:trend
 20191120010000-516,test,Thanya,yes,P_B_trend_response,USA,2019,20191120010000-516,date:this_season; kind:trend
-20191120054500-149,test,Manoj,no,P_A2_case_event,USA,2019,20191120054500-149,no:P_A2_case_event; no:word_rules_said_useful
+20191120054500-149,test,Manoj,yes,P_A2_case_event,USA,2019,20191120054500-149,kind:cases
 20191121031500-1418,test,Jahnavi,yes,P_A1_counts,USA,2019,20191121031500-1418,count:open_total; count:period_total; date:last_week; date:this_season; kind:cases; kind:deaths; kind:trend; status:suspected; trend:zero_or_low
 20191121223000-232,dev,Jahnavi,no,P_B_trend_response,BRA,2019,20191121223000-232,no:P_B_trend_response; no:word_rules_said_useful
 20191122180000-557,test,Aditya,no,N_no_flu_text,BRA,2019,20191122180000-557,no:N_no_flu_text
@@ -626,7 +626,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20211204194500-328,test,Manoj,no,P_A1_counts,BRA,2021,20211204194500-328,no:P_A1_counts; no:word_rules_said_useful
 20211207163000-398,test,Jahnavi,no,P_A1_counts,BRA,2021,20211207163000-398,no:P_A1_counts; no:word_rules_said_useful
 20211208161500-720,test,Manoj,no,P_A1_counts,BRA,2021,20211207163000-398,no:P_A1_counts; no:word_rules_said_useful
-20211208224500-429,test,Thanya,yes,P_A2_case_event,BRA,2021,20211208224500-429,kind:deaths; kind:trend; place:several_countries; strain:animal_flu_in_people
+20211208224500-429,test,Thanya,yes,P_A2_case_event,BRA,2021,20211208224500-429,count:new_and_total; count:period_total; date:since; kind:cases; kind:deaths; kind:hospitalized; kind:trend; place:several_countries; strain:animal_flu_in_people
 20211213113000-733,dev,Manoj,no,X_listing_garbled,BRA,2021,20211213113000-733,no:X_listing_garbled
 20211215101500-234,test,Manoj,no,N_other_flu_mention,BRA,2021,20211215101500-234,no:N_other_flu_mention
 20211215124500-1372,dev,Aditya,no,N_other_disease,BRA,2021,20211215124500-1372,no:N_other_disease
@@ -743,8 +743,8 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20220720001500-778,test,Aditya,no,N_awareness,IND,2022,20220720001500-778,no:N_awareness
 20220720123000-684,dev,Manoj,no,N_flu_idiom,IND,2022,20220720123000-684,no:N_flu_idiom
 20220722053000-323,test,Manoj,yes,P_A2_case_event,IND,2022,20220722053000-323,kind:cases
-20220723003000-988,dev,Thanya,yes,P_A1_counts,IND,2022,20220723003000-988,count:period_total; date:so_far_this_year; kind:cases; kind:deaths
-20220723063000-35,dev,Thanya,yes,P_A1_counts,IND,2022,20220723003000-988,count:period_total; date:weekday; kind:cases; kind:deaths; kind:trend
+20220723003000-988,dev,Thanya,yes,P_A1_counts,IND,2022,20220723003000-988,count:new_and_total; count:period_total; date:so_far_this_year; kind:cases; kind:deaths; kind:trend; status:suspected
+20220723063000-35,dev,Thanya,yes,P_A1_counts,IND,2022,20220723003000-988,count:open_total; count:period_total; date:weekday; kind:cases; kind:deaths; kind:trend
 20220723110000-185,dev,Thanya,yes,P_A1_counts,IND,2022,20220723003000-988,count:period_total; date:so_far_this_year; date:weekday; kind:cases; kind:deaths; kind:trend
 20220724204500-399,dev,Thanya,no,P_B_trend_response,IND,2022,20220724204500-399,no:P_B_trend_response; no:word_rules_said_useful
 20220725020000-191,dev,Aditya,no,P_B_trend_response,IND,2022,20220724204500-399,no:P_B_trend_response; no:word_rules_said_useful
@@ -828,7 +828,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20221109214500-1128,test,Aditya,no,N_other_flu_mention,USA,2022,20221109214500-1128,no:N_other_flu_mention
 20221112164500-659,dev,Manoj,no,N_history_only,USA,2022,20221112164500-659,no:N_history_only
 20221115230000-12,test,Aditya,yes,P_A1_counts,IND,2022,20221115230000-12,date:since; kind:trend
-20221125084500-261,dev,Manoj,yes,P_A1_counts,IND,2022,20221125084500-261,count:comparison_nearby; count:period_total; date:last_week; kind:cases; kind:trend; status:suspected
+20221125084500-261,dev,Manoj,yes,P_A1_counts,IND,2022,20221125084500-261,count:comparison_nearby; count:period_total; date:last_week; kind:cases; kind:trend
 20221205164500-1452,dev,Thanya,no,N_business_policy,IND,2022,20221205164500-1452,no:N_business_policy
 20221206041500-133,dev,Aditya,yes,P_A2_case_event,IND,2022,20221206041500-133,kind:trend
 20221206100000-820,test,Thanya,no,P_B_trend_response,IND,2022,20221206100000-820,no:P_B_trend_response; no:word_rules_said_useful
@@ -946,7 +946,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20230523121500-907,dev,Aditya,no,N_awareness,AUS,2023,20230523121500-907,no:N_awareness
 20230526001500-70,test,Manoj,no,N_other_flu_mention,AUS,2023,20230526001500-70,no:N_other_flu_mention
 20230526201500-617,dev,Thanya,no,P_A2_case_event,AUS,2023,20230526201500-617,no:P_A2_case_event; no:word_rules_said_useful
-20230528083000-181,dev,Thanya,yes,P_A1_counts,AUS,2023,20230528083000-181,count:period_total; date:so_far_this_year; kind:hospitalized
+20230528083000-181,dev,Thanya,yes,P_A1_counts,AUS,2023,20230528083000-181,count:period_total; date:so_far_this_year; kind:hospitalized; kind:trend
 20230531094500-249,dev,Jahnavi,no,P_A2_case_event,AUS,2023,20230526201500-617,no:P_A2_case_event; no:word_rules_said_useful
 20230601020000-1003,test,Aditya,no,P_B_trend_response,AUS,2023,20230601020000-1003,no:P_B_trend_response; no:word_rules_said_useful
 20230607110000-195,dev,Aditya,yes,P_A2_case_event,AUS,2023,20230607110000-195,date:last_week; date:past_week; kind:deaths; kind:trend; trend:percentage
@@ -1074,15 +1074,15 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20240506141500-1385,test,Aditya,yes,P_A1_counts,IND,2024,20240506141500-1385,count:new_and_total; count:open_total; date:weekday; kind:cases; kind:deaths
 20240507210000-153,dev,Manoj,no,N_business_policy,AUS,2024,20240507210000-153,no:N_business_policy
 20240508211500-1396,test,Thanya,no,N_no_flu_text,IND,2024,20240508211500-1396,no:N_no_flu_text
-20240509001500-619,dev,Manoj,yes,P_A1_counts,IND,2024,20240509001500-619,count:open_total; count:period_total; date:weekday; kind:cases; kind:deaths; status:suspected
-20240509071500-893,test,Manoj,yes,P_A1_counts,IND,2024,20240509071500-893,date:weekday; kind:deaths
+20240509001500-619,dev,Manoj,yes,P_A1_counts,IND,2024,20240509001500-619,count:open_total; count:period_total; date:weekday; kind:cases; kind:deaths; kind:hospitalized; kind:trend; status:suspected
+20240509071500-893,test,Manoj,yes,P_A1_counts,IND,2024,20240509071500-893,count:new_and_total; count:open_total; date:weekday; kind:deaths; kind:hospitalized
 20240509103000-1130,dev,Jahnavi,no,N_awareness,IND,2024,20240509103000-1130,no:N_awareness
 20240510084500-935,dev,Thanya,yes,P_B_trend_response,AUS,2024,20240510084500-935,kind:trend
 20240511111500-129,test,Jahnavi,yes,P_A2_case_event,IND,2024,20240511111500-129,kind:deaths; kind:hospitalized
 20240514083000-1040,test,Jahnavi,no,N_other_flu_mention,IND,2024,20240514083000-1040,no:N_other_flu_mention
 20240514134500-331,dev,Thanya,no,N_awareness,IND,2024,20240514134500-331,no:N_awareness
 20240514160000-1221,test,Aditya,yes,P_B_trend_response,IND,2024,20240514160000-1221,date:week_ending; kind:trend
-20240515193000-617,dev,Jahnavi,yes,P_A1_counts,AUS,2024,20240515193000-617,count:new_and_total; count:period_total; date:none_stated; date:week_number; kind:cases; kind:deaths; kind:hospitalized; kind:trend; place:territory; trend:percentage; trend:strain_share
+20240515193000-617,dev,Jahnavi,yes,P_A1_counts,AUS,2024,20240515193000-617,count:new_and_total; count:period_total; date:none_stated; date:week_number; kind:cases; kind:deaths; kind:hospitalized; kind:trend; place:several_countries; place:territory; trend:percentage; trend:strain_share
 20240518033000-494,dev,Jahnavi,yes,P_B_trend_response,AUS,2024,20240518033000-494,kind:trend
 20240518193000-670,test,Thanya,no,N_awareness,AUS,2024,20240518193000-670,no:N_awareness; note:animal; note:in_passing
 20240521000000-201,test,Thanya,no,P_A2_case_event,AUS,2024,20240521000000-201,no:P_A2_case_event; no:word_rules_said_useful
@@ -1129,7 +1129,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20240620191500-1657,test,Manoj,no,P_A1_counts,AUS,2024,20240620191500-1657,no:P_A1_counts; no:word_rules_said_useful
 20240621143000-1462,test,Jahnavi,yes,P_B_trend_response,IDN,2024,20240621143000-1462,kind:hospitalized; strain:animal_flu_in_people
 20240622011500-534,dev,Aditya,no,N_other_disease,AUS,2024,20240622011500-534,no:N_other_disease
-20240623111500-759,test,Manoj,no,P_A1_counts,IDN,2024,20240623111500-759,no:P_A1_counts; no:word_rules_said_useful; note:animal
+20240623111500-759,test,Manoj,yes,P_A1_counts,IDN,2024,20240623111500-759,count:open_total; kind:cases; kind:trend; note:animal; note:past; strain:animal_flu_in_people
 20240624151500-1127,dev,Manoj,no,N_animal_flu,IND,2024,20240624151500-1127,no:N_animal_flu
 20240628120000-1457,dev,Aditya,yes,P_B_trend_response,IND,2024,20240628120000-1457,kind:trend
 20240630150000-347,test,Manoj,yes,P_A1_counts,IND,2024,20240630150000-347,count:new_and_total; count:period_total; kind:cases; kind:deaths; kind:trend
@@ -1144,7 +1144,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20240705120000-1021,dev,Jahnavi,no,P_B_trend_response,IND,2024,20240705120000-1021,no:P_B_trend_response; no:word_rules_said_useful
 20240705130000-1238,test,Jahnavi,yes,Z_zoonotic_human,IND,2024,20240705130000-1238,kind:deaths; note:past; strain:animal_flu_in_people
 20240705153000-1185,test,Manoj,no,N_other_flu_mention,IDN,2024,20240705153000-1185,no:N_other_flu_mention
-20240707053000-209,dev,Manoj,yes,P_A1_counts,IDN,2024,20240707053000-209,date:none_stated; date:week_number; kind:cases; place:several_countries; place:territory; status:suspected
+20240707053000-209,dev,Manoj,yes,P_A1_counts,IDN,2024,20240707053000-209,count:comparison_nearby; date:none_stated; date:week_number; kind:cases; kind:hospitalized; kind:trend; place:several_countries; place:territory; status:suspected; trend:zero_or_low
 20240708141500-1365,test,Manoj,no,N_flu_idiom,IND,2024,20240708141500-1365,no:N_flu_idiom
 20240714143000-458,test,Aditya,no,P_B_trend_response,IND,2024,20240714143000-458,no:P_B_trend_response; no:word_rules_said_useful; note:forecast
 20240715093000-157,test,Aditya,no,N_other_flu_mention,IND,2024,20240715093000-157,no:N_other_flu_mention
@@ -1155,7 +1155,7 @@ article_id,split,labeler,useful,bucket,country,year,story_group,tags
 20241002201500-1753,test,Jahnavi,no,P_A2_case_event,USA,2024,20241002201500-1753,no:P_A2_case_event; no:word_rules_said_useful
 20241008214500-733,dev,Jahnavi,yes,P_A1_counts,USA,2024,20241008214500-733,count:open_total; kind:cases
 20241010131500-910,test,Aditya,yes,N_other_flu_mention,USA,2024,20241010131500-910,kind:trend; yes:word_rules_said_not_useful
-20241011024500-316,test,Manoj,yes,Z_zoonotic_human,USA,2024,20241011024500-316,count:period_total; date:so_far_this_year; kind:cases; place:several_countries; strain:animal_flu_in_people
+20241011024500-316,test,Manoj,yes,Z_zoonotic_human,USA,2024,20241011024500-316,count:new_and_total; count:period_total; date:last_month; date:so_far_this_year; kind:cases; place:several_countries; strain:animal_flu_in_people
 20241014191500-531,test,Jahnavi,no,N_flu_idiom,USA,2024,20241014191500-531,no:N_flu_idiom
 20241015184500-1309,dev,Aditya,no,X_listing_garbled,USA,2024,20241015184500-1309,no:X_listing_garbled
 20241017034500-1095,test,Thanya,yes,P_A1_counts,USA,2024,20241017034500-1095,kind:deaths

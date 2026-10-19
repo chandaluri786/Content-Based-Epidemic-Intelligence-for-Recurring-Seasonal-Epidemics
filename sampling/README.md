@@ -76,7 +76,7 @@ It reads `output/sample_1200.jsonl` and the four labelers' `output/labeling/<nam
 - **Every rule in dev.** Each article is tagged with the rules it exercises (from its items, its bucket and the harmonising notes). Matched story groups are then swapped until every tag has min(3, half its total) dev articles.
 - **Frozen.** The split is in git. The script refuses to overwrite it; use `--force` only before prompt tuning starts. Never look at model errors on test while tuning.
 
-The first split (seed 42): dev 397 articles (104 useful), test 803 (208 useful); 21 story groups; 6 swaps; every tag met. The 3 round-1 check rows that still disagree with the owner are listed in the report, and the owner's label is used.
+The first split (seed 42): dev 397 articles (104 useful), test 803 (208 useful); 21 story groups; 6 swaps; every tag met. The 3 round-1 check rows that still disagree with the owner are listed in the report, and the owner's label is used. After the label corrections of 2026-10-19 (check rows settled, two fixes while choosing prompt examples, the second rulebook audit) it is dev 107 useful, test 211 useful, with every tag still met; the report lists each correction.
 
 ## How it works
 
