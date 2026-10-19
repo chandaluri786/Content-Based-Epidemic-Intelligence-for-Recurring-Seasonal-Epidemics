@@ -1,0 +1,417 @@
+{
+  "city: allahabad": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Prayagraj, Allahabad, Prayagraj, Uttar Pradesh, 211001, India"
+  },
+  "city: barnstable": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Barnstable, Barnstable County, Massachusetts, United States"
+  },
+  "city: bhubaneswar": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Bhubaneswar, Bhubaneswar Municipal Corporation, Bhubaneswar (M.Corp.), Khordha, Odisha, 751001, India"
+  },
+  "city: brasilia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Brasília, Plano Piloto, Distrito Federal, Região Centro-Oeste, 70391-900, Brasil"
+  },
+  "city: chennai": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Chennai, Chennai Metropolitan Area, Chennai District, Tamil Nadu, India"
+  },
+  "city: delhi": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Delhi, Old Delhi, Delhi, India"
+  },
+  "city: godhra": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Godhra, Godhra Taluka, Panchmahal, Gujarat, 389001, India"
+  },
+  "city: harmanli": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Harmanlı, Bismil, Diyarbakır, Güneydoğu Anadolu Bölgesi, Türkiye"
+  },
+  "city: hyderabad": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+  },
+  "city: jodhpur": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Jodhpur, Jodhpur Tehsil, Jodhpur, Rajasthan, India"
+  },
+  "city: kolkata": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Kolkata, West Bengal, India"
+  },
+  "city: ludhiana": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Ludhiana, Ludhiana (West) Tahsil, Ludhiana, Punjab, 141001, India"
+  },
+  "city: macau": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "澳門 Macau, 999078, 中国"
+  },
+  "city: multan": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "ملتان, Gulshan, ضلع ملتان, ملتان ڈویژن, پنجاب, 66000, پاکستان"
+  },
+  "city: mumbai": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Mumbai, Mumbai Suburban District, Maharashtra, 400051, India"
+  },
+  "city: nagpur": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Nagpur City, Nagpur Urban Taluka, Nagpur, Maharashtra, India"
+  },
+  "city: nanchang": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "南昌市, 东湖区, 南昌市, 江西省, 330006, 中国"
+  },
+  "city: nanjing": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "南京市, 江苏省, 中国"
+  },
+  "city: new delhi": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "New Delhi, Delhi, India"
+  },
+  "city: phoenix": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Phoenix, Maricopa County, Arizona, United States"
+  },
+  "city: pune": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Pune, Pune City Subdistrict, Pune, Maharashtra, 411001, India"
+  },
+  "city: san diego": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "San Diego, San Diego County, California, United States"
+  },
+  "city: santa barbara": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Santa Barbara, Santa Barbara County, California, United States"
+  },
+  "city: silchar": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Silchar, Cachar, Assam, 788014, India"
+  },
+  "city: st. louis": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Saint Louis, Missouri, United States"
+  },
+  "city: sydney": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Sydney, New South Wales, Australia"
+  },
+  "city: westmead": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Westmead, Sydney, New South Wales, Australia"
+  },
+  "country: australia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Australia"
+  },
+  "country: azerbaijan": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Azərbaycan"
+  },
+  "country: bolivia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Bolivia"
+  },
+  "country: brazil": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Brasil"
+  },
+  "country: bulgaria": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "България"
+  },
+  "country: canada": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Canada"
+  },
+  "country: china": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "中国"
+  },
+  "country: ecuador": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Ecuador"
+  },
+  "country: egypt": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "مصر"
+  },
+  "country: el salvador": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "El Salvador"
+  },
+  "country: fiji": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Viti"
+  },
+  "country: france": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "France"
+  },
+  "country: georgia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "საქართველო"
+  },
+  "country: guatemala": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Guatemala"
+  },
+  "country: india": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "India"
+  },
+  "country: iran": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "ایران"
+  },
+  "country: micronesia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Micronesia"
+  },
+  "country: pakistan": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "پاکستان"
+  },
+  "country: russia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Россия"
+  },
+  "country: turkey": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Türkiye"
+  },
+  "country: usa": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "United States"
+  },
+  "state: alberta": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Alberta, Canada"
+  },
+  "state: anhui": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "安徽省, 中国"
+  },
+  "state: arizona": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Arizona, United States"
+  },
+  "state: assam": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Assam, India"
+  },
+  "state: california": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "California, United States"
+  },
+  "state: connecticut": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Connecticut, United States"
+  },
+  "state: delhi": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Delhi, India"
+  },
+  "state: district of columbia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "District of Columbia, United States"
+  },
+  "state: florida": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Florida, United States"
+  },
+  "state: gujarat": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Gujarat, India"
+  },
+  "state: illinois": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Illinois, United States"
+  },
+  "state: indiana": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Indiana, United States"
+  },
+  "state: jammu and kashmir": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Jammu and Kashmir, India"
+  },
+  "state: jiangsu": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "江苏省, 中国"
+  },
+  "state: jiangxi": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "江西省, 中国"
+  },
+  "state: karnataka": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Karnataka, India"
+  },
+  "state: maharashtra": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Maharashtra, India"
+  },
+  "state: massachusetts": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Massachusetts, United States"
+  },
+  "state: missouri": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Missouri, United States"
+  },
+  "state: montana": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Montana, United States"
+  },
+  "state: new south wales": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "New South Wales, Australia"
+  },
+  "state: new york": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "New York, United States"
+  },
+  "state: odisha": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Odisha, India"
+  },
+  "state: oklahoma": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Oklahoma, United States"
+  },
+  "state: oregon": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Oregon, United States"
+  },
+  "state: punjab": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Punjab, India"
+  },
+  "state: rajasthan": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Rajasthan, India"
+  },
+  "state: south australia": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "South Australia, Australia"
+  },
+  "state: tamil nadu": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Tamil Nadu, India"
+  },
+  "state: telangana": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Telangana, India"
+  },
+  "state: texas": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Texas, United States"
+  },
+  "state: uttar pradesh": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Uttar Pradesh, India"
+  },
+  "state: victoria": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Victoria, Australia"
+  },
+  "state: west bengal": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "West Bengal, India"
+  },
+  "state: wisconsin": {
+    "checked_on": "2026-10-18",
+    "found": true,
+    "top_match": "Wisconsin, United States"
+  }
+}

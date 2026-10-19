@@ -1,0 +1,5325 @@
+[
+  {
+    "row": 1,
+    "article_id": "20240214121500-1731",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 2,
+    "article_id": "20240201120000-51",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 3,
+    "article_id": "20241008214500-733",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 38,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Alberta",
+        "country": "Canada",
+        "start_date": null,
+        "end_date": "2024-10-08",
+        "words": null,
+        "evidence": [
+          "COVID-19 and flu trajectory for 2023-2024\nAs of Oct. 8, 2,002 people have been diagnosed with COVID-19, 38 with influenza and 17 with RSV. It’s too early to predict how the season might progress, but currently doctors predict that the number of cases for COVID-19 and influenza might continue on a similar trajectory as last year.\nLast year, 23,924 people were diagnosed with COVID-19, out of which 2,094 were aged 19 and younger. Additionally 16,229 people were diagnosed with influenza, of which 5,132 were aged 19 and younger.",
+          "An internal memo shared by Alberta Health last Friday stated that family physicians and nurses would not receive COVID-19 and flu vaccines in time for the fall immunization program, and should instead direct patients who want the doses to AHS clinics and pharmacies.\n"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 4,
+    "article_id": "20211119160000-1266",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 5,
+    "article_id": "20231215060000-365",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 6,
+    "article_id": "20161230170000-2179",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 658,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "New York",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2016-12-30",
+        "words": null,
+        "evidence": [
+          "Some 658 flu-related hospitalizations in New York have been reported so far this flu season."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 7,
+    "article_id": "20191123034500-153",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 8,
+    "article_id": "20191105234500-1000",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 9,
+    "article_id": "20220321000000-433",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 10,
+    "article_id": "20210429044500-358",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 11,
+    "article_id": "20161221013000-2292",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 12,
+    "article_id": "20231027024500-1341",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 13,
+    "article_id": "20241213171500-1215",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 14,
+    "article_id": "20210901214500-702",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 15,
+    "article_id": "20220729211500-857",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 16,
+    "article_id": "20160419000000-1881",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": "H7N9",
+        "number": 2,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nanchang",
+        "state": "Jiangxi",
+        "country": "China",
+        "start_date": "2016-04-18",
+        "end_date": "2016-04-18",
+        "words": null,
+        "evidence": [
+          "The Hong Kong Centre for Health Protection (CHP) today reported two more H7N9 avian flu infections in adults from China's mainland.\nThe cases involve a 43-year-old woman and her 23-year-old son, both of whom live in Jiangxi province and work in Fujian province. The two patients are hospitalized in stable condition in Jiangxi's city of Nanchang, the CHP said.\nThe CHP warns people to stay away from live-poultry markets and avoid contact with birds and their droppings."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 17,
+    "article_id": "20240216171500-1641",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 18,
+    "article_id": "20150801071500-199",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 7,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-01",
+        "end_date": "2015-07-31",
+        "words": null,
+        "evidence": [
+          "The H1N1 virus claimed  seven lives in  July.",
+          "After the sixth death of  a 45-year-old woman who had been diagnosed with H1N1 influenza virus died at Kasturba Hospital on July 23, the diagnosis of the influenza virus was received only after her death.",
+          "She was a resident of Byculla and was admitted to a hospital on July 25."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-23",
+        "end_date": "2015-07-23",
+        "words": null,
+        "evidence": [
+          "After the sixth death of  a 45-year-old woman who had been diagnosed with H1N1 influenza virus died at Kasturba Hospital on July 23, the diagnosis of the influenza virus was received only after her death. The official cause of death has been reported as Type I Respiratory Failure with Acute Respiratory Distress Syndrome along with hyperthyroidism in the lung and hypertension."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-30",
+        "end_date": "2015-07-30",
+        "words": null,
+        "evidence": [
+          "After this, the toll reached seven when a nine months old baby lost her life due to the virus. She was a resident of Byculla and was admitted to a hospital on July 25. She was given Tami flu tables but she died on July 30 and the cause of death was Acute Respiratory Distress Syndrome with H1N1 Positive Pneumonia."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 19,
+    "article_id": "20231110203000-1583",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 20,
+    "article_id": "20161112131500-483",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 21,
+    "article_id": "20210805190000-566",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 22,
+    "article_id": "20240614061500-390",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 23,
+    "article_id": "20220404021500-427",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 24,
+    "article_id": "20221027214500-694",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 25,
+    "article_id": "20180702233000-1618",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 26,
+    "article_id": "20240613081500-1185",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 27,
+    "article_id": "20161230001500-665",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Wisconsin",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2016-12-30",
+        "words": "rise",
+        "evidence": [
+          "Flu Cases on the Rise in Wisconsin"
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 161,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Wisconsin",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2016-12-30",
+        "words": null,
+        "evidence": [
+          "There have been 161 influenza cases this flu season, according to the Wisconsin Department of Health Services"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 95,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Wisconsin",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2016-12-30",
+        "words": null,
+        "evidence": [
+          "These flu cases include 95 hospitalizations"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 28,
+    "article_id": "20180618223000-1505",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 29,
+    "article_id": "20231011103000-1548",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 30,
+    "article_id": "20221010103000-447",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New York",
+        "country": "USA",
+        "start_date": "2022-10-03",
+        "end_date": "2022-10-09",
+        "words": "early and substantial increase",
+        "evidence": [
+          "Bassett last week warned of an \"early and substantial increase\" in flu cases found in New York."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 31,
+    "article_id": "20161224223000-1034",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H7N9",
+        "number": 5,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Anhui",
+        "country": "China",
+        "start_date": "2016-12-08",
+        "end_date": "2016-12-21",
+        "words": null,
+        "evidence": [
+          "Anhui has reported five cases of H7N9 avian flu since Dec. 8, including the two people who died, the eastern province's health authority said in a statement dated Dec. 21, posted on its website."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H7N9",
+        "number": 2,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Anhui",
+        "country": "China",
+        "start_date": "2016-12-08",
+        "end_date": "2016-12-21",
+        "words": null,
+        "evidence": [
+          "Anhui has reported five cases of H7N9 avian flu since Dec. 8, including the two people who died, the eastern province's health authority said in a statement dated Dec. 21, posted on its website."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H7N9",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Macau",
+        "state": null,
+        "country": "China",
+        "start_date": null,
+        "end_date": null,
+        "words": null,
+        "evidence": [
+          "Two people in China's Anhui province have died from H7N9 bird flu, the first fatalities in China among this winter's cases, while Macau reported its first human infection of the strain since the former Portuguese colony returned to China in 1999."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 32,
+    "article_id": "20220518090000-763",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 33,
+    "article_id": "20210605234500-487",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H10N3",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "Jiangsu",
+        "country": "China",
+        "start_date": "2021-06-01",
+        "end_date": "2021-06-01",
+        "words": null,
+        "evidence": [
+          "China has confirmed the first instance of human infection from H10N3 , a rare strain of a virus that normally infects poultry. On Tuesday, the National Health Commission of Beijing reported that a 41-year-old man in the eastern Jiangsu province had been infected with the rare strain but no details were given as to how he caught it."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H5N8",
+        "number": 7,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Russia",
+        "start_date": "2021-02-01",
+        "end_date": "2021-02-28",
+        "words": null,
+        "evidence": [
+          "In February, Russia reported that seven poultry workers in a plant were infected by the H5N8 strain. All of them recovered."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 34,
+    "article_id": "20231013061500-69",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "St. Louis",
+        "state": "Missouri",
+        "country": "USA",
+        "start_date": "2023-10-12",
+        "end_date": "2023-10-12",
+        "words": "coming",
+        "evidence": [
+          "ST LOUIS, MISSOURI (October 12, 2023) — It may not be snowing yet, but flu season — with all of its germs, sneezing, and more is coming."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 35,
+    "article_id": "20230201230000-737",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 36,
+    "article_id": "20221106180000-54",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 37,
+    "article_id": "20231204103000-1045",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Barnstable",
+        "state": "Massachusetts",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2023-12-04",
+        "words": "rise",
+        "evidence": [
+          "BARNSTABLE – Health officials are stating a need for more awareness of the flu as they have seen a rise in the number of cases this flu season.\nAn estimated 1.2 million illnesses, 12,000 hospitalizations, and 780 deaths from the flu so far has led to the annual campaign from the American Medical Association (AMA),"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 38,
+    "article_id": "20150727124500-999",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 39,
+    "article_id": "20180902043000-1067",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 40,
+    "article_id": "20240620094500-86",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2024-06-17",
+        "end_date": "2024-06-19",
+        "words": "33 per cent rise",
+        "evidence": [
+          "A 33 per cent rise in people diagnosed with influenza in the last week is also causing increased pneumonia symptoms and more people visiting emergency departments with flu-like symptoms.\n“The high level of flu activity is concerning,” said Dr Jeremy McAnulty from NSW Health. “We expect this to continue in the coming weeks.”"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 41,
+    "article_id": "20160616050000-1176",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 42,
+    "article_id": "20160130104500-564",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 2,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Jammu and Kashmir",
+        "country": "India",
+        "start_date": "2016-01-29",
+        "end_date": "2016-01-29",
+        "words": null,
+        "evidence": [
+          "The Jammu and Kashmir Health department collected 43 samples of suspected H1N1 patients yesterday, out of which two turned out to be positive."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 31,
+        "status": "negative",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Jammu and Kashmir",
+        "country": "India",
+        "start_date": "2016-01-29",
+        "end_date": "2016-01-29",
+        "words": null,
+        "evidence": [
+          "\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 10,
+        "status": "suspected",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Jammu and Kashmir",
+        "country": "India",
+        "start_date": "2016-01-29",
+        "end_date": "2016-01-29",
+        "words": null,
+        "evidence": [
+          "\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 43,
+    "article_id": "20220814144500-244",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 44,
+    "article_id": "20220714060000-418",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 45,
+    "article_id": "20231213190000-2446",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 46,
+    "article_id": "20180712233000-524",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 19,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Sydney",
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-04-03",
+        "end_date": "2018-07-08",
+        "words": null,
+        "evidence": [
+          "NSW health authorities are urging parents to get their kids vaccinated with the free flu shot after a child died from influenza.\nThe child was one of 19 admitted to Sydney's children's hospital between April 3 and July 8 with the flu, with only two of those infants fully vaccinated."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Sydney",
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-07-12",
+        "end_date": "2018-07-12",
+        "words": null,
+        "evidence": [
+          "NSW health authorities are urging parents to get their kids vaccinated with the free flu shot after a child died from influenza.\nThe child was one of 19 admitted to Sydney's children's hospital between April 3 and July 8 with the flu, with only two of those infants fully vaccinated."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-07-12",
+        "end_date": "2018-07-12",
+        "words": "slow start",
+        "evidence": [
+          "News of the death comes as the authority predicts a slow start to this year's flu season in NSW,"
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 256,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-07-02",
+        "end_date": "2018-07-08",
+        "words": null,
+        "evidence": [
+          "News of the death comes as the authority predicts a slow start to this year's flu season in NSW, with 256 cases confirmed in the week ending July 8,"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 47,
+    "article_id": "20191121031500-1418",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Santa Barbara",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2019-11-11",
+        "end_date": "2019-11-17",
+        "words": null,
+        "evidence": [
+          "According to the Santa Barbara County Public Health Department's flu report released last week, there has been one known flu-related death in the county this flu season."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 133,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Santa Barbara",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2019-10-01",
+        "end_date": "2019-10-31",
+        "words": null,
+        "evidence": [
+          "133 people who visited hospitals in the past month were diagnosed with influenza-like illness."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "California",
+        "country": "USA",
+        "start_date": "2019-11-20",
+        "end_date": "2019-11-20",
+        "words": "minimal flu activity",
+        "evidence": [
+          "California still has minimal flu activity."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": null,
+        "end_date": null,
+        "words": "early increases",
+        "evidence": [
+          "Flu season typically peaks between December and February, but this year the CDC says parts of the country are seeing early increases."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 48,
+    "article_id": "20220508234500-811",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 1024,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2022-05-08",
+        "words": null,
+        "evidence": [
+          "Cases of flu in NSW have more than doubled in recent weeks to 1024."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2022-05-08",
+        "words": "doubled",
+        "evidence": [
+          "Cases of flu in NSW have more than doubled in recent weeks to 1024."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 49,
+    "article_id": "20161218114500-317",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2016-12-17",
+        "words": "no cases received so far for this flu season",
+        "evidence": [
+          "Delhi hospitals gear up as swine flu season arrives\nAll the major hospitals of the city, however, on Saturday said they had not received any swine flu cases so far."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 2,
+        "status": "suspected",
+        "total_or_new": "new",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "start_date": "2016-12-18",
+        "end_date": "2016-12-18",
+        "words": null,
+        "evidence": [
+          "At Safdarjung hospital, two patients were kept in isolation on suspicion that they had swine flu."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 50,
+    "article_id": "20150717011500-230",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 2,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-16",
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "H1N1",
+        "number": 2,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-12",
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization,"
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 25,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 4,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-01",
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "After a lull throughout June, the respiratory virus has come back to claim four lives."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 60,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-01",
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 7,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-16",
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-17",
+        "end_date": "2015-07-17",
+        "words": "increase",
+        "evidence": [
+          "There is a slight increase in cases across the state"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "H1N1",
+        "number": 8,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-17",
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "At the civic-run Kasturba Hospital, eight patients are undergoing treatment, including three members from the same family."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-17",
+        "end_date": "2015-07-17",
+        "words": "eight-10 cases per day",
+        "evidence": [
+          "Across the state, over eight-10 cases of new infections are being reported everyday."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 5300,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 546,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 51,
+    "article_id": "20150717091500-1064",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 2,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-16",
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "Swine flu claimed two more lives in Mumbai on July 16"
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 25,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-16",
+        "words": null,
+        "evidence": [
+          "Swine flu claimed two more lives in Mumbai on July 16 with the death of two 32-year-old women from Worli and Juhu. The death toll has reached 25 in the city."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 60,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-01",
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Around 60 people have tested positive for the H1N1 virus in July, including seven people over the last 24 hours."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 7,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-16",
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Around 60 people have tested positive for the H1N1 virus in July, including seven people over the last 24 hours."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "swine flu",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-17",
+        "end_date": "2015-07-17",
+        "words": "slight increase",
+        "evidence": [
+          "A state official said, “There is a slight increase in cases across the state but we are vigilant.”"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "swine flu",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-07-17",
+        "end_date": "2015-07-17",
+        "words": "8 to 10 cases per day",
+        "evidence": [
+          "Nearly 8 to 10 cases of swine flu are being reported everyday."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 5300,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Maharashtra has been the worst-hit states reporting over 5,300 cases and 546 deaths."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 546,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-07-17",
+        "words": null,
+        "evidence": [
+          "Maharashtra has been the worst-hit states reporting over 5,300 cases and 546 deaths."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 52,
+    "article_id": "20160113124500-1363",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 463,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2016-01-01",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "About 463 citizens of Turkey were diagnosed with swine flu since the beginning of 2016, Turkish Health Ministry reported on January 13."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 14,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2016-01-01",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "About 463 citizens of Turkey were diagnosed with swine flu since the beginning of 2016, Turkish Health Ministry reported on January 13.\nSome 14 people died from swine flu during this period in Turkey, according to the ministry."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 2905,
+        "status": "suspected",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2016-01-01",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "Over 2,905 people suspected with swine flu appealed to the country’s hospitals since the beginning of this year,"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 53,
+    "article_id": "20220627073000-811",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 54,
+    "article_id": "20150605213000-2429",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 55,
+    "article_id": "20191113031500-882",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Connecticut",
+        "country": "USA",
+        "start_date": "2019-11-13",
+        "end_date": "2019-11-13",
+        "words": "flu season escalates",
+        "evidence": [
+          "But as flu season escalates, people should get some type of vaccine rather than wait for a specialty version, according to Mick Bolduc, DPH epidemiologist and vaccine coordinator.\n“Since we are in the middle of November ... we are starting to see flu ramp up in the state, and it is important for them to receive a vaccine now,” he said.",
+          "The state Department of Public Health confirmed that some Connecticut residents may experience pockets of shortages of specialized vaccines like the high-dose shot, which is designed for seniors."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Connecticut",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2019-11-13",
+        "words": "sporadic",
+        "evidence": [
+          "State data show that flu activity so far has been sporadic, with just over 100 confirmed cases. About 43 people, including senior adults, have been hospitalized for the flu.",
+          "The state Department of Public Health confirmed that some Connecticut residents may experience pockets of shortages of specialized vaccines like the high-dose shot, which is designed for seniors."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 100,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Connecticut",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2019-11-13",
+        "words": null,
+        "evidence": [
+          "State data show that flu activity so far has been sporadic, with just over 100 confirmed cases. About 43 people, including senior adults, have been hospitalized for the flu.",
+          "The state Department of Public Health confirmed that some Connecticut residents may experience pockets of shortages of specialized vaccines like the high-dose shot, which is designed for seniors."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 43,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Connecticut",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2019-11-13",
+        "words": null,
+        "evidence": [
+          "State data show that flu activity so far has been sporadic, with just over 100 confirmed cases. About 43 people, including senior adults, have been hospitalized for the flu.",
+          "The state Department of Public Health confirmed that some Connecticut residents may experience pockets of shortages of specialized vaccines like the high-dose shot, which is designed for seniors."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 56,
+    "article_id": "20210724021500-725",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 57,
+    "article_id": "20151211133000-932",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 0,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Azerbaijan",
+        "start_date": null,
+        "end_date": "2015-12-11",
+        "words": null,
+        "evidence": [
+          "The situation with the swine influenza in Azerbaijan is under the\ncontrol and no cases both among people and animal have been\nreported until now, the Health Ministry reported."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 7,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Georgia",
+        "start_date": null,
+        "end_date": "2015-12-11",
+        "words": null,
+        "evidence": [
+          "Over the past weeks some seven people were diagnosed with the H1N1 flu in Azerbaijan’s western neighbor Georgia."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 170,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2015-01-01",
+        "end_date": "2015-12-11",
+        "words": null,
+        "evidence": [
+          "Some countries neighboring Azerbaijan already afflicted the deadly virus, which infected more than 170 people in Turkey with 57 victims from the beginning of the year."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 57,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2015-01-01",
+        "end_date": "2015-12-11",
+        "words": null,
+        "evidence": [
+          "Some countries neighboring Azerbaijan already afflicted the deadly virus, which infected more than 170 people in Turkey with 57 victims from the beginning of the year."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 40,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Iran",
+        "start_date": "2015-11-20",
+        "end_date": "2015-12-11",
+        "words": null,
+        "evidence": [
+          "National airlines AZAL is also strengthening measures to prevent penetration H1N1 by air transport from Iran, where the virus left 40 people dead in the past three weeks."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 58,
+    "article_id": "20161015003000-465",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 5,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Montana",
+        "country": "USA",
+        "start_date": "2016-10-15",
+        "end_date": "2016-10-15",
+        "words": null,
+        "evidence": [
+          "Five cases of flu have been confirmed in Missoula and Lewis and Clark Counties. These are the first flu cases of the season in Montana."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2016-10-15",
+        "end_date": "2016-10-15",
+        "words": "from 0.5 percent of all samples tested to 1.5 percent",
+        "evidence": [
+          "The federal Centers for Disease Control and Prevention says the flu rate is up nationwide slightly, from 0.5 percent of all samples tested to 1.5 percent."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 59,
+    "article_id": "20231005220000-1444",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 60,
+    "article_id": "20180828231500-2022",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 6,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-01",
+        "end_date": "2018-08-28",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-18",
+        "end_date": "2018-08-18",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-21",
+        "end_date": "2018-08-21",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date.\nOf the remaining five cases, one is from Yavatmal who got admitted here on August 21 and is undergoing treatment."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-04",
+        "end_date": "2018-08-04",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date.\nOf the remaining five cases, one is from Yavatmal who got admitted here on August 21 and is undergoing treatment. Two, a father-son duo are from Amravati.\nThey were admitted on August 4 and 6"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-06",
+        "end_date": "2018-08-06",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date.\nOf the remaining five cases, one is from Yavatmal who got admitted here on August 21 and is undergoing treatment. Two, a father-son duo are from Amravati.\nThey were admitted on August 4 and 6"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-01",
+        "end_date": "2018-08-01",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date.\nOf the remaining five cases, one is from Yavatmal who got admitted here on August 21 and is undergoing treatment. Two, a father-son duo are from Amravati.\nThey were admitted on August 4 and 6, and discharged. The remaining two who are from Chandrapur, were admitted on August 1 and 2, and discharged later."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nagpur",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2018-08-02",
+        "end_date": "2018-08-02",
+        "words": null,
+        "evidence": [
+          "The NMC health department has also registered six positive cases of swine flu this month. Though all patients underwent or are undergoing treatment in private hospitals in the city, only one case is from the city, from Manewada in South Nagpur. The patient was admitted on August 18 and was still undergoing treatment as on date.\nOf the remaining five cases, one is from Yavatmal who got admitted here on August 21 and is undergoing treatment. Two, a father-son duo are from Amravati.\nThey were admitted on August 4 and 6, and discharged. The remaining two who are from Chandrapur, were admitted on August 1 and 2, and discharged later."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 61,
+    "article_id": "20210721024500-1056",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": "bird flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "New Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "start_date": "2021-07-02",
+        "end_date": "2021-07-02",
+        "words": null,
+        "evidence": [
+          "NEW DELHI: India has reported the first case of human death due to \nbird flu\n, the strain of influenza virus that primarily affects birds. \nAn 11-year-old boy, admitted to AIIMS on July 2, was confirmed dead due to bird flu on Tuesday."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "bird flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "New Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "start_date": "2021-07-20",
+        "end_date": "2021-07-20",
+        "words": null,
+        "evidence": [
+          "NEW DELHI: India has reported the first case of human death due to \nbird flu\n, the strain of influenza virus that primarily affects birds. \nAn 11-year-old boy, admitted to AIIMS on July 2, was confirmed dead due to bird flu on Tuesday."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 62,
+    "article_id": "20241117231500-595",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 63,
+    "article_id": "20191205204500-2462",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 64,
+    "article_id": "20180802023000-815",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Victoria",
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2018-08-02",
+        "words": "on the rise",
+        "evidence": [
+          "“It’s never too late to get a flu shot, and with influenza activity just now on the rise, getting a shot now will provide full season protection right through winter and beyond the expected peak in late September,\" said Professor Charles Guest, Victoria's Chief Health Officer, in a statement on Thursday."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2018-08-02",
+        "words": "relatively light",
+        "evidence": [
+          "So far, 2018's season has been relatively light."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 65,
+    "article_id": "20221027214500-335",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "San Diego",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2022-10-15",
+        "end_date": "2022-10-15",
+        "words": null,
+        "evidence": [
+          "San Diego County health officials on Thursday announced the region's first flu death of the season, a 55-year-old man from North San Diego County who was unvaccinated and had underlying health conditions.",
+          "The man died on Oct. 15"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "San Diego",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2022-10-27",
+        "end_date": "2022-10-27",
+        "words": "here early",
+        "evidence": [
+          "\"The flu is here, and it's here early,” San Diego County Deputy Public Health Officer Dr. Cameron Kaiser said."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "San Diego",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2022-10-16",
+        "end_date": "2022-10-22",
+        "words": "up nearly 45% in a week",
+        "evidence": [
+          "Last week's case count is up nearly 45% in a week with 856 cases reported in the week ending Oct. 22 compared with 591 cases the week prior."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 856,
+        "status": null,
+        "total_or_new": "new",
+        "city": "San Diego",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2022-10-16",
+        "end_date": "2022-10-22",
+        "words": null,
+        "evidence": [
+          "Last week's case count is up nearly 45% in a week with 856 cases reported in the week ending Oct. 22 compared with 591 cases the week prior."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 591,
+        "status": null,
+        "total_or_new": "new",
+        "city": "San Diego",
+        "state": "California",
+        "country": "USA",
+        "start_date": "2022-10-09",
+        "end_date": "2022-10-15",
+        "words": null,
+        "evidence": [
+          "Last week's case count is up nearly 45% in a week with 856 cases reported in the week ending Oct. 22 compared with 591 cases the week prior."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 66,
+    "article_id": "20210628134500-620",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 67,
+    "article_id": "20211207163000-398",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 68,
+    "article_id": "20161231040000-1321",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 69,
+    "article_id": "20220405130000-967",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 70,
+    "article_id": "20171101180000-1559",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 71,
+    "article_id": "20230218213000-110",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 72,
+    "article_id": "20240205121500-1119",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 73,
+    "article_id": "20191202214500-1023",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 74,
+    "article_id": "20151220081500-1246",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "country": "India",
+        "start_date": "2015-12-19",
+        "end_date": "2015-12-19",
+        "words": null,
+        "evidence": [
+          "A pregnant Muktsar woman suffering from swine flu, admitted at the Dayanand Medical College and Hospital (DMCH) on December 6, succumbed to the viral disease on Saturday.",
+          "Muktsar woman dies of swine flu in Ludhiana"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "country": "India",
+        "start_date": "2015-12-06",
+        "end_date": "2015-12-06",
+        "words": null,
+        "evidence": [
+          "A pregnant Muktsar woman suffering from swine flu, admitted at the Dayanand Medical College and Hospital (DMCH) on December 6, succumbed to the viral disease on Saturday.",
+          "Muktsar woman dies of swine flu in Ludhiana"
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 3,
+        "status": "suspected",
+        "total_or_new": "new",
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "country": "India",
+        "start_date": "2015-12-20",
+        "end_date": "2015-12-20",
+        "words": null,
+        "evidence": [
+          "There are three more patients admitted at DMCH with swine flu symptoms and their samples had been sent to the Post Graduate Institute of Medical Sciences and Research (PGIMER), Chandigarh, with reports expected by Sunday.",
+          "Muktsar woman dies of swine flu in Ludhiana"
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "country": "India",
+        "start_date": "2015-10-17",
+        "end_date": "2015-10-17",
+        "words": null,
+        "evidence": [
+          "On October 17, a Tarn Taran — based cloth merchant Gurmail Singh, 30, also succumbed to swine flu at the DMCH.",
+          "Muktsar woman dies of swine flu in Ludhiana"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 75,
+    "article_id": "20180614074500-1850",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 76,
+    "article_id": "20241109004500-270",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H5N1",
+        "number": 41,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2024-01-01",
+        "end_date": "2024-11-01",
+        "words": null,
+        "evidence": [
+          "In its Nov. 1 update on confirmed human cases of H5N1 so far this year, the CDC listed 41 cases in six states.",
+          "AUSTIN, Minn. — Dairy and poultry farmers in three southeast Minnesota counties can get free seasonal flu shots on their farm thanks to a new public health initiative to remove vaccination barriers."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 77,
+    "article_id": "20180227214500-647",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2018-02-27",
+        "words": "begun to decline",
+        "evidence": [
+          "According to the Centers for Disease Control and Prevention, the flu has hit hard in every state except Hawaii and Oregon, and while the number of cases has begun to decline, flu activity is expected to remain elevated for several more weeks, the agency reported."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 202,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "California",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2018-02-27",
+        "words": null,
+        "evidence": [
+          "Reports from individual state health authorities give an indication of the staggering statistics this flu season: 202 flu deaths in California, 219 in Indiana and 162 in Missouri."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 219,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Indiana",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2018-02-27",
+        "words": null,
+        "evidence": [
+          "Reports from individual state health authorities give an indication of the staggering statistics this flu season: 202 flu deaths in California, 219 in Indiana and 162 in Missouri."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 162,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Missouri",
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2018-02-27",
+        "words": null,
+        "evidence": [
+          "Reports from individual state health authorities give an indication of the staggering statistics this flu season: 202 flu deaths in California, 219 in Indiana and 162 in Missouri."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 78,
+    "article_id": "20161217003000-1497",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 3,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Delhi",
+        "state": null,
+        "country": "India",
+        "start_date": "2016-12-17",
+        "end_date": "2016-12-17",
+        "words": null,
+        "evidence": [
+          "Two patients have tested positive at the All India Institute of Medical Sciences (AIIMS) and one at the neighboring Safdarjung Hospital.",
+          "Delhi authorities need to start worrying as the Capital saw over 4,000 patients last winter with a dozen deaths.",
+          "India recorded over 1,800 deaths during the 2009-10 swine flu pandemic, with 600 of them reported in Maharashtra."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Delhi",
+        "state": null,
+        "country": "India",
+        "start_date": "2016-12-17",
+        "end_date": "2016-12-17",
+        "words": null,
+        "evidence": [
+          "At Safdarjung Hospital, one patient has been diagnosed with swine flu.\n'He is in critical condition and undergoing treatment in ICU,' a senior doctor told Mail Today.",
+          "Delhi authorities need to start worrying as the Capital saw over 4,000 patients last winter with a dozen deaths.",
+          "India recorded over 1,800 deaths during the 2009-10 swine flu pandemic, with 600 of them reported in Maharashtra."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 79,
+    "article_id": "20230517043000-393",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2023-05-17",
+        "words": "now rising",
+        "evidence": [
+          "After having low rates of influenza (flu) transmission in recent years thanks to our COVID control strategies, case numbers are now rising.",
+          "So far this year, Australia has had more than 32,000 lab-confirmed cases of the flu and 32 deaths."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 32000,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": "2023-01-01",
+        "end_date": "2023-05-17",
+        "words": null,
+        "evidence": [
+          "So far this year, Australia has had more than 32,000 lab-confirmed cases of the flu and 32 deaths."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 32,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": "2023-01-01",
+        "end_date": "2023-05-17",
+        "words": null,
+        "evidence": [
+          "So far this year, Australia has had more than 32,000 lab-confirmed cases of the flu and 32 deaths."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 80,
+    "article_id": "20180713050000-509",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-07-13",
+        "end_date": "2018-07-13",
+        "words": null,
+        "evidence": [
+          "One child has died and more than a dozen others have been hospitalised after coming down with the flu.",
+          "The dominant flu strain in New South Wales this year hits young children and pregnant women the hardest."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 19,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Westmead",
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2018-04-01",
+        "end_date": "2018-07-13",
+        "words": null,
+        "evidence": [
+          "19 children have been admitted to Westmead Children’s hospital with influenza since April.",
+          "The dominant flu strain in New South Wales this year hits young children and pregnant women the hardest."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 81,
+    "article_id": "20160114111500-1261",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 5,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Multan",
+        "state": null,
+        "country": "Pakistan",
+        "start_date": "2016-01-13",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "Summary At least five patients affected by swine flu virus have been admitted to Nishtar Hospital Multan.",
+          "MULTAN (Dunya News) – Five more patients affected by swine flu virus were shifted to Nishtar Hospital, Multan on Wednesday, raising the number of patients affected by the virus to 24, Dunya News reported.",
+          "According to details, 40-year-old Sallah Arfa and 35-year-old Sultan of Dera Ismail Khan, 39-year-old Shehnaz of Sargodha, 10-year-old Iqra from Jampur and 50-year-old Attya from Dera Ghazi Khan were brought to Nishtar Hospital."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 24,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Multan",
+        "state": null,
+        "country": "Pakistan",
+        "start_date": null,
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "MULTAN (Dunya News) – Five more patients affected by swine flu virus were shifted to Nishtar Hospital, Multan on Wednesday, raising the number of patients affected by the virus to 24, Dunya News reported.",
+          "According to details, 40-year-old Sallah Arfa and 35-year-old Sultan of Dera Ismail Khan, 39-year-old Shehnaz of Sargodha, 10-year-old Iqra from Jampur and 50-year-old Attya from Dera Ghazi Khan were brought to Nishtar Hospital."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 3,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Multan",
+        "state": null,
+        "country": "Pakistan",
+        "start_date": "2016-01-13",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "According to hospital sources, the virus has been confirmed in three patient brought to hospital on Wednesday while test reports of two other patients are awaited.",
+          "According to details, 40-year-old Sallah Arfa and 35-year-old Sultan of Dera Ismail Khan, 39-year-old Shehnaz of Sargodha, 10-year-old Iqra from Jampur and 50-year-old Attya from Dera Ghazi Khan were brought to Nishtar Hospital."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 2,
+        "status": "suspected",
+        "total_or_new": "new",
+        "city": "Multan",
+        "state": null,
+        "country": "Pakistan",
+        "start_date": "2016-01-13",
+        "end_date": "2016-01-13",
+        "words": null,
+        "evidence": [
+          "According to hospital sources, the virus has been confirmed in three patient brought to hospital on Wednesday while test reports of two other patients are awaited.",
+          "According to details, 40-year-old Sallah Arfa and 35-year-old Sultan of Dera Ismail Khan, 39-year-old Shehnaz of Sargodha, 10-year-old Iqra from Jampur and 50-year-old Attya from Dera Ghazi Khan were brought to Nishtar Hospital."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 82,
+    "article_id": "20220824180000-805",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 83,
+    "article_id": "20160129010000-168",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 57,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2015-10-01",
+        "end_date": "2015-12-31",
+        "words": null,
+        "evidence": [
+          "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2015-11-01",
+        "end_date": "2015-12-10",
+        "words": "slow",
+        "evidence": [
+          "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+          "Turkey's top health official says peak season of flu over."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2015-12-21",
+        "end_date": "2016-01-10",
+        "words": "peaked",
+        "evidence": [
+          "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+          "Turkey's top health official says peak season of flu over."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Turkey",
+        "start_date": "2016-01-28",
+        "end_date": "2016-01-28",
+        "words": "peak season is over",
+        "evidence": [
+          "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+          "Turkey's top health official says peak season of flu over."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 84,
+    "article_id": "20210825023000-442",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 85,
+    "article_id": "20181129171500-1434",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 4,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Oklahoma",
+        "country": "USA",
+        "start_date": "2018-09-01",
+        "end_date": "2018-11-29",
+        "words": null,
+        "evidence": [
+          "Four Oklahomans have died due to the flu since Sept. 1, the beginning of this flu season, health officials confirmed."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 112,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Oklahoma",
+        "country": "USA",
+        "start_date": "2018-09-01",
+        "end_date": "2018-11-29",
+        "words": null,
+        "evidence": [
+          "Four Oklahomans have died due to the flu since Sept. 1, the beginning of this flu season, health officials confirmed.",
+          "Officials said 112 people have been hospitalized due to the flu, officials said."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 86,
+    "article_id": "20240531071500-55",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "South Australia",
+        "country": "Australia",
+        "start_date": "2024-05-30",
+        "end_date": "2024-05-30",
+        "words": "overwhelms staffing numbers",
+        "evidence": [
+          "- 'Code Yellow' declared in South Australia\n- Elective surgeries postponed, patients transferred\n- READ MORE: The 'triple hit' of illnesses that explains why everyone in Australia is getting sick at the moment\nAn emergency 'Code Yellow' has been declared in one state's public hospital system as a new Covid and flu wave overwhelms staffing numbers and generates a surge in new patients.\nSouth Australia Health Chief Executive Robyn Lawrence triggered the emergency on Thursday and at a press conference on Friday confirmed at least nine elective surgeries would be postponed and some patients at Adelaide's metropolitan hospitals would be transferred to regional centres."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2024-05-24",
+        "end_date": "2024-05-30",
+        "words": "27 per cent increase",
+        "evidence": [
+          "- READ MORE: The 'triple hit' of illnesses that explains why everyone in Australia is getting sick at the moment\nThe NSW Health Respiratory Surveillance Report released on Thursday revealed a 27 per cent increase in influenza notifications, and a 23 per cent in Covid-19 notifications week-on-week."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 87,
+    "article_id": "20240515193000-617",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 43,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2024-04-29",
+        "end_date": "2024-05-05",
+        "words": null,
+        "evidence": [
+          "- French Polynesia: In EpiWeek 18, there were 43 new confirmed cases of influenza out of 107 tests conducted, comprising 42 cases of Influenza A and 1 case of Influenza B.",
+          "- Source: Tonga Ministry of Health Communicable Diseases Syndromic Surveillance Epidemic week 17 (22/04/2024 - 28/04/2024) reported shared PPHSN focal point on 09 May 2024."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 22,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2024-04-29",
+        "end_date": "2024-05-05",
+        "words": null,
+        "evidence": [
+          "- French Polynesia: In EpiWeek 18, there were 43 new confirmed cases of influenza out of 107 tests conducted, comprising 42 cases of Influenza A and 1 case of Influenza B.",
+          "Among the reported cases, 22 were hospitalised, including two in the ICU, and one death occurred in a person aged over 60, bringing the total deaths between April and May 2024 to 3.",
+          "- Source: Tonga Ministry of Health Communicable Diseases Syndromic Surveillance Epidemic week 17 (22/04/2024 - 28/04/2024) reported shared PPHSN focal point on 09 May 2024."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2024-04-29",
+        "end_date": "2024-05-05",
+        "words": null,
+        "evidence": [
+          "- French Polynesia: In EpiWeek 18, there were 43 new confirmed cases of influenza out of 107 tests conducted, comprising 42 cases of Influenza A and 1 case of Influenza B.",
+          "Among the reported cases, 22 were hospitalised, including two in the ICU, and one death occurred in a person aged over 60, bringing the total deaths between April and May 2024 to 3.",
+          "- Source: Tonga Ministry of Health Communicable Diseases Syndromic Surveillance Epidemic week 17 (22/04/2024 - 28/04/2024) reported shared PPHSN focal point on 09 May 2024."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 3,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2024-04-01",
+        "end_date": "2024-05-05",
+        "words": null,
+        "evidence": [
+          "- French Polynesia: In EpiWeek 18, there were 43 new confirmed cases of influenza out of 107 tests conducted, comprising 42 cases of Influenza A and 1 case of Influenza B.",
+          "Among the reported cases, 22 were hospitalised, including two in the ICU, and one death occurred in a person aged over 60, bringing the total deaths between April and May 2024 to 3.",
+          "- Source: Tonga Ministry of Health Communicable Diseases Syndromic Surveillance Epidemic week 17 (22/04/2024 - 28/04/2024) reported shared PPHSN focal point on 09 May 2024."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2024-04-22",
+        "end_date": "2024-05-05",
+        "words": "increased from 24.2% in EpiWeek 17 to 40.2% in EpiWeek 18",
+        "evidence": [
+          "- French Polynesia: In EpiWeek 18, there were 43 new confirmed cases of influenza out of 107 tests conducted, comprising 42 cases of Influenza A and 1 case of Influenza B.",
+          "The positivity rate increased from 24.2% in EpiWeek 17 to 40.2% in EpiWeek 18.",
+          "- Source: Tonga Ministry of Health Communicable Diseases Syndromic Surveillance Epidemic week 17 (22/04/2024 - 28/04/2024) reported shared PPHSN focal point on 09 May 2024."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Victoria",
+        "country": "Australia",
+        "start_date": "2024-04-27",
+        "end_date": "2024-05-10",
+        "words": "30% increase in notifications of influenza and RSV",
+        "evidence": [
+          "Australia, Victoria: On May 10, the Victoria Health department issued an alert due to increased COVID-19 activity, as evidenced by rising 7-day average hospitalisation figures (208), a 30% increase in notifications of influenza and RSV over the past fortnight and elevated detection of COVID-19 in wastewater indicating high levels of COVID-19 transmission"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 88,
+    "article_id": "20240614141500-273",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "South Australia",
+        "country": "Australia",
+        "start_date": "2024-06-14",
+        "end_date": "2024-06-14",
+        "words": "surge in flu and RSV cases",
+        "evidence": [
+          "South Australia's health system remains under strain, with code yellow still in effect across metropolitan hospitals.",
+          "The resumption came as health ministers from across the country convened in Adelaide to address the pressing issues affecting healthcare systems nationwide.",
+          "The state-wide code yellow, which indicates an internal emergency, continues as the health system grapples with a surge in flu and RSV cases, even as COVID-19 cases decline."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 89,
+    "article_id": "20150521081500-1627",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 90,
+    "article_id": "20170705044500-1192",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2017-07-04",
+        "end_date": "2017-07-04",
+        "words": "early flu season, record numbers of cases",
+        "evidence": [
+          "NSW is facing an early flu season, with record numbers of cases already diagnosed weeks before the usual peak, but reports that it is set to be the worst season ever are overblown, NSW Health says."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 721,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2017-07-03",
+        "end_date": "2017-07-04",
+        "words": null,
+        "evidence": [
+          "Those who have been stricken with the flu this year are more likely to live in Sydney, the department's figures show. In the past week alone, 552 of 721 confirmed cases in NSW were in the Sydney area."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 91,
+    "article_id": "20221025234500-1192",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 92,
+    "article_id": "20241216210000-2067",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2024-12-16",
+        "end_date": "2024-12-16",
+        "words": "ticking up but remain low",
+        "evidence": [
+          "Seasonal influenza rates are ticking up but remain low nationally, according to the CDC's latest surveillance data."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Illinois",
+        "country": "USA",
+        "start_date": "2024-12-01",
+        "end_date": "2024-12-07",
+        "words": "Activity is low",
+        "evidence": [
+          "Activity is low in Illinois as of the week ending Dec. 7."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 93,
+    "article_id": "20170627224500-617",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 94,
+    "article_id": "20210608190000-995",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 95,
+    "article_id": "20241207120000-520",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "California",
+        "country": "USA",
+        "start_date": "2024-12-06",
+        "end_date": "2024-12-06",
+        "words": null,
+        "evidence": [
+          "While the winter flu season has just begun, the Stanislaus County Public Health Department reported on Friday the county's first flu-related death of an individual under age 65.",
+          "According to the Centers for Disease Control, California has an influenza mortality rate of 11.5% and recorded 5,308 deaths due to influenza in 2022."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "avian flu",
+        "number": 58,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2024-12-07",
+        "words": null,
+        "evidence": [
+          "There have been a confirmed total of 58 human cases of avian flu in the United States, with 32 of them in California."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 96,
+    "article_id": "20161106151500-1403",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 97,
+    "article_id": "20230421074500-899",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Victoria",
+        "country": "Australia",
+        "start_date": "2023-04-01",
+        "end_date": "2023-04-14",
+        "words": "rose by 38 per cent",
+        "evidence": [
+          "Professor Sutton said notified influenza cases in Victoria rose by 38 per cent in the first fortnight of April compared to the fortnight prior - indicating seasonal influenza activity has returned for 2023."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 98,
+    "article_id": "20170501060000-1614",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Nanjing",
+        "state": null,
+        "country": "China",
+        "start_date": "2017-04-16",
+        "end_date": "2017-05-01",
+        "words": null,
+        "evidence": [
+          "Kerri Cosma, 58, was visiting her daughter Emma Madigan and young grandchildren in Nanjing, in the country's east, over Easter when she contracted the illness.",
+          "'We met in Shanghai and she (Mrs Cosma) was coming down with something. They tested her for all types of influenza and they found out it was H1N1, or swine flu.'"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 99,
+    "article_id": "20190911111500-669",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 100,
+    "article_id": "20150801131500-492",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 101,
+    "article_id": "20161228180000-1805",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Harmanli",
+        "state": null,
+        "country": "Bulgaria",
+        "start_date": "2016-12-28",
+        "end_date": "2016-12-28",
+        "words": "flu epidemics declared",
+        "evidence": [
+          "Bulgarian regional health authorities declared flu epidemics on December 28 in the districts of Harmanli and Haskovo, a day after a flu epidemic was declared in the town of Pernik."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 102,
+    "article_id": "20221028074500-464",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "District of Columbia",
+        "country": "USA",
+        "start_date": "2022-10-15",
+        "end_date": "2022-10-28",
+        "words": "Very High",
+        "evidence": [
+          "Based on stats from the end of October 15th, there are six states that are considered to be \"High\" for the spread of the flu virus.",
+          "The country's capital, Washington, DC is considered \"Very High\" with Texas, South Carolina, Tennessee, Georgia, and New York in the \"High\" category."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New York",
+        "country": "USA",
+        "start_date": "2022-10-15",
+        "end_date": "2022-10-28",
+        "words": "High",
+        "evidence": [
+          "Based on stats from the end of October 15th, there are six states that are considered to be \"High\" for the spread of the flu virus.",
+          "The country's capital, Washington, DC is considered \"Very High\" with Texas, South Carolina, Tennessee, Georgia, and New York in the \"High\" category."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 103,
+    "article_id": "20241122224500-514",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2024-11-22",
+        "end_date": "2024-11-22",
+        "words": "Seasonal flu activity is also increasing among children",
+        "evidence": [
+          "The Centers for Disease Control and Prevention says RSV activity is increasing in the southern and eastern United States, particularly among young children.",
+          "Seasonal flu activity is also increasing among children."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 104,
+    "article_id": "20171027201500-1752",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 105,
+    "article_id": "20240405130000-1159",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H5N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Texas",
+        "country": "USA",
+        "start_date": "2024-04-01",
+        "end_date": "2024-04-05",
+        "words": null,
+        "evidence": [
+          "Further elevating the concern this discovery has triggered is the fact that a dairy farm worker in Texas was infected with H5N1, though the unnamed individual’s only symptom was conjunctivitis.",
+          "The first human case of avian influenza in Texas this week has prompted Congress to gather information about the risks to public health and agriculture."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 106,
+    "article_id": "20220614191500-1244",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 107,
+    "article_id": "20170614233000-629",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 108,
+    "article_id": "20160208201500-1688",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "California",
+        "country": "USA",
+        "start_date": "2016-02-05",
+        "end_date": "2016-02-05",
+        "words": "ramping up",
+        "evidence": [
+          "Although data show fewer flu cases and related deaths, public health officials say it's because last year's flu peaked earlier. This one is likely to reach its height in February.",
+          "The Los Angeles Times: Flu Season Is Starting To Pick Up In California\nThe flu season is ramping up in California, and public health officials say they only expect it to worsen in the coming weeks. Data released Friday morning shows that cases of the flu are as expected for this time of year. Still, the number of flu hospitalizations and deaths falls far below what California has experienced in recent years. (Karlamangla, 2/5)"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 109,
+    "article_id": "20151202014500-1906",
+    "useful": null,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 110,
+    "article_id": "20191026223000-27",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Illinois",
+        "country": "USA",
+        "start_date": "2019-10-26",
+        "end_date": "2019-10-26",
+        "words": "activity remains low",
+        "evidence": [
+          "Influenza patients have started to slowly trickle into doctors' offices and hospitals in recent weeks, according to tracking by the Illinois Department of Public Health and other health departments, but activity remains low, as expected for October, officials said."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 111,
+    "article_id": "20211125214500-727",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 112,
+    "article_id": "20160520030000-2421",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Brazil",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "elevated seasonal flu activity",
+        "evidence": [
+          "Brazil continues to report elevated seasonal flu activity, led by the 2009 H1N1 virus, and some other Southern Hemisphere are seeing levels starting to rise, including Ecuador and Bolivia, the WHO said in its latest global flu update.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Ecuador",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "levels starting to rise",
+        "evidence": [
+          "Brazil continues to report elevated seasonal flu activity, led by the 2009 H1N1 virus, and some other Southern Hemisphere are seeing levels starting to rise, including Ecuador and Bolivia, the WHO said in its latest global flu update.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Bolivia",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "levels starting to rise",
+        "evidence": [
+          "Brazil continues to report elevated seasonal flu activity, led by the 2009 H1N1 virus, and some other Southern Hemisphere are seeing levels starting to rise, including Ecuador and Bolivia, the WHO said in its latest global flu update.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "still low",
+        "evidence": [
+          "Overall flu activity in Australia and New Caledonia are still low, but activity is starting to pick up in some Pacific locations, such as Fiji, American Samoa, and Micronesia.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "France",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "still low",
+        "evidence": [
+          "Overall flu activity in Australia and New Caledonia are still low, but activity is starting to pick up in some Pacific locations, such as Fiji, American Samoa, and Micronesia.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Fiji",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "starting to pick up",
+        "evidence": [
+          "Overall flu activity in Australia and New Caledonia are still low, but activity is starting to pick up in some Pacific locations, such as Fiji, American Samoa, and Micronesia.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "starting to pick up",
+        "evidence": [
+          "Overall flu activity in Australia and New Caledonia are still low, but activity is starting to pick up in some Pacific locations, such as Fiji, American Samoa, and Micronesia.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Micronesia",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "starting to pick up",
+        "evidence": [
+          "Overall flu activity in Australia and New Caledonia are still low, but activity is starting to pick up in some Pacific locations, such as Fiji, American Samoa, and Micronesia.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "El Salvador",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "elevated flu levels",
+        "evidence": [
+          "In the Northern Hemisphere, flu levels continue to taper off, with influenza B as the predominant strain, as is typical for this time of year. Areas still reporting elevated flu levels include El Salvador and Guatemala, both due to 2009 H1N1.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Guatemala",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "elevated flu levels",
+        "evidence": [
+          "In the Northern Hemisphere, flu levels continue to taper off, with influenza B as the predominant strain, as is typical for this time of year. Areas still reporting elevated flu levels include El Salvador and Guatemala, both due to 2009 H1N1.",
+          "May 16 WHO global flu update"
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "influenza B",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Egypt",
+        "start_date": "2016-05-16",
+        "end_date": "2016-05-16",
+        "words": "influenza B illnesses have increased in recent weeks",
+        "evidence": [
+          "Africa's flu activity decreased in most locations, except for Egypt, where influenza B illnesses have increased in recent weeks.",
+          "May 16 WHO global flu update"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 113,
+    "article_id": "20240612043000-923",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 114,
+    "article_id": "20180801204500-446",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 115,
+    "article_id": "20221020210000-853",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2022-10-20",
+        "end_date": "2022-10-20",
+        "words": "early onset of flu season",
+        "evidence": [
+          "The spike in RSV, combined with the early onset of flu season and a possible winter COVID-19 surge, has public health officials concerned about the capacity of the U.S. healthcare system to treat patients in the coming months."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 116,
+    "article_id": "20150617010000-180",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 117,
+    "article_id": "20170111071500-1522",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "suspected",
+        "total_or_new": "new",
+        "city": "Allahabad",
+        "state": "Uttar Pradesh",
+        "country": "India",
+        "start_date": "2017-01-11",
+        "end_date": "2017-01-11",
+        "words": null,
+        "evidence": [
+          "Magh Mela area faces swine flu scare\nThe scare started after one of the saints showed symptoms similar to H1N1 flu virus in Magh Mela area",
+          "“We can’t say that it was swine flu as we don’t have H1N1 testing facility in Allahabad.",
+          "However, after this suspected case reported in Mela area we started preparations to ensure that the virus does not spread in the Mela area ,” says chief medical officer Dr Alok Verma."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 118,
+    "article_id": "20171011213000-513",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 119,
+    "article_id": "20210630121500-1295",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 120,
+    "article_id": "20220906210000-1620",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 121,
+    "article_id": "20191119123000-1947",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Florida",
+        "country": "USA",
+        "start_date": "2019-11-19",
+        "end_date": "2019-11-19",
+        "words": "uptick in flu cases",
+        "evidence": [
+          "There's an uptick in flu cases at local schools.",
+          "The Florida Department of Health in Palm Beach County has been monitoring the flu at Palm Beach County public schools and says there have been five influenza-like illness outbreaks since October, and a total of eight since the school year began."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 3,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Florida",
+        "country": "USA",
+        "start_date": "2019-08-01",
+        "end_date": "2019-09-30",
+        "words": null,
+        "evidence": [
+          "The Florida Department of Health in Palm Beach County has been monitoring the flu at Palm Beach County public schools and says there have been five influenza-like illness outbreaks since October, and a total of eight since the school year began."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 5,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Florida",
+        "country": "USA",
+        "start_date": "2019-10-01",
+        "end_date": "2019-11-19",
+        "words": null,
+        "evidence": [
+          "The Florida Department of Health in Palm Beach County has been monitoring the flu at Palm Beach County public schools and says there have been five influenza-like illness outbreaks since October, and a total of eight since the school year began."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 122,
+    "article_id": "20151126011500-722",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 5,
+        "status": null,
+        "total_or_new": "total",
+        "city": null,
+        "state": "Tamil Nadu",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2015-11-26",
+        "words": null,
+        "evidence": [
+          "Even as H1N1 influenza has claimed five lives in delta districts, including two in Tiruchi, the health authorities have now embarked on an aggressive campaign to prevent spreading of swine flu virus."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 123,
+    "article_id": "20181025211500-457",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 124,
+    "article_id": "20240702090000-165",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 125,
+    "article_id": "20151209120000-781",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 126,
+    "article_id": "20180802063000-508",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 127,
+    "article_id": "20220909173000-249",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 128,
+    "article_id": "20191010121500-866",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 129,
+    "article_id": "20181207033000-606",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Oregon",
+        "country": "USA",
+        "start_date": "2018-12-07",
+        "end_date": "2018-12-07",
+        "words": "seasonal influenza is increasing statewide",
+        "evidence": [
+          "OREGON CITY, Ore. — Local public schools are starting to see an uptick in flu cases as the Oregon Health Authority says seasonal influenza is increasing statewide."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 130,
+    "article_id": "20240705120000-1021",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 131,
+    "article_id": "20211014034500-937",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 132,
+    "article_id": "20240518033000-494",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 133,
+    "article_id": "20220823180000-1899",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 134,
+    "article_id": "20160531100000-1642",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 135,
+    "article_id": "20240601090000-567",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "South Australia",
+        "country": "Australia",
+        "start_date": null,
+        "end_date": "2024-06-01",
+        "words": "increasing numbers of COVID and flu cases",
+        "evidence": [
+          "Ambulance ramping in South Australia has soared to a new record high, prompting the opposition to accuse the government of winning the last election on the \"basis of [a] lie\", and the government to respond by condemning the remark as \"hysterical\".",
+          "\"Clearly our health system has been under tremendous pressure in the past few weeks as we battle increasing numbers of COVID and flu cases hitting our community."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 136,
+    "article_id": "20240427130000-246",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 137,
+    "article_id": "20240621143000-1462",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": "H9N2",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "West Bengal",
+        "country": "India",
+        "start_date": "2024-06-11",
+        "end_date": "2024-06-11",
+        "words": null,
+        "evidence": [
+          "He said that based on the WHO's June 11, 2024, report, a type-A Avian Influenza (H9N2) case was detected in a child from West Bengal, India. The child, who contracted the infection after coming in contact with an avian source of the virus, has recovered and gone home from hospital."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 138,
+    "article_id": "20241021101500-543",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 139,
+    "article_id": "20191121223000-232",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 140,
+    "article_id": "20231220124500-515",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2023-11-22",
+        "end_date": "2023-12-20",
+        "words": "hospitalizations across all age groups increased by 200% for influenza",
+        "evidence": [
+          "The coronavirus subvariant JN.1 is now the fastest growing strain of the virus in the United States. The strain now constitutes about 20% of new Covid-19 infections, according to the US Centers for Disease Control and Prevention. In the Northeast, JN.1 has become the dominant variant.",
+          "Meanwhile, the CDC has issued an alert to clinicians about the need to increase immunizations for influenza, Covid-19, and respiratory syncytial virus, or RSV. The public health agency reported that in the past four weeks, hospitalizations across all age groups increased by 200% for influenza, 60% for RSV and 51% for Covid-19."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 141,
+    "article_id": "20220708014500-268",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 142,
+    "article_id": "20220513014500-110",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 143,
+    "article_id": "20170921081500-1730",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": "Type A influenza",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": "2017-09-21",
+        "end_date": "2017-09-21",
+        "words": "onset of a Type A influenza epidemic",
+        "evidence": [
+          "If you're aching, coughing, running a fever and shaking from chills, you aren't alone — the Department of Public Health announced the onset of a Type A influenza epidemic on the island.",
+          "\"This is not entirely unexpected as Guam frequently experiences an increase of influenza illnesses soon after the start of each new school year."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 144,
+    "article_id": "20220717143000-485",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 145,
+    "article_id": "20161116210000-2723",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 146,
+    "article_id": "20220427173000-398",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 147,
+    "article_id": "20241213153000-15",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 148,
+    "article_id": "20220408000000-1397",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 149,
+    "article_id": "20231212200000-1395",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 150,
+    "article_id": "20171018120000-472",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 151,
+    "article_id": "20171027004500-2646",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 152,
+    "article_id": "20240522231500-485",
+    "useful": null,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 153,
+    "article_id": "20220731220000-227",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 154,
+    "article_id": "20240104081500-437",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 155,
+    "article_id": "20170626150000-2225",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 156,
+    "article_id": "20220715203000-42",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 157,
+    "article_id": "20211008223000-309",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 158,
+    "article_id": "20240529234500-693",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 159,
+    "article_id": "20230228041500-295",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 160,
+    "article_id": "20221018221500-1127",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 161,
+    "article_id": "20220611103000-426",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 162,
+    "article_id": "20241210154500-1478",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 163,
+    "article_id": "20171207204500-145",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 164,
+    "article_id": "20240514083000-1040",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 165,
+    "article_id": "20230129031500-442",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 166,
+    "article_id": "20151122064500-928",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 167,
+    "article_id": "20180831191500-197",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 168,
+    "article_id": "20220930024500-847",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 169,
+    "article_id": "20191107213000-439",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 170,
+    "article_id": "20230214091500-590",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 171,
+    "article_id": "20160214000000-1213",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": "swine flu",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Gujarat",
+        "country": "India",
+        "start_date": "2016-02-14",
+        "end_date": "2016-02-14",
+        "words": "People are dying of swine flu",
+        "evidence": [
+          "People are dying of swine flu in Gujarat and Rajasthan but we have kept the situation in control in Delhi."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "swine flu",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Rajasthan",
+        "country": "India",
+        "start_date": "2016-02-14",
+        "end_date": "2016-02-14",
+        "words": "People are dying of swine flu",
+        "evidence": [
+          "People are dying of swine flu in Gujarat and Rajasthan but we have kept the situation in control in Delhi."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 172,
+    "article_id": "20230102131500-519",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 173,
+    "article_id": "20220419050000-747",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 174,
+    "article_id": "20151215084500-273",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 175,
+    "article_id": "20240411213000-1347",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 176,
+    "article_id": "20191127120000-112",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 177,
+    "article_id": "20230326180000-242",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "influenza A",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": null,
+        "country": "Brazil",
+        "start_date": "2023-03-25",
+        "end_date": "2023-03-25",
+        "words": null,
+        "evidence": [
+          "The Brazilian government announced on Saturday that leftist President Lula, who took office in January, had canceled his high-profile trip to China, scheduled for March 27-31, after being diagnosed with bacterial and viral bronchopneumonia caused by influenza A."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 178,
+    "article_id": "20160104153000-1377",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 179,
+    "article_id": "20210813191500-820",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 180,
+    "article_id": "20241204180000-992",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 181,
+    "article_id": "20180628143000-1109",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 182,
+    "article_id": "20150726161500-339",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 183,
+    "article_id": "20160124063000-1593",
+    "useful": true,
+    "needs_relook": true,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "country": "India",
+        "start_date": "2016-01-23",
+        "end_date": "2016-01-23",
+        "words": null,
+        "evidence": [
+          "Days ahead of the district Republic Day events, the Ludhiana deputy commissioner and police officials seem to have had a major falling out.",
+          "But Umranangal told The Indian Express that both he and Bhargav were unwell. “Me and DCP Bhargav- both are unwell,” Umarmangal said. “I am suffering from flu but we both are on duty. The DCP had on Friday checked all security arrangements and that is why maybe he did not attend the rehearsals today. As for myself, I am even unable to speak due to throat infection.”"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 184,
+    "article_id": "20240511111500-129",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Silchar",
+        "state": "Assam",
+        "country": "India",
+        "start_date": "2024-05-11",
+        "end_date": "2024-05-11",
+        "words": null,
+        "evidence": [
+          "We also published the following articles recently\nAssam: Another infant dies of swine flu in Barak ValleyArman Hussain Laskar, an infant, passed away due to swine flu at Silchar Medical College and Hospital. He was diagnosed with pneumonia. Two other children from Cachar district are currently undergoing treatment for the virus."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 2,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "Assam",
+        "country": "India",
+        "start_date": "2024-05-11",
+        "end_date": "2024-05-11",
+        "words": null,
+        "evidence": [
+          "We also published the following articles recently\nAssam: Another infant dies of swine flu in Barak ValleyArman Hussain Laskar, an infant, passed away due to swine flu at Silchar Medical College and Hospital. He was diagnosed with pneumonia. Two other children from Cachar district are currently undergoing treatment for the virus."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 185,
+    "article_id": "20161202200000-369",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": null,
+        "state": "California",
+        "country": "USA",
+        "start_date": "2016-12-01",
+        "end_date": "2016-12-01",
+        "words": null,
+        "evidence": [
+          "California health officials on Thursday confirmed the state’s first death of this year’s influenza season and reminded everyone to get a flu shot before more people get sick."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 186,
+    "article_id": "20180828021500-1966",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Bhubaneswar",
+        "state": "Odisha",
+        "country": "India",
+        "start_date": "2018-08-28",
+        "end_date": "2018-08-28",
+        "words": null,
+        "evidence": [
+          "Bhubaneswar: After this year’s first swine flu case was reported from a private hospital in Bhubaneswar, the Odisha government was quick to allay fears citing that it is well prepared."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 187,
+    "article_id": "20230105154500-1283",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 188,
+    "article_id": "20151118000000-1856",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 189,
+    "article_id": "20230531094500-249",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 190,
+    "article_id": "20240613103000-197",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 191,
+    "article_id": "20180821024500-1880",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 192,
+    "article_id": "20150612211500-446",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": "H1N1",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-05-29",
+        "end_date": "2015-05-29",
+        "words": null,
+        "evidence": [
+          "While authorities both at Sassoon hospital and a private hospital at Hadapsar where the woman was earlier treated refused to be quoted, they confirmed that the Pune resident, who was both diabetic and obese, had been infected with H1N1 virus.",
+          "According to sources, the woman, who was admitted to a private hospital for nearly 10 days, had been recovering from swine flu. However, since the recovery was slow, her relatives decided to shift her to Sassoon General Hospital on June 8. Sassoon hospital authorities said the woman’s swab report had tested positive for H1N1 virus."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "country": "India",
+        "start_date": "2015-06-12",
+        "end_date": "2015-06-12",
+        "words": null,
+        "evidence": [
+          "a 45-year-old woman died due to H1N1 virus at Sassoon General Hospital.",
+          "While authorities both at Sassoon hospital and a private hospital at Hadapsar where the woman was earlier treated refused to be quoted, they confirmed that the Pune resident, who was both diabetic and obese, had been infected with H1N1 virus.",
+          "According to sources, the woman, who was admitted to a private hospital for nearly 10 days, had been recovering from swine flu. However, since the recovery was slow, her relatives decided to shift her to Sassoon General Hospital on June 8. Sassoon hospital authorities said the woman’s swab report had tested positive for H1N1 virus."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 193,
+    "article_id": "20230325231500-30",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Brasilia",
+        "state": null,
+        "country": "Brazil",
+        "start_date": "2023-03-23",
+        "end_date": "2023-03-23",
+        "words": null,
+        "evidence": [
+          "Lula was admitted to a hospital in the capital of Brasilia on Thursday, where he was diagnosed with influenza and is receiving treatment."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 194,
+    "article_id": "20181219130000-741",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 195,
+    "article_id": "20241002201500-1753",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 196,
+    "article_id": "20180828180000-63",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 197,
+    "article_id": "20150713130000-86",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "country": "India",
+        "start_date": "2015-07-13",
+        "end_date": "2015-07-13",
+        "words": null,
+        "evidence": [
+          "Forty-seven-year-old woman succumbs to the virus in Chennai and cases of swine flu are reported in other districts of south India, alerting health officials.\nReferring to the woman’s death he said, “The patient was suffering from asthma and she also tested positive for H1N1 virus. This made her condition worse and she died without responding to the treatment. If not for the infection, she would have lived with asthma. However, we are yet to categorise it into swine flu death. Pulmonologist have to conform it.”"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 198,
+    "article_id": "20151215194500-614",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 199,
+    "article_id": "20240612094500-1062",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 200,
+    "article_id": "20170119083000-1556",
+    "useful": true,
+    "needs_relook": true,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 3,
+        "status": null,
+        "total_or_new": "total",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "start_date": "2017-01-01",
+        "end_date": "2017-01-19",
+        "words": null,
+        "evidence": [
+          "HYDERABAD: A 58- year-old woman suffering from sin flu died at the state-run Gandhi hospital on Wednesday.",
+          "It is the third swine flu-related death in the city since January 1. The first swine flu-related death was at Nawab Saheb Kunta and another was from Yadadri district.\nAccording to the sources, the prevailing cold wave condition has shot up the number of H1N1 positive cases to 50 since January 1."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "H1N1",
+        "number": 50,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "start_date": "2017-01-01",
+        "end_date": "2017-01-19",
+        "words": null,
+        "evidence": [
+          "HYDERABAD: A 58- year-old woman suffering from sin flu died at the state-run Gandhi hospital on Wednesday.",
+          "It is the third swine flu-related death in the city since January 1. The first swine flu-related death was at Nawab Saheb Kunta and another was from Yadadri district.\nAccording to the sources, the prevailing cold wave condition has shot up the number of H1N1 positive cases to 50 since January 1."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "start_date": "2017-01-14",
+        "end_date": "2017-01-14",
+        "words": null,
+        "evidence": [
+          "HYDERABAD: A 58- year-old woman suffering from sin flu died at the state-run Gandhi hospital on Wednesday.\nLaxmi, a resident of Saroornagar in the city, was admitted to a private hospital in Madhapur on January 14 for treatment but later shifted to Gandhi Hospital to undergo treatment but Laxmi was in a critical condition and the doctors did not get enough time to stabilize her condition."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "start_date": "2017-01-18",
+        "end_date": "2017-01-18",
+        "words": null,
+        "evidence": [
+          "HYDERABAD: A 58- year-old woman suffering from sin flu died at the state-run Gandhi hospital on Wednesday.\nLaxmi, a resident of Saroornagar in the city, was admitted to a private hospital in Madhapur on January 14 for treatment but later shifted to Gandhi Hospital to undergo treatment but Laxmi was in a critical condition and the doctors did not get enough time to stabilize her condition."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 201,
+    "article_id": "20160701091500-428",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 202,
+    "article_id": "20180731120000-1708",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Kolkata",
+        "state": "West Bengal",
+        "country": "India",
+        "start_date": "2018-07-30",
+        "end_date": "2018-07-30",
+        "words": null,
+        "evidence": [
+          "KOLKATA: In the wake of the yearâs first swine flu case, reported by The Times of India on Monday"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 203,
+    "article_id": "20171204234500-813",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Phoenix",
+        "state": "Arizona",
+        "country": "USA",
+        "start_date": "2017-11-28",
+        "end_date": "2017-11-28",
+        "words": null,
+        "evidence": [
+          "Alani \"Joie\" Murrieta, a 20-year-old mother of two from Phoenix, Arizona, died last Tuesday — only one day after being diagnosed with the flu.",
+          "Murrieta arrived at the hospital around 7 a.m. and was declared dead at 3:25 p.m. on Tuesday, Nov. 28, 2017."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 204,
+    "article_id": "20231108204500-469",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 205,
+    "article_id": "20211115010000-615",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 206,
+    "article_id": "20241215194500-660",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 207,
+    "article_id": "20170710080000-1685",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 88,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2017-06-01",
+        "end_date": "2017-06-30",
+        "words": null,
+        "evidence": [
+          "While the traditional “flu season” usually kicks off in July, Central Coast Local Area Health has already recorded 88 flu cases last month compared to 16 in June, 2016."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2017-06-01",
+        "end_date": "2017-07-10",
+        "words": "one of the worst flu seasons in years",
+        "evidence": [
+          "THIS winter is shaping up as one of the worst flu seasons in years with five and a half times the number of confirmed cases last month than the same period last year.",
+          "“Flu vaccines used in Australia are made with vaccine viruses that have been ‘inactivated’ so they are not infectious,” he said."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 208,
+    "article_id": "20230204064500-404",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Godhra",
+        "state": "Gujarat",
+        "country": "India",
+        "start_date": "2023-01-21",
+        "end_date": "2023-01-21",
+        "words": null,
+        "evidence": [
+          "Several students at the Godhra GMERS Medical College were advised to rest and some were also allowed to go home after swine flu cases were reported among them.",
+          "According to sources, the first case of swine flu was reported about two weeks back in the college."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Godhra",
+        "state": "Gujarat",
+        "country": "India",
+        "start_date": "2023-01-30",
+        "end_date": "2023-01-30",
+        "words": null,
+        "evidence": [
+          "Several students at the Godhra GMERS Medical College were advised to rest and some were also allowed to go home after swine flu cases were reported among them.",
+          "One more student tested positive earlier this week even as others were found suspicious along with this student too."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "swine flu",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Godhra",
+        "state": "Gujarat",
+        "country": "India",
+        "start_date": "2023-01-21",
+        "end_date": "2023-02-04",
+        "words": "several students with swine flu",
+        "evidence": [
+          "Several students at the Godhra GMERS Medical College were advised to rest and some were also allowed to go home after swine flu cases were reported among them."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 209,
+    "article_id": "20220506091500-657",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 210,
+    "article_id": "20210818104500-122",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": "Jodhpur",
+        "state": "Rajasthan",
+        "country": "India",
+        "start_date": "2021-08-18",
+        "end_date": "2021-08-18",
+        "words": null,
+        "evidence": [
+          "JODHPUR, India – A 70-year-old foreign tourist has died of swine flu in Jodhpur as the toll in Rajasthan has gone up to more than 120.",
+          "She was put on the ventilator but died on Wednesday morning."
+        ]
+      },
+      {
+        "kind": "deaths",
+        "strain": "swine flu",
+        "number": 120,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": "Rajasthan",
+        "country": "India",
+        "start_date": null,
+        "end_date": "2021-08-18",
+        "words": null,
+        "evidence": [
+          "JODHPUR, India – A 70-year-old foreign tourist has died of swine flu in Jodhpur as the toll in Rajasthan has gone up to more than 120."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 211,
+    "article_id": "20220801020000-189",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": null,
+        "number": 2,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Karnataka",
+        "country": "India",
+        "start_date": "2022-08-01",
+        "end_date": "2022-08-01",
+        "words": null,
+        "evidence": [
+          "Meanwhile, Minister for Cooperation ST Somashekar and Minister for Municipal Administration N Nagaraju have been down with an illness.",
+          "Sudhakar clarified, “Both the ministers are having symptomatic flu . Both have undergone Covid tests and both of them are negative. They are doing fine and are being treated for flu.”"
+        ]
+      }
+    ]
+  },
+  {
+    "row": 212,
+    "article_id": "20220630034500-605",
+    "useful": true,
+    "needs_relook": true,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Kolkata",
+        "state": "West Bengal",
+        "country": "India",
+        "start_date": "2022-06-30",
+        "end_date": "2022-06-30",
+        "words": "many turning out to be common flu",
+        "evidence": [
+          "KOLKATA: Not all cough, fever and runny nose are symptoms of Covid-19. Doctors across the city have been receiving a steady stream of patients with various viral infections, along with Covid. Upper respiratory tract infections have made a comeback with the rains starting to set in and doctors blame parainfluenza, adenovirus and common flu for the illnesses around this time.",
+          "Given the overlapping symptoms, most patients have been getting checked and tested, fearing that they might have caught the novel coronavirus. For many, it has been turning out to be common flu."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 213,
+    "article_id": "20221101223000-783",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 214,
+    "article_id": "20230124050000-501",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 215,
+    "article_id": "20161124090000-1105",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 216,
+    "article_id": "20161222191500-494",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 217,
+    "article_id": "20210621144500-374",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 218,
+    "article_id": "20160212201500-825",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 219,
+    "article_id": "20240509103000-1130",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 220,
+    "article_id": "20180213203000-6",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 221,
+    "article_id": "20231213164500-828",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 222,
+    "article_id": "20210913201500-892",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 223,
+    "article_id": "20161209193000-181",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 224,
+    "article_id": "20160504091500-2907",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 225,
+    "article_id": "20180305080000-411",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 226,
+    "article_id": "20170717190000-2258",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 227,
+    "article_id": "20210630180000-999",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 228,
+    "article_id": "20160203204500-2443",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 229,
+    "article_id": "20181210160000-963",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 230,
+    "article_id": "20220928061500-451",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 231,
+    "article_id": "20221223163000-1002",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 232,
+    "article_id": "20210407071500-104",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 233,
+    "article_id": "20231209010000-1581",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 234,
+    "article_id": "20180831190000-1037",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 235,
+    "article_id": "20231225180000-245",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 236,
+    "article_id": "20191105230000-2380",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 237,
+    "article_id": "20211105101500-470",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 238,
+    "article_id": "20230220001500-343",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 239,
+    "article_id": "20220526154500-240",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 240,
+    "article_id": "20190915131500-879",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 241,
+    "article_id": "20230208173000-388",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 242,
+    "article_id": "20160119190000-657",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 243,
+    "article_id": "20230113141500-1240",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 244,
+    "article_id": "20150730153000-1035",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 245,
+    "article_id": "20181116213000-1645",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 246,
+    "article_id": "20181210103000-1162",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 247,
+    "article_id": "20160503060000-2066",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 248,
+    "article_id": "20241218161500-608",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 249,
+    "article_id": "20240221014500-1454",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 250,
+    "article_id": "20211014070000-5",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 251,
+    "article_id": "20161231110000-588",
+    "useful": true,
+    "needs_relook": false,
+    "items": [
+      {
+        "kind": "deaths",
+        "strain": "bird flu",
+        "number": 3,
+        "status": "confirmed",
+        "total_or_new": "total",
+        "city": null,
+        "state": null,
+        "country": "China",
+        "start_date": null,
+        "end_date": "2016-12-31",
+        "words": null,
+        "evidence": [
+          "Strains of bird flu, which can be spread to poultry by wild birds, have been detected across Asia and in Europe in recent weeks. Two people in China and one person in Hong Kong have died in the outbreaks."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 252,
+    "article_id": "20180203174500-992",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 253,
+    "article_id": "20240429160000-1092",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 254,
+    "article_id": "20220805141500-729",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 255,
+    "article_id": "20220525053000-567",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 256,
+    "article_id": "20220413151500-5",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 257,
+    "article_id": "20170709230000-1373",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 258,
+    "article_id": "20210724104500-20",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 259,
+    "article_id": "20230108214500-501",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 260,
+    "article_id": "20230104184500-1056",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 261,
+    "article_id": "20230222121500-857",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 262,
+    "article_id": "20230514164500-469",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 263,
+    "article_id": "20180711231500-629",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 264,
+    "article_id": "20160105110000-306",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 265,
+    "article_id": "20220713060000-69",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 266,
+    "article_id": "20191101094500-1409",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 267,
+    "article_id": "20230304040000-189",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 268,
+    "article_id": "20220325090000-760",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 269,
+    "article_id": "20180903074500-1029",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 270,
+    "article_id": "20170116134500-1170",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 271,
+    "article_id": "20240522083000-778",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 272,
+    "article_id": "20231110161500-848",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 273,
+    "article_id": "20210613174500-197",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 274,
+    "article_id": "20150514061500-1486",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 275,
+    "article_id": "20181208104500-761",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 276,
+    "article_id": "20241115090000-473",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 277,
+    "article_id": "20240618030000-1332",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 278,
+    "article_id": "20170712113000-1353",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 279,
+    "article_id": "20231203063000-261",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 280,
+    "article_id": "20161119184500-639",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 281,
+    "article_id": "20240130221500-117",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 282,
+    "article_id": "20220531134500-410",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 283,
+    "article_id": "20191003183000-131",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 284,
+    "article_id": "20180811143000-203",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 285,
+    "article_id": "20220801073000-599",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 286,
+    "article_id": "20231107210000-2200",
+    "useful": true,
+    "needs_relook": true,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2023-11-07",
+        "words": "ongoing flu season",
+        "evidence": [
+          "The Centers for Disease Control and Prevention [CDC], confirms the first pediatric flu deaths of the 2023-24 season in the United States."
+        ]
+      }
+    ]
+  },
+  {
+    "row": 287,
+    "article_id": "20210426193000-2068",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 288,
+    "article_id": "20230217110000-723",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 289,
+    "article_id": "20240613050000-596",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 290,
+    "article_id": "20211124020000-373",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 291,
+    "article_id": "20231128183000-1447",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 292,
+    "article_id": "20170709144500-1034",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 293,
+    "article_id": "20220614114500-498",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 294,
+    "article_id": "20230205193000-299",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 295,
+    "article_id": "20220313024500-172",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 296,
+    "article_id": "20151202011500-1964",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 297,
+    "article_id": "20180824074500-897",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 298,
+    "article_id": "20150803221500-1543",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 299,
+    "article_id": "20181212191500-754",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 300,
+    "article_id": "20151217054500-1477",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 301,
+    "article_id": "20241014191500-531",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 302,
+    "article_id": "20161212211500-423",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 303,
+    "article_id": "20220425114500-136",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 304,
+    "article_id": "20170929204500-101",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 305,
+    "article_id": "20171114060000-1795",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 306,
+    "article_id": "20240426114500-227",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 307,
+    "article_id": "20221011024500-211",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 308,
+    "article_id": "20241107220000-969",
+    "useful": false,
+    "needs_relook": true,
+    "items": []
+  },
+  {
+    "row": 309,
+    "article_id": "20240705130000-1238",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 310,
+    "article_id": "20240611061500-1127",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 311,
+    "article_id": "20240429194500-29",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 312,
+    "article_id": "20181011130000-1560",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 313,
+    "article_id": "20160212060000-1296",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 314,
+    "article_id": "20240120163000-428",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 315,
+    "article_id": "20170713060000-636",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 316,
+    "article_id": "20220324144500-633",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 317,
+    "article_id": "20171013170000-1863",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 318,
+    "article_id": "20220426081500-1022",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 319,
+    "article_id": "20220719191500-146",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  },
+  {
+    "row": 320,
+    "article_id": "20231212123000-536",
+    "useful": false,
+    "needs_relook": false,
+    "items": []
+  }
+]
