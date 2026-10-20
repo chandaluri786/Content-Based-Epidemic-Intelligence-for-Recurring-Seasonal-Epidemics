@@ -1,0 +1,296 @@
+You read one news article and fill in a flu record. Follow the steps in order, then reply with one
+JSON object only.
+
+Before the new article you see solved examples: an article, then its correct answer. Each item's
+evidence shows the sentences it came from. Study how each evidence sentence leads to the item's
+kind, number, status, total_or_new, place and dates, and reason the same way for the new article.
+
+The article text may be shortened. "[…]" marks text that was cut out and "[NO flu-keyword sentence in
+article]" means no flu sentence was kept. Never guess what the cut text said. Use only the words you can
+see.
+
+STEP 1. THE ARTICLE DATE.
+The article date is the scan date given with the article. Use it even when the article or its link
+shows another date. Work every time phrase ("yesterday", "on Tuesday", "last week") out from the
+article date (step 6). Never use your own knowledge to invent a date.
+
+STEP 2. IS THE ARTICLE USEFUL?
+The article is useful if it has at least one item that passes every rule in steps 2 to 5. Otherwise
+it is not useful. A useful article always has items; a not-useful article never has any.
+
+An item is a CURRENT statement about flu IN PEOPLE in a NAMED COUNTRY. It is one of these:
+ 1. People ill with flu: cases, deaths or hospital admissions. At least one person must be affected
+    by flu of any strain or variant, or by a flu-related disease (seasonal flu, swine flu, bird flu,
+    H5N1, H9N2). The first case or first death of the year counts. A small group counts (two
+    ministers with flu), even in an article about something else.
+ 2. The level or direction of flu in a place: rising, falling, peaking, low, widespread, an epidemic
+    declared, an early or bad season, "no cases yet" at the start of a season.
+ 3. A season that is active now: "the season has started", "the season is underway", "flu season is
+    upon us", "as flu season takes hold", "we haven't hit the peak yet", "the peak season is over".
+ 4. Suspected flu: suspected cases ("on suspicion", "samples sent"), or flu-like illness for named
+    people or a place when the article names no other cause or test.
+ 5. Vague amounts of illness or death that the article ties to flu: "several students with swine flu",
+    "several deaths have been reported", "an extraordinary outbreak". These are trends (step 4).
+Human cases of animal flu count (H5N1 in a farm worker, H9N2 in a child).
+
+These are NOT items:
+ - flu in animals only (poultry, cattle, pigs, dogs, horses, wild birds)
+ - illnesses that are not flu: "stomach flu", norovirus, cat flu, Hib ("haemophilus influenzae"),
+   and cold-type illness where the article names another cause or test (dengue, malaria, COVID)
+ - a "mystery illness": an outbreak that the article calls unexplained and under investigation,
+   without saying it is flu or suspected flu. (Flu-like illness that is otherwise unexplained is a
+   suspected case: see "status" in step 4.)
+ - a line that is not the article's own statement: a "read more" or related-link headline, a teaser or
+   headline-only entry on a topic or listing page, a heading or table row of a ranking or index ("Top ten
+   states with flu activity"), a caption. These can point to a flu story, but the story itself is not in
+   the article.
+ - opinion and first-person writing: "I think the worst is yet to come", a reader letter, an essay in
+   which the writer mentions their own illness without a date
+ - a look-back in the past tense: "there was an uptick", "Quebec experienced a late flu season", "he fell
+   ill in January" when the period has ended (step 3)
+ - flu named only in passing: in a list, a comparison, a metaphor, a nickname ("Spanish flu",
+   "Kung flu"), a symptom or drug side effect, a photo caption, or a business, investment or
+   vaccine-development remark
+ - prevention only: vaccination, tips, clinics, vaccine coverage. If the same article also states a
+   current flu item, the article is useful and only that item is recorded
+ - forecasts: "the season is coming", "could be severe", "may peak in January", "likely to increase"
+ - risk statements: "the risk to humans is low", "no person-to-person spread"
+ - general seasonal facts: "flu usually peaks in winter", "the season runs from October to April"
+ - the past (step 3)
+ - worldwide or regional statements with no country ("the southern hemisphere", "across Asia")
+ - an undated personal story that may be an old event retold, or an old event mentioned as
+   background ("Tensions were heightened when a child ... was confirmed")
+ - illness or hospital demand in general that the article does not tie to flu or flu-like illness
+   ("a surge in viral illnesses", "rising demand for medical attention")
+ - spam, ads, and pages whose text does not match the link
+An article that has these and also a current item is still useful; just do not record these.
+
+Other diseases. An article mainly about COVID-19, RSV, dengue or another disease is useful only if it
+has a current flu statement of its own. Cases, hospitalized and deaths are written only when the
+number is for flu alone, and only when it is current; never record another disease's numbers or a
+combined total of flu and another disease. A TREND may mention flu together with other diseases when
+it is current ("a 30% rise in flu and RSV", "a surge in RSV and the flu and Covid"): that is still a
+flu trend.
+
+Mixed sentences. When a sentence mixes a forecast with current news, keep only the current part.
+"Flu activity is increasing and is expected to worsen" gives a trend with the words "increasing".
+
+Borderline. When a careful reader could go either way, give your best answer and set borderline to
+true, with the reason in "reason". Set borderline to true only when ANY of these applies:
+ - a named person has flu and neither the article nor its setting (the event, the person's base) gives a
+   place you can be sure of
+ - a single case has no date
+ - a self-reported case has no test ("the minister says he has flu")
+ - the item's period ended 31 to 45 days before the article
+ - "this season" or "this year" with no direction ("flu season is ramping up"), and nothing else in the
+   article is a current flu item
+ - the whole flu content is one loose line in an article about something else
+In the earlier test about 60% of useful answers were flagged borderline; the flag must stay rare so that
+it means something. Do not flag an article that has a clear count, a clear direction, or a clear place and
+date. If useful and borderline are both true, still write the items.
+
+Named person with flu. A named person who has flu counts, even a sportsperson, actor or singer, when the
+article gives the place of the illness or of the person's current situation (the match, the film
+location, the city they live in). If neither the article nor its setting gives a country, there is no
+item. This is the one case where the place may come from the person's setting; it still needs a country
+you are sure of.
+
+STEP 3. IS IT CURRENT?
+Check every item twice. Keep it only if it passes both.
+ Check 1. Did its period end recently? The article date minus end_date should be 30 days or less.
+   Measure from the END of the period. A running total that ends at the article date is current,
+   however long ago it started ("since January, 170 tested positive"). An item that ended 31 to 45
+   days before is borderline; older than that is past.
+ Check 2. Is its period a completed calendar year or a completed flu season? If yes, it is past,
+   even if it ended inside 30 days (an article from 5 January with "last year, 2,200 cases").
+   Finished: "last year", "in 2015", "last season", "last winter", "the 2017-18 season", "the season
+   ended with 300 deaths". Still running, so it passes: "so far this year", "this season", "since
+   September 1", "to date". A present statement that the season is over ("the peak season is
+   over") is a current trend and passes. Check 2 is only about a whole year or season: "last month"
+   and "over the last three months" only need check 1.
+ Examples:
+   article 2016-01-05, "Last year, the city reported 2,200 cases": finished year, drop.
+   article 2015-12-20, "So far this year, 2,200 cases": still running, keep.
+   article 2017-07-10, "88 cases last month": ended 10 days before, keep.
+   article 2015-08-03, "209 patients, January to March": ended 125 days before, drop.
+   article 2016-01-29, "The peak season of the flu is over": a statement about today, keep (trend).
+ - A comparison with the period just before ("2,000 cases this week, compared with 1,024 the
+   previous week") keeps both numbers, if each passes the checks. A comparison with last year or an
+   earlier season is not an item ("compared with 6,449 in the same week in 2017" drops the 6,449).
+ - An old case announced late is dropped when the event itself ended more than 30 days before the
+   article.
+
+STEP 4. ITEMS.
+Write one item for each distinct statement. Copy the article's facts. Never guess.
+Fields: kind, strain, number, status, total_or_new, city, state, country, start_date, end_date,
+words, evidence.
+
+Kinds. Exactly four: "cases", "deaths", "hospitalized", "trend".
+ - deaths: the article links the death to flu. If the person had confirmed flu but the cause of death
+   is unknown or "yet to be categorised", write a cases item and no deaths item. If the article does
+   not show the person had flu, leave the death out.
+ - hospitalized: admitted, in hospital, under treatment in a hospital, in intensive care, or isolated in
+   a hospital ("eight patients are undergoing treatment at Kasturba Hospital" is hospitalized). The item
+   records the event of admission: start_date and end_date are both the admission day, not the length of
+   the stay (if the admission day is not given, use the day of the report). Emergency visits and people
+   merely "affected" or "sick" with no hospital named are cases.
+ - trend: what flu is doing: rising, falling, stable, low, declared, ongoing.
+ - A statement with no count is a trend. "People are dying of swine flu in Gujarat" is a trend in
+   Gujarat, not a deaths item with no number.
+ - "No cases yet" is a trend, never a count of 0.
+
+strain: the article's own term for THIS item ("swine flu", "H1N1", "influenza A", "bird flu"). If the
+  same sentence gives both a name and a subtype code, use the code. If the article gives two strains
+  for the same item, write them as it does ("Influenza A & B"). Never list strains from elsewhere in
+  the article. Do not correct the article. null if none.
+number: a whole number, only if the article gives one. "More than 120" is 120. Vague amounts ("a
+  couple of deaths", "nearly three dozen", "dozens") are not numbers: the statement becomes a trend.
+  Never add or subtract numbers. A percentage or ratio is never a number; it goes in words. null for
+  trend items.
+status:
+  Rule for cases and deaths: if the sentence names a strain ("swine flu", "H1N1", "bird flu", "H5N1"),
+    the status is "confirmed", also for tolls and totals ("swine flu claimed 48 lives", "seven deaths and
+    142 cases"). Status is null only when the sentence says just "flu" or "influenza" with no strain and no
+    test word. Suspected beats both.
+  deaths: "confirmed" when a strain is named for the death ("died of swine flu", "an H1N1 death");
+    "suspected" when the article says the death is suspected or still being investigated; otherwise
+    null ("the first flu death of the season").
+  cases: "confirmed" when a named strain is reported ("a case of swine flu"), when the text says
+    confirmed, lab-confirmed, tested positive or diagnosed, or when it says a named person has the
+    flu ("is battling the flu", "is suffering from swine flu"); "suspected" for "suspected", "on
+    suspicion", "samples sent", "report awaited", or flu-like illness with no other cause named;
+    otherwise null ("416 reports of flu cases").
+  hospitalized: "suspected" when the article says the patients are suspected ("isolated on
+    suspicion") or they have flu-like illness; otherwise null.
+  trend: always null.
+total_or_new: "total" for running totals ("so far", "since", "to date", "a toll") AND for any count
+  over a stated period of more than one day ("last week", "last month", "the week ending 7 May", "in
+  the past 10 days"). "new" for a single newly reported event, even when its day is only known to a
+  period ("a child died last week"), and for a count that falls on one day ("182 students sick on
+  Thursday"). null for trend items.
+words: trend items only; null otherwise. Use the article's own phrase when it has one ("seasonal
+  influenza is increasing statewide", "rose by 38 per cent"). When the trend runs over several
+  sentences, write a short plain summary ("no cases received so far this season"). A summary must not
+  add facts.
+
+Counting each thing once. Do not write the same fact twice. Record the headline, not the breakdown.
+ - Headline first. For each place the article reports on, write the main total (cases, deaths,
+   hospitalized) and, when the article gives it, the count that is new today, yesterday or in the last
+   24 hours. That is usually one to three items per kind.
+ - Do NOT write a breakdown of the headline: a list of districts, cities, counties, hospitals or age
+   groups under a state or national total ("Lehigh County 120, Montgomery 93, Schuylkill 15, ..."), or the
+   rows of a table. Write a part only when the sentence singles it out as its own news (it has its own
+   "new" count: "seven in the last 24 hours"; or the article is about that place alone and gives no larger
+   total).
+ - Different countries are separate items, because they are not parts of one total. Keep one item per
+   country the article reports on.
+ - If the article gives both a weekly count and a running total for the same place, write both (each
+   with its own period). Never add or subtract numbers to make a headline.
+ - One patient, same day: keep only the most severe kind (deaths over hospitalized over cases). On
+   different days, write separate items.
+ - A "new" count inside a larger total is kept when it has its own period: "around 60 tested positive in
+   July, including seven in the last 24 hours" gives cases 60 (total) and cases 7 (new). "A tourist died
+   on Wednesday as the state toll rose to more than 120" gives deaths 1 (new) and deaths 120 (total).
+   total_or_new tells them apart. A city count that is only a breakdown of the state count is not kept
+   (see "Headline first").
+ - Drop an item only when it repeats another item: the same kind, the same place, the same period and
+   the same meaning.
+ - Trend items: write ONE trend item for each distinct meaning, for each place and period. Write one for
+   each vague amount the article ties to flu ("several deaths have been reported" gives a trend in that
+   place). Do not write a trend for each row of a ranking or index table, and do not write a trend for a
+   past season. If two
+   trend statements say the same thing in different words for the same place and period (for example
+   "mild" and "lower than usual" in one sentence, or a headline repeating the body), keep the one with
+   the clearest words and drop the others.
+ - Separate places that are not parts of one total are separate items. "Two people in China and one
+   person in Hong Kong died" gives deaths 2 (China) and deaths 1 (China, city Hong Kong). Never add
+   them up.
+ - Round-up pages: a line printed next to a flu item belongs to it only if it is about the same flu
+   event.
+ - Never record: vaccination figures, age shares, death rates ("half of those infected die"), patient
+   details (age, home town), animal outbreaks, or other diseases' numbers.
+
+STEP 5. PLACES.
+ - country is always filled, and must be a real country. Write the United States as "USA" and other
+   countries in full ("India", "Australia").
+ - The country is the place of the illness. The country of the news outlet, the language of the
+   article or a person's nationality does not place the person: a story from a Korean paper about a
+   singer does not put him in Korea. If the article does not say where the illness is, there is no
+   country, so there is no item.
+ - Territories go under their country: Hong Kong and Macau are "China" (city "Hong Kong", "Macau");
+   Guam and American Samoa are "USA"; French Polynesia and New Caledonia are "France".
+ - No country, no item. Drop worldwide and regional items. Never put "global", "worldwide", a
+   continent or a hemisphere in a place field.
+ - Fill in every part of city, state and country that you can work out with certainty from the places
+   the article names (Houston gives Texas, Kolkata gives West Bengal, Brisbane gives Queensland and
+   Australia). Leave a part null when you cannot be certain.
+ - state: a real state or province, or null.
+ - city: a real city only, where the cases or the hospital are, not the patient's home town. A suburb
+   or a hospital name is not a city: use the city it belongs to (Westmead Children's Hospital gives
+   "Sydney"). A county is not a city unless a city of the same name exists. A region ("Central
+   Coast") is not a city. Otherwise null.
+ - A national agency (the CDC, a ministry of health) gives the country and no state.
+
+STEP 6. DATES.
+start_date and end_date are YYYY-MM-DD. start_date is never after end_date, and end_date is never
+after the article date. Work them out from the article date. If a date cannot be worked out, set both
+to null.
+ - A single day (an event, a death, "yesterday", "on Tuesday"): start and end are the same day. Never
+   leave start_date null when end_date is a single day.
+ - A newly reported case or event with no time wording: the article date for both.
+ - "In the last 24 hours": the day before the article date, for both. "In the past N days" (a count):
+   the N days ending the day before the article date (article 2023-01-03, "in the past 10 days" is
+   2022-12-24 to 2023-01-02).
+ - "Today": the article date. "Yesterday": the article date minus 1.
+ - "On Tuesday" or "last Tuesday": the most recent Tuesday ON OR BEFORE the article date. If the
+   article states the date of that day, use it.
+ - "Last week": Monday to Sunday of the week before the article's week.
+ - "This week" or "earlier this week" for one event: the Monday of that week, start and end the same.
+ - "In the last week" or "in the past week" for a count or a rise: the Monday of the article's week to
+   the article date.
+ - "The week ending July 8": the 7 days ending that day. "The past N weeks": the article date minus N
+   weeks, to the article date. "About two weeks back": the article date minus 14 days, for both dates.
+ - "In July": the whole month. "Last month": the whole previous calendar month. "Over the last three
+   months": the three full calendar months before the article's month. "The first fortnight of
+   April": April 1 to April 14.
+ - "Since April 3": that date to the article date. "Since March": March 1 to the article date. "Since
+   last week": the Monday of last week to the article date. "As of Oct. 8", "till Monday": end is that
+   day, start null (unless the text says "this year").
+ - "So far this year", "since January", "year to date": January 1 of the article's year to the
+   article date. Use an earlier end date only when the article gives its own as-of date ("as of
+   Oct. 8", "till Monday", "the week ending Oct. 27").
+ - "This season", "so far this season": start null, end is the article date. A season shown to be
+   active is a trend ending on the article date.
+ - A week number ("EpiWeek 18"): only if the article states that week's calendar range. Copy that
+   range and add the sentence that gives it to the evidence. Never work a week's dates out yourself.
+
+STEP 7. EVIDENCE.
+evidence is a list of strings, each copied word for word from the article: whole sentences, with
+typos, odd spacing and broken characters as printed. Put the parts in article order. Never join
+sentences yourself. If the place or the date comes from a different sentence (a headline, a
+dateline), add that sentence too. If you inferred a city, state or country that is not in the item's
+own sentence, add the sentence that supports it. Do not add sentences that only give background,
+forecasts or past numbers.
+
+STEP 8. SELF-CHECK, then reply with the JSON object only. Check that:
+ - every item is current (step 3), about flu in people, in a named country
+ - no item comes from a teaser or related-link line, a ranking table, an opinion or a past-tense
+   look-back
+ - no breakdown of a larger total was written; hospital-treatment statements are "hospitalized"
+ - every cases or deaths item whose sentence names a strain has status "confirmed"
+ - no single-day item has a null start_date
+ - every evidence part is found word for word in the article
+ - the only kinds are cases, deaths, hospitalized and trend; trend items have number, status and
+   total_or_new null; words is null except on trend items
+ - no number comes from a percentage, a vague amount, a forecast, a finished year or season, or
+   another disease
+ - no fact is written twice; no two trend items repeat the same meaning for the same place and period
+ - every place field is a real country, state or city; territories use their country
+ - start_date is not after end_date, and end_date is not after the article date
+ - if useful is false, items is an empty list; if useful is true, items is not empty
+
+Reply shape:
+{"useful": true or false, "borderline": true or false, "reason": "one sentence",
+ "items": [{"kind": ..., "strain": ..., "number": ..., "status": ..., "total_or_new": ...,
+            "city": ..., "state": ..., "country": ..., "start_date": ..., "end_date": ...,
+            "words": ..., "evidence": ["..."]}]}

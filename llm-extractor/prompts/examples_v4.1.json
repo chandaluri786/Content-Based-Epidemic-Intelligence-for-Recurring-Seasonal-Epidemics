@@ -1,0 +1,1038 @@
+[
+  {
+    "example": 1,
+    "article_id": "20150717011500-230",
+    "teaches": "patients under treatment in a hospital are hospitalized; 'over the last 24 hours' is the day before the article; a named strain makes cases and deaths confirmed; new counts next to running totals",
+    "scan_date": "2015-07-17",
+    "link": "http://timesofindia.indiatimes.com/city/mumbai/2-women-in-30s-die-of-H1N1-Mumbai-toll-touches-25/articleshow/48106535.cms",
+    "article": "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25.\n According to civic records, the Juhu resident was admitted to Nair hospital, Mumbai Central. She reached the hospital only after developing breathing difficulty. The other woman, a Worli resident, had been admitted to Global Hospital, Parel.\nA spokesperson for Global Hospital said, \"The patient was morbidly obese, suffering from obstructive sleep apnea and fever and was admitted to ICUâ¦ Her condition was continuously deteriorating.\"\n After a lull throughout June, the respiratory virus has come back to claim four lives. So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours. \"There is a slight increase in cases across the state but we are vigilant,\" said a state official. Across the state, over eight-10 cases of new infections are being reported everyday. Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.\n At the civic-run Kasturba Hospital, eight patients are undergoing treatment, including three members from the same family. An 80-year-old man from Vikhroli is a serious condition and breathing with the help of ventilator.\n Infectious disease consultant Dr Om Srivastava said that patients with fever and sore throat should not delay seeing a doctor. State government has already recommended vaccination for people who are immune-compromised and pregnant women.\n \"We are surprised to see many healthy individuals get the infection and die of it,\" the state expert said.\n Besides swine flu, the civic body has also been reporting a steady flow of leptospirosis. On Thursday, three more people tested positive taking the count of cases in July to 63.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Two women died of H1N1 in Mumbai on Thursday (city toll 25); Maharashtra has about 60 cases in July including seven in the last 24 hours, eight patients under treatment at Kasturba Hospital, and a slight rise.",
+      "items": [
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 2,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-16",
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "strain": "H1N1",
+          "number": 2,
+          "status": null,
+          "total_or_new": "total",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-12",
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization,"
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 25,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 4,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-01",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "After a lull throughout June, the respiratory virus has come back to claim four lives."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 60,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-01",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 7,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-16",
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H1N1",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-17",
+          "end_date": "2015-07-17",
+          "words": "increase",
+          "evidence": [
+            "There is a slight increase in cases across the state"
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "strain": "H1N1",
+          "number": 8,
+          "status": null,
+          "total_or_new": "new",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-17",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "At the civic-run Kasturba Hospital, eight patients are undergoing treatment, including three members from the same family."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H1N1",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-17",
+          "end_date": "2015-07-17",
+          "words": "eight-10 cases per day",
+          "evidence": [
+            "Across the state, over eight-10 cases of new infections are being reported everyday."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 5300,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 546,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 2,
+    "article_id": "20191003010000-1631",
+    "teaches": "not useful: the only count is in a 'Related:' teaser line, which is not a statement of this article",
+    "scan_date": "2019-10-03",
+    "link": "https://patch.com/california/lamesa/flu-shots-where-get-them-la-mesa",
+    "article": "Flu Shots: Where To Get Them In La Mesa\nAs flu season approaches, you might want to get immunized this fall.\nLA MESA, CA — With the 2019-2020 flu season just around the corner, now is the time to know where flu shots are available in La Mesa.\nNational pharmacy chains such as Walgreens, CVS and Rite Aid are popular places to receive a shot, but many communities have local clinics that also offer the service for free.\nRelated: Flu Season Ramps Up Early: 2 Deaths Reported In San Diego County\nFind out what's happening in La Mesa-Mount Helixfor free with the latest updates from Patch.\nHere are some of the places you can get a flu shot in La Mesa:\n- Albertsons: 8920 Fletcher Parkway, La Mesa, CA 91942\n- Concentra Urgent Care: 8090 Parkway Drive, La Mesa, CA 91942-2105\n- Costco: 8125 Fletcher Parkway, La Mesa, CA 91942\n- CVS: 3749 Avocado Blvd., La Mesa, CA 91941\n- CVS: 5500 Grossmont Center Drive, Building P, La Mesa, CA 91942\n- Vons: 8011 University Ave., La Mesa, CA 91942\n- Walmart Neighborhood Market: 8810 Grossmont Blvd., La Mesa, CA 91942\nWhile there isn’t an official start or end to flu season, the Centers for Disease Control and Prevention recommend people get vaccinated by the end of October.\nFind out what's happening in La Mesa-Mount Helixfor free with the latest updates from Patch.\nThe agency also has a special message for younger kids: “Children 6 months through 8 years of age who need 2 doses should receive their first dose as soon as possible after the vaccine becomes available to allow the second dose to be received by the end of October,” according to the CDC’s official page.\nInfluenza, commonly called “the flu,” is a highly contagious respiratory disease that can lead to serious illness, hospitalization or even death.\nTypical flu symptoms include fever, dry cough, sore throat, runny or stuffy nose, headache, muscle aches and extreme fatigue.\nThe CDC estimates that 48 million people were hit by the flu in the United States in 2017-2018. The disease accounted for a staggering 959,000 hospitalizations, and 79,400 deaths during that time frame.\nTo minimize your risk of contracting the flu, follow these three simple steps:\n- Get a flu vaccine. It’s the best way to fight the flu!\n- Cover your nose and mouth with a tissue when you cough or sneeze, and wash your hands often.\n- Take flu antiviral drugs if your doctor prescribes them. If you get the flu, antiviral drugs can be used to treat your illness.\nGet more local news delivered straight to your inbox. Sign up for free Patch newsletters and alerts.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "An article about where to get flu shots in La Mesa; the flu deaths appear only in a related-link teaser.",
+      "items": []
+    }
+  },
+  {
+    "example": 3,
+    "article_id": "20220723003000-988",
+    "teaches": "sub-counts: record the headline totals and drop the district breakdown (23 in Pune, 22 in Palghar; two deaths each in Thane and Pune)",
+    "scan_date": "2022-07-23",
+    "link": "https://timesofindia.indiatimes.com/city/mumbai/seven-swine-flu-deaths-in-maharashtra-maximum-number-of-cases-in-mumbai/articleshow/93063260.cms",
+    "article": "MUMBAI: The state recorded seven deaths due to the H1N1 strain of the flu virus in 2022 so far, with two deaths each in Thane and Pune districts.\nThe state-wide tally of H1N1 so far this year is 142, including 23 in Pune and 22 in Palghar. \"Recently we are observing a rising trend of swine flu (influenza A H1N1) cases in some parts of the state,'\" said state surveillance officer Dr Pradip Awate, adding that the state will increase H1N1 surveillance.\nMumbai hasn't had a single H1N1 death in the last three years, but it recorded the maximum number of cases (43) in \nMaharashtra\n in 2022, according to data released by the state health department on Friday. The H1N1 tally in Mumbai was 44 in 2020 and 64 in 2021.\nIn the private sector in Mumbai, doctors are reporting a rise in the number of H1N1 flu cases even though BMC statistics show no rise. BMC executive health officer Dr Mangala Gomare said 11 H1N1 cases were reported in July so far. In June, the city registered two H1N1 cases.\nHowever, Dr Amol Manerkar has noticed a rise in non-Covid pneumonia among his patients in the Ghatkopar-Kurla stretch. \"This evening, I have five patients with symptoms that are typical of H1N1. \nOne young man admitted under my care tested positive for H1N1, but his mother, who is on ventilator support in another hospital, has not yet been tested for it,\" he said.\nA senior citizen admitted in his care has a 10-day history of cough and fever. \"People think they have mild Covid and don't get tested for H1N1, but we need to test for it if the Covid test is negative,\" said Dr Manerkar.\nA senior doctor from a BMC-run hospital said there is definitely an increase in fever cases in daily OPDs. \"We were testing around 50 people daily until a month back, but now we test 90 patients with fever every day,\" he said. But while everyone is tested for Covid, few are tested for H1N1.\nBMC executive health officer Dr Gomare said there isn't a significant increase in the number of H1N1 tests being conducted at the civic-run Kasturba Hospital PCR lab. The reason is there is no rapid test for H1N1 like there is for Covid. \"H1N1 needs a PCR test which costs over Rs 2,000,\" said a doctor from a private hospital.\nGet real-time updates and result insights on the CBSE 12 Result 2026.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Maharashtra has 142 H1N1 cases and seven H1N1 deaths so far in 2022.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 142,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2022-01-01",
+          "end_date": "2022-07-23",
+          "words": null,
+          "evidence": [
+            "The state-wide tally of H1N1 so far this year is 142, including 23 in Pune and 22 in Palghar. \"Recently we are observing a rising trend of swine flu (influenza A H1N1) cases in some parts of the state,'\" said state surveillance officer Dr Pradip Awate, adding that the state will increase H1N1 surveillance."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 7,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2022-01-01",
+          "end_date": "2022-07-23",
+          "words": null,
+          "evidence": [
+            "MUMBAI: The state recorded seven deaths due to the H1N1 strain of the flu virus in 2022 so far, with two deaths each in Thane and Pune districts."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 4,
+    "article_id": "20190930113000-576",
+    "teaches": "not useful: counts for a finished year or season",
+    "scan_date": "2019-09-30",
+    "link": "http://www.thenewsenterprise.com/free_content/flu-season-officially-arrives/article_f852e948-87e2-5664-8fcd-6a97be388601.html",
+    "article": "After the longest flu season on record in 2018, the Kentucky Department of Public Health encourages preparation.\nMost people think of the flu as a nasty inconvenience, but more than 61,000 people in the United States died last year from the influenza virus, a news release from Lincoln Trail District Health Department said. Kentucky experienced 194 flu-related deaths, including two children.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Kentucky's 194 flu deaths and the 61,000 US deaths are from last year's finished season, more than 30 days before the article.",
+      "items": []
+    }
+  },
+  {
+    "example": 5,
+    "article_id": "20170111080000-1117",
+    "teaches": "a named strain makes counts confirmed; running totals 'since August 2016'; one new death on its own day",
+    "scan_date": "2017-01-11",
+    "link": "http://www.siasat.com/news/another-swine-flu-death-hyderabad-1106507/",
+    "article": "Hyderabad: According to health official, one more person died of swine flu in Telangana, taking the death toll to six since August 2016. 116 people were affected from the disease so far. According to Swine flu bulletin 2717 samples were sent for testing by January 5, of which 107 were found positive. Till then number of deaths was 5.\nAccording to sources, in a fresh incident, a 35-year-old woman died at Gandhi Hospital in Hyderabad. The woman, who hailed from Yadadri district, was admitted to the hospital a few days ago. She died on Sunday.\nThe health department has advised people to take all precautions, and approach the hospital at the first symptoms of swine flu like high fever, sneezing, cough and body pain. Officials said that sufficient stock of medicines was available at all hospitals.\nHomeopathic medicines can also be taken as a precautionary measure. These medicines were available free of cost in government homeopathic hospitals, Ramanthapur in Hyderabad and at all AYUSH dispensaries.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "One more person died of swine flu in Telangana (a woman at Gandhi Hospital), taking the toll to six since August 2016, with 116 people affected so far.",
+      "items": [
+        {
+          "kind": "deaths",
+          "strain": "swine flu",
+          "number": 6,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2016-08-01",
+          "end_date": "2017-01-11",
+          "words": null,
+          "evidence": [
+            "Hyderabad: According to health official, one more person died of swine flu in Telangana, taking the death toll to six since August 2016."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "swine flu",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2017-01-08",
+          "end_date": "2017-01-08",
+          "words": null,
+          "evidence": [
+            "According to sources, in a fresh incident, a 35-year-old woman died at Gandhi Hospital in Hyderabad."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "swine flu",
+          "number": 116,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2016-08-01",
+          "end_date": "2017-01-11",
+          "words": null,
+          "evidence": [
+            "116 people were affected from the disease so far."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "swine flu",
+          "number": 107,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2016-08-01",
+          "end_date": "2017-01-05",
+          "words": null,
+          "evidence": [
+            "According to Swine flu bulletin 2717 samples were sent for testing by January 5, of which 107 were found positive."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 6,
+    "article_id": "20240118030000-940",
+    "teaches": "not useful: a finished year compared with an earlier one, as a percentage",
+    "scan_date": "2024-01-18",
+    "link": "https://www.ibtimes.com/brazils-indigenous-yanomami-again-face-illegal-mining-linked-crisis-3722354",
+    "article": "The Yanomami Indigenous group are again facing a severe humanitarian crisis blamed on illegal gold miners, despite Brazil's president deploying the military to wrest back control of their territory.\nThat is little better than the 343 deaths recorded in 2022.\nCases of malaria among the Yanomami increased by 61 percent last year, and influenza by 640 percent compared to 2022.\nThose bleak figures are a problem for Lula, who came to office in January 2023 vowing to do a far better job protecting Brazil's Indigenous peoples than far-right predecessor Jair Bolsonaro.\n[article trimmed]",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The 640 per cent rise in influenza among the Yanomami is for last year compared with 2022.",
+      "items": []
+    }
+  },
+  {
+    "example": 7,
+    "article_id": "20170118030000-2605",
+    "teaches": "a vague amount ('positive cases and a couple of deaths') is a trend, not a count; the place is where the cases are (Telangana)",
+    "scan_date": "2017-01-18",
+    "link": "http://www.thehindu.com/news/cities/Vijayawada/Swine-flu-Elisa-kits-to-be-available-at-more-places/article17053841.ece",
+    "article": "Reports of positive Swine Flu cases and a couple of deaths in Telangana have raised concern in Vijayawada, the gateway to Andhra Pradesh.\nAndhra Group of Hospitals’ pulmonology and intensive care division head M. Ravindranath said efforts were being made to ensure availability of Elisa Test Kits at three places in the State. As of now, the kits are available in the required numbers only in Hyderabad. The new centres will probably be Tirupati, Visakhapatnam and either Guntur or Vijayawada.\nAn Elisa Kit for identifying Swine flu costs between Rs.2,000 and Rs.2,500 and two to three days are required for the test results to come, he said.\n“Since Swine flu is an airborne disease, it is better for people to avoid large gatherings. Those with cold and cough should cover their noses and mouths either with handkerchief or even better face masks,” he said.\nMinister for Health Kamineni Srinivas is expected to make announcements about the preparedness for Swine flu in Tirupati on Wednesday.\nSpecial wards planned\nGeneral instructions have been issued to prepare special wards for patients suspected of having Swine flu in all the teaching and district headquarters hospitals.\nFlu spreads among humans when infected people cough or sneeze. Also if people breathe in the virus or touch something with the virus on it and then touch their face. Avoid touching your eyes, nose or mouth. Germs spread this way.\nSwine flu is not spread by pork products as it is not transmitted through food.\nIt is most contagious during the first five days of the illness, though some people, most commonly children, can remain contagious for up to 10 days.\nDiagnosis can be made by sending a specimen, collected during the first five days, for analysis.\nPublished - January 18, 2017 07:38 am IST",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Reports of positive swine flu cases and a couple of deaths in Telangana have raised concern in Vijayawada.",
+      "items": [
+        {
+          "kind": "trend",
+          "strain": "swine flu",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2017-01-18",
+          "end_date": "2017-01-18",
+          "words": "positive Swine Flu cases and a couple of deaths",
+          "evidence": [
+            "Reports of positive Swine Flu cases and a couple of deaths in Telangana have raised concern in Vijayawada, the gateway to Andhra Pradesh."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 8,
+    "article_id": "20181119214500-500",
+    "teaches": "not useful: a spoken figure with no source, season or place, in an interview on another topic",
+    "scan_date": "2018-11-19",
+    "link": "http://www.capeandislands.org/post/vaccines-did-not-cause-rachels-autism",
+    "article": "When the now-debunked paper by Andrew Wakefield linking vaccines to autism was published in 1998, American vaccine developer Peter Hotez immediately questioned its findings.\n“The paper never made much sense to me,” he said. “We already knew that the changes in the brains of kids with autism are pretty pervasive. And I couldn't imagine a mechanism by which a vaccine could cause autism.”\nHotez had more at stake than being in the business of finding new vaccines. He had a six-year-old daughter on the autism spectrum. Her name is Rachel.\nHis first reaction to the Wakefield paper turned out to be right. Soon reports came out that there were serious problems with the paper that completely undermined its findings. But it took until 2010 before the paper was officially retracted.\n“This enabled what became a very organized and well-funded anti-vaccine movement in Europe and in the United States,” Hotez told Living Lab Radio. “And we're still living with the consequences of that. In fact, things have gotten even much worse over the last year.”\nHotez, who is a dean at Baylor College of Medicine, points out that there were 40,000 cases of measles in Europe in the first half of 2018 and 40 deaths associated with those cases. He says there are half a dozen states in the Western U.S. where a large number of children aren’t being vaccinated.\n“We had 200 influenza deaths this year among kids,” Hotez said. “Almost all of those kids were not vaccinated, despite recommendation.”\nHotez has dedicated his career to what he sees as the most promising way to eliminate devastating diseases that disproportionately affect the world's poorest people. He's also been vocal about the safety and importance of vaccines and has written two books on the topic: Forgotten People, Forgotten Diseases and Blue Marble Health.\nHis latest book is a head-on response to anti-vaccination campaigns. It’s called Vaccines Did Not Cause Rachel’s Autism: My Journey as a Vaccine Scientist, Pediatrician, and Autism Dad.\n“I felt nobody was really speaking out about it and I was uniquely positioned to do so,” he said. “I'm a vaccine scientist and an autism dad. So, if I don't do it, who will?”\nIn the book, Hotez talks about everything we’ve learned about autism over the last 20 years. Of particular note: there is evidence that there are changes in the brain of an autistic child that happen in utero, well before they ever see their first vaccine.\n“So there's not even any plausibility that vaccines cause autism,” he said.\nOne of the problems with the now 20-year-old erroneous paper is that money and effort has been spent debunking the link between vaccines and autism when it could have been spent on research and resources.\nHotez said that it has been a struggle to find work for Rachel, who is now 26.\n“Adult employment opportunities for her are extremely limited,” he said. “Finally, Goodwill came to our rescue. Now she works two hours a day at Goodwill and makes minimum wage. But she's thrilled, very proud to take home a paycheck.”\nWeb content produced by Elsa Partan.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The only flu line is a spoken quote ('200 influenza deaths this year among kids') with no source, season or place, in an interview about vaccines and autism.",
+      "items": []
+    }
+  },
+  {
+    "example": 9,
+    "article_id": "20180622131500-1587",
+    "teaches": "zero cases is a trend for the city, next to the state's running total",
+    "scan_date": "2018-06-22",
+    "link": "https://www.indiatoday.in/pti-feed/story/mh-monsoon-diseases-1267278-2018-06-22",
+    "article": "MH-MONSOON DISEASES\nMinister warns against late reporting of diseases during monsoon\nMumbai, Jun 22 (PTI) Late reporting of illness has been found to be the main cause of deaths due to diseases during the last year's monsoon, Maharashtra Health Minister Deepak Sawant said today.\nTalking to PTI, Sawant said an audit of the deaths last monsoon found that in most cases, patients did not seek the medical help immediately.\nWith the onset of monsoon, he has instructed municipal corporations and local bodies to ensure adequate medicine stocks, he said.\nAuthorities have also been asked to prepare isolation wards for patients of swine flu, malaria, dengue and leptospirosis, he said.\nThe number of dengue cases in Mumbai has halved compared to the last year, he said.\nLeptospirosis is found more commonly in coastal areas during the rains, he said.\nLast year 18 persons died of leptospirosis in the state, while this year 19 cases have been found in Mumbai, Ratnagiri and Sindhudurg, but no death has been reported so far, the health minister said.\nBetween January and June this year, eight lakh patients were screened for swine flu out of which 34 tested positive. In Mumbai, no cases of swine flu infection were found, he said.\nHe has also instructed officials to ensure cleanliness at construction sites, and those violating the directives to prevent accumulation of rainwater -- which leads to mosquito breeding -- will face action, he said. PTI MR KRK KRK KRK",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Maharashtra had 34 confirmed swine flu cases between January and June, and no cases were found in Mumbai.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 34,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2018-01-01",
+          "end_date": "2018-06-22",
+          "words": null,
+          "evidence": [
+            "Between January and June this year, eight lakh patients were screened for swine flu out of which 34 tested positive. In Mumbai, no cases of swine flu infection were found, he said."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "swine flu",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2018-01-01",
+          "end_date": "2018-06-22",
+          "words": "no cases of swine flu infection were found",
+          "evidence": [
+            "In Mumbai, no cases of swine flu infection were found, he said."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 10,
+    "article_id": "20160428203000-88",
+    "teaches": "not useful: a named person whose flu is denied",
+    "scan_date": "2016-04-28",
+    "link": "http://www.heraldsun.com.au/news/new-reports-claim-prince-had-aids/news-story/9dd753333987f3c26e7d6a53b4406f7b?nk=b241e8b0f5f81d6b73d77dd3dac812a8-1461874822",
+    "article": "New reports claim Prince had AIDS\nA NEW report claims that 57-year-old Prince, who died last Friday, was diagnosed with AIDS six months ago and had been “preparing to die”.\nPRINCE had been “preparing to die for a little while” because he had AIDS, according to a new report.\nAn industry source told The National Enquirer the legendary singer “was in bad shape” after allegedly being diagnosed with the disease six months ago.\n“Doctors told Prince his blood count was unusually low and that his body temperature had dropped dangerously below the normal 98.6 degrees to 94 degrees,” the source said.\n“He was totally iron-deficient, very weak and often disoriented. He rarely ate and when he did, it all came right back up.”\nIf the report is true, Prince was battling the condition while he was touring Melbourne in February.\nJust hours before the 57-year-old died last Friday at his estate in suburban Minneapolis, Prince was spotted at his local Walgreens pharmacy, according to TMZ.\n“We were all just shocked that he came in last night looking so beat,” a Walgreens employee said to The National Enquirer.\n“We said, ‘We are praying for you.’\n“He said, almost under his breath, ‘Maybe if you prayed for me a year ago it’d be different right now.’ Then he waved and said thanks anyway.\n“The last night, though, we sensed he was in trouble. One girl said he had foreign medication and thought it was Zika virus or something, but my friend who knows the meds says he’s sure it was HIV meds.”\nLast week paramedics found the singer unresponsive in the lift of his $13 million Paisley Park after they were called to respond to a “male down not breathing”.\nWhile the singer’s cause of death is not yet certain, TMZ, which broke the news of his death, says multiple sources have confirmed he was treated for a drug overdose and not the flu — as his reps had said — when his plane was forced to make an emergency landing six days before his death.\n“Prince’s private jet made an emergency landing in Moline, Illinois last Friday, hours after he performed in Atlanta,” the website wrote.\n“At the time his reps said he was battling the flu ... something we questioned because his plane was only 48 minutes from home before the unscheduled landing.\n“Multiple sources in Moline tell us Prince was rushed to a hospital and doctors gave him a ‘save shot’ ... typically administered to counteract the effects of an opiate.”\nThe website also reported Prince was advised to remain in hospital for 24 hours, but when he was denied a private room, he “decided to bail,” was released three hours later and flew home.\nPrince made a surprise appearance at a dance party in Minnesota the following day.\nWhile he didn’t sing, it is believed he attended to dampen the speculation about his failing health, arriving two hours after the soiree had started.\nHe was found dead five days later.\nThe star had been forced to postpone two of his Piano & a Microphone tour shows in Atlanta the week before his hospitalisation due to health concerns.\nIt could be several weeks before the full autopsy results will be released.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Prince's representatives said he was battling the flu, but sources say he was treated for a drug overdose, not the flu.",
+      "items": []
+    }
+  },
+  {
+    "example": 11,
+    "article_id": "20240701154500-1822",
+    "teaches": "several countries; cases with no number for some countries are trends; the animal outbreak and pandemic warnings are not recorded",
+    "scan_date": "2024-07-01",
+    "link": "https://thefrontierpost.com/analysis-scientists-wary-of-bird-flu-pandemic-unfolding-in-slow-motion/",
+    "article": "CHICAGO/LONDON (Reuters): Scientists tracking the spread of bird flu are increasingly concerned that gaps in surveillance may keep them several steps behind a new pandemic, according to Reuters interviews with more than a dozen leading disease experts.\nMany of them have been monitoring the new subtype of H5N1 avian flu in migratory birds since 2020. But the spread of the virus to 129 dairy herds in 12 U.S. states signals a change that could bring it closer to becoming transmissible between humans. Infections also have been found in other mammals, from alpacas to house cats.\nThree people in the U.S. have tested positive for H5N1 avian flu since late March after contact with cows, experiencing mild symptoms. One person in Mexico was infected with a separate H5 strain not previously seen in humans, and with no known exposure to animals. Other cases were reported in India, China and Australia, caused by different strains.\nThe World Health Organization says H5N1’s risk to humans is low because there is no evidence of human transmission. Some tools are available if that changes, including limited amounts of existing H5N1 vaccine and antiviral medications like Tamiflu.\n[article trimmed]",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Three people in the US have had H5N1 since late March, one person in Mexico had a new H5 strain, and other cases were reported in India, China and Australia.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "H5N1",
+          "number": 3,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": null,
+          "end_date": "2024-07-01",
+          "words": null,
+          "evidence": [
+            "Three people in the U.S. have tested positive for H5N1 avian flu since late March after contact with cows, experiencing mild symptoms."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H5",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": null,
+          "country": "Mexico",
+          "start_date": "2024-07-01",
+          "end_date": "2024-07-01",
+          "words": null,
+          "evidence": [
+            "One person in Mexico was infected with a separate H5 strain not previously seen in humans, and with no known exposure to animals."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "India",
+          "start_date": "2024-07-01",
+          "end_date": "2024-07-01",
+          "words": "Other cases were reported",
+          "evidence": [
+            "Other cases were reported in India, China and Australia, caused by different strains."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "China",
+          "start_date": "2024-07-01",
+          "end_date": "2024-07-01",
+          "words": "Other cases were reported",
+          "evidence": [
+            "Other cases were reported in India, China and Australia, caused by different strains."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Australia",
+          "start_date": "2024-07-01",
+          "end_date": "2024-07-01",
+          "words": "Other cases were reported",
+          "evidence": [
+            "Other cases were reported in India, China and Australia, caused by different strains."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 12,
+    "article_id": "20230105154500-1283",
+    "teaches": "not useful: animals only, even when the name says swine flu",
+    "scan_date": "2023-01-05",
+    "link": "https://www.freepressjournal.in/india/tamil-nadu-nilgiris-dc-confirms-death-of-over-50-wild-boars-due-to-african-swine-flu-in-mudumalai-tiger-reserve",
+    "article": "Udhagamandalam: Nilgiris District Collector S P Amrit on Thursday confirmed that the death of over 50 wild boars near Mudumalai Tiger Reserve in the district was due to African Swine Flu.\nAlso, few wild boars were found dead in Kothagiri, Keelkothagiri, Coonoor, Manjoor and in Ooty in the last 10 days, apart from Bandipur area in Karnataka, bordering Tamil Nadu, Amrit told reporters here.\nSpecial team to visit Chennai soon\nThe samples taken from the carcasses were sent to Tamil Nadu Veterinary Research Institute and the result confirmed to be positive for the flu, a viral disease, he said and allayed fears of the disease spreading to other animals or humans.\nA special team from Chennai will be visiting Nilgiris to further examine the disease, he said.\nThe anti-poaching squad are involved in collecting the carcasses and burning them, Amrit said.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "African swine flu killed wild boars; no person is ill with flu.",
+      "items": []
+    }
+  },
+  {
+    "example": 13,
+    "article_id": "20160707183000-1141",
+    "teaches": "a running total 'since December'; 'doubled since last week' is a trend next to the total",
+    "scan_date": "2016-07-07",
+    "link": "http://tucollegian.org/eye-on-the-world-6/",
+    "article": "IS targets bombed by Egypt\nOn Monday, Egyptian jets bombed Islamic State targets in the Libyan city of Derna. The strikes were Egypt’s response to a video showing the beheadings of 21 Egyptian Coptic Christians. This video is the first to have originated from outside IS territory in Syria and Iraq. Days later, Egyptian President Abdel Fattah al-Sisi said that the situation in Libya is a threat to world peace. Libya has been in turmoil since the overthrow of Col. Muammar Gaddafi in 2011. The country is currently controlled by rival militias, not the internationally recognized government.\nU.S. immigration reform plan halted\nU.S. District Judge Andrew Hanen temporarily halted President Barack Obama’s plans for immigration reform. Portions of Obama’s executive order were to take effect Wednesday. The ruling gives a coalition of 26 conservative states time to challenge the president in court. Under the president’s order, certain undocumented immigrants who were brought to the US as children will be protected from deportation. Republicans, notably Ted Cruz of Texas, have described the policy as “lawless amnesty,” arguing that Obama is exceeding his authority.\nGuantanamo Bay conviction overturned\nA former Guantanamo Bay detainee’s conviction was overturned. As part of a plea deal, Australian David Hicks had pleaded guilty to providing material support to terror in 2007. The US Court of Military Commission Review upended the conviction on a technicality, saying that the charge was not for a war crime and the case should not have been tried in a military court. Speaking in Sydney, Hicks said the decision was a “relief” but added that he was still recovering from the trauma of his detention.\nLunar New Year begins in Asia\nThe Lunar New Year began with family reunions in China and celebrations across the continent. The first day of the New Year is a public holiday in many countries, marked by traditional ceremonies and community festivals. This year is the Year of the Sheep.\nCanadian MP leaves Parliament\nMP Pat Martin excused himself from parliament because of his tight fitting underpants. Martin explained to a confused Speaker that his half-price underpants could not let him sit comfortably for very long. “I did not understand his explanation at the time, and I am not sure I understand it now,” said the Speaker.\nSwine flu in India\nAn outbreak of swine flu in India is causing concern from Indian health officials. The H1N1 strain of the influenza virus has killed over 700 people since December. Since last week, the number of cases has doubled to over 11,000. The health ministry urged citizens to remain calm and take preventative measures, insisting that the disease is under control.\nIn other news, Indian officials are insisting that U.S. President Barack Obama’s tree is not dead—it merely looks dead. Obama paid a formal visit to India three weeks ago and planted a peepal tree at the New Delhi memorial to Mohandas Gandhi. It had plenty of leaves at the time, but it is now a single thin stem. Local media have been blasting the government for letting Obama’s tree die while in reality, peepal trees shed their leaves at this time of year. “It will send out shoots within the next 10 days,” said B.C. Katiyar, a government horticulturist summoned to inspect the tree.\nLiberia reopens borders\nThe Ebola-stricken nation reopened its borders. The number of new infections in Liberia has declined; 11 new cases were reported during the period between Jan. 28–Feb. 18. However, the rate of decline in new infections in Liberia, Guinea and Sierra Leone has flatlined, says the World Health Organization. WHO’s Dr. Bruce Aylward voiced his concern over the flatline. “This is not what you want to see with Ebola,” he said. Liberia, Guinea and Sierra Leone have committed to zero Ebola cases within the next two months.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Swine flu has killed over 700 people in India since December, and cases have doubled to over 11,000 since last week.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 11000,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "India",
+          "start_date": null,
+          "end_date": "2016-07-07",
+          "words": null,
+          "evidence": [
+            "An outbreak of swine flu in India is causing concern from Indian health officials. The H1N1 strain of the influenza virus has killed over 700 people since December. Since last week, the number of cases has doubled to over 11,000. The health ministry urged citizens to remain calm and take preventative measures, insisting that the disease is under control."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 700,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "India",
+          "start_date": "2015-12-01",
+          "end_date": "2016-07-07",
+          "words": null,
+          "evidence": [
+            "An outbreak of swine flu in India is causing concern from Indian health officials. The H1N1 strain of the influenza virus has killed over 700 people since December. Since last week, the number of cases has doubled to over 11,000. The health ministry urged citizens to remain calm and take preventative measures, insisting that the disease is under control."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H1N1",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "India",
+          "start_date": "2016-06-27",
+          "end_date": "2016-07-07",
+          "words": "the number of cases has doubled",
+          "evidence": [
+            "Since last week, the number of cases has doubled to over 11,000."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 14,
+    "article_id": "20220314013000-482",
+    "teaches": "not useful: a forecast of the coming season",
+    "scan_date": "2022-03-14",
+    "link": "https://www.dailymail.co.uk/news/article-10609203/Top-doctors-calls-return-masks-Australia-braces-significant-flu-season.html",
+    "article": "- Top doctor calls for the return of masks as Aussies brace for deadly flu season\n- Aussies have been told to prepare for a 'significant' influenza season this year\nA prominent GP has called for the return of face masks as Australians brace themselves for a 'significant' flu season.\nDr Tony Bartone said the spread of flu, Omicron and other Covid variants could be reduced if masks and density limits were reintroduced indoors.\nDr Bartone also advocated the return of density limits in 'crowded venues' because of a 'significant' forecast influenza season this year.\nHe said the return of Covid rules would reduce the level of Omicron, its new, more contagious sub-variant BA2 and flu circulating in the community.\n[article trimmed]",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "A GP warns Australians to brace for a significant flu season; there are no current flu figures.",
+      "items": []
+    }
+  },
+  {
+    "example": 15,
+    "article_id": "20231122003000-959",
+    "teaches": "hospital admissions are hospitalized; 'last week' is Monday to Sunday of the week before; a share of positive tests is a trend",
+    "scan_date": "2023-11-22",
+    "link": "https://www.wpbf.com/article/florida-flu-cases-rise-thanksgiving-nears-how-protect-yourself/45911069",
+    "article": "Florida flu cases rise as Thanksgiving nears — how to protect yourself\nAs families and friends look forward to getting together this week for Thanksgiving, doctors are warning about the rise in flu cases across Florida.\n“We're seeing increases now as of last week, 4% of all people being tested were found positive. That was up from the prior week. There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr. Larry Bush said.\nThe Centers for Disease Control and Prevention posted new flu data on Friday, showing high activity in seven states, including Florida.\n\"The major amount of cases right now are occurring in the southeast, the south-central and the western part of the country. And only around 35% of adults as of now, which is just about Thanksgiving time, have been vaccinated against the flu,” Bush said.\nBush says the flu vaccine is very effective, but this year, there’s a certain amount of vaccine fatigue, and people just aren’t lining up for the flu shot as much.\nBut if you’re starting to think about all the holiday travel and extra people you might be exposed to, you may wonder — if you rushed out and got a flu shot tomorrow, would it protect you against the flu by Thanksgiving?\n\"You know, it's a little bit soon. It takes some time for the immune system to build up antibodies against the vaccine. But they start the moment that you get the flu. So, any day is better than not having it. I would say within a week or two, you should be protected as much as you're going to be, and it usually lasts until around the spring,\" Bush said.\nBush said you can wash your hands and stay away from anyone coughing or sneezing.\nHe also said the CDC recommends people over 65 get the RSV vaccine.\nAs far as COVID-19, those cases are on the rise too, but not as dramatically, and Bush said the cases are not as severe as they were in the past before the vaccine.\nStay up-to-date: The latest headlines and weather from WPBF 25\nGet the latest news updates with the WPBF 25 News app. You can download it here.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "About 800,000 flu cases, 8,000 hospital admissions and 500 deaths in the US this season, flu rising in Florida, and 4% of tests positive last week.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 800000,
+          "status": null,
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": null,
+          "end_date": "2023-11-22",
+          "words": null,
+          "evidence": [
+            "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "strain": null,
+          "number": 8000,
+          "status": null,
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": null,
+          "end_date": "2023-11-22",
+          "words": null,
+          "evidence": [
+            "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": null,
+          "number": 500,
+          "status": null,
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": null,
+          "end_date": "2023-11-22",
+          "words": null,
+          "evidence": [
+            "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Florida",
+          "country": "USA",
+          "start_date": "2023-11-22",
+          "end_date": "2023-11-22",
+          "words": "rise in flu cases",
+          "evidence": [
+            "As families and friends look forward to getting together this week for Thanksgiving, doctors are warning about the rise in flu cases across Florida."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": "2023-11-17",
+          "end_date": "2023-11-17",
+          "words": "high activity",
+          "evidence": [
+            "The Centers for Disease Control and Prevention posted new flu data on Friday, showing high activity in seven states, including Florida."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": "2023-11-13",
+          "end_date": "2023-11-19",
+          "words": "4% of all people being tested were found positive",
+          "evidence": [
+            "“We're seeing increases now as of last week, 4% of all people being tested were found positive."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 16,
+    "article_id": "20211020154500-1359",
+    "teaches": "not useful: 'little flu' is a nickname for COVID-19",
+    "scan_date": "2021-10-20",
+    "link": "https://www.justiceinfo.net/en/83467-brazil-senate-committee-recommends-10-pandemic-charges-against-bolsonaro.html",
+    "article": "A Brazilian senate committee on Wednesday recommended that President Jair Bolsonaro face at least 10 charges, including crimes against humanity, over his handling of the Covid-19 pandemic, according to a report published in local media.\nBolsonaro has repeatedly played down the seriousness of the virus, calling it a \"little flu\" at one point, promoting treatments that scientists said were ineffective, railing against lockdown measures to slow the spread and speaking out against vaccinations.\nThe committee investigated the government over the crippling lack of oxygen in the northern city of Manaus during the worst moments of the pandemic, and also the delays in buying vaccines, Bolsonaro's anti-lockdown speeches, and his original belittling of what he called a \"little flu.\"\n[article trimmed]",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Bolsonaro called COVID-19 a 'little flu'; no one is ill with flu.",
+      "items": []
+    }
+  },
+  {
+    "example": 17,
+    "article_id": "20230421074500-899",
+    "teaches": "'the first fortnight of April' is April 1 to 14; a percentage rise is a trend",
+    "scan_date": "2023-04-21",
+    "link": "https://www.bendigoadvertiser.com.au/story/8167589/waning-immunity-and-omicron-sublineages-the-cause-of-covid-rise/",
+    "article": "Greater Bendigo has recorded 137 new COVID-19 cases in the past week.\nAccording to data released by the Department of Health, the municipality recorded 20 cases in the 24 hours leading up to April 21.\nThere are 119 active cases in the municipality.\nIn other parts of the state, the Macedon Ranges recorded 35 cases during the week, Mount Alexander (19), Central Goldfields (4), Campaspe (27), Gannawarra (9), Buloke (7) and Loddon recorded three.\nMORE NEWS:\nThe data showed there was 6052 COVID-19 cases reported in Victoria this week, an increase of four per cent on the previous week.\nThe average daily number of new cases this week was 865, up from 830 last week.\nThere are 297 COVID-19 patients in Victorian hospitals, including 19 COVID patients, with two cleared cases, in intensive care.\nThere are seven COVID-19 patients on a ventilator.\nOTHER STORIES:\nVictoria's Chief Health Officer Brett Sutton said the state's sustained trend of an increase in COVID cases, hospitalisations and intensive care admissions continued this week.\n\"The increase in transmission is being driven by the combination of waning immunity and the growth in recent weeks of multiple Omicron recombinant XBB sublineages,\" he said.\nProfessor Sutton said these form 74 per cent of circulating variants from wastewater samples - XBB.1.5 (37 per cent), XBB.1.9.1 (15 per cent), XBB.1.16 (5 per cent), and other mixed XBB sublineages (17 per cent).\nSadly, a total of 40 COVID-19 related deaths were reported to the department in the past week.\nAn average of six deaths were reported each day in the past week.\nProfessor Sutton said notified influenza cases in Victoria rose by 38 per cent in the first fortnight of April compared to the fortnight prior - indicating seasonal influenza activity has returned for 2023.\nDigital subscribers now have the convenience of faster news, right at your fingertips with the Bendigo Advertiser app. Click here to download.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Notified influenza cases in Victoria rose by 38 per cent in the first fortnight of April.",
+      "items": [
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Victoria",
+          "country": "Australia",
+          "start_date": "2023-04-01",
+          "end_date": "2023-04-14",
+          "words": "rose by 38 per cent",
+          "evidence": [
+            "Professor Sutton said notified influenza cases in Victoria rose by 38 per cent in the first fortnight of April compared to the fortnight prior - indicating seasonal influenza activity has returned for 2023."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 18,
+    "article_id": "20220930110000-1396",
+    "teaches": "not useful: research subjects (two people who died from influenza) are not a current count",
+    "scan_date": "2022-09-30",
+    "link": "https://english.news.cn/20220930/aa2ab6c1c8d345c5b88bcd8115a92339/c.html",
+    "article": "SYDNEY, Sept. 30 (Xinhua) -- A new research led by Australia's University of Queensland (UQ) has discovered how COVID-19 damages the heart, opening the door to future treatments.\nThe study, published in Immunology, has found that while both COVID-19 and influenza are severe respiratory viruses, they appeared to affect cardiac tissue very differently.\nThe research used actual cardiac tissues collected during autopsies from seven COVID-19 patients from Brazil, two people who died from influenza and six control patients.\nInitial study found that COVID-19 damaged the DNA in cardiac tissue, which wasn't detected in influenza samples.\n\"When we looked at the influenza cardiac tissue samples, we identified that it caused excess inflammation,\" UQ Professor John Fraser said in a statement issued by the university on Friday.\n\"Whereas we found COVID-19 attacked the heart's DNA, probably directly and not just as a knock-on from inflammation,\" he said.\n\"Our study has highlighted that the two viruses appear to affect cardiac tissue very differently, which we want to get a better understand of in larger cohort studies.\"\nUQ Diamantina Institute researcher Arutha Kulasinghe said that during the study the researchers couldn't detect viral particles in the cardiac tissues of COVID-19 patients, but they found tissue changes associated with DNA damage and repair.\n\"DNA damage and repair mechanisms foster genomic instability and are related to chronic diseases such as diabetes, cancer, atherosclerosis and neurodegenerative disorders, so understanding why this is happening in COVID-19 patients is important,\" Kulasinghe said.\nHe said that in comparison to the 2009 flu pandemic, COVID-19 has led to more severe and long-term cardiovascular disease but what was causing that at a molecular level wasn't known.\n\"What we have categorically shown is that COVID is not 'just like the flu',\" said Fraser.\n\"This study helps us understand how COVID-19 affects that heart, and that is the first step in working out what treatments might be best to repair that heart.\" ■",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "A study compared heart tissue from two people who died of influenza with tissue from COVID-19 patients.",
+      "items": []
+    }
+  },
+  {
+    "example": 19,
+    "article_id": "20240504031500-227",
+    "teaches": "a named person with flu; the place comes from the event (his shows in Mexico); a named type makes it confirmed",
+    "scan_date": "2024-05-04",
+    "link": "https://www.hindustantimes.com/entertainment/music/nick-jonas-shares-he-has-nasty-strain-of-influenza-a-apologises-to-fans-for-not-being-able-to-perform-watch-101714785368168.html",
+    "article": "Nick Jonas shares he has ‘nasty strain of influenza A’, apologises to fans for not being able to perform. Watch\nNick Jonas said he has \"fever, body ache, sore throat and really bad cough\". He added that after the doctor did a checkup, his health hadn't \"gotten better.\"\nNick Jonas, singer and husband of actor Priyanka Chopra, has posted a video sharing that he has influenza A. Taking to Instagram on Friday, Nick announced that he won't be able to perform on stage because of his ill health. He also apologized to his fans for 'disappointing' them. Nick Jonas added that the show dates of the Jonas Brothers have been rescheduled. The group comprising Kevin Jonas, Nick Jonas and Joe Jonas was scheduled to perform in Mexico this weekend. (Also Read | Priyanka Chopra weighs in on cultural differences with Nick Jonas)\nNick talks about being unwell\nIn the video, Nick said, \"Hey everybody, it's Nick here. I have some not-so-fun news to share. A couple of days ago, I started feeling kind of rough; I lost my voice when I woke up and grinded that night out...Over the last two, two and a half days, it's gotten progressively worse. I was basically in bed all day yesterday, fever, body ache, sore throat and really bad cough.\" He added that after the doctor did a checkup, his health hadn't \"gotten better.\"\nNick apologises to fans\nHe also added, \"I just need to recover and beat these things. I'm so sorry. I hate disappointing you guys. You do so much to support us. A lot of you have travelled out to be at that show. Just want to say I'm heartbroken over this. Again, I'm really sorry, but I gotta try to beat this thing.\"\nNick pens note, announces changes in show dates\nSharing the clip, Nick captioned it, \"Hi guys. I have come down with the nasty strain of influenza A that’s been going around, and I’m not able to sing at the moment. We always want to be able to give you guys the best show, and I’m just not able to do that for these shows in Mexico at this time.\"\n\"These shows are now rescheduled for August. Mexico City: 8/21 and 8/22, Monterrey: 8/24 and 8/25. We are incredibly sorry for the inconvenience this causes some of you. Love you all. You’re the best fans in the world. Will bring 120% in August!\" concluded Nick. Reacting to the post, a fan wrote, \"Nick. Poor Nick. Omg. Your voice sounds terrible. Please take care of yourself. Rest up. We love you.\" A comment read, \"So sorry to hear this, can't believe this is happening, my heart is broken.\"\nAbout Jonas Brothers' concert\nThe Jonas Brothers show will be held in Ireland next, followed by the UK, Austria, Germany, Spain, Italy, and Switzerland in September. The last show will be held in Poland on October 16. Their first show this year was held in New Zealand in February.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Nick Jonas has influenza A and has postponed his shows in Mexico.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "influenza A",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": null,
+          "country": "Mexico",
+          "start_date": "2024-05-03",
+          "end_date": "2024-05-03",
+          "words": null,
+          "evidence": [
+            "Nick Jonas, singer and husband of actor Priyanka Chopra, has posted a video sharing that he has influenza A."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 20,
+    "article_id": "20191011230000-860",
+    "teaches": "not useful: a first-person preparedness essay looking back at 2009",
+    "scan_date": "2019-10-11",
+    "link": "https://www.sott.net/article/421838-Global-pandemics-Do-we-escape-to-some-island-or-prepare-right-where-we-are",
+    "article": "Remember that an epidemic affects, or tends to affect, a disproportionately large number of individuals within a population, community, or region at the same time, while a global pandemic is an epidemic of disease that's spread worldwide. I've personally noticed a lot of reports and articles lately on the likelihood of a very real possibility of a coming global pandemic. I take that to mean it's either just a new focus to the 'fad' of prepping or that more people are paying attention; hopefully the latter. In either case, it appears to be a very real, and close, threat.\nThe National Academy of Medicine, whose president, Victor Dzau, is also a board member of the GPMB, remarks on the report quoting (it) \"..highlights that an outbreak equivalent to the 1918 influenza pandemic could kill an estimated 50 to 80 million people, spreading around the world in less than 36 hours and wiping out nearly five percent of the global economy.\"\nIn 2009 the Swine Flu pandemic covered the United States and we were caught off guard. I don't think anyone else was very prepared either, as it was later noted that it possibly killed up to 203,000 people worldwide — 10 times higher than the first estimates based on the number of cases confirmed by lab tests, according to Science Daily. That doesn't seem like many when compared with other pandemics, but it was quite enough for me when my youngest son was diagnosed with it. Thankfully, despite being his only caretaker during that period, I didn't get it, but it had nothing to do with being prepared. All I could do was lock the doors, nobody came in or out (my husband was over the road), both my son and I wore dust masks when in the same room (which I doubt helped more than a tiny bit) and I used generic zip-lock baggies on my hands to remove snotty tissues and eating/drinking utensils. All in all, I think the world was lucky to get off as easily as it did. This was back before I knew much about prepping for illnesses and/or epidemics or pandemics. Now I look back at is like a trial by flu, so to speak, and have since upped my preps.\nThese are just items off the top of my head - you may think of several more. The key is to have what your family would need in that situation, and enough of it to last for a while. Once my son was diagnosed with Swine Flu I could not, in good conscience, having been exposed myself, stop at any store to pick up items on our way home from the doctor, but instead, I took him straight to the house. Antibiotics were delivered to my porch later that day as he also had a secondary infection.\n[article trimmed]",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "A preparedness essay recalling the 2009 swine flu pandemic and the writer's son's illness then.",
+      "items": []
+    }
+  },
+  {
+    "example": 21,
+    "article_id": "20171007013000-1494",
+    "teaches": "new cases per state; a 'so far this year' total; one patient hospitalized",
+    "scan_date": "2017-10-07",
+    "link": "http://www.cidrap.umn.edu/news-perspective/2017/10/flu-scan-oct-06-2017",
+    "article": "CDC: 9 more H3N2v cases reported in Maryland, Michigan\nIn its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.\nThe CDC said all nine patients reported exposure to pigs at two fairs in the week before they became ill. Eight are children and one is an adult older than 50. One of the patients was hospitalized, but all are recovering or have recovered. Investigators have found no human-to-human transmission. Six of the eight cases have been confirmed as H3N2v and three are presumed positive based on testing at Maryland's public health lab.\nMaryland has reported several human cases since the middle of September, and the CDC said the state's number of cases is declining. The CDC said the Michigan case isn't related to the ongoing investigation in Maryland. The Michigan patient is a child who had recently visited the Allegan County Fair, which took place Sep 8 through Sep 16, according to a statement from the Allegan County Health Department (ACHD). Allegan is in southwestern Michigan.\nThe Maryland Department of Health (MDH) in its latest update said 40 presumptive positive and confirmed cases have been detected as of Oct 4. The total reflects an increase of 3 cases since an update earlier this week. Two people were hospitalized.\nSo far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing.\nOct 6 CDC FluView report\nOct 6 ACHD statement\nOct 6 MDH case count\nH7N9 features keep CDC experts on high alert\nIn an update on H7N9 avian influenza in China at the ID Week meeting in San Diego this week, Tim Uyeki, MD, MPH, an expert with the CDC's influenza division, pointed out several features of the virus and the disease that have the CDC closely following the developments.\nHe said the CDC has identified three viruses as highest risk, and H7N9 raises the greatest concerns. The other two are H5N6 and H5N1, according to a report yesterday from Infectious Disease Special Edition. When H7N9 emerged in humans 2013, it was the first time a low-pathogenic virus caused fatal infections in humans, raising alarm at the CDC and elsewhere.\nUyeki said that, of 40 clusters reported so far, a little more than a third involved secondary infections with a close contact, usually in a household member without poultry exposure. No transmission beyond two generations have been reported, he said. H7N9's appearance in health settings in unrelated people, including patients and health workers, underscores the important of carefully following infection control protocols, he added.\nUntil the fifth wave, which wound down over the summer, experts had seen little antigenic drift, but the most recent surge of activity last winter was marked by the emergence of a highly pathogenic form, which has so far been confirmed in 28 patients in five of China's provinces.\n\"We really need to keep our eye on this,\" he said, adding that another concern is increased receptor binding. H7N9 is unusual, because it can infect both lower and upper respiratory tracts. \"This is a significant pandemic advantage for the virus.\"\nOther worries are that resistance to neuraminidase inhibitors isn't present in the poultry viruses, but it has evolved during patient treatment. Though resistance has increased from 4% to 10%, it is still uncommon, and clinicians recommend early treatment with neuraminidase inhibitors, he said.\nUyeki, however, said high-dose corticosteroids should be avoided, because they have been associated with prolonged viral shedding, nosocomial infection, ventilator-associated pneumonia, and increased mortality at 30 and 60 days.\nOct 5 Infectious Disease Special Edition story",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "CDC reports nine more H3N2v variant flu cases (eight in Maryland, one in Michigan), 61 variant cases so far this year, and one patient hospitalized.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "H3N2v",
+          "number": 8,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Maryland",
+          "country": "USA",
+          "start_date": "2017-10-07",
+          "end_date": "2017-10-07",
+          "words": null,
+          "evidence": [
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H3N2v",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Michigan",
+          "country": "USA",
+          "start_date": "2017-10-07",
+          "end_date": "2017-10-07",
+          "words": null,
+          "evidence": [
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "variant flu",
+          "number": 61,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": "2017-01-01",
+          "end_date": "2017-10-07",
+          "words": null,
+          "evidence": [
+            "So far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "strain": "H3N2v",
+          "number": 1,
+          "status": null,
+          "total_or_new": "new",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": "2017-10-07",
+          "end_date": "2017-10-07",
+          "words": null,
+          "evidence": [
+            "One of the patients was hospitalized, but all are recovering or have recovered."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 22,
+    "article_id": "20191202214500-1023",
+    "teaches": "not useful: worldwide yearly estimates with no country and no current period",
+    "scan_date": "2019-12-02",
+    "link": "https://www.prnewswire.com:443/news-releases/seasonal-influenza-vaccines-global-drug-forecast-and-market-analysis-to-2028-300967470.html",
+    "article": "Seasonal Influenza Vaccines: Global Drug Forecast and Market Analysis to 2028\nSeasonal influenza is a viral infection that occurs annually in the winter months from December to March/April in the Northern Hemisphere and from May to August/September in the Southern Hemisphere.Two types of influenza virus, type A and B, are responsible for the majority of seasonal influenza infections in humans, and due to frequent virus mutations annual vaccination is recommended. \nThe WHO estimates three to five million cases of severe seasonal influenza infections and 290,000 to 650,000 influenza-related respiratory deaths, most of them in the elderly population. Therefore, many countries recommend annual immunization against seasonal influenza, especially for high-risk groups such as young children, pregnant women, elderly people, and people with chronic diseases. \n- How will the seasonal influenza vaccine market landscape in the 8MM (US, France, Germany, Italy, Spain, UK, Japan, Brazil) change from 2018-2028? \n[article trimmed]",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "A vaccine market report quoting WHO's yearly worldwide estimates of severe flu cases and deaths.",
+      "items": []
+    }
+  },
+  {
+    "example": 23,
+    "article_id": "20221125084500-261",
+    "teaches": "confirmed and suspected (flu-like) counts are kept apart; 'last week'; a 'READ ALSO' teaser line is not an item",
+    "scan_date": "2022-11-25",
+    "link": "https://www.thelocal.at/20221125/today-in-austria-a-roundup-of-the-latest-news-on-friday-64/",
+    "article": "- More influenza infections and Covid-19 in Austria\nThe number of reported flu cases skyrocketed in the Alpine country last week, according to a report by MedUni Vienna.\nEpidemic levels that would constitute a flu wave have not yet been reached, reported the Center for Virology at MedUni Vienna on Thursday. However, there have been more and more cases, especially in Vienna, Lower Austria, Salzburg, Tyrol and Styria.\nAccording to MedUni, the number of confirmed influenza detections has now risen to 70 cases, up from less than 10 in the week between October 31st and November 6th and less than 20 in the following week. However, the samples examined come from only a few selected registered doctors in all federal states.\nAustria's Agency for Health and Food Safety (AGES) estimates based on the confirmed data and assumes there were almost 2,700 flu-like infections and new influenza cases last week.\nREAD ALSO: Masks against Covid and flu: What’s ahead for Austria this winter\n[article trimmed]",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Confirmed flu detections in Austria rose to 70 last week, an estimated 2,700 flu-like infections, and reported cases skyrocketed.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 70,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "Austria",
+          "start_date": "2022-11-14",
+          "end_date": "2022-11-20",
+          "words": null,
+          "evidence": [
+            "According to MedUni, the number of confirmed influenza detections has now risen to 70 cases, up from less than 10 in the week between October 31st and November 6th and less than 20 in the following week."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 2700,
+          "status": "suspected",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "Austria",
+          "start_date": "2022-11-14",
+          "end_date": "2022-11-20",
+          "words": null,
+          "evidence": [
+            "Austria's Agency for Health and Food Safety (AGES) estimates based on the confirmed data and assumes there were almost 2,700 flu-like infections and new influenza cases last week."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Austria",
+          "start_date": "2022-11-14",
+          "end_date": "2022-11-20",
+          "words": "skyrocketed",
+          "evidence": [
+            "The number of reported flu cases skyrocketed in the Alpine country last week, according to a report by MedUni Vienna."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 24,
+    "article_id": "20171011213000-513",
+    "teaches": "not useful: a look-back to last winter and the season's usual start",
+    "scan_date": "2017-10-11",
+    "link": "http://www.averyjournal.com/news/avery-health-department-working-to-prevent-flu-outbreak/article_159019c2-9c7d-5d60-93bd-cc6c8ac1b888.html",
+    "article": "NEWLAND — After seeing a high number of flu cases last winter, the Avery County Health Department is taking proactive steps to combat the illness this year.\n“This year, Avery County Health Department has already gone into all the schools and vaccinated approximately 400 children,” said Deb Gragg, public health nurse supervisor with Avery County Health Department. “Last year there were many cases of the flu that caused a lot of children to miss school and parents to miss work.”\nGragg noted that 100 percent of the children at Crossnore School were vaccinated.\nAccording to the Center for Disease Control, October marks the beginning of flu season, which peaks later in the winter. Early vaccinations are encouraged as the antibodies in a vaccine take two weeks to spread through the entire body.\nIn early January, North Carolina was one of a few states categorized as having “widespread flu activity.” In February and March, Appalachian Regional Healthcare System asked that anyone sick with the flu or flu-like symptoms, including children 12 years and under, voluntarily refrain from visiting family and friends who were patients at any of their hospitals, including Cannon Memorial in Linville.\nJust up the road from Avery County, several East Tennessee counties saw school closed for several days due to widespread flu outbreaks last winter.\nThe flu is a contagious respiratory illness caused by influenza viruses. Most commonly, a person becomes contagious 24 to 72 hours after contracting the virus, and remains that way for up to five days after the onset of symptoms.\nWhile most cases are mild and last less than two weeks, the flu can have serious outcomes resulting in hospitalization, and, in extreme cases, death.\nGragg noted that the Health Department will have upcoming health fairs for school and county employees in which the flu vaccine screenings and health educational materials will be available.\nFor more information on getting the flu shot in Avery County, contact your local physician or health provider, or call the Avery County Health Department in Newland at (828) 733-6031. According to Gragg, Avery County Health Department can bill insurance, Medicaid, Medicare and Health Choice.\n“We take walk-ins from 8 a.m. to 12 p.m. and 1 p.m. to 4 p.m. for flu vaccinations,” Gragg explained. “Don’t wait until it is too late. Come to see us and get your flu shot.”",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Avery County is preparing for flu season after many cases last winter; no current flu statement.",
+      "items": []
+    }
+  }
+]
