@@ -1,0 +1,884 @@
+[
+  {
+    "example": 1,
+    "article_id": "20180712233000-524",
+    "teaches": "a new death next to totals; a hospital count over stated dates; week ending; a comparison with a past year and a forecast are not recorded",
+    "scan_date": "2018-07-12",
+    "link": "http://www.dailymail.co.uk/wires/aap/article-5948789/Child-death-spurs-NSW-flu-vaccine-warning.html",
+    "article": "NSW health authorities are urging parents to get their kids vaccinated with the free flu shot after a child died from influenza.\nThe child was one of 19 admitted to Sydney's children's hospital between April 3 and July 8 with the flu, with only two of those infants fully vaccinated.\nIt was the first death of a child for the 2018 flu season, NSW Health said.\n\"This is an important reminder to parents who have not yet vaccinated their children that influenza can be life-threatening and it's not too late to vaccinate,\" Dr Kerry Chant, NSW Chief Health Officer, said in a statement on Friday.\nNews of the death comes as the authority predicts a slow start to this year's flu season in NSW, with 256 cases confirmed in the week ending July 8, compared with 6449 cases in the equivalent week in 2017.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "A child flu death in NSW, 19 children admitted to a Sydney hospital since April 3, and 256 cases in the week ending July 8.",
+      "items": [
+        {
+          "kind": "hospitalized",
+          "strain": null,
+          "number": 19,
+          "status": null,
+          "total_or_new": "total",
+          "city": "Sydney",
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2018-04-03",
+          "end_date": "2018-07-08",
+          "words": null,
+          "evidence": [
+            "NSW health authorities are urging parents to get their kids vaccinated with the free flu shot after a child died from influenza.\nThe child was one of 19 admitted to Sydney's children's hospital between April 3 and July 8 with the flu, with only two of those infants fully vaccinated."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": null,
+          "number": 1,
+          "status": null,
+          "total_or_new": "new",
+          "city": "Sydney",
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2018-07-12",
+          "end_date": "2018-07-12",
+          "words": null,
+          "evidence": [
+            "NSW health authorities are urging parents to get their kids vaccinated with the free flu shot after a child died from influenza.\nThe child was one of 19 admitted to Sydney's children's hospital between April 3 and July 8 with the flu, with only two of those infants fully vaccinated."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 256,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2018-07-02",
+          "end_date": "2018-07-08",
+          "words": null,
+          "evidence": [
+            "News of the death comes as the authority predicts a slow start to this year's flu season in NSW, with 256 cases confirmed in the week ending July 8,"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 2,
+    "article_id": "20230105154500-1283",
+    "teaches": "not useful: animals only, even when the name says swine flu",
+    "scan_date": "2023-01-05",
+    "link": "https://www.freepressjournal.in/india/tamil-nadu-nilgiris-dc-confirms-death-of-over-50-wild-boars-due-to-african-swine-flu-in-mudumalai-tiger-reserve",
+    "article": "Udhagamandalam: Nilgiris District Collector S P Amrit on Thursday confirmed that the death of over 50 wild boars near Mudumalai Tiger Reserve in the district was due to African Swine Flu.\nAlso, few wild boars were found dead in Kothagiri, Keelkothagiri, Coonoor, Manjoor and in Ooty in the last 10 days, apart from Bandipur area in Karnataka, bordering Tamil Nadu, Amrit told reporters here.\nSpecial team to visit Chennai soon\nThe samples taken from the carcasses were sent to Tamil Nadu Veterinary Research Institute and the result confirmed to be positive for the flu, a viral disease, he said and allayed fears of the disease spreading to other animals or humans.\nA special team from Chennai will be visiting Nilgiris to further examine the disease, he said.\nThe anti-poaching squad are involved in collecting the carcasses and burning them, Amrit said.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "African swine flu killed wild boars; no person is ill with flu.",
+      "items": []
+    }
+  },
+  {
+    "example": 3,
+    "article_id": "20240403060000-349",
+    "teaches": "a human case of animal flu; a new case next to its running total; a weekday; the animal outbreak, risk statements and a 2022 case are not recorded",
+    "scan_date": "2024-04-03",
+    "link": "https://www.beefcentral.com/news/bird-flu-jumps-species-in-latest-us-episode/",
+    "article": "REPORTS of humans contracting Avian Influenza (bird flu) via inflected cattle in the United States have again raised concerns about zoonotic diseases – those which can suddenly pass from one species to another.\nBird flu infection in US dairy cows was first reported by the US Department of Agriculture in Texas and Kansas on March 25, and now at least two cases have been found in humans.\nIn only the second case seen in humans in the US, the US Centres for Disease Control and Prevention on Monday issued a statement saying a person in Texas had tested positive for highly pathogenic avian influenza (H5N1 bird flu) after coming into contact with dairy cattle suspected of being infected.\nThe Texas Department of State Health Services said the patient’s only experienced symptom was eye inflammation. The person was tested late last week and the Centers for Disease Control and Prevention confirmed the results over Easter.\nThe person is now being treated with antiviral medication.\nThe CDC said this was only the second time that a human in the US had contracted bird flu, which typically infects wild birds but can spread to domestic species. It has killed millions of birds across the world in its latest outbreak and has also spread to other mammal populations, killing sea lions, seals, possums and polar bears.\nJust before Easter, federal US agencies announced that dairy cattle were the latest animal group to have contracted a strain of the virus. Dairy cattle in Texas, Kansas and Michigan were identified. No reports have yet emerged in US beef cattle.\nThe last time a human in the US contracted bird flu was in Colorado in 2022, when a man working in a poultry slaughter facility became infected. He recovered after being isolated and treated with anti-virus drugs.\nUS officials have emphasised that risk to general public remains low, and that practicing good hygiene can help prevent the spread of this and many other illnesses.\nThe US Centres for Disease Control and Prevention issued a statement on Monday saying the latest human infection did not change the H5N1 bird flu human health risk assessment for the US general public, which CDC considered to be low.\n[article trimmed]",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "A person in Texas tested positive for H5N1 bird flu, announced on Monday, the second human case found.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "bird flu",
+          "number": 2,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": null,
+          "end_date": "2024-04-03",
+          "words": null,
+          "evidence": [
+            "Bird flu infection in US dairy cows was first reported by the US Department of Agriculture in Texas and Kansas on March 25, and now at least two cases have been found in humans."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H5N1",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Texas",
+          "country": "USA",
+          "start_date": "2024-04-01",
+          "end_date": "2024-04-01",
+          "words": null,
+          "evidence": [
+            "In only the second case seen in humans in the US, the US Centres for Disease Control and Prevention on Monday issued a statement saying a person in Texas had tested positive for highly pathogenic avian influenza (H5N1 bird flu) after coming into contact with dairy cattle suspected of being infected."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 4,
+    "article_id": "20220720123000-684",
+    "teaches": "not useful: stomach flu is not flu",
+    "scan_date": "2022-07-20",
+    "link": "https://www.mid-day.com/mumbai/mumbai-news/article/mumbai-reports-340-gastroenteritis-cases-within-two-weeks-23236885",
+    "article": "Mumbai reports 340 gastroenteritis cases within two weeks\nGastroenteritis or stomach flu, can be termed as an inflammation (irritation) of the intestines. It spreads by contact with an infected person or through contaminated food or water. Common symptoms include diarrhoea, vomiting and fever\nRepresentative image. Pic/Istock\nMumbai has recorded around 340 cases of gastroenteritis in the first two weeks of July month. According to the Brihanmumbai Municipal Corporation (BMC) epidemiology cell data, they have been reporting rising cases of gastroenteritis followed by malaria (243 cases).\nGastroenteritis or stomach flu, can be termed as an inflammation (irritation) of the intestines. It spreads by contact with an infected person or through contaminated food or water. Common symptoms include diarrhoea, vomiting and fever. In June, the city reported 543 gastroenteritis cases.\nADVERTISEMENT\nADVERTISEMENT",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Gastroenteritis ('stomach flu') and malaria cases in Mumbai; no influenza.",
+      "items": []
+    }
+  },
+  {
+    "example": 5,
+    "article_id": "20230228080000-246",
+    "teaches": "Hong Kong is China with city Hong Kong; flu winding down together with other viruses is a flu trend",
+    "scan_date": "2023-02-28",
+    "link": "https://www.marketing-interactive.com/hk-ends-mask-mandate-from-march-after-3-years",
+    "article": "HongKongers and tourists will no longer need to wear masks as soon as tomorrow as the city has finally lifted its mask mandate after almost three years. The latest announcement comes six days after the government extended the mask mandate until 8 March.\nHong Kong's leader John Lee said at a media session before ExCo on Tuesday, that the city will drop the mask mandate from 1 March, where people in the city can go mask-free in both indoors and outdoors, as well as when taking public transport. Lee said that the decision was made based on a few factors, including the stability of the local situation of Covid-19 and no outbreaks among high-risk populations such as hospitals, schools and care homes.\nFurthermore, the winding down of influenza and other respiratory viruses is also one of the reasons the government made the decision, “The data showed the local epidemic situation was under control and there was no big rebound. Hong Kong has already built a wide and comprehensive immunity barrier,” Lee said.\nIn high risk places such as hospitals and care homes, management teams can decide whether staff and visitors should wear masks. “We think this is the best time to make this decision. It is a clear message to show Hong Kong is resuming normalcy,\" Lee added.\nThe latest lift of mask mandate comes after neighbouring city such as Macau's announcement that the city would drop its mask mandate except for public transportation and hospitals. Furthermore, In mainland China, residents are not required to wear masks outdoors.\n[article trimmed]",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Hong Kong's leader said influenza and other respiratory viruses are winding down.",
+      "items": [
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": "Hong Kong",
+          "state": null,
+          "country": "China",
+          "start_date": "2023-02-28",
+          "end_date": "2023-02-28",
+          "words": "winding down",
+          "evidence": [
+            "Furthermore, the winding down of influenza and other respiratory viruses is also one of the reasons the government made the decision, “The data showed the local epidemic situation was under control and there was no big rebound."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 6,
+    "article_id": "20210616030000-275",
+    "teaches": "not useful: flu-like symptoms when another cause (COVID) is named",
+    "scan_date": "2021-06-16",
+    "link": "https://www.indiatoday.in/magazine/up-front/story/20210621-covid-orphans-the-young-survivors-1813611-2021-06-11",
+    "article": "Covid orphans: The young survivors\nThe staggering national Covid death toll of 354,000 and counting has created a war-like situation—like war orphans, there are now Covid orphans.\nOn April 8, Deepak Solanki, resident of Bagratawa, a village in Madhya Pradesh’s Hoshangabad district, tested positive for the coronavirus. Two days earlier, Solanki and his wife Anita developed a fever and other flu-like symptoms, but they thought it was likely just a bout of common flu—it hadn’t yet sunk in that Covid was no longer the urban phenomenon they imagined it to be. However, an RT-PCR test, done on the insistence of Deepak, 45, a district medical representative, proved otherwise. Deepak was admitted to a private medical facility the same day and Anita two days later. Their children—two daughters, aged 18 and 15, and a son, 12—were left in the care of their nephew Shrikant Solanki. All three children, too, had tested positive.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The family's flu-like symptoms turned out to be COVID-19.",
+      "items": []
+    }
+  },
+  {
+    "example": 7,
+    "article_id": "20240518033000-494",
+    "teaches": "a season shown to be active now; in a mixed sentence the forecast part is dropped",
+    "scan_date": "2024-05-18",
+    "link": "https://www.skynews.com.au/lifestyle/health/protect-yourself-new-south-wales-health-says-influenza-covid19-cases-on-the-rise-as-winter-nears/news-story/17ec0728e477bc978d44539a7c37f50e?nk=a0c362a389a6d794ff3a30e8957bb9c8-1716002199",
+    "article": "‘Protect yourself’: New South Wales Health says influenza, COVID-19 cases on the rise as winter nears\nThe flu season in New South Wales is now underway, with the state’s peak health body urging residents to take measures to protect themselves as cases are expected to surge.\nNSW Health has urged residents to take steps to prevent getting struck down with illness as the flu season kicks off for the year.\nThe state’s Chief Health Officer Dr Kerry Chant said influenza cases are likely to spike in the next few weeks.\n“We are now officially entering the influenza season, with cases expected to surge rapidly in the next six to eight weeks,” she said in a statement.\n“So now is the time to book in for a flu vaccine to protect yourself and your loved ones.”\nAccording to the latest NSW Health Respiratory Surveillance Report, influenza and COVID-19 transmission is increasing and respiratory syncytial virus, better known as RSV, also remains at “high levels”.\n“We are also seeing COVID-19 activity increase from low to moderate levels, and expect that COVID-19 will also continue to increase, so we are encouraging the community to make sure they are up to date with their COVID-19 vaccinations,” Dr Chant said.\n“With all three viruses in circulation, we also want to remind the community that symptomatic people should stay at home and wear a mask if they do need to go out.\n[article trimmed]",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "NSW Health says the flu season is now underway and influenza cases are rising.",
+      "items": [
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2024-05-18",
+          "end_date": "2024-05-18",
+          "words": "flu season now underway, cases on the rise",
+          "evidence": [
+            "‘Protect yourself’: New South Wales Health says influenza, COVID-19 cases on the rise as winter nears",
+            "The flu season in New South Wales is now underway, with the state’s peak health body urging residents to take measures to protect themselves as cases are expected to surge."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 8,
+    "article_id": "20180802063000-508",
+    "teaches": "not useful: an undated personal story, a vaccine coverage figure and a forecast",
+    "scan_date": "2018-08-02",
+    "link": "https://au.news.yahoo.com/mothers-warning-toddler-came-within-hours-death-flu-131448195.html",
+    "article": "A Perth mother has told how her two-year-old boy came within hours of death after catching the flu, and urged other families to get their children vaccinated before the flu season hit hard.\nLittle Danny Bousaid found it difficult to breathe and didn't get better after contracting the flu. He became so sick he was moved to the intensive care unit at Perth Children's Hospital.\nHe needed a lot of oxygen and his mother Lily Bousaid thought she might lose her little boy.\nShe described it as a \"very hard moment\".\nDanny is immunised against most illnesses, but his parents underestimated the seriousness of this highly contagious virus and how quickly it can become deadly.\nThe Hamilton Hill parents didn't know a simple shot could have protected him.\nMs Bousaid said she thought her boy's flu would pass after a few days of a runny nose and fever, but it almost killed the toddler.\nThe true danger of the flu is a message still not getting through to most Perth parents, with only 19 per cent of children under age of five currently immunised against the virus.\nDr Chris Blyth, who divides his time as a paediatrician at Perth Children's Hospital and as an infectious diseases researcher at the Telethon Kids Institute, said the flu is often underestimated.\n\"People don't think about flu as a significant disease,\" Dr Blyth said.\n\"Each year hundreds of children get admitted to hospital with the flu and it is preventable through vaccination.\"\nHe said the worst of the flu season is yet to hit, so there is still time to protect children from a potentially deadly case of the flu.\nThe vaccination is free for children under five – the ages most at risk.\nMs Bousaid's advice to parents is: \"Just do it, don't wait.\"",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "A mother's story of her toddler's flu with no date, plus vaccination advice and a warning that the worst is yet to come.",
+      "items": []
+    }
+  },
+  {
+    "example": 9,
+    "article_id": "20220723110000-185",
+    "teaches": "so-far-this-year totals; the district and city parts of a total are not recorded; a rising trend",
+    "scan_date": "2022-07-23",
+    "link": "http://www.china.org.cn/world/2022-07/23/content_78337699.htm",
+    "article": "India's western state of Maharashtra has seen a rising trend in swine flu infection with seven deaths and 142 cases reported so far this year, officials said on Friday.\nOf the seven deaths, three were reported in Kolhapur and two each in Pune and Thane districts.\nMumbai, the country's financial hub, has recorded 43 cases of infection, followed by Pune district with 23, officials said.\n\"We are taking appropriate action to enhance surveillance. Prevention and control measures are being implemented,\" said Maharashtra state surveillance officer Pradeep Awate.\nSwine flu is a respiratory disease caused by the H1N1 virus. It affects the respiratory tracts of humans with the potential for human-to-human transmission.\nTwo other Indian states of Uttar Pradesh in the north and Kerala in the south have also reported swine flu cases.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Maharashtra reports 142 swine flu cases and seven deaths so far this year, with a rising trend.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "swine flu",
+          "number": 142,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2022-01-01",
+          "end_date": "2022-07-22",
+          "words": null,
+          "evidence": [
+            "India's western state of Maharashtra has seen a rising trend in swine flu infection with seven deaths and 142 cases reported so far this year, officials said on Friday."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "swine flu",
+          "number": 7,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2022-01-01",
+          "end_date": "2022-07-22",
+          "words": null,
+          "evidence": [
+            "India's western state of Maharashtra has seen a rising trend in swine flu infection with seven deaths and 142 cases reported so far this year, officials said on Friday."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "swine flu",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2022-07-23",
+          "end_date": "2022-07-23",
+          "words": "rising trend",
+          "evidence": [
+            "India's western state of Maharashtra has seen a rising trend in swine flu infection with seven deaths and 142 cases reported so far this year, officials said on Friday."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 10,
+    "article_id": "20220906121500-1430",
+    "teaches": "not useful: a forecast for the coming season; a hemisphere has no country",
+    "scan_date": "2022-09-06",
+    "link": "https://www.nbcnews.com/health/health-news/flu-shots-kids-child-need-one-dose-year-rcna46165",
+    "article": "Ahead of what may be an intense flu season, the American Academy of Pediatrics urged parents on Tuesday to make sure their children are vaccinated against the flu this fall, adding that some kids may need more than one flu shot.\nThe recommendation that some children need two flu shots is not new, but experts say it's particularly important after two years of the Covid pandemic.\nChildren ages 6 months through 8 years old who've either never received a flu shot or who've only ever had a single flu shot should get two this year, a month apart, for maximum protection.\nThe recommendation comes from the Centers for Disease Control and Prevention, which has advised this strategy since the 2009 H1N1 epidemic. Last month, the agency reminded parents that some children may need a second shot.\nThis strategy may have an even greater impact during the 2022-2023 flu season, experts said, because the number of children getting flu shots and other recommended vaccines has slowed in recent years.\nSpread of flu dropped precipitously once the pandemic began — likely because of social distancing measures, said Dr. Buddy Creech, a pediatric infectious disease expert at Vanderbilt University Medical Center in Nashville, Tennessee.\nThe ensuing decrease in flu activity, Creech surmised, meant families were less likely to get their kids to regular wellness checks.\n\"Folks weren't going in for routine vaccines,\" he said. \"The sense of urgency wasn't there.\"\nDr. Mark Kline, physician-in-chief at Children's Hospital New Orleans, agreed. \"We haven't had much flu, so people haven't really been motivated to go out and get their kids vaccinated.\"\nThe gap has left a large proportion of children unexposed to influenza and therefore vulnerable to the virus.\nBut flu activity in the Southern Hemisphere has surged recently, which could be an early indicator of what the United States might experience.\nThe American Academy of Pediatrics recommends that all children 6 months and older get vaccinated for influenza this fall, preferably by the end of October.\n\"Vaccines remain the best way to prevent severe illness and keep kids in classrooms,\" according to the AAP.\nDoctors also encourage pregnant women to get flu shots, as they've been shown to provide lasting protection to their newborn infants up to six months of age.\nFollow NBC HEALTH on Twitter & Facebook.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Advice ahead of what may be an intense season; the only activity mentioned is in the Southern Hemisphere.",
+      "items": []
+    }
+  },
+  {
+    "example": 11,
+    "article_id": "20241028164500-1111",
+    "teaches": "flu in an article mainly about COVID; a count for the week ended a date is a total; a low trend; other diseases' numbers are not recorded",
+    "scan_date": "2024-10-28",
+    "link": "https://www.nbcmontana.com/news/local/covid-19-influenza-numbers-decrease-in-montana",
+    "article": "COVID-19, influenza numbers decrease in Montana\nMISSOULA, Mont. — The number of COVID-19 cases reported by the Montana Department of Public Health and Human Services show another large drop.\nThe numbers reported Friday are for the week ended October 19. There were 313 confirmed cases of COVID-19 in the state that week, down from 450 a week before.\nThe number of hospitalized people decreased from 38 to 33.\nOne person died of the virus that week.\nSo far this year, the Montana DPHHS reports there have been 14,795 cases, 995 hospitalizations, and 59 deaths in Montana caused by COVID-19.\nInfluenza numbers remain low, with 12 cases reported across the state for the week ended Oct. 19. So far this flu season,\nRSV numbers continue to be low as well, with no positive tests reported last week.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Montana reported 12 flu cases for the week ended Oct. 19, and flu numbers remain low.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 12,
+          "status": null,
+          "total_or_new": "total",
+          "city": null,
+          "state": "Montana",
+          "country": "USA",
+          "start_date": "2024-10-13",
+          "end_date": "2024-10-19",
+          "words": null,
+          "evidence": [
+            "Influenza numbers remain low, with 12 cases reported across the state for the week ended Oct. 19."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Montana",
+          "country": "USA",
+          "start_date": "2024-10-13",
+          "end_date": "2024-10-19",
+          "words": "remain low",
+          "evidence": [
+            "Influenza numbers remain low, with 12 cases reported across the state for the week ended Oct. 19."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Montana",
+          "country": "USA",
+          "start_date": "2024-10-13",
+          "end_date": "2024-10-19",
+          "words": "influenza numbers decrease",
+          "evidence": [
+            "COVID-19, influenza numbers decrease in Montana MISSOULA, Mont."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 12,
+    "article_id": "20190930113000-576",
+    "teaches": "not useful: only numbers for a finished year",
+    "scan_date": "2019-09-30",
+    "link": "http://www.thenewsenterprise.com/free_content/flu-season-officially-arrives/article_f852e948-87e2-5664-8fcd-6a97be388601.html",
+    "article": "After the longest flu season on record in 2018, the Kentucky Department of Public Health encourages preparation.\nMost people think of the flu as a nasty inconvenience, but more than 61,000 people in the United States died last year from the influenza virus, a news release from Lincoln Trail District Health Department said. Kentucky experienced 194 flu-related deaths, including two children.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The deaths are for last year's (2018) season, which is over.",
+      "items": []
+    }
+  },
+  {
+    "example": 13,
+    "article_id": "20231219041500-966",
+    "teaches": "a first death of the season dated by its news release; 'several deaths' is a vague amount, so a trend; a county with a city of the same name",
+    "scan_date": "2023-12-19",
+    "link": "https://www.union-bulletin.com/news/local/health/first-flu-related-death-of-the-season-reported-in-walla-walla-county/article_d9345c0c-9de7-11ee-a941-936b294f41d2.html",
+    "article": "Walla Walla County’s first flu-related death of the 2023-2024 flu season was recently reported, according to a Monday, Dec. 18, county health department news release.\nThe Walla Walla County Department of Community Health said although this was the first flu-related death in the county, several deaths have been reported in eastern Washington in recent weeks.\nThe health department recommends people receive the updated COVID-19 and Respiratory Syncytial Virus (RSV) vaccines, stay at home when sick and wash hands frequently with soap and water.\n“While most people recover from the flu with care and rest, the flu can be a serious illness and cause deadly complications,” the news release said.\nIt is recommended that everyone ages 6 and older receive the flu vaccine and updated COVID-19 vaccine. The RSV vaccine is recommended for adults 60 and older as well as pregnant women between weeks 32 and 36 of pregnancy.\nTo find vaccine locations, visit vaccinelocator.doh.wa.gov.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Walla Walla County reported its first flu death of the season, and several deaths in eastern Washington.",
+      "items": [
+        {
+          "kind": "deaths",
+          "strain": null,
+          "number": 1,
+          "status": null,
+          "total_or_new": "new",
+          "city": "Walla Walla",
+          "state": "Washington",
+          "country": "USA",
+          "start_date": "2023-12-18",
+          "end_date": "2023-12-18",
+          "words": null,
+          "evidence": [
+            "Walla Walla County’s first flu-related death of the 2023-2024 flu season was recently reported, according to a Monday, Dec. 18, county health department news release."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Washington",
+          "country": "USA",
+          "start_date": "2023-12-19",
+          "end_date": "2023-12-19",
+          "words": "several deaths have been reported",
+          "evidence": [
+            "The Walla Walla County Department of Community Health said although this was the first flu-related death in the county, several deaths have been reported in eastern Washington in recent weeks."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 14,
+    "article_id": "20240606170000-637",
+    "teaches": "not useful: human bird flu cases that ended more than 30 days before the article, announced late",
+    "scan_date": "2024-06-06",
+    "link": "https://www.washingtontimes.com/news/2024/jun/6/bird-flu-first-person-world-dies-new-strain-mexico/",
+    "article": "A new strain of bird flu, previously unseen in humans, has resulted in the death of a man in Mexico.\nThe World Health Organization confirmed that the patient, who was hospitalized in Mexico City, was infected with the H5N2 strain of avian influenza.\nAccording to a WHO report, the organization was informed of the human infection on May 23. The patient was a 59-year-old resident of Mexico with multiple health conditions.\nPeople were interested in these podcasts\nThe patient was bedridden for three weeks before showing acute symptoms of avian flu. On April 17, he began experiencing fever, shortness of breath, diarrhea, nausea and general malaise. He died April 24.\nIn response, the WHO probed 17 people who had close contact with the deceased. Only one of them reported having a runny nose.\nThe death comes shortly after Australia recorded its first human case of a virulent bird flu strain in a child who became ill after returning from overseas. The child contracted the H5N1 strain, which has been spreading globally and causing significant bird deaths. The child, who returned to Victoria from India in March, suffered a severe infection but has since fully recovered, according to Victoria’s chief health officer.\n“This is the first human case of H5N1 avian influenza in Australia,” Dr. Clare Looker said, according to The Mirror. “The avian influenza virus was detected through further testing of positive influenza samples that take place to detect novel or concerning flu virus strains, as part of Victoria’s enhanced surveillance system.”\n“Contact tracing has not identified any further cases of avian influenza connected to this case,” she added, noting that the strain of bird flu does not easily spread among humans.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The Mexico death was on April 24 and the Australian child fell ill in March, both more than 30 days before the article.",
+      "items": []
+    }
+  },
+  {
+    "example": 15,
+    "article_id": "20210818104500-122",
+    "teaches": "a new death next to a running toll; 'more than 120' is 120",
+    "scan_date": "2021-08-18",
+    "link": "https://eturbonews.com/109276/70-year-old-swiss-tourist-dies-swine-flu-india/",
+    "article": "JODHPUR, India – A 70-year-old foreign tourist has died of swine flu in Jodhpur as the toll in Rajasthan has gone up to more than 120. The Swiss tourist, Anne Marie, was taken ill while she was visiting Jaisalmer where she was treated at a private hospital.\nWhen her condition deteriorated as she suffered from acute pneumonia, Anne Marie was shifted to MDM Hospital, Jodhpur, on Wednesday. She was put on the ventilator but died on Wednesday morning. Her blood test report, which came after her death, confirmed she was suffering from H1N1 influenza.\nDescribing swine flu as an ‘epidemic’, Chief Minister Vasundhara Raje has asked the tourists to take medical help at the earliest if they suffered from symptoms like fever, cough and breathlessness. Speaking to a television channel, Ms. Raje said patients often went to hospitals in the last stages. “We have set up a task force and are providing diagnostic services and medicines free of cost in hospitals,” she said.\nThis being the peak tourist season, the government has also decided to distribute pamphlets at airports and railway stations to warn foreign visitors about the spread of swine flu and what measures to take. Masks will be provided to all patients who visit the swine flu treatment centres to prevent the infection from spreading, Ashok Panagariya, chairperson of the State Task Force on swine flu said.\nThe government has set up isolation wards for swine flu patients and provided ventilators for the critical ones. Leave of all doctors has been cancelled and Assembly meetings have been done away with.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "A tourist died of swine flu in Jodhpur as Rajasthan's toll rose to more than 120.",
+      "items": [
+        {
+          "kind": "deaths",
+          "strain": "swine flu",
+          "number": 1,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": "Jodhpur",
+          "state": "Rajasthan",
+          "country": "India",
+          "start_date": "2021-08-18",
+          "end_date": "2021-08-18",
+          "words": null,
+          "evidence": [
+            "JODHPUR, India – A 70-year-old foreign tourist has died of swine flu in Jodhpur as the toll in Rajasthan has gone up to more than 120.",
+            "She was put on the ventilator but died on Wednesday morning."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "strain": "swine flu",
+          "number": 120,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": "Rajasthan",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2021-08-18",
+          "words": null,
+          "evidence": [
+            "JODHPUR, India – A 70-year-old foreign tourist has died of swine flu in Jodhpur as the toll in Rajasthan has gone up to more than 120."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 16,
+    "article_id": "20231213190000-2446",
+    "teaches": "not useful: respiratory illness and hospital numbers that are not tied to flu",
+    "scan_date": "2023-12-13",
+    "link": "https://www.northernpublicradio.org/wnij-news/2023-12-13/lingering-cough-respiratory-virus-cases-are-rising-across-illinois",
+    "article": "State officials are launching a new Respiratory Disease Surveillance Dashboard. It will be updated weekly. The dashboard will include hospital visits, seasonal trends, lab test positivity and demographic data.\nCurrently, cases of respiratory viruses are trending up across Illinois. State health officials say 44 Illinois counties are now at an elevated level for COVID-19.\nThe latest information from the Illinois Department of Public Health also shows hospitalization rates are increasing.\nResidents are urged to get COVID booster shots and the flu vaccine in time for the holidays.\nIn DeKalb County, the latest numbers from the CDC show 64 hospitalizations at the start of the month. The hospital admission level in DeKalb County is still considered “low” but the latest numbers are a 16.4% increase from the week before.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Respiratory viruses and hospitalizations are rising in Illinois, but nothing is said about flu itself.",
+      "items": []
+    }
+  },
+  {
+    "example": 17,
+    "article_id": "20160129010000-168",
+    "teaches": "'over the last three months'; a peak and 'the peak season is over' are trends; a past season and a seasonal fact are not recorded",
+    "scan_date": "2016-01-29",
+    "link": "http://beyazgazete.com/haber/2016/1/29/turkey-aciklamasi-57-people-died-from-swine-flu-in-3-months-3090462.html",
+    "article": "Turkey Açıklaması 57 People Died From Swine Flu İn 3 Months\nTurkey's top health official says peak season of flu over.\nEkleme: 29.01.2016 - 02:13\nGüncelleme: 29.01.2016 - 02:13 / Editör: AA\n/ Kaynak: AA\nAt least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday.\n“We have collected a total of 480 samples from patients, out of which 280 were cases of H1N1,” Health Minister Mehmet Muezzinoglu told an Ankara meeting about Turkey's health vision and future projections.\nThe minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.\nAuthorities define the flu season as spanning the period from October to April.\nThe minister said that the government had taken all necessary measures to deal with the situation and there was no need to panic. 'Hand hygiene is vital for preventing the virus from spreading. Healthy nutrition as well as drinking more water is also important,' the minister said.\nSwine flu was first reported in Turkey in 2009. The flu had killed over 30 people in the country in 2014-2015 flu season.\nMezzinoglu also assured that no Zika virus has been recorded in Turkey so far.\nOriginating in Latin America, the mosquito-borne virus causes symptoms in roughly one in five adults, including fever, rash and conjunctivitis.\nThere is currently no vaccine or cure for the virus, which has spread to 21 countries and territories in the Americas, according to the Pan American Health Organization.\nThe virus is expected to spread to every country where Aedes mosquitoes are known to live, according to the organization.\nThe World Health Organization predicted on Thursday that the virus could be contracted by as many as four million people over the next 12 months.",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Turkey's health minister reported 57 swine flu deaths over the last three months and said the peak season is over.",
+      "items": [
+        {
+          "kind": "deaths",
+          "strain": "H1N1",
+          "number": 57,
+          "status": "confirmed",
+          "total_or_new": "total",
+          "city": null,
+          "state": null,
+          "country": "Turkey",
+          "start_date": "2015-10-01",
+          "end_date": "2015-12-31",
+          "words": null,
+          "evidence": [
+            "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H1N1",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Turkey",
+          "start_date": "2015-12-21",
+          "end_date": "2016-01-10",
+          "words": "peaked",
+          "evidence": [
+            "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+            "Turkey's top health official says peak season of flu over."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H1N1",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Turkey",
+          "start_date": "2016-01-28",
+          "end_date": "2016-01-28",
+          "words": "peak season is over",
+          "evidence": [
+            "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+            "Turkey's top health official says peak season of flu over."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 18,
+    "article_id": "20211006221500-903",
+    "teaches": "not useful: flu shot schemes only",
+    "scan_date": "2021-10-06",
+    "link": "https://www.thestandard.com.hk/section-news/section/4/234841/",
+    "article": "The time is not ripe to remove a ban on eating in cinemas, University of Hong Kong microbiologist Ho Pak-leung says.\nHe was commenting on a call by the Hong Kong Theatres Association, which wants to offer snacks and drinks as 30 percent of cinemas' income derives from such sales - crucial for operations including employee wages.\nThe association argues the risk of the virus spreading in cinemas is low because audience members don't talk to each other, and 90 percent of employees have been vaccinated. There are also ventilation systems inside cinemas.\nHo raised concerns about cinema control measures yesterday, saying that unlike restaurants, there are no partitions between seats. Also, the distance between cinema seats is tight, Ho said, and he doubted if the air change rate inside cinemas could reach at least six times per hour.\nOn restaurants throughout the SAR, Ho said authorities could rule that customers must be vaccinated to enter an eatery apart from requiring employees to have had the jabs.\nOnly by fulfilling such conditions can authorities relax infection control measures in premises, he said. \"This will also put people's minds at ease when it comes to reopening the Hong Kong-mainland border,\" he added.\nMeanwhile, two schemes to provide free or subsidized flu shots for eligible people ahead of the winter influenza season started yesterday, with authorities recommending a two-week gap between shots against influenza and Covid-19.\nThere were six imported cases of Covid-19 reported yesterday.\nOne case involves a 43-year-old Indonesian domestic helper who arrived on September 4. She was listed as a positive case after antibodies were found in samples.",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "Hong Kong started flu vaccination schemes; no flu activity is reported.",
+      "items": []
+    }
+  },
+  {
+    "example": 19,
+    "article_id": "20160130104500-564",
+    "teaches": "keep the positive count, not the samples it came from; results awaited are suspected; yesterday; division counts inside the state total are not recorded",
+    "scan_date": "2016-01-30",
+    "link": "http://www.business-standard.com/article/pti-stories/two-cases-of-h1n1-flu-detected-in-j-k-measures-put-in-place-116013000483_1.html",
+    "article": "Two cases of H1N1 flu detected in J&K; measures put in place\nTwo cases of H1N1 Influenza have been reported in Jammu and Kashmir, prompting the government to step up measures in place to tackle the flu.\nThe Jammu and Kashmir Health department collected 43 samples of suspected H1N1 patients yesterday, out of which two turned out to be positive.\n\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said.\nAlso Read\nIn view of these reports, Governor N N Vohra yesterday reviewed the preparedness of the Health and Medical Education Department in dealing with the problem.\n\"The state has geared up to deal with H1N1 flu. The preparedness to tackle H1N1 flu in the State has been reviewed and measures put in place\", Commissioner Secretary Health and Medical Education department, Dr Mandeep Bhandari said.\nAs per the situation report on H1N1 Flu status provided by the Secretary Health and Medical Education, a total of 32 samples of suspected patients were collected in Jammu division and 11 in Kashmir division, the department officer said.\n\"Out of 32 collected samples in Jammu Division, 23 cases have been found negative, two positive and reports of seven cases are pending.\nIn Kashmir Division, out of 11 samples collected, 8 are negative and results of the rest are awaited\", he added.\nBhandari said that a Control Room has been established in the Directorates of Health Services at Jammu and Srinagar; an advisory has been circulated to all districts for the sensitization of health\ncare professional and para professionals, including ASHAs and Anganwadi workers, regarding the disease.\nBesides, screening and sample collection centres have been established at Government Medical College, Jammu, SKIMS Soura, GMC Srinagar, hospitals in Gandhinagar and Sarwal for drawing samples of the persons suspected to have Influenza-A.\nMore From This Section\nFirst Published: Jan 30 2016 | 3:22 PM IST",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "Two of 43 samples tested positive for H1N1 in Jammu and Kashmir yesterday, and results for 10 are awaited.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 2,
+          "status": "confirmed",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Jammu and Kashmir",
+          "country": "India",
+          "start_date": "2016-01-29",
+          "end_date": "2016-01-29",
+          "words": null,
+          "evidence": [
+            "The Jammu and Kashmir Health department collected 43 samples of suspected H1N1 patients yesterday, out of which two turned out to be positive."
+          ]
+        },
+        {
+          "kind": "cases",
+          "strain": "H1N1",
+          "number": 10,
+          "status": "suspected",
+          "total_or_new": "new",
+          "city": null,
+          "state": "Jammu and Kashmir",
+          "country": "India",
+          "start_date": "2016-01-29",
+          "end_date": "2016-01-29",
+          "words": null,
+          "evidence": [
+            "\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 20,
+    "article_id": "20220524014500-506",
+    "teaches": "not useful: the Spanish flu as history in a COVID article",
+    "scan_date": "2022-05-24",
+    "link": "https://en.antaranews.com/news/230853/indonesia-will-take-over-six-months-to-confirm-pandemics-end",
+    "article": "\"It's not time to mention the endemic phase. The current situation is a controlled pandemic. There are several more stages that must be passed,\" he informed after attending a hearing meeting (RDP) with Commission IX of the Indonesian House of Representatives (DPR) here on Monday night.\nOne of the parameters for Indonesia to enter a COVID-19 safe phase is maintaining an effective reproduction number (RT) of less than one for more than six months, he said.\nRT reflects the number of additional cases that occurred in the community after various interventions were given to control the pandemic, such as the implementation of community activity restrictions (PPKM), COVID-19 vaccinations, and other measures implemented in Indonesia.\n\"There are several phases to enter the endemic, one of which is when the RT is less than one for more than six months,\" Harbuwono said.\nIndonesia still needs to pursue the target of 70-percent complete vaccination for the entire population in order to achieve herd immunity against COVID-19 transmission, he added.\nBased on the COVID-19 Vaccination Dashboard of the Indonesian Health Ministry, the achievement of full-dose or two-dose vaccinations as of Monday afternoon stood at 166.9 million out of the target of more than 208 million.\nThe COVID-19 pandemic has not been the first to hit the world, the deputy minister noted.\nRelated news: Gov't will handle COVID-19 as normal disease on endemic situation\n\"The Spanish Flu pandemic took two–three years. Some are missing (the virus, ed.) and some are still in the community. However, since the immunity is biologically accumulated and passed from mother to child, the virus subsides,\" he added.\nThe transition from the pandemic to the endemic phase, he said, will require the SARS-CoV-2 virus, which causes COVID-19, to disappear completely.\n\"It could happen, but this virus can stop spreading because there is an immune system. There are epigenetic adaptations, there are changes in genes that the body adapts so that the genes in the body make the body more immune than previous pandemics,\" he added.\nThe World Health Organization (WHO) has said that COVID-19 has not yet become endemic across the world, he stressed.\n\"But this is considered a Public Health Emergency of International Concern (PHEIC). This means that this status is still being monitored and evaluated regularly, both clinically and in joint laboratories around the world,\" he said.\nRelated news: Pandemic in Indonesia in controlled stage: deputy minister\nTranslator: Katriana\nEditor: Rahmad Nasution\nCopyright © ANTARA 2022",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The only flu is the Spanish flu pandemic, mentioned as history.",
+      "items": []
+    }
+  },
+  {
+    "example": 21,
+    "article_id": "20180808223000-2532",
+    "teaches": "a round-up: one trend per named country; hemisphere, region and worldwide statements and an old study are not recorded",
+    "scan_date": "2018-08-08",
+    "link": "http://www.cidrap.umn.edu/news-perspective/2018/08/flu-scan-aug-08-2018",
+    "article": "WHO says Southern Hemisphere flu activity remains fairly low\nInfluenza activity remains elevated in South America, has started to decline in southern Africa, and is still below seasonal threshold levels in Australia and New Zealand, the World Health Organization (WHO) said in its latest update.\nSamples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there.\nFlu activity remains low in Australia and New Zealand, but influenza-like illness in West Australia is rising and appears to have crossed the seasonal threshold. H1N1 is the predominant strain in Oceania, which includes Australia and New Zealand.\nNorthern Hemisphere flu activity remains at inter-seasonal levels, the WHO said.\nAnalysis of FluNet isolates from the most recent week of data shows that 88% of viruses are influenza A. Of flu A viruses subtyped, 76% were H1N1.\nAug 6 WHO update\nStudy shows mismatch between flu vaccine, circulating strains common\nIn an illustration of how commonly mismatch occurs between flu vaccine strains and circulating flu viruses, Hong Kong investigators used 17 years' of data to determine that a close match occurs only 11% to 21% of the time, depending on the strain and vaccine.\nThe researchers analyzed data from 1996 through 2012 in Hong Kong, focusing on H3N2 (one of the two major \"A\" strains) and influenza B, because changes in vaccine composition were more frequent for those viruses. They sequenced an average of 30 clinical samples of influenza H3N2 and 30 of influenza B per year, except for 2009, when influenza H1N1 predominated. They divided the 17-year period into 34 flu seasons—winter and summer for each year.\nThe researchers found that Northern Hemisphere vaccine strains were closely matched with circulating strains for 7 (20.6%) of 34 seasons for H3N2 and 5 (14.7%) of 34 seasons for influenza B. For the Southern Hemisphere vaccine, the rates were 14.7% for H3N2 and 11.1% for influenza B.\nStrain drift among seasons was 41.2% for H3N2 and 35.3% for influenza B. In addition, biannual vaccination strategy—administering Northern Hemisphere vaccines in November followed by Southern Hemisphere vaccines in May—did not improve match rates.\nThe authors conclude, \"A specific strategy is urgently needed to select and produce influenza vaccines targeting the tropical and subtropical regions.\"\nAug 7 Emerg Infect Dis study",
+    "answer": {
+      "useful": true,
+      "borderline": false,
+      "reason": "WHO reports flu rising in Chile and Paraguay, falling in Brazil, Colombia and Peru, and low in Argentina, Australia and New Zealand.",
+      "items": [
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Chile",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "increased",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": "H3N2",
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Chile",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "H3N2 strain dominating",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Paraguay",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "increased",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Brazil",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "declined",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Argentina",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "remains low",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Colombia",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "declined",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Peru",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "declined",
+          "evidence": [
+            "Samples testing positive for influenza in Chile and Paraguay have increased, the WHO said, with the H3N2 strain dominating in Chile. Flu has declined in Brazil, however, and remains low in Argentina. Flu activity has also declined in Colombia and Peru but remains elevated. 2009 H1N1 is the predominant strain in southern Africa as activity drops there."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "Australia",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "remains low",
+          "evidence": [
+            "Flu activity remains low in Australia and New Zealand, but influenza-like illness in West Australia is rising and appears to have crossed the seasonal threshold. H1N1 is the predominant strain in Oceania, which includes Australia and New Zealand."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": null,
+          "country": "New Zealand",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "remains low",
+          "evidence": [
+            "Flu activity remains low in Australia and New Zealand, but influenza-like illness in West Australia is rising and appears to have crossed the seasonal threshold. H1N1 is the predominant strain in Oceania, which includes Australia and New Zealand."
+          ]
+        },
+        {
+          "kind": "trend",
+          "strain": null,
+          "number": null,
+          "status": null,
+          "total_or_new": null,
+          "city": null,
+          "state": "Western Australia",
+          "country": "Australia",
+          "start_date": "2018-08-08",
+          "end_date": "2018-08-08",
+          "words": "rising",
+          "evidence": [
+            "Flu activity remains low in Australia and New Zealand, but influenza-like illness in West Australia is rising and appears to have crossed the seasonal threshold. H1N1 is the predominant strain in Oceania, which includes Australia and New Zealand."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 22,
+    "article_id": "20220519151500-743",
+    "teaches": "not useful: flu only as a comparison",
+    "scan_date": "2022-05-19",
+    "link": "https://en.antaranews.com/news/230297/govt-to-gradually-roll-back-covid-treatment-subsidies",
+    "article": "\"It must be step-by-step. If (the COVID-19) outbreak no longer exists, why keep the subsidies?\" he remarked.\nAccording to Effendy, the government will put the handling of COVID-19 on par with the treatment for common influenza, thus, financial assistance will not be provided for laboratory examinations for case confirmations.\nThe treatment funding for COVID-19 patients will also be returned to the financing mechanism of the national health insurance program managed by state-owned Healthcare and Social Security Agency (BPJS Kesehatan), the minister informed.\n\"Currently, it's all borne by the government,\" he said.\nFurthermore, Effendy explained that the transmission of COVID-19 in Indonesia has been brought under control, as evidenced by the continued fall in the number of cases and mortality rates.\n\"In Jakarta's referral hospitals, most of the people who died were not due to COVID-19, (instead) the highest (cause) was cancer, the second was non-specific pneumonia, but COVID-19 ranked 14th, precisely at the bottom (of the ranking),\" he said to illustrate the COVID-19 situation in Jakarta.\nRelated news: Minister Mahfud MD discusses national challenges with Jos Ramos-Horta\nAlthough COVID-19 transmission in the country has been brought under control, the government has remained cautious in determining the transition from the pandemic to the endemic stage, he emphasized.\n\"Of course, none of this means that we are being reckless. We should not be careless, we should not take it lightly, because we do not know the development of this virus,\" he said.\nEffendy also pointed out that the emergence of a new variant of the coronavirus has been confirmed in other countries.\n\"There is no other word, we must be vigilant in facing COVID-19. Hopefully, we can make it to the endemic transition,\" he remarked.\nRelated news: Do not become complacent after mask-wearing regulation relaxation: KSP\nTranslator: Andi F, Kenzu T\nEditor: Rahmad Nasution\nCopyright © ANTARA 2022",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "COVID-19 will be treated like common influenza; no flu activity is reported.",
+      "items": []
+    }
+  },
+  {
+    "example": 23,
+    "article_id": "20160620113000-1875",
+    "teaches": "one named person with flu is enough; borderline because it is self-reported with no test",
+    "scan_date": "2016-06-20",
+    "link": "http://www.smh.com.au/federal-politics/federal-election-2016/election-2016-malcolm-turnbull-battles-the-flu-as-july-2-polling-day-approaches-20160620-gpnoq1.html",
+    "article": "He can't say he wasn't warned. Criss-crossing the country for an eight week election campaign in winter was always going to bring risks.\nNow Malcolm Turnbull - sometimes unkindly accused of living in a different world to the ordinary man - has succumbed to that most common of ailments: the flu.\nThe Prime Minister first showed signs of being crook on Saturday, when reporters noted a distinct croakiness in his voice. He probably should have been rugged up in bed with chicken soup and a wheat bag that night.\nInstead, he had to soldier on and host the Prime Minister's Olympic Dinner in Melbourne for Australian athletes headed off to Rio. Taking a sick day simply isn't an option when you are running the country and an election is hanging in the balance.\nOn Sunday Turnbull appeared worse and inquired at his press conference whether anyone had any good flu remedies.\nA day later he still had a spluttering cough, looked flat and sounded as hoarse as Janis Joplin. But he insisted to those who asked: \"I sound worse than I feel.\"\nThe timing could hardly have been worse for the PM: his sickness has coincided with a standalone appearance on the ABC's Q&A program, a gruelling experience at the best of times.\nOne can only hope the prime ministerial medico has some appropriately innovative remedies to get him through these last two, crucial weeks of the campaign.",
+    "answer": {
+      "useful": true,
+      "borderline": true,
+      "reason": "The Prime Minister has had the flu since Saturday; no test is mentioned, so it is borderline.",
+      "items": [
+        {
+          "kind": "cases",
+          "strain": null,
+          "number": 1,
+          "status": null,
+          "total_or_new": "new",
+          "city": null,
+          "state": null,
+          "country": "Australia",
+          "start_date": "2016-06-18",
+          "end_date": "2016-06-18",
+          "words": null,
+          "evidence": [
+            "Now Malcolm Turnbull - sometimes unkindly accused of living in a different world to the ordinary man - has succumbed to that most common of ailments: the flu.",
+            "The Prime Minister first showed signs of being crook on Saturday, when reporters noted a distinct croakiness in his voice.",
+            "Instead, he had to soldier on and host the Prime Minister's Olympic Dinner in Melbourne for Australian athletes headed off to Rio."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "example": 24,
+    "article_id": "20220726141500-1048",
+    "teaches": "not useful: other diseases' numbers and flu awareness only",
+    "scan_date": "2022-07-26",
+    "link": "https://www.freepressjournal.in/mumbai/navi-mumbai-separate-ward-for-dengue-and-malaria-patients-at-vashi-civic-hospital",
+    "article": "The Navi Mumbai Municipal Corporation (NMMC) has set up a separate ward for dengue and malaria patients at the civic hospital in Vashi. This year so far, seven cases of dengue have already been reported.\nThe civic body will also take penal action against housing societies that do not allow civic officials for the inspections.\nDengue and malaria cases are mostly reported during the rainy season and post-monsoon. Since this year seven cases of dengue and nine cases of malaria have already been reported in the city, civic chief Abhijit Bangar held a meeting of health officials to chalk out a plan.\nIn the meeting, he directed officials to review the last two years' data on dengue and malaria cases and pay attention to those areas. As construction sites are risky in terms of mosquito breeding, he asked to pay more strict attention to it.\nAfter a fortnight of rainfall, at many places, water has been stagnant for the past few days and there is a huge possibility of mosquito breeding.\nThe civic chief has also directed the medical officers and concerned urban health posts to pay close attention to the search operation for mosquito breeding places and the fumigation operation in the NMMC area. He has asked to accompany at least one female employee on the search team.\nBangar further directed that penal action should be taken against the societies that refuse entry for obstructing social health proceedings.\nDuring the meeting, Bangar was directed to set up a separate ward for the treatment of malaria and dengue patients in Vashi Municipal Hospital. He also directed that dengue patients should be provided platelets by the municipal corporation.\nMeanwhile, health officials have been directed to create awareness about the symptoms of swine flu and the precautions to be taken to prevent it from spreading.\nPM",
+    "answer": {
+      "useful": false,
+      "borderline": false,
+      "reason": "The counts are for dengue and malaria; for swine flu there is only an awareness campaign.",
+      "items": []
+    }
+  }
+]
