@@ -21,7 +21,7 @@ An article is **useful** if it has at least one item that passes every rule in s
 
 A current statement about flu in people, in a named country. It is one of these:
 
-1. **People ill with flu:** cases, deaths or hospital admissions. One person is enough. The first case or first death of the year counts. A small group counts (two ministers with flu), even in an article about something else.
+1. **People ill with flu:** cases, deaths or hospital admissions. At least one person ill with flu of any strain is enough (seasonal flu, swine flu, bird flu, H5N1, H9N2). The first case or first death of the year counts. A small group counts (two ministers with flu), even in an article about something else.
 2. **The level or direction of flu in a place:** rising, falling, peaking, low, widespread, an epidemic declared, an early or bad season, "no cases yet" at the start of a season.
 3. **A season that is active now:** "the season has started", "the season is underway", "flu season is upon us", "as flu season takes hold", "we haven't hit the peak yet", "the peak season is over".
 4. **Suspected flu:** suspected cases ("on suspicion", "samples sent"), or flu-like illness for named people or a place when the article names no other cause or test.
@@ -34,15 +34,15 @@ Human cases of animal flu count (H5N1 in a farm worker, H9N2 in a child).
 - flu in animals only (poultry, cattle, dogs, wild birds)
 - illnesses that are not flu: "stomach flu", norovirus, cat flu, Hib ("haemophilus influenzae"), and cold-type illness where the article names another cause or test (dengue, malaria, COVID)
 - an unexplained illness that the article describes only as "flu-like" while officials are still finding the cause (a "mystery illness" under investigation) is not suspected flu
-- flu named only in passing: in a list, a comparison, a metaphor, a nickname ("a little flu"), a symptom or drug side effect, a photo caption, or a business, investment or vaccine-development remark
-- prevention only: vaccination, tips, clinics, vaccine coverage
+- flu named only in passing: in a list, a comparison, a metaphor, a nickname ("Spanish flu", "Kung flu"), a symptom or drug side effect, a photo caption, or a business, investment or vaccine-development remark
+- prevention only: vaccination, tips, clinics, vaccine coverage. A prevention article that also gives a current flu statement is useful; only that statement is recorded.
 - forecasts: "the season is coming", "could be severe", "may peak in January", "likely to increase"
 - risk statements: "the risk to humans is low", "no person-to-person spread"
 - general seasonal facts: "flu usually peaks in winter", "the season runs from October to April"
 - the past (section 2.3)
 - worldwide or regional statements with no country ("the southern hemisphere", "across Asia")
 - an undated personal story that may be an old event retold, or an old event mentioned as background ("Tensions were heightened when a child … was confirmed")
-- illness or hospital demand in general that the article does not tie to flu ("a surge in viral illnesses", "rising demand for medical attention")
+- illness or hospital demand in general that the article does not tie to flu or flu-like illness ("a surge in viral illnesses", "rising demand for medical attention")
 - spam, ads, and pages whose text does not match the link (the page changed after it was collected)
 
 An article that has these and also a current statement is still useful. The others are just not recorded.
@@ -56,7 +56,7 @@ An article that has these and also a current statement is still useful. The othe
 Check every item twice. Keep it only if it passes both.
 
 1. **Did the period end recently?** The article date minus `end_date` must be 30 days or less. Measure from the **end** of the period. A running total that ends now is current, however long ago it started ("since January, 170 tested positive").
-2. **Is it a whole year or a whole season that is already over?** If yes, it is past, even if it ended a few days before the article. This catches year-in-review numbers.
+2. **Is its period a completed calendar year or a completed flu season?** If yes, it is past, even if it ended a few days before the article. This catches year-in-review numbers. A statement about today that the season is over ("the peak season is over") is a current trend and passes.
    - Finished: "last year", "in 2015", "last season", "last winter", "the 2017–18 season", "the season ended with 300 deaths".
    - Ongoing, so it passes: "so far this year", "this season", "since September 1", "to date".
    - Check 2 is only about a whole year or season. "Last month" and "over the last three months" only need check 1.
@@ -71,7 +71,7 @@ Check every item twice. Keep it only if it passes both.
 
 More cases:
 
-- **Comparison numbers** are items like any other. "2,000 cases this week, compared with 1,024 the previous week" keeps both. "Compared with 6,449 in the same week in 2017" drops the 6,449.
+- **Comparison numbers** are items like any other, if each passes both checks. "2,000 cases this week, compared with 1,024 the previous week" keeps both. A comparison with last year or an earlier season never passes: "compared with 6,449 in the same week in 2017" drops the 6,449.
 - **An old case announced late** is dropped when the event itself ended more than 30 days before the article.
 
 ## 3. What to pull out of a useful article
@@ -99,7 +99,7 @@ There are exactly four kinds: `cases`, `deaths`, `hospitalized`, `trend`.
 | city, state, country | Section 3.5. |
 | start_date, end_date | Section 3.6. YYYY-MM-DD. |
 | words | Trend items only. Use the article's own phrase when it has one ("seasonal influenza is increasing statewide", "rose by 38 per cent"). When the trend runs over several sentences, write a short plain summary ("no cases received so far this season"). A summary must not add facts. |
-| evidence | Whole sentences copied word for word, typos included. Several parts go in article order, joined by ` \|\| `. If the place or the date comes from a different sentence, add that sentence too. Do not add sentences that only give background, forecasts or past numbers. |
+| evidence | Whole sentences copied word for word, typos included. Several parts go in article order, joined by ` \|\| `. If the place or the date comes from a different sentence, add that sentence too. If a city, state or country was worked out and is not in the item's own sentence, add the sentence that supports it. Do not add sentences that only give background, forecasts or past numbers. |
 
 ### 3.3 Status
 
@@ -125,13 +125,13 @@ There are exactly four kinds: `cases`, `deaths`, `hospitalized`, `trend`.
 - **country** is always filled, and must be a real country. Write the United States as `USA` and other countries in full (`India`, `Australia`).
 - **Territories** go under their country: Hong Kong and Macau are `China` (city `Hong Kong`, `Macau`); Guam and American Samoa are `USA`; French Polynesia and New Caledonia are `France`.
 - **No country, no item.** Drop worldwide and regional items. Never put "global", "worldwide", a continent or a hemisphere in a place field.
-- **state** is a real state or province. Fill it in from the city when you are certain (Kolkata is in West Bengal).
+- **state** is a real state or province. Fill it in from the city when you are certain (Houston is in Texas, Kolkata is in West Bengal). Fill in every place part you can work out with certainty from the places the article names; leave a part empty when you cannot be certain.
 - **city** is where the cases or the hospital are, not the patient's home town. Use the city, not a suburb (Westmead is `Sydney`). A county is not a city unless a city of the same name exists. A region ("Central Coast") is not a city.
 - **A national agency** (the CDC, a ministry of health) gives the country and no state.
 
 ### 3.6 Dates
 
-Work dates out from the article date (the scan date). If a date cannot be worked out, leave both empty.
+Work dates out from the article date (the scan date). `start_date` is never after `end_date`, and `end_date` is never after the article date. If a date cannot be worked out, leave both empty.
 
 - A single day (an event, a death, "yesterday", "on Tuesday"): start and end are the same day.
 - A newly reported case or event with no time wording: the article date for both.
@@ -232,3 +232,16 @@ These change or sharpen the rules in `llm_extraction_prompt_v2.0.md`. Every labe
 19. **Flu alongside other viruses:** "a surge in RSV and the flu" is a flu trend; a single figure that mixes them is not recorded.
 20. **Background and general demand:** an old case mentioned as background, and illness or hospital demand not tied to flu, are not items.
 21. **Strains:** only the strain the article gives for that item, never a list collected from the whole article.
+
+## 7. Wording changes agreed on 2026-10-19
+
+These come from Jahnavi's feedback on prompt v2.1. They make the wording clearer and do not change any label: the labels already follow them. They are in prompt v2.2. The rule changes in her feedback (strain shares, hospital dates, parts inside a total, mystery illnesses, "battling the flu", the 30-day limit, mixed-disease trends, repeated trends) wait for a team decision, and the labels change first if a rule does.
+
+22. **One person:** at least one person ill with flu of any strain is enough (2.1).
+23. **Nicknames:** "Spanish flu" and "Kung flu"; "a little flu" is no longer the example (2.2).
+24. **Prevention with a count:** a prevention article that also gives a current flu statement is useful, and only that statement is recorded (2.2).
+25. **General demand:** illness not tied to flu *or flu-like illness* is not an item (2.2).
+26. **Completed year or season:** check 2 names a completed calendar year or flu season; "the peak season is over" is a current trend (2.3).
+27. **Comparisons:** a comparison with last year or an earlier season never passes the checks (2.3).
+28. **Worked-out places:** fill every place part you can work out with certainty (Houston → Texas), and add the sentence that supports it to the evidence (3.2, 3.5).
+29. **End date:** `end_date` is never after the article date (3.6).
