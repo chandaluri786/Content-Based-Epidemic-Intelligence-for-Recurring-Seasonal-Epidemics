@@ -5,12 +5,18 @@ Run this script when you want to refresh the data files, for example after a lab
 corrected. It is the only code that knows where the sampling files live.
 
     python scripts/build_data_files.py [--sampling-dir PATH] [--with-prompts]
+    python scripts/build_data_files.py --labeling-dir PATH --labels-out data/human_labels_<name>.json
 
 Always rewrites (from the repo-sampling worktree):
     sampling/output/sample_1200.jsonl                      -> data/articles.json
     sampling/output/labeling/<Name>_labels.csv, _items.csv,
     sampling/split/dev_test_split.csv                      -> data/human_labels.json
     (all four labelers; each article's answer comes from the labeler who owns it)
+
+With --labeling-dir and --labels-out (a second label set on the same 1,200 articles, such as
+Jahnavi's reviewed sheets): writes only that labels file. Each article keeps its split from
+dev_test_split.csv but takes `useful` from the given sheets, so the check that the sheet and the
+split agree on `useful` is skipped; every other check still runs.
 
 Only with --with-prompts (this OVERWRITES the active prompt files in prompts/):
     prompt_versions/llm_extraction_prompt_v2.0.md          -> prompts/system_prompt_v2.0.txt
@@ -158,8 +164,11 @@ def item_problems(item: dict) -> list[str]:
 
 
 def validate(answers: dict[str, dict], sample: dict[str, dict], split: dict[str, dict],
-             expected_size: int = SAMPLE_SIZE) -> list[str]:
-    """Every reason the sheets, the sample and the split do not fit together."""
+             expected_size: int = SAMPLE_SIZE, check_split_useful: bool = True) -> list[str]:
+    """Every reason the sheets, the sample and the split do not fit together.
+
+    check_split_useful=False drops only the "sheet and split agree on useful" check, for a second
+    label set that reuses the frozen split's dev/test assignment."""
     errors = []
     for name, ids in (("sheets", answers), ("sample", sample), ("split", split)):
         if len(ids) != expected_size:
@@ -174,7 +183,7 @@ def validate(answers: dict[str, dict], sample: dict[str, dict], split: dict[str,
         where = f"{article_id} ({answer['labeler']})"
         if answer["useful"] not in ("yes", "no"):
             errors.append(f"{where}: useful is {answer['useful']!r}, not yes or no")
-        if answer["useful"] != split[article_id]["useful"]:
+        if check_split_useful and answer["useful"] != split[article_id]["useful"]:
             errors.append(f"{where}: the sheet says useful={answer['useful']}, the split says "
                           f"{split[article_id]['useful']}")
         if answer["useful"] == "yes" and not answer["items"]:
@@ -201,13 +210,15 @@ def build_records(answers: dict[str, dict], sample: dict[str, dict],
     return articles, labels
 
 
-def load_checked_records(sampling_dir: Path) -> tuple[list[dict], list[dict]]:
-    """Read the sampling files, stop with a list of problems if they do not fit, else build the records."""
+def load_checked_records(sampling_dir: Path, labeling_dir: Path | None = None) -> tuple[list[dict], list[dict]]:
+    """Read the sampling files, stop with a list of problems if they do not fit, else build the records.
+
+    labeling_dir: another set of the four sheets; its `useful` is not checked against the split."""
     output = sampling_dir / "sampling" / "output"
-    answers = read_sheets(output / "labeling")
+    answers = read_sheets(labeling_dir or output / "labeling")
     sample = read_sample(output / "sample_1200.jsonl")
     split = read_split(sampling_dir / "sampling" / "split" / "dev_test_split.csv")
-    errors = validate(answers, sample, split)
+    errors = validate(answers, sample, split, check_split_useful=labeling_dir is None)
     if errors:
         shown = "\n  ".join(errors[:MAX_ERRORS_SHOWN])
         more = f"\n  ... and {len(errors) - MAX_ERRORS_SHOWN} more" if len(errors) > MAX_ERRORS_SHOWN else ""
@@ -241,7 +252,22 @@ def main() -> None:
                         help="also rewrite prompts/system_prompt_v2.0.txt and prompts/examples_v2.0.json from the "
                              "capstone prompt v2.0. This OVERWRITES the active prompt files; by default they are "
                              "left alone because prompts/ is maintained by hand.")
+    parser.add_argument("--labeling-dir", type=Path,
+                        help="a second set of the four sheets (e.g. Jahnavi's reviewed copy); needs --labels-out")
+    parser.add_argument("--labels-out", type=Path,
+                        help="where to write that set's labels, e.g. data/human_labels_jahnavi.json")
     args = parser.parse_args()
+
+    if args.labeling_dir:
+        if not args.labels_out or args.labels_out.resolve() == (PROJECT_DIR / "data" / "human_labels.json").resolve():
+            raise SystemExit("--labeling-dir needs --labels-out with a new file name; data/human_labels.json "
+                             "holds the team's labels and is never overwritten by another set.")
+        if args.with_prompts:
+            raise SystemExit("--with-prompts cannot be combined with --labeling-dir")
+        _, labels = load_checked_records(args.sampling_dir, args.labeling_dir)
+        write_json(args.labels_out.resolve(), labels)
+        print_counts(labels)
+        return
 
     # Check everything before writing anything, so a bad sheet never leaves half-updated files.
     articles, labels = load_checked_records(args.sampling_dir)

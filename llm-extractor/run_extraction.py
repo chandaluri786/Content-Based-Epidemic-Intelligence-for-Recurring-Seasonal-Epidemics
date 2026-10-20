@@ -15,15 +15,16 @@ include a test article.
 import argparse
 import json
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import CancelledError, ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
 from flu_extractor import config
 from flu_extractor.data_loading import DEV, SPLITS, TEST, Article, load_articles, load_human_labels
-from flu_extractor.evaluation import default_ids_to_run
+from flu_extractor.evaluation import RUN_CONFIG_NAME, default_ids_to_run, read_run_settings, settings_mismatch
 from flu_extractor.extractor import extract_article
 from flu_extractor.llm_client import create_client
+from flu_extractor.pacing import Pacer, RateLimitStop
 from flu_extractor.prompt import build_prefix_messages, load_examples, load_system_prompt
 
 RAW_LOG_NAME = "raw_results.jsonl"
@@ -85,6 +86,9 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument("--limit", type=int, help="run only the first N of the selected articles.")
     parser.add_argument("--exclude-file", type=Path,
                         help="text file of extra article IDs to leave out (one per line).")
+    parser.add_argument("--calls-per-minute", type=int, default=config.CALLS_PER_MINUTE,
+                        help=f"at most this many calls start in any 60 s (default {config.CALLS_PER_MINUTE}, "
+                             "or CALLS_PER_MINUTE in .env); it halves by itself after a rate limit")
     parser.add_argument("--workers", type=int, default=3,
                         help="parallel requests (default 3). Lower it if you hit rate limits.")
     parser.add_argument("--run-dir", type=Path,
@@ -113,13 +117,18 @@ def main() -> None:
         ids = ids[: args.limit]
 
     run_dir = args.run_dir or config.RESULTS_DIR / f"run_{datetime.now():%Y%m%d_%H%M%S}"
+    settings = {"system_prompt": config.SYSTEM_PROMPT_PATH.name, "examples": config.EXAMPLES_PATH.name,
+                "labels": config.HUMAN_LABELS_PATH.name}
+    mismatch = settings_mismatch(read_run_settings(run_dir), settings)
+    if mismatch:
+        raise SystemExit(f"{run_dir} was made with other settings, so resuming would mix them:\n  "
+                         + "\n  ".join(mismatch) + "\nSet PROMPT_VERSION / HUMAN_LABELS_PATH to match the run.")
     run_dir.mkdir(parents=True, exist_ok=True)
     log_path = run_dir / RAW_LOG_NAME
     done = ids_already_done(log_path)
     ids = [i for i in ids if i not in done]
-    (run_dir / "run_config.json").write_text(json.dumps({
-        "model": config.MODEL_ID, "system_prompt": config.SYSTEM_PROMPT_PATH.name,
-        "examples": config.EXAMPLES_PATH.name, "temperature": config.TEMPERATURE,
+    (run_dir / RUN_CONFIG_NAME).write_text(json.dumps({
+        "model": config.MODEL_ID, **settings, "temperature": config.TEMPERATURE,
         "max_tokens": config.MAX_TOKENS, "started": datetime.now().isoformat(timespec="seconds"),
         "articles_by_split": dict(Counter(articles[i].split for i in ids)),
         "examples_by_split": dict(Counter(articles[i].split for i in example_ids if i in articles)),
@@ -134,19 +143,33 @@ def main() -> None:
     # The instructions and the examples are the same for every article, so build them once.
     prefix_messages = build_prefix_messages(load_system_prompt(config.SYSTEM_PROMPT_PATH), examples)
     client = create_client()
+    pacer = Pacer(args.calls_per_minute)
+    print(f"Pacing: at most {args.calls_per_minute} calls start per minute, {args.workers} workers")
 
     # Replies are written by this (main) thread only, one line each, so the log is never interleaved.
+    stopped = None
     with ThreadPoolExecutor(max_workers=args.workers) as pool, \
             log_path.open("a", encoding="utf-8") as log_file:
-        futures = [pool.submit(extract_article, client, prefix_messages, articles[i]) for i in ids]
+        futures = [pool.submit(extract_article, client, prefix_messages, articles[i], pacer) for i in ids]
         for number, future in enumerate(as_completed(futures), start=1):
-            record = future.result()
+            try:
+                record = future.result()
+            except RateLimitStop as error:
+                stopped = stopped or error
+                pool.shutdown(wait=False, cancel_futures=True)  # articles not started are not logged
+                continue
+            except CancelledError:
+                continue
             log_file.write(json.dumps(record, ensure_ascii=False) + "\n")
             log_file.flush()  # keep finished work on disk even if the run is interrupted
             outcome = record["api_error"] or record["parse_error"] or \
                 f"useful={record['parsed']['useful']}"
             print(f"[{number}/{len(ids)}] {record['article_id']}: {outcome} ({record['seconds']}s)")
 
+    if stopped:
+        print(f"STOPPED: {stopped}. Finished replies are saved. Resume later with:\n"
+              f"  python run_extraction.py --run-dir {run_dir}")
+        raise SystemExit(2)
     print(f"Done. Now run: python evaluate_run.py {run_dir}")
 
 

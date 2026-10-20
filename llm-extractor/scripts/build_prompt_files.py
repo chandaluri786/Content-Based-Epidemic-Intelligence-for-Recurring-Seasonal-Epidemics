@@ -1,11 +1,13 @@
 """Build the two active prompt files for one prompt version.
 
     python scripts/build_prompt_files.py v2.1
+    python scripts/build_prompt_files.py v4.1 --labels data/human_labels_jahnavi.json
 
 Reads
     prompt_versions/llm_extraction_prompt_<version>.md   the instructions (the code fence under "## 1. Instructions")
     prompt_versions/examples_<version>_selection.json    which dev articles are the examples, and why
     data/articles.json, data/human_labels.json           the article texts and the human answers
+                                                          (--labels: another label set's answers)
 Writes
     prompts/system_prompt_<version>.txt
     prompts/examples_<version>.json
@@ -83,14 +85,18 @@ def example_problems(selection: list[dict], examples: list[dict], splits: dict[s
     return problems
 
 
-def load_examples(version: str) -> list[dict]:
-    """Build the examples of one version from its selection file; stop with a list if any check fails."""
+DEFAULT_LABELS = PROJECT_DIR / "data" / "human_labels.json"
+
+
+def load_examples(version: str, labels_path: Path = DEFAULT_LABELS) -> list[dict]:
+    """Build the examples of one version from its selection file; stop with a list if any check fails.
+
+    Each answer is copied from labels_path, so a second label set gives its own answers."""
     selection = json.loads((PROJECT_DIR / "prompt_versions" / f"examples_{version}_selection.json")
                            .read_text(encoding="utf-8"))
     articles = {a["article_id"]: a for a in json.loads((PROJECT_DIR / "data" / "articles.json")
                                                        .read_text(encoding="utf-8"))}
-    labels = {a["article_id"]: a for a in json.loads((PROJECT_DIR / "data" / "human_labels.json")
-                                                     .read_text(encoding="utf-8"))}
+    labels = {a["article_id"]: a for a in json.loads(labels_path.read_text(encoding="utf-8"))}
     unknown = [e["article_id"] for e in selection if e["article_id"] not in articles]
     if unknown:
         raise SystemExit(f"Not in data/articles.json: {', '.join(unknown)}")
@@ -105,11 +111,14 @@ def load_examples(version: str) -> list[dict]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("version", help="the prompt version, e.g. v2.1")
-    version = parser.parse_args().version
+    parser.add_argument("--labels", type=Path, default=DEFAULT_LABELS,
+                        help="labels file the example answers come from (default: data/human_labels.json)")
+    args = parser.parse_args()
+    version = args.version
 
     system_prompt = extract_system_prompt(
         (PROJECT_DIR / "prompt_versions" / f"llm_extraction_prompt_{version}.md").read_text(encoding="utf-8"))
-    examples = load_examples(version)
+    examples = load_examples(version, args.labels.resolve())
 
     prompts = PROJECT_DIR / "prompts"
     (prompts / f"system_prompt_{version}.txt").write_text(system_prompt, encoding="utf-8")
@@ -120,6 +129,7 @@ def main() -> None:
     sent = len(system_prompt) + sum(len(e["article"]) + len(json.dumps(e["answer"], ensure_ascii=False))
                                     for e in examples)
     print(f"wrote prompts/system_prompt_{version}.txt and prompts/examples_{version}.json")
+    print(f"  answers from {args.labels.name}")
     print(f"  {len(examples)} examples: {useful} useful, {len(examples) - useful} not useful, all from dev")
     print(f"  about {sent // CHARS_PER_TOKEN:,} tokens sent before each article")
 

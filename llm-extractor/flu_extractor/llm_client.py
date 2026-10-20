@@ -25,8 +25,9 @@ def create_client() -> OpenAI:
         base_url=config.BASE_URL,
         api_key=config.get_api_key(),
         timeout=config.REQUEST_TIMEOUT_SECONDS,
-        # The library waits and retries by itself on rate limits (429), timeouts and server errors.
-        max_retries=config.MAX_RETRIES,
+        # No retries inside the library: its quick retries on 429 make a rate limit worse. Retries
+        # and pacing are done in flu_extractor/extractor.py and flu_extractor/pacing.py.
+        max_retries=0,
     )
 
 

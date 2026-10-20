@@ -24,14 +24,18 @@ load_dotenv(PROJECT_DIR / ".env")
 PROMPTS_DIR = PROJECT_DIR / "prompts"
 DATA_DIR = PROJECT_DIR / "data"
 
-# The prompt, in two files. To try a new prompt version, add new files and point these at them.
-# Build them with `python scripts/build_prompt_files.py <version>`.
-SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v2.1.txt"  # instructions only
-EXAMPLES_PATH = PROMPTS_DIR / "examples_v2.1.json"           # solved examples, sent as chat turns
+# The prompt, in two files. To try a new prompt version, build its files with
+# `python scripts/build_prompt_files.py <version>` and change the default here, or set
+# PROMPT_VERSION for one run (Jahnavi's track uses PROMPT_VERSION=v4.1).
+PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v2.2")
+SYSTEM_PROMPT_PATH = PROMPTS_DIR / f"system_prompt_{PROMPT_VERSION}.txt"  # instructions only
+EXAMPLES_PATH = PROMPTS_DIR / f"examples_{PROMPT_VERSION}.json"           # solved examples, sent as chat turns
 
 # Inputs for the run: the articles to send, and the human answers to score against.
+# HUMAN_LABELS_PATH can point at a second label set on the same articles
+# (data/human_labels_jahnavi.json); a relative path is read from the project folder.
 ARTICLES_PATH = DATA_DIR / "articles.json"
-HUMAN_LABELS_PATH = DATA_DIR / "human_labels.json"
+HUMAN_LABELS_PATH = PROJECT_DIR / os.getenv("HUMAN_LABELS_PATH", "data/human_labels.json")
 
 # Answers of the place check (is this a real city / state / country?), one per name, so that
 # each name is looked up only once and later runs repeat exactly.
@@ -51,8 +55,20 @@ TEMPERATURE = 0
 MAX_TOKENS = 4000
 # Seconds to wait for one reply; the prompt is ~25-30k tokens, so replies are slow.
 REQUEST_TIMEOUT_SECONDS = 300
-# The OpenAI client retries rate-limit, timeout and server errors this many times by itself.
+# Timeouts, dropped connections and server errors are retried this many times, waiting
+# RETRY_BASE_SECONDS, then twice that, and so on. Rate limits (429) are handled by flu_extractor/pacing.py.
 MAX_RETRIES = 4
+RETRY_BASE_SECONDS = 2
+
+# Pacing (flu_extractor/pacing.py). The API sends no rate-limit headers, so we keep under the limit
+# ourselves: at most CALLS_PER_MINUTE calls start in any 60 s. After a 429 every worker pauses (60 s,
+# doubling up to 5 min) and the rate halves (never below MIN_CALLS_PER_MINUTE). After 15 min with no
+# successful call the run stops; resume it later with --run-dir.
+CALLS_PER_MINUTE = int(os.getenv("CALLS_PER_MINUTE", "10"))
+MIN_CALLS_PER_MINUTE = 2
+RATE_LIMIT_FIRST_PAUSE_SECONDS = 60
+RATE_LIMIT_MAX_PAUSE_SECONDS = 300
+RATE_LIMIT_GIVE_UP_SECONDS = 900
 # Nemotron-specific switch: answer directly instead of writing out its reasoning first.
 EXTRA_BODY = {"chat_template_kwargs": {"enable_thinking": False}}
 

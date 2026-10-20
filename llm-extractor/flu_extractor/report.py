@@ -214,13 +214,17 @@ def _split_text(evaluation: Evaluation) -> str:
     return ", ".join(f"**{split}** ({count} articles)" for split, count in sorted(counts.items())) or "none"
 
 
-def write_report(evaluation: Evaluation, run_dir: Path) -> None:
-    """Write all three report files into the run folder."""
+def write_report(evaluation: Evaluation, run_dir: Path, run_info: dict[str, str] | None = None) -> None:
+    """Write all three report files into the run folder.
+
+    run_info: the run's prompt, examples and labels file names (default: what config uses now)."""
+    info = run_info or {"system_prompt": config.SYSTEM_PROMPT_PATH.name, "examples": config.EXAMPLES_PATH.name,
+                        "labels": config.HUMAN_LABELS_PATH.name}
     sections = [
         f"# Extraction report: {run_dir.name}",
         "",
-        f"Model: `{config.MODEL_ID}`  |  Prompt: `{config.SYSTEM_PROMPT_PATH.name}` "
-        f"+ `{config.EXAMPLES_PATH.name}`  |  Split: {_split_text(evaluation)}",
+        f"Model: `{config.MODEL_ID}`  |  Prompt: `{info['system_prompt']}` "
+        f"+ `{info['examples']}`  |  Labels: `{info['labels']}`  |  Split: {_split_text(evaluation)}",
         "",
         *_usefulness_section(evaluation),
         *_items_section(evaluation),

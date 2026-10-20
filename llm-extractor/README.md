@@ -53,7 +53,7 @@ python -m unittest discover tests                      # 1. the logic works (no 
 python run_extraction.py --ids 20161230170000-2179     # 2. ONE API call; prints the run folder name
 python evaluate_run.py results/run_<timestamp>         # 3. score it, write the reports
 python inspect_row.py results/run_<timestamp> 20161230170000-2179   # 4. read that article field by field
-python run_extraction.py                               # 5. all dev articles (373 API calls with prompt v2.1)
+python run_extraction.py                               # 5. all dev articles (373 API calls with prompt v2.2)
 python evaluate_run.py results/run_<timestamp>         # 6. score the full run, then read report.md
 ```
 
@@ -106,7 +106,7 @@ the run: the error is stored in the record.
 
 1. a `system` message: the instructions (`system_prompt_*.txt`);
 2. for each solved example, a `user` message with the example article, then an `assistant`
-   message with the human answer as JSON (24 pairs for prompt v2.1). This is how the model
+   message with the human answer as JSON (24 pairs for prompts v2.1 and v2.2). This is how the model
    learns the task and the reply format from worked examples; its weights do not change;
 3. a final `user` message with the article to process.
 
@@ -125,8 +125,16 @@ labels of the articles being scored are never sent.
 
 **Model call settings** (`llm_client.py`, values in `config.py`): `temperature=0` (no sampling
 randomness), `max_tokens=4000` (ceiling for the reply), `extra_body` with
-`enable_thinking: False` (a Nemotron setting: answer directly), a 300 s timeout and 4
-automatic retries on rate-limit, timeout and server errors.
+`enable_thinking: False` (a Nemotron setting: answer directly) and a 300 s timeout. Timeouts,
+dropped connections and server errors are retried 4 times (2, 4, 8, 16 s apart).
+
+**Pacing** (`pacing.py`): the API sends no rate-limit headers, so the run keeps under the limit
+itself. At most `--calls-per-minute` calls (default 10) start in any 60 s, shared by all workers.
+After a 429 every worker pauses together (60 s, doubling up to 5 min), the rate halves (never below
+2 per minute), and the same article is tried again, so a rate limit no longer leaves `api_error`
+records behind. If 15 minutes pass with no successful call, the run stops, prints `STOPPED` and how
+to resume, and exits with code 2. Articles that were not finished are not logged, so `--run-dir`
+runs them.
 
 ### Step 2: `evaluate_run.py` (scores a run)
 
@@ -241,18 +249,26 @@ used so that lines can be appended safely and nothing is lost if a run is interr
 | `--final` | allow test articles. Use it once, for the final test run (see section 7) |
 | `--limit N` | run only the first N of the selected articles |
 | `--exclude-file FILE` | extra article IDs to leave out, one per line; ignored when `--ids` is given |
-| `--workers N` | requests at the same time (default 3). Lower it if you see rate-limit errors |
+| `--workers N` | requests at the same time (default 3) |
+| `--calls-per-minute N` | at most N calls start in any 60 s (default 10, or `CALLS_PER_MINUTE` in `.env`); halves by itself after a 429 |
 | `--run-dir DIR` | continue an existing run folder: articles that already have a reply are skipped |
 
 Each run writes a new folder `results/run_<date>_<time>/`. With `--run-dir`, only articles whose call
 **failed with an API error** are retried. An article whose reply was invalid JSON counts as done: to
 retry it, delete its line from `raw_results.jsonl`. Records are written in the order they finish.
+A resume with another prompt or labels file than the run was made with is refused (the names are in
+`run_config.json`).
 
 ### `evaluate_run.py RUN_DIR`: score a run
 
 | Option | Meaning |
 |---|---|
 | `--offline` | do not look up place names online; use only the saved answers. Names that were never looked up are reported as "could not be checked" |
+| `--labels FILE` | score against another labels file (for example `data/human_labels_jahnavi.json`); the reports go to a sub-folder `vs_<file name>/` and the run's own reports are left alone |
+
+A run is scored against the labels file it was made with. If `HUMAN_LABELS_PATH` names another one,
+scoring is refused unless `--labels` is given, so a run is never scored against the wrong set by
+accident.
 
 Writes `report.md`, `row_results.csv` and `item_comparison.csv` into the run folder, and prints a
 short summary. New place names are looked up online, about one per second, and saved.
@@ -276,6 +292,8 @@ It uses the same scoring code as the reports, so what it shows is what gets coun
 python scripts/build_data_files.py                     # rewrites data/articles.json and data/human_labels.json
 python scripts/build_data_files.py --sampling-dir /path/to/repo-sampling
 python scripts/build_data_files.py --with-prompts      # ALSO overwrites the active files in prompts/
+python scripts/build_data_files.py --labeling-dir ../../repo-sampling/sampling/output/labeled-data-reviewed-by-jahnavi \
+    --labels-out data/human_labels_jahnavi.json        # a second label set; writes only that file
 ```
 
 `data/` is a snapshot of the `repo-sampling` worktree: the article texts from
@@ -289,6 +307,11 @@ Before writing anything it checks that the three sources fit together and stops 
 problems if not: 1,200 articles in each, every `useful` is yes or no and agrees with the split,
 every `yes` has items and every `no` has none, and every item has a valid kind, status,
 total_or_new, a country, `YYYY-MM-DD` dates, a whole `number` and no empty quote.
+
+With `--labeling-dir` and `--labels-out` it reads another copy of the four sheets (such as
+Jahnavi's reviewed set) and writes only that labels file. Each article keeps its split from the
+frozen split file but takes `useful` from those sheets, so only the "agrees with the split" check is
+skipped. It never overwrites `data/human_labels.json`.
 
 By default it leaves `prompts/` alone. `--with-prompts` overwrites the active prompt files with
 prompt v2.0, taken from `prompt_versions/llm_extraction_prompt_v2.0.md` and from the capstone
@@ -306,10 +329,13 @@ Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in
 | `NVIDIA_MODEL_ID` | `.env` (optional) | `nvidia/nemotron-3.5-lightning-30b-a3b` |
 | `NVIDIA_BASE_URL` | `.env` (optional) | `https://integrate.api.nvidia.com/v1` |
 | `RESULTS_DIR` | `.env` (optional) | `llm-extractor/results` |
-| `SYSTEM_PROMPT_PATH`, `EXAMPLES_PATH` | `config.py` | `prompts/system_prompt_v2.1.txt`, `prompts/examples_v2.1.json` |
-| `ARTICLES_PATH`, `HUMAN_LABELS_PATH`, `PLACE_CACHE_PATH` | `config.py` | `data/articles.json`, `data/human_labels.json`, `data/place_lookups.json` |
+| `PROMPT_VERSION` | environment or `.env` (optional) | `v2.2`; sets `SYSTEM_PROMPT_PATH` = `prompts/system_prompt_<version>.txt` and `EXAMPLES_PATH` = `prompts/examples_<version>.json` |
+| `HUMAN_LABELS_PATH` | environment or `.env` (optional) | `data/human_labels.json` (relative to `llm-extractor/`) |
+| `ARTICLES_PATH`, `PLACE_CACHE_PATH` | `config.py` | `data/articles.json`, `data/place_lookups.json` |
 | `TEMPERATURE`, `MAX_TOKENS` | `config.py` | 0, 4000 |
-| `REQUEST_TIMEOUT_SECONDS`, `MAX_RETRIES` | `config.py` | 300, 4 |
+| `REQUEST_TIMEOUT_SECONDS`, `MAX_RETRIES`, `RETRY_BASE_SECONDS` | `config.py` | 300, 4, 2 (timeouts and server errors only) |
+| `CALLS_PER_MINUTE` | environment or `.env` (optional) | 10 |
+| `MIN_CALLS_PER_MINUTE`, `RATE_LIMIT_FIRST_PAUSE_SECONDS`, `RATE_LIMIT_MAX_PAUSE_SECONDS`, `RATE_LIMIT_GIVE_UP_SECONDS` | `config.py` | 2, 60, 300, 900 |
 | `EXTRA_BODY` | `config.py` | `{"chat_template_kwargs": {"enable_thinking": False}}` |
 
 Other tuning points: the places check pace and retries are at the top of `flu_extractor/places.py`;
@@ -328,8 +354,22 @@ example selection for each version from v2.1 on.
 |---|---|
 | `prompt_versions/llm_extraction_prompt_v1.0.md` | prompt v1.0, the full document (earlier version, 14 solved examples) |
 | `prompt_versions/llm_extraction_prompt_v2.0.md` | prompt v2.0 (43 examples, the old rules, `findings`). Its files `prompts/system_prompt_v2.0.txt` and `prompts/examples_v2.0.json` are kept |
-| `prompt_versions/llm_extraction_prompt_v2.1.md` | prompt v2.1, **the active version**: the rules copied from the rulebook (`repo-sampling/sampling_and_labeling_guide.md`), what changed since v2.0, the example table, the reply schema and how to tune |
-| `prompt_versions/examples_v2.1_selection.json` | which 24 dev articles are the v2.1 examples, with `teaches`, `reason`, and the lines kept for trimmed articles |
+| `prompt_versions/llm_extraction_prompt_v2.2.md` | prompt v2.2, **the active version**: v2.1 plus the wording fixes from Jahnavi's feedback that the labels already follow (its first table lists them) |
+| `prompt_versions/llm_extraction_prompt_v2.1.md` | prompt v2.1: the rules copied from the rulebook (`repo-sampling/sampling_and_labeling_guide.md`), what changed since v2.0, the example table, the reply schema and how to tune |
+| `prompt_versions/examples_v2.1_selection.json` | which 24 dev articles are the v2.1 examples (v2.2 uses the same 24 in `examples_v2.2_selection.json`), with `teaches`, `reason`, and the lines kept for trimmed articles |
+| `prompt_versions/llm_extraction_prompt_v4.1.md` | Jahnavi's track: her v4.0 instructions word for word plus 24 examples (`examples_v4.1_selection.json`) whose answers come from her labels. Not the active version |
+
+**Jahnavi's track.** Jahnavi's reviewed sheets and her prompt are run separately from the team's,
+on the same frozen dev split. Her labels are `data/human_labels_jahnavi.json`; nothing from her
+track's dev errors goes into the team's rulebook or prompts. Her v4.0 was written from errors on all
+1,200 articles, test included, so its scores are not held-out scores.
+
+```bash
+python scripts/build_prompt_files.py v4.1 --labels data/human_labels_jahnavi.json
+PROMPT_VERSION=v4.1 HUMAN_LABELS_PATH=data/human_labels_jahnavi.json python run_extraction.py
+PROMPT_VERSION=v4.1 HUMAN_LABELS_PATH=data/human_labels_jahnavi.json python evaluate_run.py results/run_X
+python evaluate_run.py results/run_X --labels data/human_labels.json     # the same run against the team's labels
+```
 
 A full document holds more than the model is sent (change notes, the reply schema, tuning
 advice). The model receives only the instructions and the examples, as built into `prompts/`.
@@ -339,7 +379,7 @@ To make a new version (for example v2.2):
    A rule wording changes only when the rulebook already says it.
 2. Run `python scripts/build_prompt_files.py v2.2`. It writes `prompts/system_prompt_v2.2.txt` (the
    code fence under "## 1. Instructions") and `prompts/examples_v2.2.json`. Each answer is copied
-   from `data/human_labels.json`, so it always equals the human label. It stops, writing nothing,
+   from `data/human_labels.json` (or the file given with `--labels`), so it always equals the human label. It stops, writing nothing,
    if an example is a test article, is chosen twice, loses an evidence quote to trimming, or the
    useful / not-useful mix is uneven. It prints the example count and the prompt size.
 2. If the file names changed, update the two paths in `config.py`.
@@ -369,7 +409,7 @@ Without `--ids`, a run covers every article of one split (`--split`, default `de
 | test | 803 | 207 | the final score: run once, after tuning, and do not tune on what it shows |
 
 Both splits keep the natural share of useful articles (about 26%), so precision on test means what
-it will mean on real news. For prompt v2.1 a dev run covers **373 articles (94 useful)**: its 24
+it will mean on real news. For prompts v2.1 and v2.2 a dev run covers **373 articles (94 useful)**: its 24
 examples are left out. (For v2.0 it was 383 articles, without its 14 dev examples.)
 
 `--ids` bypasses the exclusions and runs exactly the articles named. Test articles, whether from
@@ -518,6 +558,8 @@ Needs no API key and no internet (the place check uses a fake geocoder).
 | `tests/test_evaluation.py` | which articles a run covers, the guard on test articles, `--ids` parsing |
 | `tests/test_build_prompt_files.py` | trimming, and the checks on a prompt version's examples |
 | `tests/test_build_data_files.py` | reading the four sheets (owner rows only, both `\|\|` styles) and every data check |
+| `tests/test_second_label_set.py` | `PROMPT_VERSION` / `HUMAN_LABELS_PATH`, the run-settings guard, a second label set's data build, example answers from another labels file |
+| `tests/test_pacing.py` | the calls-per-minute window, the shared pause after a 429, giving up, and retries of server errors |
 
 Not covered by tests: the live API call, `report.py`, and the command-line scripts. Check those by
 running a single article (section 1) and reading it with `inspect_row.py`.
@@ -526,8 +568,8 @@ running a single article (section 1) and reading it with `inspect_row.py`.
 
 ```
 prompts/           ACTIVE prompt: system prompt (.txt) and solved examples (.json)
-prompt_versions/   the full prompt documents (v1.0, v2.0, v2.1) and each version's example selection
-data/              articles.json, human_labels.json (1,200 each, tagged dev or test), place_lookups.json
+prompt_versions/   the full prompt documents (v1.0, v2.0, v2.1, v2.2, and v4.1 for Jahnavi's track) and each version's example selection
+data/              articles.json, human_labels.json (1,200 each, tagged dev or test), human_labels_jahnavi.json, place_lookups.json
 results/           one folder per run (ignored by git)
 scripts/
   build_data_files.py   refresh data/ from repo-sampling (prompts/ only with --with-prompts)
@@ -538,6 +580,7 @@ flu_extractor/
   data_loading.py  read articles and human labels
   prompt.py        build the chat messages (system prompt, example turns, article)
   llm_client.py    the only code that calls the model API
+  pacing.py        keeps the run under the rate limit (calls per minute, shared pause after a 429)
   extractor.py     one article -> one log record (parsing the reply, never crashing)
   checks.py        reply format check and the automatic rule checks
   places.py        asks the geocoder whether a city/state/country exists; saves the answers
@@ -573,5 +616,5 @@ inspect_row.py     command-line tool: one article (by ID), human vs model, field
   `_normalise` in `flu_extractor/metrics.py`.
 - **Garbled characters.** 49 of the 1,200 articles contain broken characters such as `â`. The prompt tells
   the model to copy evidence "as printed", so this is expected, not a bug in this code.
-- **Cost and speed.** A full dev run with prompt v2.1 is 373 calls of about 19,000-22,000 prompt tokens each (v2.0 sent about 28,000-30,000). Measured on 2026-10-19 with 24 dev articles and `--workers 6`: no rate-limit, timeout or server errors, 1-24 s per call (mean 4 s), 33 s for all 24. A full dev run should take about 5-10 minutes, so Nemotron stays the model; DeepSeek V4 Flash is the fallback if limits appear. Hosted
+- **Cost and speed.** A full dev run with prompt v2.1 is 373 calls of about 19,000-22,000 prompt tokens each (v2.0 sent about 28,000-30,000). Measured on 2026-10-19 with 24 dev articles and `--workers 6`: no rate-limit, timeout or server errors, 1-24 s per call (mean 4 s), 33 s for all 24. A full dev run should take about 5-10 minutes, so Nemotron stays the model; DeepSeek V4 Flash is the fallback if limits appear. Later the same day the key returned 429 after 10-15 calls, even with one worker, and the server sends no rate-limit headers; runs are now paced (section 2, Pacing), which makes a dev run take about 40 minutes at 10 calls per minute. Hosted
   API quotas and latency are not guaranteed.

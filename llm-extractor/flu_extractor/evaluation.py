@@ -59,6 +59,32 @@ class Evaluation:
         return [r for r in self.rows if r.status == status]
 
 
+RUN_CONFIG_NAME = "run_config.json"
+# Runs made before the labels file was recorded were all scored against the team's labels.
+DEFAULT_LABELS_NAME = "human_labels.json"
+# The settings a run must keep from start to end; a resume or a scoring with others is refused.
+RUN_SETTINGS = ("system_prompt", "examples", "labels")
+
+
+def read_run_settings(run_dir: Path) -> dict[str, str] | None:
+    """The prompt, examples and labels file names a run was made with, or None for a new run."""
+    path = run_dir / RUN_CONFIG_NAME
+    if not path.exists():
+        return None
+    saved = json.loads(path.read_text(encoding="utf-8"))
+    return {"system_prompt": saved["system_prompt"], "examples": saved["examples"],
+            "labels": saved.get("labels", DEFAULT_LABELS_NAME)}
+
+
+def settings_mismatch(saved: dict[str, str] | None, current: dict[str, str],
+                      names: tuple[str, ...] = RUN_SETTINGS) -> list[str]:
+    """Each setting (among `names`) where a saved run differs from what is in use now."""
+    if saved is None:
+        return []
+    return [f"{name}: the run used {saved[name]}, now {current[name]}"
+            for name in names if saved[name] != current[name]]
+
+
 def read_run_records(log_path: Path) -> dict[str, dict]:
     """Read a run's raw_results.jsonl into {article_id: record}. A later line for an article replaces an earlier one."""
     records: dict[str, dict] = {}

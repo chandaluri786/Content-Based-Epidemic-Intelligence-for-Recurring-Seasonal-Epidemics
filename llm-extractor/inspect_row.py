@@ -13,7 +13,7 @@ from pathlib import Path
 
 from flu_extractor import config
 from flu_extractor.data_loading import load_articles, load_human_labels
-from flu_extractor.evaluation import SCORED, evaluate_run, read_run_records
+from flu_extractor.evaluation import SCORED, evaluate_run, read_run_records, read_run_settings
 from flu_extractor.metrics import EXACT_KEY_FIELDS, classify_item_set, differing_fields
 from flu_extractor.places import PlaceChecker
 
@@ -60,7 +60,9 @@ def main() -> None:
     if article_id not in records:
         raise SystemExit(f"{article_id} is not in {args.run_dir}. Articles there: {sorted(records)[:20]}")
     articles = load_articles(config.ARTICLES_PATH)
-    labels = load_human_labels(config.HUMAN_LABELS_PATH)
+    saved = read_run_settings(args.run_dir)
+    # Compare with the labels the run was made with (the team's, or a second set such as Jahnavi's).
+    labels = load_human_labels(config.DATA_DIR / saved["labels"] if saved else config.HUMAN_LABELS_PATH)
 
     place_checker = PlaceChecker(config.PLACE_CACHE_PATH, offline=args.offline)
     evaluation = evaluate_run({article_id: records[article_id]}, articles, labels, place_checker)
