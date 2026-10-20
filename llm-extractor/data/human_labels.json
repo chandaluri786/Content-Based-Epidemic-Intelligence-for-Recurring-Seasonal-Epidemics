@@ -134,7 +134,8 @@
         "words": null,
         "evidence": [
           "Actress Priyanka Chopra, busy promoting her forthcoming film Dil Dhadakne Do, is under the weather, but she plans to continue spreading the word about the film.",
-          "doc says its Influenza!Sounds scary nah?"
+          "On Tuesday, she posted: “Thank u all for asking! doc says its Influenza!Sounds scary nah? But started meds n off to promotion! +ve energies of team #DDD helping majorly [sic].”",
+          "The actors are on an extensive multi-city tour in places such as Kolkata, Indore, Jaipur, Chandigarh, Delhi, Ahmedabad and Bengaluru to promote the highly anticipated film."
         ]
       }
     ]
@@ -154,11 +155,12 @@
         "city": "Mumbai",
         "state": "Maharashtra",
         "country": "India",
-        "start_date": "2015-06-05",
-        "end_date": "2015-06-05",
+        "start_date": "2015-05-01",
+        "end_date": "2015-05-31",
         "words": null,
         "evidence": [
-          "According to health authorities, two persons, one in Mumbai and the other in Nashik succumbed to swine flu while a further four cases, two of which are said to be critical, have been reported."
+          "According to health authorities, two persons, one in Mumbai and the other in Nashik succumbed to swine flu while a further four cases, two of which are said to be critical, have been reported.",
+          "A 50-year-old woman, a resident of Mumbai’s Mankhurd area died in the city’s KEM hospital last month while another woman passed away at the Civil Hospital in Nashik on May 30."
         ]
       },
       {
@@ -170,11 +172,12 @@
         "city": "Nashik",
         "state": "Maharashtra",
         "country": "India",
-        "start_date": "2015-06-05",
-        "end_date": "2015-06-05",
+        "start_date": "2015-05-30",
+        "end_date": "2015-05-30",
         "words": null,
         "evidence": [
-          "According to health authorities, two persons, one in Mumbai and the other in Nashik succumbed to swine flu while a further four cases, two of which are said to be critical, have been reported."
+          "According to health authorities, two persons, one in Mumbai and the other in Nashik succumbed to swine flu while a further four cases, two of which are said to be critical, have been reported.",
+          "A 50-year-old woman, a resident of Mumbai’s Mankhurd area died in the city’s KEM hospital last month while another woman passed away at the Civil Hospital in Nashik on May 30."
         ]
       },
       {
@@ -1020,11 +1023,12 @@
         "city": null,
         "state": null,
         "country": "Bahrain",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "hot spots, 2009 H1N1 virus is the dominant strain",
         "evidence": [
-          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update."
+          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1036,11 +1040,12 @@
         "city": null,
         "state": null,
         "country": "Oman",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "hot spots, 2009 H1N1 virus is the dominant strain",
         "evidence": [
-          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update."
+          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1052,11 +1057,12 @@
         "city": null,
         "state": null,
         "country": "Qatar",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "hot spots, 2009 H1N1 virus is the dominant strain",
         "evidence": [
-          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update."
+          "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1068,12 +1074,13 @@
         "city": null,
         "state": null,
         "country": "Cuba",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "other exceptions to low flu activity",
         "evidence": [
           "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
-          "Other exceptions are Cuba and parts of tropical Asia, notably the southern and southeast part of the region."
+          "Other exceptions are Cuba and parts of tropical Asia, notably the southern and southeast part of the region.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1085,13 +1092,14 @@
         "city": null,
         "state": null,
         "country": "India",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "other exceptions to low flu activity",
         "evidence": [
           "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
           "Other exceptions are Cuba and parts of tropical Asia, notably the southern and southeast part of the region.",
-          "Those countries include India, Laos, and Thailand."
+          "Those countries include India, Laos, and Thailand.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1103,13 +1111,14 @@
         "city": null,
         "state": null,
         "country": "Laos",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "other exceptions to low flu activity",
         "evidence": [
           "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
           "Other exceptions are Cuba and parts of tropical Asia, notably the southern and southeast part of the region.",
-          "Those countries include India, Laos, and Thailand."
+          "Those countries include India, Laos, and Thailand.",
+          "Nov 30 WHO global flu update"
         ]
       },
       {
@@ -1121,13 +1130,14 @@
         "city": null,
         "state": null,
         "country": "Thailand",
-        "start_date": "2015-12-01",
-        "end_date": "2015-12-01",
+        "start_date": "2015-11-30",
+        "end_date": "2015-11-30",
         "words": "other exceptions to low flu activity",
         "evidence": [
           "Overall flu activity has remained low, with hot spots in only a few areas, such as some Middle Eastern countries including Bahrain, Oman, and Qatar, which are reporting that the 2009 H1N1 virus is the dominant strain, the World Health Organization (WHO) said yesterday in its regular update.",
           "Other exceptions are Cuba and parts of tropical Asia, notably the southern and southeast part of the region.",
-          "Those countries include India, Laos, and Thailand."
+          "Those countries include India, Laos, and Thailand.",
+          "Nov 30 WHO global flu update"
         ]
       }
     ]
@@ -2055,6 +2065,22 @@
         "evidence": [
           "The third week of January saw the most positive flu tests during the reporting season, with about 200."
         ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Pennsylvania",
+        "country": "USA",
+        "start_date": "2016-01-27",
+        "end_date": "2016-01-27",
+        "words": "not active in nearly all of the state",
+        "evidence": [
+          "The flu activity remains at the local stage, meaning the flu is not active in nearly all of the state."
+        ]
       }
     ]
   },
@@ -2320,54 +2346,6 @@
         "words": "recent increase",
         "evidence": [
           "While it looks like we will experience a less severe flu season than in the last several years, the recent increase may be a sign we are heading into a more aggressive spread of the illness."
-        ]
-      },
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "New York",
-        "country": "USA",
-        "start_date": "2016-02-01",
-        "end_date": "2016-02-01",
-        "words": "lower-than-usual flu activity",
-        "evidence": [
-          "Experts said it's too early to say whether or not a good match between the flu and vaccine is contributing to the lower-than-usual flu activity."
-        ]
-      },
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "New York",
-        "country": "USA",
-        "start_date": "2016-02-01",
-        "end_date": "2016-02-01",
-        "words": "decreased levels of flu",
-        "evidence": [
-          "One theory about decreased levels of flu is the mild weather."
-        ]
-      },
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "New York",
-        "country": "USA",
-        "start_date": "2016-02-01",
-        "end_date": "2016-02-01",
-        "words": "so little illness",
-        "evidence": [
-          "\"We see mild flu seasons now and again and seldom can explain why there is so little illness,\""
         ]
       },
       {
@@ -2989,25 +2967,8 @@
     "article_id": "20160423230000-1664",
     "labeler": "Aditya",
     "split": "dev",
-    "useful": true,
-    "items": [
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": null,
-        "country": "Australia",
-        "start_date": "2016-04-23",
-        "end_date": "2016-04-23",
-        "words": "flu season begins",
-        "evidence": [
-          "As flu season begins some respiratory illness sufferers are turning to âsalt cavesâ for relief, but the Lung Foundation is warning against the trend."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20160424134500-902",
@@ -3801,57 +3762,8 @@
     "article_id": "20160707183000-1141",
     "labeler": "Thanya",
     "split": "dev",
-    "useful": true,
-    "items": [
-      {
-        "kind": "cases",
-        "strain": "H1N1",
-        "number": 11000,
-        "status": "confirmed",
-        "total_or_new": "total",
-        "city": null,
-        "state": null,
-        "country": "India",
-        "start_date": null,
-        "end_date": "2016-07-07",
-        "words": null,
-        "evidence": [
-          "An outbreak of swine flu in India is causing concern from Indian health officials. The H1N1 strain of the influenza virus has killed over 700 people since December. Since last week, the number of cases has doubled to over 11,000. The health ministry urged citizens to remain calm and take preventative measures, insisting that the disease is under control."
-        ]
-      },
-      {
-        "kind": "deaths",
-        "strain": "H1N1",
-        "number": 700,
-        "status": "confirmed",
-        "total_or_new": "total",
-        "city": null,
-        "state": null,
-        "country": "India",
-        "start_date": null,
-        "end_date": "2016-07-07",
-        "words": null,
-        "evidence": [
-          "An outbreak of swine flu in India is causing concern from Indian health officials. The H1N1 strain of the influenza virus has killed over 700 people since December. Since last week, the number of cases has doubled to over 11,000. The health ministry urged citizens to remain calm and take preventative measures, insisting that the disease is under control."
-        ]
-      },
-      {
-        "kind": "trend",
-        "strain": "H1N1",
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": null,
-        "country": "India",
-        "start_date": "2016-06-27",
-        "end_date": "2016-07-07",
-        "words": "the number of cases has doubled",
-        "evidence": [
-          "Since last week, the number of cases has doubled to over 11,000."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20160710024500-382",
@@ -3986,6 +3898,23 @@
         "words": "victims of the fevers, which includes swine flu",
         "evidence": [
           "Family members are taking turns to become victims of the fevers, which includes swine flu."
+        ]
+      },
+      {
+        "kind": "cases",
+        "strain": "swine flu",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Telangana",
+        "country": "India",
+        "start_date": "2016-11-04",
+        "end_date": "2016-11-04",
+        "words": null,
+        "evidence": [
+          "Nalgonda: Come winter season, several mandals of the district are in the grip of viral fevers.",
+          "A trader belonging to Nakrekal is suffering from swine flu."
         ]
       }
     ]
@@ -4517,7 +4446,7 @@
     "items": [
       {
         "kind": "trend",
-        "strain": null,
+        "strain": "swine flu",
         "number": null,
         "status": null,
         "total_or_new": null,
@@ -4763,41 +4692,8 @@
     "article_id": "20161227231500-2770",
     "labeler": "Thanya",
     "split": "test",
-    "useful": true,
-    "items": [
-      {
-        "kind": "trend",
-        "strain": "AH3B",
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "Arizona",
-        "country": "USA",
-        "start_date": "2016-12-27",
-        "end_date": "2016-12-27",
-        "words": "circulating at a high level",
-        "evidence": [
-          "The predominant strain was H1N1, but AH3B is also circulating at a high level. H1N1 was commonly known as swine flu when it caused global pandemic during the 2009-2010 season. Back then it was a novel strain. Now, it is among the common viruses."
-        ]
-      },
-      {
-        "kind": "trend",
-        "strain": "H1N1",
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "Arizona",
-        "country": "USA",
-        "start_date": "2016-12-27",
-        "end_date": "2016-12-27",
-        "words": "The predominant strain was H1N1",
-        "evidence": [
-          "The predominant strain was H1N1, but AH3B is also circulating at a high level."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20161228034500-1203",
@@ -6028,10 +5924,11 @@
         "city": null,
         "state": null,
         "country": "Taiwan",
-        "start_date": "2017-07-03",
-        "end_date": "2017-07-09",
+        "start_date": "2017-07-02",
+        "end_date": "2017-07-08",
         "words": null,
         "evidence": [
+          "The Program disease monitoring data show that domestic influenza-door emergency attendances in the first decline since May, last week (July 2 to July 8) attendances (119,543 people) fell 6.7 percent from a week (128,190 passengers) ago ; in addition, upper respiratory / flu-like cluster from a total of 29 reported cases, the number of notifications fell for three consecutive weeks; of which 20 cases tested positive for influenza, mainly in the densely populated mechanism (18 cases).",
           "Last week, add another 124 cases of influenza complicated by severe determine cases, primary infection typed as H3N2; 11 new cases of severe deaths, cases of onset between the ages of 16 to 88 years, have a history of chronic disease, infection typed in 9 cases H3N2,1 Example Example B and one H1N1 type."
         ]
       },
@@ -6044,11 +5941,12 @@
         "city": null,
         "state": null,
         "country": "Taiwan",
-        "start_date": "2017-07-10",
-        "end_date": "2017-07-11",
+        "start_date": "2017-07-02",
+        "end_date": "2017-07-08",
         "words": null,
         "evidence": [
-          "They also report 11 influenza-related deaths over the past week, including a 16 year old."
+          "They also report 11 influenza-related deaths over the past week, including a 16 year old.",
+          "The Program disease monitoring data show that domestic influenza-door emergency attendances in the first decline since May, last week (July 2 to July 8) attendances (119,543 people) fell 6.7 percent from a week (128,190 passengers) ago ; in addition, upper respiratory / flu-like cluster from a total of 29 reported cases, the number of notifications fell for three consecutive weeks; of which 20 cases tested positive for influenza, mainly in the densely populated mechanism (18 cases)."
         ]
       },
       {
@@ -7241,6 +7139,22 @@
         "evidence": [
           "At last count, the flu was widespread in Oklahoma, Louisiana, Massachusetts, and Georgia."
         ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "USA",
+        "start_date": null,
+        "end_date": "2017-12-06",
+        "words": "early start to flu season",
+        "evidence": [
+          "The U.S. reached that level in late November, marking an early start to flu season."
+        ]
       }
     ]
   },
@@ -7503,6 +7417,22 @@
         "evidence": [
           "Flu is already widespread in seven states: Arkansas, Georgia, Louisiana, Massachusetts, Mississippi, Oklahoma, and Virginia."
         ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "South Carolina",
+        "country": "USA",
+        "start_date": "2017-12-10",
+        "end_date": "2017-12-10",
+        "words": "high levels of flu",
+        "evidence": [
+          "And three states — Louisiana, Mississippi, and South Carolina — have high levels of flu already this year."
+        ]
       }
     ]
   },
@@ -7626,7 +7556,7 @@
         "city": null,
         "state": null,
         "country": "USA",
-        "start_date": null,
+        "start_date": "2018-02-27",
         "end_date": "2018-02-27",
         "words": "begun to decline",
         "evidence": [
@@ -8273,6 +8203,102 @@
         "words": "levels increased slightly",
         "evidence": [
           "In tropical parts of Asia, flu activity remained low except for Cambodia, where levels increased slightly."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Brazil",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "2009 H1N1 predominant in Brazil",
+        "evidence": [
+          "In South America's temperate regions, flu activity has been reported in most countries, with H3N2 predominant in Chile and 2009 H1N1 predominant in Brazil, which is circulating alongside H3N2."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "H3N2",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Chile",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "H3N2 predominant in Chile",
+        "evidence": [
+          "In South America's temperate regions, flu activity has been reported in most countries, with H3N2 predominant in Chile and 2009 H1N1 predominant in Brazil, which is circulating alongside H3N2."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Guatemala",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "hot spots",
+        "evidence": [
+          "In tropical countries in the Americas, flu activity varied, with hot spots including Guatemala and Honduras, where 2009 H1N1 is predominant, and elevated levels still reported in Colombia and Peru."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": "2009 H1N1",
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Honduras",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "hot spots",
+        "evidence": [
+          "In tropical countries in the Americas, flu activity varied, with hot spots including Guatemala and Honduras, where 2009 H1N1 is predominant, and elevated levels still reported in Colombia and Peru."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Colombia",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "elevated levels still reported",
+        "evidence": [
+          "In tropical countries in the Americas, flu activity varied, with hot spots including Guatemala and Honduras, where 2009 H1N1 is predominant, and elevated levels still reported in Colombia and Peru."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Peru",
+        "start_date": null,
+        "end_date": "2018-07-08",
+        "words": "elevated levels still reported",
+        "evidence": [
+          "In tropical countries in the Americas, flu activity varied, with hot spots including Guatemala and Honduras, where 2009 H1N1 is predominant, and elevated levels still reported in Colombia and Peru."
         ]
       }
     ]
@@ -9330,25 +9356,8 @@
     "article_id": "20181025180000-1632",
     "labeler": "Aditya",
     "split": "dev",
-    "useful": true,
-    "items": [
-      {
-        "kind": "deaths",
-        "strain": null,
-        "number": 1,
-        "status": null,
-        "total_or_new": "new",
-        "city": null,
-        "state": null,
-        "country": "USA",
-        "start_date": null,
-        "end_date": null,
-        "words": null,
-        "evidence": [
-          "(First death of the flu season: an unvaccinated child.)"
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20181025211500-457",
@@ -9361,25 +9370,8 @@
     "article_id": "20181030023000-1998",
     "labeler": "Aditya",
     "split": "test",
-    "useful": true,
-    "items": [
-      {
-        "kind": "deaths",
-        "strain": null,
-        "number": 1,
-        "status": null,
-        "total_or_new": "total",
-        "city": null,
-        "state": "Florida",
-        "country": "USA",
-        "start_date": "2018-01-01",
-        "end_date": "2018-10-30",
-        "words": null,
-        "evidence": [
-          "There has already been a flu-related death in Florida this year."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20181030181500-1330",
@@ -9404,9 +9396,10 @@
         "state": "Arkansas",
         "country": "USA",
         "start_date": "2018-09-30",
-        "end_date": "2018-10-31",
+        "end_date": "2018-10-27",
         "words": null,
         "evidence": [
+          "LITTLE ROCK, AR (KAIT) - The Arkansas Department of Health released their weekly flu report on the week ending Oct. 27 Tuesday.",
           "Over 400 positive flu tests have been reported to the ADH since Sept. 30."
         ]
       },
@@ -9420,9 +9413,10 @@
         "state": "Arkansas",
         "country": "USA",
         "start_date": null,
-        "end_date": "2018-10-31",
+        "end_date": "2018-10-27",
         "words": null,
         "evidence": [
+          "LITTLE ROCK, AR (KAIT) - The Arkansas Department of Health released their weekly flu report on the week ending Oct. 27 Tuesday.",
           "There have been two flu deaths in the state so far this season, according to the ADH."
         ]
       },
@@ -9435,10 +9429,11 @@
         "city": null,
         "state": "Arkansas",
         "country": "USA",
-        "start_date": null,
-        "end_date": null,
+        "start_date": "2018-10-21",
+        "end_date": "2018-10-27",
         "words": "sporadic flu activity",
         "evidence": [
+          "LITTLE ROCK, AR (KAIT) - The Arkansas Department of Health released their weekly flu report on the week ending Oct. 27 Tuesday.",
           "The report states that during week 43, Arkansas reported sporadic flu activity to the Centers for Disease Control and Prevention."
         ]
       },
@@ -9452,10 +9447,11 @@
         "state": null,
         "country": "USA",
         "start_date": null,
-        "end_date": "2018-10-31",
+        "end_date": "2018-10-27",
         "words": null,
         "evidence": [
-          "The report also states that the CDC has reported one pediatric death in the U.S."
+          "LITTLE ROCK, AR (KAIT) - The Arkansas Department of Health released their weekly flu report on the week ending Oct. 27 Tuesday.",
+          "The report also states that the CDC has reported one pediatric death in the U.S. due to the flu."
         ]
       }
     ]
@@ -9586,7 +9582,7 @@
         "end_date": "2018-12-01",
         "words": "As flu season takes hold",
         "evidence": [
-          "Story Location United States MARION — As flu season takes hold, come out and learn something to stay healthy this winter from Tabor Academy’s upcoming Science@Work speaker, a nutritional biochemist whose research focuses on boosting the immune systems of U.S."
+          "Story Location United States MARION — As flu season takes hold, come out and learn something to stay healthy this winter from Tabor Academy’s upcoming Science@Work speaker, a nutritional biochemist whose research focuses on boosting the immune systems of U.S. combat soldiers."
         ]
       }
     ]
@@ -9674,8 +9670,25 @@
     "article_id": "20181205114500-124",
     "labeler": "Thanya",
     "split": "test",
-    "useful": false,
-    "items": []
+    "useful": true,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Kansas",
+        "country": "USA",
+        "start_date": "2018-12-05",
+        "end_date": "2018-12-05",
+        "words": "sporadic",
+        "evidence": [
+          "Several other states are reporting high flu activity, while Kansas is still listed as \"sporadic.\""
+        ]
+      }
+    ]
   },
   {
     "article_id": "20181205224500-358",
@@ -9935,8 +9948,27 @@
     "article_id": "20181218064500-764",
     "labeler": "Manoj",
     "split": "test",
-    "useful": false,
-    "items": []
+    "useful": true,
+    "items": [
+      {
+        "kind": "hospitalized",
+        "strain": null,
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Nairobi",
+        "state": null,
+        "country": "Kenya",
+        "start_date": "2018-12-13",
+        "end_date": "2018-12-13",
+        "words": null,
+        "evidence": [
+          "Retired President Daniel arap Moi was yesterday discharged from Nairobi Hospital after doctors ascertained he was regaining full health.",
+          "The former President was admitted to the facility last Thursday for a routine medical checkup.",
+          "“… Doctors... closely observed the former president... and treated him for a bout of flu, which he blamed on chilly weather."
+        ]
+      }
+    ]
   },
   {
     "article_id": "20181219004500-1119",
@@ -11067,7 +11099,8 @@
         "end_date": "2021-06-01",
         "words": null,
         "evidence": [
-          "China has confirmed the first instance of human infection from H10N3 , a rare strain of a virus that normally infects poultry."
+          "China has confirmed the first instance of human infection from H10N3 , a rare strain of a virus that normally infects poultry.",
+          "On Tuesday, the National Health Commission of Beijing reported that a 41-year-old man in the eastern Jiangsu province had been infected with the rare strain but no details were given as to how he caught it."
         ]
       }
     ]
@@ -11205,6 +11238,22 @@
         "evidence": [
           "Global flu activity in the middle 2 weeks of June remained below expected levels in both hemispheres, with little activity except for a slight increase in influenza B, especially in China, the WHO said in its latest global update."
         ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "India",
+        "start_date": null,
+        "end_date": null,
+        "words": "sporadic detections",
+        "evidence": [
+          "Sporadic detections were reported in western and eastern Africa, as well as in India."
+        ]
       }
     ]
   },
@@ -11301,11 +11350,29 @@
         "city": "Delhi",
         "state": "Delhi",
         "country": "India",
-        "start_date": "2021-07-21",
-        "end_date": "2021-07-21",
+        "start_date": "2021-07-12",
+        "end_date": "2021-07-12",
         "words": null,
         "evidence": [
-          "A 12-year-old boy from Haryana, who was infected with the H5N1 virus, recently died at AIIMS Delhi."
+          "A 12-year-old boy from Haryana, who was infected with the H5N1 virus, recently died at AIIMS Delhi.",
+          "He died on July 12."
+        ]
+      },
+      {
+        "kind": "hospitalized",
+        "strain": "H5N1",
+        "number": 1,
+        "status": null,
+        "total_or_new": "new",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "start_date": "2021-07-02",
+        "end_date": "2021-07-02",
+        "words": null,
+        "evidence": [
+          "A 12-year-old boy from Haryana, who was infected with the H5N1 virus, recently died at AIIMS Delhi.",
+          "An AIIMS source had said the 12-year-old boy was admitted to AIIMS on July 2 with pneumonia and leukaemia."
         ]
       }
     ]
@@ -11374,10 +11441,11 @@
         "city": null,
         "state": null,
         "country": "India",
-        "start_date": null,
-        "end_date": null,
+        "start_date": "2021-07-01",
+        "end_date": "2021-07-31",
         "words": "few detections",
         "evidence": [
+          "Global flu activity in July remained low, mainly flu B",
           "Areas that reported a few detections include East and West Africa, India, Nepal, the Philippines, and Thailand."
         ]
       },
@@ -11390,10 +11458,11 @@
         "city": null,
         "state": null,
         "country": "Nepal",
-        "start_date": null,
-        "end_date": null,
+        "start_date": "2021-07-01",
+        "end_date": "2021-07-31",
         "words": "few detections",
         "evidence": [
+          "Global flu activity in July remained low, mainly flu B",
           "Areas that reported a few detections include East and West Africa, India, Nepal, the Philippines, and Thailand."
         ]
       },
@@ -11406,10 +11475,11 @@
         "city": null,
         "state": null,
         "country": "Philippines",
-        "start_date": null,
-        "end_date": null,
+        "start_date": "2021-07-01",
+        "end_date": "2021-07-31",
         "words": "few detections",
         "evidence": [
+          "Global flu activity in July remained low, mainly flu B",
           "Areas that reported a few detections include East and West Africa, India, Nepal, the Philippines, and Thailand."
         ]
       },
@@ -11422,10 +11492,11 @@
         "city": null,
         "state": null,
         "country": "Thailand",
-        "start_date": null,
-        "end_date": null,
+        "start_date": "2021-07-01",
+        "end_date": "2021-07-31",
         "words": "few detections",
         "evidence": [
+          "Global flu activity in July remained low, mainly flu B",
           "Areas that reported a few detections include East and West Africa, India, Nepal, the Philippines, and Thailand."
         ]
       }
@@ -11686,7 +11757,7 @@
     "items": [
       {
         "kind": "deaths",
-        "strain": "H1N1",
+        "strain": "swine flu",
         "number": 1,
         "status": "confirmed",
         "total_or_new": "new",
@@ -12552,25 +12623,8 @@
     "article_id": "20220426101500-125",
     "labeler": "Manoj",
     "split": "test",
-    "useful": true,
-    "items": [
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": "Quebec",
-        "country": "Canada",
-        "start_date": "2022-04-26",
-        "end_date": "2022-04-26",
-        "words": "late flu season",
-        "evidence": [
-          "COVID-related absences exacerbated the health-network labour shortage amid the sixth wave as cases and hospitalizations rose even as Quebec experienced a late flu season."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20220427173000-398",
@@ -12946,12 +13000,13 @@
         "status": null,
         "total_or_new": null,
         "city": null,
-        "state": "Victoria",
+        "state": null,
         "country": "Australia",
         "start_date": "2022-05-06",
         "end_date": "2022-05-20",
         "words": "increased three-fold in the last couple of weeks",
         "evidence": [
+          "Professor Bennett, who is Chair in Epidemiology at Melbourne's Deakin University, said this was being observed across the country.",
           "'Flu notifications have increased three-fold in the last couple of weeks,' she said."
         ]
       }
@@ -13500,11 +13555,27 @@
         "city": null,
         "state": null,
         "country": "New Zealand",
-        "start_date": "2022-07-15",
-        "end_date": "2022-07-15",
+        "start_date": "2022-07-14",
+        "end_date": "2022-07-14",
         "words": "the worst flu season in recent memory",
         "evidence": [
           "“There’s no question the combination of a spike in Covid-19 cases and hospitalisations, the worst flu season in recent memory and corresponding staff absences are putting health workers and the whole health system under extreme pressure,” Ayesha Verrall, Minister for Covid-19 Response, said in a statement."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": null,
+        "country": "Australia",
+        "start_date": "2022-07-15",
+        "end_date": "2022-07-15",
+        "words": "high influenza numbers",
+        "evidence": [
+          "Australian hospital admissions are already hovering near levels seen in the last major Omicron outbreak earlier this year with its health system also under pressure from high Covid and influenza numbers."
         ]
       }
     ]
@@ -14405,8 +14476,26 @@
     "article_id": "20221025141500-417",
     "labeler": "Thanya",
     "split": "dev",
-    "useful": false,
-    "items": []
+    "useful": true,
+    "items": [
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Tennessee",
+        "country": "USA",
+        "start_date": "2022-10-25",
+        "end_date": "2022-10-25",
+        "words": "very early for flu activity",
+        "evidence": [
+          "Another disease specialist, Dr Diego Hijano of Tennessee's St Jude Children's Research Hospital, said: \"As of today, we are seeing equal numbers of Covid, flu and RSV.",
+          "That's really concerning, because we are very early for flu and RSV activity..."
+        ]
+      }
+    ]
   },
   {
     "article_id": "20221025234500-1192",
@@ -14841,6 +14930,70 @@
         "words": "About one in 11 tests for flu were positive last week",
         "evidence": [
           "About one in 11 tests for flu were positive last week."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Mississippi",
+        "country": "USA",
+        "start_date": "2022-11-04",
+        "end_date": "2022-11-04",
+        "words": "hotspots",
+        "evidence": [
+          "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "Alabama",
+        "country": "USA",
+        "start_date": "2022-11-04",
+        "end_date": "2022-11-04",
+        "words": "hotspots",
+        "evidence": [
+          "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "Houston",
+        "state": "Texas",
+        "country": "USA",
+        "start_date": "2022-11-04",
+        "end_date": "2022-11-04",
+        "words": "hotspots",
+        "evidence": [
+          "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": "New Orleans",
+        "state": "Louisiana",
+        "country": "USA",
+        "start_date": "2022-11-04",
+        "end_date": "2022-11-04",
+        "words": "hotspots",
+        "evidence": [
+          "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
         ]
       }
     ]
@@ -16202,8 +16355,26 @@
     "article_id": "20230329193000-2321",
     "labeler": "Manoj",
     "split": "dev",
-    "useful": false,
-    "items": []
+    "useful": true,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "influenza A",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": null,
+        "country": "Brazil",
+        "start_date": "2023-03-25",
+        "end_date": "2023-03-26",
+        "words": null,
+        "evidence": [
+          "BRASILIA - Brazilian President Luiz Inacio Lula da Silva is expected to reschedule his visit to China to April 11, his press secretary, Paulo Pimenta, said on Wednesday.",
+          "Lula was supposed to depart to China last weekend, but the trip was postponed after he was diagnosed with bacterial and viral bronchopneumonia caused by influenza A."
+        ]
+      }
+    ]
   },
   {
     "article_id": "20230330080000-394",
@@ -17119,7 +17290,7 @@
         "end_date": "2023-11-22",
         "words": null,
         "evidence": [
-          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr. Larry Bush said."
         ]
       },
       {
@@ -17135,7 +17306,7 @@
         "end_date": "2023-11-22",
         "words": null,
         "evidence": [
-          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr. Larry Bush said."
         ]
       },
       {
@@ -17151,7 +17322,7 @@
         "end_date": "2023-11-22",
         "words": null,
         "evidence": [
-          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr."
+          "There's been around 800,000 documented cases of flu, about 8000 hospital admissions and about 500 deaths,” infectious disease specialist Dr. Larry Bush said."
         ]
       },
       {
@@ -17475,11 +17646,12 @@
         "city": null,
         "state": null,
         "country": "Cambodia",
-        "start_date": "2023-12-07",
-        "end_date": "2023-12-07",
+        "start_date": "2023-11-26",
+        "end_date": "2023-11-26",
         "words": null,
         "evidence": [
-          "Samples were collected, which tested positive for H5N1, and the case died while in the hospital."
+          "Samples were collected, which tested positive for H5N1, and the case died while in the hospital.",
+          "The patient died in the ICU on November 26th."
         ]
       }
     ]
@@ -17517,7 +17689,7 @@
         "end_date": "2023-12-12",
         "words": "increase",
         "evidence": [
-          "“As we anticipated, we are seeing an increase in respiratory viruses – including COVID-19, flu and RSV - both in Illinois and across the nation,” IDPH Director Dr."
+          "“As we anticipated, we are seeing an increase in respiratory viruses – including COVID-19, flu and RSV - both in Illinois and across the nation,” IDPH Director Dr. Sameer Vohra said in a statement last week."
         ]
       }
     ]
@@ -17582,25 +17754,8 @@
     "article_id": "20231218161500-1115",
     "labeler": "Aditya",
     "split": "test",
-    "useful": true,
-    "items": [
-      {
-        "kind": "cases",
-        "strain": "H5N1",
-        "number": 4,
-        "status": "confirmed",
-        "total_or_new": "total",
-        "city": null,
-        "state": null,
-        "country": "USA",
-        "start_date": null,
-        "end_date": "2023-12-18",
-        "words": null,
-        "evidence": [
-          "There have only ever been four recorded human infections of H5N1 in the United States, with the latest being in an inmate who worked on a poultry farm in Colorado in April 2022."
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20231219041500-966",
@@ -18247,8 +18402,26 @@
     "article_id": "20240405130000-123",
     "labeler": "Manoj",
     "split": "test",
-    "useful": false,
-    "items": []
+    "useful": true,
+    "items": [
+      {
+        "kind": "cases",
+        "strain": "H5N1",
+        "number": 1,
+        "status": "confirmed",
+        "total_or_new": "new",
+        "city": null,
+        "state": "Texas",
+        "country": "USA",
+        "start_date": "2024-04-01",
+        "end_date": "2024-04-01",
+        "words": null,
+        "evidence": [
+          "Further elevating the concern this discovery has triggered is the fact that a dairy farm worker in Texas was infected with H5N1, though the unnamed individual’s only symptom was conjunctivitis.",
+          "The first human case of avian influenza in Texas this week has prompted Congress to gather information about the risks to public health and agriculture."
+        ]
+      }
+    ]
   },
   {
     "article_id": "20240406113000-759",
@@ -18724,6 +18897,22 @@
         "words": "increase",
         "evidence": [
           "Victoria is experiencing an increase in COVID-19, influenza and Respiratory Syncytial Virus (RSV) cases as the state heads into winter."
+        ]
+      },
+      {
+        "kind": "trend",
+        "strain": null,
+        "number": null,
+        "status": null,
+        "total_or_new": null,
+        "city": null,
+        "state": "New South Wales",
+        "country": "Australia",
+        "start_date": "2024-05-10",
+        "end_date": "2024-05-10",
+        "words": "low reports for influenza",
+        "evidence": [
+          "The latest NSW respiratory surveillance report is showing low reports for COVID-19 and influenza but high activity for RSV."
         ]
       }
     ]
@@ -19285,7 +19474,7 @@
         "city": null,
         "state": "New South Wales",
         "country": "Australia",
-        "start_date": "2024-06-07",
+        "start_date": "2024-06-10",
         "end_date": "2024-06-13",
         "words": "22 percent increase",
         "evidence": [
@@ -19348,8 +19537,8 @@
         "city": null,
         "state": "New South Wales",
         "country": "Australia",
-        "start_date": "2024-06-02",
-        "end_date": "2024-06-08",
+        "start_date": "2024-06-13",
+        "end_date": "2024-06-13",
         "words": "surge",
         "evidence": [
           "SYDNEY -- The health authority in the Australian state of New South Wales (NSW) on Thursday issued a warning over the surge of flu virus cases, calling on people aged 65 and over to get vaccinated as soon as possible."
@@ -19947,7 +20136,7 @@
         "end_date": "2024-07-03",
         "words": null,
         "evidence": [
-          "It was the fourth human case of bird flu reported in the U.S."
+          "It was the fourth human case of bird flu reported in the U.S. since avian flu was confirmed in cows in March."
         ]
       }
     ]
@@ -21196,25 +21385,8 @@
     "article_id": "20241219053000-302",
     "labeler": "Manoj",
     "split": "test",
-    "useful": true,
-    "items": [
-      {
-        "kind": "trend",
-        "strain": null,
-        "number": null,
-        "status": null,
-        "total_or_new": null,
-        "city": null,
-        "state": null,
-        "country": "United Kingdom",
-        "start_date": "2024-12-19",
-        "end_date": "2024-12-19",
-        "words": "already rising",
-        "evidence": [
-          "Read more: GWH issues advice as flu admissions already rising across country"
-        ]
-      }
-    ]
+    "useful": false,
+    "items": []
   },
   {
     "article_id": "20241219193000-867",
