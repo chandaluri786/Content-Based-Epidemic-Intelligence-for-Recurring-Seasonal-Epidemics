@@ -24,9 +24,14 @@ load_dotenv(PROJECT_DIR / ".env")
 PROMPTS_DIR = PROJECT_DIR / "prompts"
 DATA_DIR = PROJECT_DIR / "data"
 
-# The prompt, in two files. To try a new prompt version, add new files and point these at them.
-SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v5.1.txt"  # instructions only
-EXAMPLES_PATH = PROMPTS_DIR / "examples_v5.1.json"           # solved examples, sent as chat turns
+# The prompt. To try a new prompt version, add new files and point these at them.
+SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v5.1.txt"  # the rules, word for word
+# Solved examples, sent as chat turns. EXAMPLES_PATH in .env selects another set, e.g. the
+# k=4, 8, 12 candidates (prompts/examples_v5.1_k8.json), without editing this file.
+EXAMPLES_PATH = Path(os.getenv("EXAMPLES_PATH", PROMPTS_DIR / "examples_v5.1.json"))
+# How to learn from the examples. Added after the rules only when examples are sent, so a
+# zero-shot run is the rules alone.
+FEWSHOT_GUIDE_PATH = PROMPTS_DIR / "fewshot_guide_v5.1.txt"
 
 # Inputs for the run: the articles to send, the gold answers to score against, and the human
 # `useful` answers, kept as a second comparison.
@@ -54,8 +59,22 @@ TEMPERATURE = 0
 MAX_TOKENS = 8000
 # Seconds to wait for one reply; the prompt is ~30k tokens with examples, so replies are slow.
 REQUEST_TIMEOUT_SECONDS = 300
-# The OpenAI client retries rate-limit, timeout and server errors this many times by itself.
+# Retries after a rate-limit, timeout, connection or server error (done in llm_client.ask_model).
 MAX_RETRIES = 4
+# Requests repeated, with a note naming the problem, when a reply is cut off, not valid JSON or
+# breaks the reply format (done in extractor.extract_article). The last one asks for a compact
+# reply at LAST_RETRY_TEMPERATURE: at temperature 0 a repeated request tends to repeat the mistake.
+MAX_VALIDATION_RETRIES = 3
+LAST_RETRY_TEMPERATURE = 0.3
+# A fixed seed, so that any sampling on the server is repeatable (temperature 0 already removes ours).
+SEED = 20261101
+# Stop a run after this many API failures in a row (e.g. the daily quota is used up). The run can
+# be resumed later with --run-dir.
+STOP_AFTER_CONSECUTIVE_API_ERRORS = 5
+# The API allows 40 requests per minute. Every request, retries included, counts. The window is a
+# little over 60 s so that clock differences between us and the server cannot push us over.
+REQUESTS_PER_MINUTE = int(os.getenv("NVIDIA_REQUESTS_PER_MINUTE", "40"))
+RATE_WINDOW_SECONDS = 61.0
 # Nemotron-specific switch: no separate thinking block. The v5 reply carries its reasoning in JSON.
 EXTRA_BODY = {"chat_template_kwargs": {"enable_thinking": False}}
 
