@@ -1,20 +1,24 @@
-"""Automatic checks on a model reply (section 5, step 3 of the prompt).
+"""Automatic checks on a model reply.
 
 Two levels:
   * shape errors   - the reply does not follow the JSON schema, so it cannot be scored;
   * rule violations - the reply is well-formed but breaks a labeling rule.
 """
 
-from datetime import date
+from datetime import date, timedelta
 
 from flu_extractor.places import PLACE_FIELDS, PlaceChecker
 
 VALID_KINDS = {"cases", "deaths", "hospitalized", "trend"}
-REQUIRED_TOP_LEVEL = ("useful", "borderline", "reason", "items", "findings")
+VALID_COUNT_TYPES = {"new", "cumulative_region", "cumulative_subset"}
+VALID_STATUSES = {"confirmed", "suspected"}
+VALID_WORDS = {"rising", "falling", "high", "moderate", "low", "inactive", "present"}
+REQUIRED_TOP_LEVEL = ("summary", "reasoning", "useful", "reason", "items")
 REQUIRED_ITEM_FIELDS = (
-    "kind", "strain", "number", "status", "total_or_new", "city", "state",
-    "country", "start_date", "end_date", "words", "evidence",
+    "kind", "number", "count_type", "status", "strain", "city", "state", "country",
+    "start_date", "end_date", "words", "evidence",
 )
+RECENT_DAYS = 30  # section 4.7 of the prompt
 # Wording of rule (d) violations.
 PLACE_NOT_FOUND = "was not found as a"
 PLACE_UNCHECKED = "could not be checked (place lookup unavailable)"
@@ -32,7 +36,7 @@ def _is_iso_date(value) -> bool:
 
 
 def find_shape_errors(parsed: dict) -> list[str]:
-    """Check the reply against the schema in section 4 of the prompt. Empty list = valid."""
+    """Check the reply against the schema in the prompt. Empty list = valid."""
     errors = []
     for key in REQUIRED_TOP_LEVEL:
         if key not in parsed:
@@ -42,14 +46,11 @@ def find_shape_errors(parsed: dict) -> list[str]:
 
     if not isinstance(parsed["useful"], bool):
         errors.append("'useful' is not true/false")
+    reasoning = parsed["reasoning"]
+    if not (isinstance(reasoning, list) and reasoning and all(isinstance(s, str) for s in reasoning)):
+        errors.append("'reasoning' must be a non-empty list of strings")
     if not isinstance(parsed["items"], list):
         return errors + ["'items' is not a list"]
-    findings = parsed["findings"]
-    if not (isinstance(findings, list) and all(
-        isinstance(f, dict) and isinstance(f.get("country"), str) and isinstance(f.get("finding"), str)
-        for f in findings
-    )):
-        errors.append("'findings' must be a list of objects with string 'country' and 'finding'")
 
     for index, item in enumerate(parsed["items"], start=1):
         label = f"item {index}"
@@ -67,6 +68,9 @@ def find_shape_errors(parsed: dict) -> list[str]:
         for field in PLACE_FIELDS:
             if item.get(field) is not None and not isinstance(item.get(field), str):
                 errors.append(f"{label} {field} must be text or null, not {item.get(field)!r}")
+        number = item.get("number")
+        if number is not None and (isinstance(number, bool) or not isinstance(number, int)):
+            errors.append(f"{label} number must be a whole number or null, not {number!r}")
         evidence = item.get("evidence")
         if not (isinstance(evidence, list) and evidence and all(isinstance(e, str) for e in evidence)):
             errors.append(f"{label} evidence must be a non-empty list of strings")
@@ -105,32 +109,67 @@ def find_quote_problem(quote: str, article_text: str) -> str | None:
     return QUOTE_NOT_FOUND
 
 
-def _ranges_overlap(first: dict, second: dict) -> bool:
-    """True if the date ranges of two items overlap. Items without an end date never overlap."""
-    if not (first.get("end_date") and second.get("end_date")):
-        return False
-    first_start = first.get("start_date") or first["end_date"]
-    second_start = second.get("start_date") or second["end_date"]
-    return first_start <= second["end_date"] and second_start <= first["end_date"]
+def _same_except_evidence(first: dict, second: dict) -> bool:
+    """True when two items agree on every field but evidence (G3 in the prompt)."""
+    return all(first[name] == second[name] for name in REQUIRED_ITEM_FIELDS if name != "evidence")
 
 
-def find_rule_violations(parsed: dict, article_text: str, place_checker: PlaceChecker) -> list[str]:
-    """Check labeling rules (a)-(g). Call only on a reply with no shape errors.
+def _evidence_in_article_order(evidence: list[str], article_text: str) -> bool:
+    """Parts after the first must follow article order (10.1). The first part may come from anywhere."""
+    squashed_article = _collapse_whitespace(article_text)
+    positions = [squashed_article.find(_collapse_whitespace(part)) for part in evidence[1:]]
+    found = [position for position in positions if position >= 0]
+    return found == sorted(found)
+
+
+def _kind_field_problems(item: dict) -> list[str]:
+    """Rules (b) and (c): which fields a trend and a count must and must not fill (2.2)."""
+    problems = []
+    if item["kind"] == "trend":
+        if item["words"] not in VALID_WORDS:
+            problems.append(f"(b) trend word {item['words']!r} is not one of the seven words")
+        if item["number"] is not None or item["count_type"] is not None or item["status"] is not None:
+            problems.append("(b) a trend must have null number, count_type and status")
+        return problems
+    if item["words"] is not None:
+        problems.append("(c) 'words' must be null on a count")
+    if item["number"] is None:
+        problems.append("(c) a count needs a number")
+    if item["count_type"] not in VALID_COUNT_TYPES:
+        problems.append(f"(c) count_type {item['count_type']!r} is not valid")
+    if item["status"] not in VALID_STATUSES:
+        problems.append(f"(c) status {item['status']!r} is not valid")
+    return problems
+
+
+def _date_problems(item: dict, scan_date: str) -> list[str]:
+    """Rules (e), (h) and (i): the end date exists, is recent, and the range is in order."""
+    problems = []
+    end_date = item["end_date"]
+    if not end_date:
+        return ["(h) the end date is missing (G2)"]
+    if item["start_date"] and item["start_date"] > end_date:  # ISO dates compare correctly as text
+        problems.append("(e) start_date is after end_date")
+    scanned = date.fromisoformat(scan_date)
+    if end_date > scan_date:
+        problems.append(f"(i) end date {end_date} is after the scan date {scan_date}")
+    elif date.fromisoformat(end_date) < scanned - timedelta(days=RECENT_DAYS):
+        problems.append(f"(i) end date {end_date} is more than {RECENT_DAYS} days before the scan date")
+    return problems
+
+
+def find_rule_violations(parsed: dict, article_text: str, scan_date: str,
+                         place_checker: PlaceChecker) -> list[str]:
+    """Check labeling rules (a)-(j). Call only on a reply with no shape errors.
 
     `place_checker` tells whether a city, state or country exists, for rule (d).
     """
     violations = []
     items = parsed["items"]
 
-    # (g) a not-useful article has no items
-    if not parsed["useful"] and items:
-        violations.append("(g) useful is false but items are present")
-
-    # (a) every finding sentence is copied from the article
-    for index, finding in enumerate(parsed["findings"], start=1):
-        problem = find_quote_problem(finding["finding"], article_text)
-        if problem:
-            violations.append(f"(a) finding {index}: sentence {problem}: {finding['finding'][:60]!r}")
+    # (g) useful is true exactly when there are items (Section 11)
+    if parsed["useful"] != bool(items):
+        violations.append("(g) useful does not agree with the items list")
 
     for index, item in enumerate(items, start=1):
         label = f"item {index} ({item['kind']})"
@@ -140,10 +179,16 @@ def find_rule_violations(parsed: dict, article_text: str, place_checker: PlaceCh
             problem = find_quote_problem(part, article_text)
             if problem:
                 violations.append(f"(a) {label}: evidence {problem}: {part[:60]!r}")
+        # (j) evidence after the first part is in article order
+        if not _evidence_in_article_order(item["evidence"], article_text):
+            violations.append(f"(j) {label}: evidence after the first part is out of article order")
 
-        # (b) 'words' is only for trend items
-        if item["kind"] != "trend" and item["words"] is not None:
-            violations.append(f"(b) {label}: 'words' must be null unless kind is trend")
+        for problem in _kind_field_problems(item) + _date_problems(item, scan_date):
+            violations.append(f"{problem[:3]} {label}: {problem[4:]}")
+
+        # (h) a country is required (G1)
+        if not item["country"]:
+            violations.append(f"(h) {label}: the country is missing (G1)")
 
         # (d) each place field is null or a real city / state / country, as the field requires
         for field in PLACE_FIELDS:
@@ -156,17 +201,9 @@ def find_rule_violations(parsed: dict, article_text: str, place_checker: PlaceCh
             elif is_known is None:
                 violations.append(f"(d) {label}: {field} {value!r} {PLACE_UNCHECKED}")
 
-        # (e) the range does not run backwards (ISO dates compare correctly as text)
-        if item["start_date"] and item["end_date"] and item["start_date"] > item["end_date"]:
-            violations.append(f"(e) {label}: start_date is after end_date")
-
-    # (f) no two items of the same kind, strain and place with overlapping dates
+    # (f) no two items identical except evidence (G3). Overlapping counts are allowed (G5).
     for i, first in enumerate(items):
         for j in range(i + 1, len(items)):
-            second = items[j]
-            same_subject = all(
-                first[f] == second[f] for f in ("kind", "strain", "city", "state", "country")
-            )
-            if same_subject and _ranges_overlap(first, second):
-                violations.append(f"(f) items {i + 1} and {j + 1} are the same kind and place with overlapping dates")
+            if _same_except_evidence(first, items[j]):
+                violations.append(f"(f) items {i + 1} and {j + 1} are identical except evidence (G3)")
     return violations

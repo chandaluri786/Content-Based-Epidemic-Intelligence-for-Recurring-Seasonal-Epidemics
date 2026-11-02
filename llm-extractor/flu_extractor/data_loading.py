@@ -1,59 +1,79 @@
-"""Load the articles and the human labels from the JSON files in data/."""
+"""Load the articles, the gold labels and the human labels from the JSON files in data/."""
 
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
+
+DEV = "dev"    # used to build the rules, choose examples and compare settings
+TEST = "test"  # Thanya rows 41-320: scored once, at the end
 
 
 @dataclass(frozen=True)
 class Article:
     """One news article, exactly as it is sent to the model."""
 
-    row: int          # row number in the labeling sheet (1-based)
     article_id: str   # e.g. "20240214121500-1731"
     scan_date: str    # YYYY-MM-DD, the day the article was collected
     link: str
     text: str         # the article body (the "article" field in the JSON)
+    split: str        # DEV or TEST
+    passes_keyword_gate: bool  # False: Rule 1 applies and the model is not called
+    sources: tuple[str, ...] = ()  # where it appears in the labeling sets, e.g. ("Jahnavi:46",)
 
 
 @dataclass(frozen=True)
-class HumanLabel:
-    """The human answer for one article."""
+class GoldLabel:
+    """The answer for one article, from the chain-of-thought records."""
 
-    row: int
     article_id: str
-    useful: bool | None   # None when the human sheet has no label (rows 109 and 152)
-    needs_relook: bool    # the labeler is unsure about this row
-    items: list[dict] = field(default_factory=list)  # human items, in the model's reply format
+    useful: bool
+    items: list[dict] = field(default_factory=list)  # items in the model's reply format
+    labelers: tuple[str, ...] = ()
 
 
 def _read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_articles(path: Path) -> dict[int, Article]:
-    """Read articles.json into {row number: Article}."""
+def load_articles(path: Path) -> dict[str, Article]:
+    """Read articles.json into {article_id: Article}."""
     return {
-        record["row"]: Article(
-            row=record["row"],
+        record["article_id"]: Article(
             article_id=record["article_id"],
             scan_date=record["scan_date"],
             link=record["link"],
             text=record["article"],
+            split=record["split"],
+            passes_keyword_gate=record["passes_keyword_gate"],
+            sources=tuple(record["sources"]),
         )
         for record in _read_json(path)
     }
 
 
-def load_human_labels(path: Path) -> dict[int, HumanLabel]:
-    """Read human_labels.json into {row number: HumanLabel}."""
+def load_gold_labels(path: Path) -> dict[str, GoldLabel]:
+    """Read gold_labels.json into {article_id: GoldLabel}."""
     return {
-        record["row"]: HumanLabel(
-            row=record["row"],
+        record["article_id"]: GoldLabel(
             article_id=record["article_id"],
             useful=record["useful"],
-            needs_relook=record["needs_relook"],
             items=record["items"],
+            labelers=tuple(record["labelers"]),
         )
         for record in _read_json(path)
     }
+
+
+def load_human_useful(path: Path) -> dict[str, bool | None]:
+    """Read human_labels.json into {article_id: the human useful answer}. None = no answer."""
+    return {record["article_id"]: record["useful"] for record in _read_json(path)}
+
+
+def resolve_article_id(spec: str, articles: dict[str, Article]) -> str:
+    """Turn an article id or a set position such as 'Jahnavi:46' into an article id."""
+    if spec in articles:
+        return spec
+    for article in articles.values():
+        if spec in article.sources:
+            return article.article_id
+    raise ValueError(f"No article matches {spec!r}. Use an article id or a form like Jahnavi:46.")

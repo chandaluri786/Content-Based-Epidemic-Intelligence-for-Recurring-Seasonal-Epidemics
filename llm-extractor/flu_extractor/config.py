@@ -25,12 +25,16 @@ PROMPTS_DIR = PROJECT_DIR / "prompts"
 DATA_DIR = PROJECT_DIR / "data"
 
 # The prompt, in two files. To try a new prompt version, add new files and point these at them.
-SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v2.0.txt"  # instructions only
-EXAMPLES_PATH = PROMPTS_DIR / "examples_v2.0.json"           # solved examples, sent as chat turns
+SYSTEM_PROMPT_PATH = PROMPTS_DIR / "system_prompt_v5.1.txt"  # instructions only
+EXAMPLES_PATH = PROMPTS_DIR / "examples_v5.1.json"           # solved examples, sent as chat turns
 
-# Inputs for the run: the articles to send, and the human answers to score against.
+# Inputs for the run: the articles to send, the gold answers to score against, and the human
+# `useful` answers, kept as a second comparison.
 ARTICLES_PATH = DATA_DIR / "articles.json"
+GOLD_LABELS_PATH = DATA_DIR / "gold_labels.json"
 HUMAN_LABELS_PATH = DATA_DIR / "human_labels.json"
+# The fixed development sample used to compare example sets.
+DEV_SAMPLE_PATH = DATA_DIR / "dev_sample_200.txt"
 
 # Answers of the place check (is this a real city / state / country?), one per name, so that
 # each name is looked up only once and later runs repeat exactly.
@@ -46,13 +50,13 @@ MODEL_ID = os.getenv("NVIDIA_MODEL_ID", "nvidia/nemotron-3.5-lightning-30b-a3b")
 
 # 0 makes the output as repeatable as the server allows, so prompt versions can be compared.
 TEMPERATURE = 0
-# Upper limit for the reply only. The longest labeled answer is estimated at ~1,800 tokens.
-MAX_TOKENS = 4000
-# Seconds to wait for one reply; the prompt is ~25-30k tokens, so replies are slow.
+# Upper limit for the reply only. The longest gold reply is 15,683 characters, roughly 5,000 tokens.
+MAX_TOKENS = 8000
+# Seconds to wait for one reply; the prompt is ~30k tokens with examples, so replies are slow.
 REQUEST_TIMEOUT_SECONDS = 300
 # The OpenAI client retries rate-limit, timeout and server errors this many times by itself.
 MAX_RETRIES = 4
-# Nemotron-specific switch: answer directly instead of writing out its reasoning first.
+# Nemotron-specific switch: no separate thinking block. The v5 reply carries its reasoning in JSON.
 EXTRA_BODY = {"chat_template_kwargs": {"enable_thinking": False}}
 
 

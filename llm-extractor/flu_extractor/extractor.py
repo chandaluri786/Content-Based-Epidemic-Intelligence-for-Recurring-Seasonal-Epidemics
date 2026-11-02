@@ -9,6 +9,21 @@ from flu_extractor.data_loading import Article
 from flu_extractor.llm_client import ask_model
 from flu_extractor.prompt import build_messages
 
+# The Rule 1 reply of the prompt. An article that fails the keyword gate never reaches the model,
+# because the prompt tells the model this check has already happened in code.
+RULE_1_REPLY = {
+    "summary": "The article failed the flu keyword check, so it was not sent to the model.",
+    "reasoning": [
+        "Step 0 (summary): The article failed the flu keyword check, so it was not sent to the model.",
+        "Step 1 (Rule 1): the article never mentions flu, influenza, a flu strain, a flu drug or "
+        "vaccine, or a flu-like illness, so it is not useful.",
+    ],
+    "useful": False,
+    "reason": "Not useful: the article never mentions flu, influenza, a flu strain, a flu drug or "
+              "vaccine, or a flu-like illness.",
+    "items": [],
+}
+
 
 def parse_reply(reply_text: str) -> tuple[dict | None, str | None]:
     """Parse the model's reply as JSON. Returns (parsed object, error message).
@@ -41,9 +56,9 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
     cannot stop a long run, and the row can be retried later.
     """
     record = {
-        "row": article.row,
         "article_id": article.article_id,
         "model": config.MODEL_ID,
+        "gated": not article.passes_keyword_gate,
         "finish_reason": None,
         "prompt_tokens": None,
         "completion_tokens": None,
@@ -53,6 +68,10 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         "parse_error": None,
         "api_error": None,
     }
+    if record["gated"]:
+        record["parsed"] = RULE_1_REPLY
+        return record
+
     try:
         reply = ask_model(client, build_messages(prefix_messages, article))
     except openai.OpenAIError as error:

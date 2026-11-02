@@ -16,20 +16,20 @@ def load_system_prompt(path: Path) -> str:
 
 
 def load_examples(path: Path) -> list[dict]:
-    """Read the solved examples: records with scan_date, link, article, answer, source_row."""
+    """Read the solved examples: records with article_id, scan_date, link, article, answer."""
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def format_article(scan_date: str, link: str, article_text: str) -> str:
-    """Write one article the way the prompt expects it (section 3 of prompt v2.0)."""
-    return f"Scan date: {scan_date}\nLink: {link}\nArticle:\n{article_text}"
+    """Write one article with the input names the prompt uses (its Input section)."""
+    return f"scan_date: {scan_date}\nlink: {link}\narticle:\n{article_text}"
 
 
 def build_prefix_messages(system_prompt: str, examples: list[dict]) -> list[dict]:
     """The part of the request that is the same for every article: instructions and examples.
 
-    Each example becomes two messages: the article as a user turn and the human answer,
-    written as JSON, as the assistant turn. Built once per run.
+    Each example becomes two messages: the article as a user turn and the answer, written
+    as JSON, as the assistant turn. Built once per run.
     """
     messages = [{"role": "system", "content": system_prompt}]
     for example in examples:
