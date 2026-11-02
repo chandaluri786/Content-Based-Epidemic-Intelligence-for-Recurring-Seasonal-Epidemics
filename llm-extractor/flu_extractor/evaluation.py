@@ -6,20 +6,26 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from flu_extractor.checks import find_rule_violations, find_shape_errors
-from flu_extractor.data_loading import Article, GoldLabel
+from flu_extractor.data_loading import ALL, Article, GoldLabel
 from flu_extractor.metrics import (
     EXACT_KEY_FIELDS,
     RELAXED_KEY_FIELDS,
     STRICT_KEY_FIELDS,
     WEEKLY_KEY_FIELDS,
+    ArticleScore,
     Counts,
     ItemMatch,
     ItemTally,
+    MacroScore,
     UsefulnessResult,
+    align_items,
     bootstrap_f1_interval,
+    compared_fields,
     differing_fields,
     drop_inactive_only,
+    macro_average,
     match_items,
+    score_article,
     score_usefulness,
 )
 from flu_extractor.places import PlaceChecker
@@ -40,6 +46,8 @@ class RowResult:
     status: str
     gated: bool
     gold_useful: bool
+    repaired: bool = False          # the accepted reply needed stray quotes escaped before parsing
+    validation_retries: int = 0     # times the article was asked again because a reply was invalid
     human_useful: bool | None = None
     model_useful: bool | None = None
     model_reason: str = ""
@@ -49,6 +57,7 @@ class RowResult:
     model_items: list[dict] = field(default_factory=list)
     exact_match: ItemMatch | None = None  # gold vs model items, every field but evidence must agree
     near_match: ItemMatch | None = None   # the leftovers of exact_match, paired by kind and place
+    article_score: ArticleScore | None = None  # this article's exact and partial-credit scores
 
 
 @dataclass
@@ -57,7 +66,11 @@ class Scores:
 
     articles: int
     usefulness: UsefulnessResult
-    exact_items: ItemTally    # headline: every field except evidence agrees
+    article_scores: list[ArticleScore]  # one per article, in the same order as the pairs
+    # Per-article scores averaged over articles (the headline), keyed by MACRO_KEYS.
+    macro: dict[str, MacroScore]
+    # Pooled over all items of all articles (micro), kept for reference.
+    exact_items: ItemTally    # every field except evidence agrees
     strict_items: ItemTally   # kind, place, strain and dates agree
     relaxed_items: ItemTally  # kind, place and strain agree
     weekly_items: ItemTally   # kind, strain, country and ISO week agree
@@ -73,7 +86,7 @@ class Evaluation:
     all_articles: Scores      # every scored article
     model_articles: Scores    # only articles that reached the model
     without_inactive: Scores  # model_articles with inactive-only articles filtered on both sides
-    field_agreement: dict[str, tuple[int, int]]  # field -> (equal, compared) on paired items
+    field_agreement: dict[str, tuple[int, int]]  # field -> (equal, compared) on aligned item pairs
     by_country: dict[str, Counts]                # exact matches per country
     human_vs_model: UsefulnessResult             # model against the human useful answers
     human_vs_gold: UsefulnessResult              # gold against the human useful answers
@@ -97,8 +110,26 @@ def read_run_records(log_path: Path) -> dict[str, dict]:
     return records
 
 
+# The per-article averages in Scores.macro. "with items" = articles where gold or the model has at
+# least one item (an article with none on either side has nothing to score); "gold has items" =
+# articles where gold has at least one item; precision is defined where the model wrote items.
+MACRO_KEYS = {
+    "exact_f1": ("exact_f1", lambda s: s.has_items),
+    "exact_f1_gold_items": ("exact_f1", lambda s: s.gold_items > 0),
+    "exact_precision": ("exact_precision", lambda s: s.model_items > 0),
+    "exact_recall": ("exact_recall", lambda s: s.gold_items > 0),
+    "soft_f1": ("soft_f1", lambda s: s.has_items),
+    "soft_f1_gold_items": ("soft_f1", lambda s: s.gold_items > 0),
+    "soft_precision": ("soft_precision", lambda s: s.model_items > 0),
+    "soft_recall": ("soft_recall", lambda s: s.gold_items > 0),
+}
+
+
 def score_articles(pairs: list[tuple[list[dict], list[dict]]]) -> Scores:
     """Score (gold items, model items) pairs, one pair per article."""
+    article_scores = [score_article(gold_items, model_items) for gold_items, model_items in pairs]
+    macro = {key: macro_average([getattr(s, score) for s in article_scores if applies(s)])
+             for key, (score, applies) in MACRO_KEYS.items()}
     exact, strict, relaxed, weekly = ItemTally(), ItemTally(), ItemTally(), ItemTally()
     exact_counts = []
     for gold_items, model_items in pairs:
@@ -113,6 +144,8 @@ def score_articles(pairs: list[tuple[list[dict], list[dict]]]) -> Scores:
     return Scores(
         articles=len(pairs),
         usefulness=score_usefulness(useful_pairs),
+        article_scores=article_scores,
+        macro=macro,
         exact_items=exact, strict_items=strict, relaxed_items=relaxed, weekly_items=weekly,
         useful_interval=bootstrap_f1_interval(useful_counts),
         exact_interval=bootstrap_f1_interval(exact_counts),
@@ -148,16 +181,20 @@ def evaluate_run(
     )
 
 
+# The order fields are listed in the report: count-only fields, the trend word, then shared fields.
+FIELD_ORDER = ("number", "count_type", "status", "words", "strain", "city", "state", "start_date", "end_date")
+
+
 def _field_agreement(rows: list[RowResult]) -> dict[str, tuple[int, int]]:
-    """On items paired with a gold item, how often each field agrees."""
+    """On aligned item pairs (same kind and country), how often each applicable field agrees."""
     equal, compared = Counter(), Counter()
     for result in rows:
-        for gold_item, model_item in [*result.exact_match.matched, *result.near_match.matched]:
-            different = differing_fields(gold_item, model_item)
-            for name in EXACT_KEY_FIELDS:
+        for gold_item, model_item, _ in align_items(result.gold_items, result.model_items):
+            different = set(differing_fields(gold_item, model_item))
+            for name in compared_fields(gold_item["kind"]):
                 compared[name] += 1
                 equal[name] += name not in different
-    return {name: (equal[name], compared[name]) for name in EXACT_KEY_FIELDS}
+    return {name: (equal[name], compared[name]) for name in FIELD_ORDER}
 
 
 def _exact_by_country(rows: list[RowResult]) -> dict[str, Counts]:
@@ -186,6 +223,8 @@ def _evaluate_row(record: dict, article: Article, label: GoldLabel, human_useful
         gold_useful=label.useful,
         human_useful=human_useful,
         gold_items=label.items,
+        repaired=record.get("repaired", False),
+        validation_retries=record.get("validation_retries", 0),
     )
 
     if record["api_error"]:
@@ -208,6 +247,7 @@ def _evaluate_row(record: dict, article: Article, label: GoldLabel, human_useful
     # Items left over after the exact comparison: pair those of the same kind and place, so that
     # the report can show which fields differ instead of listing one missing and one extra item.
     result.near_match = match_items(result.exact_match.missed, result.exact_match.extra, RELAXED_KEY_FIELDS)
+    result.article_score = score_article(label.items, parsed["items"])
     return result
 
 
@@ -219,7 +259,7 @@ def default_articles_to_run(
     extra_excluded_ids: frozenset[str] = frozenset(),
 ) -> list[str]:
     """The articles to run and score. An article is left out when it:
-      - belongs to the other split,
+      - is not in the chosen split (ALL: no split is left out),
       - has no gold label yet,
       - is one of the solved examples in the examples file (the model would see its answer), or
       - is in the extra exclusion set.
@@ -227,5 +267,5 @@ def default_articles_to_run(
     skipped = example_ids | extra_excluded_ids
     return sorted(
         article_id for article_id, article in articles.items()
-        if article.split == split and article_id in gold_labels and article_id not in skipped
+        if split in (ALL, article.split) and article_id in gold_labels and article_id not in skipped
     )

@@ -6,8 +6,8 @@ from datetime import date
 
 ITEM_KINDS = ("cases", "deaths", "hospitalized", "trend")
 
-# Three ways to decide that a model item and a human item are "the same", from strictest to loosest.
-# Evidence is never compared: the model and the labeler may quote different sentences for one fact.
+# Four ways to decide that a model item and a gold item are "the same", from strictest to loosest.
+# Evidence is never compared: the model and the gold record may quote different sentences for one fact.
 #
 # EXACT: every item field except evidence agrees. This is the headline score.
 EXACT_KEY_FIELDS = (
@@ -198,6 +198,120 @@ def classify_item_set(match: ItemMatch) -> str:
     if not extra:
         return SET_MISSING_ONLY
     return SET_MIXED if matched else SET_NO_MATCH
+
+
+# --- Per-article scores ------------------------------------------------------
+#
+# Each article is scored on its own, then the article scores are averaged (macro average), so
+# that an article with 20 items does not outweigh twenty articles with one item each.
+
+# The fields compared on an aligned pair, besides kind and country (which must agree for two items
+# to be aligned at all). Counts and trends fill different fields (prompt 2.2).
+COUNT_FIELDS = ("number", "count_type", "status", "strain", "city", "state", "start_date", "end_date")
+TREND_FIELDS = ("words", "strain", "city", "state", "start_date", "end_date")
+
+
+def compared_fields(kind: str) -> tuple[str, ...]:
+    return TREND_FIELDS if kind == "trend" else COUNT_FIELDS
+
+
+def item_similarity(gold_item: dict, model_item: dict) -> float | None:
+    """Share of the applicable fields that agree, or None when kind or country differ.
+
+    Items of another kind or another country describe different events, so they are never aligned.
+    """
+    if any(_normalise(gold_item.get(name)) != _normalise(model_item.get(name)) for name in ("kind", "country")):
+        return None
+    fields = compared_fields(gold_item["kind"])
+    return sum(_normalise(gold_item.get(f)) == _normalise(model_item.get(f)) for f in fields) / len(fields)
+
+
+def align_items(gold_items: list[dict], model_items: list[dict]) -> list[tuple[dict, dict, float]]:
+    """Pair model items with gold items, most similar pairs first. Each item is used at most once.
+
+    Returns (gold item, model item, similarity) for every aligned pair. Exact matches have
+    similarity 1, so they are always aligned with each other first.
+    """
+    candidates = sorted(
+        ((similarity, g, m) for g, gold in enumerate(gold_items) for m, model in enumerate(model_items)
+         if (similarity := item_similarity(gold, model)) is not None),
+        key=lambda c: (-c[0], c[1], c[2]),
+    )
+    used_gold, used_model, pairs = set(), set(), []
+    for similarity, g, m in candidates:
+        if g not in used_gold and m not in used_model:
+            used_gold.add(g); used_model.add(m)
+            pairs.append((gold_items[g], model_items[m], similarity))
+    return pairs
+
+
+@dataclass
+class ArticleScore:
+    """How well the model's items for one article match the gold items."""
+
+    gold_items: int
+    model_items: int
+    exact_matches: int   # items whose every field but evidence agrees
+    soft_matches: float  # sum of similarities of the aligned pairs (partial credit)
+
+    @property
+    def has_items(self) -> bool:
+        """False when neither side has items: nothing to extract, nothing extracted."""
+        return bool(self.gold_items or self.model_items)
+
+    @property
+    def exact_precision(self) -> float | None:
+        return safe_divide(self.exact_matches, self.model_items)
+
+    @property
+    def exact_recall(self) -> float | None:
+        return safe_divide(self.exact_matches, self.gold_items)
+
+    @property
+    def exact_f1(self) -> float | None:
+        """None when neither side has items."""
+        return safe_divide(2 * self.exact_matches, self.gold_items + self.model_items)
+
+    @property
+    def soft_precision(self) -> float | None:
+        return safe_divide(self.soft_matches, self.model_items)
+
+    @property
+    def soft_recall(self) -> float | None:
+        return safe_divide(self.soft_matches, self.gold_items)
+
+    @property
+    def soft_f1(self) -> float | None:
+        return safe_divide(2 * self.soft_matches, self.gold_items + self.model_items)
+
+
+def score_article(gold_items: list[dict], model_items: list[dict]) -> ArticleScore:
+    exact = match_items(gold_items, model_items, EXACT_KEY_FIELDS)
+    return ArticleScore(
+        gold_items=len(gold_items), model_items=len(model_items), exact_matches=len(exact.matched),
+        soft_matches=sum(similarity for _, _, similarity in align_items(gold_items, model_items)),
+    )
+
+
+@dataclass
+class MacroScore:
+    """The mean of one per-article score over the articles where it is defined, with a 95% interval."""
+
+    mean: float | None
+    articles: int
+    interval: tuple[float, float] | None
+
+
+def macro_average(values: list[float | None], resamples: int = 1000, seed: int = 20261101) -> MacroScore:
+    """Average per-article values (None = not defined for that article, left out), with a
+    bootstrap interval that resamples articles."""
+    defined = [v for v in values if v is not None]
+    if not defined:
+        return MacroScore(None, 0, None)
+    generator = random.Random(seed)
+    means = sorted(sum(generator.choices(defined, k=len(defined))) / len(defined) for _ in range(resamples))
+    return MacroScore(sum(defined) / len(defined), len(defined),
+                      (means[int(0.025 * resamples)], means[int(0.975 * resamples) - 1]))
 
 
 # --- Filters and intervals ---------------------------------------------------

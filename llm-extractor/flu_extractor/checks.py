@@ -160,12 +160,16 @@ def _date_problems(item: dict, scan_date: str) -> list[str]:
 
 def find_rule_violations(parsed: dict, article_text: str, scan_date: str,
                          place_checker: PlaceChecker) -> list[str]:
-    """Check labeling rules (a)-(j). Call only on a reply with no shape errors.
+    """Check labeling rules (a)-(k). Call only on a reply with no shape errors.
 
     `place_checker` tells whether a city, state or country exists, for rule (d).
     """
     violations = []
     items = parsed["items"]
+
+    # (k) the reasoning steps start with the summary step ("How to work" in the prompt)
+    if not parsed["reasoning"][0].startswith("Step 0"):
+        violations.append("(k) reasoning does not begin with Step 0")
 
     # (g) useful is true exactly when there are items (Section 11)
     if parsed["useful"] != bool(items):

@@ -20,6 +20,7 @@ from flu_extractor.places import PlaceChecker
 
 ARTICLE = "SPRINGFIELD - Officials confirmed 12 new flu cases on Friday."
 GOOD_QUOTE = "Officials confirmed 12 new flu cases on Friday."
+SCAN_DATE = "2016-12-30"
 
 # What the fake geocoder knows: {(field, lower-case name)}.
 REAL_PLACES = {
@@ -45,11 +46,11 @@ class FakeGeocoder:
 
 def reply(city=None, state=None, country=None):
     item = {
-        "kind": "cases", "strain": None, "number": 12, "status": "confirmed", "total_or_new": "new",
-        "city": city, "state": state, "country": country, "start_date": None, "end_date": None,
+        "kind": "cases", "number": 12, "count_type": "new", "status": "confirmed", "strain": None,
+        "city": city, "state": state, "country": country, "start_date": SCAN_DATE, "end_date": SCAN_DATE,
         "words": None, "evidence": [GOOD_QUOTE],
     }
-    return {"useful": True, "borderline": False, "reason": "x", "items": [item], "findings": []}
+    return {"summary": "x", "reasoning": ["Step 0 (summary): x"], "useful": True, "reason": "x", "items": [item]}
 
 
 class PlaceCheckerTest(unittest.TestCase):
@@ -114,7 +115,7 @@ class PlaceRuleTest(unittest.TestCase):
 
     def violations(self, parsed, checker=None):
         checker = checker or PlaceChecker(lookup=FakeGeocoder())
-        return [v for v in find_rule_violations(parsed, ARTICLE, checker) if v.startswith("(d)")]
+        return [v for v in find_rule_violations(parsed, ARTICLE, SCAN_DATE, checker) if v.startswith("(d)")]
 
     def test_null_places_are_allowed_without_any_lookup(self):
         geocoder = FakeGeocoder()
