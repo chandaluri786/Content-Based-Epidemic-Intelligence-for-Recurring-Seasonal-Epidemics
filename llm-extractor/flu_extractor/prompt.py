@@ -25,12 +25,16 @@ def format_article(scan_date: str, link: str, article_text: str) -> str:
     return f"scan_date: {scan_date}\nlink: {link}\narticle:\n{article_text}"
 
 
-def build_prefix_messages(system_prompt: str, examples: list[dict]) -> list[dict]:
+def build_prefix_messages(system_prompt: str, examples: list[dict], fewshot_guide: str = "") -> list[dict]:
     """The part of the request that is the same for every article: instructions and examples.
 
-    Each example becomes two messages: the article as a user turn and the answer, written
-    as JSON, as the assistant turn. Built once per run.
+    The few-shot guide (how to learn from the examples' reasoning and evidence) follows the
+    rules in the system message, only when there are examples. Each example becomes two
+    messages: the article as a user turn and the answer, written as JSON, as the assistant
+    turn. Built once per run.
     """
+    if examples and fewshot_guide:
+        system_prompt = f"{system_prompt}\n\n---\n\n{fewshot_guide}"
     messages = [{"role": "system", "content": system_prompt}]
     for example in examples:
         messages.append({
@@ -44,10 +48,13 @@ def build_prefix_messages(system_prompt: str, examples: list[dict]) -> list[dict
     return messages
 
 
-def build_messages(prefix_messages: list[dict], article: Article) -> list[dict]:
-    """The full request: the shared prefix plus this article as the final user message."""
-    user_message = {
-        "role": "user",
-        "content": format_article(article.scan_date, article.link, article.text),
-    }
-    return [*prefix_messages, user_message]
+def build_messages(prefix_messages: list[dict], article: Article, note: str = "") -> list[dict]:
+    """The full request: the shared prefix plus this article as the final user message.
+
+    `note` is added after the article only when an earlier reply for it was invalid: it says what
+    was wrong, so the next reply differs (at temperature 0 the same request gives the same reply).
+    """
+    content = format_article(article.scan_date, article.link, article.text)
+    if note:
+        content += f"\n\n{note}"
+    return [*prefix_messages, {"role": "user", "content": content}]

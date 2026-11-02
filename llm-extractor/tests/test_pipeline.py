@@ -1,0 +1,259 @@
+"""Tests for the parts between the data files and the scores: building the data, the request,
+the keyword gate, choosing the articles and scoring a run. No API and no internet.
+
+Run from the llm-extractor folder:
+
+    python -m unittest discover tests
+"""
+
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+from unittest import mock
+
+import openai
+
+from flu_extractor import config
+from flu_extractor.data_loading import ALL, DEV, TEST, Article, GoldLabel, resolve_article_id
+from flu_extractor.llm_client import ModelReply
+from flu_extractor.evaluation import SCORED, UNPARSEABLE, default_articles_to_run, evaluate_run
+from flu_extractor.extractor import RULE_1_REPLY, extract_article, parse_reply
+from flu_extractor.places import PlaceChecker
+from flu_extractor.prompt import build_messages, build_prefix_messages, format_article
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+import build_gold_files  # noqa: E402
+import select_examples  # noqa: E402
+
+EVERY_PLACE_IS_REAL = PlaceChecker(lookup=lambda field, value: {"found": True, "top_match": value})
+
+
+def article(article_id="a1", split=DEV, gate=True, text="Officials confirmed 12 new flu cases on Friday."):
+    return Article(article_id=article_id, scan_date="2016-12-30", link="http://x", text=text, split=split,
+                   passes_keyword_gate=gate, sources=(f"Jahnavi:{article_id[1:]}",))
+
+
+class PromptTest(unittest.TestCase):
+    def test_article_uses_the_input_names_of_the_v5_prompt(self):
+        self.assertEqual(format_article("2016-12-30", "http://x", "Text."),
+                         "scan_date: 2016-12-30\nlink: http://x\narticle:\nText.")
+
+    def test_examples_become_user_and_assistant_turns_before_the_article(self):
+        example = {"article_id": "e1", "scan_date": "2016-01-01", "link": "l", "article": "Grippe ist da.",
+                   "answer": {"summary": "s", "reasoning": ["Step 0"], "useful": False, "reason": "r", "items": []}}
+        messages = build_messages(build_prefix_messages("RULES", [example]), article())
+        self.assertEqual([m["role"] for m in messages], ["system", "user", "assistant", "user"])
+        self.assertEqual(list(json.loads(messages[2]["content"])), ["summary", "reasoning", "useful", "reason", "items"])
+        self.assertIn("Grippe ist da.", messages[1]["content"])  # not escaped: ensure_ascii=False
+
+    def test_fewshot_guide_follows_the_rules_only_when_examples_are_sent(self):
+        example = {"scan_date": "d", "link": "l", "article": "a", "answer": {}}
+        with_examples = build_prefix_messages("RULES", [example], "GUIDE")[0]["content"]
+        self.assertTrue(with_examples.startswith("RULES") and with_examples.endswith("GUIDE"))
+        self.assertEqual(build_prefix_messages("RULES", [], "GUIDE")[0]["content"], "RULES")  # zero-shot
+
+
+class ExampleSelectionTest(unittest.TestCase):
+    @staticmethod
+    def record(useful, rules, items=()):
+        return {"output": {"useful": useful, "items": list(items)}, "rules_used": rules}
+
+    def test_slots_come_from_rules_and_items(self):
+        count = {"kind": "cases", "count_type": "cumulative_subset", "status": "suspected", "words": None,
+                 "strain": None, "city": None, "state": None, "country": "USA"}
+        trend = dict(count, kind="trend", count_type=None, status=None, words="rising")
+        self.assertEqual(select_examples.slots_of(self.record(False, ["Rule 1", "1.2", "4.7"])), {1, 3})
+        self.assertEqual(select_examples.slots_of(self.record(False, ["Rule 1", "1.3"])), {2})
+        self.assertEqual(select_examples.slots_of(self.record(True, ["4.5", "5.3.6"], [count, trend])),
+                         {7, 10, 11, 12})
+
+    def test_prompt_order_spreads_not_useful_and_ends_on_one(self):
+        examples = [{"id": i, "useful": u} for i, u in enumerate([True, True, False, True, True, False])]
+        ordered = select_examples.prompt_order(examples)
+        self.assertFalse(ordered[-1]["useful"])
+        self.assertEqual(sorted(e["id"] for e in ordered), list(range(6)))
+        self.assertEqual([e["useful"] for e in ordered], [True, True, False, True, True, False])
+
+
+class ExtractorTest(unittest.TestCase):
+    def test_gated_article_gets_the_rule_1_reply_without_calling_the_model(self):
+        record = extract_article(client=None, prefix_messages=[], article=article(gate=False))
+        self.assertTrue(record["gated"])
+        self.assertEqual(record["parsed"], RULE_1_REPLY)
+        self.assertIsNone(record["raw_reply"])
+
+    def test_parse_reply_accepts_fenced_json(self):
+        parsed, error, repaired = parse_reply('```json\n{"useful": false}\n```')
+        self.assertEqual((parsed, error, repaired), ({"useful": False}, None, False))
+
+    def test_stray_quotes_from_the_article_are_repaired(self):
+        # the failure seen in the runs: an article quotation copied with its double quotes unescaped
+        text = '{"reasoning": ["S1 \'a "noticeable increase" in wastewater\'"], "useful": true}'
+        parsed, error, repaired = parse_reply(text)
+        self.assertIsNone(error)
+        self.assertTrue(repaired)
+        self.assertEqual(parsed["reasoning"][0], 'S1 \'a "noticeable increase" in wastewater\'')
+
+    def test_raw_line_breaks_inside_strings_are_repaired(self):
+        parsed, error, repaired = parse_reply('{"reason": "line one\nline two", "useful": false}')
+        self.assertEqual((parsed["reason"], error, repaired), ("line one\nline two", None, True))
+
+    def test_valid_escapes_are_kept_and_unrepairable_text_is_reported(self):
+        parsed, _, repaired = parse_reply('{"q": "he said \\"hi\\""}')
+        self.assertEqual((parsed["q"], repaired), ('he said "hi"', False))
+        parsed, error, _ = parse_reply('{"useful": true, "items": [')
+        self.assertIsNone(parsed)
+        self.assertTrue(error.startswith("invalid JSON"))
+
+
+VALID_REPLY = json.dumps({"summary": "s", "reasoning": ["Step 0 (summary): s"], "useful": False,
+                          "reason": "r", "items": []})
+
+
+class ValidationRetryTest(unittest.TestCase):
+    """extract_article accepts only a complete, parseable, well-formed reply; otherwise it asks again
+    with a note that names the problem."""
+
+    def run_with_replies(self, *replies):
+        sent = []
+        self.temperatures = []
+
+        def fake_ask(client, messages, temperature=None):
+            sent.append(messages[-1]["content"])
+            self.temperatures.append(temperature)
+            outcome = replies[len(sent) - 1]
+            if isinstance(outcome, Exception):
+                raise outcome
+            text, finish = outcome
+            return ModelReply(text=text, finish_reason=finish, prompt_tokens=100, completion_tokens=10, seconds=1.0)
+
+        with mock.patch("flu_extractor.extractor.ask_model", fake_ask):
+            record = extract_article(client=None, prefix_messages=[], article=article())
+        return record, sent
+
+    def test_a_valid_first_reply_is_accepted_without_retry(self):
+        record, sent = self.run_with_replies((VALID_REPLY, "stop"))
+        self.assertEqual((len(sent), record["validation_retries"], record["parse_error"]), (1, 0, None))
+        self.assertEqual(record["parsed"]["useful"], False)
+
+    def test_cut_off_invalid_and_malformed_replies_are_asked_again_with_a_note(self):
+        for bad, words in ((("{\"summary\": \"s\", \"reas", "length"), "cut off"),
+                           (("{\"useful\": tru", "stop"), "not valid JSON"),
+                           (('{"useful": false, "items": []}', "stop"), "broke the reply format")):
+            with self.subTest(bad=bad):
+                record, sent = self.run_with_replies(bad, (VALID_REPLY, "stop"))
+                self.assertEqual(len(sent), 2)
+                self.assertIn(words, sent[1])            # the second request names the problem
+                self.assertNotIn("Note:", sent[0])       # the first request is the plain article
+                self.assertEqual((record["validation_retries"], record["parse_error"]), (1, None))
+                self.assertEqual(len(record["validation_problems"]), 1)
+                self.assertEqual(record["prompt_tokens"], 200)  # both requests counted
+
+    def test_gives_up_after_the_retries_and_reports_the_last_problem(self):
+        bad = ("{\"useful\": tru", "stop")
+        record, sent = self.run_with_replies(*[bad] * (config.MAX_VALIDATION_RETRIES + 1))
+        self.assertEqual(len(sent), config.MAX_VALIDATION_RETRIES + 1)
+        self.assertIsNone(record["parsed"])
+        self.assertTrue(record["parse_error"].startswith("invalid JSON"))
+        # every attempt but the last at the default temperature; the last asks for a compact reply
+        # at a small temperature, because at temperature 0 the same mistake tends to repeat
+        self.assertEqual(self.temperatures[:-1], [None] * config.MAX_VALIDATION_RETRIES)
+        self.assertEqual(self.temperatures[-1], config.LAST_RETRY_TEMPERATURE)
+        self.assertIn("compact", sent[-1])
+        self.assertIn("do not copy any text from the article", sent[-1])
+
+    def test_an_api_failure_is_recorded_not_raised(self):
+        record, _ = self.run_with_replies(openai.APIConnectionError(request=None))
+        self.assertIn("APIConnectionError", record["api_error"])
+
+
+class SelectionTest(unittest.TestCase):
+    def test_default_articles_follow_the_split_and_skip_examples_and_unlabelled(self):
+        articles = {a.article_id: a for a in (article("a1"), article("a2"), article("a3"),
+                                              article("a4", split=TEST), article("a5"))}
+        gold = {i: GoldLabel(i, False) for i in ("a1", "a2", "a3", "a4")}  # a5 has no gold yet
+        self.assertEqual(default_articles_to_run(articles, gold, DEV, frozenset({"a2"}), frozenset({"a3"})), ["a1"])
+        self.assertEqual(default_articles_to_run(articles, gold, TEST, frozenset()), ["a4"])
+        # ALL treats every labelled article as one set; examples, exclusions and unlabelled still out
+        self.assertEqual(default_articles_to_run(articles, gold, ALL, frozenset({"a2"}), frozenset({"a3"})),
+                         ["a1", "a4"])
+
+    def test_article_can_be_named_by_set_position(self):
+        articles = {"a7": article("a7")}
+        self.assertEqual(resolve_article_id("Jahnavi:7", articles), "a7")
+        self.assertEqual(resolve_article_id("a7", articles), "a7")
+        with self.assertRaises(ValueError):
+            resolve_article_id("Manoj:7", articles)
+
+
+class EvaluationTest(unittest.TestCase):
+    ITEM = {"kind": "cases", "number": 12, "count_type": "new", "status": "confirmed", "strain": None,
+            "city": None, "state": "Illinois", "country": "USA", "start_date": "2016-12-30",
+            "end_date": "2016-12-30", "words": None,
+            "evidence": ["Officials confirmed 12 new flu cases on Friday."]}
+
+    def record(self, article_id, parsed, gated=False, parse_error=None):
+        return {"article_id": article_id, "gated": gated, "api_error": None, "parsed": parsed,
+                "parse_error": parse_error}
+
+    def test_gated_rows_are_left_out_of_the_headline_but_kept_in_all_articles(self):
+        articles = {"a1": article("a1"), "a2": article("a2", gate=False), "a3": article("a3")}
+        gold = {"a1": GoldLabel("a1", True, [self.ITEM]), "a2": GoldLabel("a2", False), "a3": GoldLabel("a3", True)}
+        answer = {"summary": "s", "reasoning": ["Step 0 (summary): s"], "useful": True, "reason": "r",
+                  "items": [self.ITEM]}
+        records = {"a1": self.record("a1", answer), "a2": self.record("a2", RULE_1_REPLY, gated=True),
+                   "a3": self.record("a3", None, parse_error="invalid JSON")}
+        evaluation = evaluate_run(records, articles, gold, {"a1": True}, EVERY_PLACE_IS_REAL)
+        self.assertEqual([r.status for r in evaluation.rows], [SCORED, SCORED, UNPARSEABLE])
+        self.assertEqual((evaluation.model_articles.articles, evaluation.all_articles.articles), (1, 2))
+        self.assertEqual(evaluation.model_articles.exact_items.overall().f1, 1.0)
+        self.assertEqual(evaluation.rows[0].violations, [])
+
+
+class BuildGoldFilesTest(unittest.TestCase):
+    SEPARATOR = "=" * 80
+
+    def texts(self, *articles):
+        blocks = [f"{self.SEPARATOR}\n#{row}  [1-own]  {aid}\nscan date: 2016-12-30\ntagged country: USA\n"
+                  f"link: http://x/{aid}\n{'-' * 80}\n{body}\n" for row, aid, body in articles]
+        return "".join(blocks)
+
+    def test_system_prompt_starts_at_the_task_section(self):
+        text = build_gold_files.extract_system_prompt("# Title\n\nGenerated from x.\n\n## Task\nDo it.\n")
+        self.assertEqual(text, "## Task\nDo it.\n")
+
+    def test_overlaps_are_merged_and_thanya_41_on_is_test(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            bodies = {"j1": "Flu in town.", "t41": "Influenza rising.", "n1": "Nothing here."}
+            sets = {
+                "Jahnavi": [(1, "j1", bodies["j1"])],
+                "Aditya": [(1, "n1", bodies["n1"])],
+                "Manoj": [(1, "m1", "More flu.")],
+                "Thanya": [(1, "j1", bodies["j1"]), (41, "t41", bodies["t41"])],
+            }
+            for name, articles in sets.items():
+                (folder / f"{name}_texts.txt").write_text(self.texts(*articles), encoding="utf-8")
+                (folder / f"{name}_labels.csv").write_text(
+                    "row,article_id,useful\n" + "".join(f"{r},{a},yes\n" for r, a, _ in articles), encoding="utf-8")
+            record = {"article_id": "j1", "source_rows": [{"labeler": "Jahnavi", "row": 1}],
+                      "output": {"useful": False, "reason": "r", "items": []}}
+            (folder / "Jahnavi_chain_of_thought_v2.jsonl").write_text(json.dumps(record) + "\n", encoding="utf-8")
+
+            articles, gold, human = build_gold_files.build(folder, folder, lambda text: "flu" in text.lower()
+                                                           or "influenza" in text.lower())
+        by_id = {a["article_id"]: a for a in articles}
+        self.assertEqual(len(articles), 4)
+        self.assertEqual(by_id["j1"]["sources"], ["Jahnavi:1", "Thanya:1"])
+        self.assertEqual((by_id["j1"]["split"], by_id["t41"]["split"]), (DEV, TEST))
+        self.assertFalse(by_id["n1"]["passes_keyword_gate"])
+        self.assertNotIn("tagged country", by_id["j1"]["article"])  # header lines are never sent
+        self.assertEqual([(g["article_id"], g["split"]) for g in gold], [("j1", DEV)])
+        self.assertTrue(all(h["useful"] is True for h in human))
+
+
+if __name__ == "__main__":
+    unittest.main()
