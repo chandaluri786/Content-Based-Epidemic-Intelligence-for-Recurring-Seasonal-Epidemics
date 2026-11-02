@@ -4,8 +4,9 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-DEV = "dev"    # used to build the rules, choose examples and compare settings
-TEST = "test"  # Thanya rows 41-320: scored once, at the end
+DEV = "dev"    # Jahnavi, Aditya and Manoj (where the labels came from)
+TEST = "test"  # Thanya rows 41-320 (no gold labels yet)
+ALL = "all"    # both: runs treat every labelled article as one set
 
 
 @dataclass(frozen=True)
