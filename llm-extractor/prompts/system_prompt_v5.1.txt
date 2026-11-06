@@ -69,7 +69,7 @@ An article that never mentions flu, influenza, a flu strain, a flu drug or vacci
 
 | Overlap | Example | Items |
 |---|---|---|
-| A region total broken down by place | "1,000 cases in the USA, 500 in Texas and 200 in Seattle so far this year" | 3 items: USA; Texas, USA; Seattle, Washington, USA |
+| A region total broken down by place | "1,000 cases in the USA, 500 in Texas and 200 in Seattle so far this year" | 3 items: United States; Texas, United States; Seattle, Washington, United States |
 | A shorter period inside a longer one | "Fifty H1N1 cases… in the past four weeks, including 17 cases between June 25 and 28" | 50 and 17 |
 | A single-day count inside a period count | "around 60… in July, including seven people over the last 24 hours" | 60 and 7 |
 | A new count updating a running total | "Seven more people have succumbed… in the last four days taking the death toll… to 31" | 7 and 31 |
@@ -319,11 +319,11 @@ An item is recorded only if its **end date is within the 30 days ending on the s
 
 ### 5.1 Definition: the three place fields
 The place is **where the event happened**, written in three fields.
-- **country** (required, G1): a real country, standard short name (USA, United Kingdom, India…). Any country is recorded, not only the six study countries.
-- **state**: the country's **first-level division**, whatever it's called: state, province, region, territory, union territory, prefecture, emirate, oblast, or a first-level county as in Kenya. Full name ("New South Wales", not "NSW").
-- **city**: a real city or town, common English name.
+- **country** (required, G1): a real country. Any country is recorded, not only the six study countries.
+- **state**: the country's **first-level division**, whatever it's called: state, province, region, territory, union territory, prefecture, emirate, oblast, or a first-level county as in Kenya.
+- **city**: a real city or town.
 - **The chain must be complete.** A city needs a state and a country. A state needs a country. Country alone is allowed.
-- **One place, one name.** Every place is written the same way in every item, whatever form the article uses: one standard common English name, never a local spelling, an old name or a second name for the same place. New Delhi is written as Delhi.
+- **One place, one name.** Every city, state and country has exactly one agreed form, used in every item and every article, whatever form the article uses. **The agreed form is the place's English name in OpenStreetMap**, the name the project's place check looks up. This applies to every place, well known or not. Never write an old name, a local-language name, a different transliteration, an abbreviation, or a level word (Province, District, Oblast) that OpenStreetMap's name doesn't include. If you are unsure of OpenStreetMap's exact form, write the place's current official English name; the code converts every value to OpenStreetMap's form before it is used.
 - **Never stored in these fields:** areas below the first level that aren't cities (counties, districts, talukas, mandals, boroughs), neighbourhoods, regions, hemispheres, continents, "global" or WHO regions. They are used only to infer the fields (5.5).
 
 ### 5.2 Read the context, and attach only a place tied to the event
@@ -338,7 +338,7 @@ Use the steps in order. If a later step gives a **more specific place for the sa
 | Step | Source | Use only when | Example |
 |---|---|---|---|
 | 1 | **The event's own sentence.** "in X", "X reported", "residents of X"; a dateline that **starts this sentence** ("HYDERABAD: A 58-year-old woman… died"); a place inside a name ("Missoula City-County Health Department", "Kerman province"); a demonym for residents ("Kenyans"); an office naming a country ("Brazilian President Lula") | the place is where the event happened (5.4) | "two persons, one in Mumbai and the other in Nashik succumbed to swine flu" → two items |
-| 2 | **The jurisdiction of the authority reporting this event** | the jurisdiction is in its name (NSW Health, Kerala Health Department) or is a fixed acronym (CDC → USA, ADPH → Alabama, BMC → Mumbai), and the authority reports about its own jurisdiction | "The figures, from an SA Health disease notification, show 1106 flu cases" → South Australia |
+| 2 | **The jurisdiction of the authority reporting this event** | the jurisdiction is in its name (NSW Health, Kerala Health Department) or is a fixed acronym (CDC → United States, ADPH → Alabama, BMC → Mumbai), and the authority reports about its own jurisdiction | "The figures, from an SA Health disease notification, show 1106 flu cases" → South Australia |
 | 3 | **The location of the institution where the event happened** (hospital, testing lab) | the article states the institution's city, or it has only one location (AIIMS has several campuses, so it needs the city in the article) | "died… at Kasturba Hospital" → Mumbai |
 | 4 | **An explicit reference back** to an earlier place ("the state", "the district", "the city", "the county", "here", "locally", "statewide", "across the country") or to the same event or person ("the outbreak", "the patient", "she") | the earlier sentence states the place | "Of the 13 persons who died… six are from the district" → the district named earlier |
 | 5 | **The data source of the figures** | the article names the source with a place reference ("the province's respiratory dashboard", "state figures") that resolves to a named place, and every event in the article is in that one place | "As of Oct. 8… 38 with influenza" + "according to the province's respiratory dashboard" + "Alberta…" → Alberta, Canada |
@@ -372,7 +372,7 @@ Use the steps in order. If a later step gives a **more specific place for the sa
 | a state or other first-level division | state and country |
 | a territory or special region (Guam, Puerto Rico, New Caledonia, French Polynesia, Hong Kong, Macau) | state = the territory, country = its sovereign country (Hong Kong → state Hong Kong, country China). For Hong Kong and Macau, city = the same name. |
 | a city-state with no first level (Singapore, Monaco, Vatican City) | country only |
-| a capital district (Delhi, Washington DC, Brasilia) | city Delhi, state Delhi; city Washington, state District of Columbia; city Brasilia, state Federal District |
+| a capital district (Delhi, Washington DC, Brasilia) | city Delhi, state Delhi; city Washington, state District of Columbia; city Brasília, state Federal District |
 | a loose region inside one state or country ("delta districts… including two in Tiruchi") | the smallest real unit that contains it (Tamil Nadu) |
 | a region with no single containing unit ("the Southern Hemisphere", "the Middle East", "south India" as a whole) | no place, so no item |
 | several places for one count ("Missoula and Lewis and Clark Counties") | the smallest area containing all of them (Montana) |
@@ -442,7 +442,7 @@ Whether the article treats the illness, admission or death as **caused by flu** 
 - **No → `cumulative_region`.** This is the **default**: the total for all of the lowest recorded place (city, else state, else country) and all its people, whenever the article gives no clue that the count is limited.
   - **Details about the people counted do not limit the count.** "One death occurred in a person aged over 60", "the four who died were over 65", "including senior adults", "also citizens of other countries" describe who was counted; the count is still the whole place's total.
 - **Yes → `cumulative_subset`.** The article's count is limited to:
-  - **part of the place**: a smaller area inside the recorded place (county, district, taluka), or only some named parts of it: "Douglas County has already seen more than 20 confirmed cases" (recorded as Nebraska); "the CDC listed 41 cases in six states" (recorded as USA); numbers given for only a few districts of a state;
+  - **part of the place**: a smaller area inside the recorded place (county, district, taluka), or only some named parts of it: "Douglas County has already seen more than 20 confirmed cases" (recorded as Nebraska); "the CDC listed 41 cases in six states" (recorded as United States); numbers given for only a few districts of a state;
   - **an institution** (school, college, hospital, clinic, care home, prison, workplace): "182 students and 15 teachers sick" at one Brisbane school; "19 children… admitted to Westmead Children's hospital since April";
   - **one category of people counted on its own** (an age group, one gender, students, teachers, farm workers, travellers, ICU patients), even across the whole place: "seven children" died this season in the USA. Here the article gives the total for that group only, not for the whole population;
   - **a sample** (one doctor's patients, one batch of tests).
@@ -576,7 +576,7 @@ Some statements show flu is circulating now without describing cases. Each needs
 - **Dominance** ("predominant", "most frequently detected") is **present**, never high, and is recorded **even when the article has other items**.
 
 ### 9.7 Fallback items: only when that place has no other item
-After all statements are handled, check each place separately, because trends are recorded per place. A place is one set of values for city, state and country. Two places are separate only if those values differ as a set: "Minnesota, USA" and "USA" are separate places. A part below the lowest place that can be recorded has the same values as that place, so it is the same place and gets no separate entry: flu in one neighbourhood and a trend for the whole city share one set of values, so the trend holds for the city. For each place with **no other item**, one of these may be recorded, provided the activity is recent (4.7) and the place is tied to it (Section 5). If that place has any other item, no fallback is recorded for it. Items for a different place do not block it: "People are dying of swine flu in Gujarat and Rajasthan but we have kept the situation in control in Delhi" gives a fallback **present** for each of Delhi, Gujarat and Rajasthan. A fallback is never added because counts were found, or for a sentence that only adds detail to a trend already recorded.
+After all statements are handled, check each place separately, because trends are recorded per place. A place is one set of values for city, state and country. Two places are separate only if those values differ as a set: "Minnesota, United States" and "United States" are separate places. A part below the lowest place that can be recorded has the same values as that place, so it is the same place and gets no separate entry: flu in one neighbourhood and a trend for the whole city share one set of values, so the trend holds for the city. For each place with **no other item**, one of these may be recorded, provided the activity is recent (4.7) and the place is tied to it (Section 5). If that place has any other item, no fallback is recorded for it. Items for a different place do not block it: "People are dying of swine flu in Gujarat and Rajasthan but we have kept the situation in control in Delhi" gives a fallback **present** for each of Delhi, Gujarat and Rajasthan. A fallback is never added because counts were found, or for a sentence that only adds detail to a trend already recorded.
 
 | Fallback | When | Item |
 |---|---|---|

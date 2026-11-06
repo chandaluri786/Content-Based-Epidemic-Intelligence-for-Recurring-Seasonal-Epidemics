@@ -1,417 +1,3017 @@
 {
-  "city: allahabad": {
-    "checked_on": "2026-10-18",
+  "city: abu dhabi | state: abu dhabi emirate | country: united arab emirates": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Abu Dhabi",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/4479763",
+    "top_match": "Abu Dhabi, Abu Dhabi Emirate, United Arab Emirates"
+  },
+  "city: abu dhabi | state: abu dhabi | country: united arab emirates": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Abu Dhabi",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/4479763",
+    "top_match": "Abu Dhabi, Abu Dhabi Emirate, United Arab Emirates"
+  },
+  "city: allahabad | state: uttar pradesh | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Prayagraj",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/245733956",
     "top_match": "Prayagraj, Allahabad, Prayagraj, Uttar Pradesh, 211001, India"
   },
-  "city: barnstable": {
-    "checked_on": "2026-10-18",
+  "city: barnstable | state: massachusetts | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Barnstable",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2387624",
     "top_match": "Barnstable, Barnstable County, Massachusetts, United States"
   },
-  "city: bhubaneswar": {
-    "checked_on": "2026-10-18",
+  "city: barnstable | state: massachusetts | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Barnstable",
     "found": true,
-    "top_match": "Bhubaneswar, Bhubaneswar Municipal Corporation, Bhubaneswar (M.Corp.), Khordha, Odisha, 751001, India"
+    "language": "en",
+    "osm_id": "relation/2387624",
+    "top_match": "Barnstable, Barnstable County, Massachusetts, United States"
   },
-  "city: brasilia": {
-    "checked_on": "2026-10-18",
+  "city: bengaluru | state: karnataka | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Bengaluru",
     "found": true,
-    "top_match": "Brasília, Plano Piloto, Distrito Federal, Região Centro-Oeste, 70391-900, Brasil"
+    "language": "en",
+    "osm_id": "relation/7902476",
+    "top_match": "Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, India"
   },
-  "city: chennai": {
-    "checked_on": "2026-10-18",
+  "city: bhubaneshwar | state: odisha | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Bhubaneshwar",
     "found": true,
+    "language": "en",
+    "osm_id": "node/1051669585",
+    "top_match": "Bhubaneshwar, Bhubaneswar Municipal Corporation, Bhubaneswar (M.Corp.), Khordha, Odisha, 751001, India"
+  },
+  "city: bhubaneswar | state: odisha | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Bhubaneshwar",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/1051669585",
+    "top_match": "Bhubaneshwar, Bhubaneswar Municipal Corporation, Bhubaneswar (M.Corp.), Khordha, Odisha, 751001, India"
+  },
+  "city: boston | state: massachusetts | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Boston",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2315704",
+    "top_match": "Boston, Suffolk County, Massachusetts, United States"
+  },
+  "city: boston | state: massachusetts | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Boston",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2315704",
+    "top_match": "Boston, Suffolk County, Massachusetts, United States"
+  },
+  "city: brasilia | state: federal district | country: brazil": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Brasília",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/34567423",
+    "top_match": "Brasília, Plano Piloto, Federal District, Central-West Region, 70391-900, Brazil"
+  },
+  "city: brasília | state: federal district | country: brazil": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Brasília",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/34567423",
+    "top_match": "Brasília, Plano Piloto, Federal District, Central-West Region, 70391-900, Brazil"
+  },
+  "city: brisbane | state: queensland | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Brisbane",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/14027280",
+    "top_match": "Brisbane, Queensland, Australia"
+  },
+  "city: chennai | state: tamil nadu | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Chennai",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1766358",
     "top_match": "Chennai, Chennai Metropolitan Area, Chennai District, Tamil Nadu, India"
   },
-  "city: delhi": {
-    "checked_on": "2026-10-18",
+  "city: coimbatore | state: tamil nadu | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Coimbatore",
     "found": true,
+    "language": "en",
+    "osm_id": "node/245589078",
+    "top_match": "Coimbatore, Coimbatore North, Coimbatore, Tamil Nadu, 641001, India"
+  },
+  "city: dahanu | state: maharashtra | country: india": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Dahanu",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/245686722",
+    "top_match": "Dahanu, Dahanu Taluka, Palghar, Maharashtra, 401600, India"
+  },
+  "city: delhi | state: delhi | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Delhi",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/21180767",
     "top_match": "Delhi, Old Delhi, Delhi, India"
   },
-  "city: godhra": {
-    "checked_on": "2026-10-18",
+  "city: dhaulpur | state: rajasthan | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Dhaulpur",
     "found": true,
+    "language": "en",
+    "osm_id": "node/245751454",
+    "top_match": "Dhaulpur, Dhaulpur Tehsil, Dhaulpur, Rajasthan, 328001, India"
+  },
+  "city: dholpur | state: rajasthan | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Dhaulpur",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/245751454",
+    "top_match": "Dhaulpur, Dhaulpur Tehsil, Dhaulpur, Rajasthan, 328001, India"
+  },
+  "city: dobrich | state: dobrich | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Dobrich",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/12996399",
+    "top_match": "Dobrich, Bulgaria"
+  },
+  "city: gabrovo | state: gabrovo | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Gabrovo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/17363266",
+    "top_match": "Gabrovo, Bulgaria"
+  },
+  "city: godhra | state: gujarat | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Godhra",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/2313653794",
     "top_match": "Godhra, Godhra Taluka, Panchmahal, Gujarat, 389001, India"
   },
-  "city: harmanli": {
-    "checked_on": "2026-10-18",
+  "city: greencastle | state: indiana | country: united states": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Greencastle",
     "found": true,
-    "top_match": "Harmanlı, Bismil, Diyarbakır, Güneydoğu Anadolu Bölgesi, Türkiye"
+    "language": "en",
+    "osm_id": "relation/127791",
+    "top_match": "Greencastle, Putnam County, Indiana, 46135, United States"
   },
-  "city: hyderabad": {
-    "checked_on": "2026-10-18",
+  "city: greencastle | state: indiana | country: usa": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Greencastle",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/127791",
+    "top_match": "Greencastle, Putnam County, Indiana, 46135, United States"
+  },
+  "city: gurgaon | state: haryana | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Gurgaon",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3577685",
+    "top_match": "Gurgaon, Haryana, India"
+  },
+  "city: hillsdale | state: michigan | country: united states": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Hillsdale",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135012",
+    "top_match": "Hillsdale, Hillsdale County, Michigan, United States"
+  },
+  "city: hillsdale | state: michigan | country: usa": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Hillsdale",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135012",
+    "top_match": "Hillsdale, Hillsdale County, Michigan, United States"
+  },
+  "city: hong kong | state: hong kong | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Hong Kong",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/20044132",
+    "top_match": "Hong Kong, China"
+  },
+  "city: houston | state: texas | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Houston",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2688911",
+    "top_match": "Houston, Harris County, Texas, United States"
+  },
+  "city: houston | state: texas | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Houston",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2688911",
+    "top_match": "Houston, Harris County, Texas, United States"
+  },
+  "city: hyderabad | state: telangana | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Hyderabad",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/7868535",
     "top_match": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
   },
-  "city: jodhpur": {
-    "checked_on": "2026-10-18",
+  "city: jaipur | state: rajasthan | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Jaipur",
     "found": true,
+    "language": "en",
+    "osm_id": "node/315734346",
+    "top_match": "Jaipur, Jaipur Municipal Corporation, Jaipur Tehsil, Jaipur, Rajasthan, 302001, India"
+  },
+  "city: jodhpur | state: rajasthan | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Jodhpur",
+    "found": true,
+    "language": "en",
+    "osm_id": "way/31725312",
     "top_match": "Jodhpur, Jodhpur Tehsil, Jodhpur, Rajasthan, India"
   },
-  "city: kolkata": {
-    "checked_on": "2026-10-18",
+  "city: kanpur | state: uttar pradesh | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kanpur",
     "found": true,
-    "top_match": "Kolkata, West Bengal, India"
+    "language": "en",
+    "osm_id": "node/1180652177",
+    "top_match": "Kanpur, Kanpur Nagar, Uttar Pradesh, 208012, India"
   },
-  "city: ludhiana": {
-    "checked_on": "2026-10-18",
+  "city: kharkiv | state: kharkiv oblast | country: ukraine": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kharkiv",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/3154746",
+    "top_match": "Kharkiv, Kharkiv Urban Hromada, Kharkiv Raion, Kharkiv Oblast, Ukraine"
+  },
+  "city: kolkata | state: west bengal | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kolkata",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/9381363",
+    "top_match": "Kolkata, Greater Kolkata, Kolkata, West Bengal, India"
+  },
+  "city: kyiv | state: kyiv | country: ukraine": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": "Old Kyiv, Shevchenkivskyi district, Kyiv, Ukraine"
+  },
+  "city: las vegas | state: nevada | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Las Vegas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/170117",
+    "top_match": "Las Vegas, Clark County, Nevada, United States"
+  },
+  "city: las vegas | state: nevada | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Las Vegas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/170117",
+    "top_match": "Las Vegas, Clark County, Nevada, United States"
+  },
+  "city: ludhiana | state: punjab | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ludhiana",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/3203442516",
     "top_match": "Ludhiana, Ludhiana (West) Tahsil, Ludhiana, Punjab, 141001, India"
   },
-  "city: macau": {
-    "checked_on": "2026-10-18",
+  "city: macau | state: macau | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Macau",
     "found": true,
-    "top_match": "澳門 Macau, 999078, 中国"
+    "language": "en",
+    "osm_id": "node/1939592594",
+    "top_match": "Macau, 519030, China"
   },
-  "city: multan": {
-    "checked_on": "2026-10-18",
+  "city: mangaluru | state: karnataka | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Mangaluru",
     "found": true,
-    "top_match": "ملتان, Gulshan, ضلع ملتان, ملتان ڈویژن, پنجاب, 66000, پاکستان"
+    "language": "en",
+    "osm_id": "node/245612641",
+    "top_match": "Mangaluru, Mangaluru taluk, Dakshina Kannada, Karnataka, 575001, India"
   },
-  "city: mumbai": {
-    "checked_on": "2026-10-18",
+  "city: meizhou | state: guangdong | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Meizhou",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/3233743",
+    "top_match": "Meizhou, Guangdong, China"
+  },
+  "city: melbourne | state: victoria | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Melbourne",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/4246124",
+    "top_match": "Melbourne, Victoria, Australia"
+  },
+  "city: mexico city | state: mexico city | country: mexico": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Mexico City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/17483459",
+    "top_match": "Mexico City, Cuauhtémoc, Mexico City, Mexico"
+  },
+  "city: montana | state: montana | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Montana",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/31058180",
+    "top_match": "Montana, 3400, Bulgaria"
+  },
+  "city: mornington | state: victoria | country: australia": {
+    "addresstype": "suburb",
+    "checked_on": "2026-11-06",
+    "english_name": "Mornington",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2435944",
+    "top_match": "Mornington, Victoria, 3931, Australia"
+  },
+  "city: moscow | state: moscow | country: russia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Moscow",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2555133",
+    "top_match": "Moscow, Central Federal District, Russia"
+  },
+  "city: multan | state: punjab | country: pakistan": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Multan",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/307617596",
+    "top_match": "Multan, Gulshan, Multan District, Multan Division, Punjab, 66000, Pakistan"
+  },
+  "city: mumbai | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Mumbai",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/16173235",
     "top_match": "Mumbai, Mumbai Suburban District, Maharashtra, 400051, India"
   },
-  "city: nagpur": {
-    "checked_on": "2026-10-18",
+  "city: nagpur | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nagpur",
     "found": true,
-    "top_match": "Nagpur City, Nagpur Urban Taluka, Nagpur, Maharashtra, India"
+    "language": "en",
+    "osm_id": "relation/12969115",
+    "top_match": "Nagpur, Nagpur Urban Taluka, Nagpur, Maharashtra, India"
   },
-  "city: nanchang": {
-    "checked_on": "2026-10-18",
+  "city: nairobi | state: nairobi county | country: kenya": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nairobi",
     "found": true,
-    "top_match": "南昌市, 东湖区, 南昌市, 江西省, 330006, 中国"
+    "language": "en",
+    "osm_id": "relation/9185096",
+    "top_match": "Nairobi, Nairobi County, Kenya"
   },
-  "city: nanjing": {
-    "checked_on": "2026-10-18",
+  "city: nairobi | state: nairobi | country: kenya": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nairobi",
     "found": true,
-    "top_match": "南京市, 江苏省, 中国"
+    "language": "en",
+    "osm_id": "relation/9185096",
+    "top_match": "Nairobi, Nairobi County, Kenya"
   },
-  "city: new delhi": {
-    "checked_on": "2026-10-18",
+  "city: nanchang | state: jiangxi | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nanchang",
     "found": true,
-    "top_match": "New Delhi, Delhi, India"
+    "language": "en",
+    "osm_id": "node/244081434",
+    "top_match": "Nanchang, Donghu District, Nanchang, Jiangxi, 330006, China"
   },
-  "city: phoenix": {
-    "checked_on": "2026-10-18",
+  "city: nanjing city | state: jiangsu | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nanjing City",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2131524",
+    "top_match": "Nanjing City, Jiangsu, China"
+  },
+  "city: nanjing | state: jiangsu | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nanjing City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2131524",
+    "top_match": "Nanjing City, Jiangsu, China"
+  },
+  "city: nashik | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Nashik",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/245686763",
+    "top_match": "Nashik, Nashik Subdistrict, Nashik District, Maharashtra, 422001, India"
+  },
+  "city: new orleans | state: louisiana | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "New Orleans",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/131885",
+    "top_match": "New Orleans, Orleans Parish, Louisiana, United States"
+  },
+  "city: new orleans | state: louisiana | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "New Orleans",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/131885",
+    "top_match": "New Orleans, Orleans Parish, Louisiana, United States"
+  },
+  "city: new york | state: new york | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "New York",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/175905",
+    "top_match": "New York, United States"
+  },
+  "city: new york | state: new york | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "New York",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/175905",
+    "top_match": "New York, United States"
+  },
+  "city: newcastle | state: new south wales | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Newcastle",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/25841904",
+    "top_match": "Newcastle, Newcastle-Maitland, New South Wales, 2300, Australia"
+  },
+  "city: odesa | state: odesa oblast | country: ukraine": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Odesa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1413934",
+    "top_match": "Odesa, Odesa Urban Hromada, Odesa Raion, Odesa Oblast, Ukraine"
+  },
+  "city: orange | state: new south wales | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Orange",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/6058037",
+    "top_match": "Orange, New South Wales, 2800, Australia"
+  },
+  "city: pazardzhik | state: pazardzhik | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Pazardzhik",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/31058181",
+    "top_match": "Pazardzhik, Pazardzik, Pazardzhik, 4400, Bulgaria"
+  },
+  "city: pernik | state: pernik | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Pernik",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/31058182",
+    "top_match": "Pernik, 2300, Bulgaria"
+  },
+  "city: perth | state: western australia | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Perth",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/29277817",
+    "top_match": "Perth, Western Australia, 6000, Australia"
+  },
+  "city: phoenix | state: arizona | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Phoenix",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/111257",
     "top_match": "Phoenix, Maricopa County, Arizona, United States"
   },
-  "city: pune": {
-    "checked_on": "2026-10-18",
+  "city: phoenix | state: arizona | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Phoenix",
     "found": true,
-    "top_match": "Pune, Pune City Subdistrict, Pune, Maharashtra, 411001, India"
+    "language": "en",
+    "osm_id": "relation/111257",
+    "top_match": "Phoenix, Maricopa County, Arizona, United States"
   },
-  "city: san diego": {
-    "checked_on": "2026-10-18",
+  "city: pimpri-chinchwad | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Pimpri-Chinchwad",
     "found": true,
-    "top_match": "San Diego, San Diego County, California, United States"
+    "language": "en",
+    "osm_id": "node/1600720975",
+    "top_match": "Pimpri-Chinchwad, Haveli Subdistrict, Pune District, Maharashtra, 411089, India"
   },
-  "city: santa barbara": {
-    "checked_on": "2026-10-18",
+  "city: plovdiv | state: plovdiv | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Plovdiv",
     "found": true,
-    "top_match": "Santa Barbara, Santa Barbara County, California, United States"
+    "language": "en",
+    "osm_id": "node/1698668366",
+    "top_match": "Plovdiv, Tsentralen District, Plovdiv, 4000, Bulgaria"
   },
-  "city: silchar": {
-    "checked_on": "2026-10-18",
+  "city: prayagraj | state: uttar pradesh | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Prayagraj",
     "found": true,
+    "language": "en",
+    "osm_id": "node/245733956",
+    "top_match": "Prayagraj, Allahabad, Prayagraj, Uttar Pradesh, 211001, India"
+  },
+  "city: pune | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Pune",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/16174445",
+    "top_match": "Pune, Pune City Subdistrict, Pune District, Maharashtra, 411001, India"
+  },
+  "city: ranchi | state: jharkhand | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ranchi",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/2510123017",
+    "top_match": "Ranchi, Kanke, Ranchi, Jharkhand, 834001, India"
+  },
+  "city: reading | state: pennsylvania | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Reading",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/188481",
+    "top_match": "Reading, Berks County, Pennsylvania, United States"
+  },
+  "city: reading | state: pennsylvania | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Reading",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/188481",
+    "top_match": "Reading, Berks County, Pennsylvania, United States"
+  },
+  "city: saint petersburg | state: saint petersburg | country: russia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Saint Petersburg",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/421007",
+    "top_match": "Saint Petersburg, Northwestern Federal District, Russia"
+  },
+  "city: salt lake city | state: utah | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Salt Lake City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/198770",
+    "top_match": "Salt Lake City, Salt Lake County, Utah, United States"
+  },
+  "city: salt lake city | state: utah | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Salt Lake City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/198770",
+    "top_match": "Salt Lake City, Salt Lake County, Utah, United States"
+  },
+  "city: secunderabad | state: telangana | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Secunderabad",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/2460862103",
+    "top_match": "Secunderabad, Hyderabad, Telangana, 500003, India"
+  },
+  "city: shaoxing | state: zhejiang | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Shaoxing",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3316522",
+    "top_match": "Shaoxing, Zhejiang, China"
+  },
+  "city: silchar | state: assam | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Silchar",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/567777060",
     "top_match": "Silchar, Cachar, Assam, 788014, India"
   },
-  "city: st. louis": {
-    "checked_on": "2026-10-18",
+  "city: sofia | state: sofia city | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia",
     "found": true,
-    "top_match": "Saint Louis, Missouri, United States"
+    "language": "en",
+    "osm_id": "relation/4283101",
+    "top_match": "Sofia, Sredets District, Stolichna, Sofia-City, Bulgaria"
   },
-  "city: sydney": {
-    "checked_on": "2026-10-18",
+  "city: sofia | state: sofia-city | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/4283101",
+    "top_match": "Sofia, Sredets District, Stolichna, Sofia-City, Bulgaria"
+  },
+  "city: stara zagora | state: stara zagora | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Stara Zagora",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/836529193",
+    "top_match": "Stara Zagora, 6000, Bulgaria"
+  },
+  "city: sydney | state: new south wales | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sydney",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/5750005",
     "top_match": "Sydney, New South Wales, Australia"
   },
-  "city: westmead": {
-    "checked_on": "2026-10-18",
+  "city: tampa | state: florida | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Tampa",
     "found": true,
-    "top_match": "Westmead, Sydney, New South Wales, Australia"
+    "language": "en",
+    "osm_id": "relation/1216849",
+    "top_match": "Tampa, Hillsborough County, Florida, United States"
+  },
+  "city: tampa | state: florida | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Tampa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1216849",
+    "top_match": "Tampa, Hillsborough County, Florida, United States"
+  },
+  "city: terre haute | state: indiana | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Terre Haute",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/127733",
+    "top_match": "Terre Haute, Vigo County, Indiana, United States"
+  },
+  "city: terre haute | state: indiana | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Terre Haute",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/127733",
+    "top_match": "Terre Haute, Vigo County, Indiana, United States"
+  },
+  "city: thane | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Thane",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/7120000",
+    "top_match": "Thane, Thane Subdistrict, Thane, Maharashtra, India"
+  },
+  "city: tonk | state: rajasthan | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Tonk",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/4135301384",
+    "top_match": "Tonk, Tonk Tehsil, Tonk, Rajasthan, 304001, India"
+  },
+  "city: townsville | state: queensland | country: australia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Townsville",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/31446304",
+    "top_match": "Townsville, Queensland, 4810, Australia"
+  },
+  "city: vadodara | state: gujarat | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Vadodara",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/2022807192",
+    "top_match": "Vadodara, Vadodara Rural Taluka, Vadodara, Gujarat, 390001, India"
+  },
+  "city: vienna | state: vienna | country: austria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": "Vienna International Centre, 5, Katastralgemeinde Kaisermühlen, Donaustadt, Vienna, 1220, Austria"
+  },
+  "city: vinnytsia | state: vinnytsia oblast | country: ukraine": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Vinnytsia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/361818",
+    "top_match": "Vinnytsia, Vinnytsia Urban Hromada, Vinnytsia Raion, Vinnytsia Oblast, Ukraine"
+  },
+  "city: vratsa | state: vratsa | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Vratsa",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/31058197",
+    "top_match": "Vratsa, 3002, Bulgaria"
+  },
+  "city: washington | state: district of columbia | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Washington",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/5396194",
+    "top_match": "Washington, District of Columbia, United States"
+  },
+  "city: washington | state: district of columbia | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Washington",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/5396194",
+    "top_match": "Washington, District of Columbia, United States"
+  },
+  "city: wichita | state: kansas | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Wichita",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/129814",
+    "top_match": "Wichita, Sedgwick County, Kansas, United States"
+  },
+  "city: wichita | state: kansas | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Wichita",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/129814",
+    "top_match": "Wichita, Sedgwick County, Kansas, United States"
+  },
+  "city: yongzhou | state: hunan | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Yongzhou",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/244081152",
+    "top_match": "Yongzhou, Lengshuitan District, Yongzhou, Hunan, China"
+  },
+  "country: argentina": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Argentina",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/286393",
+    "top_match": "Argentina"
+  },
+  "country: armenia": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Armenia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/364066",
+    "top_match": "Armenia"
   },
   "country: australia": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Australia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/80500",
     "top_match": "Australia"
   },
-  "country: azerbaijan": {
-    "checked_on": "2026-10-18",
+  "country: austria": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Austria",
     "found": true,
-    "top_match": "Azərbaycan"
+    "language": "en",
+    "osm_id": "relation/16239",
+    "top_match": "Austria"
+  },
+  "country: azerbaijan": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Azerbaijan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/364110",
+    "top_match": "Azerbaijan"
+  },
+  "country: bahrain": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Bahrain",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/378734",
+    "top_match": "Bahrain"
   },
   "country: bolivia": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Bolivia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/252645",
     "top_match": "Bolivia"
   },
   "country: brazil": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Brazil",
     "found": true,
-    "top_match": "Brasil"
+    "language": "en",
+    "osm_id": "relation/59470",
+    "top_match": "Brazil"
   },
   "country: bulgaria": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Bulgaria",
     "found": true,
-    "top_match": "България"
+    "language": "en",
+    "osm_id": "relation/186382",
+    "top_match": "Bulgaria"
+  },
+  "country: cambodia": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Cambodia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/49898",
+    "top_match": "Cambodia"
   },
   "country: canada": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Canada",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/1428125",
     "top_match": "Canada"
   },
-  "country: china": {
-    "checked_on": "2026-10-18",
+  "country: central african republic": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Central African Republic",
     "found": true,
-    "top_match": "中国"
+    "language": "en",
+    "osm_id": "relation/192790",
+    "top_match": "Central African Republic"
+  },
+  "country: chile": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Chile",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/167454",
+    "top_match": "Chile"
+  },
+  "country: china": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "China",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/270056",
+    "top_match": "China"
+  },
+  "country: colombia": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Colombia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/120027",
+    "top_match": "Colombia"
+  },
+  "country: cook islands": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Cook Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2184233",
+    "top_match": "Cook Islands"
+  },
+  "country: costa rica": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Costa Rica",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/287667",
+    "top_match": "Costa Rica"
+  },
+  "country: cote d'ivoire": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ivory Coast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192779",
+    "top_match": "Ivory Coast"
+  },
+  "country: cuba": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Cuba",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/307833",
+    "top_match": "Cuba"
+  },
+  "country: democratic republic of the congo": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Democratic Republic of the Congo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192795",
+    "top_match": "Democratic Republic of the Congo"
+  },
+  "country: east timor": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "East Timor",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/305142",
+    "top_match": "East Timor"
   },
   "country: ecuador": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ecuador",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/108089",
     "top_match": "Ecuador"
   },
   "country: egypt": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Egypt",
     "found": true,
-    "top_match": "مصر"
+    "language": "en",
+    "osm_id": "relation/1473947",
+    "top_match": "Egypt"
   },
   "country: el salvador": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "El Salvador",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/1520612",
     "top_match": "El Salvador"
   },
-  "country: fiji": {
-    "checked_on": "2026-10-18",
+  "country: federated states of micronesia": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Federated States of Micronesia",
     "found": true,
-    "top_match": "Viti"
+    "language": "en",
+    "osm_id": "relation/571802",
+    "top_match": "Federated States of Micronesia"
+  },
+  "country: fiji": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Fiji",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/571747",
+    "top_match": "Fiji"
   },
   "country: france": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "France",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2202162",
     "top_match": "France"
   },
   "country: georgia": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Georgia",
     "found": true,
-    "top_match": "საქართველო"
+    "language": "en",
+    "osm_id": "relation/28699",
+    "top_match": "Georgia"
+  },
+  "country: ghana": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ghana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192781",
+    "top_match": "Ghana"
   },
   "country: guatemala": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Guatemala",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/1521463",
     "top_match": "Guatemala"
   },
-  "country: india": {
-    "checked_on": "2026-10-18",
+  "country: honduras": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Honduras",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/287670",
+    "top_match": "Honduras"
+  },
+  "country: india": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "India",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/304716",
     "top_match": "India"
   },
-  "country: iran": {
-    "checked_on": "2026-10-18",
+  "country: indonesia": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Indonesia",
     "found": true,
-    "top_match": "ایران"
+    "language": "en",
+    "osm_id": "relation/304751",
+    "top_match": "Indonesia"
+  },
+  "country: iran": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Iran",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/304938",
+    "top_match": "Iran"
+  },
+  "country: ireland": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ireland",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/62273",
+    "top_match": "Ireland"
+  },
+  "country: ivory coast": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ivory Coast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192779",
+    "top_match": "Ivory Coast"
+  },
+  "country: japan": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Japan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/382313",
+    "top_match": "Japan"
+  },
+  "country: kenya": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Kenya",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192798",
+    "top_match": "Kenya"
+  },
+  "country: kiribati": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Kiribati",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/571178",
+    "top_match": "Kiribati"
+  },
+  "country: laos": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Laos",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/49903",
+    "top_match": "Laos"
+  },
+  "country: marshall islands": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Marshall Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/571771",
+    "top_match": "Marshall Islands"
+  },
+  "country: mexico": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Mexico",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/114686",
+    "top_match": "Mexico"
   },
   "country: micronesia": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Federated States of Micronesia",
     "found": true,
-    "top_match": "Micronesia"
+    "language": "en",
+    "osm_id": "relation/571802",
+    "top_match": "Federated States of Micronesia"
+  },
+  "country: mozambique": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Mozambique",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/195273",
+    "top_match": "Mozambique"
+  },
+  "country: nepal": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Nepal",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/184633",
+    "top_match": "Nepal"
+  },
+  "country: new zealand": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "New Zealand",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/556706",
+    "top_match": "New Zealand"
+  },
+  "country: nicaragua": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Nicaragua",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/287666",
+    "top_match": "Nicaragua"
+  },
+  "country: niue": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Niue",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1558556",
+    "top_match": "Niue"
+  },
+  "country: oman": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Oman",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/305138",
+    "top_match": "Oman"
   },
   "country: pakistan": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Pakistan",
     "found": true,
-    "top_match": "پاکستان"
+    "language": "en",
+    "osm_id": "relation/307573",
+    "top_match": "Pakistan"
+  },
+  "country: panama": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Panama",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/287668",
+    "top_match": "Panama"
+  },
+  "country: paraguay": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Paraguay",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/287077",
+    "top_match": "Paraguay"
+  },
+  "country: peru": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Peru",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/288247",
+    "top_match": "Peru"
+  },
+  "country: philippines": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Philippines",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/443174",
+    "top_match": "Philippines"
+  },
+  "country: qatar": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Qatar",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/305095",
+    "top_match": "Qatar"
   },
   "country: russia": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Russia",
     "found": true,
-    "top_match": "Россия"
+    "language": "en",
+    "osm_id": "relation/60189",
+    "top_match": "Russia"
+  },
+  "country: samoa": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Samoa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1872673",
+    "top_match": "Samoa"
+  },
+  "country: south africa": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "South Africa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/87565",
+    "top_match": "South Africa"
+  },
+  "country: south korea": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "South Korea",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/307756",
+    "top_match": "South Korea"
+  },
+  "country: thailand": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Thailand",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2067731",
+    "top_match": "Thailand"
+  },
+  "country: timor-leste": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "East Timor",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/305142",
+    "top_match": "East Timor"
   },
   "country: turkey": {
-    "checked_on": "2026-10-18",
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Turkey",
     "found": true,
-    "top_match": "Türkiye"
+    "language": "en",
+    "osm_id": "relation/174737",
+    "top_match": "Turkey"
   },
-  "country: usa": {
-    "checked_on": "2026-10-18",
+  "country: ukraine": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Ukraine",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/60199",
+    "top_match": "Ukraine"
+  },
+  "country: united arab emirates": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "United Arab Emirates",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/307763",
+    "top_match": "United Arab Emirates"
+  },
+  "country: united kingdom": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "United Kingdom",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/62149",
+    "top_match": "United Kingdom"
+  },
+  "country: united states": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "United States",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/148838",
     "top_match": "United States"
   },
-  "state: alberta": {
-    "checked_on": "2026-10-18",
+  "country: uruguay": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Uruguay",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/287072",
+    "top_match": "Uruguay"
+  },
+  "country: usa": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "United States",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/148838",
+    "top_match": "United States"
+  },
+  "country: vanuatu": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Vanuatu",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2177246",
+    "top_match": "Vanuatu"
+  },
+  "country: vietnam": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Vietnam",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/49915",
+    "top_match": "Vietnam"
+  },
+  "state: abu dhabi emirate | country: united arab emirates": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Abu Dhabi Emirate",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3766481",
+    "top_match": "Abu Dhabi Emirate, United Arab Emirates"
+  },
+  "state: abu dhabi | country: united arab emirates": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Abu Dhabi Emirate",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3766481",
+    "top_match": "Abu Dhabi Emirate, United Arab Emirates"
+  },
+  "state: alabama | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Alabama",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161950",
+    "top_match": "Alabama, United States"
+  },
+  "state: alabama | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Alabama",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161950",
+    "top_match": "Alabama, United States"
+  },
+  "state: alberta | country: canada": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Alberta",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/391186",
     "top_match": "Alberta, Canada"
   },
-  "state: anhui": {
-    "checked_on": "2026-10-18",
+  "state: american samoa | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "American Samoa",
     "found": true,
-    "top_match": "安徽省, 中国"
+    "language": "en",
+    "osm_id": "relation/2177187",
+    "top_match": "American Samoa, United States"
   },
-  "state: arizona": {
-    "checked_on": "2026-10-18",
+  "state: american samoa | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "American Samoa",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2177187",
+    "top_match": "American Samoa, United States"
+  },
+  "state: anhui | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Anhui",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/913011",
+    "top_match": "Anhui, China"
+  },
+  "state: arizona | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Arizona",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162018",
     "top_match": "Arizona, United States"
   },
-  "state: assam": {
-    "checked_on": "2026-10-18",
+  "state: arizona | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Arizona",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162018",
+    "top_match": "Arizona, United States"
+  },
+  "state: arkansas | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Arkansas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161646",
+    "top_match": "Arkansas, United States"
+  },
+  "state: arkansas | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Arkansas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161646",
+    "top_match": "Arkansas, United States"
+  },
+  "state: assam | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Assam",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2025886",
     "top_match": "Assam, India"
   },
-  "state: california": {
-    "checked_on": "2026-10-18",
+  "state: australian capital territory | country: australia": {
+    "addresstype": "territory",
+    "checked_on": "2026-11-06",
+    "english_name": "Australian Capital Territory",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2354197",
+    "top_match": "Australian Capital Territory, Australia"
+  },
+  "state: california | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "California",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165475",
     "top_match": "California, United States"
   },
-  "state: connecticut": {
-    "checked_on": "2026-10-18",
+  "state: california | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "California",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/165475",
+    "top_match": "California, United States"
+  },
+  "state: colorado | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Colorado",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161961",
+    "top_match": "Colorado, United States"
+  },
+  "state: colorado | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Colorado",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161961",
+    "top_match": "Colorado, United States"
+  },
+  "state: connecticut | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Connecticut",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165794",
     "top_match": "Connecticut, United States"
   },
-  "state: delhi": {
-    "checked_on": "2026-10-18",
+  "state: connecticut | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Connecticut",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/165794",
+    "top_match": "Connecticut, United States"
+  },
+  "state: dagestan | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Dagestan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/109876",
+    "top_match": "Dagestan, North Caucasian Federal District, Russia"
+  },
+  "state: delaware | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Delaware",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162110",
+    "top_match": "Delaware, United States"
+  },
+  "state: delaware | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Delaware",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162110",
+    "top_match": "Delaware, United States"
+  },
+  "state: delhi | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Delhi",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1942586",
     "top_match": "Delhi, India"
   },
-  "state: district of columbia": {
-    "checked_on": "2026-10-18",
+  "state: district of columbia | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "District of Columbia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162069",
     "top_match": "District of Columbia, United States"
   },
-  "state: florida": {
-    "checked_on": "2026-10-18",
+  "state: district of columbia | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "District of Columbia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162069",
+    "top_match": "District of Columbia, United States"
+  },
+  "state: dobrich | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Dobrich",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739528",
+    "top_match": "Dobrich, Bulgaria"
+  },
+  "state: federal district | country: brazil": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Federal District",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/421151",
+    "top_match": "Federal District, Central-West Region, Brazil"
+  },
+  "state: florida | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Florida",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162050",
     "top_match": "Florida, United States"
   },
-  "state: gujarat": {
-    "checked_on": "2026-10-18",
+  "state: florida | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Florida",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162050",
+    "top_match": "Florida, United States"
+  },
+  "state: french polynesia | country: france": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "French Polynesia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3412620",
+    "top_match": "French Polynesia, France"
+  },
+  "state: gabrovo | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Gabrovo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739527",
+    "top_match": "Gabrovo, Bulgaria"
+  },
+  "state: georgia | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Georgia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161957",
+    "top_match": "Georgia, United States"
+  },
+  "state: georgia | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Georgia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161957",
+    "top_match": "Georgia, United States"
+  },
+  "state: guam | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Guam",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/306001",
+    "top_match": "Guam, United States"
+  },
+  "state: guam | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Guam",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/306001",
+    "top_match": "Guam, United States"
+  },
+  "state: guangdong | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Guangdong",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/911844",
+    "top_match": "Guangdong, China"
+  },
+  "state: gujarat | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Gujarat",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1949080",
     "top_match": "Gujarat, India"
   },
-  "state: illinois": {
-    "checked_on": "2026-10-18",
+  "state: haryana | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Haryana",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/1942601",
+    "top_match": "Haryana, India"
+  },
+  "state: haskovo | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Haskovo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739545",
+    "top_match": "Haskovo, Bulgaria"
+  },
+  "state: hong kong | country: china": {
+    "addresstype": "region",
+    "checked_on": "2026-11-06",
+    "english_name": "Hong Kong",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/913110",
+    "top_match": "Hong Kong, China"
+  },
+  "state: hunan | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Hunan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/913073",
+    "top_match": "Hunan, China"
+  },
+  "state: idaho | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Idaho",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162116",
+    "top_match": "Idaho, United States"
+  },
+  "state: idaho | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Idaho",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162116",
+    "top_match": "Idaho, United States"
+  },
+  "state: illinois | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Illinois",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/122586",
     "top_match": "Illinois, United States"
   },
-  "state: indiana": {
-    "checked_on": "2026-10-18",
+  "state: illinois | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Illinois",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/122586",
+    "top_match": "Illinois, United States"
+  },
+  "state: indiana | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Indiana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161816",
     "top_match": "Indiana, United States"
   },
-  "state: jammu and kashmir": {
-    "checked_on": "2026-10-18",
+  "state: indiana | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Indiana",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/161816",
+    "top_match": "Indiana, United States"
+  },
+  "state: iowa | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Iowa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161650",
+    "top_match": "Iowa, United States"
+  },
+  "state: iowa | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Iowa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161650",
+    "top_match": "Iowa, United States"
+  },
+  "state: jammu and kashmir | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Jammu and Kashmir",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1943188",
     "top_match": "Jammu and Kashmir, India"
   },
-  "state: jiangsu": {
-    "checked_on": "2026-10-18",
+  "state: jharkhand | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Jharkhand",
     "found": true,
-    "top_match": "江苏省, 中国"
+    "language": "en",
+    "osm_id": "relation/1960191",
+    "top_match": "Jharkhand, India"
   },
-  "state: jiangxi": {
-    "checked_on": "2026-10-18",
+  "state: jiangsu | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Jiangsu",
     "found": true,
-    "top_match": "江西省, 中国"
+    "language": "en",
+    "osm_id": "relation/913012",
+    "top_match": "Jiangsu, China"
   },
-  "state: karnataka": {
-    "checked_on": "2026-10-18",
+  "state: jiangxi | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Jiangxi",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/913109",
+    "top_match": "Jiangxi, China"
+  },
+  "state: kaliningrad oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kaliningrad",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/103906",
+    "top_match": "Kaliningrad, Northwestern Federal District, Russia"
+  },
+  "state: kaliningrad | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kaliningrad",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/103906",
+    "top_match": "Kaliningrad, Northwestern Federal District, Russia"
+  },
+  "state: kampot | country: cambodia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kampot",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2200183",
+    "top_match": "Kampot, Cambodia"
+  },
+  "state: kansas | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kansas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161644",
+    "top_match": "Kansas, United States"
+  },
+  "state: kansas | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kansas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161644",
+    "top_match": "Kansas, United States"
+  },
+  "state: karnataka | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Karnataka",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2019939",
     "top_match": "Karnataka, India"
   },
-  "state: maharashtra": {
-    "checked_on": "2026-10-18",
+  "state: kerala | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kerala",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2018151",
+    "top_match": "Kerala, India"
+  },
+  "state: kerman province | country: iran": {
+    "addresstype": "province",
+    "checked_on": "2026-11-06",
+    "english_name": "Kerman Province",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/229593",
+    "top_match": "Kerman Province, Iran"
+  },
+  "state: kerman | country: iran": {
+    "addresstype": "province",
+    "checked_on": "2026-11-06",
+    "english_name": "Kerman Province",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/229593",
+    "top_match": "Kerman Province, Iran"
+  },
+  "state: kharkiv oblast | country: ukraine": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kharkiv Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/71254",
+    "top_match": "Kharkiv Oblast, Ukraine"
+  },
+  "state: kostroma oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kostroma Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/85963",
+    "top_match": "Kostroma Oblast, Central Federal District, Russia"
+  },
+  "state: kwango | country: democratic republic of the congo": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Kwango",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/193091",
+    "top_match": "Kwango, Democratic Republic of the Congo"
+  },
+  "state: kyiv | country: ukraine": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kyiv",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/421866",
+    "top_match": "Kyiv, Ukraine"
+  },
+  "state: louisiana | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Louisiana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224922",
+    "top_match": "Louisiana, United States"
+  },
+  "state: louisiana | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Louisiana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224922",
+    "top_match": "Louisiana, United States"
+  },
+  "state: lower austria | country: austria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Lower Austria",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/77189",
+    "top_match": "Lower Austria, Austria"
+  },
+  "state: macau | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Macau",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1867188",
+    "top_match": "Macau, China"
+  },
+  "state: maharashtra | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Maharashtra",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1950884",
     "top_match": "Maharashtra, India"
   },
-  "state: massachusetts": {
-    "checked_on": "2026-10-18",
+  "state: maryland | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Maryland",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162112",
+    "top_match": "Maryland, United States"
+  },
+  "state: maryland | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Maryland",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162112",
+    "top_match": "Maryland, United States"
+  },
+  "state: massachusetts | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Massachusetts",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/61315",
     "top_match": "Massachusetts, United States"
   },
-  "state: missouri": {
-    "checked_on": "2026-10-18",
+  "state: massachusetts | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Massachusetts",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/61315",
+    "top_match": "Massachusetts, United States"
+  },
+  "state: mexico city | country: mexico": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Mexico City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1376330",
+    "top_match": "Mexico City, Mexico"
+  },
+  "state: michigan | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Michigan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165789",
+    "top_match": "Michigan, United States"
+  },
+  "state: michigan | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Michigan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165789",
+    "top_match": "Michigan, United States"
+  },
+  "state: minnesota | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Minnesota",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165471",
+    "top_match": "Minnesota, United States"
+  },
+  "state: minnesota | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Minnesota",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165471",
+    "top_match": "Minnesota, United States"
+  },
+  "state: mississippi | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Mississippi",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161943",
+    "top_match": "Mississippi, United States"
+  },
+  "state: mississippi | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Mississippi",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161943",
+    "top_match": "Mississippi, United States"
+  },
+  "state: missouri | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Missouri",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161638",
     "top_match": "Missouri, United States"
   },
-  "state: montana": {
-    "checked_on": "2026-10-18",
+  "state: missouri | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Missouri",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/161638",
+    "top_match": "Missouri, United States"
+  },
+  "state: montana | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Montana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739532",
+    "top_match": "Montana, Bulgaria"
+  },
+  "state: montana | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Montana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162115",
     "top_match": "Montana, United States"
   },
-  "state: new south wales": {
-    "checked_on": "2026-10-18",
+  "state: montana | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Montana",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162115",
+    "top_match": "Montana, United States"
+  },
+  "state: moscow | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Moscow",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/102269",
+    "top_match": "Moscow, Central Federal District, Russia"
+  },
+  "state: nairobi county | country: kenya": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nairobi County",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3492709",
+    "top_match": "Nairobi County, Kenya"
+  },
+  "state: nairobi | country: kenya": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nairobi County",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3492709",
+    "top_match": "Nairobi County, Kenya"
+  },
+  "state: nebraska | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nebraska",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161648",
+    "top_match": "Nebraska, United States"
+  },
+  "state: nebraska | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nebraska",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161648",
+    "top_match": "Nebraska, United States"
+  },
+  "state: nevada | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nevada",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165473",
+    "top_match": "Nevada, United States"
+  },
+  "state: nevada | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Nevada",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165473",
+    "top_match": "Nevada, United States"
+  },
+  "state: new caledonia | country: france": {
+    "addresstype": "archipelago",
+    "checked_on": "2026-11-06",
+    "english_name": "New Caledonia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3407643",
+    "top_match": "New Caledonia, France"
+  },
+  "state: new mexico | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "New Mexico",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162014",
+    "top_match": "New Mexico, United States"
+  },
+  "state: new mexico | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "New Mexico",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162014",
+    "top_match": "New Mexico, United States"
+  },
+  "state: new south wales | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "New South Wales",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2316593",
     "top_match": "New South Wales, Australia"
   },
-  "state: new york": {
-    "checked_on": "2026-10-18",
+  "state: new york | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "New York",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/61320",
     "top_match": "New York, United States"
   },
-  "state: odisha": {
-    "checked_on": "2026-10-18",
+  "state: new york | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "New York",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/61320",
+    "top_match": "New York, United States"
+  },
+  "state: north carolina | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "North Carolina",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224045",
+    "top_match": "North Carolina, United States"
+  },
+  "state: north carolina | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "North Carolina",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224045",
+    "top_match": "North Carolina, United States"
+  },
+  "state: northern mariana islands | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Northern Mariana Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/306004",
+    "top_match": "Northern Mariana Islands, United States"
+  },
+  "state: northern mariana islands | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Northern Mariana Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/306004",
+    "top_match": "Northern Mariana Islands, United States"
+  },
+  "state: odesa oblast | country: ukraine": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Odesa Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/72634",
+    "top_match": "Odesa Oblast, Ukraine"
+  },
+  "state: odisha | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Odisha",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1984022",
     "top_match": "Odisha, India"
   },
-  "state: oklahoma": {
-    "checked_on": "2026-10-18",
+  "state: ohio | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Ohio",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/162061",
+    "top_match": "Ohio, United States"
+  },
+  "state: ohio | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Ohio",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162061",
+    "top_match": "Ohio, United States"
+  },
+  "state: oklahoma | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Oklahoma",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161645",
     "top_match": "Oklahoma, United States"
   },
-  "state: oregon": {
-    "checked_on": "2026-10-18",
+  "state: oklahoma | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Oklahoma",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/161645",
+    "top_match": "Oklahoma, United States"
+  },
+  "state: ontario | country: canada": {
+    "addresstype": "province",
+    "checked_on": "2026-11-06",
+    "english_name": "Ontario",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/68841",
+    "top_match": "Ontario, Canada"
+  },
+  "state: oregon | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Oregon",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165476",
     "top_match": "Oregon, United States"
   },
-  "state: punjab": {
-    "checked_on": "2026-10-18",
+  "state: oregon | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Oregon",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/165476",
+    "top_match": "Oregon, United States"
+  },
+  "state: pazardzhik | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Pazardzhik",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739533",
+    "top_match": "Pazardzhik, Bulgaria"
+  },
+  "state: pennsylvania | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Pennsylvania",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162109",
+    "top_match": "Pennsylvania, United States"
+  },
+  "state: pennsylvania | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Pennsylvania",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/162109",
+    "top_match": "Pennsylvania, United States"
+  },
+  "state: pernik | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Pernik",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739534",
+    "top_match": "Pernik, Bulgaria"
+  },
+  "state: plovdiv | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Plovdiv",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739536",
+    "top_match": "Plovdiv, Bulgaria"
+  },
+  "state: punjab | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Punjab",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1942686",
     "top_match": "Punjab, India"
   },
-  "state: rajasthan": {
-    "checked_on": "2026-10-18",
+  "state: punjab | country: pakistan": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Punjab",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/357988",
+    "top_match": "Punjab, Pakistan"
+  },
+  "state: queensland | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Queensland",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2316595",
+    "top_match": "Queensland, Australia"
+  },
+  "state: rajasthan | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Rajasthan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1942920",
     "top_match": "Rajasthan, India"
   },
-  "state: south australia": {
-    "checked_on": "2026-10-18",
+  "state: rostov oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Rostov Oblast",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/85606",
+    "top_match": "Rostov Oblast, Southern Federal District, Russia"
+  },
+  "state: saint petersburg | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Saint Petersburg",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/337422",
+    "top_match": "Saint Petersburg, Northwestern Federal District, Russia"
+  },
+  "state: salzburg | country: austria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Salzburg",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/86539",
+    "top_match": "Salzburg, Austria"
+  },
+  "state: sistan and baluchestan province | country: iran": {
+    "addresstype": "province",
+    "checked_on": "2026-11-06",
+    "english_name": "Sistan and Baluchestan Province",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/537693",
+    "top_match": "Sistan and Baluchestan Province, Iran"
+  },
+  "state: sistan and baluchestan | country: iran": {
+    "addresstype": "province",
+    "checked_on": "2026-11-06",
+    "english_name": "Sistan and Baluchestan Province",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/537693",
+    "top_match": "Sistan and Baluchestan Province, Iran"
+  },
+  "state: sofia city | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia-City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739543",
+    "top_match": "Sofia-City, Bulgaria"
+  },
+  "state: sofia-city | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia-City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739543",
+    "top_match": "Sofia-City, Bulgaria"
+  },
+  "state: south australia | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "South Australia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2316596",
     "top_match": "South Australia, Australia"
   },
-  "state: tamil nadu": {
-    "checked_on": "2026-10-18",
+  "state: south carolina | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "South Carolina",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/224040",
+    "top_match": "South Carolina, United States"
+  },
+  "state: south carolina | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "South Carolina",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224040",
+    "top_match": "South Carolina, United States"
+  },
+  "state: south dakota | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "South Dakota",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161652",
+    "top_match": "South Dakota, United States"
+  },
+  "state: south dakota | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "South Dakota",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161652",
+    "top_match": "South Dakota, United States"
+  },
+  "state: stara zagora | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Stara Zagora",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1300657",
+    "top_match": "Stara Zagora, Bulgaria"
+  },
+  "state: styria | country: austria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Styria",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/35183",
+    "top_match": "Styria, Austria"
+  },
+  "state: tambov oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tambov Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/72180",
+    "top_match": "Tambov Oblast, Central Federal District, Russia"
+  },
+  "state: tamil nadu | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tamil Nadu",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/96905",
     "top_match": "Tamil Nadu, India"
   },
-  "state: telangana": {
-    "checked_on": "2026-10-18",
+  "state: tasmania | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tasmania",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2369652",
+    "top_match": "Tasmania, Australia"
+  },
+  "state: telangana | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Telangana",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3250963",
     "top_match": "Telangana, India"
   },
-  "state: texas": {
-    "checked_on": "2026-10-18",
+  "state: tennessee | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tennessee",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/161838",
+    "top_match": "Tennessee, United States"
+  },
+  "state: tennessee | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tennessee",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161838",
+    "top_match": "Tennessee, United States"
+  },
+  "state: texas | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Texas",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/114690",
     "top_match": "Texas, United States"
   },
-  "state: uttar pradesh": {
-    "checked_on": "2026-10-18",
+  "state: texas | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Texas",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/114690",
+    "top_match": "Texas, United States"
+  },
+  "state: tyrol | country: austria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Tyrol",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/52343",
+    "top_match": "Tyrol, Austria"
+  },
+  "state: united states virgin islands | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "United States Virgin Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/286898",
+    "top_match": "United States Virgin Islands, United States"
+  },
+  "state: us virgin islands | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "United States Virgin Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/286898",
+    "top_match": "United States Virgin Islands, United States"
+  },
+  "state: utah | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Utah",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161993",
+    "top_match": "Utah, United States"
+  },
+  "state: utah | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Utah",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161993",
+    "top_match": "Utah, United States"
+  },
+  "state: uttar pradesh | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Uttar Pradesh",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1942587",
     "top_match": "Uttar Pradesh, India"
   },
-  "state: victoria": {
-    "checked_on": "2026-10-18",
+  "state: victoria | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Victoria",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2316741",
     "top_match": "Victoria, Australia"
   },
-  "state: west bengal": {
-    "checked_on": "2026-10-18",
+  "state: vienna | country: austria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Vienna",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/109166",
+    "top_match": "Vienna, Austria"
+  },
+  "state: vinnytsia oblast | country: ukraine": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Vinnytsia Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/90726",
+    "top_match": "Vinnytsia Oblast, Ukraine"
+  },
+  "state: volgograd oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Volgograd Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/77665",
+    "top_match": "Volgograd Oblast, Southern Federal District, Russia"
+  },
+  "state: vratsa | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Vratsa",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739526",
+    "top_match": "Vratsa, Bulgaria"
+  },
+  "state: washington | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Washington",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165479",
+    "top_match": "Washington, United States"
+  },
+  "state: washington | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Washington",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165479",
+    "top_match": "Washington, United States"
+  },
+  "state: west bengal | country: india": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "West Bengal",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1960177",
     "top_match": "West Bengal, India"
   },
-  "state: wisconsin": {
-    "checked_on": "2026-10-18",
+  "state: western australia | country: australia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Western Australia",
     "found": true,
+    "language": "en",
+    "osm_id": "relation/2316598",
+    "top_match": "Western Australia, Australia"
+  },
+  "state: wisconsin | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Wisconsin",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165466",
     "top_match": "Wisconsin, United States"
+  },
+  "state: wisconsin | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Wisconsin",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/165466",
+    "top_match": "Wisconsin, United States"
+  },
+  "state: zhejiang | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Zhejiang",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/553302",
+    "top_match": "Zhejiang, China"
   }
 }

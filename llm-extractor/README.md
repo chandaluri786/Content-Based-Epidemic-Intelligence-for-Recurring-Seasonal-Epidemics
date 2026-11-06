@@ -1,874 +1,660 @@
 # Flu news LLM extractor
 
-Runs a large language model over human-influenza news articles, extracts structured
-findings with **prompt v5.1**, and scores the result against the chain-of-thought gold records.
-For each article the model says:
+Runs a large language model over human-influenza news articles with **prompt v5.1**, and scores
+its replies against the **chain-of-thought v2 records** (the gold labels). For each article the
+model answers two tasks:
 
-- whether the article is **useful** (does it report current human flu activity in a real place?), and
-- the **items** it reports: `cases`, `hospitalized`, `deaths` or `trend`, with number, count type,
-  status, strain, place, dates, trend word and the quoted evidence.
+1. **Useful or not**: does the article report current human flu activity in a real place?
+2. **Items**: every `cases`, `hospitalized`, `deaths` or `trend` finding, with number, count
+   type, status, strain, place, dates, trend word and the quoted evidence.
 
-The model is **NVIDIA Nemotron 3.5 Lightning 30B-A3B**, called through NVIDIA's hosted,
-OpenAI-compatible API. The prompt is the v5.1 rules as a system message, plus optional solved
-examples sent as chat turns (few-shot). Everything the extractor reads is inside this folder
-(`prompts/` and `data/`), so it does not depend on where the capstone files are on disk.
+The model is **DeepSeek V4.1 Flash** (`deepseek-ai/deepseek-v4.1-flash`), called through NVIDIA's
+OpenAI-compatible API. NVIDIA lists only the 4.1 build of DeepSeek V4 Flash. No human labels are used anywhere: gold is the v2 records only.
 
-The plan this code follows is in
-[HANDOFF_thanya_evaluation_fewshot.md](HANDOFF_thanya_evaluation_fewshot.md), Sections 3-5.
+## Recent changes (2026-11-05 to 2026-11-06)
+
+- **Model:** DeepSeek V4.1 Flash on NVIDIA, with greedy decoding, a fixed seed and thinking off (4.2).
+- **Data:** gold is only the chain-of-thought v2 records; no human labels; every article that is in more
+  than one labeling set is removed; the input files are validated before a build is written and before
+  a run starts (2).
+- **All 832 articles are sent**, none decided by code; the 8 few-shot examples are left out (3).
+- **Checks:** three layers matched to v5.1 (5.5). The format check now covers every fixed value (kind,
+  count type, status, trend word, strain, number of at least 1, the place chain, dates, `useful` against
+  the items) and, with the evidence check, decides whether a reply is sent back to the model (4.4). The
+  place check asks the geocoder for the whole city-state-country chain.
+- **Place names (6 Nov, approved):** prompt v5.1 and v5.2 section 5.1 now say every city, state and country
+  has one agreed form, its English name in OpenStreetMap. The code turns every place, in gold and in model
+  replies, into that form before checking, matching and scoring (5.6), for any place, with no name tables.
+- **Scoring:** pairs need similarity 0.8 and are locked best partners first; every metric is computed
+  per article and summarised over articles; article outcome buckets; four charts (5).
+- **Changes are settings:** `PROMPT_VERSION`, `RECORDS_SUFFIX`, `EXAMPLES_PATH`, `NVIDIA_MODEL_ID` and
+  friends; how to change data, prompt, examples or model is in section 8.
+- **One example set:** `prompts/examples_v5.1.json` only; `select_examples.py` writes that one file (8.3).
+- **Place answers saved afresh:** `data/place_lookups.json` was started again from empty, since the old
+  answers did not record the kind of place; it holds only answers of the current lookup (5.5).
+- **Data in agreed place form (6 Nov):** the v2 records and the examples were rewritten to the agreed form
+  (USA -> United States and 15 others; backups in `data_backups/2026-11-06_before_place_names/`); empty
+  place fields were never filled. Australian towns recorded as administrative suburbs (Mornington) count
+  as cities (5.6).
+- **Removed:** the handoff document, the old scoring example, the v2.0 prompt pair, the human labels,
+  the dev sample, the obsolete build scripts, the k4/k8/k12 example candidates.
 
 ## Contents
 
-1. [Status and what comes next](#1-status-and-what-comes-next)
-2. [Quick start](#2-quick-start)
-3. [How it works](#3-how-it-works)
-4. [Data formats](#4-data-formats)
-5. [Commands](#5-commands)
-6. [Configuration](#6-configuration)
-7. [Prompt versions](#7-prompt-versions)
-8. [Which articles are run: one set](#8-which-articles-are-run-one-set)
-9. [Choosing the few-shot examples](#9-choosing-the-few-shot-examples)
-10. [How results are scored](#10-how-results-are-scored)
-11. [Automatic checks](#11-automatic-checks)
-12. [Output files](#12-output-files)
-13. [Testing](#13-testing)
-14. [Layout](#14-layout)
-15. [Known limitations](#15-known-limitations)
+1. [Quick start](#1-quick-start)
+2. [The data](#2-the-data)
+3. [Which articles are sent](#3-which-articles-are-sent)
+4. [How a request works](#4-how-a-request-works)
+5. [How the results are measured](#5-how-the-results-are-measured)
+6. [Commands](#6-commands)
+7. [Configuration](#7-configuration)
+8. [Making changes](#8-making-changes): new labels, a new prompt version, new examples, another model
+9. [Output files](#9-output-files)
+10. [Testing](#10-testing)
+11. [Layout](#11-layout)
+12. [Known limitations](#12-known-limitations)
 
 ---
 
-## 1. Status and what comes next
+## 1. Quick start
 
-**Done in code (handoff Section 3):**
-
-- Everything is keyed by `article_id`, because row numbers collide across the four labeling
-  sets (row 41 is four different articles). The 1,280 rows give 1,200 unique articles.
-- `scripts/build_gold_files.py` reads all four sets and writes `data/articles.json` (with `split`
-  and `passes_keyword_gate`), `data/gold_labels.json`, `data/human_labels.json`, and the v5.1
-  system prompt.
-- The request uses the v5.1 rules and the v5 input names (`scan_date`, `link`, `article`).
-  `MAX_TOKENS` is 8000.
-- The keyword gate (Rule 1) runs in code: an article that fails it gets the exact Rule 1 reply and
-  no API call.
-- The checks follow the v5 schema (`summary`, `reasoning`, `useful`, `reason`, `items`; 12 item
-  fields; `count_type`). The old overlap rule is gone, because G5 requires overlapping counts.
-- Scoring has exact, strict, relaxed and weekly tiers, agreement by field, scores by country,
-  with/without gated and inactive-only articles, 95% bootstrap intervals by article, and a
-  `useful` comparison against the human labels.
-- `run_config.json` stores SHA-256 hashes of the prompt and examples files, so a run can be
-  traced to the exact text it used.
-- 99 unit tests pass, with no API calls and no internet.
-
-**Done with the data (2026-11-02):**
-
-- `data/` is built from the three dev record files in `../labeled_data_chain_of_thought/` (960
-  records, 920 unique articles) and the article texts. All 1,397 gold evidence quotes were found
-  word for word in the article texts.
-- **Every article that appears in more than one labeling set is removed** (80 articles: the 40
-  double-labelled dev articles, 20 Jahnavi/Aditya and 20 Aditya/Manoj, and the 40 dev articles
-  repeated as Thanya rows 1-40). That leaves **840 dev articles: 240 useful, 600 not useful**
-  (280 per labeler: Jahnavi 81 useful, Aditya 71, Manoj 88), and 280 test articles with no gold yet.
-- **One set, no dev/test split.** Runs score every labelled article except the 8 few-shot
-  examples: **832 articles (235 useful, 597 not useful)**, 44 of them decided by the keyword gate.
-  The `split` field is kept in the data for reference only.
-- **Few-shot, favouring hard cases.** The 8 active examples (section 9) are the records the labelers
-  marked `hard_case` and articles the model got wrong in earlier runs, still covering all 12 slots
-  and all three labeled sets. None is a shared article.
-- **Every reply is validated** (section 3): repaired if only stray quotes break the JSON, otherwise
-  asked again with a note naming the problem, up to 2 times.
-- The dev sample D (`data/dev_sample_200.txt`, now 181 articles) was used only for the first
-  zero-shot and few-shot comparison (`results/run_k0_D`, `results/run_k8_D`).
-
-**Still to do, in this order:**
-
-| # | Step | Who / where |
-|---|---|---|
-| 1 | NVIDIA API key in `llm-extractor/.env` (done 2026-11-02) | key holder |
-| 2 | One-article smoke run (done 2026-11-02: exact match, 2 of 2 items) | section 2 below |
-| 3 | Zero-shot and first few-shot runs on D (done 2026-11-02: `results/run_k0_D`, `results/run_k8_D`) | section 9 |
-| 4 | Few-shot run on all 832 articles with the hard-case examples (done 2026-11-02: `results/run_full_k8`; `useful` F1 81.0%, per-article partial-credit F1 30.7%) | section 8 |
-| 5 | Decide whether the headline keeps or filters inactive-only articles | section 10 |
-| 6 | Thanya's chain-of-thought records, if her 280 articles should be scored too, then rebuild `data/` | handoff Section 2 |
-| 7 | Run-to-run variation measured on 60 articles (done: large, see section 3); decide on voting over repeated runs | section 3 |
-
-The human `useful` answers in `data/human_labels.json` come from older copies of the label sheets
-(blank for Jahnavi, Aditya and Thanya). Rebuild with the current sheets (`--labeling-dir`) before
-reporting the human comparison.
-
-## 2. Quick start
-
-Requirements: Python 3.11 or newer (tested on 3.12.3 on Linux and 3.11.9 on Windows), an NVIDIA
-API key with access to the model (https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b),
-and internet access.
+Requirements: Python 3.11 or newer, an NVIDIA API key with access to
+`deepseek-ai/deepseek-v4.1-flash` (https://build.nvidia.com), and internet access.
 
 ```bash
-# one-time setup
 cd llm-extractor
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-cp .env.example .env          # then edit .env and put your key after NVIDIA_API_KEY=
-chmod 600 .env                # only you can read it
+cp .env.example .env          # put your key after NVIDIA_API_KEY=
+chmod 600 .env
 
-# once, and whenever the labels change (needs the capstone labeling folder)
-python scripts/build_gold_files.py
-
-# every session: activate the environment, then
-python -m unittest discover tests                            # 1. the logic works (no API, no internet)
-python run_extraction.py --ids Jahnavi:6                     # 2. ONE API call; prints the run folder
-python inspect_row.py results/run_<timestamp> Jahnavi:6 --reasoning   # 3. read the reply
-python run_extraction.py --ids-file data/dev_sample_200.txt  # 4. few-shot (k = 8) on D (~190 calls, at least 5 min)
-python evaluate_run.py results/run_<timestamp>               # 5. score it, then read report.md
+python -m unittest discover tests                     # 1. the logic works (no API, no internet)
+python run_extraction.py --ids Jahnavi:42             # 2. one article; prints the run folder
+python inspect_row.py results/run_<time> Jahnavi:42 --reasoning   # 3. read the reply
+python run_extraction.py                              # 4. all 832 articles (see section 3)
+python evaluate_run.py results/run_<time>             # 5. score it; then read report.md
 ```
 
-`data/dev_sample_200.txt` is already drawn (`scripts/make_dev_sample.py` refuses to redraw it).
+All commands run from the `llm-extractor` folder with the virtual environment active. The key
+is read from `.env` and never printed.
 
-All commands run from the `llm-extractor` folder with the virtual environment active.
-The API key is read from `.env` and never printed.
+A full run is long. On 2026-11-05 the NVIDIA queue for this model answered a 15-token test
+request in 153 s, so a full run takes hours, not minutes. If it stops (quota, network), resume it:
+`python run_extraction.py --run-dir results/run_<time>`.
 
-## 3. How it works
+## 2. The data
 
-```
- prompts/system_prompt_v5.1.txt ─┐
- prompts/examples_v5.1.json ─────┼─► run_extraction.py ─► results/run_<time>/raw_results.jsonl
- data/articles.json ─────────────┘   (keyword gate in code;   (one line per article: reply,
-                                      one API call for each    tokens, timing, errors)
-                                      article that passes)               │
- data/gold_labels.json ──────────────────────────────────────────────────┼─► evaluate_run.py ─► report.md
- data/human_labels.json (useful only, a second comparison) ──────────────┤                      scores.json
- data/place_lookups.json (saved place answers; geocoder if new) ─────────┘                      row_results.csv
-                                                                                                item_comparison.csv
-```
+`data/` holds only what the pipeline reads:
 
-The two steps are separate on purpose: scoring can be repeated, or changed, without paying for
-new model calls.
-
-### Step 1: `run_extraction.py` (calls the model)
-
-| # | Function (module) | Input | Output |
-|---|---|---|---|
-| 1 | `load_articles` (`data_loading.py`) | `data/articles.json` | `{article_id: Article}` |
-| 2 | `load_gold_labels` (`data_loading.py`) | `data/gold_labels.json` | `{article_id: GoldLabel}` |
-| 3 | `load_examples` (`prompt.py`) | the examples JSON file | list of example dicts |
-| 4 | `default_articles_to_run` (`evaluation.py`), or `--ids` / `--ids-file` | split, example ids, exclusions | sorted list of article ids |
-| 5 | `ids_already_done` | an existing `raw_results.jsonl` (when resuming) | ids to skip |
-| 6 | `load_system_prompt`, `build_prefix_messages` (`prompt.py`) | system prompt file, examples | the shared part of every request |
-| 7 | `create_client` (`llm_client.py`) | settings from `config.py` and the API key | an `OpenAI` client |
-
-Then, for each article (up to `--workers` at the same time), `extract_article` (`extractor.py`):
-
-| # | Function | Input | Output |
-|---|---|---|---|
-| a | keyword gate | `Article.passes_keyword_gate` | if false: the Rule 1 reply, no API call, `gated: true` |
-| b | `build_messages` (`prompt.py`) | the shared messages and one `Article` | the full list of chat messages |
-| c | `ask_model` (`llm_client.py`) | client, messages | `ModelReply`: text, finish reason, token counts, seconds |
-| d | `parse_reply` (`extractor.py`) | the reply text | the reply as a dict, or an error message |
-
-The record is appended to `raw_results.jsonl` as soon as it is done. A failed call never stops
-the run: the error is stored in the record.
-
-**The keyword gate.** v5.1 Rule 1 tells the model the flu keyword check has already happened, so
-it must happen in code. `build_gold_files.py` runs `is_flu_related` from
-`../flu_bucketing/flu_keywords.py` on each article and stores `passes_keyword_gate`. A failing
-article gets the Rule 1 reply from `extractor.RULE_1_REPLY` (`useful: false`, no items).
-
-**What the model receives.** One request is a list of chat messages:
-
-1. a `system` message: the v5.1 rules (`system_prompt_v5.1.txt`), followed, **only when examples
-   are sent**, by the few-shot guide (`fewshot_guide_v5.1.txt`, section 9);
-2. for each solved example, a `user` message with the example article, then an `assistant`
-   message with the answer as JSON (`summary`, `reasoning`, `useful`, `reason`, `items`);
-3. a final `user` message with the article to process.
-
-Every article block, in the examples and for the real article, uses the input names of the v5.1
-prompt (`format_article` in `prompt.py`):
-
-```
-scan_date: 2016-12-30
-link: http://cbs6albany.com/news/local/...
-article:
-<article text>
-```
-
-The messages in 1 and 2 are the same for every article and are built once per run. The GDELT
-header lines of the labeling files (tagged country, places mentioned) are never sent; the
-prompt forbids using them (5.6).
-
-**Model call settings** (`llm_client.py`, values in `config.py`): `temperature=0`,
-`max_tokens=8000` (the longest gold reply is 15,683 characters, roughly 4,000-5,000 tokens),
-`extra_body` with `enable_thinking: False` (v5 puts its reasoning inside the JSON reply), a
-300 s timeout, and up to 4 retries on rate-limit (429), timeout, connection and server (5xx)
-errors, waiting for the server's `Retry-After` if it sends one, otherwise 5, 10, 20, 40 s. Other
-errors (for example a request over the context limit) are not retried.
-
-**Rate limit: 40 requests per minute.** The API allows 40 requests per minute, and every request
-counts, retries included. One `RateLimiter` (`llm_client.py`) is shared by all worker threads:
-before any request, including a retry, it waits until fewer than 40 requests have started in the
-last 61 seconds (one second of margin for clock differences). The OpenAI library's own retries are
-switched off (`max_retries=0`), because they would bypass the limiter. So the limit holds for any
-`--workers` value, and a 200-article run takes at least 5 minutes. Change it with
-`NVIDIA_REQUESTS_PER_MINUTE` in `.env`.
-
-**Every reply is validated before it is accepted** (`extractor.py`). A reply is accepted only if
-it is complete (not cut off at `max_tokens`), parses as one JSON object, and passes the reply format
-check (`find_shape_errors`). Otherwise:
-
-1. **Repair.** The usual break is an article quotation copied with its double quotes unescaped
-   (`"pension spiking"` inside a JSON string). `repair_json_strings` escapes a double quote that
-   cannot end a string (the next character is not `,` `:` `}` `]`) and raw line breaks inside
-   strings. Nothing else is changed, so evidence still matches the article. The record notes
-   `repaired: true`.
-2. **Ask again.** If repair is not enough, or the reply was cut off or malformed, the article is sent
-   again with a short note after it naming the problem (for example "your previous reply was not
-   valid JSON (...). Inside every JSON string, write a double quote as \""). Up to
-   `MAX_VALIDATION_RETRIES` = 3 times; every request goes through the rate limiter. The record keeps
-   `validation_retries` and `validation_problems`.
-3. **Last attempt, compact.** Re-asking at temperature 0 tends to repeat the same mistake, so the
-   last attempt asks for a compact reply (at most 12 reasoning steps, no article text inside
-   `reasoning`, article text only in `evidence`) at `LAST_RETRY_TEMPERATURE` = 0.3.
-4. Only if all 4 replies are invalid is the article reported as unparseable or malformed (the
-   record's `invalid` field says why). `--retry-invalid` reruns such articles when resuming.
-
-In the full run (832 articles, `results/run_full_k8`) **every article ended with a valid reply**:
-48 replies were valid only after quote repair, 37 articles were asked again, and the remaining few
-were completed with `--retry-invalid`.
-
-**Why not the API's JSON mode.** `response_format={"type": "json_object"}` is accepted, but in a
-test it turned an unescaped quote into a reply that filled the rest of the 8,000 tokens with blank
-lines (the decoder closes the string at the quote and allows only whitespace after it). Repair plus
-re-asking fixed the same articles without that cost, so JSON mode is not used.
-
-**Repeatability.** `temperature=0` and a fixed `seed` (`SEED` in `config.py`) are sent with every
-request, but they do **not** make this hosted model repeatable. Measured on 60 articles sent twice
-(`results/run_repeat60`): the reply text was identical for 1 of 53 compared articles, the `useful`
-answer flipped for 4 of 53, and among the 17 articles with items the item lists were identical for
-1. Two identical requests with `top_p` = 1e-6 as well still differed from the first sentence. The
-variation is on the server side (a mixture-of-experts model batched with other requests); no
-request setting removes it. Reduce it by voting over repeated runs, or use a model served with
-deterministic decoding.
-
-**Quota stop.** The free key has a daily quota. After `STOP_AFTER_CONSECUTIVE_API_ERRORS` = 5 API
-failures in a row, the run stops instead of failing every remaining article. Finished work is kept;
-resume with `python run_extraction.py --run-dir results/<run>`.
-
-**Request size.** The v5.1 rules are about 66,000 characters (roughly 16,500 tokens at 4
-characters per token). Each example adds roughly 1,500 tokens. The longest article adds about
-35,000 more. Articles are never cut: a request over the model's context limit fails and is
-reported as an API error (unscored). Check the model's limit before the first full run.
-
-### Step 2: `evaluate_run.py` (scores a run)
-
-| # | Function | Input | Output |
-|---|---|---|---|
-| 1 | `read_run_records` (`evaluation.py`) | `raw_results.jsonl` | `{article_id: record}` (a later line replaces an earlier one) |
-| 2 | `load_articles`, `load_gold_labels`, `load_human_useful` | the data files | as above |
-| 3 | `PlaceChecker(cache, offline)` (`places.py`) | `data/place_lookups.json`, `--offline` | the place checker |
-| 4 | `evaluate_run` (`evaluation.py`) | records, articles, gold, human answers, place checker | an `Evaluation` |
-| 5 | `write_report` (`report.py`) | the `Evaluation`, the run folder | `report.md`, `scores.json`, two CSV files |
-
-Each record with a gold label gets a **status**:
-
-| Status | Meaning |
+| File | Content |
 |---|---|
-| `api_error` | the call failed after all retries, or with an error a retry cannot fix (e.g. a request over the context limit) |
-| `unparseable` | the reply was not valid JSON, or was cut off at `max_tokens` |
-| `malformed` | valid JSON that breaks the reply format (`find_shape_errors`) |
-| `scored` | everything is fine; the row enters the numbers |
+| `chain_of_thought/<Name>_chain_of_thought_v2.jsonl` | the gold source: the v2 records of Jahnavi, Aditya and Manoj (960 records, 920 unique articles) |
+| `articles.json` | built: one record per article that is scored (840): `article_id`, `scan_date`, `link`, `sources`, `article` |
+| `gold_labels.json` | built: one record per article (840): `article_id`, `useful`, `labelers`, `items` |
+| `place_lookups.json` | the saved answers of the place lookups (sections 5.5, 5.6), so each place chain is asked online only once and later runs give the same names. It is **not a list of allowed places**: a chain not in it is asked online and added |
 
-Rows that are not `scored` are left out of every score and listed in section 4 of `report.md`.
+Rebuild `articles.json` and `gold_labels.json` whenever the v2 records change:
 
-## 4. Data formats
-
-All four files in `data/` are written by `scripts/build_gold_files.py`.
-
-**`data/articles.json`**: one object per article (1,120: 840 dev and 280 test; the 80 articles in more than one labeling set are removed).
-
-```json
-{"article_id": "20161230170000-2179", "scan_date": "2016-12-30",
- "link": "http://cbs6albany.com/news/local/influenza-forcing-ny-hospitals-to-adjust-visitation-rules",
- "split": "dev", "passes_keyword_gate": true, "sources": ["Jahnavi:6"],
- "article": "Influenza forcing NY hospitals to adjust visitation rules\nALBANY, N.Y. (AP) -- ..."}
+```bash
+python scripts/build_gold_files.py
 ```
 
-`sources` gives the labeling set and row of the article (the 80 articles that appeared in two
-sets are removed by default; `build_gold_files.py --keep-shared` keeps one copy of each). `split` is `dev` or `test` (section 8). `scan_date` is the day GDELT collected the
-article; the prompt treats it as the publication date.
+It reads every `*_chain_of_thought_v2.jsonl` in `data/chain_of_thought/` (`RECORDS_SUFFIX` in
+`config.py`), takes the article texts from `<capstone>/labeling/labeling/<Name>_texts.txt` (the v2
+records do not contain the text), and also refreshes `prompts/system_prompt_v5.1.txt` from
+`prompt_versions/llm_extraction_prompt_v5.1.md` (`PROMPT_VERSION` in `config.py`).
 
-**`data/gold_labels.json`**: one object per article that has a chain-of-thought record, taken
-from `<Name>_chain_of_thought_v2.jsonl`. When an article is in two sets, both records must agree,
-or the build stops.
+**Duplicate articles are removed completely.** An article that appears in more than one labeling
+set is dropped with every copy and its gold record: the 40 articles labelled in two sets
+(Jahnavi/Aditya, Aditya/Manoj) and the 40 articles repeated as Thanya rows 1-40. The texts of all
+four sets are read only to find these repeats. Result:
+
+| | Useful | Not useful | Articles | Gold items |
+|---|---|---|---|---|
+| After removing shared articles | 240 | 600 | **840** | 697 |
+
+**The input data is validated** (`flu_extractor/data_checks.py`), with the same code that checks the
+model's replies (section 5.5):
+
+| File | Checked |
+|---|---|
+| `articles.json` | every record has `article_id`, `scan_date` (YYYY-MM-DD), `link`, `sources`, a non-empty `article`; no article twice |
+| `gold_labels.json` | every record has `article_id`, `useful`, `labelers`, `items`, belongs to an article in `articles.json`, and its items pass the v5.1 format check and the evidence check (every quote is in the article) |
+| the examples file | every example has `article_id`, `scan_date`, `link`, `article`, `answer`; the answer passes the format and evidence checks and starts with Step 0 and a Step 1 citing Rule 1; its article text is the same as in `articles.json` |
+
+`build_gold_files.py` writes nothing if its output fails, and `run_extraction.py` stops before any API
+call if the files it would use fail. The build also stops if two copies of an article differ or two
+records of one article disagree. All current files pass.
+
+Gold record format (`gold_labels.json`):
 
 ```json
-{"article_id": "20161230170000-2179", "split": "dev", "useful": true, "labelers": ["Jahnavi"],
+{"article_id": "20161230170000-2179", "useful": true, "labelers": ["Jahnavi"],
  "items": [{"kind": "hospitalized", "number": 658, "count_type": "cumulative_region",
             "status": "confirmed", "strain": null, "city": null, "state": "New York",
             "country": "USA", "start_date": null, "end_date": "2016-12-30", "words": null,
             "evidence": ["Some 658 flu-related hospitalizations in New York have been reported so far this flu season."]}]}
 ```
 
-**`data/human_labels.json`**: the labelers' own `useful` answers, kept as a second comparison.
+## 3. Which articles are sent
 
-```json
-{"article_id": "20161230170000-2179", "useful": true, "by_labeler": {"Jahnavi": true}}
+Without `--ids` or `--ids-file`, a run sends **every article in `gold_labels.json` except the
+few-shot examples** (the model sees their answers in the prompt):
+
+| | Useful | Not useful | Articles |
+|---|---|---|---|
+| Labelled articles | 240 | 600 | 840 |
+| Few-shot examples (k = 8), left out | 5 | 3 | 8 |
+| **Sent to the model and scored** | **235** | **597** | **832** |
+
+Every one of the 832 is sent, including articles that never mention flu: prompt Rule 1 tells the
+model the exact reply for them, so no article is decided by code.
+
+## 4. How a request works
+
+### 4.1 Messages
+
+1. `system`: the v5.1 rules (`prompts/system_prompt_v5.1.txt`), then the few-shot guide
+   (`prompts/fewshot_guide_v5.1.txt`), which says how to learn from the examples' reasoning and evidence;
+2. for each of the 8 examples (`prompts/examples_v5.1.json`): a `user` turn with the article and an
+   `assistant` turn with the gold answer as JSON (`summary`, `reasoning`, `useful`, `reason`, `items`);
+3. a final `user` turn with the article:
+
+```
+scan_date: 2016-12-30
+link: http://...
+article:
+<article text>
 ```
 
-`useful` is null when the sheet has no answer, or when two labelers of an overlap article disagree.
+The GDELT header lines of the labeling files are never sent (the prompt forbids using them, 5.6).
+The examples and how they were chosen are in [few_shot_selection.md](few_shot_selection.md).
 
-**The model's reply** (one JSON object; defined in the v5.1 prompt, "Your reply" and 2.1-2.2):
+**How the model learns from the examples.** Each assistant turn is the gold record's full answer:
+the `reasoning` steps in the order of the prompt's "How to work" (summary; Rule 1 and the list of
+flu statements; each statement checked for human flu, count or trend, number, dates, place, status,
+count type, strain or word, evidence; G3-G5; the per-place fallback check; the `useful` decision),
+each step citing its rule IDs, and the `items` with their `evidence`. The few-shot guide tells the
+model to learn that method and the way evidence is chosen (the event sentence first, then every
+sentence that gave a field, in article order, copied exactly), to learn from the not-useful examples
+what gets no item, to follow the rules when an example seems to differ, and never to reuse an
+example's places, dates, numbers or quotes. The examples are mixed useful and not useful and end on
+a not-useful one, so the last turn does not push toward items. Every example passes the same checks
+as a reply (section 2), so the model never sees a badly formed answer.
 
-```json
-{"summary": "one line about the article",
- "reasoning": ["Step 0 (summary): ...", "Step 1 (Rule 1): ...", "Step 2 (2.3, 4.3, 5.3): ..."],
- "useful": true, "reason": "one short sentence",
- "items": [{"kind": "trend", "number": null, "count_type": null, "status": null, "strain": null,
-            "city": null, "state": "New York", "country": "USA",
-            "start_date": "2016-12-30", "end_date": "2016-12-30",
-            "words": "high", "evidence": ["exact quote from the article"]}]}
-```
+### 4.2 Decoding settings: as little variation as possible
 
-| Field | Meaning |
+Every request, retries included, uses the same settings (`flu_extractor/config.py`):
+
+| Setting | Value | Why |
+|---|---|---|
+| `temperature` | 0 | greedy decoding: always the most likely next token |
+| `top_p` | 1 | no extra sampling cut-off (irrelevant at temperature 0, sent so the server does not apply its own default) |
+| `seed` | 20261101 | fixes any sampling left on the server |
+| `extra_body` | `{"chat_template_kwargs": {"thinking": false}}` | no hidden thinking pass: the v5 reply carries its reasoning in the JSON, and thinking adds tokens, time and variation (verified: 0 reasoning tokens) |
+| `max_tokens` | 8000 | the longest gold reply is about 5,000 tokens |
+| no penalties | defaults | presence and frequency penalties are 0 |
+
+An earlier version raised the temperature to 0.3 for the last retry; that is removed, so no
+request is ever sampled. **Hosted models are still not guaranteed to be bit-for-bit
+repeatable**: the server batches requests with other users. To measure the remaining
+variation, run the same articles twice and compare with `compare_runs.py`.
+
+### 4.3 Rate limit: at most 40 requests per minute
+
+One `RateLimiter` (`llm_client.py`) is shared by all worker threads. Before **every** request,
+including each retry, it waits until fewer than 40 requests have started in the last 61 seconds (one
+second of margin). The OpenAI library's own retries are switched off, because they would bypass
+the limiter. The limit therefore holds for any `--workers` value. Because a reply takes minutes,
+the default is 16 requests in flight. Change the limit with `NVIDIA_REQUESTS_PER_MINUTE` in `.env`.
+
+API errors worth retrying (429, timeouts, lost connections, 5xx) are retried up to 4 times, waiting for the
+server's `Retry-After` if it sends one, otherwise 5, 10, 20, 40 s. After 5 API failures in a row the run
+stops (usually the daily quota) and can be resumed with `--run-dir`.
+
+### 4.4 Every reply is validated
+
+A reply is accepted only if it is complete (not cut off at `max_tokens`), parses as one JSON
+object, passes the **v5.1 format check** (`checks.find_format_errors`: every key, field and fixed value
+of section 5.5, layer 1) and quotes **every evidence passage exactly from the article**
+(`checks.find_evidence_errors`, layer 2). Otherwise:
+
+1. **Repair**: a double quote copied from the article inside a JSON string is escaped, and raw line breaks
+   inside strings become `\n`. Nothing else changes, so evidence still matches the article.
+2. **Ask again** with a note after the article naming the problems (for example "item 2 status must be
+   one of confirmed, suspected" or "these evidence quotes are not exact copies of the article: ..."), up
+   to 3 times. The last time asks for a compact reply (at most 12 reasoning steps, article text only in
+   `evidence`). The decoding settings never change.
+3. If all 4 replies are invalid, the record keeps the reason in `invalid`. A reply that still breaks
+   the format is reported as `unparseable` or `malformed` and not scored. A reply whose only problem is
+   a quote not copied exactly is scored, and the quote is reported as rule (a). Rerun such articles with
+   `python run_extraction.py --run-dir results/<run> --retry-invalid`.
+
+A test on the 832 replies of an earlier full run (another model, older validation) showed what
+the format check now catches and sends back: a city with no state (44 items), a count with no number
+(44) or a number of 0 (9), a missing status (30) or count type (16), no end date (29), "swine flu" as
+a strain instead of H1N1 (27), a count with a trend word (19), and "elevated" as a trend word (15).
+
+## 5. How the results are measured
+
+Scoring is a separate step (`evaluate_run.py`), so it can be repeated without new API calls.
+
+### 5.1 Task 1: useful or not
+
+One cell of a confusion table per article: gold `useful` against the model's `useful`.
+The report gives precision, recall, F1 (with a 95% bootstrap interval) and accuracy. Under the
+v5.1 rules `useful` is true exactly when the reply has items. The rule checks report any reply
+where the two disagree.
+
+### 5.2 Task 2: the items
+
+**Step 1: places in their agreed form, then normalize.** Every city, state and country of a gold or
+model item is replaced by its agreed form, its English name in OpenStreetMap (section 5.6), so
+"Bangalore" and "Bengaluru", or "USA" and "United States", are the same value. Then
+(`normalization.py`, `norm_v3`) only harmless differences are removed: case, spaces, curly vs straight
+quotes and dashes. A different number, period, count type or place stays different.
+
+**Step 2: similarity of a gold item and a model item.** The share of the gold kind's fields that
+agree, every field weighing the same. Counts have 10 fields (kind, number, count_type, status, strain,
+city, state, country, start_date, end_date), trends 8 (kind, words, strain, city, state, country,
+start_date, end_date). Evidence is not compared. **A hit's similarity is also its accuracy**: the
+same fields, compared the same way.
+
+**Step 3: pairing** (`matching.py`, `matching_v3`), inside each article, one to one:
+
+1. allowed pairs: the same country and the same kind (or two counts with the same number, a kind
+   confusion), and similarity **at least 0.8** (at most 2 of a count's 10 fields, or 1 of a trend's 8,
+   may disagree);
+2. **best partners first**: lock the allowed pair with the highest similarity among the items not yet
+   paired; both items are then used up. Repeat until no allowed pair is left. A strong pair is never
+   given up to make room for more, weaker pairs, so each pair is the closest match still available to
+   both of its items;
+3. **ties** at the highest similarity: lock the pair whose two items have the fewest other allowed
+   partners still available (this leaves more good pairs for the others), then article order (first gold
+   item, then first model item), so the result is always the same;
+4. same-kind pairs first, kind-confusion pairs only among the items left after that.
+
+Example (G = gold, I = model; pairs under 0.8 not allowed):
+
+| | I1 | I2 | I3 |
+|---|---|---|---|
+| G1 | 0.8 | 0.9 | 0 |
+| G2 | 0.6 | 0.6 | 1.0 |
+| G3 | 0.7 | 0.8 | 0.9 |
+
+G2-I3 (1.0) is locked first, then G1-I2 (0.9). G3's remaining option, I1 at 0.7, is not allowed, so
+G3 is a miss and I1 an extra: 2 hits, accuracy 0.95. (Pairing for the most pairs would have given
+G1-I1, G2-I3, G3-I2, pushing G1 onto its weaker partner.) The three examples are unit tests.
+
+A pair is a **hit**, a gold item left alone a **miss**, a model item left alone an **extra**.
+
+**Step 4: score each article.** Every task 2 metric is first computed inside one article. A metric
+that has no meaning for an article is left blank for it (never set to 0 or 1), and that article is
+left out of that metric's summary:
+
+| Metric | Calculation inside one article | Articles it covers | What it says | Good |
+|---|---|---|---|---|
+| **Recall** | hits / gold items | gold has items | did the model catch the article's real events? Low = it misses outbreaks | near 1 |
+| **Precision** | hits / model items | the model wrote items | are the events it wrote real? Low = false alarms | near 1 |
+| **F1** | 2 x hits / (2 x hits + misses + extras) | either side has items | both together; low if either is low | near 1 |
+| **Accuracy** | mean similarity of the article's hits | the article has a hit | how right the details of the found events are; never below 0.8, the pairing threshold | near 1 |
+| **Exact rate** | hits with every field right / hits | the article has a hit | how many found events are completely right | near 1 |
+| **Field accuracy** (one per field) | hits with that field right / hits that have the field | the article has a hit with that field | which detail goes wrong: dates, number, place... | near 1 for every field |
+
+Accuracy and field accuracy read the same grid (one row per hit, one column per field) in two
+directions: accuracy averages each hit's row, field accuracy each field's column. Misses and extras
+count only in recall, precision and F1; accuracy, exact rate and field accuracy look only at hits, so
+no mistake is counted twice. Two items that describe the same event but agree on under 80% of their
+fields count as one miss and one extra.
+
+**Step 5: combine the articles.** Each metric is summarised over the articles it covers, every article
+weighing the same, so an article with 10 items does not count more than an article with 1:
+
+| Summary | Calculation | What it says |
+|---|---|---|
+| **Mean** (the headline) | sum of the article values / articles covered | the score of a typical article |
+| **95% interval of the mean** | the mean recomputed on 1,000 resamples of the articles (fixed seed) | how certain the mean is; two runs whose intervals overlap a lot may differ only by noise |
+| **Median, 25th-75th percentile** | the middle value, and the range of the middle half of the articles | whether a few very good or very bad articles pull the mean |
+| **At 1** | articles with the value 1 / articles covered | how often an article is fully right on this metric |
+| **At 0** | articles with the value 0 / articles covered | how often an article fails completely |
+| **Articles covered** | count | how many articles the numbers rest on |
+
+Example, F1 of three articles 0.5, 0.67 and 1.0: mean 0.72, median 0.67, at 1 33%, at 0 0%.
+
+**Step 6: article outcomes.** Each article is put in exactly one bucket, and the report gives the count
+and share of each:
+
+| Gold | Bucket | Good |
+|---|---|---|
+| has items | every item found, no extras (and, of these, how many with every detail right) | high |
+| has items | some found, with misses or extras | |
+| has items | nothing found | low |
+| has no items | the model wrote none (correct) | high |
+| has no items | the model wrote items (false items) | low |
+
+Articles where both sides are empty are credited here, not given F1 = 1, which would inflate the means.
+
+**Step 7: context, not scores.** The report also gives: the hits, misses and extras added over all
+articles; how many extras repeat another model item; misses and extras by kind and country; the
+articles that could not be scored; and the mean recall, precision and F1 with inactive-only items
+(the 1.3 food and monitoring fallbacks) removed on both sides.
+
+**Duplicates** (`duplicates.py`) are never deleted silently. Two identical gold items each need their own
+model item (pairing is one to one). An extra that repeats another model item is still an extra.
+Gold candidate groups are listed in `duplicate_candidates.csv` and can be decided in
+`data/duplicate_adjudication.json` (`duplicate` keeps only the first item).
+
+### 5.3 Charts
+
+`evaluate_run.py` writes four charts into the run folder (`flu_extractor/plots.py`); the values behind
+them are in `article_metrics.csv`.
+
+| Chart | Shows | How to read it |
+|---|---|---|
+| `plot_article_counts.png` | one stacked bar per article with items on either side: hits, misses, extras | mostly hit-coloured bars = good; many miss segments = it misses events; many extra segments = it over-reports. Articles are sorted by gold items, so problems with long articles stand out |
+| `plot_article_metrics.png` | one histogram per metric (recall, precision, F1, accuracy, exact rate) of the per-article values, the mean dashed | a tall bar at 1 = most articles fully right; a bar at 0 = articles that fail completely; the spread shows how uneven the model is |
+| `plot_field_accuracy.png` | mean per-article accuracy of each field, lowest first | the shortest bars are the details to fix |
+| `plot_article_buckets.png` | the number of articles in each outcome bucket | "all found" and "left empty" high, "nothing found" and "false items" low |
+
+### 5.4 Where errors come from
+
+Report section 5: hits, misses and extras by kind, kind confusions, repeats among the extras, and
+misses and extras by country. Section 6: what could not be scored, evidence copied exactly, rule checks.
+
+### 5.5 The checks (`checks.py`)
+
+Every reply, every gold record and every few-shot example is checked against prompt v5.1 by the same
+code, in three layers.
+
+**Layer 1: format.** A failure sends the reply back to the model (section 4.4); a reply that still fails
+is not scored.
+
+| Check | v5.1 |
 |---|---|
-| `kind` | `cases`, `hospitalized`, `deaths` or `trend` |
-| `number` | whole number of people; counts only |
-| `count_type` | `new`, `cumulative_region` or `cumulative_subset`; counts only |
-| `status` | `confirmed` or `suspected`; counts only |
-| `strain` | e.g. `H1N1`, `influenza A`, `avian influenza`; null when none is named |
-| `city`, `state`, `country` | where the event happened; country is required (G1) |
-| `start_date`, `end_date` | `YYYY-MM-DD`; end date required (G2), within the 30 days ending on the scan date (4.7) |
-| `words` | trends only: one of `rising`, `falling`, `high`, `moderate`, `low`, `inactive`, `present` |
-| `evidence` | non-empty list of exact quotes; the sentence stating the event first, then article order |
+| one JSON object with `summary` (text), `reasoning` (a non-empty list of steps), `useful` (true/false), `reason` (text), `items` (a list) | "Your reply", 2.1 |
+| every item has exactly the 12 fields, no others | 2.2 |
+| `kind` is `cases`, `hospitalized`, `deaths` or `trend` | 2.3 |
+| a trend: `words` is one of `rising`, `falling`, `high`, `moderate`, `low`, `inactive`, `present`; `number`, `count_type`, `status` are null | 2.2, 9.2 |
+| a count: `number` is a whole number of at least 1; `count_type` is `new`, `cumulative_region` or `cumulative_subset`; `status` is `confirmed` or `suspected`; `words` is null | 2.2, Sections 3, 6, 7 |
+| `strain` is null, a subtype code in upper case (`H1N1`, `H3N2v`, `H5`), `influenza A`, `influenza B` or `avian influenza` | 8.1 |
+| a country is present; a city has a state; place fields are text | G1, 5.1 |
+| an end date is present; dates are real `YYYY-MM-DD` dates; the start is not after the end | G2, 4.2 |
+| `evidence` is a non-empty list of non-empty quotes | 10.2 |
+| `useful` is true exactly when `items` is not empty | Section 11 |
 
-**Solved examples** (`prompts/examples_v5.1.json`): a list. Each entry:
+**Layer 2: evidence (rule a).** Every quote is an exact, unbroken piece of the article. Only line breaks
+and repeated spaces are ignored; a quote that is reworded, shortened with "...", joined from two places,
+invented, or has straight quotes where the article has curly ones fails. A failure sends the reply back;
+if the last reply still has one, the reply is scored and the quote is reported.
 
-```json
-{"article_id": "...", "source": "Jahnavi:47", "slots": [6, 7, 10], "scan_date": "...", "link": "...",
- "article": "...",
- "answer": {"summary": "...", "reasoning": ["Step 0 ...", "..."], "useful": true, "reason": "...", "items": []}}
-```
+**Layer 3: rule checks.** Reported in `report.md` section 6 and `article_metrics.csv`; never used to reject
+a reply:
 
-Only `scan_date`, `link`, `article` and `answer` are sent. `answer` comes straight from the gold
-record, with `rules_used`, `hard_case` and `source_rows` left out. `article_id` decides which
-articles are never scored. **The extractor runs few-shot**: the active file holds the k = 8 set
-(a copy of `examples_v5.1_k8.json`); `examples_v5.1_k4.json` and `_k12.json` are the other sizes.
+| Rule | Check | v5.1 |
+|---|---|---|
+| (d) place real | the whole chain is asked of OpenStreetMap's geocoder (Nominatim): the country; the state *in that country*; the city *in that state and country*. "Victoria, Canada" or "Pune, Gujarat" are not found; "Worldwide" is not a country | 5.1, G1 |
+| (d) agreed form | every level that is found is written in its agreed form, its English name in OpenStreetMap; anything else is reported with the agreed form ("city 'Mangalore' is not in its agreed form; write 'Mangaluru'", "country 'USA' … write 'United States'", "state 'NSW' … write 'New South Wales'"). Scoring already uses the agreed form, so this shows how well the reply follows 5.1 | 5.1 |
+| (i) recent | the end date is on or before the scan date and within the 30 days before it | 4.7 |
+| (j) evidence order | quotes after the first are in article order | 10.1 |
+| (k) reasoning | the first step is Step 0 and the second is Step 1 citing Rule 1 | "How to work" |
 
-**One log line** (`raw_results.jsonl`):
+**The place check is not a fixed list.** Any place on Earth can be checked, because each chain is asked
+online. `data/place_lookups.json` only stores the answers already given, so each chain is asked once
+and later runs repeat exactly. A chain that is not in it is asked online, at one request per second
+(Nominatim's usage policy), and added. With `--offline`, chains not in the file keep their written values
+and are reported as "could not be checked", never guessed. Delete the file to ask everything again.
 
-```json
-{"article_id": "...", "model": "nvidia/nemotron-3.5-lightning-30b-a3b", "gated": false,
- "finish_reason": "stop", "prompt_tokens": 17012, "completion_tokens": 1450, "seconds": 21.4, "attempts": 1,
- "raw_reply": "{\"summary\": ...}", "parsed": {...the reply as an object...},
- "parse_error": null, "api_error": null}
-```
+Place data: © OpenStreetMap contributors, ODbL (https://www.openstreetmap.org/copyright).
 
-`finish_reason` is `stop` when the model finished and `length` when it hit `max_tokens` (the
-reply is then incomplete and is not parsed). `attempts` is the number of requests sent for this
-reply (more than 1 after a retry); `seconds` includes rate-limit waits and retries. For a gated
-article, `gated` is true, `parsed` is the Rule 1 reply and the call fields are null.
+### 5.6 Place names: one agreed form for every place
 
-**`data/place_lookups.json`**: saved answers of the place check. Key `"city: allahabad"`, value
-`{"found": true, "top_match": "Prayagraj, Allahabad, ...", "checked_on": "2026-10-18"}`.
+Prompt 5.1 (v5.1 and v5.2): every city, state and country has exactly one agreed form, its English
+name in OpenStreetMap, the same in every item and every article. The model cannot look this up while
+it reads, so the code makes sure of it (`places.agreed_names`, `places.PlaceChecker.with_agreed_names`):
 
-## 5. Commands
+1. For an item, the geocoder is asked for the country, then the state in that country, then the city in
+   that state and country (each chain once; answers saved in `data/place_lookups.json`).
+2. Each level that is found is replaced by OpenStreetMap's name in `PLACE_NAME_LANGUAGE` (English), or its
+   main name if it has none in that language. Two spellings of one place lead to the same OpenStreetMap
+   entry, so they get the same name: Bangalore and Bengaluru both become Bengaluru.
+3. Only the right kind of OpenStreetMap object answers a level: a city must be a city, town or village
+   (never a building, an industrial site or a district inside a city), a state a region-level unit, a
+   country a country. Without this, "Vienna" matched "Vienna International Centre" and "Kyiv" matched
+   "Old Kyiv". Where a country's OpenStreetMap convention records towns as administrative areas of the
+   "suburb" kind (Australia: Mornington, Victoria), such an area answers the city level when no
+   settlement does; a loose neighbourhood point never does, and such a value stays not found.
+4. A name that is not found is asked again without a level word OpenStreetMap does not use (Province,
+   District, Oblast, County, Region, ...: "Dobrich Province" is "Dobrich"). A city that is its own
+   first-level unit (Vienna, Kyiv) takes the state's entry.
+5. A level that is still not found keeps its written value, and the levels below it are not looked up;
+   the rule check reports it. Offline, a chain not in the file, or saved by an older version without the
+   kind of place, keeps its written values.
 
-Articles can be named by `article_id` or by set position, such as `Jahnavi:6` or `Thanya:120`.
+This happens in `evaluation.py` for gold and model items alike, before matching and scoring; the files
+in `data/` are never changed. The written values are kept (`raw_gold_items`, `raw_model_items`) for the
+rule checks. Any code that combines items into weekly signals should use the same
+`with_agreed_names` with the same file, so one place is always one value. The file stores each answer
+with its language, OpenStreetMap id, kind of place and the date it was asked.
 
-### `run_extraction.py`: ask the model
+## 6. Commands
 
-| Option | Meaning |
+Articles can be named by `article_id` or by labeling set and row, such as `Jahnavi:42`.
+
+| Command | What it does |
 |---|---|
-| `--ids Jahnavi:6,Manoj:12` | run exactly these articles, bypassing the split and all exclusions |
-| `--ids-file FILE` | run the articles listed in FILE, one per line (`#` starts a comment), e.g. `data/dev_sample_200.txt`. Example articles are still left out |
-| `--split all\|dev\|test` | articles to run when no ids are given (default `all`: every labelled article as one set) |
-| `--limit N` | run only the first N of the selected articles |
-| `--exclude-file FILE` | extra articles to leave out, one per line |
-| `--workers N` | requests in flight at the same time (default 3). The 40-per-minute limit holds whatever N is |
-| `--run-dir DIR` | continue an existing run folder: articles that already have a reply are skipped |
-| `--retry-invalid` | with `--run-dir`: also rerun articles whose reply was still invalid after the retries |
+| `python run_extraction.py` | send every labelled article except the examples |
+| `... --ids Jahnavi:42,Manoj:94` | send exactly these articles |
+| `... --ids-file FILE` | send the articles listed in FILE, one per line (`#` starts a comment); examples are still left out |
+| `... --limit N` | only the first N of the selected articles |
+| `... --exclude-file FILE` | leave out more articles |
+| `... --workers N` | requests in flight at once (default 16); the 40-per-minute limit holds for any N |
+| `... --run-dir DIR` | resume a run: articles that already have a reply are skipped, API failures are retried |
+| `... --retry-invalid` | with `--run-dir`: also rerun articles whose reply was still invalid |
+| `python evaluate_run.py RUN_DIR [--offline]` | score a run; writes `report.md` and the files of section 9 |
+| `python inspect_row.py RUN_DIR ARTICLE [--article] [--reasoning] [--offline]` | one article, gold vs model, field by field, with the matching shown |
+| `python compare_runs.py RUN_DIR...` | headline scores of several evaluated runs side by side; mean and range; with two runs a paired bootstrap difference |
+| `python scripts/build_gold_files.py` | rebuild `data/articles.json`, `data/gold_labels.json` and the system prompt |
+| `python scripts/select_examples.py --hard-runs RUN...` | re-choose the few-shot examples (writes the one set, `prompts/examples_v5.1.json`, and `few_shot_selection.md`; `--k` sets how many, default 8) |
 
-Each run writes a new folder `results/run_<date>_<time>/`. With `--run-dir`, only articles whose
-call **failed with an API error** are retried. Invalid replies are already repaired or asked again
-during the run (section 3); one that is still invalid after that counts as done: to retry it,
-delete its line from `raw_results.jsonl`. Records are written in the order they finish.
+## 7. Configuration
 
-### `evaluate_run.py RUN_DIR`: score a run
-
-| Option | Meaning |
-|---|---|
-| `--offline` | do not look up place names online; use only the saved answers. Names never looked up are reported as "could not be checked" |
-
-Writes `report.md`, `scores.json`, `row_results.csv` and `item_comparison.csv` into the run
-folder, and prints a short summary. New place names are looked up online, about one per second,
-and saved.
-
-### `inspect_row.py RUN_DIR ARTICLE`: one article, gold vs model, field by field
-
-| Option | Meaning |
-|---|---|
-| `--article` | also print the article text |
-| `--reasoning` | also print the model's summary and reasoning steps |
-| `--offline` | do not look up place names online |
-
-Prints the call details, the usefulness verdict (gold vs model, with the human label), and every
-item with **all** its fields, gold and model side by side, each flagged `same` or `DIFFERENT`.
-Items are labeled `EXACT MATCH`, `NOT EXACT` (same kind and place, with the differing fields
-named), `MISSING FROM MODEL` or `EXTRA FROM MODEL`, followed by any rule violations. It uses the
-same scoring code as the reports.
-
-### `compare_runs.py RUN_DIR...`: scores of several runs side by side
-
-```bash
-python compare_runs.py results/run_k0_D results/run_k4 results/run_k8 results/run_k12
-python compare_runs.py results/run_test1 results/run_test2 results/run_test3   # mean and range
-```
-
-Reads each folder's `scores.json` and `run_config.json` and prints k (example count), the examples
-hash, and usefulness, exact, strict, relaxed and weekly F1, then the mean and range of each.
-`--variant all_articles` or `--variant without_inactive` compares the other score sets.
-
-### `scripts/build_gold_files.py`: refresh `data/` and the system prompt
-
-```bash
-python scripts/build_gold_files.py                                  # default capstone layout
-python scripts/build_gold_files.py --capstone-dir /path/to/capstone
-python scripts/build_gold_files.py --labeling-dir DIR --records-dir DIR
-```
-
-Defaults: the capstone folder is two levels up, the labeling files are in
-`<capstone>/labeling/labeling/`, the records in `data/chain_of_thought/` if it exists, else in
-`../labeled_data_chain_of_thought/`. It reads all four
-`<Name>_texts.txt`, `<Name>_labels.csv` and `<Name>_chain_of_thought_v2.jsonl` (a missing or
-partial records file is fine: those articles get no gold yet). It stops with an error if an
-article is in both splits, or if two copies of an article or of its record differ. It also
-rewrites `prompts/system_prompt_v5.1.txt` from the v5.1 document, and creates
-`prompts/examples_v5.1.json` as `[]` only if it does not exist. It prints article, gate and gold
-counts per split. It is the only code that knows where the capstone folder is.
-
-### `scripts/make_dev_sample.py`: draw the dev sample D
-
-Draws 200 dev articles with gold, stratified by labeler and gold `useful`, seed 20261101, and
-writes them to `data/dev_sample_200.txt`. It refuses to overwrite an existing file, because D
-must stay identical across the runs it compares.
-
-### `scripts/select_examples.py`: choose the few-shot candidates
-
-```bash
-python scripts/select_examples.py [--records-dir DIR]
-```
-
-Builds the candidate pool from the three dev record files and picks 12 nested candidates (section
-9). Writes `prompts/examples_v5.1_k4.json`, `_k8.json`, `_k12.json` and the review sheet
-`few_shot_selection.md`. It never touches the active `prompts/examples_v5.1.json`. Deterministic:
-the same records give the same picks.
-
-`scripts/build_data_files.py` is the old v2.0 converter. It is obsolete: it writes the old row-keyed
-format the code no longer reads. Do not run it.
-
-## 6. Configuration
-
-Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in
-`flu_extractor/config.py`.
+Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in `flu_extractor/config.py`.
 
 | Setting | Where | Default |
 |---|---|---|
 | `NVIDIA_API_KEY` | `.env` (required) | none |
-| `NVIDIA_MODEL_ID` | `.env` (optional) | `nvidia/nemotron-3.5-lightning-30b-a3b` |
-| `NVIDIA_BASE_URL` | `.env` (optional) | `https://integrate.api.nvidia.com/v1` |
-| `RESULTS_DIR` | `.env` (optional) | `llm-extractor/results` |
-| `EXAMPLES_PATH` | `.env` (optional) | `prompts/examples_v5.1.json`; set to e.g. `prompts/examples_v5.1_k8.json` for the k comparison |
-| `SYSTEM_PROMPT_PATH`, `FEWSHOT_GUIDE_PATH` | `config.py` | `prompts/system_prompt_v5.1.txt`, `prompts/fewshot_guide_v5.1.txt` |
-| `ARTICLES_PATH`, `GOLD_LABELS_PATH`, `HUMAN_LABELS_PATH` | `config.py` | `data/articles.json`, `data/gold_labels.json`, `data/human_labels.json` |
-| `DEV_SAMPLE_PATH`, `PLACE_CACHE_PATH` | `config.py` | `data/dev_sample_200.txt`, `data/place_lookups.json` |
-| `TEMPERATURE`, `MAX_TOKENS` | `config.py` | 0, 8000 |
-| `NVIDIA_REQUESTS_PER_MINUTE` | `.env` (optional) | 40 (every request and retry counts; window 61 s, `RATE_WINDOW_SECONDS`) |
-| `REQUEST_TIMEOUT_SECONDS`, `MAX_RETRIES` | `config.py` | 300, 4 |
-| `MAX_VALIDATION_RETRIES`, `LAST_RETRY_TEMPERATURE` | `config.py` | 3, 0.3 (requests repeated when a reply is cut off, not valid JSON or malformed; the last one compact, at 0.3) |
-| `SEED` | `config.py` | 20261101 (sent with every request, with `TEMPERATURE` 0) |
-| `STOP_AFTER_CONSECUTIVE_API_ERRORS` | `config.py` | 5 (stop a run when the quota is used up) |
-| `EXTRA_BODY` | `config.py` | `{"chat_template_kwargs": {"enable_thinking": False}}` |
+| `NVIDIA_MODEL_ID` | `.env` | `deepseek-ai/deepseek-v4.1-flash` |
+| `NVIDIA_BASE_URL` | `.env` | `https://integrate.api.nvidia.com/v1` |
+| `NVIDIA_REQUESTS_PER_MINUTE` | `.env` | 40 (every request and retry counts; window 61 s) |
+| `REQUEST_TIMEOUT_SECONDS` | `.env` | 900 |
+| `PROMPT_VERSION` | `.env` | `v5.1`: names the prompt files (`prompts/system_prompt_<v>.txt`, `fewshot_guide_<v>.txt`, `examples_<v>.json`) and the document `build_gold_files.py` reads |
+| `EXAMPLES_PATH` | `.env` | `prompts/examples_<PROMPT_VERSION>.json` (the k = 8 set) |
+| `RECORDS_SUFFIX` | `.env` | `_chain_of_thought_v2.jsonl`: the gold record files read from `data/chain_of_thought/` |
+| `RESULTS_DIR` | `.env` | `results/` |
+| `TEMPERATURE`, `TOP_P`, `SEED`, `EXTRA_BODY`, `MAX_TOKENS` | `config.py` | 0, 1, 20261101, thinking off, 8000 |
+| `MAX_RETRIES`, `MAX_VALIDATION_RETRIES`, `STOP_AFTER_CONSECUTIVE_API_ERRORS` | `config.py` | 4, 3, 5 |
+| `PLACE_NAME_LANGUAGE` | `.env` | `en`: the language of the agreed place names (5.6); `PLACE_NAME_SOURCE` in `config.py` is `openstreetmap` |
+| match threshold, normalization, recency window | `matching.py`, `normalization.py`, `checks.py` | 0.8, `norm_v3`, 30 days |
 
-Other tuning points: the place check pace and retries are at the top of `flu_extractor/places.py`;
-the item matching tiers are at the top of `flu_extractor/metrics.py`; the recency window
-(`RECENT_DAYS = 30`) is in `flu_extractor/checks.py`.
+## 8. Making changes
 
-## 7. Prompt versions
+Each change below is a change of files and settings; no code needs editing unless the reply format
+itself changes. After any change: `python -m unittest discover tests`, then a one-article run.
 
-**`prompts/` holds the files the code reads**, named in `config.py`:
+### 8.1 New or corrected labels (gold)
 
-| File | What it is |
-|---|---|
-| `prompts/system_prompt_v5.1.txt` | **active.** The v5.1 rules, from `## Task` to the end of `llm_extraction_prompt_v5.1.md`, word for word. Generated by `build_gold_files.py` |
-| `prompts/examples_v5.1.json` | **active.** The few-shot examples: the k = 8 set (section 9) |
-| `prompts/fewshot_guide_v5.1.txt` | **active.** How to learn from the examples' reasoning and evidence. Added after the rules only when examples are sent (section 9) |
-| `prompts/examples_v5.1_k4.json`, `_k8.json`, `_k12.json` | candidate example sets for the k comparison, written by `select_examples.py`. Not active |
-| `prompts/system_prompt_v2.0.txt`, `prompts/examples_v2.0.json` | the old v2.0 pair, kept as the record of the v2.0 runs. Old schema: do not reuse |
+1. Put the record files in `data/chain_of_thought/` as `<Name><RECORDS_SUFFIX>` (one JSON record per line,
+   with `article_id`, `source_rows`, `summary`, `reasoning`, `output: {useful, reason, items}`, as now).
+   For a new label version (for example `_chain_of_thought_v3.jsonl`), set `RECORDS_SUFFIX` in `.env`.
+   Remove the old files from the folder if they should no longer count.
+2. If a new labeling set is added, add its name to `LABELERS` in `scripts/build_gold_files.py` and put
+   its `<Name>_texts.txt` in the labeling folder; set `LABELERS` in `scripts/select_examples.py` if it
+   should provide examples.
+3. Run `python scripts/build_gold_files.py`. It rebuilds `data/articles.json` and `data/gold_labels.json`,
+   removes every article that is in more than one set, and writes nothing if a record fails the checks
+   (section 2); fix the record it names and run again.
+4. If a chosen few-shot example's record changed, rebuild the examples (8.3): an example must match its
+   gold record.
 
-**`prompt_versions/` is the archive** of full prompt documents. No code reads it except
-`build_gold_files.py`, which takes the system prompt from the v5.1 file.
+### 8.2 A new prompt version
 
-| File | What it is |
-|---|---|
-| `llm_extraction_prompt_v1.0.md` | v1.0 (14 solved examples, old schema) |
-| `llm_extraction_prompt_v2.0.md` | v2.0 (43 solved examples, old schema with `total_or_new`, `borderline`, `findings`) |
-| `llm_extraction_prompt_v5.1.md` | **v5.1, the active version.** Generated from `prompt_rules.md` (rules version `prompt_rules 2026-11-01`). Rule numbers are the same as v5.0 |
+1. Put the new prompt document in `prompt_versions/` as `llm_extraction_prompt_<version>.md` (the
+   rules from `## Task` to the end are sent).
+2. Set `PROMPT_VERSION=<version>` in `.env` (or change the default in `config.py`).
+3. Run `python scripts/build_gold_files.py`: it writes `prompts/system_prompt_<version>.txt`.
+4. Create `prompts/fewshot_guide_<version>.txt` (copy the v5.1 guide and adjust it to the new rules)
+   and `prompts/examples_<version>.json` (8.3). A run without examples needs `examples_<version>.json`
+   to contain `[]`.
+5. **If the reply format changes** (a new field, a new allowed value, a new kind or trend word, a
+   renamed field), change the matching constants at the top of `flu_extractor/checks.py`
+   (`REPLY_KEYS`, `ITEM_FIELDS`, `KINDS`, `COUNT_TYPES`, `STATUSES`, `TREND_WORDS`, `STRAIN_NAMES`,
+   `STRAIN_CODE`, `RECENT_DAYS`) and, for scoring, the field lists in `flu_extractor/normalization.py`
+   (`COUNT_FIELDS`, `TREND_FIELDS`, `ALL_FIELDS`). The gold records must then follow the new format too,
+   and the tests that name the old values need the new ones.
+6. If the prompt's input names change (`scan_date`, `link`, `article`), change `format_article` in
+   `flu_extractor/prompt.py`.
 
-The v5.1 document holds no examples: they go in chat turns, never pasted into the rules. The rule
-text is unchanged; how to use the examples is in the separate guide file, which keeps the rules as
-the authority. If the zero-shot run shows a repeated misreading of a rule, change the rule through
-the normal protocol on dev data only, before the freeze, as a new version file.
+### 8.3 New few-shot examples
 
-**Freezing.** Before the test runs, the prompt, the guide, the examples, the model and the
-settings are frozen. `run_config.json` in each run folder records the file names and their SHA-256
-hashes, so every run can be traced to the exact text it used. All three test runs must show the
-same hashes.
+1. Choose them: `python scripts/select_examples.py [--k 8] [--hard-runs results/<run> ...]`. It picks
+   examples from the gold records, favouring `hard_case` records and articles the model got wrong in the
+   given runs, checks them, and writes the one example set `prompts/examples_<version>.json` (it
+   replaces the current one; back it up first if you may want it back) and the review sheet
+   `few_shot_selection.md` (the 12 best picks, coverage at 4, 8 and 12, and alternates).
+2. Review the sheet. There is only ever one example set; `EXAMPLES_PATH` in `.env` can point at another
+   file if you keep one elsewhere.
+3. To write examples by hand, each entry needs `article_id`, `source`, `scan_date`, `link`, `article`
+   (the exact text in `data/articles.json`) and `answer` (`summary`, `reasoning`, `useful`, `reason`,
+   `items`, in that order). `run_extraction.py` refuses to start if an example fails the checks.
+4. Examples are never scored: their articles are left out of every run automatically.
 
-## 8. Which articles are run: one set
+### 8.4 Another model
 
-All labelled articles are one set; there is no dev/test split. Without `--ids` or `--ids-file`, a
-run covers every article with a gold record except the few-shot examples (the model has seen their
-answers) and articles in `--exclude-file`:
+1. On the same NVIDIA API: set `NVIDIA_MODEL_ID` in `.env` to the model's id. List the ids your key
+   can use with `curl -H "Authorization: Bearer $NVIDIA_API_KEY" https://integrate.api.nvidia.com/v1/models`.
+2. On another OpenAI-compatible API (DeepSeek's own, OpenAI, a local server): set `NVIDIA_BASE_URL` to
+   its base URL, `NVIDIA_API_KEY` to its key and `NVIDIA_MODEL_ID` to its model name. (The names keep
+   the `NVIDIA_` prefix; they work for any such API.)
+3. Set the model's own request options in `EXTRA_BODY` in `config.py`, above all how to switch off a
+   hidden thinking pass (see the model card); use `{}` if it has none.
+4. Set `NVIDIA_REQUESTS_PER_MINUTE` to that API's limit and `REQUEST_TIMEOUT_SECONDS` to its speed.
+5. Check that the model's context length holds the prefix (about 30,000 tokens with 8 examples) plus
+   the longest article (about 35,000 tokens).
+6. Run one article, read the reply with `inspect_row.py`, then run the rest.
 
-| | Useful | Not useful | Total |
-|---|---|---|---|
-| Labelled articles (no shared articles) | 240 | 600 | 840 |
-| Few-shot examples, left out | 5 | 3 | 8 |
-| **Scored** | **235** | **597** | **832** |
+### 8.5 Place names
 
-Gated articles (44) are included: they cost no API call, and the report scores them separately.
-Thanya's 280 articles have no gold records yet, so they are not scored. The `split` field and
-`--split dev|test` remain for running one part on its own.
+The agreed form of every place (5.6) comes from OpenStreetMap; no name list is kept in the code.
+- To use the names of another language, set `PLACE_NAME_LANGUAGE` in `.env` (for example `fr`); saved
+  answers in another language are asked again automatically.
+- To refresh the names (OpenStreetMap changes over time), delete `data/place_lookups.json`; the next
+  evaluation asks every chain again, at one per second. If you refresh, rerun the data fix too, so the
+  gold records keep the same names as the file.
+- New data needs no list either: any new place is looked up the first time it is seen.
 
-```text
-1. python -m unittest discover tests
-2. python run_extraction.py --ids Jahnavi:6        one-article smoke run; read the reply
-3. python run_extraction.py                        all 832 articles (about 790 API calls)
-4. python evaluate_run.py results/run_<timestamp>
-5. Repeat 3-4 to measure run-to-run variation; compare_runs.py gives the mean and range
-```
+### 8.6 Scoring settings
 
-## 9. Choosing the few-shot examples
+The match threshold (`MATCH_THRESHOLD`, 0.8) and the pairing are in `flu_extractor/matching.py`; the
+country names in `flu_extractor/normalization.py`; the recency window in `flu_extractor/checks.py`.
+Changing them changes every score, so each has a version string (`MATCHING_VERSION`,
+`NORMALIZATION_VERSION`) that is written into `evaluation_summary.json`; change it with the setting.
+A finished run can be re-scored at any time with `evaluate_run.py`, without new API calls.
 
-The examples are chosen from the three labelled record files by `scripts/select_examples.py`, using
-each record's `rules_used`, items and `hard_case`, and **favouring hard cases**. The 12 candidates
-are listed, with why each is hard and up to 3 alternates per slot, in
-[few_shot_selection.md](few_shot_selection.md).
+## 9. Output files
 
-### 9.1 How the examples were chosen
-
-1. **No shared articles.** The 80 articles that appear in more than one labeling set are not in
-   `data/` at all; the selection script also excludes them on its own.
-2. **Candidate pool:** the whole labelled set (no split, no D). Left out: articles failing the
-   keyword gate, articles over 6,000 characters (10,000 for a `hard_case` record), replies over
-   5,000 characters, garbled text, and inactive-only records except for the food-link slot.
-3. **Slots.** Each record is tagged with the slots below from its `rules_used` and items (e.g. slot
-   6 = G4 or G5 with two or more counts; slot 12 = a `cumulative_subset` or `suspected` count).
-4. **Hardness.** +2 for a `hard_case` note (a judgement call the labeler recorded), plus the share
-   of the earlier runs (`run_k0_D`, `run_k8_D`) in which the model got the article wrong (wrong
-   `useful`, or per-article partial-credit F1 under 50%).
-5. **Greedy, nested pick.** Each pick adds the most new slots (10 points each), hardness (6 points
-   per unit), rarely used rules, new countries and new kinds, minus about 1 point per 1,000 tokens.
-   At every size the three labeled sets are all present and about one third are not useful.
-
-**The active 8** (`prompts/examples_v5.1.json`), each hard:
-
-| Example | Useful | Why it is hard |
-|---|---|---|
-| Jahnavi 83 | yes | items wrong in both earlier runs (Turkey, deaths and cases over a period) |
-| Aditya 307 | yes | `hard_case`: a monitoring statement from a general CDC update |
-| Jahnavi 311 | no | `useful` wrong in both earlier runs (H5N1 in livestock, no human item) |
-| Manoj 79 | yes | items wrong in both earlier runs (infant deaths, Silchar) |
-| Jahnavi 320 | no | `hard_case`: China's "normal flu" claim, which the letter rejects |
-| Manoj 162 | yes | items wrong in an earlier run (present fallbacks for 7 countries) |
-| Aditya 142 | yes | items wrong in both earlier runs (6 countries) |
-| Manoj 60 | no | `useful` wrong in both earlier runs (Yanomami crisis) |
-
-The third `hard_case` (Jahnavi 308) is example 9, in the k = 12 set.
-
-| k | Slots covered | Rules covered (of 68 in the pool) | Not useful | Jahnavi / Aditya / Manoj | Extra tokens per call |
-|---|---|---|---|---|---|
-| 4 | 10 of 12 | 36 | 1 | 2 / 1 / 1 | ~7,400 |
-| 8 | 12 of 12 | 40 | 3 | 3 / 2 / 3 | ~12,600 |
-| 12 | 12 of 12 | 46 | 4 | 4 / 4 / 4 | ~17,300 |
-
-| # | Slot | Rules | Kind of example |
-|---|---|---|---|
-| 1 | Flu named, but no current activity | 1.2, 9.5 | routine vaccine advice or company news, no item |
-| 2 | Flu in animals only | 1.3 | poultry outbreak, no item |
-| 3 | Past or forecast | 4.1, 4.7, 9.3.8 | old total or a coming season, no item |
-| 4 | Food link fallback | 1.3, 9.7 | price rise gives inactive |
-| 5 | Stages for one person | 2.4, 4.3 | case, admission, death on stated days |
-| 6 | Overlapping counts | G4, G5 | a total plus a weekly count, the same event told twice |
-| 7 | Count and trend together | 2.3, 9.3 | "rising" plus a number |
-| 8 | Fallback present, per place | 9.3.5, 9.7 | several places, no level word |
-| 9 | Trend with a strain | 9.6 | general plus dominant strain gives two items |
-| 10 | Place from context | 5.3.6, 5.4, 5.5 | no place in the sentence, home area vs hospital |
-| 11 | Relative dates | 4.3-4.6 | weekday, "past week", "since X" |
-| 12 | Subset vs region, suspected | 6.3, 7.2 | a school outbreak, pending samples |
-
-### 9.2 How many examples
-
-**Active: k = 8.** The extractor always runs few-shot. k = 8 is the smallest set that covers all 12
-slots, with 3 of 8 not useful, for about 12,600 extra tokens per call (the whole prefix is then
-about 30,000 tokens). k = 4 leaves slots 2 and 4 uncovered; k = 12 adds the third `hard_case` and 6
-more rules for about 4,700 more tokens on every call. To try another size, set
-`EXAMPLES_PATH=prompts/examples_v5.1_k12.json` (or `_k4`) in `.env`, run, and compare with
-`compare_runs.py`.
-
-### 9.3 Learning from the reasoning and evidence
-
-Each assistant turn keeps the record's full `reasoning` and every item's `evidence`. The few-shot
-guide (`prompts/fewshot_guide_v5.1.txt`), added after the rules only when examples are sent, tells
-the model how to use them:
-
-- learn the step-by-step method from `reasoning` (statements, each field with its rule ID, G3-G5,
-  the per-place fallback check, the `useful` decision) and reason through the new article the same way;
-- learn evidence selection from `evidence` (the event sentence first, then every sentence that
-  supplied a field, in article order, copied exactly);
-- learn what gets no item from the not-useful examples, and not look for items because examples
-  have them;
-- the rules decide when an example and a rule seem to differ;
-- never reuse an example's places, dates, numbers, strains or quotes.
-
-The v5.1 rule text is unchanged. Handoff 4.5 asks for no line telling the model to copy the
-examples; the guide asks the model to learn the method, not to copy, and keeps the rules as the
-authority. Its effect is part of what the k comparison measures. To measure it alone, run k = 8
-once more with the guide file renamed.
-
-### 9.4 Notes
-
-1. **No separate approval step.** If a record is corrected, correct it in its `v2.jsonl`, rebuild
-   `data/` and rerun `select_examples.py` (or swap in an alternate from `few_shot_selection.md`).
-2. Examples are ordered with not useful and useful mixed, ending on a not-useful one, so the last
-   turn does not push the model toward items.
-3. Hard examples were picked partly from the model's mistakes on the dev sample D; they are then
-   left out of scoring like every example, so no scored article was seen by the model.
-4. **No example is an article labelled in more than one set.**
-
-## 10. How results are scored
-
-**Gold is the chain-of-thought records** (`data/gold_labels.json`). The human `useful` answers are
-a second comparison (report section 6).
-
-**Usefulness.** Positive class = *useful*. Confusion table, precision, recall, F1 and accuracy.
-`useful` is read from the items (`bool(items)`), as v5.1 Section 11 defines it.
-
-**Items: scored article by article, then averaged.** Each article gets its own item scores, and the
-report averages those over articles (macro average). Every article counts once: an article with 20
-items does not outweigh twenty articles with one item, as it would if all items were pooled.
-Evidence is never compared. Upper/lower case and repeated spaces are ignored; null equals null.
-
-For each article:
-
-| Per-article score | How it is computed |
-|---|---|
-| exact matches | model items whose kind, number, count_type, status, strain, city, state, country, start_date, end_date and words all agree with a gold item (each gold item matched once) |
-| exact precision / recall / F1 | matches / model items; matches / gold items; 2 x matches / (gold items + model items) |
-| partial credit | each model item is aligned with its most similar gold item of the same kind and country (each item used once). A pair scores the share of its fields that agree: counts compare number, count_type, status, strain, city, state, start_date, end_date (8); trends compare words, strain, city, state, start_date, end_date (6). Missing and extra items score 0 |
-| partial-credit precision / recall / F1 | the same formulas with the sum of the pair scores in place of the number of exact matches |
-
-Then, over articles (report section 2.1, each with a 95% bootstrap interval resampling articles):
-
-| Average | Over |
-|---|---|
-| **F1, exact and partial credit** (the headline) | articles with items on either side |
-| F1 | articles where gold has items |
-| precision | articles where the model wrote items |
-| recall | articles where gold has items |
-
-Articles with no items on either side are left out of the item averages (nothing to extract,
-nothing extracted, so any score would be arbitrary); the `useful` confusion table counts them as
-true negatives. The report also shows how many articles are fully right, partly right or fully
-wrong (2.2), and the **accuracy of each field on aligned items** (2.3), which shows where misses
-come from. `row_results.csv` has every article's six scores.
-
-**Why both exact and partial credit.** Exact match is all or nothing: one day off in a date turns a
-correct item into one missing and one extra. Partial credit shows how close the model is; exact
-match shows how often it is fully usable. Report both; exact is the stricter number.
-
-**Pooled scores (reference only, report 2.4).** All items of all articles added together, in four
-tiers: exact; strict (kind, place, strain, dates); relaxed (kind, place, strain); weekly (kind,
-strain, country, ISO week of end_date). Kept for comparison with earlier runs and because the weekly
-tier is closest to what the weekly signal needs.
-
-**Comparing runs.** `compare_runs.py` lists `useful` precision, recall and F1, per-article exact and
-partial-credit F1, and the pooled exact and weekly F1. Unscored rows (cut-off or invalid replies)
-drop out of a run's averages, so check that runs scored the same articles before comparing them.
-
-**Score variants** (report section 5):
-
-| Variant | Articles |
-|---|---|
-| Reached the model (headline) | scored articles that passed the keyword gate |
-| All | including gated articles, which code decides; this inflates `useful` accuracy |
-| Inactive-only filtered | an article whose only items are `inactive` trends counts as having no items, on both sides |
-
-Jahnavi wants inactive-only articles filtered from the weekly signal. So far: Jahnavi 71, 241,
-248, 310; Aditya 17, 239, 241, 307, 310, 320; Manoj 9, 13, 37, 255. **Ask her which variant is
-the headline before the test run**, and decide it before seeing the score.
-
-## 11. Automatic checks
-
-Every reply is validated during the run (section 3), so a reply with shape errors is asked for
-again before it can reach scoring. **Shape errors** that remain after 2 retries make a row
-`malformed` (not scored): a missing top-level key (`summary`,
-`reasoning`, `useful`, `reason`, `items`), `useful` not true/false, `reasoning` not a non-empty list
-of text, an item missing one of the 12 fields, a kind other than the four, an invalid date, a place
-that is not text or null, a number that is not a whole number, evidence that is not a non-empty
-list of text.
-
-**Rule violations** do **not** stop a row from being scored; they are reported so you can read
-those rows with care:
-
-| Rule | Check | Prompt |
-|---|---|---|
-| (a) | every evidence quote is an exact piece of the article | 10.1 |
-| (b) | a trend has one of the seven words and null number, count_type, status | 2.2, 9.2 |
-| (c) | a count has a number, a valid count_type and status, and null words | 2.2 |
-| (d) | city, state, country are null or a real place of that kind | 5.1 |
-| (e) | start_date is not after end_date | 4.2 |
-| (f) | no two items identical except evidence | G3 |
-| (g) | `useful` equals `bool(items)`, both ways | Section 11 |
-| (h) | a country and an end date are present | G1, G2 |
-| (i) | the end date is on or before the scan date and within 30 days of it | 4.7 |
-| (j) | evidence after the first part is in article order (a warning) | 10.1 |
-| (k) | `reasoning` begins with Step 0 | How to work |
-
-Two items of the same kind and place with overlapping dates are **not** flagged: G5 requires them
-("50 and 17", "856 and 591").
-
-### Rule (a): evidence is copied from the article
-
-Only line breaks and repeated spaces are ignored. Each failure gets one of three reasons, counted
-separately in `report.md`:
-
-| Reason | Meaning |
-|---|---|
-| not found in the article | reworded, shortened (for example with "..."), joined from separate places, or invented |
-| differs only in quote or dash characters | the words are the article's, but curly quotes or dashes were changed |
-| empty | the quote is blank |
-
-It proves the text exists in the article, not that the quote supports the item.
-
-### Rule (d): places are real
-
-There is no list of names in the code. For each non-null place field, `PlaceChecker.is_known`
-asks OpenStreetMap's free geocoder (Nominatim) one structured question: `country=...`,
-`state=...` or `city=...`. A field is checked only against its own kind: "India" is not a state,
-"California" is not a country, and "Southern Hemisphere" or "Europe" are not found.
-
-- **Answers are saved** in `data/place_lookups.json` with the best match and the date. Each name is
-  looked up once; later runs give the same answers without internet. New names are looked up at
-  about one per second (Nominatim's usage policy; do not lower `MIN_SECONDS_BETWEEN_REQUESTS`).
-- **If the service is unreachable** the value is reported as "could not be checked". It is never
-  guessed and nothing is saved.
-
-Limits: a match means a place with that name exists *somewhere*; the geocoder forgives misspelled
-cities; each field is checked alone, so a city is not checked against its state or country.
-
-Place data: © OpenStreetMap contributors, ODbL (https://www.openstreetmap.org/copyright).
-Keep this credit if you share results that include `data/place_lookups.json`.
-
-## 12. Output files
-
-Per run, in `results/run_<date>_<time>/` (the `results/` folder is ignored by git):
+Per run, in `results/run_<date>_<time>/` (ignored by git):
 
 | File | Content |
 |---|---|
-| `raw_results.jsonl` | one line per article: gated flag, raw reply, parsed reply, finish reason, token counts, seconds, errors |
-| `run_config.json` | model, base URL, prompt and examples file names with SHA-256 hashes, example count, temperature, max tokens, extra body, split or ids file, start time |
-| `report.md` | 1 usefulness confusion table; 2 items article by article (2.1 per-article exact and partial-credit scores, 2.2 how articles are spread, 2.3 field accuracy on aligned items, 2.4 pooled scores for reference, 2.5 by country); 3 rule checks and the evidence summary; 4 coverage (gated and unscored rows); 5 score variants with intervals; 6 against the human labels |
-| `scores.json` | `useful` precision, recall and F1, per-article exact and partial-credit F1, and the pooled F1 scores, for each variant; read by `compare_runs.py` |
-| `row_results.csv` | per article: `sources`, `status`, `gated`, gold, human and model usefulness, item counts, exact matches, missing, extra, per-article exact and partial-credit precision, recall and F1, item-set outcome, rule violations, problems, the model's `reason` |
-| `item_comparison.csv` | one line per item: `exact match`, `same kind and place` (with `differing_fields`), `missing from model` or `extra from model`. Gold and model values side by side for number, count_type, status, dates and words, plus both sides' evidence |
+| `raw_results.jsonl` | one line per article: model, raw reply, parsed reply, finish reason, tokens, seconds, requests, validation retries and problems, errors |
+| `run_config.json` | model, base URL, decoding settings, prompt, guide and examples files with SHA-256 hashes, rate limit, selection, start time |
+| `report.md` | 1 task 1 table; 2 recall, precision, F1; 3 accuracy, exact rate, field accuracy (each as mean, interval, median, quartiles, share at 1 and 0, articles covered); 4 article outcomes; 5 where misses and extras come from; 6 coverage and checks |
+| `plot_article_counts.png`, `plot_article_metrics.png`, `plot_field_accuracy.png`, `plot_article_buckets.png` | the charts of section 5.3 |
+| `evaluation_summary.json` | the per-article summaries of every metric, the buckets and the counts, for every scored article and with inactive-only items removed, plus the settings and versions (read by `compare_runs.py`) |
+| `article_metrics.csv` | per article: status, gold and model `useful`, items, hits, misses, extras, repeated extras, recall, precision, F1, accuracy, exact hits, outcome bucket |
+| `matched_items.csv` | per hit: similarity, exact, wrong fields, every field result, gold and model values and evidence |
+| `missed_items.csv` | per miss: the gold item, and its closest model item with the similarity (below 0.8, or taken by another gold item) |
+| `additional_items.csv` | per extra, with its repeat label |
+| `duplicate_candidates.csv` | candidate groups in gold (with the review decision) and in the model items |
+| `field_error_summary.csv`, `kind_error_summary.csv`, `error_examples.md` | errors by field, by kind, and examples of each error type |
 
-Read `report.md` in this order: section 4 (what could not be scored), section 3 (rule
-violations), section 1 (usefulness), section 2 (items). Then open `item_comparison.csv` or
-`inspect_row.py` to see why items fail.
+Read `report.md` section 6 first (what could not be scored), then sections 2-4 and the charts.
 
-## 13. Testing
+## 10. Testing
 
 ```bash
 python -m unittest discover tests
 ```
 
-99 tests. They need no API key and no internet (the place check uses a fake geocoder).
+99 tests, no API key and no internet needed (the geocoder is faked). They cover the three check
+layers: the format with every fixed value, the evidence, and the rule checks (`test_checks.py`); normalization, the pairing,
+the 0.8 threshold, best-partners-first pairing with its tie rule, field results, duplicates, per-article metrics and their summaries, which articles each metric covers,
+article outcomes, the charts, bootstrap and evidence checks (`test_evaluation.py`); the 40-per-minute limiter
+and API retries (`test_llm_client.py`); the whole-chain place check, the agreed form of any place
+(two spellings of one place become one value and score as the same place), the saved answers, offline mode
+(`test_places.py`); and the request format, validation retries (format and
+evidence problems are sent back), articles without flu being sent, article selection, scoring a run,
+the data build with duplicate removal, and the real `data/` and `prompts/` files passing the input
+checks (`test_pipeline.py`).
 
-| File | Covers |
-|---|---|
-| `tests/test_checks.py` | the v5 reply shape, rule (a) exact quotes, and rules (b), (c), (e)-(k) |
-| `tests/test_metrics.py` | per-article exact and partial-credit scores, item alignment, macro averages, exact and weekly matching, the six item-set outcomes, F1, usefulness table, inactive-only filter, bootstrap interval |
-| `tests/test_llm_client.py` | the 40-per-minute limiter (40 at once, the 41st waits for the window, the window slides, the limit holds across threads), retries counted against the limit, `Retry-After` and back-off, giving up after `MAX_RETRIES`, no retry for errors a retry cannot fix |
-| `tests/test_places.py` | the place cache, offline mode, an unreachable service, rule (d) |
-| `tests/test_pipeline.py` | the v5 article format and chat turns, the keyword gate (no API call), reply parsing, choosing articles by split, scoring with gated and unparseable rows, `build_gold_files.py` (overlaps merged, Thanya 41+ in test, header lines not sent), the few-shot guide sent only with examples, and the slot tagging and prompt order of `select_examples.py` |
+The live API is not covered by tests: check it with a one-article run (section 1, step 2).
 
-Not covered by tests: the live API call, the report text and the command-line wrappers. Check
-those with a one-article run (section 2) and `inspect_row.py`.
-
-## 14. Layout
+## 11. Layout
 
 ```
-prompts/           ACTIVE prompt: system_prompt_v5.1.txt, fewshot_guide_v5.1.txt, examples_v5.1.json;
-                   candidates examples_v5.1_k4/k8/k12.json; old v2.0 pair kept
-prompt_versions/   archive: the full prompt documents (v1.0, v2.0, v5.1)
-data/              articles.json, gold_labels.json, human_labels.json, place_lookups.json,
-                   dev_sample_200.txt (the gold record sources are in ../labeled_data_chain_of_thought/)
+data/              chain_of_thought/*_v2.jsonl (gold source), articles.json, gold_labels.json, place_lookups.json
+prompts/           ACTIVE: system_prompt_v5.1.txt, fewshot_guide_v5.1.txt, examples_v5.1.json (the one example set, k = 8)
+prompt_versions/   archive of the full prompt documents (build_gold_files.py reads the active version)
+few_shot_selection.md  review sheet of how the active examples were chosen (written by select_examples.py)
 results/           one folder per run (ignored by git)
 scripts/
-  build_gold_files.py   refresh data/ and the system prompt from the capstone files
-  make_dev_sample.py    draw the dev sample D once
-  select_examples.py    choose the few-shot candidates (k = 4, 8, 12) and write the review sheet
-  build_data_files.py   OBSOLETE v2.0 converter; do not run
-tests/             unit tests (section 13)
+  build_gold_files.py   build data/ from the v2 records and the article texts; refresh the system prompt
+  select_examples.py    choose the few-shot candidates
+tests/             unit tests
 flu_extractor/
-  config.py        paths and model settings
-  data_loading.py  read articles, gold labels and human answers; resolve "Jahnavi:6" to an id
-  prompt.py        build the chat messages (system prompt, example turns, article)
-  llm_client.py    the only code that calls the model API
-  extractor.py     one article -> one log record (keyword gate, parsing the reply, never crashing)
-  checks.py        reply shape check and the automatic rule checks (a)-(k)
-  places.py        asks the geocoder whether a city/state/country exists; saves the answers
-  metrics.py       F1, usefulness scoring, item matching tiers, item-set outcomes, bootstrap
-  evaluation.py    score a whole run against gold; choose the default articles
-  report.py        write report.md, scores.json and the two CSV files
-run_extraction.py  command-line tool: ask the model
-evaluate_run.py    command-line tool: score a run
-inspect_row.py     command-line tool: one article, gold vs model, field by field
-compare_runs.py    command-line tool: several runs side by side (k comparison, test mean and range)
-few_shot_selection.md  review sheet of the 12 example candidates and their alternates
-HANDOFF_thanya_evaluation_fewshot.md   the plan: Thanya's set, extractor changes, examples, evaluation
+  config.py        paths, model and decoding settings
+  data_loading.py  read articles and gold labels; resolve "Jahnavi:42" to an id
+  prompt.py        build the chat messages
+  llm_client.py    the only code that calls the API; the shared 40-per-minute limiter and retries
+  extractor.py     one article -> one validated log record (repair, re-ask, never crash)
+  checks.py        the three check layers: v5.1 format, evidence, rule checks
+  data_checks.py   input files in the required format (articles, gold, examples)
+  places.py        is a city/state/country chain real, and its agreed form (5.1)? (geocoder, answers saved in data/place_lookups.json)
+  normalization.py comparable values, fields per kind (norm_v3)
+  matching.py      candidates, similarity, one-to-one best-partners-first pairing (matching_v3)
+  field_scoring.py field results of a matched pair
+  duplicates.py    duplicate groups, duplicate extras, gold adjudication
+  evidence.py      evidence checks on model items
+  metrics.py       counts, usefulness table, summaries over articles, bootstrap
+  evaluation.py    score a run: per article, per population, diagnostics
+  report.py        write report.md, evaluation_summary.json and the CSV files
+  plots.py         the four charts of the per-article results
+run_extraction.py, evaluate_run.py, inspect_row.py, compare_runs.py   the command-line tools
 ```
 
-## 15. Known limitations
+## 12. Known limitations
 
-State these in the write-up (handoff 5.4):
-
-- **Gold is LLM-written.** The records were written by Claude from the v5 rules and reviewed by
-  Jahnavi on flips and big clashes, not line by line. A model scored against them partly measures
-  agreement with Claude. That is why the human comparison stays in the report.
-- **Records vs human labels on `useful`** (records yes and human yes / records yes and human no /
-  records no and human yes / both no): Jahnavi 82 / 9 / 0 / 229, Aditya 70 / 9 / 4 / 237, Manoj
-  82 / 15 / 4 / 219. These differences have not been broken down by cause yet; do that before the
-  write-up.
-- **Read depth.** Aditya and Manoj rows were read once. Jahnavi's rows 1-226 had a second full read.
-- **Sample mix.** The 1,200 articles were drawn half from likely useful and half from likely not
-  useful, so the useful rate is higher than in the full pool. Scores do not carry over directly to
-  raw news.
-- **Rule edits during Aditya and Manoj.** Dev scores are optimistic. Only the test score is a fair
-  estimate.
-
-Other limits:
-
-- **Run-to-run variation is large.** The hosted model does not return identical output for identical
-  input, even at `temperature=0` with a fixed seed and `top_p` near 0: 4 of 53 repeated articles
-  flipped `useful`, and item lists matched for 1 of 17 (section 3). Single-run differences of a few
-  points between settings are within this noise.
-- **Context length.** Not yet checked against the model's limit. A request that is too long fails as
-  an API error and is reported as unscored, never cut.
-- **Invalid JSON.** The model often copies article quotations with unescaped `"`. Such replies are
-  repaired or asked again (section 3); the API's JSON mode was tried and not used, because it turns
-  the same mistake into a reply padded with blank lines up to `max_tokens`.
-- **Exact matching is demanding.** A one-day date difference or a different `count_type` makes an
-  item missing plus extra. The strict, relaxed and weekly tiers and `differing_fields` in
-  `item_comparison.csv` show which field went wrong.
-- **Garbled characters.** Some source articles contain broken characters such as `â`. The prompt
-  tells the model to copy evidence as stored, so this is expected.
-- **Cost and speed.** Each call sends about 16,500 tokens of rules plus about 1,500 per example.
-  Hosted API quotas and latency are not guaranteed.
+- **Gold is LLM-written.** The v2 records were written by Claude from the rules and reviewed by
+  Jahnavi on disagreements, not line by line, so the score partly measures agreement with Claude.
+- **Slow and quota-limited endpoint.** NVIDIA's queue for this model is slow (minutes per reply)
+  and the free key has a daily quota. Runs are resumable.
+- **Not fully repeatable.** Greedy settings remove sampling on our side, but a hosted model can
+  still return different text for the same request. Measure it with two runs before trusting
+  small differences.
+- **Context length.** The prefix (rules plus 8 examples) is about 30,000 tokens; the longest
+  article adds about 35,000 more. A request over the model's limit fails as an API error (not
+  scored, never cut).
+- **Matching threshold.** 0.8 is set by decision, not yet checked on reviewed pairs. Look at misses whose
+  closest model item is just under it (`missed_items.csv`) before trusting small differences.
+- **The labels and the few-shot examples still use the old names** ("USA", "Brasilia", "Federated States
+  of Micronesia", "Dobrich Province"...), because the data has not been updated to 5.1's agreed form yet.
+  Scoring is not affected (both sides are put in the agreed form first), but the examples show the model
+  "USA" while the rules ask for "United States". Update the gold records and rebuild the examples to
+  remove that mixed signal.
+- **The agreed form depends on OpenStreetMap.** It is OpenStreetMap's choice, even where a common name
+  differs (it writes Gurgaon, Bhubaneshwar, Ivory Coast); a value OpenStreetMap does not find keeps its
+  written form and is reported. Offline, chains not in the saved answers keep their written values, so
+  run the first evaluation of new data online.
+- **Sample mix.** The articles were drawn half from likely useful and half from likely not useful,
+  so scores do not carry over directly to raw news.

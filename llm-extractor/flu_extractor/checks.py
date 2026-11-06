@@ -1,32 +1,47 @@
-"""Automatic checks on a model reply.
+"""Checks on a reply (the model's, a gold record's or a few-shot example's) against prompt v5.1.
 
-Two levels:
-  * shape errors   - the reply does not follow the JSON schema, so it cannot be scored;
-  * rule violations - the reply is well-formed but breaks a labeling rule.
+Three layers:
+
+  1. find_format_errors(reply): the reply follows the v5.1 format, with every value the prompt fixes.
+     A reply with a format error cannot be scored. During a run it is sent back to the model with a
+     note naming the problem (extractor.py).
+  2. find_evidence_errors(reply, article_text): every evidence quote is copied exactly from the
+     article (10.1). During a run a reply with a bad quote is also sent back; if the last reply still
+     has one, it is scored and the quote is reported as rule (a).
+  3. find_rule_violations(reply, article_text, scan_date, place_checker): rules that need the article,
+     the scan date or the geocoder: recency (4.7), evidence order (10.1), the reasoning steps ("How to
+     work"), and places that are real and written in their agreed form (5.1). They are reported, never
+     used to reject a reply.
 """
 
+import re
 from datetime import date, timedelta
 
 from flu_extractor.places import PLACE_FIELDS, PlaceChecker
 
-VALID_KINDS = {"cases", "deaths", "hospitalized", "trend"}
-VALID_COUNT_TYPES = {"new", "cumulative_region", "cumulative_subset"}
-VALID_STATUSES = {"confirmed", "suspected"}
-VALID_WORDS = {"rising", "falling", "high", "moderate", "low", "inactive", "present"}
-REQUIRED_TOP_LEVEL = ("summary", "reasoning", "useful", "reason", "items")
-REQUIRED_ITEM_FIELDS = (
-    "kind", "number", "count_type", "status", "strain", "city", "state", "country",
-    "start_date", "end_date", "words", "evidence",
-)
-RECENT_DAYS = 30  # section 4.7 of the prompt
-# Wording of rule (d) violations.
-PLACE_NOT_FOUND = "was not found as a"
+# --- The values v5.1 fixes ---------------------------------------------------
+
+REPLY_KEYS = ("summary", "reasoning", "useful", "reason", "items")                    # "Your reply"
+ITEM_FIELDS = ("kind", "number", "count_type", "status", "strain", "city", "state", "country",
+               "start_date", "end_date", "words", "evidence")                         # 2.2
+COUNT_KINDS = ("cases", "hospitalized", "deaths")                                     # 2.3
+KINDS = (*COUNT_KINDS, "trend")
+COUNT_TYPES = ("new", "cumulative_region", "cumulative_subset")                       # Section 7
+STATUSES = ("confirmed", "suspected")                                                 # Section 6
+TREND_WORDS = ("rising", "falling", "high", "moderate", "low", "inactive", "present")  # 9.2
+# 8.1: a subtype code as written in upper case (H1N1, H3N2v, H5), or one of three names.
+STRAIN_NAMES = ("influenza A", "influenza B", "avian influenza")
+STRAIN_CODE = re.compile(r"H\d{1,2}(N\d{1,2})?v?")
+RECENT_DAYS = 30                                                                      # 4.7
+
+# Wording of rule (d) problems, counted in the report.
+PLACE_NOT_FOUND = "was not found"
 PLACE_UNCHECKED = "could not be checked (place lookup unavailable)"
 
 
-def _is_iso_date(value) -> bool:
+def is_iso_date(value) -> bool:
     """True if value is a string like 2018-07-30 that is a real calendar date."""
-    if not isinstance(value, str):
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
         return False
     try:
         date.fromisoformat(value)
@@ -35,47 +50,96 @@ def _is_iso_date(value) -> bool:
     return True
 
 
-def find_shape_errors(parsed: dict) -> list[str]:
-    """Check the reply against the schema in the prompt. Empty list = valid."""
+def is_valid_strain(value) -> bool:
+    """8.1: null, a subtype code in upper case, or influenza A / influenza B / avian influenza."""
+    return value is None or value in STRAIN_NAMES or (isinstance(value, str) and bool(STRAIN_CODE.fullmatch(value)))
+
+
+# --- Layer 1: format ---------------------------------------------------------
+
+def _item_format_errors(item, label: str) -> list[str]:
+    if not isinstance(item, dict):
+        return [f"{label} is not an object"]
+    missing = [name for name in ITEM_FIELDS if name not in item]
+    if missing:
+        return [f"{label} is missing the field(s) {', '.join(missing)} (every item has all 12 fields)"]
     errors = []
-    for key in REQUIRED_TOP_LEVEL:
-        if key not in parsed:
-            errors.append(f"missing top-level key '{key}'")
-    if errors:
-        return errors  # the checks below need these keys
-
-    if not isinstance(parsed["useful"], bool):
-        errors.append("'useful' is not true/false")
-    reasoning = parsed["reasoning"]
-    if not (isinstance(reasoning, list) and reasoning and all(isinstance(s, str) for s in reasoning)):
-        errors.append("'reasoning' must be a non-empty list of strings")
-    if not isinstance(parsed["items"], list):
-        return errors + ["'items' is not a list"]
-
-    for index, item in enumerate(parsed["items"], start=1):
-        label = f"item {index}"
-        if not isinstance(item, dict):
-            errors.append(f"{label} is not an object")
-            continue
-        for field in REQUIRED_ITEM_FIELDS:
-            if field not in item:
-                errors.append(f"{label} missing field '{field}'")
-        if item.get("kind") not in VALID_KINDS:
-            errors.append(f"{label} has kind {item.get('kind')!r}, not one of {sorted(VALID_KINDS)}")
-        for field in ("start_date", "end_date"):
-            if item.get(field) is not None and not _is_iso_date(item.get(field)):
-                errors.append(f"{label} has an invalid {field} {item.get(field)!r}")
-        for field in PLACE_FIELDS:
-            if item.get(field) is not None and not isinstance(item.get(field), str):
-                errors.append(f"{label} {field} must be text or null, not {item.get(field)!r}")
-        number = item.get("number")
-        if number is not None and (isinstance(number, bool) or not isinstance(number, int)):
-            errors.append(f"{label} number must be a whole number or null, not {number!r}")
-        evidence = item.get("evidence")
-        if not (isinstance(evidence, list) and evidence and all(isinstance(e, str) for e in evidence)):
-            errors.append(f"{label} evidence must be a non-empty list of strings")
+    extra = [name for name in item if name not in ITEM_FIELDS]
+    if extra:
+        errors.append(f"{label} has field(s) the prompt does not define: {', '.join(extra)}")
+    kind = item["kind"]
+    if kind not in KINDS:
+        return errors + [f"{label} kind {kind!r} is not one of {', '.join(KINDS)}"]
+    if kind == "trend":                                                  # 2.2, 9.2
+        if item["words"] not in TREND_WORDS:
+            errors.append(f"{label} is a trend, so words must be one of {', '.join(TREND_WORDS)}, "
+                          f"not {item['words']!r}")
+        for name in ("number", "count_type", "status"):
+            if item[name] is not None:
+                errors.append(f"{label} is a trend, so {name} must be null")
+    else:                                                                # 2.2, Sections 3, 6, 7
+        number = item["number"]
+        if isinstance(number, bool) or not isinstance(number, int) or number < 1:
+            errors.append(f"{label} is a count, so number must be a whole number of at least 1, not {number!r}")
+        if item["count_type"] not in COUNT_TYPES:
+            errors.append(f"{label} count_type must be one of {', '.join(COUNT_TYPES)}, not {item['count_type']!r}")
+        if item["status"] not in STATUSES:
+            errors.append(f"{label} status must be one of {', '.join(STATUSES)}, not {item['status']!r}")
+        if item["words"] is not None:
+            errors.append(f"{label} is a count, so words must be null")
+    if not is_valid_strain(item["strain"]):                              # 8.1
+        errors.append(f"{label} strain {item['strain']!r} is not a subtype code in upper case (H1N1, H3N2v), "
+                      f"{', '.join(STRAIN_NAMES)}, or null")
+    for name in PLACE_FIELDS:                                            # 5.1
+        value = item[name]
+        if value is not None and not (isinstance(value, str) and value.strip()):
+            errors.append(f"{label} {name} must be a place name or null, not {value!r}")
+    if not item["country"]:
+        errors.append(f"{label} has no country (G1)")
+    if item["city"] and not item["state"]:
+        errors.append(f"{label} has a city but no state (5.1: the chain must be complete)")
+    for name in ("start_date", "end_date"):                              # 4.2
+        if item[name] is not None and not is_iso_date(item[name]):
+            errors.append(f"{label} {name} {item[name]!r} is not a date written YYYY-MM-DD")
+    if not item["end_date"]:
+        errors.append(f"{label} has no end_date (G2)")
+    elif is_iso_date(item["end_date"]) and is_iso_date(item["start_date"]) and item["start_date"] > item["end_date"]:
+        errors.append(f"{label} start_date is after end_date")
+    evidence = item["evidence"]                                          # 10.2
+    if not (isinstance(evidence, list) and evidence and all(isinstance(q, str) and q.strip() for q in evidence)):
+        errors.append(f"{label} evidence must be a non-empty list of non-empty quotes")
     return errors
 
+
+def find_format_errors(reply) -> list[str]:
+    """Layer 1: everything the v5.1 reply format fixes. An empty list means the format is valid."""
+    if not isinstance(reply, dict):
+        return ["the reply is not a JSON object"]
+    missing = [key for key in REPLY_KEYS if key not in reply]
+    if missing:
+        return [f"missing top-level key(s) {', '.join(missing)}"]
+    errors = []
+    if not (isinstance(reply["summary"], str) and reply["summary"].strip()):
+        errors.append("summary must be a non-empty line of text")
+    reasoning = reply["reasoning"]
+    if not (isinstance(reasoning, list) and reasoning and all(isinstance(s, str) for s in reasoning)):
+        errors.append("reasoning must be a non-empty list of steps (text)")
+    if not isinstance(reply["useful"], bool):
+        errors.append("useful must be true or false")
+    if not (isinstance(reply["reason"], str) and reply["reason"].strip()):
+        errors.append("reason must be a non-empty sentence")
+    items = reply["items"]
+    if not isinstance(items, list):
+        return errors + ["items must be a list"]
+    for index, item in enumerate(items, start=1):
+        errors += _item_format_errors(item, f"item {index}")
+    if isinstance(reply["useful"], bool) and reply["useful"] != bool(items):  # Section 11
+        errors.append("useful must be true exactly when items is not empty (Section 11)")
+    return errors
+
+
+
+# --- Layer 2: evidence copied from the article ----------------------------------
 
 def _collapse_whitespace(text: str) -> str:
     """Make 'a  b\\nc' and 'a b c' equal, so line breaks do not cause false alarms."""
@@ -94,9 +158,9 @@ _TYPOGRAPHY = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "�
 def find_quote_problem(quote: str, article_text: str) -> str | None:
     """Rule (a): a quote must be an exact, unbroken piece of the article.
 
-    Returns None when it is, otherwise one of the QUOTE_* reasons. Only line breaks and
-    runs of spaces are ignored. Text joined from separate places, reworded, shortened with
-    "..." or invented is not found, because the article has no such continuous passage.
+    Returns None when it is, otherwise one of the QUOTE_* reasons. Only line breaks and runs of
+    spaces are ignored. Text joined from separate places, reworded, shortened with "..." or
+    invented is not found, because the article has no such continuous passage.
     """
     squashed_quote = _collapse_whitespace(quote)
     squashed_article = _collapse_whitespace(article_text)
@@ -109,10 +173,21 @@ def find_quote_problem(quote: str, article_text: str) -> str | None:
     return QUOTE_NOT_FOUND
 
 
-def _same_except_evidence(first: dict, second: dict) -> bool:
-    """True when two items agree on every field but evidence (G3 in the prompt)."""
-    return all(first[name] == second[name] for name in REQUIRED_ITEM_FIELDS if name != "evidence")
+def find_evidence_errors(reply: dict, article_text: str) -> list[str]:
+    """Layer 2 (rule a): every evidence quote of every item is an exact piece of the article.
 
+    Call on a reply with a valid format. Each problem names the item and the start of the quote.
+    """
+    errors = []
+    for index, item in enumerate(reply["items"], start=1):
+        for quote in item["evidence"]:
+            problem = find_quote_problem(quote, article_text)
+            if problem:
+                errors.append(f"(a) item {index} ({item['kind']}): evidence {problem}: {quote[:80]!r}")
+    return errors
+
+
+# --- Layer 3: rule checks -----------------------------------------------------------
 
 def _evidence_in_article_order(evidence: list[str], article_text: str) -> bool:
     """Parts after the first must follow article order (10.1). The first part may come from anywhere."""
@@ -122,92 +197,65 @@ def _evidence_in_article_order(evidence: list[str], article_text: str) -> bool:
     return found == sorted(found)
 
 
-def _kind_field_problems(item: dict) -> list[str]:
-    """Rules (b) and (c): which fields a trend and a count must and must not fill (2.2)."""
-    problems = []
-    if item["kind"] == "trend":
-        if item["words"] not in VALID_WORDS:
-            problems.append(f"(b) trend word {item['words']!r} is not one of the seven words")
-        if item["number"] is not None or item["count_type"] is not None or item["status"] is not None:
-            problems.append("(b) a trend must have null number, count_type and status")
-        return problems
-    if item["words"] is not None:
-        problems.append("(c) 'words' must be null on a count")
-    if item["number"] is None:
-        problems.append("(c) a count needs a number")
-    if item["count_type"] not in VALID_COUNT_TYPES:
-        problems.append(f"(c) count_type {item['count_type']!r} is not valid")
-    if item["status"] not in VALID_STATUSES:
-        problems.append(f"(c) status {item['status']!r} is not valid")
-    return problems
-
-
-def _date_problems(item: dict, scan_date: str) -> list[str]:
-    """Rules (e), (h) and (i): the end date exists, is recent, and the range is in order."""
-    problems = []
+def _recency_problems(item: dict, scan_date: str) -> list[str]:
+    """Rule (i), 4.7: the end date is on or before the scan date and within the 30 days before it."""
     end_date = item["end_date"]
-    if not end_date:
-        return ["(h) the end date is missing (G2)"]
-    if item["start_date"] and item["start_date"] > end_date:  # ISO dates compare correctly as text
-        problems.append("(e) start_date is after end_date")
-    scanned = date.fromisoformat(scan_date)
     if end_date > scan_date:
-        problems.append(f"(i) end date {end_date} is after the scan date {scan_date}")
-    elif date.fromisoformat(end_date) < scanned - timedelta(days=RECENT_DAYS):
-        problems.append(f"(i) end date {end_date} is more than {RECENT_DAYS} days before the scan date")
+        return [f"end date {end_date} is after the scan date {scan_date}"]
+    if date.fromisoformat(end_date) < date.fromisoformat(scan_date) - timedelta(days=RECENT_DAYS):
+        return [f"end date {end_date} is more than {RECENT_DAYS} days before the scan date"]
+    return []
+
+
+def find_place_problems(item: dict, place_checker: PlaceChecker) -> list[str]:
+    """Rule (d), 5.1: the place is real as a whole chain, and written in its agreed form.
+
+    Real: the geocoder is asked for the country, then state + country, then city + state + country,
+    so a state in the wrong country or a city in the wrong state is not found. Agreed form: every
+    level that is found must be written as its English name in OpenStreetMap (5.1); a level written
+    another way ("USA", "Bangalore", "NSW") is reported with the agreed form. Scoring already uses
+    the agreed form, so this reports how well the reply follows 5.1, not a scoring difference.
+    """
+    problems = []
+    agreed = place_checker.agreed_names(item)
+    for level in ("country", "state", "city"):
+        written = item[level]
+        if not written:
+            continue
+        chain = ", ".join(v for v in (item["city"] if level == "city" else None,
+                                      item["state"] if level != "country" else None, item["country"]) if v)
+        found = agreed["resolved"][level]
+        if found is None:
+            problems.append(f"{level} {chain!r} {PLACE_UNCHECKED}")
+            break
+        if found is False:
+            problems.append(f"{level} {chain!r} {PLACE_NOT_FOUND} as a {level} in that chain")
+            break  # the levels below cannot be found either
+        if " ".join(written.split()) != agreed[level]:
+            problems.append(f"{level} {written!r} is not in its agreed form (5.1); write {agreed[level]!r}")
     return problems
 
 
-def find_rule_violations(parsed: dict, article_text: str, scan_date: str,
+def find_rule_violations(reply: dict, article_text: str, scan_date: str,
                          place_checker: PlaceChecker) -> list[str]:
-    """Check labeling rules (a)-(k). Call only on a reply with no shape errors.
+    """Layers 2 and 3 for a reply with a valid format: rules (a), (d), (i), (j), (k).
 
-    `place_checker` tells whether a city, state or country exists, for rule (d).
+    (a) evidence copied exactly from the article; (d) places real and in their agreed form; (i) end date
+    recent; (j) evidence after the first quote in article order; (k) reasoning starts with
+    Step 0 and Step 1 cites Rule 1.
     """
-    violations = []
-    items = parsed["items"]
-
-    # (k) the reasoning steps start with the summary step ("How to work" in the prompt)
-    if not parsed["reasoning"][0].startswith("Step 0"):
-        violations.append("(k) reasoning does not begin with Step 0")
-
-    # (g) useful is true exactly when there are items (Section 11)
-    if parsed["useful"] != bool(items):
-        violations.append("(g) useful does not agree with the items list")
-
-    for index, item in enumerate(items, start=1):
+    violations = list(find_evidence_errors(reply, article_text))
+    steps = reply["reasoning"]
+    if not steps[0].startswith("Step 0"):
+        violations.append("(k) reasoning does not begin with Step 0 (How to work)")
+    elif len(steps) < 2 or not steps[1].startswith("Step 1 (Rule 1)"):
+        violations.append("(k) Step 1 does not cite Rule 1 (How to work)")
+    for index, item in enumerate(reply["items"], start=1):
         label = f"item {index} ({item['kind']})"
-
-        # (a) every evidence part is copied from the article, word for word
-        for part in item["evidence"]:
-            problem = find_quote_problem(part, article_text)
-            if problem:
-                violations.append(f"(a) {label}: evidence {problem}: {part[:60]!r}")
-        # (j) evidence after the first part is in article order
         if not _evidence_in_article_order(item["evidence"], article_text):
-            violations.append(f"(j) {label}: evidence after the first part is out of article order")
-
-        for problem in _kind_field_problems(item) + _date_problems(item, scan_date):
-            violations.append(f"{problem[:3]} {label}: {problem[4:]}")
-
-        # (h) a country is required (G1)
-        if not item["country"]:
-            violations.append(f"(h) {label}: the country is missing (G1)")
-
-        # (d) each place field is null or a real city / state / country, as the field requires
-        for field in PLACE_FIELDS:
-            value = item[field]
-            if value is None:
-                continue
-            is_known = place_checker.is_known(field, value)
-            if is_known is False:
-                violations.append(f"(d) {label}: {field} {value!r} {PLACE_NOT_FOUND} {field}")
-            elif is_known is None:
-                violations.append(f"(d) {label}: {field} {value!r} {PLACE_UNCHECKED}")
-
-    # (f) no two items identical except evidence (G3). Overlapping counts are allowed (G5).
-    for i, first in enumerate(items):
-        for j in range(i + 1, len(items)):
-            if _same_except_evidence(first, items[j]):
-                violations.append(f"(f) items {i + 1} and {j + 1} are identical except evidence (G3)")
+            violations.append(f"(j) {label}: evidence after the first quote is out of article order")
+        violations += [f"(i) {label}: {p}" for p in _recency_problems(item, scan_date)]
+        violations += [f"(d) {label}: {p}" for p in find_place_problems(item, place_checker)]
+    # Items identical except evidence are not a violation here: two different people can give two
+    # identical items. duplicates.py reports them as candidates for review instead.
     return violations

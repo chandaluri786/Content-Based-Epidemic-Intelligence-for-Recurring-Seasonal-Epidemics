@@ -1,14 +1,14 @@
-"""Choose few-shot example candidates from the chain-of-thought records (handoff Section 4).
+"""Choose few-shot example candidates from the chain-of-thought v2 records.
 
-    python scripts/select_examples.py [--records-dir DIR] [--hard-runs RUN_DIR ...]
+    python scripts/select_examples.py [--k 8] [--records-dir DIR] [--hard-runs RUN_DIR ...]
 
 Steps:
-  1. Read the three labelled record files. The whole labelled set is one pool (no dev/test split).
+  1. Read the chain-of-thought v2 record files in data/chain_of_thought/. They form one pool.
   2. Build the candidate pool: leave out every article labelled in more than one set (the 40
-     double-labelled articles and the Thanya 1-40 repeats), articles failing the keyword gate,
+     double-labelled articles and the Thanya 1-40 repeats), articles that never mention flu (Rule 1 only),
      articles over 6,000 characters (10,000 for a `hard_case` record), replies over 5,000
      characters, garbled text, and inactive-only records except for the food-link slot.
-  3. Tag each record with the slots of handoff 4.3, from its `rules_used` and its items, and give
+  3. Tag each record with the slots below (SLOTS), from its `rules_used` and its items, and give
      it a hardness: +2 for a `hard_case` note (a judgement call the labeler recorded), plus the
      share of earlier runs (--hard-runs) in which the model got the article wrong (wrong `useful`,
      or per-article partial-credit F1 under 50%).
@@ -17,9 +17,10 @@ Steps:
      a length penalty. Every stage keeps the labelers balanced and about a third of examples not
      useful.
 
-Writes prompts/examples_v5.1_k4.json, _k8.json, _k12.json (candidates, not active) and
-few_shot_selection.md (the review sheet for Jahnavi, with up to 3 alternates per slot).
-The active file prompts/examples_v5.1.json is never touched: it is set by hand once k is chosen.
+Writes the one example set the prompt uses, prompts/examples_<PROMPT_VERSION>.json (the first k
+picks, default 8), and few_shot_selection.md (the review sheet: all 12 picks in order, coverage at
+k = 4, 8, 12, and up to 3 alternates per slot). The set is checked with flu_extractor/data_checks.py
+(v5.1 format, exact evidence, "How to work" steps) before it is written.
 """
 
 import argparse
@@ -33,8 +34,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from flu_extractor import config  # noqa: E402
+from flu_extractor.data_checks import check_examples  # noqa: E402
 
-DEV_LABELERS = ("Jahnavi", "Aditya", "Manoj")
+LABELERS = ("Jahnavi", "Aditya", "Manoj")  # the sets with chain-of-thought v2 records
 MAX_ARTICLE_CHARS, MAX_REPLY_CHARS = 6000, 5000
 MAX_HARD_CASE_ARTICLE_CHARS = 10000  # a hard_case record may be longer: it is favoured on purpose
 # Weight of hardness in a pick (one new slot is worth 10). A hard_case (hardness 2) is worth more
@@ -61,14 +63,14 @@ STAGES = ((4, 2, (1, 2)), (8, 3, (3, 3)), (12, 4, (4, 4)))
 
 
 def answer(record: dict) -> dict:
-    """The assistant turn: the record's reply in the key order v5.1 asks for (handoff 4.4)."""
+    """The assistant turn: the record's reply in the key order v5.1 asks for ("Your reply")."""
     output = record["output"]
     return {"summary": record["summary"], "reasoning": record["reasoning"], "useful": output["useful"],
             "reason": output["reason"], "items": output["items"]}
 
 
 def slots_of(record: dict) -> set[int]:
-    """The slots of handoff 4.3 that a record demonstrates, from its rules and items."""
+    """The slots (see SLOTS) that a record demonstrates, from its rules and items."""
     rules, items, useful = set(record["rules_used"]), record["output"]["items"], record["output"]["useful"]
     counts = [i for i in items if i["kind"] in COUNT_KINDS]
     trends = [i for i in items if i["kind"] == "trend"]
@@ -93,13 +95,15 @@ def model_misses(run_dirs: list[Path]) -> dict[str, list[str]]:
     """Articles the model got wrong in earlier evaluated runs: {article_id: ["run: why", ...]}."""
     misses: dict[str, list[str]] = collections.defaultdict(list)
     for run_dir in run_dirs:
-        with (run_dir / "row_results.csv").open(encoding="utf-8") as file:
+        with (run_dir / "article_metrics.csv").open(encoding="utf-8") as file:   # written by evaluate_run.py
             for row in csv.DictReader(file):
-                if row["status"] != "scored" or row["gated"] == "True":
+                if row["status"] != "scored":
                     continue
-                if row["usefulness_correct"] == "False":
+                useful_wrong = row["gold_useful"] != row["model_useful"]
+                score = row.get("f1")
+                if useful_wrong:
                     misses[row["article_id"]].append(f"{run_dir.name}: useful wrong")
-                elif row.get("soft_f1") and float(row["soft_f1"]) < 0.5:
+                elif score and float(score) < 0.5:
                     misses[row["article_id"]].append(f"{run_dir.name}: items under 50%")
     return misses
 
@@ -108,8 +112,8 @@ def build_pool(records_dir: Path, hard_runs: list[Path] = ()) -> tuple[list[dict
     articles = {a["article_id"]: a for a in json.loads(config.ARTICLES_PATH.read_text(encoding="utf-8"))}
     misses = model_misses(list(hard_runs))
     records, copies = {}, collections.Counter()
-    for name in DEV_LABELERS:
-        with (records_dir / f"{name}_chain_of_thought_v2.jsonl").open(encoding="utf-8") as file:
+    for name in LABELERS:
+        with (records_dir / f"{name}{config.RECORDS_SUFFIX}").open(encoding="utf-8") as file:
             for line in file:
                 if line.strip():
                     record = json.loads(line)
@@ -130,7 +134,7 @@ def build_pool(records_dir: Path, hard_runs: list[Path] = ()) -> tuple[list[dict
             # Never an article labelled in more than one set: the 40 double-labelled dev articles,
             # and the dev articles repeated as Thanya rows 1-40.
             ("in more than one labeling set", copies[article_id] > 1 or len(article["sources"]) > 1),
-            ("fails the keyword gate", not article["passes_keyword_gate"]),
+            ("never mentions flu (Rule 1 only)", record.get("rules_used") == ["Rule 1"]),
             (f"article over {MAX_ARTICLE_CHARS} characters ({MAX_HARD_CASE_ARTICLE_CHARS} for hard_case)",
              len(text) > max_chars),
             (f"reply over {MAX_REPLY_CHARS} characters",
@@ -174,7 +178,7 @@ def select(pool: list[dict]) -> list[dict]:
             per_labeler = collections.Counter(c["labeler"] for c in chosen)
             # Every stage spans all three sets: once the picks left are only enough for the
             # labelers still missing, the next pick must come from one of them.
-            missing = [n for n in DEV_LABELERS if not per_labeler[n]]
+            missing = [n for n in LABELERS if not per_labeler[n]]
 
             def allowed(c: dict) -> bool:
                 after = not_useful + (not c["useful"])
@@ -190,7 +194,8 @@ def select(pool: list[dict]) -> list[dict]:
 
 
 def prompt_order(examples: list[dict]) -> list[dict]:
-    """Spread the not-useful examples through the list and end on one (handoff 4.4)."""
+    """Spread the not-useful examples through the list and end on one, so the last turn does not push
+    the model toward items."""
     not_useful = [e for e in examples if not e["useful"]]
     useful = [e for e in examples if e["useful"]]
     n, m = len(examples), len(not_useful)
@@ -221,7 +226,7 @@ def review_sheet(chosen: list[dict], pool: list[dict], excluded: collections.Cou
         labelers = collections.Counter(c["labeler"] for c in part)
         lines.append(f"| {k} | {len(slots)} of 12 | {len(rules)} of {len(frequency)} | "
                      f"{sum(not c['useful'] for c in part)} | "
-                     f"{', '.join(f'{n} {labelers[n]}' for n in DEV_LABELERS)} | "
+                     f"{', '.join(f'{n} {labelers[n]}' for n in LABELERS)} | "
                      f"~{sum(c['chars'] for c in part) // 4:,} |")
     lines += ["", "## The 12 candidates, in selection order (the first 4 are k=4, the first 8 are k=8)", "",
               "| # | Source | Article id | Useful | Slots | Kinds | Countries | Characters | Hardness | Why hard |",
@@ -246,26 +251,25 @@ def review_sheet(chosen: list[dict], pool: list[dict], excluded: collections.Cou
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    default_records = config.DATA_DIR / "chain_of_thought"
-    if not default_records.exists():
-        default_records = config.PROJECT_DIR.parent / "labeled_data_chain_of_thought"
+    default_records = config.RECORDS_DIR
     parser.add_argument("--records-dir", type=Path, default=default_records,
-                        help=f"folder with the *_chain_of_thought_v2.jsonl files (default: {default_records})")
-    default_runs = [d for d in (config.RESULTS_DIR / "run_k0_D", config.RESULTS_DIR / "run_k8_D")
-                    if (d / "row_results.csv").exists()]
-    parser.add_argument("--hard-runs", type=Path, nargs="*", default=default_runs,
-                        help="evaluated runs whose mistakes mark articles as hard (default: the zero-shot and "
-                             "first few-shot runs, if present)")
+                        help=f"folder with the *{config.RECORDS_SUFFIX} files (default: {default_records})")
+    parser.add_argument("--hard-runs", type=Path, nargs="*", default=[],
+                        help="evaluated run folders whose mistakes mark articles as hard (their article_metrics.csv)")
+    parser.add_argument("--k", type=int, choices=[k for k, _, _ in STAGES], default=8,
+                        help="how many examples the prompt gets (default 8)")
     args = parser.parse_args()
 
     pool, excluded = build_pool(args.records_dir, args.hard_runs)
     print(f"hardness from {len(args.hard_runs)} earlier runs: {', '.join(d.name for d in args.hard_runs) or 'none'}")
     chosen = select(pool)
-    for k, _, _ in STAGES:
-        path = config.PROMPTS_DIR / f"examples_v5.1_k{k}.json"
-        examples = [c["example"] for c in prompt_order(chosen[:k])]
-        path.write_text(json.dumps(examples, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(f"wrote {path.relative_to(config.PROJECT_DIR)}: {', '.join(e['source'] for e in examples)}")
+    path = config.EXAMPLES_PATH
+    examples = [c["example"] for c in prompt_order(chosen[:args.k])]
+    problems = check_examples(examples, json.loads(config.ARTICLES_PATH.read_text(encoding="utf-8")))
+    if problems:
+        raise SystemExit(f"k={args.k}: the chosen examples fail the v5.1 checks:\n" + "\n".join(problems[:10]))
+    path.write_text(json.dumps(examples, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"wrote {path.name} (k = {args.k}): {', '.join(e['source'] for e in examples)}")
     sheet = config.PROJECT_DIR / "few_shot_selection.md"
     sheet.write_text(review_sheet(chosen, pool, excluded), encoding="utf-8")
     print(f"wrote {sheet.relative_to(config.PROJECT_DIR)}")

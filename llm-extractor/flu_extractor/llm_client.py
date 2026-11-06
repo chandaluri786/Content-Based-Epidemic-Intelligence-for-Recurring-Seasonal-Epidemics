@@ -1,4 +1,4 @@
-"""The only module that talks to the NVIDIA API.
+"""The only module that talks to the model API (NVIDIA's OpenAI-compatible endpoint).
 
 The API allows at most REQUESTS_PER_MINUTE requests per minute. Every request, including each
 retry, first takes a turn from one RateLimiter shared by all worker threads, so the limit holds
@@ -90,10 +90,10 @@ def _seconds_before_retry(error: Exception, attempt: int) -> float:
 
 
 def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMITER,
-              sleep: Callable[[float], None] = time.sleep, temperature: float | None = None) -> ModelReply:
+              sleep: Callable[[float], None] = time.sleep) -> ModelReply:
     """Send one request (a list of chat messages) and return the reply.
 
-    `temperature` overrides config.TEMPERATURE (used only for the last validation retry).
+    Every request uses the same decoding settings (config.TEMPERATURE, TOP_P, SEED, EXTRA_BODY).
     Retries rate-limit, timeout, connection and server errors up to MAX_RETRIES times, each
     attempt waiting for its turn under the rate limit. Raises openai.OpenAIError when all
     attempts fail, or at once for errors that a retry cannot fix (e.g. a request that is too long).
@@ -105,7 +105,8 @@ def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMI
             response = client.chat.completions.create(
                 model=config.MODEL_ID,
                 messages=messages,
-                temperature=config.TEMPERATURE if temperature is None else temperature,
+                temperature=config.TEMPERATURE,
+                top_p=config.TOP_P,
                 max_tokens=config.MAX_TOKENS,
                 seed=config.SEED,
                 extra_body=config.EXTRA_BODY,

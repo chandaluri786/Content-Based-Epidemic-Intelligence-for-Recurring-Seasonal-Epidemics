@@ -1,464 +1,456 @@
-"""Write the evaluation as report.md, row_results.csv and item_comparison.csv."""
+"""Write an evaluation into the run folder.
+
+Files (one evaluation = one set):
+  report.md                 the readable summary
+  evaluation_summary.json   dataset-level metrics, settings and versions (compare_runs.py reads it)
+  article_metrics.csv       one row per article: counts and article-level scores
+  matched_items.csv         one row per matched gold/model pair, field by field
+  missed_items.csv          unmatched gold items
+  additional_items.csv      unmatched model items, with their duplicate label
+  duplicate_candidates.csv  duplicate candidate groups in gold and in the model items
+  field_error_summary.csv   results by field over matched pairs
+  kind_error_summary.csv    gold, model, matched, missed, additional and duplicate items by kind
+  error_examples.md         a few examples of each error type, for review
+  plot_*.png                charts of the per-article values (flu_extractor/plots.py)
+"""
 
 import csv
+import hashlib
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 
 from flu_extractor import config
-from flu_extractor.checks import QUOTE_EMPTY, QUOTE_NOT_FOUND, QUOTE_TYPOGRAPHY_ONLY
+from flu_extractor.duplicates import DUPLICATES_VERSION, find_groups
 from flu_extractor.evaluation import (
-    API_ERROR, MALFORMED, SCORED, UNPARSEABLE, Evaluation, RowResult, Scores,
+    API_ERROR, MALFORMED, SCORED, UNPARSEABLE, Evaluation, RowResult, Summary,
 )
-from flu_extractor.metrics import (
-    ITEM_KINDS,
-    SET_BOTH_EMPTY,
-    SET_EXACT,
-    SET_OUTCOMES,
-    Counts,
-    ItemTally,
-    classify_item_set,
-    differing_fields,
-)
+from flu_extractor.field_scoring import EXTRA_VALUE, MATCH, MISSING_VALUE, WRONG
+from flu_extractor.matching import MATCH_THRESHOLD, MATCHING_VERSION
+from flu_extractor.metrics import BOOTSTRAP_RESAMPLES, BOOTSTRAP_SEED, Distribution, safe_divide
+from flu_extractor.plots import write_plots
+from flu_extractor.normalization import ALL_FIELDS, ITEM_KINDS, NORMALIZATION_VERSION, applicable_fields, show
 
-# In item_comparison.csv, items that are paired always agree on the first group of fields;
-# the second group is shown for gold and the model side by side.
-_SHARED_COLUMNS = ("kind", "strain", "city", "state", "country")
-_SIDE_BY_SIDE_COLUMNS = ("number", "count_type", "status", "start_date", "end_date", "words")
+EVALUATION_VERSION = "evaluation_v5"
+_ITEM_COLUMNS = ("kind", "number", "count_type", "status", "words", "strain", "city", "state", "country",
+                 "start_date", "end_date")
 
 
 def _fmt(value: float | None) -> str:
-    """Format a rate as a percentage with one decimal, or 'n/a'."""
     return "n/a" if value is None else f"{value * 100:.1f}%"
 
 
-def _interval(interval: tuple[float, float] | None) -> str:
-    """Format a 95% interval, or 'n/a'."""
-    return "n/a" if interval is None else f"{_fmt(interval[0])} to {_fmt(interval[1])}"
+def _interval(value: tuple[float, float] | None) -> str:
+    return "n/a" if value is None else f"{_fmt(value[0])} to {_fmt(value[1])}"
 
 
-def _scores_row(label: str, counts: Counts) -> str:
-    return (f"| {label} | {counts.tp} | {counts.fp} | {counts.fn} | "
-            f"{_fmt(counts.precision)} | {_fmt(counts.recall)} | {_fmt(counts.f1)} |")
+def _item_text(item: dict) -> str:
+    fields = applicable_fields(item.get("kind"))
+    return ", ".join(f"{name}={show(item.get(name))}" for name in fields)
 
 
-def _item_table(tally: ItemTally) -> list[str]:
-    """Markdown table of precision/recall/F1 per kind, plus the pooled row."""
-    lines = [
-        "| Kind | TP | FP | FN | Precision | Recall | F1 |",
-        "|---|---|---|---|---|---|---|",
-    ]
-    lines += [_scores_row(kind, tally.by_kind[kind]) for kind in ITEM_KINDS]
-    lines.append(_scores_row("**all kinds**", tally.overall()))
-    return lines
-
+# --- report.md ---------------------------------------------------------------
 
 def _usefulness_section(evaluation: Evaluation) -> list[str]:
-    scores = evaluation.model_articles
-    counts = scores.usefulness.counts
+    s = evaluation.headline
+    u = s.usefulness
+    c = u.counts
     return [
-        "## 1. Usefulness classification",
+        "## 1. Task 1: useful or not",
         "",
-        "Positive class = *useful*. Gold is the chain-of-thought records. Articles rejected by the keyword "
-        "gate are left out here, because code decides them, not the model. Section 5 shows them included.",
+        "One answer per article, compared with the gold `useful`.",
         "",
         "| | Model: useful | Model: not useful |",
         "|---|---|---|",
-        f"| **Gold: useful** | {counts.tp} (TP) | {counts.fn} (FN, missed) |",
-        f"| **Gold: not useful** | {counts.fp} (FP, false alarm) | {scores.usefulness.true_negatives} (TN) |",
+        f"| **Gold: useful** | {c.tp} | {c.fn} (missed article) |",
+        f"| **Gold: not useful** | {c.fp} (false alarm) | {u.true_negatives} |",
         "",
-        f"- Precision: **{_fmt(counts.precision)}**  Recall: **{_fmt(counts.recall)}**  "
-        f"F1: **{_fmt(counts.f1)}** (95% interval {_interval(scores.useful_interval)})  "
-        f"Accuracy: **{_fmt(scores.usefulness.accuracy)}**",
+        f"Precision **{_fmt(c.precision)}**, recall **{_fmt(c.recall)}**, F1 **{_fmt(c.f1)}** "
+        f"(95% interval {_interval(s.intervals['useful_f1'])}), accuracy **{_fmt(u.accuracy)}**.",
         "",
     ]
 
 
-def _item_set_lines(scored: list[RowResult]) -> list[str]:
-    """How the model's whole item list compares with the gold list, article by article."""
-    outcomes = Counter(classify_item_set(r.exact_match) for r in scored)
-    total = len(scored)
-    same_count = sum(len(r.gold_items) == len(r.model_items) for r in scored)
-    exact_sets = outcomes[SET_EXACT] + outcomes[SET_BOTH_EMPTY]
-    with_items = [r for r in scored if r.gold_items]
-    exact_with_items = sum(classify_item_set(r.exact_match) == SET_EXACT for r in with_items)
+_SUMMARY_HEADER = ["| Metric | Per article | Articles covered | **Mean** | 95% interval of the mean | Median | "
+                   "25th-75th | At 1 | At 0 |", "|---|---|---|---|---|---|---|---|---|"]
+
+
+def _metric_row(label: str, calculation: str, d: Distribution, ci=None) -> str:
+    return (f"| {label} | {calculation} | {d.articles} | **{_fmt(d.mean)}** | {_interval(ci) if ci is not None else ''} | "
+            f"{_fmt(d.median)} | {_fmt(d.q1)} to {_fmt(d.q3)} | {_fmt(d.share_one)} | {_fmt(d.share_zero)} |")
+
+
+def _finding_section(evaluation: Evaluation) -> list[str]:
+    s = evaluation.headline
+    m, c = s.metrics, s.counts
     lines = [
-        "| What the model's item list looks like, compared with gold | Articles |",
-        "|---|---|",
-        *[f"| {outcome} | {outcomes[outcome]} |" for outcome in SET_OUTCOMES],
-        f"| **all scored articles** | **{total}** |",
+        "## 2. Task 2: finding the events",
         "",
-        f"- Exact set match (same items, same number of items): **{exact_sets} of {total}** "
-        f"({_fmt(exact_sets / total if total else None)}).",
-        f"- Only articles where gold has items: **{exact_with_items} of {len(with_items)}** "
-        f"({_fmt(exact_with_items / len(with_items) if with_items else None)}). "
-        "This is the harder, more informative figure, because \"no items on either side\" is easy.",
-        f"- Same number of items on both sides: **{same_count} of {total}**.",
+        "Places are compared in their agreed form (5.1): every city, state and country, in gold and in the "
+        f"model's reply, is replaced by its {config.PLACE_NAME_LANGUAGE} name in OpenStreetMap, so two spellings of one "
+        "place are never a difference. "
+        f"Inside each article, each gold item is paired with at most one model item ({MATCHING_VERSION}): same "
+        f"country and kind, similarity (share of fields that agree) at least {MATCH_THRESHOLD}. The highest-similarity "
+        "pair still available is locked first, and its two items are used up (ties: the pair with fewer other "
+        "options, then article order). A pair is a **hit**; a gold item left alone is a **miss**; a model item left "
+        "alone is an **extra**.",
+        "",
+        "Every metric is computed **per article**, then summarised over the articles it covers, each article "
+        "weighing the same. **Mean** is the headline; the interval comes from resampling articles.",
+        "",
+        *_SUMMARY_HEADER,
+        _metric_row("**Recall**", "hits / gold items", m["recall"], s.intervals["recall"]),
+        _metric_row("**Precision**", "hits / model items", m["precision"], s.intervals["precision"]),
+        _metric_row("**F1**", "2 x hits / (2 x hits + misses + extras)", m["f1"], s.intervals["f1"]),
+        "",
+        f"Context only (added over all articles, not a score): {c.tp} hits, {c.fn} misses, {c.fp} extras. "
+        "Per-article values: `article_metrics.csv`, `plot_article_counts.png` and `plot_article_metrics.png`.",
         "",
     ]
+    other = evaluation.summaries.get("without_inactive")
+    if other:
+        o = other.metrics
+        lines += [f"With inactive-only items (1.3 food and monitoring fallbacks) removed on both sides: mean recall "
+                  f"{_fmt(o['recall'].mean)}, precision {_fmt(o['precision'].mean)}, F1 {_fmt(o['f1'].mean)}.", ""]
     return lines
 
 
-def _macro(score) -> str:
-    """A per-article average with its interval and the number of articles it covers."""
-    if score.mean is None:
-        return "n/a"
-    return f"**{_fmt(score.mean)}** ({_interval(score.interval)}; {score.articles} articles)"
-
-
-def _distribution_lines(scores: Scores) -> list[str]:
-    """How many articles are fully right, partly right or fully wrong, by each per-article F1."""
-    with_items = [s for s in scores.article_scores if s.has_items]
-
-    def bands(values: list[float]) -> tuple[int, int, int]:
-        return (sum(v == 1 for v in values), sum(0 < v < 1 for v in values), sum(v == 0 for v in values))
-
-    exact = bands([s.exact_f1 for s in with_items])
-    soft = bands([s.soft_f1 for s in with_items])
-    return [
-        "| Articles with items on either side | Exact match | Partial credit |",
-        "|---|---|---|",
-        f"| F1 = 100% (every item right) | {exact[0]} | {soft[0]} |",
-        f"| F1 between 0 and 100% (partly right) | {exact[1]} | {soft[1]} |",
-        f"| F1 = 0 (nothing right) | {exact[2]} | {soft[2]} |",
-        f"| **all** | **{len(with_items)}** | **{len(with_items)}** |",
+def _details_section(evaluation: Evaluation) -> list[str]:
+    s = evaluation.headline
+    m = s.metrics
+    lines = [
+        "## 3. Task 2: details of the found events",
         "",
-    ]
-
-
-def _items_section(evaluation: Evaluation) -> list[str]:
-    scores = evaluation.model_articles
-    macro = scores.macro
-    exact, strict = scores.exact_items, scores.strict_items
-    scored = [r for r in evaluation.rows_with_status(SCORED) if not r.gated]
-    both_empty = sum(not s.has_items for s in scores.article_scores)
-    gold_total = exact.overall().tp + exact.overall().fn
-    model_total = exact.overall().tp + exact.overall().fp
-    return [
-        "## 2. Item extraction, article by article",
+        "Only hits are scored here; misses and extras are already in section 2. A hit's accuracy is the share "
+        f"of its fields that agree with gold, which is its similarity, so it is never below {MATCH_THRESHOLD}.",
         "",
-        "Each article is scored on its own: its gold items, its model items, and how many of them match. "
-        "Those per-article scores are then averaged over articles, so every article counts once, whatever "
-        "its number of items. Evidence is never compared, because two readers may quote different "
-        "sentences for the same fact.",
+        *_SUMMARY_HEADER,
+        _metric_row("**Accuracy**", "mean similarity of the article's hits", m["accuracy"], s.intervals["accuracy"]),
+        _metric_row("**Exact rate**", "hits with every field right / hits", m["exact_rate"], s.intervals["exact_rate"]),
         "",
-        "- **Exact match**: a model item matches a gold item when kind, number, count_type, status, strain, "
-        "city, state, country, start_date, end_date and words all agree (case and repeated spaces are "
-        "ignored). Per article: precision = matches / model items, recall = matches / gold items, "
-        "F1 = 2 x matches / (gold items + model items).",
-        "- **Partial credit**: each model item is aligned with the most similar gold item of the same kind "
-        "and country (each item used once). A pair scores the share of its fields that agree (counts: "
-        "number, count_type, status, strain, city, state, start_date, end_date; trends: words, strain, city, "
-        "state, start_date, end_date). Per article, the same formulas use the sum of these shares instead "
-        "of the number of exact matches. A missing or extra item scores 0.",
+        "**Field accuracy**, per article: the article's hits with that field right / its hits with that field. "
+        "It shows which detail goes wrong (`plot_field_accuracy.png`).",
         "",
-        "### 2.1 Per-article scores (the headline)",
-        "",
-        "Mean over articles, with the 95% bootstrap interval (resampling articles) and the number of "
-        "articles the mean covers.",
-        "",
-        "| Per-article score | Exact match | Partial credit |",
-        "|---|---|---|",
-        f"| **F1**, articles with items on either side | {_macro(macro['exact_f1'])} | {_macro(macro['soft_f1'])} |",
-        f"| F1, articles where gold has items | {_macro(macro['exact_f1_gold_items'])} "
-        f"| {_macro(macro['soft_f1_gold_items'])} |",
-        f"| Precision, articles where the model wrote items | {_macro(macro['exact_precision'])} "
-        f"| {_macro(macro['soft_precision'])} |",
-        f"| Recall, articles where gold has items | {_macro(macro['exact_recall'])} | {_macro(macro['soft_recall'])} |",
-        "",
-        f"{both_empty} articles have no items on either side. They are left out of these averages, "
-        "because there was nothing to extract and nothing was extracted; the confusion table in section 1 "
-        "counts them (true negatives).",
-        "",
-        "### 2.2 How the articles are spread",
-        "",
-        *_distribution_lines(scores),
-        "Item lists compared as a whole (exact match):",
-        "",
-        *_item_set_lines(scored),
-        "`row_results.csv` has every article's scores; `item_comparison.csv` lists every item with its "
-        "outcome, and for near-misses the fields that differ.",
-        "",
-        "### 2.3 Field accuracy on aligned items",
-        "",
-        "On the item pairs aligned for partial credit (same kind and country): how often each field "
-        "agrees. Shows which field the misses come from.",
-        "",
-        "| Field | Equal | Compared | Share |",
-        "|---|---|---|---|",
-        *[f"| {name} | {equal} | {compared} | {_fmt(equal / compared if compared else None)} |"
-          for name, (equal, compared) in evaluation.field_agreement.items()],
-        "",
-        "### 2.4 Pooled over all items (for reference)",
-        "",
-        "All items of all articles added together (micro average). Articles with many items weigh more "
-        "here, so this is not the headline. **TP** = exact matches, **FP** = extra items, **FN** = missing "
-        "items.",
-        "",
-        *_item_table(exact),
-        "",
-        f"- Gold items: **{gold_total}**. Model items: **{model_total}**. Exact matches: "
-        f"**{exact.overall().tp}**. F1 95% interval: {_interval(scores.exact_interval)}.",
-        "",
-        "**Kind, place, strain and dates agree** (number, count_type, status and words not compared):",
-        "",
-        *_item_table(strict),
-        "",
-        "**Kind, place and strain agree** (dates also ignored):",
-        "",
-        *_item_table(scores.relaxed_items),
-        "",
-        "**Weekly signal: kind, strain, country and ISO week of the end date agree:**",
-        "",
-        *_item_table(scores.weekly_items),
-        "",
-        "### 2.5 Exact matches by country (pooled)",
-        "",
-        "| Country | TP | FP | FN | Precision | Recall | F1 |",
+        "| Field | Articles covered | **Mean** | Median | 25th-75th | At 1 | At 0 |",
         "|---|---|---|---|---|---|---|",
-        *[_scores_row(country, counts) for country, counts in evaluation.by_country.items()],
-        "",
     ]
+    for name in ALL_FIELDS:
+        d = s.fields[name]
+        if d.articles:
+            lines.append(f"| {name} | {d.articles} | **{_fmt(d.mean)}** | {_fmt(d.median)} | {_fmt(d.q1)} to "
+                         f"{_fmt(d.q3)} | {_fmt(d.share_one)} | {_fmt(d.share_zero)} |")
+    return [*lines, ""]
 
 
-def _evidence_check_lines(scored: list[RowResult]) -> list[str]:
-    """Rule (a) in plain numbers: how many quoted passages are not exact copies of the article."""
-    quotes_checked = sum(len(item["evidence"]) for r in scored for item in r.model_items)
-    problems = [v for r in scored for v in r.violations if v.startswith("(a)")]
-    invented = sum(QUOTE_NOT_FOUND in v for v in problems)
-    typography = sum(QUOTE_TYPOGRAPHY_ONLY in v for v in problems)
-    empty = sum(QUOTE_EMPTY in v for v in problems)
-    rows_affected = sorted({r.article_id for r in scored if any(v.startswith("(a)") for v in r.violations)})
+def _articles_section(evaluation: Evaluation) -> list[str]:
+    s = evaluation.headline
+    share = lambda n, total: f"{n} ({_fmt(safe_divide(n, total))})"  # noqa: E731
     return [
-        "### Evidence is copied from the article (rule a)",
+        "## 4. Task 2: article outcomes",
         "",
-        f"Every evidence quote the model wrote ({quotes_checked} in total) is looked "
-        "up in the article text. Line breaks and repeated spaces are ignored; nothing else.",
+        "Each article is in exactly one bucket (`plot_article_buckets.png`).",
         "",
-        f"- Not found in the article (reworded, shortened, joined from separate places or invented): **{invented}**",
-        f"- Found only after treating curly and straight quotes or dashes as the same (words right, copy not exact): **{typography}**",
-        f"- Empty: **{empty}**",
-        f"- Articles affected: {', '.join(map(str, rows_affected)) if rows_affected else 'none'}",
-        "",
-        "The check shows that the text exists in the article. It cannot show that the quote supports the item.",
+        "| Articles | Outcome | Count (share) |",
+        "|---|---|---|",
+        f"| Gold has items ({s.gold_nonempty}) | every item found, no extras | **{share(s.all_found, s.gold_nonempty)}** |",
+        f"| | ... of which every detail right as well | {share(s.all_found_and_exact, s.gold_nonempty)} |",
+        f"| | some found, with misses or extras | {share(s.some_found, s.gold_nonempty)} |",
+        f"| | nothing found | {share(s.none_found, s.gold_nonempty)} |",
+        f"| Gold has no items ({s.gold_empty}) | model wrote none (correct) | **{share(s.both_empty, s.gold_empty)}** |",
+        f"| | model wrote items (false items) | {share(s.false_items_on_empty, s.gold_empty)} |",
         "",
     ]
 
 
-def _rule_check_section(evaluation: Evaluation) -> list[str]:
+def _errors_section(evaluation: Evaluation) -> list[str]:
+    s = evaluation.headline
+    d = evaluation.diagnostics
+    lines = [
+        "## 5. Where the misses and extras come from",
+        "",
+        "| Kind | Gold | Model | Hits | Misses | Extras |",
+        "|---|---|---|---|---|---|",
+    ]
+    for kind in sorted(d.by_kind, key=lambda k: (k not in ITEM_KINDS, str(k))):
+        c = d.by_kind[kind]
+        lines.append(f"| {kind} | {c['gold']} | {c['model']} | {c['matched']} | {c['missed']} | {c['additional']} |")
+    confusion = [(pair, n) for pair, n in d.kind_confusion.items() if pair[0] != pair[1]]
+    lines += [
+        "",
+        f"- Extras that repeat another model item ({DUPLICATES_VERSION}): **{s.duplicate_extras}** of {s.counts.fp}.",
+        "- Hits whose kinds differ (gold -> model): "
+        + (", ".join(f"{g} -> {m}: {n}" for (g, m), n in sorted(confusion)) or "none") + ".",
+    ]
+    for title, source in (("Misses", d.missed_by), ("Extras", d.additional_by)):
+        lines.append(f"- {title} by country (top 10): "
+                     + (", ".join(f"{k} {v}" for k, v in source["country"].most_common(10)) or "none") + ".")
+    return [*lines, ""]
+
+
+def _checks_section(evaluation: Evaluation) -> list[str]:
     scored = evaluation.rows_with_status(SCORED)
-    rule_counts = Counter(v[:3] for r in scored for v in r.violations)  # e.g. "(a)"
-    rows_with_violations = sum(1 for r in scored if r.violations)
+    e = evaluation.diagnostics.evidence
+    rule_counts = Counter(v[:3] for r in scored for v in r.violations)
     lines = [
-        "## 3. Automatic rule checks",
+        "## 6. Checks and coverage",
         "",
-        f"{rows_with_violations} of {len(scored)} scored articles have at least one violation.",
-        "",
-        *_evidence_check_lines(scored),
+        f"- Articles in the run with a gold label: **{len(evaluation.rows)}**; scored: **{len(scored)}**.",
     ]
-    if rule_counts:
-        lines += ["| Rule | Violations |", "|---|---|"]
-        lines += [f"| {rule} | {count} |" for rule, count in sorted(rule_counts.items())]
-        lines.append("")
-    return lines
-
-
-def _coverage_section(evaluation: Evaluation) -> list[str]:
-    """How many articles could not be scored, and why."""
-    gated = sum(r.gated for r in evaluation.rows)
-    lines = [
-        "## 4. Coverage",
-        "",
-        f"- Rejected by the keyword gate, no API call: **{gated}**",
-        f"- Articles in the run with a gold label: **{len(evaluation.rows)}**",
-        f"- Scored: **{len(evaluation.rows_with_status(SCORED))}**",
-        f"- Valid only after stray quotes in the JSON were escaped: **{sum(r.repaired for r in evaluation.rows)}**",
-        f"- Asked again because a reply was cut off, not valid JSON or malformed: "
-        f"**{sum(r.validation_retries > 0 for r in evaluation.rows)}** articles "
-        f"({sum(r.validation_retries for r in evaluation.rows)} extra requests)",
-    ]
-    for status, meaning in (
-        (API_ERROR, "API call failed after retries"),
-        (UNPARSEABLE, "reply was not valid JSON or was cut off"),
-        (MALFORMED, "valid JSON that breaks the reply schema"),
-    ):
+    for status, meaning in ((API_ERROR, "API call failed after retries"),
+                            (UNPARSEABLE, "reply was not valid JSON or was cut off"),
+                            (MALFORMED, "valid JSON that breaks the reply format")):
         failed = evaluation.rows_with_status(status)
         if failed:
-            rows = ", ".join(r.article_id for r in failed)
-            lines.append(f"- Not scored, {status} ({meaning}): **{len(failed)}** - articles {rows}")
-    lines.append("")
-    lines.append("Rows that are not scored are left out of every number above, so they do not hurt the scores. "
-                 "Retry them before trusting the results.")
-    lines.append("")
+            lines.append(f"- Not scored, {status} ({meaning}): **{len(failed)}**. These are left out of every "
+                         "number above; rerun them with --run-dir.")
+    lines += [
+        f"- Evidence quotes copied exactly from the article: {_fmt(safe_divide(e['quotes verbatim'], e['quotes']))} "
+        f"of {e['quotes']}.",
+        f"- Articles breaking at least one rule check: {sum(bool(r.violations) for r in scored)} of {len(scored)} "
+        "(" + (", ".join(f"{k}: {v}" for k, v in sorted(rule_counts.items())) or "none") + ").",
+        "",
+    ]
     return lines
 
 
-def _variant_row(label: str, scores: Scores) -> str:
-    useful, macro = scores.usefulness.counts, scores.macro
-    return (f"| {label} | {scores.articles} | {_fmt(useful.f1)} | {_fmt(macro['exact_f1'].mean)} "
-            f"| {_fmt(macro['soft_f1'].mean)} | {_fmt(scores.exact_items.overall().f1)} |")
+# --- Settings and versions ---------------------------------------------------
+
+def _sha256(path: Path) -> str | None:
+    return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
 
 
-def _variants_section(evaluation: Evaluation) -> list[str]:
-    """The headline scores under each way of counting."""
-    return [
-        "## 5. Scores with and without gated and inactive-only articles",
-        "",
-        "| Articles | Count | Usefulness F1 | Per-article exact F1 | Per-article partial-credit F1 | Pooled exact F1 |",
-        "|---|---|---|---|---|---|",
-        _variant_row("Reached the model (headline)", evaluation.model_articles),
-        _variant_row("All, including keyword gate rejections", evaluation.all_articles),
-        _variant_row("Reached the model, inactive-only filtered", evaluation.without_inactive),
-        "",
-        "The inactive-only row treats an article whose only items are `inactive` trends as having no "
-        "items, on both the gold and the model side. Per-article F1 is averaged over articles with items "
-        "on either side (section 2.1).",
-        "",
-    ]
+def _code_version() -> str | None:
+    try:
+        result = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=config.PROJECT_DIR,
+                                capture_output=True, text=True, timeout=10)
+        dirty = subprocess.run(["git", "status", "--porcelain", "flu_extractor"], cwd=config.PROJECT_DIR,
+                               capture_output=True, text=True, timeout=10).stdout.strip()
+        return result.stdout.strip() + (" (uncommitted changes in flu_extractor)" if dirty else "")
+    except (OSError, subprocess.SubprocessError):
+        return None
 
 
-def _human_section(evaluation: Evaluation) -> list[str]:
-    """Usefulness against the human labels, as a second truth."""
-    def line(label: str, result) -> str:
-        counts = result.counts
-        return (f"| {label} | {result.total} | {_fmt(counts.precision)} | {_fmt(counts.recall)} "
-                f"| {_fmt(counts.f1)} | {_fmt(result.accuracy)} |")
-    return [
-        "## 6. Against the human labels",
-        "",
-        "Gold was written by Claude from the rules and reviewed by Jahnavi on disagreements. These rows "
-        "use the labeler's own `useful` answer as the truth instead. Only `useful` is compared.",
-        "",
-        "| Compared with human labels | Articles | Precision | Recall | F1 | Accuracy |",
-        "|---|---|---|---|---|---|",
-        line("Model", evaluation.human_vs_model),
-        line("Gold records", evaluation.human_vs_gold),
-        "",
-    ]
-
-
-def headline_scores(evaluation: Evaluation) -> dict:
-    """The numbers compare_runs.py reads from each run."""
-    def pack(scores: Scores) -> dict:
-        return {
-            "articles": scores.articles,
-            "useful_f1": scores.usefulness.counts.f1,
-            "useful_precision": scores.usefulness.counts.precision,
-            "useful_recall": scores.usefulness.counts.recall,
-            "article_exact_f1": scores.macro["exact_f1"].mean,
-            "article_soft_f1": scores.macro["soft_f1"].mean,
-            "article_exact_f1_gold_items": scores.macro["exact_f1_gold_items"].mean,
-            "article_soft_f1_gold_items": scores.macro["soft_f1_gold_items"].mean,
-            "exact_item_f1": scores.exact_items.overall().f1,
-            "strict_item_f1": scores.strict_items.overall().f1,
-            "relaxed_item_f1": scores.relaxed_items.overall().f1,
-            "weekly_item_f1": scores.weekly_items.overall().f1,
-        }
+def _summary_json(s: Summary) -> dict:
     return {
-        "reached_model": pack(evaluation.model_articles),
-        "all_articles": pack(evaluation.all_articles),
-        "without_inactive": pack(evaluation.without_inactive),
+        "articles": s.articles, "gold_nonempty": s.gold_nonempty, "gold_empty": s.gold_empty,
+        "metrics": {name: d.__dict__ for name, d in s.metrics.items()},
+        "field_accuracy": {name: d.__dict__ for name, d in s.fields.items() if d.articles},
+        "intervals_of_the_mean": s.intervals,
+        "buckets": {"all_found": s.all_found, "all_found_and_exact": s.all_found_and_exact,
+                    "some_found": s.some_found, "none_found": s.none_found,
+                    "empty_correct": s.both_empty, "empty_false_items": s.false_items_on_empty},
+        "counts": {"hits": s.counts.tp, "misses": s.counts.fn, "extras": s.counts.fp,
+                   "repeated_extras": s.duplicate_extras},
+        "useful": {"precision": s.usefulness.counts.precision, "recall": s.usefulness.counts.recall,
+                   "f1": s.usefulness.counts.f1, "accuracy": s.usefulness.accuracy},
     }
 
 
+def _settings(run_dir: Path) -> dict:
+    run_config_path = run_dir / "run_config.json"
+    run_config = json.loads(run_config_path.read_text(encoding="utf-8")) if run_config_path.exists() else {}
+    return {
+        "run_id": run_dir.name,
+        "model": run_config.get("model"),
+        "prompt": run_config.get("system_prompt"), "prompt_sha256": run_config.get("system_prompt_sha256"),
+        "examples": run_config.get("examples"), "examples_sha256": run_config.get("examples_sha256"),
+        "example_count": run_config.get("example_count"),
+        "decoding": {k: run_config.get(k) for k in ("temperature", "top_p", "seed", "extra_body", "max_tokens")},
+        "annotation_rules": "prompt_rules.md, as in the prompt above",
+        "gold_labels_sha256": _sha256(config.GOLD_LABELS_PATH),
+        "duplicate_adjudication_sha256": _sha256(config.ADJUDICATION_PATH),
+        "normalization_version": NORMALIZATION_VERSION,
+        "place_names": {"source": config.PLACE_NAME_SOURCE, "language": config.PLACE_NAME_LANGUAGE,
+                        "rule": "every city, state and country in its agreed form, its name in OpenStreetMap (5.1)"},
+        "matching_version": MATCHING_VERSION, "match_threshold": MATCH_THRESHOLD,
+        "duplicates_version": DUPLICATES_VERSION,
+        "evaluation_version": EVALUATION_VERSION, "code_version": _code_version(),
+        "bootstrap": {"resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED, "unit": "article"},
+    }
+
+
+# --- Detailed files ----------------------------------------------------------
+
+def _write_csv(path: Path, columns: list[str], rows) -> None:
+    with path.open("w", encoding="utf-8", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=columns)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _scored(evaluation: Evaluation) -> list[RowResult]:
+    return [r for r in evaluation.rows if r.status == SCORED]
+
+
+def _article_outcome(o) -> str:
+    """The article's bucket in report section 4."""
+    if not o.gold_items:
+        return "empty, correct" if not o.model_items else "empty, false items"
+    if o.tp == 0:
+        return "nothing found"
+    if o.fp == 0 and o.fn == 0:
+        return "all found, every detail right" if o.exact_items == o.tp else "all found"
+    return "some found"
+
+
+def _article_rows(evaluation: Evaluation):
+    for r in evaluation.rows:
+        o = r.outcome
+        yield {
+            "article_id": r.article_id, "sources": " ".join(r.sources), "status": r.status,
+            "gold_useful": r.gold_useful, "model_useful": r.model_useful,
+            "gold_items": len(r.gold_items), "model_items": len(r.model_items) if o else "",
+            "hits": o.tp if o else "", "misses": o.fn if o else "", "extras": o.fp if o else "",
+            "repeated_extras": len(o.duplicate_extras) if o else "",
+            "recall": o.recall if o else "", "precision": o.precision if o else "", "f1": o.f1 if o else "",
+            "accuracy": o.attribute_accuracy if o else "", "exact_hits": o.exact_items if o else "",
+            "outcome": _article_outcome(o) if o else "",
+            "rule_violations": " | ".join(r.violations), "problems": " | ".join(r.problems),
+        }
+
+
+def _item_columns(prefix: str, item: dict | None) -> dict:
+    return {f"{prefix}_{name}": (show(item.get(name)) if item else "") for name in _ITEM_COLUMNS}
+
+
+def _evidence(item: dict | None) -> str:
+    return " || ".join(item.get("evidence") or []) if item else ""
+
+
+def _matched_rows(rows: list[RowResult]):
+    for r in rows:
+        o = r.outcome
+        for (g, m, compat), pair in zip(o.match.pairs, o.pair_scores):
+            line = {"article_id": r.article_id, "sources": " ".join(r.sources), "gold_index": g, "model_index": m,
+                    "similarity": round(compat, 3), "exact": pair.exact, "wrong_fields": ", ".join(pair.wrong_fields)}
+            results = {f.name: f.result for f in pair.fields}
+            line.update({f"result_{name}": results.get(name, "not applicable") for name in ALL_FIELDS})
+            line.update(_item_columns("gold", o.gold_items[g]))
+            line.update(_item_columns("model", o.model_items[m]))
+            line["gold_evidence"], line["model_evidence"] = _evidence(o.gold_items[g]), _evidence(o.model_items[m])
+            yield line
+
+
+def _missed_rows(rows: list[RowResult]):
+    for r in rows:
+        o = r.outcome
+        rejected = {g: (m, s) for g, m, s in o.match.rejected}
+        for g in o.match.unmatched_gold:
+            m, score = rejected.get(g, (None, None))
+            yield {"article_id": r.article_id, "sources": " ".join(r.sources), "gold_index": g,
+                   "model_wrote_items": bool(o.model_items),
+                   "closest_model_index": "" if m is None else m,
+                   "closest_model_similarity": "" if score is None else round(score, 3),
+                   **_item_columns("gold", o.gold_items[g]), "gold_evidence": _evidence(o.gold_items[g])}
+
+
+def _additional_rows(rows: list[RowResult]):
+    for r in rows:
+        o = r.outcome
+        for m in o.match.unmatched_model:
+            yield {"article_id": r.article_id, "sources": " ".join(r.sources), "model_index": m,
+                   "gold_has_items": bool(o.gold_items), "duplicate_label": o.duplicate_extras.get(m, ""),
+                   **_item_columns("model", o.model_items[m]), "model_evidence": _evidence(o.model_items[m])}
+
+
+def _duplicate_rows(rows: list[RowResult]):
+    for r in rows:
+        for review in r.gold_reviews:
+            for i in review["item_indexes"]:
+                yield {"side": "gold", "article_id": r.article_id, "sources": " ".join(r.sources),
+                       "group": "-".join(map(str, review["item_indexes"])), "category": review["category"],
+                       "decision": review["decision"], "reason": review["reason"], "item_index": i,
+                       "duplicate_label": "", "item": _item_text(r.raw_gold_items[i]),
+                       "evidence": _evidence(r.raw_gold_items[i])}
+        if r.outcome:
+            for group in find_groups(r.model_items):
+                for i in group.indexes:
+                    yield {"side": "model", "article_id": r.article_id, "sources": " ".join(r.sources),
+                           "group": "-".join(map(str, group.indexes)), "category": group.category,
+                           "decision": "", "reason": "", "item_index": i,
+                           "duplicate_label": r.outcome.duplicate_extras.get(i, "kept"),
+                           "item": _item_text(r.model_items[i]), "evidence": _evidence(r.model_items[i])}
+
+
+def _error_examples(evaluation: Evaluation, per_type: int = 3) -> list[str]:
+    rows = _scored(evaluation)
+    lines = ["# Error examples", "", f"Run: up to {per_type} examples of each error type, in article id order.", ""]
+
+    def block(title, examples):
+        lines.extend([f"## {title}", ""])
+        if not examples:
+            lines.extend(["None.", ""])
+        for article, gold, model, note in examples[:per_type]:
+            lines.append(f"- **{article.article_id}** ({' '.join(article.sources)}) {note}")
+            if gold:
+                lines.append(f"  - gold: {_item_text(gold)}  \n    evidence: {_evidence(gold)[:300]}")
+            if model:
+                lines.append(f"  - model: {_item_text(model)}  \n    evidence: {_evidence(model)[:300]}")
+        lines.append("")
+
+    for kind in ITEM_KINDS:
+        block(f"Missed {kind} items", [(r, r.outcome.gold_items[g], None, "") for r in rows for g in r.outcome.match.unmatched_gold
+                                       if r.outcome.gold_items[g]["kind"] == kind])
+        block(f"Additional {kind} items (not duplicates)",
+              [(r, None, r.outcome.model_items[m], "gold has no items" if not r.gold_items else "")
+               for r in rows for m in r.outcome.match.unmatched_model
+               if r.outcome.model_items[m].get("kind") == kind and m not in r.outcome.duplicate_extras])
+    block("Duplicate extras", [(r, None, r.outcome.model_items[m], f"({label})") for r in rows
+                               for m, label in r.outcome.duplicate_extras.items()])
+    block("Kind confusion", [(r, r.outcome.gold_items[g], r.outcome.model_items[m], "") for r in rows
+                             for g, m, _ in r.outcome.match.pairs
+                             if r.outcome.gold_items[g]["kind"] != r.outcome.model_items[m]["kind"]])
+    for combo, _ in evaluation.diagnostics.wrong_combinations.most_common(5):
+        block(f"Matched, wrong only in: {', '.join(combo)}",
+              [(r, r.outcome.gold_items[g], r.outcome.model_items[m], "") for r in rows
+               for (g, m, _), pair in zip(r.outcome.match.pairs, r.outcome.pair_scores) if tuple(pair.wrong_fields) == combo])
+    return lines
+
+
 def write_report(evaluation: Evaluation, run_dir: Path) -> None:
-    """Write all the report files into the run folder."""
+    """Write every file listed in the module docstring into the run folder."""
+    settings = _settings(run_dir)
     sections = [
-        f"# Extraction report: {run_dir.name}",
-        "",
-        f"Model: `{config.MODEL_ID}`  |  Prompt: `{config.SYSTEM_PROMPT_PATH.name}` "
-        f"+ `{config.EXAMPLES_PATH.name}`",
-        "",
-        *_usefulness_section(evaluation),
-        *_items_section(evaluation),
-        *_rule_check_section(evaluation),
-        *_coverage_section(evaluation),
-        *_variants_section(evaluation),
-        *_human_section(evaluation),
+        f"# Extraction report: {run_dir.name}", "",
+        f"Model: `{settings['model']}`  |  Prompt: `{settings['prompt']}` + `{settings['examples']}` "
+        f"(k = {settings['example_count']})  |  {MATCHING_VERSION}, {NORMALIZATION_VERSION}, {DUPLICATES_VERSION}", "",
+        *_usefulness_section(evaluation), *_finding_section(evaluation), *_details_section(evaluation),
+        *_articles_section(evaluation), *_errors_section(evaluation), *_checks_section(evaluation),
+        "Charts: `plot_article_counts.png`, `plot_article_metrics.png`, `plot_field_accuracy.png`, "
+        "`plot_article_buckets.png`.", "",
+        "Detailed files: `article_metrics.csv`, `matched_items.csv`, `missed_items.csv`, `additional_items.csv`, "
+        "`duplicate_candidates.csv`, `field_error_summary.csv`, `kind_error_summary.csv`, `error_examples.md`, "
+        "`evaluation_summary.json`.", "",
     ]
     (run_dir / "report.md").write_text("\n".join(sections), encoding="utf-8")
-    (run_dir / "scores.json").write_text(json.dumps(headline_scores(evaluation), indent=2), encoding="utf-8")
-    _write_row_results(evaluation.rows, run_dir / "row_results.csv")
-    _write_item_comparison(evaluation.rows, run_dir / "item_comparison.csv")
+    (run_dir / "evaluation_summary.json").write_text(json.dumps({
+        "settings": settings,
+        "populations": {name: _summary_json(s) for name, s in evaluation.summaries.items()},
+    }, indent=2, default=str), encoding="utf-8")
 
-
-def _write_row_results(rows: list[RowResult], path: Path) -> None:
-    """One line per article: what gold and the model said, and how the items compare."""
-    columns = ["article_id", "sources", "status", "gated", "gold_useful", "human_useful", "model_useful",
-               "usefulness_correct", "gold_items", "model_items", "items_exact_matched", "items_missing",
-               "items_extra", "exact_precision", "exact_recall", "exact_f1", "soft_precision", "soft_recall",
-               "soft_f1", "item_set_outcome", "rule_violations", "problems", "model_reason"]
-    with path.open("w", encoding="utf-8", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=columns)
-        writer.writeheader()
-        for r in rows:
-            scored = r.status == SCORED
-            writer.writerow({
-                "article_id": r.article_id, "sources": " ".join(r.sources), "status": r.status,
-                "gated": r.gated, "gold_useful": r.gold_useful, "human_useful": r.human_useful,
-                "model_useful": r.model_useful if scored else "",
-                "usefulness_correct": (r.gold_useful == r.model_useful) if scored else "",
-                "gold_items": len(r.gold_items),
-                "model_items": len(r.model_items) if scored else "",
-                "items_exact_matched": len(r.exact_match.matched) if scored else "",
-                "items_missing": len(r.exact_match.missed) if scored else "",
-                "items_extra": len(r.exact_match.extra) if scored else "",
-                **{name: _rate(getattr(r.article_score, name)) if scored else ""
-                   for name in ("exact_precision", "exact_recall", "exact_f1", "soft_precision", "soft_recall",
-                                "soft_f1")},
-                "item_set_outcome": classify_item_set(r.exact_match) if scored else "",
-                "rule_violations": " | ".join(r.violations),
-                "problems": " | ".join(r.problems),
-                "model_reason": r.model_reason,
-            })
-
-
-def _rate(value: float | None) -> str:
-    """A 0-1 score for the CSV with three decimals; empty when it is not defined for the article."""
-    return "" if value is None else f"{value:.3f}"
-
-
-def _evidence_text(item: dict | None) -> str:
-    """The quotes of an item in one cell, separated by ' || '. Empty when there is no item."""
-    return " || ".join(item["evidence"]) if item else ""
-
-
-def _write_item_comparison(rows: list[RowResult], path: Path) -> None:
-    """Every gold and model item, one line each pair, with the evidence each of them quoted.
-
-    outcome is one of:
-      exact match               every field except evidence agrees
-      same kind and place       the items are alike but some fields differ; `differing_fields`
-                                lists them and the side-by-side columns show the values
-      missing from model        a gold item with no model counterpart (model columns empty)
-      extra from model          a model item with no gold counterpart (gold columns empty)
-    Evidence is shown for learning how the two differ; it is never part of the score.
-    """
-    side_by_side = [f"{side}_{name}" for name in _SIDE_BY_SIDE_COLUMNS for side in ("gold", "model")]
-    columns = ["article_id", "outcome", "differing_fields", *_SHARED_COLUMNS, *side_by_side,
-               "gold_evidence", "model_evidence"]
-    with path.open("w", encoding="utf-8", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=columns)
-        writer.writeheader()
-        for r in rows:
-            if r.status != SCORED:
-                continue
-            pairs = (
-                [("exact match", gold, model) for gold, model in r.exact_match.matched]
-                + [("same kind and place", gold, model) for gold, model in r.near_match.matched]
-                + [("missing from model", gold, None) for gold in r.near_match.missed]
-                + [("extra from model", None, model) for model in r.near_match.extra]
-            )
-            for outcome, gold, model in pairs:
-                shared = gold or model  # paired items agree on the shared fields, so either side will do
-                line = {
-                    "article_id": r.article_id, "outcome": outcome,
-                    "differing_fields": ", ".join(differing_fields(gold, model)) if gold and model else "",
-                    **{name: shared.get(name) for name in _SHARED_COLUMNS},
-                    "gold_evidence": _evidence_text(gold),
-                    "model_evidence": _evidence_text(model),
-                }
-                for name in _SIDE_BY_SIDE_COLUMNS:
-                    line[f"gold_{name}"] = gold[name] if gold else ""
-                    line[f"model_{name}"] = model[name] if model else ""
-                writer.writerow(line)
+    rows = _scored(evaluation)
+    article_rows = list(_article_rows(evaluation))
+    _write_csv(run_dir / "article_metrics.csv", list(article_rows[0]) if article_rows else ["article_id"], article_rows)
+    matched = list(_matched_rows(rows))
+    _write_csv(run_dir / "matched_items.csv", list(matched[0]) if matched else ["article_id"], matched)
+    missed = list(_missed_rows(rows))
+    _write_csv(run_dir / "missed_items.csv", list(missed[0]) if missed else ["article_id"], missed)
+    additional = list(_additional_rows(rows))
+    _write_csv(run_dir / "additional_items.csv", list(additional[0]) if additional else ["article_id"], additional)
+    duplicates = list(_duplicate_rows(rows))
+    _write_csv(run_dir / "duplicate_candidates.csv",
+               ["side", "article_id", "sources", "group", "category", "decision", "reason", "item_index",
+                "duplicate_label", "item", "evidence"], duplicates)
+    d = evaluation.diagnostics
+    _write_csv(run_dir / "field_error_summary.csv", ["field", "compared", "right", "wrong", "missing", "extra", "accuracy"],
+               [{"field": name, "compared": sum(c.values()), "right": c[MATCH], "wrong": c[WRONG],
+                 "missing": c[MISSING_VALUE], "extra": c[EXTRA_VALUE], "accuracy": safe_divide(c[MATCH], sum(c.values()))}
+                for name, c in d.field_results.items() if sum(c.values())])
+    _write_csv(run_dir / "kind_error_summary.csv",
+               ["kind", "gold", "model", "matched", "missed", "additional", "duplicate extras", "matched under another kind"],
+               [{"kind": kind, **{k: c[k] for k in ("gold", "model", "matched", "missed", "additional", "duplicate extras")},
+                 "matched under another kind": sum(n for (g, m), n in d.kind_confusion.items() if g == kind and m != kind)}
+                for kind, c in d.by_kind.items()])
+    (run_dir / "error_examples.md").write_text("\n".join(_error_examples(evaluation)), encoding="utf-8")
+    write_plots(evaluation.headline, [r.outcome for r in rows], run_dir)

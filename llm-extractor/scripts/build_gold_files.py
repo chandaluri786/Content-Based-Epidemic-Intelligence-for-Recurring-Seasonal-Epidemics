@@ -1,52 +1,49 @@
-"""Copy the capstone source files into this project as JSON, keyed by article id.
+"""Build data/articles.json and data/gold_labels.json from the chain-of-thought v2 records.
 
-The extractor itself reads only files inside this folder (`prompts/` and `data/`).
-Run this script when the sources change, for example after more chain-of-thought records
-were written. It is the only code that knows where the capstone files live.
+The extractor itself reads only files inside this folder (`prompts/` and `data/`). Run this
+script when the records change. It is the only code that knows where the capstone files live.
 
     python scripts/build_gold_files.py [--capstone-dir PATH] [--labeling-dir PATH] [--records-dir PATH]
 
-Reads, for each of the four labeling sets (Jahnavi, Aditya, Manoj, Thanya):
-    <labeling-dir>/<Name>_texts.txt                       the articles
-    <labeling-dir>/<Name>_labels.csv                      the human `useful` answers
-    <records-dir>/<Name>_chain_of_thought_v2.jsonl        the gold records (may be missing or partial;
-                                                          default data/chain_of_thought, else
-                                                          ../labeled_data_chain_of_thought)
-and the prompt document prompt_versions/llm_extraction_prompt_v5.1.md.
+Reads:
+    <records-dir>/<Name><RECORDS_SUFFIX>              the gold records (config.py; default
+                                                    data/chain_of_thought/<Name>_chain_of_thought_v2.jsonl),
+                                                    for every <Name> that has such a file
+    <labeling-dir>/<Name>_texts.txt                  the article texts of all four labeling sets
+                                                    (the v2 records hold no article text)
+    prompt_versions/llm_extraction_prompt_<PROMPT_VERSION>.md   the prompt document (config.py)
 
 Writes:
-    data/articles.json           one record per unique article, with `split` and `passes_keyword_gate`
-    data/gold_labels.json        one record per article that has a chain-of-thought record
-    data/human_labels.json       one record per article: the human `useful` answers
-    prompts/system_prompt_v5.1.txt   the v5.1 rules, from "## Task" to the end, word for word
-    prompts/examples_v5.1.json       only if it does not exist yet: [] (zero-shot)
+    data/articles.json             one record per article that has a gold record: id, scan_date, link,
+                                   sources (set and row) and the article text
+    data/gold_labels.json          one record per article: useful, items, labelers
+    prompts/system_prompt_<PROMPT_VERSION>.txt  the rules, from "## Task" to the end, word for word
 
-Row numbers collide across the four sets (row 41 is four different articles), so everything is
-keyed by `article_id`. The copies of an article that appears in two sets must agree. By default
-every such article is then removed entirely (80 articles: the 40 double-labelled dev articles and
-the 40 dev articles repeated as Thanya rows 1-40); --keep-shared keeps one copy of each instead.
+No human labels are read. Row numbers collide across the labeling sets (row 41 is four different
+articles), so everything is keyed by `article_id`. An article that appears in more than one
+labeling set (double-labelled articles, and the Thanya rows 1-40 that repeat Jahnavi and Manoj
+articles) is removed entirely: every copy, its article text and its gold record.
 """
 
 import argparse
-import csv
-import importlib.util
 import json
 import re
 import sys
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_DIR))
+from flu_extractor import config  # noqa: E402
+from flu_extractor.data_checks import check_articles, check_gold  # noqa: E402
+
+# The labeling sets whose article texts are read. All four are read, so that an article repeated in
+# another set (Thanya rows 1-40) is found and removed, even though only some sets have gold records.
 LABELERS = ("Jahnavi", "Aditya", "Manoj", "Thanya")
-PROMPT_DOCUMENT = PROJECT_DIR / "prompt_versions" / "llm_extraction_prompt_v5.1.md"
-SYSTEM_PROMPT_FILE = PROJECT_DIR / "prompts" / "system_prompt_v5.1.txt"
-EXAMPLES_FILE = PROJECT_DIR / "prompts" / "examples_v5.1.json"
+RECORDS_SUFFIX = config.RECORDS_SUFFIX
+PROMPT_DOCUMENT = PROJECT_DIR / "prompt_versions" / f"llm_extraction_prompt_{config.PROMPT_VERSION}.md"
+SYSTEM_PROMPT_FILE = config.SYSTEM_PROMPT_PATH
+DATA_DIR = config.DATA_DIR
 
-# The locked test set: Thanya rows 41-320. Rows 1-40 repeat Jahnavi 21-40 and Manoj 1-20.
-TEST_LABELER = "Thanya"
-FIRST_TEST_ROW = 41
-
-
-# --- System prompt -----------------------------------------------------------
 
 def extract_system_prompt(prompt_markdown: str) -> str:
     """Everything from '## Task' to the end. The title and the generation note above it are dropped."""
@@ -89,107 +86,65 @@ def convert_articles(texts_path: Path) -> list[dict]:
     return articles
 
 
-def load_keyword_gate(capstone_project_dir: Path):
-    """Import is_flu_related from flu_bucketing/flu_keywords.py, the project's Rule 1 keyword list."""
-    path = capstone_project_dir / "flu_bucketing" / "flu_keywords.py"
-    spec = importlib.util.spec_from_file_location("flu_keywords", path)
-    if spec is None or not path.exists():
-        raise FileNotFoundError(f"Keyword list not found: {path}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.is_flu_related
-
-
-# --- Labels ------------------------------------------------------------------
-
-def read_csv(path: Path) -> list[dict]:
-    # "utf-8-sig" removes the invisible byte-order mark that Excel puts at the file start.
-    with path.open(encoding="utf-8-sig", newline="") as file:
-        return list(csv.DictReader(file))
-
-
 def read_records(path: Path) -> list[dict]:
-    """Read a chain-of-thought file (one JSON record per line). A missing file gives []."""
-    if not path.exists():
-        return []
+    """Read a chain-of-thought file (one JSON record per line)."""
     with path.open(encoding="utf-8") as file:
         return [json.loads(line) for line in file if line.strip()]
 
 
-def human_useful(answer: str) -> bool | None:
-    """The sheet's yes/no answer as true/false; None when the cell is blank or unclear."""
-    return {"yes": True, "no": False}.get(answer.strip().lower())
-
-
 # --- Build -------------------------------------------------------------------
 
-def build(labeling_dir: Path, records_dir: Path, is_flu_related) -> tuple[list, list, list]:
-    """Return (articles, gold labels, human labels), each a list sorted by article id."""
-    articles: dict[str, dict] = {}
-    gold: dict[str, dict] = {}
-    human: dict[str, dict] = {}
-
+def build(labeling_dir: Path, records_dir: Path) -> tuple[list[dict], list[dict], dict]:
+    """Return (articles, gold labels, counts). Both lists hold only unshared articles with gold."""
+    texts: dict[str, dict] = {}
     for name in LABELERS:
-        for article in convert_articles(labeling_dir / f"{name}_texts.txt"):
-            article_id, row = article["article_id"], article["row"]
-            split = "test" if name == TEST_LABELER and row >= FIRST_TEST_ROW else "dev"
-            entry = articles.setdefault(article_id, {
-                "article_id": article_id, "scan_date": article["scan_date"], "link": article["link"],
-                "article": article["article"], "split": split, "sources": [],
-            })
+        path = labeling_dir / f"{name}_texts.txt"
+        if not path.exists():
+            raise FileNotFoundError(f"article texts not found: {path}")
+        for article in convert_articles(path):
+            entry = texts.setdefault(article["article_id"], {**article, "sources": []})
             if entry["article"] != article["article"] or entry["scan_date"] != article["scan_date"]:
-                raise ValueError(f"{article_id}: the copy in {name} row {row} differs from {entry['sources']}")
-            if entry["split"] != split:
-                raise ValueError(f"{article_id} is in both the dev and the test split ({entry['sources']}, "
-                                 f"{name}:{row}); the test set must be unseen")
-            entry["sources"].append(f"{name}:{row}")
+                raise ValueError(f"{article['article_id']}: the copy in {name} row {article['row']} "
+                                 f"differs from {entry['sources']}")
+            entry["sources"].append(f"{name}:{article['row']}")
+    shared = {article_id for article_id, entry in texts.items() if len(entry["sources"]) > 1}
 
-        for label in read_csv(labeling_dir / f"{name}_labels.csv"):
-            entry = human.setdefault(label["article_id"], {"article_id": label["article_id"], "by_labeler": {}})
-            entry["by_labeler"][name] = human_useful(label["useful"])
-
-        for record in read_records(records_dir / f"{name}_chain_of_thought_v2.jsonl"):
-            output = record["output"]
+    record_files = sorted(records_dir.glob(f"*{RECORDS_SUFFIX}"))
+    if not record_files:
+        raise FileNotFoundError(f"no *{RECORDS_SUFFIX} files in {records_dir}")
+    gold: dict[str, dict] = {}
+    record_count = 0
+    for path in record_files:
+        for record in read_records(path):
+            record_count += 1
+            article_id, output = record["article_id"], record["output"]
+            if article_id not in texts:
+                raise ValueError(f"{path.name}: gold record {article_id} has no article in the texts files")
+            if output["useful"] != bool(output["items"]):
+                raise ValueError(f"{path.name}: {article_id} has useful={output['useful']} "
+                                 f"with {len(output['items'])} items")
             labelers = [source["labeler"] for source in record["source_rows"]]
-            new = {"article_id": record["article_id"], "useful": output["useful"],
-                   "items": output["items"], "labelers": labelers}
-            old = gold.setdefault(record["article_id"], new)
+            new = {"article_id": article_id, "useful": output["useful"], "items": output["items"],
+                   "labelers": labelers}
+            old = gold.setdefault(article_id, new)
             if (old["useful"], old["items"]) != (new["useful"], new["items"]):
-                raise ValueError(f"{record['article_id']}: the gold records in {old['labelers']} and "
-                                 f"{labelers} disagree")
+                raise ValueError(f"{article_id}: the gold records in {old['labelers']} and {labelers} disagree")
             old["labelers"] = sorted(set(old["labelers"]) | set(labelers))
 
-    for entry in articles.values():
-        entry["passes_keyword_gate"] = bool(is_flu_related(entry["article"]))
-    for article_id, entry in gold.items():
-        if article_id not in articles:
-            raise ValueError(f"gold record {article_id} has no article in the texts files")
-        entry["split"] = articles[article_id]["split"]
-    for entry in human.values():
-        # Two people labelled the overlap articles. Their answer is used only where they agree.
-        answers = {value for value in entry["by_labeler"].values() if value is not None}
-        entry["useful"] = answers.pop() if len(answers) == 1 else None
-
-    def ordered(records: dict, keys: tuple[str, ...]) -> list[dict]:
-        return [{key: records[article_id][key] for key in keys} for article_id in sorted(records)]
-
-    return (
-        ordered(articles, ("article_id", "scan_date", "link", "split", "passes_keyword_gate",
-                           "sources", "article")),
-        ordered(gold, ("article_id", "split", "useful", "labelers", "items")),
-        ordered(human, ("article_id", "useful", "by_labeler")),
-    )
-
-
-def drop_shared(articles: list, gold: list, human: list) -> tuple[list, list, list, int]:
-    """Remove every article that appears in more than one labeling set, from all three lists.
-
-    These are the 40 double-labelled dev articles (Jahnavi/Aditya, Aditya/Manoj) and the 40 dev
-    articles repeated as Thanya rows 1-40. Returns the three lists and how many articles were removed.
-    """
-    shared = {a["article_id"] for a in articles if len(a["sources"]) > 1}
-    keep = lambda records: [r for r in records if r["article_id"] not in shared]  # noqa: E731
-    return keep(articles), keep(gold), keep(human), len(shared)
+    kept = sorted(article_id for article_id in gold if article_id not in shared)
+    missing_quotes = 0
+    for article_id in kept:
+        text = " ".join(texts[article_id]["article"].split())
+        for item in gold[article_id]["items"]:
+            missing_quotes += sum(" ".join(q.split()) not in text for q in item["evidence"])
+    articles = [{key: texts[a][key] for key in ("article_id", "scan_date", "link", "sources", "article")}
+                for a in kept]
+    labels = [{key: gold[a][key] for key in ("article_id", "useful", "labelers", "items")} for a in kept]
+    counts = {"record_files": [p.name for p in record_files], "records": record_count,
+              "unique_gold_articles": len(gold), "removed_shared": len(set(gold) & shared),
+              "kept": len(kept), "useful": sum(g["useful"] for g in labels),
+              "items": sum(len(g["items"]) for g in labels), "evidence_not_found": missing_quotes}
+    return articles, labels, counts
 
 
 def write_json(path: Path, data) -> None:
@@ -203,40 +158,31 @@ def main() -> None:
     parser.add_argument("--capstone-dir", type=Path, default=PROJECT_DIR.parent.parent,
                         help="folder that contains labeling/labeling/ (default: two levels up)")
     parser.add_argument("--labeling-dir", type=Path,
-                        help="folder with the *_texts.txt and *_labels.csv files "
-                             "(default: <capstone-dir>/labeling/labeling)")
-    default_records = PROJECT_DIR / "data" / "chain_of_thought"
-    if not default_records.exists():
-        default_records = PROJECT_DIR.parent / "labeled_data_chain_of_thought"
-    parser.add_argument("--records-dir", type=Path, default=default_records,
-                        help="folder with the *_chain_of_thought_v2.jsonl files (default: data/chain_of_thought, "
-                             "else ../labeled_data_chain_of_thought)")
-    parser.add_argument("--keep-shared", action="store_true",
-                        help="keep articles that appear in more than one labeling set (default: remove them all)")
+                        help="folder with the *_texts.txt files (default: <capstone-dir>/labeling/labeling)")
+    parser.add_argument("--records-dir", type=Path, default=config.RECORDS_DIR,
+                        help=f"folder with the *{RECORDS_SUFFIX} files (default: data/chain_of_thought)")
     args = parser.parse_args()
     labeling_dir = args.labeling_dir or args.capstone_dir / "labeling" / "labeling"
 
-    articles, gold, human = build(labeling_dir, args.records_dir, load_keyword_gate(PROJECT_DIR.parent))
-    if not args.keep_shared:
-        articles, gold, human, removed = drop_shared(articles, gold, human)
-        print(f"removed {removed} articles that appear in more than one labeling set")
-    write_json(PROJECT_DIR / "data" / "articles.json", articles)
-    write_json(PROJECT_DIR / "data" / "gold_labels.json", gold)
-    write_json(PROJECT_DIR / "data" / "human_labels.json", human)
-
+    articles, labels, counts = build(labeling_dir, args.records_dir)
+    problems = check_articles(articles) + check_gold(labels, articles)
+    if problems:
+        print(f"Not written: {len(problems)} problems with the v5.1 format or the evidence, e.g.:", file=sys.stderr)
+        print("\n".join(problems[:20]), file=sys.stderr)
+        raise SystemExit(1)
+    write_json(DATA_DIR / "articles.json", articles)
+    write_json(DATA_DIR / "gold_labels.json", labels)
     SYSTEM_PROMPT_FILE.write_text(extract_system_prompt(PROMPT_DOCUMENT.read_text(encoding="utf-8")),
                                   encoding="utf-8")
     print(f"wrote {SYSTEM_PROMPT_FILE.relative_to(PROJECT_DIR)}")
-    if not EXAMPLES_FILE.exists():
-        write_json(EXAMPLES_FILE, [])  # zero-shot until the few-shot examples are chosen and frozen
 
-    for split in ("dev", "test"):
-        in_split = [a for a in articles if a["split"] == split]
-        labelled = [g for g in gold if g["split"] == split]
-        print(f"{split}: {len(in_split)} articles, {sum(not a['passes_keyword_gate'] for a in in_split)} fail "
-              f"the keyword gate, {len(labelled)} with gold ({sum(g['useful'] for g in labelled)} useful)")
-    if len(gold) < len(articles):
-        print(f"note: {len(articles) - len(gold)} articles have no gold record yet and cannot be scored",
+    print(f"records: {counts['records']} in {', '.join(counts['record_files'])}; "
+          f"{counts['unique_gold_articles']} unique articles")
+    print(f"removed {counts['removed_shared']} articles that appear in more than one labeling set")
+    print(f"kept {counts['kept']} articles: {counts['useful']} useful, {counts['kept'] - counts['useful']} "
+          f"not useful, {counts['items']} gold items")
+    if counts["evidence_not_found"]:
+        print(f"warning: {counts['evidence_not_found']} gold evidence quotes are not in their article text",
               file=sys.stderr)
 
 

@@ -14,37 +14,35 @@ import sys
 from pathlib import Path
 
 from flu_extractor import config
-from flu_extractor.data_loading import load_articles, load_gold_labels, load_human_useful, resolve_article_id
+from flu_extractor.data_loading import load_articles, load_gold_labels, resolve_article_id
 from flu_extractor.evaluation import SCORED, evaluate_run, read_run_records
-from flu_extractor.metrics import EXACT_KEY_FIELDS, classify_item_set, differing_fields
+from flu_extractor.duplicates import load_adjudication
+from flu_extractor.field_scoring import score_pair
+from flu_extractor.matching import MATCH_THRESHOLD, MATCHING_VERSION
+from flu_extractor.normalization import ALL_FIELDS, applicable_fields, show
 from flu_extractor.places import PlaceChecker
-
-
-def show(value) -> str:
-    """How a field value is printed: null shows as (null) so it is not confused with the word None."""
-    return "(null)" if value is None else str(value)
 
 
 def print_evidence(label: str, item: dict | None) -> None:
     """Print every evidence quote of an item in full. Evidence is shown but never compared."""
     if item is None:
         return
-    print(f"      {label} evidence ({len(item['evidence'])} quote(s), not compared):")
-    for quote in item["evidence"]:
+    print(f"      {label} evidence ({len(item.get('evidence') or [])} quote(s), not compared):")
+    for quote in item.get("evidence") or []:
         print(f"        - {quote!r}")
 
 
 def print_item_pair(title: str, gold: dict | None, model: dict | None) -> None:
-    """Print all item fields, gold and model next to each other, with a same/DIFFERENT flag."""
+    """Print the item fields, gold and model next to each other, with the result of each field."""
     print(f"\n  {title}")
-    different = set(differing_fields(gold, model)) if gold and model else set()
-    for name in EXACT_KEY_FIELDS:
-        flag = ""
-        if gold and model:
-            flag = "DIFFERENT" if name in different else "same"
-        gold_text = show(gold[name]) if gold else "-"
-        model_text = show(model[name]) if model else "-"
-        print(f"      {name:<13} {flag:<10} gold: {gold_text:<32} model: {model_text}")
+    results = {f.name: f.result for f in score_pair(gold, model).fields} if gold and model else {}
+    fields = applicable_fields((gold or model).get("kind"))
+    for name in ALL_FIELDS:
+        if name not in fields:
+            continue
+        gold_text = show(gold.get(name)) if gold else "-"
+        model_text = show(model.get(name)) if model else "-"
+        print(f"      {name:<12} {results.get(name, ''):<8} gold: {gold_text:<32} model: {model_text}")
     print_evidence("gold", gold)
     print_evidence("model", model)
 
@@ -58,7 +56,7 @@ def main() -> None:
     parser.add_argument("article", help="article id, or a set position such as Jahnavi:6")
     parser.add_argument("--article", dest="show_article", action="store_true", help="also print the article text")
     parser.add_argument("--reasoning", action="store_true", help="also print the model's summary and reasoning steps")
-    parser.add_argument("--offline", action="store_true", help="do not look up place names online")
+    parser.add_argument("--offline", action="store_true", help="do not look up place names online; use only the saved answers")
     args = parser.parse_args()
 
     articles = load_articles(config.ARTICLES_PATH)
@@ -71,21 +69,18 @@ def main() -> None:
         raise SystemExit(f"{article_id} has no gold record, so there is nothing to compare with.")
 
     place_checker = PlaceChecker(config.PLACE_CACHE_PATH, offline=args.offline)
-    evaluation = evaluate_run({article_id: records[article_id]}, articles, gold,
-                              load_human_useful(config.HUMAN_LABELS_PATH), place_checker)
+    evaluation = evaluate_run({article_id: records[article_id]}, articles, gold, place_checker,
+                              load_adjudication(config.ADJUDICATION_PATH))
     result, article, record = evaluation.rows[0], articles[article_id], records[article_id]
 
-    print(f"ARTICLE {article_id}   in {', '.join(article.sources)}   split {article.split}   "
+    print(f"ARTICLE {article_id}   in {', '.join(article.sources)}   "
           f"scan_date {article.scan_date}")
     print(f"link: {article.link}")
     if args.show_article:
         print(f"\n--- article text ---\n{article.text}\n--- end of article ---")
 
-    if result.gated:
-        print("\nCALL: none - the article fails the keyword gate, so the Rule 1 reply was written by code")
-    else:
-        print(f"\nCALL: finish_reason={record['finish_reason']}  prompt_tokens={record['prompt_tokens']}  "
-              f"completion_tokens={record['completion_tokens']}  seconds={record['seconds']}")
+    print(f"\nCALL: finish_reason={record['finish_reason']}  prompt_tokens={record['prompt_tokens']}  "
+          f"completion_tokens={record['completion_tokens']}  seconds={record['seconds']}")
     print(f"STATUS: {result.status}")
     if result.status != SCORED:
         print("Not scored, because:", *result.problems, sep="\n  ")
@@ -93,8 +88,7 @@ def main() -> None:
         return
 
     print(f"\nUSEFULNESS   gold: {result.gold_useful}   model: {result.model_useful}   "
-          f"-> {'CORRECT' if result.gold_useful == result.model_useful else 'WRONG'}   "
-          f"(human label: {show(result.human_useful)})")
+          f"-> {'CORRECT' if result.gold_useful == result.model_useful else 'WRONG'}")
     print(f"  model reason: {result.model_reason}")
     if args.reasoning:
         parsed = record["parsed"]
@@ -102,27 +96,36 @@ def main() -> None:
         for step in parsed["reasoning"]:
             print(f"    {step}")
 
-    print("\nHOW ITEMS ARE MATCHED")
-    print("  A model item is an EXACT match for a gold item when all of these fields agree:")
-    print("    " + ", ".join(EXACT_KEY_FIELDS))
-    print("  Upper/lower case and repeated spaces are ignored; null equals null; evidence is not compared.")
-    print("  Each gold item can be matched once. Leftovers are then paired by kind, strain and place")
-    print("  only to show which fields differ.")
+    print(f"\nHOW ITEMS ARE MATCHED ({MATCHING_VERSION})")
+    print("  Places are first put in their agreed form (5.1: the English name in OpenStreetMap). Candidate pairs")
+    print("  are in the same country and the same kind (or two count kinds with the same number).")
+    print(f"  Similarity = share of the gold kind's fields that agree (= the hit's accuracy); pairs below {MATCH_THRESHOLD}")
+    print("  are not allowed. Best partners first: the highest pair still available is locked, both items used up. Each field:")
+    print("  match, wrong, missing (gold has a value, the model null) or extra (gold null, the model has a value).")
 
-    exact, near = result.exact_match, result.near_match
-    print(f"\nITEMS   gold: {len(result.gold_items)}   model: {len(result.model_items)}   "
-          f"exact matches: {len(exact.matched)}   missing from model: {len(near.missed)}   "
-          f"extra from model: {len(near.extra)}   same kind/place but not exact: {len(near.matched)}")
-    for number, (gold_item, model_item) in enumerate(exact.matched, start=1):
-        print_item_pair(f"EXACT MATCH #{number}", gold_item, model_item)
-    for number, (gold_item, model_item) in enumerate(near.matched, start=1):
-        print_item_pair(f"NOT EXACT #{number} (same kind and place; differs in: "
-                        f"{', '.join(differing_fields(gold_item, model_item))})", gold_item, model_item)
-    for number, gold_item in enumerate(near.missed, start=1):
-        print_item_pair(f"MISSING FROM MODEL #{number} (in gold; no model item pairs with it)", gold_item, None)
-    for number, model_item in enumerate(near.extra, start=1):
-        print_item_pair(f"EXTRA FROM MODEL #{number} (model wrote it; no gold item pairs with it)", None, model_item)
-    print(f"\nITEM SET OUTCOME: {classify_item_set(exact)}")
+    o = result.outcome
+    print(f"\nITEMS   gold: {len(result.gold_items)} (as annotated: {len(result.raw_gold_items)})   "
+          f"model: {len(result.model_items)}   hits: {o.tp}   misses: {o.fn}   extras: {o.fp}   "
+          f"exact: {o.exact_items}")
+    for number, ((g, m, similarity), pair) in enumerate(zip(o.match.pairs, o.pair_scores), start=1):
+        label = "EXACT" if pair.exact else f"MATCHED, wrong in: {', '.join(pair.wrong_fields)}"
+        print_item_pair(f"HIT #{number} (similarity {similarity:.2f}): {label}", o.gold_items[g], o.model_items[m])
+    rejected = {g: (m, s) for g, m, s in o.match.rejected}
+    for g in o.match.unmatched_gold:
+        note = ""
+        if g in rejected:
+            m, score = rejected[g]
+            note = f"; closest model item #{m + 1} at {score:.2f} ({'below the threshold' if score < MATCH_THRESHOLD else 'taken by another gold item'})"
+        print_item_pair(f"MISS (gold item #{g + 1}, no model counterpart{note})", o.gold_items[g], None)
+    for m in o.match.unmatched_model:
+        label = o.duplicate_extras.get(m)
+        print_item_pair(f"EXTRA (model item #{m + 1}{', ' + label if label else ''})", None, o.model_items[m])
+    if result.gold_reviews:
+        print("\nGOLD DUPLICATE CANDIDATES")
+        for review in result.gold_reviews:
+            print(f"  items {review['item_indexes']} ({review['category']}): {review['decision']} {review['reason']}")
+    print(f"\nARTICLE SCORES   recall {o.recall}   precision {o.precision}   F1 {o.f1}   accuracy {o.attribute_accuracy}   "
+          f"exact rate {o.exact_rate}")
 
     print("\nRULE CHECKS (evidence copied from the article, places real, dates recent, fields by kind, ...)")
     print("  " + ("none violated" if not result.violations else "\n  ".join(result.violations)))

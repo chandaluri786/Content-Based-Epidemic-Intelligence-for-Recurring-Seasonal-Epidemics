@@ -1,10 +1,14 @@
 """Run the model on one article and turn its reply into a log record.
 
 Every reply is validated before it is accepted: it must be complete (not cut off at MAX_TOKENS),
-parse as one JSON object (after a safe repair of stray quotes), and follow the reply format
-(checks.find_shape_errors). An invalid reply is asked for again with a note naming the problem,
-up to MAX_VALIDATION_RETRIES times; the last time it asks for a compact reply at
-LAST_RETRY_TEMPERATURE. Each request goes through the shared rate limiter.
+parse as one JSON object (after a safe repair of stray quotes), follow the v5.1 reply format with
+every fixed value (checks.find_format_errors), and quote its evidence exactly from the article
+(checks.find_evidence_errors). An invalid reply is asked for again with a note naming the problems,
+up to MAX_VALIDATION_RETRIES times; the last time it asks for a compact reply. The decoding
+settings never change between attempts. Each request goes through the shared rate limiter.
+
+Every article is sent to the model, including one that never mentions flu: prompt Rule 1 tells
+the model the exact reply for that case.
 """
 
 import json
@@ -12,25 +16,10 @@ import json
 import openai
 
 from flu_extractor import config
-from flu_extractor.checks import find_shape_errors
+from flu_extractor.checks import find_evidence_errors, find_format_errors
 from flu_extractor.data_loading import Article
 from flu_extractor.llm_client import ask_model
 from flu_extractor.prompt import build_messages
-
-# The Rule 1 reply of the prompt. An article that fails the keyword gate never reaches the model,
-# because the prompt tells the model this check has already happened in code.
-RULE_1_REPLY = {
-    "summary": "The article failed the flu keyword check, so it was not sent to the model.",
-    "reasoning": [
-        "Step 0 (summary): The article failed the flu keyword check, so it was not sent to the model.",
-        "Step 1 (Rule 1): the article never mentions flu, influenza, a flu strain, a flu drug or "
-        "vaccine, or a flu-like illness, so it is not useful.",
-    ],
-    "useful": False,
-    "reason": "Not useful: the article never mentions flu, influenza, a flu strain, a flu drug or "
-              "vaccine, or a flu-like illness.",
-    "items": [],
-}
 
 TRUNCATED = "reply truncated at max_tokens"
 
@@ -55,9 +44,14 @@ _NOTE_COMPACT = (
     "double quote written as \\\"."
 )
 _NOTE_FORMAT = (
-    "Note: your previous reply to this article broke the reply format: {problem}. Reply again with "
-    "one JSON object that has summary, reasoning, useful, reason and items, and every item with all "
-    "12 fields."
+    "Note: your previous reply to this article broke the reply format of the rules: {problem}. Reply "
+    "again with one JSON object that has summary, reasoning, useful, reason and items, every item with "
+    "all 12 fields and only the values the rules allow."
+)
+_NOTE_EVIDENCE = (
+    "Note: in your previous reply to this article, these evidence quotes are not exact copies of the "
+    "article text: {problem}. Reply again; copy every evidence quote character for character from the "
+    "article, as whole sentences, with no rewording, shortening or joining (10.1)."
 )
 
 
@@ -126,17 +120,24 @@ def parse_reply(reply_text: str) -> tuple[dict | None, str | None, bool]:
     return None, last_error, False
 
 
-def _problem_and_note(reply) -> tuple[dict | None, str | None, bool, str]:
+EVIDENCE_PROBLEM = "evidence not copied exactly"
+
+
+def _problem_and_note(reply, article_text: str) -> tuple[dict | None, str | None, bool, str]:
     """Validate one reply. Returns (parsed, problem or None, repaired, note for the next request)."""
     if reply.finish_reason == "length":
         return None, TRUNCATED, False, _NOTE_TRUNCATED
     parsed, error, repaired = parse_reply(reply.text)
     if parsed is None:
         return None, error, False, _NOTE_INVALID_JSON.format(problem=error)
-    shape_errors = find_shape_errors(parsed)
-    if shape_errors:
-        problem = "; ".join(shape_errors[:5])
+    format_errors = find_format_errors(parsed)
+    if format_errors:
+        problem = "; ".join(format_errors[:5])
         return parsed, f"malformed: {problem}", repaired, _NOTE_FORMAT.format(problem=problem)
+    evidence_errors = find_evidence_errors(parsed, article_text)
+    if evidence_errors:
+        problem = "; ".join(evidence_errors[:5])
+        return parsed, f"{EVIDENCE_PROBLEM}: {problem}", repaired, _NOTE_EVIDENCE.format(problem=problem)
     return parsed, None, repaired, ""
 
 
@@ -149,7 +150,6 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
     record = {
         "article_id": article.article_id,
         "model": config.MODEL_ID,
-        "gated": not article.passes_keyword_gate,
         "finish_reason": None,
         "prompt_tokens": None,
         "completion_tokens": None,
@@ -164,18 +164,13 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         "parse_error": None,
         "api_error": None,
     }
-    if record["gated"]:
-        record["parsed"] = RULE_1_REPLY
-        return record
-
     note, prompt_tokens, completion_tokens, seconds, attempts = "", 0, 0, 0.0, 0
     for validation_round in range(config.MAX_VALIDATION_RETRIES + 1):
         last_round = validation_round == config.MAX_VALIDATION_RETRIES and validation_round > 0
-        if last_round:  # the same kind of request has failed before: ask for a compact reply, and vary it
+        if last_round:  # the same kind of request has failed before: ask for a compact reply
             note = _NOTE_COMPACT.format(problem=record["validation_problems"][-1][:200])
         try:
-            reply = ask_model(client, build_messages(prefix_messages, article, note),
-                              temperature=config.LAST_RETRY_TEMPERATURE if last_round else None)
+            reply = ask_model(client, build_messages(prefix_messages, article, note))
         except openai.OpenAIError as error:
             record["api_error"] = f"{type(error).__name__}: {error}"
             break
@@ -183,7 +178,7 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         completion_tokens += reply.completion_tokens or 0
         seconds += reply.seconds
         attempts += reply.attempts
-        parsed, problem, repaired, note = _problem_and_note(reply)
+        parsed, problem, repaired, note = _problem_and_note(reply, article.text)
         record.update(finish_reason=reply.finish_reason, raw_reply=reply.text, parsed=parsed,
                       parse_error=problem if parsed is None else None, repaired=repaired,
                       validation_retries=validation_round)

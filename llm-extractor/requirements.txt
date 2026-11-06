@@ -1,2 +1,4 @@
-openai==3.35.1
-python-dotenv==1.2.4
+# Python 3.11 or newer (tested on 3.12.3). Install with: python -m pip install -r requirements.txt
+openai==3.35.1          # the OpenAI-compatible client for NVIDIA's API (flu_extractor/llm_client.py)
+python-dotenv==1.2.4    # reads the API key and overrides from .env (flu_extractor/config.py)
+matplotlib==3.10.3      # the charts of the per-article results (flu_extractor/plots.py)
