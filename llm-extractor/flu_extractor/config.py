@@ -27,7 +27,7 @@ DATA_DIR = PROJECT_DIR / "data"
 # The prompt version. The three prompt files below are named after it, and
 # scripts/build_gold_files.py makes the system prompt from prompt_versions/llm_extraction_prompt_<version>.md.
 # PROMPT_VERSION in .env selects another version (README section "Making changes").
-PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v5.1")
+PROMPT_VERSION = os.getenv("PROMPT_VERSION", "v5.2")
 SYSTEM_PROMPT_PATH = PROMPTS_DIR / f"system_prompt_{PROMPT_VERSION}.txt"  # the rules, word for word
 # The one set of solved examples, sent as chat turns (written by scripts/select_examples.py).
 # EXAMPLES_PATH in .env points at another file instead.
@@ -37,13 +37,13 @@ EXAMPLES_PATH = Path(os.getenv("EXAMPLES_PATH", PROMPTS_DIR / f"examples_{PROMPT
 FEWSHOT_GUIDE_PATH = PROMPTS_DIR / f"fewshot_guide_{PROMPT_VERSION}.txt"
 
 # Inputs for the run: the articles to send and the gold answers to score against. Both are built
-# from the chain-of-thought v2 records by scripts/build_gold_files.py (no human labels are used).
+# from the v5.2 label records by scripts/build_gold_files.py (no human labels are used).
 ARTICLES_PATH = DATA_DIR / "articles.json"
 GOLD_LABELS_PATH = DATA_DIR / "gold_labels.json"
 # The chain-of-thought record files the gold labels are built from: every <Name><RECORDS_SUFFIX>
 # file in RECORDS_DIR. RECORDS_SUFFIX in .env selects another label version.
 RECORDS_DIR = DATA_DIR / "chain_of_thought"
-RECORDS_SUFFIX = os.getenv("RECORDS_SUFFIX", "_chain_of_thought_v2.jsonl")
+RECORDS_SUFFIX = os.getenv("RECORDS_SUFFIX", "_labels_v5.2.jsonl")
 
 # Prompt 5.1: every city, state and country has one agreed form, its name in OpenStreetMap in this
 # language. Gold and model values are turned into it (places.agreed_names) before they are checked,
@@ -80,7 +80,7 @@ REQUEST_TIMEOUT_SECONDS = float(os.getenv("REQUEST_TIMEOUT_SECONDS", "900"))
 # Retries after a rate-limit, timeout, connection or server error (done in llm_client.ask_model).
 MAX_RETRIES = 4
 # Requests repeated, with a note naming the problem, when a reply is cut off, not valid JSON, breaks
-# the v5.1 format or quotes evidence that is not in the article (done in extractor.extract_article).
+# the prompt's format or quotes evidence that is not in the article (done in extractor.extract_article).
 # The last one asks for a compact reply; the decoding settings never change.
 MAX_VALIDATION_RETRIES = 3
 # A fixed seed, so that any sampling on the server is repeatable (temperature 0 already removes ours).

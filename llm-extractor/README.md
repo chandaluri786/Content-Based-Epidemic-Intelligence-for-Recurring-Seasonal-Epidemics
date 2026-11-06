@@ -1,7 +1,7 @@
 # Flu news LLM extractor
 
-Runs a large language model over human-influenza news articles with **prompt v5.1**, and scores
-its replies against the **chain-of-thought v2 records** (the gold labels). For each article the
+Runs a large language model over human-influenza news articles with **prompt v5.2**, and scores
+its replies against the **v5.2 labels** (the gold labels). For each article the
 model answers two tasks:
 
 1. **Useful or not**: does the article report current human flu activity in a real place?
@@ -9,16 +9,25 @@ model answers two tasks:
    type, status, strain, place, dates, trend word and the quoted evidence.
 
 The model is **DeepSeek V4.1 Flash** (`deepseek-ai/deepseek-v4.1-flash`), called through NVIDIA's
-OpenAI-compatible API. NVIDIA lists only the 4.1 build of DeepSeek V4 Flash. No human labels are used anywhere: gold is the v2 records only.
+OpenAI-compatible API. NVIDIA lists only the 4.1 build of DeepSeek V4 Flash. No human labels are used anywhere: gold is the v5.2 labels only.
 
 ## Recent changes (2026-11-05 to 2026-11-06)
 
+- **Prompt v5.2 and the v5.2 labels (6 Nov):** gold is now `data/chain_of_thought/<Name>_labels_v5.2.jsonl`
+  for all four sets (Jahnavi, Aditya, Manoj, Thanya), labeled with prompt v5.2 (2). After removing the 80
+  shared articles: 1,120 articles, 1,098 sent. The prompt files are `prompts/*_v5.2.*`; the few-shot
+  examples are the 22 of the labels' own `fewshot_examples_v5.2.json` (14 useful, 8 not useful), with
+  their place names in the agreed form. The rule checks add v5.2's G4 and
+  G5 (5.5). The chain-of-thought v2 records and the v5.1 prompt files were removed from `data/` and
+  `prompts/` (they are in git history).
+
 - **Model:** DeepSeek V4.1 Flash on NVIDIA, with greedy decoding, a fixed seed and thinking off (4.2).
-- **Data:** gold is only the chain-of-thought v2 records; no human labels; every article that is in more
+- **Data:** gold is only the label records (v2 until 6 Nov, now v5.2); no human labels; every article that is in more
   than one labeling set is removed; the input files are validated before a build is written and before
   a run starts (2).
-- **All 832 articles are sent**, none decided by code; the 8 few-shot examples are left out (3).
-- **Checks:** three layers matched to v5.1 (5.5). The format check now covers every fixed value (kind,
+- **Every article is sent** (1,098 with the v5.2 labels), none decided by code; the few-shot examples
+  are left out (3).
+- **Checks:** three layers matched to the prompt (5.5). The format check now covers every fixed value (kind,
   count type, status, trend word, strain, number of at least 1, the place chain, dates, `useful` against
   the items) and, with the evidence check, decides whether a reply is sent back to the model (4.4). The
   place check asks the geocoder for the whole city-state-country chain.
@@ -29,10 +38,10 @@ OpenAI-compatible API. NVIDIA lists only the 4.1 build of DeepSeek V4 Flash. No 
   per article and summarised over articles; article outcome buckets; four charts (5).
 - **Changes are settings:** `PROMPT_VERSION`, `RECORDS_SUFFIX`, `EXAMPLES_PATH`, `NVIDIA_MODEL_ID` and
   friends; how to change data, prompt, examples or model is in section 8.
-- **One example set:** `prompts/examples_v5.1.json` only; `select_examples.py` writes that one file (8.3).
+- **One example set:** `prompts/examples_<PROMPT_VERSION>.json` only; `select_examples.py` writes that one file (8.3).
 - **Place answers saved afresh:** `data/place_lookups.json` was started again from empty, since the old
   answers did not record the kind of place; it holds only answers of the current lookup (5.5).
-- **Data in agreed place form (6 Nov):** the v2 records and the examples were rewritten to the agreed form
+- **Data in agreed place form (6 Nov):** the records and the examples were rewritten to the agreed form
   (USA -> United States and 15 others; backups in `data_backups/2026-11-06_before_place_names/`); empty
   place fields were never filled. Australian towns recorded as administrative suburbs (Mornington) count
   as cities (5.6).
@@ -70,9 +79,9 @@ cp .env.example .env          # put your key after NVIDIA_API_KEY=
 chmod 600 .env
 
 python -m unittest discover tests                     # 1. the logic works (no API, no internet)
-python run_extraction.py --ids Jahnavi:42             # 2. one article; prints the run folder
-python inspect_row.py results/run_<time> Jahnavi:42 --reasoning   # 3. read the reply
-python run_extraction.py                              # 4. all 832 articles (see section 3)
+python run_extraction.py --ids Jahnavi:192            # 2. one article; prints the run folder
+python inspect_row.py results/run_<time> Jahnavi:192 --reasoning  # 3. read the reply
+python run_extraction.py                              # 4. all 1,098 articles (see section 3)
 python evaluate_run.py results/run_<time>             # 5. score it; then read report.md
 ```
 
@@ -89,30 +98,44 @@ request in 153 s, so a full run takes hours, not minutes. If it stops (quota, ne
 
 | File | Content |
 |---|---|
-| `chain_of_thought/<Name>_chain_of_thought_v2.jsonl` | the gold source: the v2 records of Jahnavi, Aditya and Manoj (960 records, 920 unique articles) |
-| `articles.json` | built: one record per article that is scored (840): `article_id`, `scan_date`, `link`, `sources`, `article` |
-| `gold_labels.json` | built: one record per article (840): `article_id`, `useful`, `labelers`, `items` |
+| `chain_of_thought/<Name>_labels_v5.2.jsonl` | the gold source: the v5.2 labels of Jahnavi, Aditya, Manoj and Thanya (1,280 records, 1,200 unique articles), one line per packet entry |
+| `articles.json` | built: one record per article that is scored (1,120): `article_id`, `scan_date`, `link`, `sources`, `article` |
+| `gold_labels.json` | built: one record per article (1,120): `article_id`, `useful`, `labelers`, `items` |
 | `place_lookups.json` | the saved answers of the place lookups (sections 5.5, 5.6), so each place chain is asked online only once and later runs give the same names. It is **not a list of allowed places**: a chain not in it is asked online and added |
 
-Rebuild `articles.json` and `gold_labels.json` whenever the v2 records change:
+Rebuild `articles.json` and `gold_labels.json` whenever the label records change:
 
 ```bash
 python scripts/build_gold_files.py
 ```
 
-It reads every `*_chain_of_thought_v2.jsonl` in `data/chain_of_thought/` (`RECORDS_SUFFIX` in
-`config.py`), takes the article texts from `<capstone>/labeling/labeling/<Name>_texts.txt` (the v2
-records do not contain the text), and also refreshes `prompts/system_prompt_v5.1.txt` from
-`prompt_versions/llm_extraction_prompt_v5.1.md` (`PROMPT_VERSION` in `config.py`).
+It reads every `*_labels_v5.2.jsonl` in `data/chain_of_thought/` (`RECORDS_SUFFIX` in
+`config.py`), takes the article texts from `<capstone>/labeling/labeling/<Name>_texts.txt` (the records
+do not contain the text), and also refreshes `prompts/system_prompt_v5.2.txt` from
+`prompt_versions/llm_extraction_prompt_v5.2.md` (`PROMPT_VERSION` in `config.py`).
+
+**Two record layouts are read** (`data_loading.read_label_records`): the v5.2 labels are *flat* (one line
+per packet entry: `pos`, `tag`, `article_id`, `scan_date`, `split`, then the reply `summary`,
+`reasoning`, `useful`, `reason`, `items`); the older chain-of-thought records are *nested* (`source_rows`,
+`output: {useful, reason, items}`, `rules_used`). A flat record takes its labeler from the file name, its
+row from `pos`, and its `rules_used` from the rule IDs its reasoning cites. The labels' `split` field
+(dev/test) is not used: there is no separate dev or test set, every article except the examples is sent.
+
+**Where the v5.2 labels come from.** They were written by Claude (Opus 5.5) agents in batches, following
+`llm_extraction_prompt_v5.2.md` as it was on 5 Nov (before the 6 Nov place-name wording; nothing else
+differs), each agent reading the full prompt and its batch (source folder:
+`<capstone>/labeling_final_completed/labeling_final/v5.2_labels/`, with its own README). They are model
+labels, not human labels: section 12 says what that means for the scores.
 
 **Duplicate articles are removed completely.** An article that appears in more than one labeling
 set is dropped with every copy and its gold record: the 40 articles labelled in two sets
-(Jahnavi/Aditya, Aditya/Manoj) and the 40 articles repeated as Thanya rows 1-40. The texts of all
-four sets are read only to find these repeats. Result:
+(Jahnavi/Aditya, Aditya/Manoj) and the 40 articles repeated as Thanya rows 1-40 (in the v5.2 labels
+both copies have the same reply; they are still removed, so no article can count twice). Result:
 
 | | Useful | Not useful | Articles | Gold items |
 |---|---|---|---|---|
-| After removing shared articles | 240 | 600 | **840** | 697 |
+| All v5.2 labels | 348 | 852 | 1,200 | 1,005 |
+| **After removing shared articles** | 328 | 792 | **1,120** | 963 |
 
 **The input data is validated** (`flu_extractor/data_checks.py`), with the same code that checks the
 model's replies (section 5.5):
@@ -120,7 +143,7 @@ model's replies (section 5.5):
 | File | Checked |
 |---|---|
 | `articles.json` | every record has `article_id`, `scan_date` (YYYY-MM-DD), `link`, `sources`, a non-empty `article`; no article twice |
-| `gold_labels.json` | every record has `article_id`, `useful`, `labelers`, `items`, belongs to an article in `articles.json`, and its items pass the v5.1 format check and the evidence check (every quote is in the article) |
+| `gold_labels.json` | every record has `article_id`, `useful`, `labelers`, `items`, belongs to an article in `articles.json`, and its items pass the format check and the evidence check (every quote is in the article) |
 | the examples file | every example has `article_id`, `scan_date`, `link`, `article`, `answer`; the answer passes the format and evidence checks and starts with Step 0 and a Step 1 citing Rule 1; its article text is the same as in `articles.json` |
 
 `build_gold_files.py` writes nothing if its output fails, and `run_extraction.py` stops before any API
@@ -144,20 +167,20 @@ few-shot examples** (the model sees their answers in the prompt):
 
 | | Useful | Not useful | Articles |
 |---|---|---|---|
-| Labelled articles | 240 | 600 | 840 |
-| Few-shot examples (k = 8), left out | 5 | 3 | 8 |
-| **Sent to the model and scored** | **235** | **597** | **832** |
+| Labelled articles | 328 | 792 | 1,120 |
+| Few-shot examples (k = 22), left out | 14 | 8 | 22 |
+| **Sent to the model and scored** | **314** | **784** | **1,098** |
 
-Every one of the 832 is sent, including articles that never mention flu: prompt Rule 1 tells the
+Every one of the 1,098 is sent, including articles that never mention flu: prompt Rule 1 tells the
 model the exact reply for them, so no article is decided by code.
 
 ## 4. How a request works
 
 ### 4.1 Messages
 
-1. `system`: the v5.1 rules (`prompts/system_prompt_v5.1.txt`), then the few-shot guide
-   (`prompts/fewshot_guide_v5.1.txt`), which says how to learn from the examples' reasoning and evidence;
-2. for each of the 8 examples (`prompts/examples_v5.1.json`): a `user` turn with the article and an
+1. `system`: the v5.2 rules (`prompts/system_prompt_v5.2.txt`), then the few-shot guide
+   (`prompts/fewshot_guide_v5.2.txt`), which says how to learn from the examples' reasoning and evidence;
+2. for each of the 22 examples (`prompts/examples_v5.2.json`): a `user` turn with the article and an
    `assistant` turn with the gold answer as JSON (`summary`, `reasoning`, `useful`, `reason`, `items`);
 3. a final `user` turn with the article:
 
@@ -169,19 +192,30 @@ article:
 ```
 
 The GDELT header lines of the labeling files are never sent (the prompt forbids using them, 5.6).
-The examples and how they were chosen are in [few_shot_selection.md](few_shot_selection.md).
+**The v5.2 examples** are the 22 chosen with the v5.2 labels (`fewshot_examples_v5.2.json` in the labels'
+folder; its README says why): all from the labels' dev split, 14 useful and 8 not useful, 4 easy, 6 medium
+and 4 hard, covering all kinds, count types, statuses and trend words. Each entry keeps the label file's
+reply, with place names in the agreed form (items and reasoning outside quoted text), plus its
+`difficulty` and `why_chosen` notes (not sent). Three of them break a rule the checks report (5.5):
+evidence after the first quote out of article order in Jahnavi:50, Manoj:51 and Manoj:80, and Manoj:80
+also records the 2 child deaths inside the 730 deaths (G4). They are kept as delivered.
+[few_shot_selection.md](few_shot_selection.md) is the earlier selection for v5.1 (8 examples from the v2
+records); it no longer describes the active set.
 
-**How the model learns from the examples.** Each assistant turn is the gold record's full answer:
+**How the model learns from the examples.** Each assistant turn is the example's full answer:
 the `reasoning` steps in the order of the prompt's "How to work" (summary; Rule 1 and the list of
 flu statements; each statement checked for human flu, count or trend, number, dates, place, status,
 count type, strain or word, evidence; G3-G5; the per-place fallback check; the `useful` decision),
-each step citing its rule IDs, and the `items` with their `evidence`. The few-shot guide tells the
-model to learn that method and the way evidence is chosen (the event sentence first, then every
-sentence that gave a field, in article order, copied exactly), to learn from the not-useful examples
-what gets no item, to follow the rules when an example seems to differ, and never to reuse an
-example's places, dates, numbers or quotes. The examples are mixed useful and not useful and end on
-a not-useful one, so the last turn does not push toward items. Every example passes the same checks
-as a reply (section 2), so the model never sees a badly formed answer.
+each step citing its rule IDs, and the `items` with their `evidence`. The few-shot guide
+(`prompts/fewshot_guide_v5.2.txt`) says that the v5.2 rules decide every reply and the examples only
+show how they are applied (an example that seems to disagree with a rule loses to the rule); that the
+model learns from two parts of each example, `reasoning` (how the rules are applied, step by step,
+with rule IDs) and `evidence` (the event sentence first, then every sentence that gave a field, in
+article order, copied exactly); and that each new article is decided from its own text and
+`scan_date` alone, never reusing an example's places, dates, numbers, strains or quotes. It says
+nothing about how many examples are useful, so it does not push the model either way. The examples
+are sent in the order of the labels' `fewshot_examples_v5.2.json`. Every example passes the format and
+evidence checks (section 2); the rule checks report three of them (section 4.1, "The v5.2 examples").
 
 ### 4.2 Decoding settings: as little variation as possible
 
@@ -216,7 +250,7 @@ stops (usually the daily quota) and can be resumed with `--run-dir`.
 ### 4.4 Every reply is validated
 
 A reply is accepted only if it is complete (not cut off at `max_tokens`), parses as one JSON
-object, passes the **v5.1 format check** (`checks.find_format_errors`: every key, field and fixed value
+object, passes the **format check** (`checks.find_format_errors`: every key, field and fixed value
 of section 5.5, layer 1) and quotes **every evidence passage exactly from the article**
 (`checks.find_evidence_errors`, layer 2). Otherwise:
 
@@ -231,7 +265,7 @@ of section 5.5, layer 1) and quotes **every evidence passage exactly from the ar
    a quote not copied exactly is scored, and the quote is reported as rule (a). Rerun such articles with
    `python run_extraction.py --run-dir results/<run> --retry-invalid`.
 
-A test on the 832 replies of an earlier full run (another model, older validation) showed what
+A test on the 832 replies of an earlier full run (v5.1 data, another model, older validation) showed what
 the format check now catches and sends back: a city with no state (44 items), a count with no number
 (44) or a number of 0 (9), a missing status (30) or count type (16), no end date (29), "swine flu" as
 a strain instead of H1N1 (27), a count with a trend word (19), and "elevated" as a trend word (15).
@@ -244,7 +278,7 @@ Scoring is a separate step (`evaluate_run.py`), so it can be repeated without ne
 
 One cell of a confusion table per article: gold `useful` against the model's `useful`.
 The report gives precision, recall, F1 (with a 95% bootstrap interval) and accuracy. Under the
-v5.1 rules `useful` is true exactly when the reply has items. The rule checks report any reply
+rules (Section 11) `useful` is true exactly when the reply has items. The rule checks report any reply
 where the two disagree.
 
 ### 5.2 Task 2: the items
@@ -364,13 +398,13 @@ misses and extras by country. Section 6: what could not be scored, evidence copi
 
 ### 5.5 The checks (`checks.py`)
 
-Every reply, every gold record and every few-shot example is checked against prompt v5.1 by the same
-code, in three layers.
+Every reply, every gold record and every few-shot example is checked against the prompt (v5.2; v5.1
+has the same reply format and fixed values) by the same code, in three layers.
 
 **Layer 1: format.** A failure sends the reply back to the model (section 4.4); a reply that still fails
 is not scored.
 
-| Check | v5.1 |
+| Check | Prompt |
 |---|---|
 | one JSON object with `summary` (text), `reasoning` (a non-empty list of steps), `useful` (true/false), `reason` (text), `items` (a list) | "Your reply", 2.1 |
 | every item has exactly the 12 fields, no others | 2.2 |
@@ -391,13 +425,15 @@ if the last reply still has one, the reply is scored and the quote is reported.
 **Layer 3: rule checks.** Reported in `report.md` section 6 and `article_metrics.csv`; never used to reject
 a reply:
 
-| Rule | Check | v5.1 |
+| Rule | Check | Prompt |
 |---|---|---|
 | (d) place real | the whole chain is asked of OpenStreetMap's geocoder (Nominatim): the country; the state *in that country*; the city *in that state and country*. "Victoria, Canada" or "Pune, Gujarat" are not found; "Worldwide" is not a country | 5.1, G1 |
 | (d) agreed form | every level that is found is written in its agreed form, its English name in OpenStreetMap; anything else is reported with the agreed form ("city 'Mangalore' is not in its agreed form; write 'Mangaluru'", "country 'USA' … write 'United States'", "state 'NSW' … write 'New South Wales'"). Scoring already uses the agreed form, so this shows how well the reply follows 5.1 | 5.1 |
 | (i) recent | the end date is on or before the scan date and within the 30 days before it | 4.7 |
 | (j) evidence order | quotes after the first are in article order | 10.1 |
 | (k) reasoning | the first step is Step 0 and the second is Step 1 citing Rule 1 | "How to work" |
+| (G4) overlapping counts | two counts with the same kind, place fields, start and end date, strain and status count the same people (a count and its part, or one count twice). Counts that differ in any of these (a total and a shorter period, influenza A and B, confirmed among suspected) are allowed | v5.2 G4 |
+| (G5) one trend word | two trend items with the same place fields, strain and period have different words | v5.2 G5 |
 
 **The place check is not a fixed list.** Any place on Earth can be checked, because each chain is asked
 online. `data/place_lookups.json` only stores the answers already given, so each chain is asked once
@@ -455,7 +491,7 @@ Articles can be named by `article_id` or by labeling set and row, such as `Jahna
 | `python inspect_row.py RUN_DIR ARTICLE [--article] [--reasoning] [--offline]` | one article, gold vs model, field by field, with the matching shown |
 | `python compare_runs.py RUN_DIR...` | headline scores of several evaluated runs side by side; mean and range; with two runs a paired bootstrap difference |
 | `python scripts/build_gold_files.py` | rebuild `data/articles.json`, `data/gold_labels.json` and the system prompt |
-| `python scripts/select_examples.py --hard-runs RUN...` | re-choose the few-shot examples (writes the one set, `prompts/examples_v5.1.json`, and `few_shot_selection.md`; `--k` sets how many, default 8) |
+| `python scripts/select_examples.py --hard-runs RUN...` | re-choose the few-shot examples (writes the one set, `prompts/examples_<PROMPT_VERSION>.json`, and `few_shot_selection.md`; `--k` sets how many, default 8) |
 
 ## 7. Configuration
 
@@ -468,9 +504,9 @@ Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in 
 | `NVIDIA_BASE_URL` | `.env` | `https://integrate.api.nvidia.com/v1` |
 | `NVIDIA_REQUESTS_PER_MINUTE` | `.env` | 40 (every request and retry counts; window 61 s) |
 | `REQUEST_TIMEOUT_SECONDS` | `.env` | 900 |
-| `PROMPT_VERSION` | `.env` | `v5.1`: names the prompt files (`prompts/system_prompt_<v>.txt`, `fewshot_guide_<v>.txt`, `examples_<v>.json`) and the document `build_gold_files.py` reads |
-| `EXAMPLES_PATH` | `.env` | `prompts/examples_<PROMPT_VERSION>.json` (the k = 8 set) |
-| `RECORDS_SUFFIX` | `.env` | `_chain_of_thought_v2.jsonl`: the gold record files read from `data/chain_of_thought/` |
+| `PROMPT_VERSION` | `.env` | `v5.2`: names the prompt files (`prompts/system_prompt_<v>.txt`, `fewshot_guide_<v>.txt`, `examples_<v>.json`) and the document `build_gold_files.py` reads |
+| `EXAMPLES_PATH` | `.env` | `prompts/examples_<PROMPT_VERSION>.json` (the one set; 22 examples for v5.2) |
+| `RECORDS_SUFFIX` | `.env` | `_labels_v5.2.jsonl`: the gold record files read from `data/chain_of_thought/` |
 | `RESULTS_DIR` | `.env` | `results/` |
 | `TEMPERATURE`, `TOP_P`, `SEED`, `EXTRA_BODY`, `MAX_TOKENS` | `config.py` | 0, 1, 20261101, thinking off, 8000 |
 | `MAX_RETRIES`, `MAX_VALIDATION_RETRIES`, `STOP_AFTER_CONSECUTIVE_API_ERRORS` | `config.py` | 4, 3, 5 |
@@ -485,8 +521,8 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
 ### 8.1 New or corrected labels (gold)
 
 1. Put the record files in `data/chain_of_thought/` as `<Name><RECORDS_SUFFIX>` (one JSON record per line,
-   with `article_id`, `source_rows`, `summary`, `reasoning`, `output: {useful, reason, items}`, as now).
-   For a new label version (for example `_chain_of_thought_v3.jsonl`), set `RECORDS_SUFFIX` in `.env`.
+   flat or nested, section 2). For a new label version (for example `_labels_v5.3.jsonl`), set
+   `RECORDS_SUFFIX` in `.env` (or the default in `config.py`).
    Remove the old files from the folder if they should no longer count.
 2. If a new labeling set is added, add its name to `LABELERS` in `scripts/build_gold_files.py` and put
    its `<Name>_texts.txt` in the labeling folder; set `LABELERS` in `scripts/select_examples.py` if it
@@ -495,7 +531,9 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
    removes every article that is in more than one set, and writes nothing if a record fails the checks
    (section 2); fix the record it names and run again.
 4. If a chosen few-shot example's record changed, rebuild the examples (8.3): an example must match its
-   gold record.
+   gold record. To keep the same 8 articles with their new answers, rebuild `examples_<version>.json`
+   from the new records for the same `article_id`s (this is how `examples_v5.2.json` was made).
+5. Put the place names in their agreed form (5.6) with the place-fix step, then rebuild (step 3).
 
 ### 8.2 A new prompt version
 
@@ -503,7 +541,7 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
    rules from `## Task` to the end are sent).
 2. Set `PROMPT_VERSION=<version>` in `.env` (or change the default in `config.py`).
 3. Run `python scripts/build_gold_files.py`: it writes `prompts/system_prompt_<version>.txt`.
-4. Create `prompts/fewshot_guide_<version>.txt` (copy the v5.1 guide and adjust it to the new rules)
+4. Create `prompts/fewshot_guide_<version>.txt` (copy the current guide and adjust it to the new rules)
    and `prompts/examples_<version>.json` (8.3). A run without examples needs `examples_<version>.json`
    to contain `[]`.
 5. **If the reply format changes** (a new field, a new allowed value, a new kind or trend word, a
@@ -528,6 +566,9 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
    (the exact text in `data/articles.json`) and `answer` (`summary`, `reasoning`, `useful`, `reason`,
    `items`, in that order). `run_extraction.py` refuses to start if an example fails the checks.
 4. Examples are never scored: their articles are left out of every run automatically.
+5. To take a ready-made set (as for v5.2, from the labels' `fewshot_examples_v5.2.json`): each entry's
+   reply must equal its label record, its article text must equal `data/articles.json`, and its article
+   must not be one removed as shared. Then put the place names in their agreed form (5.6).
 
 ### 8.4 Another model
 
@@ -539,7 +580,7 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
 3. Set the model's own request options in `EXTRA_BODY` in `config.py`, above all how to switch off a
    hidden thinking pass (see the model card); use `{}` if it has none.
 4. Set `NVIDIA_REQUESTS_PER_MINUTE` to that API's limit and `REQUEST_TIMEOUT_SECONDS` to its speed.
-5. Check that the model's context length holds the prefix (about 30,000 tokens with 8 examples) plus
+5. Check that the model's context length holds the prefix (about 49,000 tokens with the 22 v5.2 examples) plus
    the longest article (about 35,000 tokens).
 6. Run one article, read the reply with `inspect_row.py`, then run the rest.
 
@@ -603,22 +644,22 @@ The live API is not covered by tests: check it with a one-article run (section 1
 ## 11. Layout
 
 ```
-data/              chain_of_thought/*_v2.jsonl (gold source), articles.json, gold_labels.json, place_lookups.json
-prompts/           ACTIVE: system_prompt_v5.1.txt, fewshot_guide_v5.1.txt, examples_v5.1.json (the one example set, k = 8)
+data/              chain_of_thought/*_labels_v5.2.jsonl (gold source), articles.json, gold_labels.json, place_lookups.json
+prompts/           ACTIVE: system_prompt_v5.2.txt, fewshot_guide_v5.2.txt, examples_v5.2.json (the one example set, k = 22)
 prompt_versions/   archive of the full prompt documents (build_gold_files.py reads the active version)
 few_shot_selection.md  review sheet of how the active examples were chosen (written by select_examples.py)
 results/           one folder per run (ignored by git)
 scripts/
-  build_gold_files.py   build data/ from the v2 records and the article texts; refresh the system prompt
+  build_gold_files.py   build data/ from the label records and the article texts; refresh the system prompt
   select_examples.py    choose the few-shot candidates
 tests/             unit tests
 flu_extractor/
   config.py        paths, model and decoding settings
-  data_loading.py  read articles and gold labels; resolve "Jahnavi:42" to an id
+  data_loading.py  read articles, gold labels and label record files (flat or nested); resolve "Jahnavi:42" to an id
   prompt.py        build the chat messages
   llm_client.py    the only code that calls the API; the shared 40-per-minute limiter and retries
   extractor.py     one article -> one validated log record (repair, re-ask, never crash)
-  checks.py        the three check layers: v5.1 format, evidence, rule checks
+  checks.py        the three check layers: format, evidence, rule checks (with v5.2's G4 and G5)
   data_checks.py   input files in the required format (articles, gold, examples)
   places.py        is a city/state/country chain real, and its agreed form (5.1)? (geocoder, answers saved in data/place_lookups.json)
   normalization.py comparable values, fields per kind (norm_v3)
@@ -635,23 +676,22 @@ run_extraction.py, evaluate_run.py, inspect_row.py, compare_runs.py   the comman
 
 ## 12. Known limitations
 
-- **Gold is LLM-written.** The v2 records were written by Claude from the rules and reviewed by
-  Jahnavi on disagreements, not line by line, so the score partly measures agreement with Claude.
+- **Gold is LLM-written.** The v5.2 labels were written by Claude agents from the rules and not
+  reviewed line by line, so the score partly measures agreement with Claude. Checked on 6 Nov against
+  Jahnavi's reviewed chain-of-thought v3 records (same prompt): `useful` agrees on 98.2% of the 1,200
+  articles (Cohen's kappa 0.95); items match exactly in 70% of the articles with items (mean per-article
+  F1 0.85). The rule checks report 101 evidence-order problems (j) and 2 overlapping counts (G4) in the
+  labels.
 - **Slow and quota-limited endpoint.** NVIDIA's queue for this model is slow (minutes per reply)
   and the free key has a daily quota. Runs are resumable.
 - **Not fully repeatable.** Greedy settings remove sampling on our side, but a hosted model can
   still return different text for the same request. Measure it with two runs before trusting
   small differences.
-- **Context length.** The prefix (rules plus 8 examples) is about 30,000 tokens; the longest
-  article adds about 35,000 more. A request over the model's limit fails as an API error (not
+- **Context length.** The prefix (rules plus 22 examples) is about 49,000 tokens; the longest
+  article adds about 33,000 more, so the longest request is about 90,000 tokens with the reply. A request over the model's limit fails as an API error (not
   scored, never cut).
 - **Matching threshold.** 0.8 is set by decision, not yet checked on reviewed pairs. Look at misses whose
   closest model item is just under it (`missed_items.csv`) before trusting small differences.
-- **The labels and the few-shot examples still use the old names** ("USA", "Brasilia", "Federated States
-  of Micronesia", "Dobrich Province"...), because the data has not been updated to 5.1's agreed form yet.
-  Scoring is not affected (both sides are put in the agreed form first), but the examples show the model
-  "USA" while the rules ask for "United States". Update the gold records and rebuild the examples to
-  remove that mixed signal.
 - **The agreed form depends on OpenStreetMap.** It is OpenStreetMap's choice, even where a common name
   differs (it writes Gurgaon, Bhubaneshwar, Ivory Coast); a value OpenStreetMap does not find keeps its
   written form and is reported. Offline, chains not in the saved answers keep their written values, so

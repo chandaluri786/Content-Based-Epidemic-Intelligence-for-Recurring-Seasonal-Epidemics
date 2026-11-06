@@ -243,7 +243,7 @@ class BuildGoldFilesTest(unittest.TestCase):
         text = build_gold_files.extract_system_prompt("# Title\n\nGenerated from x.\n\n## Task\nDo it.\n")
         self.assertEqual(text, "## Task\nDo it.\n")
 
-    def test_only_unshared_articles_with_a_v2_record_are_kept(self):
+    def test_only_unshared_articles_with_a_label_record_are_kept(self):
         with tempfile.TemporaryDirectory() as folder:
             folder = Path(folder)
             sets = {
@@ -254,30 +254,49 @@ class BuildGoldFilesTest(unittest.TestCase):
             }
             for name, articles in sets.items():
                 (folder / f"{name}_texts.txt").write_text(self.texts(*articles), encoding="utf-8")
-            record = lambda aid, row: {"article_id": aid, "source_rows": [{"labeler": "Jahnavi", "row": row}],  # noqa: E731
-                                       "output": {"useful": False, "reason": "r", "items": []}}
-            (folder / "Jahnavi_chain_of_thought_v2.jsonl").write_text(
+            # v5.2 labels are flat: the reply fields sit next to pos, tag, article_id, scan_date and split.
+            record = lambda aid, pos: {"pos": pos, "tag": "1-own", "article_id": aid, "scan_date": "2016-12-30",  # noqa: E731
+                                       "split": "test", "summary": "s", "reasoning": ["Step 0 (summary): s",
+                                       "Step 1 (Rule 1): x"], "useful": False, "reason": "r", "items": []}
+            (folder / f"Jahnavi{build_gold_files.RECORDS_SUFFIX}").write_text(
                 json.dumps(record("j1", 1)) + "\n" + json.dumps(record("j2", 2)) + "\n", encoding="utf-8")
             (folder / "Jahnavi_chain_of_thought.jsonl").write_text("not read\n", encoding="utf-8")
 
             articles, gold, counts = build_gold_files.build(folder, folder)
-        # j1 is also Thanya row 1, so every copy goes; a1, m1, t41 have no v2 record
+        # j1 is also Thanya row 1, so every copy goes; a1, m1, t41 have no label record
         self.assertEqual([a["article_id"] for a in articles], ["j2"])
         self.assertEqual([g["article_id"] for g in gold], ["j2"])
         self.assertEqual(articles[0]["sources"], ["Jahnavi:2"])
         self.assertEqual(set(articles[0]), {"article_id", "scan_date", "link", "sources", "article"})
         self.assertNotIn("tagged country", articles[0]["article"])  # header lines are never sent
         self.assertEqual((counts["removed_shared"], counts["kept"]), (1, 1))
+        self.assertEqual(gold[0]["labelers"], ["Jahnavi"])   # the labeler comes from the file name
+
+    def test_flat_and_nested_records_are_read_alike(self):
+        from flu_extractor.data_loading import read_label_records
+        flat = {"pos": 7, "tag": "1-own", "article_id": "a", "scan_date": "2016-12-30", "split": "dev",
+                "summary": "s", "reasoning": ["Step 0 (summary): s", "Step 1 (Rule 1): x", "Step 2 (4.2, 5.3.1): y"],
+                "useful": False, "reason": "r", "items": []}
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "Manoj_labels_v5.2.jsonl"
+            path.write_text(json.dumps(flat) + "\n", encoding="utf-8")
+            record = read_label_records(path)[0]
+        self.assertEqual(record["source_rows"], [{"labeler": "Manoj", "row": 7}])
+        self.assertEqual(record["output"], {"useful": False, "reason": "r", "items": []})
+        self.assertEqual(record["rules_used"], ["summary", "Rule 1", "4.2", "5.3.1"])
 
 
 class InputFilesTest(unittest.TestCase):
-    """The real files in data/ and prompts/ are in the format the pipeline and v5.1 need."""
+    """The real files in data/ and prompts/ are in the format the pipeline and the prompt need."""
 
-    def test_the_data_and_every_example_set_pass_the_v5_1_checks(self):
+    def test_the_data_and_the_example_set_pass_the_checks(self):
         from flu_extractor.data_checks import check_input_files
-        for examples in sorted(config.PROMPTS_DIR.glob("examples_v5.1*.json")):
-            with self.subTest(examples=examples.name):
-                self.assertEqual(check_input_files(config.ARTICLES_PATH, config.GOLD_LABELS_PATH, examples), [])
+        self.assertTrue(config.EXAMPLES_PATH.exists(), config.EXAMPLES_PATH)
+        self.assertEqual(check_input_files(config.ARTICLES_PATH, config.GOLD_LABELS_PATH, config.EXAMPLES_PATH), [])
+
+    def test_the_prompt_files_of_the_active_version_exist(self):
+        for path in (config.SYSTEM_PROMPT_PATH, config.FEWSHOT_GUIDE_PATH, config.EXAMPLES_PATH):
+            self.assertTrue(path.exists(), path)
 
     def test_bad_gold_and_examples_are_caught(self):
         from flu_extractor.data_checks import check_examples, check_gold

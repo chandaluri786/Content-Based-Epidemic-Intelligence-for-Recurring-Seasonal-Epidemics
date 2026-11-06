@@ -3,31 +3,27 @@
     "article_id": "20160129010000-168",
     "source": "Jahnavi:83",
     "slots": [
-      6,
       7,
-      9,
-      10,
-      11,
-      12
+      11
     ],
     "scan_date": "2016-01-29",
     "link": "http://beyazgazete.com/haber/2016/1/29/turkey-aciklamasi-57-people-died-from-swine-flu-in-3-months-3090462.html",
     "article": "Turkey Açıklaması 57 People Died From Swine Flu İn 3 Months\nTurkey's top health official says peak season of flu over.\nEkleme: 29.01.2016 - 02:13\nGüncelleme: 29.01.2016 - 02:13 / Editör: AA\n/ Kaynak: AA\nAt least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday.\n“We have collected a total of 480 samples from patients, out of which 280 were cases of H1N1,” Health Minister Mehmet Muezzinoglu told an Ankara meeting about Turkey's health vision and future projections.\nThe minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.\nAuthorities define the flu season as spanning the period from October to April.\nThe minister said that the government had taken all necessary measures to deal with the situation and there was no need to panic. 'Hand hygiene is vital for preventing the virus from spreading. Healthy nutrition as well as drinking more water is also important,' the minister said.\nSwine flu was first reported in Turkey in 2009. The flu had killed over 30 people in the country in 2014-2015 flu season.\nMezzinoglu also assured that no Zika virus has been recorded in Turkey so far.\nOriginating in Latin America, the mosquito-borne virus causes symptoms in roughly one in five adults, including fever, rash and conjunctivitis.\nThere is currently no vaccine or cure for the virus, which has spread to 21 countries and territories in the Americas, according to the Pan American Health Organization.\nThe virus is expected to spread to every country where Aedes mosquitoes are known to live, according to the organization.\nThe World Health Organization predicted on Thursday that the virus could be contracted by as many as four million people over the next 12 months.",
     "answer": {
-      "summary": "Turkey's health minister says 57 people died of H1N1 in the last three months and the flu's peak season is over.",
+      "summary": "Turkey's health minister says at least 57 people died of H1N1 swine flu in three months and the flu's peak season is over.",
       "reasoning": [
-        "Step 0 (summary): Turkey's health minister says 57 people died of H1N1 in the last three months and the flu's peak season is over.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline on 57 deaths in three months; S2 'peak season of flu over'; S3 'At least 57 people have died from H1N1… in Turkey over the last three months', said on Thursday; S4 'We have collected a total of 480 samples from patients, out of which 280 were cases of H1N1'; S5 slow transmission in November and early December; S6 'The virus peaked in late December and early January, but the peak season of the flu is over'; S7 'no need to panic'; S8 history.",
-        "Step 2 (G4, 2.3, 3.2, 4.1, 4.4, 4.6, 5.3.1, 5.5, 6.2, 7.2, 8.1, 10.1): S1 and S3 are the same deaths (G4): deaths 57. Dates: said on Thursday, 2016-01-28, the reference date (4.1, 4.4); 'the last three months' runs from 2015-10-29 to 2016-01-28 (4.6), recent. Place: 'in Turkey' (5.3.1, 5.5). Confirmed (6.2). The country's total, cumulative_region (7.2). H1N1 (8.1). Evidence: S3 (10.1).",
-        "Step 3 (2.3, 3.2, 4.6, 5.3.2, 5.5, 6.2, 6.3.2, 7.2, 8.1, 10.1): S4 is a count: cases 280. Dates: a running total, start null, ending on the minister's Thursday statement, 2016-01-28 (4.6). Place: Turkey's health minister (5.3.2, 5.5). Confirmed, and the negative samples are not recorded (6.2, 6.3.2). A batch of tests, a sample, so cumulative_subset (7.2). H1N1 (8.1). Evidence: S4, then S3 for the date (10.1).",
-        "Step 4 (G4, 2.3, 4.2, 4.4, 5.3.2, 8.2, 9.2, 9.3.2, 9.6, 10.1): S2 and the end of S6 are one trend (G4). Date: the statement's own day, Thursday, 2016-01-28 (4.2, 4.4). Place: Turkey (5.3.2). Word: past the peak, a clear end of the peak: falling (9.2, 9.3.2). Strain: the H1N1 story (8.2, 9.6). Evidence: S6, then S2 and S3 (10.1).",
-        "Step 5 (2.3, 4.5, 5.3.2, 8.2, 9.2, 9.3.8, 10.1): S6 also gives a different period: 'peaked in late December and early January', 2015-12-16 to 2016-01-15 (4.5), recent. Turkey (5.3.2). Word: peaking is high (9.2, 9.3.8). Strain H1N1 (8.2). Evidence: S6, then S3 (10.1).",
-        "Step 6 (4.7, 9.3.2): S5 ended more than 30 days before the scan date, S7 is reassurance, and S8 is history. No item.",
-        "Step 7 (G3, G5): four different items.",
-        "Step 8 (Section 11): four valid items, so useful."
+        "Step 0 (summary): Turkey's health minister said on Thursday that 57 people died of H1N1 over the last three months, 280 of 480 samples were H1N1, and the peak is over.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline '57 People Died From Swine Flu In 3 Months'; S2 'peak season of flu over' headline; S3 at least 57 H1N1 deaths in Turkey over the last three months, said on Thursday; S4 280 of 480 samples were H1N1; S5 slow transmission in November and early December, peak in late December and early January, peak season over; S6 measures taken, no need to panic; S7 swine flu first reported in 2009 and over 30 deaths in the 2014-2015 season.",
+        "Step 2 (G3, 2.3, 3.2, 6.2, 8.1): S1 and S3 are the same event: deaths 57 ('at least 57'), confirmed, strain H1N1.",
+        "Step 3 (4.1, 4.4, 4.6, 7.2): 'said on Thursday' gives the reference date Thursday 2016-01-28 (scan date Friday 2016-01-29); 'over the last three months' is the same date 3 months earlier: 2015-10-28 to 2016-01-28. A period total for the whole country: cumulative_region. Place: 'in Turkey' (5.3.1).",
+        "Step 4 (2.3, 6.3, 7.2, 4.6, 4.7): S4 is a count of 280 H1N1 positive samples among 480; the negatives get no item (6.3.2). It is a running total ('a total of') with no stated start, told at the same Thursday meeting: start null, end 2016-01-28, cumulative_region (lab samples for the whole country, 7.2), confirmed, H1N1, Turkey. The season is under way, so the total shows current activity.",
+        "Step 5 (9.3.2, 9.3.8, 8.2, G3): S2 and S5 are one trend statement: 'the peak season of the flu is over' after the virus peaked, which is past the peak: falling. Strain H1N1 from the context (the virus discussed is H1N1). Date: the minister's Thursday statement, 2016-01-28. Place Turkey.",
+        "Step 6 (9.3.2, 4.7): S6 is reassurance: no item. S7 is background and a finished past season: no item.",
+        "Step 7 (G3-G5, 9.7): Turkey has counts and one trend; no fallback.",
+        "Step 8 (Section 11): items exist, so useful."
       ],
       "useful": true,
-      "reason": "Useful: 57 H1N1 deaths and 280 cases in Turkey, a peak around New Year, and the peak season now over.",
+      "reason": "Useful: recent H1N1 deaths and positive samples in Turkey, and a past-the-peak statement.",
       "items": [
         {
           "kind": "deaths",
@@ -38,17 +34,18 @@
           "city": null,
           "state": null,
           "country": "Turkey",
-          "start_date": "2015-10-29",
+          "start_date": "2015-10-28",
           "end_date": "2016-01-28",
           "words": null,
           "evidence": [
-            "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday."
+            "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday.",
+            "Turkey Açıklaması 57 People Died From Swine Flu İn 3 Months"
           ]
         },
         {
           "kind": "cases",
           "number": 280,
-          "count_type": "cumulative_subset",
+          "count_type": "cumulative_region",
           "status": "confirmed",
           "strain": "H1N1",
           "city": null,
@@ -75,25 +72,8 @@
           "end_date": "2016-01-28",
           "words": "falling",
           "evidence": [
-            "'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
+            "The minister said that the transmission of the virus in November and the early December was slow. 'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
             "Turkey's top health official says peak season of flu over.",
-            "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday."
-          ]
-        },
-        {
-          "kind": "trend",
-          "number": null,
-          "count_type": null,
-          "status": null,
-          "strain": "H1N1",
-          "city": null,
-          "state": null,
-          "country": "Turkey",
-          "start_date": "2015-12-16",
-          "end_date": "2016-01-15",
-          "words": "high",
-          "evidence": [
-            "'The virus peaked in late December and early January, but the peak season of the flu is over,' Muezzinoglu said.",
             "At least 57 people have died from H1N1 -- so-called “swine flu” -- in Turkey over the last three months, Turkey’s health minister said on Thursday."
           ]
         }
@@ -105,24 +85,25 @@
     "source": "Aditya:307",
     "slots": [
       4,
-      10
+      11
     ],
     "scan_date": "2022-08-29",
     "link": "https://www.insidernj.com/environmentalists-blast-njdep-call-to-let-dead-vultures-rot-in-the-wild/",
     "article": "Sometimes all it takes is a seemingly innocuous public notice put out by government agency that can tip the public off that there’s something seriously amiss in the bureaucracy. If COVID taught us anything, it’s that we need to pay close attention for ourselves.\nSuch was this case over the weekend when DEP’s New Jersey State Parks, Forests and Historic Sites Facebook page posted an advisory that a portion of the Sussex Brach Trail in Lafayette was going to closed for further notice because the United States Department of Agriculture had confirmed that over 100 black vultures had died in that portion of the trail from Avian Influeneza (bird flu).\n“New Jersey DEP Fish and Wildlife have left the dead birds to decompose on site due to rough terrain causing accessibility issues and a lack of personnel in the State certified to handle infected birds,” the notice said. “Improper handling can lead to further spread of disease.”\nThe agency went on the reassure the public that “the risk of avian influenza being transmitted to people is extremely low” and that the “New Jersey Department of Agriculture and NJ DEP Fish and Wildlife are continuing monitoring the situation.”\nBack in April, the CDC reported the first human case of avian bird flu in the United States in a Colorado man who has since recovered. The agency says the risk remains of humans contracting the virus is considered “low”.\n“This one H5-positive human case does not change the human health risk assessment,” the CDC said in an on line up date. “CDC will continue to watch this situation closely for signs that the risk to human health has changed. Signals that could raise the public health risk might include multiple reports of H5N1 virus infections in people from exposure to birds, or identification of spread from one infected person to a close contact. CDC also is monitoring H5N1 viruses for genetic changes that have been associated with adaptation to mammals, which could indicate the virus is adapting to spread more readily from birds to people. CDC is taking routine preparedness and prevention measures, which includes an existing candidate vaccine virus that could be used to make vaccine for people if one were needed.”\nThe CDC advisory continued. “CDC has been monitoring for illness among people exposed to H5N1 virus-infected birds since these outbreaks were detected in U.S. wild birds and poultry in late 2021 and into 2022. To date, H5N1 viruses have been found in U.S. commercial and backyard birds in 29 States and in wild birds in 32 states.”\nHere in New Jersey, the decision by the state agency to let the diseased bird carcasses rot ‘in situ’ was uniformly blasted by environmentalists, including a former DEP official, as being wholly inadequate because it risked further infection of wildlife that will come into contact with the infected carcasses. This comes at a time when the world is seeing a troubling upsurge in wild birds contracting the virus and there are concerns about potential mutations as we saw with COVID.\nJeff Tittel, the former executive director of the New Jersey’s Sierra Club for over 20 years, described the NJDEP response was “shocking.”\n“By leaving those birds out there to rot you can spread Avian to other birds and you are taking about a stench and pollution as they decompose—it’s just malpractice from an environmental and public health standpoint,” Tittel said. “I think it’s a symbol of everything that’s wrong with the DEP when it comes to the budget where thanks to cuts over the years you now don’t have enough qualified staff to pick up these dead birds and dispose of them properly.”\nTittel continued. “The State of New Jersey now has the biggest budget in state history by fare yet DEP’s budget is languishing and in real dollars is much less than it was 30 years ago. If you can’t pick up these contaminated dead birds how are you going to have the money to deal with flooding or cleaning up toxic waste sites.”\nBill Wolfe, a former DEP official and whistleblower, said the choice to let the contaminated vultures rot in the wild has roots in what has been a bi-partisan drive going back to the Gov. Florio administration to try and make the DEP more self-sustaining off of the revenues it can raise through permitting and promoting commercial activities.\n\"DEP Fish and Wildlife has plenty of staff available to promote hunting and logging of State lands (wildlife management areas) but not enough to dispose of dead birds? Are you kidding me?,” Wolfe said. “This is just another example of how DEP budget cuts, misplaced priorities driven by revenue generating activities like hunting and fishing, and lack of leadership at the top directly threaten public health and healthy ecosystems.\"\nBlack vultures have a massive 5 foot wing span, slighting smaller than the turkey vulture. They play a critical role in a society where road kill is so common. Earlier this month, Newsweek reported an even larger Avian Influenza outbreak that killed 700 black vultures at Noah's Ark Animal Sanctuary in Georgia, which ranks first in the U.S. for poultry, which is particularly susceptible to the virus.\nThe news outlet saw that the sanctuary had been placed quarantine by the Georgia Department of Agriculture. \"As a natural disease event, the site needs to be contained, cleaned up and then sanitized/disinfected,” the Noah’s Ark Animal Sanctuary said in a statement to News week. “We are at the contained stage. But our State Agency partners are and will lead clean up and sanitization. They will lead full vulture removal and roost removal and sanitation.”\nAccording to the USDA fact sheet the US is experiencing “a widespread outbreak of highly pathogenic avian influenza (HPAI). Although this disease primarily kills domestic poultry (chickens and turkeys), it can also affect more than 50 species of wild birds.”\nThe federal agency asks property owners that find dead wild birds to call your “state wildlife agency or state health department so they can collect and test them for HPAI.”\nThe USDA fact sheet is not alarmist, but informative.\n“If local authorities tell you to dispose of the bird’s carcass (body), wear disposable gloves to pick it up,” warns the USDA. “If you don’t have gloves, turn a plastic bag inside out and use it to pick up the carcass. Double-bag the carcass and throw it away in your regular trash. According to the Centers for Disease Control and Prevention, handling HPAI-infected birds is unlikely to lead to illness in people.”\nThe USDA tip sheet continues. “However, you should seek medical attention if you experience any influenza-like symptoms or illness within 10 days of handling sick or dead birds. Disinfecting Shoes and Clothing Because HPAI spreads easily on contaminated surfaces, be sure to wash your clothing in hot water and disinfect your shoes after handling a dead wild bird. To disinfect your shoes, use one of the methods below: ƒ Prepare a solution of 1 part bleach to 10 parts water and submerge shoes in the solution for 10 minutes. The mixed solution is good for 7 days. ƒ Spray your shoes with a benzalkonium chloride based commercial disinfectant (such as Lysol* spray or similar product) and allow them to dry.”\nBack in 2012 researchers at the University of Michigan published research that predicted that “climate change could increase levels of avian influenza in wild birds” and that the Delaware Bay could be a nexus as “a crossroads for many bird species traveling between continents” resulting in “an increase in the avian infection rate” as well as potentially spawning “novel subtypes of the influenza virus among North American wild bird populations.”\nThe University of Michigan study emphasized that while “avian flu viruses do not normally infect humans…..sporadic human infections with avian flu viruses have occurred. Since 2003, for example, more than 600 cases—including more than 300 deaths—of human infection with highly pathogenic avian influenza A H5N1 have been reported worldwide, according to the World Health Organization.”\nIt seems our black vultures may be that proverbial canary in the coal mine.\nA headline in the May edition of Nature was as concise as it was sobering.\n“Why unprecedented bird flu outbreaks sweeping the world are concerning scientists-Mass infections in wild birds pose a significant risk to vulnerable species, are hard to contain and increase the opportunity for the virus to spill over into people.”\nNature’s writer Brittney Miller described vividly how “a highly infectious and deadly strain of avian influenza virus has infected tens of millions of poultry birds across Europe, Asia, Africa and North America…. Since October, the H5N1 strain has caused nearly 3,000 outbreaks in poultry in dozens of countries. More than 77 million birds have been culled to curb the spread of the virus, which almost always causes severe disease or death in chickens. Another 400,000 non-poultry birds, such as wild birds, have also died in 2,600 outbreaks — twice the number reported during the last major wave, in 2016–17.”\nIn short, “researchers say that the virus seems to be spreading in wild birds more easily than ever before, making outbreaks particularly hard to contain, leaving scientists “concerned that the high levels of virus circulating in bird populations means that there are more opportunities for spillover into people.”\nExactly.\nThe time for feel good press releases and photo ops is over when the birds with that big a wing span drop dead. Somebody in the state legislature needs to not be afraid of having an independent thought and call an oversight hearing and found out why the NJDEP lacks the personnel to handle infected birds.\nIf necessary, it might be time to train the National Guard for this clear and present danger. Make no mistake, our planet’s fate rests with the birds, even the ugly ones.",
     "answer": {
-      "summary": "Environmentalists criticise New Jersey's decision to leave over 100 vultures dead of bird flu to rot on a trail.",
+      "summary": "Environmentalists criticise New Jersey DEP for leaving over 100 black vultures killed by avian influenza to rot on a Sussex trail.",
       "reasoning": [
-        "Step 0 (summary): Environmentalists criticise New Jersey's decision to leave over 100 vultures dead of bird flu to rot on a trail.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 over 100 black vultures died of avian influenza in Lafayette; S2 'the risk of avian influenza being transmitted to people is extremely low'; S3 the first US human case, in a Colorado man, 'Back in April'; S4 'CDC has been monitoring for illness among people exposed to H5N1 virus-infected birds'; S5 700 vultures in Georgia; S6 worldwide poultry figures.",
-        "Step 2 (1.3): S1, S5 and S6 are flu in birds only. No item.",
-        "Step 3 (4.7): S3 is April 2022, more than 30 days before the scan date of 2022-08-29. No item.",
-        "Step 4 (1.2): S2 is general risk advice. No item.",
-        "Step 5 (1.3, 4.2, 5.3.2, 8.1, 9.2, 9.7, 10.1): S4 is people monitored after exposure to infected birds, with no symptoms or tests stated, so a trend, inactive. Date: scan date (4.2). Place: the CDC reports on the United States, so country United States (5.3.2). Strain: H5N1 (8.1). The United States has no other item, so the fallback stands (9.7). Evidence: S4 (10.1).",
-        "Step 6 (Section 11): one valid item, so useful."
+        "Step 0 (summary): bird flu killed over 100 black vultures on a New Jersey trail; the DEP left the carcasses in place; the CDC says human risk is low.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 USDA confirmed over 100 black vultures died of avian influenza on the Sussex Branch Trail in Lafayette; S2 the risk of transmission to people is extremely low; S3 back in April the CDC reported the first US human case, a Colorado man who recovered; S4 the CDC has been monitoring for illness among people exposed to H5N1-infected birds; H5N1 found in birds in 29 and 32 states; S5 700 black vultures died in Georgia earlier this month; S6 a USDA fact sheet: a widespread outbreak of HPAI in poultry and wild birds; S7 since 2003 more than 600 human H5N1 cases worldwide; S8 Nature: outbreaks sweeping the world in birds.",
+        "Step 2 (1.3): S1, S5, S6 and S8 are flu in animals only, with no link to food or water for people and no people exposed; no item. S2 is a reassurance with no human cases; no item.",
+        "Step 3 (4.7, 4.5): S3 is a case in April 2022, more than 30 days before the scan date 2022-08-29; no item.",
+        "Step 4 (1.3, 9.7, 4.3.5): S4 is people only monitored after exposure to infected birds, with no symptoms or tests stated: a fallback trend, inactive, strain H5N1. Place: the CDC monitors in the USA (5.3.2). The CDC update has no date and is given as ongoing ('To date'): the scan date 2022-08-29.",
+        "Step 5 (4.1, 4.7): S7 is a global historical total; no item.",
+        "Step 6 (G3-G5, 9.7): the USA has no other item, so the inactive fallback is kept; New Jersey and Georgia have only animal flu with no food link, so no item for them.",
+        "Step 7 (Section 11): an item exists, so useful."
       ],
       "useful": true,
-      "reason": "Useful: people exposed to infected birds in the United States are being monitored.",
+      "reason": "Useful: an inactive fallback for the USA, where people exposed to H5N1-infected birds are being monitored.",
       "items": [
         {
           "kind": "trend",
@@ -132,12 +113,12 @@
           "strain": "H5N1",
           "city": null,
           "state": null,
-          "country": "United States",
+          "country": "USA",
           "start_date": "2022-08-29",
           "end_date": "2022-08-29",
           "words": "inactive",
           "evidence": [
-            "CDC has been monitoring for illness among people exposed to H5N1 virus-infected birds since these outbreaks were detected in U.S. wild birds and poultry in late 2021 and into 2022."
+            "The CDC advisory continued. “CDC has been monitoring for illness among people exposed to H5N1 virus-infected birds since these outbreaks were detected in U.S. wild birds and poultry in late 2021 and into 2022. To date, H5N1 viruses have been found in U.S. commercial and backyard birds in 29 States and in wild birds in 32 states.”"
           ]
         }
       ]
@@ -154,17 +135,17 @@
     "link": "https://www.thehindu.com/opinion/op-ed/the-poultry-industry-needs-urgent-reforms/article68120795.ece",
     "article": "The current outbreak of H5N1 was a disaster waiting to happen, as experts have been sounding alarm bells on the unsafe conditions at industrial livestock production for more than 10 years now. There has never been a more pressing time to discuss the welfare of farmed animals in the Indian enviro-legal perspective. India’s environmental laws and regulations must reflect what the public health crisis is showing us: that animal welfare is closely interlinked with public health, ecosystem health and biodiversity conservation — the One Health principle.\nScale of the biosecurity issue\nThe first H5N1 infection spilt over to humans directly from chickens in Hong Kong in 1997. In India, the first H5N1 patient was reported in Maharashtra in 2006. An outbreak in December 2020 and early 2021 spread across 15 States. This pathogen has crossed many species barriers, causing mortality among the polar bears in the Arctic and seals and seagulls in Antarctica. With humans, the World Health Organization (WHO) estimates the fatality rate for H5N1 at 52%, based on the 463 deaths recorded since 2003 among the 888 people diagnosed with the virus. Almost all cases of human infection with avian influenza A (H5N1) have been linked to close contact with infected birds, or contaminated environments.\nThese contaminated environments are created by cramming chickens in wired cages, or ‘battery cages’, in high densities. The resultant air quality and waste problem has a significant footprint in India due to the odour, particulate matter, and other greenhouse gas emissions. The Central Pollution Control Board (CPCB) has classified poultry units with more than 5,000 birds as a polluting industry that requires compliance and regulatory consent to establish and operate. Some poultry industrial units have been issued closure notices by the CPCB for being in violation of the law.\nDue to contract farming, large debts and a very specialised skill set, poultry farmers often find it difficult to exit the industry, despite the losses. However, the myriad problems faced by these farmers often push them out of business. The farmers suffer due to market volatility and the prevalent practices pushed by industry giants. For instance, antibiotics are regularly given to birds as a prophylactic and as growth promoters so that more animals can be grown for greater profit. Experts predict the rising demand for protein will cause a surge in antibiotic use in livestock.\nSeveral antibiotics classified as critically important and highly important by the WHO are widely sold to farmers for preventative use. Prescribed to day-old chicks to reduce the likelihood of disease and mortality, this practice is still being commonly recommended, according to an investigation by The Bureau of Investigative Journalism, reported in The Hindu.\nAnimals are heavily stocked in unsanitary conditions. Not only does this have a detrimental effect on the welfare of animals and the health of those who consume the food derived, but also on the people working at these facilities and residing in the vicinity. The impact of the emissions in the atmosphere, effluents in the water systems, and solid wastes in the soil generated by these industries is felt by humans, other animals, and the environment. There is an urgent need for monitoring as well as enforcement of legal and regulatory mechanisms.\nThe faecal matter generated at these facilities is collected periodically by local farmers for use as fertilizer. The amount of piled-up manure exceeds the carrying capacity of the land and becomes a pollutant. Farmers complain of their crops getting damaged and piles of waste becoming a breeding ground for disease vectors such as flies. Residents are compelled to adopt measures such as spraying insecticides inside homes, leading to breathlessness and a nauseating smell.\nKeeping animals in intensive confinement constitutes a crime under the provisions of the Prevention of Cruelty to Animals (PCA) Act, 1960. Moreover, the operational activities at these industrial facilities cause unnecessary pain and suffering to the animals because of mutilation, starvation, thirst, overcrowding, and other ill-treatment, which is also a violation of the PCA Act.\nPath to legal reform\nThe 269th Law Commission of India Report in 2017 placed on record a representation by the Tata Memorial Centre that contained evidence that non-therapeutic antibiotics given to poultry cause antibiotic resistance since living conditions are unhygienic. It further said that with more open, cleaner, and ventilated living spaces, animals are less likely to need constant antibiotics, making their eggs and meat safer for consumption. Finally, it made recommendations for a set of two draft rules for the welfare of chickens in the meat and egg industries, noting that improved animal welfare results in better and safer food. These rules laid down guidelines as per existing laws and international best practices for animal care, waste management, and antibiotic use, among others.\nHowever, the Draft Rules for the egg industry released by the Ministry of Agriculture and Farmers’ Welfare in 2019 are weak and tokenistic. They must meet the recommendations of the Law Commission. Strict oversight for compliance and enforcement of environmental regulations is the need of the hour, given the CPCB’s reclassification of the poultry industry as a highly polluting ‘orange category’ industry. In light of the bird flu public health crisis and the climate emergency, it is crucial for the situation to be addressed.\nPublished - April 30, 2024 12:48 am IST",
     "answer": {
-      "summary": "Hindu opinion piece calling for reform of India's poultry industry after the H5N1 outbreak.",
+      "summary": "Op-ed argues India's poultry industry needs urgent animal welfare and environmental reforms amid the H5N1 outbreak.",
       "reasoning": [
-        "Step 0 (summary): Hindu opinion piece calling for reform of India's poultry industry after the H5N1 outbreak.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'The current outbreak of H5N1 was a disaster waiting to happen'; S2 the first human H5N1 cases in Hong Kong in 1997 and Maharashtra in 2006; S3 WHO's 463 deaths among 888 people since 2003; S4 'the bird flu public health crisis'.",
-        "Step 2 (1.3, 5.2, G1): S1 and S4 name an animal flu, and the context does not show people are affected now, with no place tied to them. No item.",
-        "Step 3 (4.7, 5.6): S2 is past, and S3 is a WHO total with no country. No item.",
-        "Step 4 (9.7): the article has no item, and no statement shows current flu activity with a tied place, so no fallback.",
-        "Step 5 (Section 11): no valid item, so not useful."
+        "Step 0 (summary): Op-ed argues India's poultry industry needs urgent animal welfare and environmental reforms amid the H5N1 outbreak.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 the current outbreak of H5N1 was a disaster waiting to happen; S2 the first H5N1 human infection in Hong Kong in 1997 and India's first H5N1 patient in Maharashtra in 2006; S3 an outbreak in December 2020 and early 2021 spread across 15 States; S4 WHO fatality rate of 52% from 888 cases since 2003; S5 bird flu public health crisis.",
+        "Step 2 (5.3.7, 1.3): S1 and S5 name a current H5N1 outbreak but give no place tied to it and no animals or people for it: no item.",
+        "Step 3 (4.7): S2, S3 and S4 are past events and global totals since 2003: no item.",
+        "Step 4 (G3-G5, 9.7): no items, so no place gets a fallback.",
+        "Step 5 (Section 11): no items, so not useful."
       ],
       "useful": false,
-      "reason": "Not useful: an opinion on poultry farming with no current human flu in a named place.",
+      "reason": "Not useful: an opinion piece with only past H5N1 events and an unplaced current outbreak.",
       "items": []
     }
   },
@@ -173,6 +154,7 @@
     "source": "Manoj:79",
     "slots": [
       5,
+      6,
       10,
       11,
       12
@@ -181,21 +163,58 @@
     "link": "https://www.sentinelassam.com/topheadlines/assam-another-child-dies-of-swine-flu-in-barak-valley",
     "article": "A correspondent\nSilchar: Yet another infant with H1N1 influenza died at the Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi. Earlier on Sunday, the death of a one and a half-year-old child with the swine flu infection was reported in Hailakandi. Altogether, four children were admitted to the SMCH, and one of them died on Tuesday. The district health authority as well as the SMCH principal confirmed the death. Dr. Bhaskar Gupta, the principal of the SMCH, however, said that the infant, though diagnosed with the H1N1 virus, died of acute pneumonia. The deceased infant, Arman Hussain Laskar, was admitted to the SMCH on April 12, and after almost one month, he finally surrendered to death.\nAshutosh Barman, the Joint Director, Health, Cachar, stated that two patients were currently undergoing treatment at the SMCH.\nSwine flu was first recognized in the 1919 pandemic and still circulates as a seasonal flu virus. Swine flu is caused by the H1N1 virus strain, which started in pigs.\nSymptoms include fever, cough, sore throat, chills, weakness, and body aches. Children may experience shortness of breath, dehydration, and irritability in advanced cases. Children, pregnant women, and the elderly are at risk of severe infection.\nTypical treatment includes rest, pain relievers, and fluids. In some cases, antiviral medication and IV fluids may be required.\nAlso Read: Assam: High Alert Issued In Hailakandi As Toddler Dies Due To Swine Flu (sentinelassam.com)\nAlso Watch:",
     "answer": {
-      "summary": "Another infant with H1N1 dies at Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi.",
+      "summary": "Another infant with H1N1 died at Silchar Medical College Hospital in Assam amid a swine flu alert in two districts.",
       "reasoning": [
-        "Step 0 (summary): Another infant with H1N1 dies at Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'Yet another infant with H1N1 influenza died at the Silchar Medical College Hospital'; S2 'the infant, though diagnosed with the H1N1 virus, died of acute pneumonia'; S3 'Earlier on Sunday, the death of a one and a half-year-old child with the swine flu infection was reported in Hailakandi'; S4 'Altogether, four children were admitted to the SMCH'; S5 the infant 'was admitted to the SMCH on April 12'; S6 two patients 'currently undergoing treatment'; S7 a swine flu alert.",
-        "Step 2 (2.3, 2.4): S1 is a death with another stated cause in S2, acute pneumonia, so no deaths item (2.3). S2 shows flu was identified but not when, so no cases item (2.4).",
-        "Step 3 (2.3, 4.4, 5.4, 5.5, 6.2, 7.2, 8.2, 10.1): S3 is a count: deaths 1, Sunday, 2024-05-05 (4.4). Placed by the home district: state Assam (5.4, 5.5). New (7.2). H1N1 from the story (8.2). Evidence: S3, then S1's sentence (10.1).",
-        "Step 4 (2.3, 4.6, 5.3.1, 7.2, 8.2, 10.1): S4 is a count: hospitalized 4, a running total, start null to the scan date (4.6). City Silchar (5.3.1). One hospital: cumulative_subset (7.2). Evidence: S4, then S1's sentence (10.1).",
-        "Step 5 (2.3, 2.4, 4.3.1, 4.7, 7.2, 10.1): S5 is an admission on April 12, within 30 days: hospitalized 1, city Silchar, new (2.4, 4.3.1, 4.7). Evidence: S5 (10.1).",
-        "Step 6 (2.4, 9.5, 9.7): S6 is a hint, ignored because direct hospitalisations are recorded. S7 is a signal whose only word is present, and the place has items.",
-        "Step 7 (G3): no duplicates.",
-        "Step 8 (Section 11): valid items, so useful."
+        "Step 0 (summary): a second child with swine flu dies in Assam's Barak Valley.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 another infant with H1N1 died at SMCH amid an alert in Cachar and Hailakandi; S2 a child's swine flu death reported Sunday in Hailakandi; S3 four children admitted to SMCH, one died Tuesday; S4 infant diagnosed with H1N1 died of pneumonia; S5 infant admitted April 12; S6 two patients currently under treatment; S7 background on swine flu.",
+        "Step 2 (2.4, 4.4, 5.3.3): S1, S3, S4 are one death (G3): flu present with another cause, deaths 1, confirmed, new, Tuesday 7 May 2024, Silchar, Assam, India, strain H1N1.",
+        "Step 3 (2.4, 4.3.1): S5 admission for the illness shown to be H1N1, hospitalized 1, confirmed, new, 12 April 2024, Silchar; within 30 days (4.7).",
+        "Step 4 (2.4, 4.4, 5.5): S2 deaths 1, confirmed, new, reported Sunday 5 May 2024, Hailakandi district gives Assam, India; strain H1N1 (8.1).",
+        "Step 5 (7.2, 8.2): S3 four children admitted to SMCH is an institution total, hospitalized 4, cumulative_subset, start null, end scan date 9 May 2024, Silchar, H1N1 from context.",
+        "Step 6 (2.4, G4): S6 patients in treatment are among the four admitted already recorded; no separate item.",
+        "Step 7 (1.2): S7 is background; no item.",
+        "Step 8 (G3, G4, G5, 9.5, 9.7): the alert in Cachar and Hailakandi (Assam) fits only present, and Assam has a death item, so no fallback.",
+        "Step 9 (Section 11): valid items, so useful."
       ],
       "useful": true,
-      "reason": "Useful: swine flu death and admissions in Assam.",
+      "reason": "Useful: recent H1N1 deaths and admissions in Assam.",
       "items": [
+        {
+          "kind": "deaths",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Silchar",
+          "state": "Assam",
+          "country": "India",
+          "start_date": "2024-05-07",
+          "end_date": "2024-05-07",
+          "words": null,
+          "evidence": [
+            "Silchar: Yet another infant with H1N1 influenza died at the Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi.",
+            "Altogether, four children were admitted to the SMCH, and one of them died on Tuesday.",
+            "Dr. Bhaskar Gupta, the principal of the SMCH, however, said that the infant, though diagnosed with the H1N1 virus, died of acute pneumonia."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Silchar",
+          "state": "Assam",
+          "country": "India",
+          "start_date": "2024-04-12",
+          "end_date": "2024-04-12",
+          "words": null,
+          "evidence": [
+            "The deceased infant, Arman Hussain Laskar, was admitted to the SMCH on April 12, and after almost one month, he finally surrendered to death.",
+            "Silchar: Yet another infant with H1N1 influenza died at the Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi.",
+            "Dr. Bhaskar Gupta, the principal of the SMCH, however, said that the infant, though diagnosed with the H1N1 virus, died of acute pneumonia."
+          ]
+        },
         {
           "kind": "deaths",
           "number": 1,
@@ -225,23 +244,8 @@
           "end_date": "2024-05-09",
           "words": null,
           "evidence": [
-            "Altogether, four children were admitted to the SMCH, and one of them died on Tuesday."
-          ]
-        },
-        {
-          "kind": "hospitalized",
-          "number": 1,
-          "count_type": "new",
-          "status": "confirmed",
-          "strain": "H1N1",
-          "city": "Silchar",
-          "state": "Assam",
-          "country": "India",
-          "start_date": "2024-04-12",
-          "end_date": "2024-04-12",
-          "words": null,
-          "evidence": [
-            "The deceased infant, Arman Hussain Laskar, was admitted to the SMCH on April 12, and after almost one month, he finally surrendered to death."
+            "Altogether, four children were admitted to the SMCH, and one of them died on Tuesday.",
+            "Silchar: Yet another infant with H1N1 influenza died at the Silchar Medical College Hospital amid a swine flu alert in Cachar and Hailakandi."
           ]
         }
       ]
@@ -251,23 +255,44 @@
     "article_id": "20231212123000-536",
     "source": "Jahnavi:320",
     "slots": [
-      1
+      11
     ],
     "scan_date": "2023-12-12",
     "link": "https://www.staradvertiser.com/2023/12/12/editorial/letters/letter-new-disease-outbreak-in-china-worrisome/",
     "article": "China is facing another infectious outbreak this winter. We don’t know what kind of disease it is.\nThe impact is so severe that the World Health Organization has requested data on the outbreak. China has refused, stating it is just the normal flu and that it is under control.\nHospitals are inundated with several thousand patients daily. Impacted are young children and older adults. The major symptom is what they call “white lung,” where X-rays show the lungs filled with liquid, making it difficult for the person to breathe and can lead to death.\nWhy is China reimplementing lockdowns and PCR testing? Schools are locked down and sanitized by staff in white hazmat suits. Doctors treating patients are told not to mention COVID-19, but the government has just approved seven new COVID-19 vaccines and is requiring the citizens to get vaccinated.\nIt sure sounds like another new variant of COVID-19 is spreading throughout China and it is hiding the facts. We could be facing another deadly pandemic if we are not careful.\nJon Shimamoto\nDon't miss out on what's happening!\nStay in touch with breaking news, as it happens, conveniently in your email inbox. It's FREE!\nBy clicking to sign up, you agree to Star-Advertiser's and Google's Terms of Service and Privacy Policy. This form is protected by reCAPTCHA.\nMililani\nEXPRESS YOURSELF\nThe Honolulu Star-Advertiser welcomes all opinions. Want your voice to be heard? Submit a letter to the editor.\n>> Write us: We welcome letters up to 150 words, and guest columns of 500-600 words. We reserve the right to edit for clarity and length. Include your name, address and daytime phone number.\n>> Mail: Letters to the Editor, Honolulu Star-Advertiser 7 Waterfront Plaza, 500 Ala Moana, Suite #7-500 Honolulu, HI 96813",
     "answer": {
-      "summary": "Reader's letter arguing China's winter outbreak of severe lung illness is likely a hidden new variant of COVID-19.",
+      "summary": "A Hawaii letter writer worries that China's winter respiratory outbreak, which China calls normal flu, is a hidden new COVID-19 variant.",
       "reasoning": [
-        "Step 0 (summary): Reader's letter arguing China's winter outbreak of severe lung illness is likely a hidden new variant of COVID-19.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'China has refused, stating it is just the normal flu and that it is under control'; S2 'Hospitals are inundated with several thousand patients daily'; S3 'It sure sounds like another new variant of COVID-19 is spreading throughout China'.",
-        "Step 2 (1.2, 3.3, 9.3.2): The article attributes the illness to another cause: S3 says it sounds like COVID-19, and S1 reports flu only as China's claim, which the letter disputes. S2 is therefore not a flu statement. No item.",
-        "Step 3 (9.7): the article has no item, and no statement shows current flu activity with a tied place, so no fallback.",
-        "Step 4 (Section 11): no valid item, so not useful."
+        "Step 0 (summary): a letter to the editor about a severe respiratory outbreak in China this winter, with hospitals inundated.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 China is facing another infectious outbreak this winter; S2 'China has refused, stating it is just the normal flu and that it is under control.'; S3 hospitals are inundated with several thousand patients daily; S4 the writer thinks it sounds like a new COVID-19 variant.",
+        "Step 2 (1.1, 1.2, 3.3): the only source naming a cause, China's government, says the outbreak is normal flu (S2); the writer's COVID-19 view (S4) is speculation ('It sure sounds like'), not an attribution the article establishes. The patient numbers in S3 are not tied to flu alone, so no count.",
+        "Step 3 (9.3.2, 9.7): 'under control' is reassurance and gives no level; with the context showing flu activity in China now, it can only give a fallback present.",
+        "Step 4 (4.5, 5.3.1): 'this winter' in China (Northern Hemisphere) gives 2023-12-01 to the scan date 2023-12-12. Place: China. Strain null.",
+        "Step 5 (G3-G5, 9.7): China has no other item, so the fallback present stands.",
+        "Step 6 (Section 11): one item, so useful."
       ],
-      "useful": false,
-      "reason": "Not useful: the letter attributes the outbreak to COVID-19, not flu.",
-      "items": []
+      "useful": true,
+      "reason": "Useful: China's authorities say a current winter outbreak with crowded hospitals is normal flu, giving a present fallback for China.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "China",
+          "start_date": "2023-12-01",
+          "end_date": "2023-12-12",
+          "words": "present",
+          "evidence": [
+            "The impact is so severe that the World Health Organization has requested data on the outbreak. China has refused, stating it is just the normal flu and that it is under control.",
+            "China is facing another infectious outbreak this winter.",
+            "Hospitals are inundated with several thousand patients daily."
+          ]
+        }
+      ]
     }
   },
   {
@@ -281,71 +306,22 @@
     "link": "http://www.cidrap.umn.edu/news-perspective/2017/12/news-scan-dec-12-2017",
     "article": "SIGA requests priority FDA review of its oral smallpox drug\nSIGA Technologies of New York City announced yesterday that it has submitted its smallpox drug TPOXX (tecovirimat) for priority review by the US Food and Drug Administration (FDA).\nIf approved, the oral drug would be the first FDA-approved treatment for smallpox, a disease that has been eradicated but could be used as a bioterror weapon. The news comes on the heels of media reports that North Korea could be building a bioweapons program that might include smallpox.\nTPOXX was developed to treat smallpox and other orthopoxvirus infections. SIGA has successfully delivered two million courses of TPOXX to the Strategic National Stockpile. No cure for smallpox currently exists, but lab personnel who work with smallpox or related viruses receive vaccination as a preventive measure.\nSIGA CEO Phil Gomez, PhD, said in a news release, \"Based on extensive positive efficacy data in animal studies and human clinical safety data without any drug-related serious adverse events, we believe the NDA [new drug application] for oral TPOXX is well positioned for favorable, expedited review by the FDA.\"\nSIGA expects to receive notification from the FDA in February 2018 that its filing was accepted for review, as well as confirmation of priority review status and notification of a final action date.\nDec 11 SIGA news release\nDec 11 CIDRAP News scan on North Korea bioweapons\nWHO: Flu on the rise in North America, parts of Asia\nThe World Health Organization (WHO) released a new global influenza update yesterday, showing that influenza is on the rise in North America, Western and Central Asia, and Europe.\nIn North America, the predominant strain has been influenza A, H3N2. Europe, however, has more influenza B circulating at this time. Both influenza A and B have been detected in Asia. In Western Africa, influenza A (H1N1) detections increased in Cote d'Ivoire and Ghana. Influenza B detections were reported in Central African Republic and Mozambique.\nThe temperate zones of South America continue to report low influenza-like illness (ILI) activity. The Caribbean and Central America also report low ILI activity.\nCanada, the United States, and Mexico have all crossed the seasonal threshold for ILI. Adults over 65 have accounted for most influenza cases in the United States and just under half in Canada.\nWorldwide, laboratories reporting to the WHO have typed 62.5% of viruses as influenza A and 37.5% as influenza B.\nDec 11 WHO update\nCholera outbreaks reported in Kenya, Zambia\nYesterday the WHO reported two outbreaks of cholera in Kenya and Zambia, with the Kenyan outbreak involving nearly 4,000 cases.\nBetween Jan 1 and Nov 29, Kenyan officials have reported 3,967 probable and confirmed cases of cholera, including 76 deaths. Transmission has been linked to camps, institutions, and mass gatherings. Community transmission is still ongoing in 7 Kenyan counties as of Nov 29, but 20 of 47 counties (43%) in the country have documented cholera cases this year.\nThe WHO said the risk of widespread transmission in Kenya is high. \"Despite the decline in the number of cases reported, the outbreak appears to be clustered around two major types of settings. First, the refugee camps particularly Kakuma and Dadaab, and second in the populous Nairobi capital county,\" the WHO explained.\nIn Zambia, officials have reported 547 cases and 15 deaths since late September. Most cases are in the capital of Lusaka. The districts where cases have been documented have poor sanitation and water supply. A recent influx of refugees from the Democratic Republic of the Congo and the upcoming rainy season mean there's a strong chance the outbreak will grow in the coming months, the WHO said.\nDec 11 WHO Kenya report\nDec 11 WHO Zambia report",
     "answer": {
-      "summary": "CIDRAP news scan: smallpox drug review, WHO says flu is rising in North America and parts of Asia, and cholera in Kenya and Zambia.",
+      "summary": "CIDRAP news scan: smallpox drug review, WHO global flu update showing rises in several regions, cholera in Kenya and Zambia.",
       "reasoning": [
-        "Step 0 (summary): CIDRAP news scan: smallpox drug review, WHO says flu is rising in North America and parts of Asia, and cholera in Kenya and Zambia.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'influenza is on the rise in North America, Western and Central Asia, and Europe'; S2 'Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI'; S3 predominant strains by region; S4 'influenza A (H1N1) detections increased in Cote d'Ivoire and Ghana'; S5 'Influenza B detections were reported in Central African Republic and Mozambique'; S6 low ILI in temperate South America, the Caribbean and Central America.",
-        "Step 2 (2.3, 4.2, 4.3.5, 5.3.1, 9.2, 10.1, G4): S1 and S2 are the same rise for North America (G4): rising, per named country: Canada, United States, Mexico (9.2). Date: WHO's update, 2017-12-11 (4.2, 4.3.5). Evidence: S2, then S1 and the update line (10.1).",
-        "Step 3 (2.3, 8.1, 9.2, 9.6, 10.1): S4 is rising about H1N1, Ivory Coast and Ghana (9.2, 9.6). Evidence: S4, then the update line (10.1).",
-        "Step 4 (2.3, 8.1, 9.3.5, 9.7, 10.1): S5 has no level or amount: a fallback present, influenza B, Central African Republic and Mozambique (9.3.5, 9.7). Evidence: S5, then the update line (10.1).",
-        "Step 5 (5.5): S3 and S6 are regions with no single unit. No item.",
-        "Step 6 (G3): no duplicates.",
-        "Step 7 (Section 11): valid items, so useful."
+        "Step 0 (summary): a news scan with a WHO global influenza update among other stories.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline flu on the rise in North America, parts of Asia, S2 flu rising in North America, Western and Central Asia, Europe, S3 H3N2 predominant in North America, S4 more influenza B in Europe, A and B in Asia, S5 H1N1 detections increased in Cote d'Ivoire and Ghana, S6 influenza B detections in Central African Republic and Mozambique, S7 low ILI in South America temperate zones, Caribbean, Central America, S8 Canada, USA, Mexico crossed the seasonal ILI threshold, S9 adults over 65 most US cases.",
+        "Step 2 (4.1): the 'Dec 11 WHO update' label dates the report: 2017-12-11, within 30 days of scan 2017-12-13.",
+        "Step 3 (5.5): S1-S4 and S7 name only continents or regions with no single country: no items.",
+        "Step 4 (9.4, 9.6, 8.1): S5 is a rise in detections, H1N1 only: trend rising, H1N1, for Cote d'Ivoire and for Ghana.",
+        "Step 5 (9.7, 8.1): S6 reports detections with no level: fallback present, influenza B, for Central African Republic and for Mozambique, which have no other item.",
+        "Step 6 (9.3.8, 9.7): S8 crossing the seasonal threshold shows the season has begun: fallback present for Canada, USA and Mexico, which have no other item.",
+        "Step 7 (9.1): S9 is about one age group: no trend.",
+        "Step 8 (G3-G5, 9.7): one word per place, no duplicates.",
+        "Step 9 (Section 11): valid items, so useful."
       ],
       "useful": true,
-      "reason": "Useful: flu levels by country in WHO's update.",
+      "reason": "Useful: WHO update gives current flu trends for named countries.",
       "items": [
-        {
-          "kind": "trend",
-          "number": null,
-          "count_type": null,
-          "status": null,
-          "strain": null,
-          "city": null,
-          "state": null,
-          "country": "Canada",
-          "start_date": "2017-12-11",
-          "end_date": "2017-12-11",
-          "words": "rising",
-          "evidence": [
-            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
-            "Dec 11 WHO update"
-          ]
-        },
-        {
-          "kind": "trend",
-          "number": null,
-          "count_type": null,
-          "status": null,
-          "strain": null,
-          "city": null,
-          "state": null,
-          "country": "United States",
-          "start_date": "2017-12-11",
-          "end_date": "2017-12-11",
-          "words": "rising",
-          "evidence": [
-            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
-            "Dec 11 WHO update"
-          ]
-        },
-        {
-          "kind": "trend",
-          "number": null,
-          "count_type": null,
-          "status": null,
-          "strain": null,
-          "city": null,
-          "state": null,
-          "country": "Mexico",
-          "start_date": "2017-12-11",
-          "end_date": "2017-12-11",
-          "words": "rising",
-          "evidence": [
-            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
-            "Dec 11 WHO update"
-          ]
-        },
         {
           "kind": "trend",
           "number": null,
@@ -354,7 +330,7 @@
           "strain": "H1N1",
           "city": null,
           "state": null,
-          "country": "Ivory Coast",
+          "country": "Cote d'Ivoire",
           "start_date": "2017-12-11",
           "end_date": "2017-12-11",
           "words": "rising",
@@ -413,6 +389,57 @@
             "Influenza B detections were reported in Central African Republic and Mozambique.",
             "Dec 11 WHO update"
           ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "Canada",
+          "start_date": "2017-12-11",
+          "end_date": "2017-12-11",
+          "words": "present",
+          "evidence": [
+            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
+            "Dec 11 WHO update"
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "USA",
+          "start_date": "2017-12-11",
+          "end_date": "2017-12-11",
+          "words": "present",
+          "evidence": [
+            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
+            "Dec 11 WHO update"
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "Mexico",
+          "start_date": "2017-12-11",
+          "end_date": "2017-12-11",
+          "words": "present",
+          "evidence": [
+            "Canada, the United States, and Mexico have all crossed the seasonal threshold for ILI.",
+            "Dec 11 WHO update"
+          ]
         }
       ]
     }
@@ -420,24 +447,49 @@
   {
     "article_id": "20160630003000-1352",
     "source": "Aditya:142",
-    "slots": [],
+    "slots": [
+      9
+    ],
     "scan_date": "2016-06-30",
     "link": "http://www.cidrap.umn.edu/news-perspective/2016/06/flu-scan-jun-29-2016",
     "article": "H5N1 strikes Nigerian poultry farm, Chinese zoo lions\nNigeria's agriculture ministry yesterday reported an H5N1 avian flu outbreak at a commercial farm in Lagos state, and authorities in China said H5N1 has been detected in lions at a zoo in Hubei province.\nThe outbreak in Nigeria began on Jun 22, striking a facility that housed 3-week-old pullets, according to a report posted yesterday by the World Organization for Animal Health (OIE). Of 4,000 susceptible birds, the virus killed 1,355 and the remaining poultry were destroyed to curb the spread of the virus. Officials said poor biosecurity likely played a role in the event, though investigators haven't pinpointed the source of the outbreak.\nNigeria is among a handful of African countries that have reported a recurrence of H5N1 outbreaks in poultry after a several-year hiatus.\n Jun 28 OIE report\nNotification of China's detection of H5N1 in African lions kept at a zoo in the Hubei province city of Ezhou was made in a statement from the provincial government that was translated and posted by Avian Flu Diary, an infectious disease news blog.\nTesting was triggered by illness in two African lions who had high fevers. After veterinary officials isolated and began to treat the lions, the male lion suddenly died and a female recovered. No similar illnesses have been seen in the zoo's other animals.\nTesting of samples from the lions at a military veterinary hospital was positive for H5N1. Among other response measures, the park's birds were vaccinated against the virus.\nThe detection is the first known H5N1 infection in lions, though China reported fatal infections in tigers in 2014 and 2015, and Indonesia in 2006 reported H5N1 antibodies in stray cats.\n Jun 29 Avian Flu Diary post\nWHO: South America, southern Africa are main flu hot spots\nSouth America and southern Africa have reported steady rises in flu activity over the past few weeks, but disease activity is rising more slowly in other Southern Hemisphere countries such as Australia, the World Health Organization (WHO) said in its latest global flu update.\nThe 2009 H1N1 virus and respiratory syncytial virus (RSV) are the main viruses detected in South America, but influenza B is predominant in southern African countries.\nIn South America, flu activity in Brazil seems to have peaked earlier than usual and at a high level that was similar to 2013, when 2009 H1N1 was the dominant strain. Of Brazil's deaths from severe respiratory infection, almost 71% of patients had underlying health conditions, the WHO said. Elsewhere, flu levels increased in Bolivia and Colombia.\nIn contrast, flu levels in Australia were at or just above baseline levels, with New Zealand also reporting low flu activity.\nFlu activity from 2009 H1N1 is still under way in some parts of Central America, with levels rising in Panama, the WHO reported. In Africa, flu is increasing steadily in temperate southern regions.\nOther parts of the world are seeing low flu activity, including the Caribbean countries, other parts of Africa, Asian countries, North America, and Europe.\nAt the global level, influenza A was responsible for about 60% of flu detections, and of the subtyped \"A\" strains, 86% were the 2009 H1N1 virus while the rest were H3N2, according to the WHO.\n Jun 27 WHO global flu update",
     "answer": {
-      "summary": "CIDRAP Flu Scan: H5N1 in Nigerian poultry and Chinese zoo lions, and a WHO update on flu in the Southern Hemisphere.",
+      "summary": "CIDRAP flu scan: H5N1 in Nigerian poultry and Chinese zoo lions, and a WHO update on Southern Hemisphere and global flu activity.",
       "reasoning": [
-        "Step 0 (summary): CIDRAP Flu Scan: H5N1 in Nigerian poultry and Chinese zoo lions, and a WHO update on flu in the Southern Hemisphere.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 H5N1 in Nigerian poultry and in lions at a Chinese zoo; S2 'flu activity in Brazil seems to have peaked earlier than usual'; S3 'flu levels increased in Bolivia and Colombia'; S4 Australia 'at or just above baseline levels', New Zealand 'low flu activity'; S5 'levels rising in Panama' from 2009 H1N1; S6 regions: South America, southern Africa, the Caribbean, Asia, North America and Europe.",
-        "Step 2 (1.3): S1 is flu in animals only. No item.",
-        "Step 3 (2.3, 4.2, 5.3.1, 5.5, 8.1, 9.2, 9.3.2, 10.1): S2 to S5 are trends per country. Date: the WHO update of June 27, 2016-06-27 (4.2). Brazil: past the peak, falling (9.3.2). Bolivia and Colombia: increased, rising (9.2). Australia and New Zealand: low (9.2). Panama: rising, 2009 H1N1 (8.1). Countries as named (5.3.1, 5.5). Evidence: each sentence, then the update line (10.1).",
-        "Step 4 (5.5): S6 names regions with no containing unit. No place, so no item.",
-        "Step 5 (G3): six different items.",
-        "Step 6 (Section 11): six valid items, so useful."
+        "Step 0 (summary): CIDRAP reports H5N1 in a Lagos poultry farm and in zoo lions in Hubei, then summarises the WHO's 27 June global flu update.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 H5N1 outbreak at a commercial poultry farm in Lagos state; S2 H5N1 in African lions at a zoo in Ezhou, Hubei; S3 South America and southern Africa report steady rises; S4 activity rising more slowly in other Southern Hemisphere countries such as Australia; S5 2009 H1N1 and RSV main viruses in South America, influenza B predominant in southern Africa; S6 Brazil flu activity seems to have peaked earlier than usual at a high level similar to 2013; S7 flu levels increased in Bolivia and Colombia; S8 flu levels in Australia at or just above baseline, New Zealand low; S9 2009 H1N1 activity under way in parts of Central America, levels rising in Panama; S10 flu increasing in temperate southern Africa; S11 low activity in the Caribbean, other parts of Africa, Asia, North America and Europe; S12 global strain shares.",
+        "Step 2 (1.3): S1 and S2 are flu in animals only (poultry, lions), with no food link and no people exposed: no item.",
+        "Step 3 (5.5, 5.6): S3, S5, S10, S11 and S12 are about regions with no single containing unit (South America, southern Africa, Central America, Asia, North America, Europe, global): no item.",
+        "Step 4 (4.1, 4.2): the WHO statements carry the source label 'Jun 27 WHO global flu update', so their report date is 2016-06-27, within 30 days of the scan date 2016-06-30.",
+        "Step 5 (9.3.1, 9.2, G5): Australia: S4 gives a direction (rising more slowly) but S8 states a current level, 'at or just above baseline levels', which is low; a stated level beats a direction, so one item, low, Australia, 2016-06-27.",
+        "Step 6 (9.3.2, 9.3.8, 9.3.9): Brazil: S6 'seems to have peaked' says the season is past its peak: falling. 'similar to 2013' is a comparison and is not recorded. Strain null: the H1N1 mention in S5 is for South America as a whole and for 2013. Brazil, 2016-06-27.",
+        "Step 7 (9.2): S7 'flu levels increased' gives rising for Bolivia and for Colombia, 2016-06-27, strain null.",
+        "Step 8 (9.2): S8 'New Zealand also reporting low flu activity' gives low, New Zealand, 2016-06-27.",
+        "Step 9 (9.2, 9.6, 8.2): S9 'with levels rising in Panama' is about flu activity from 2009 H1N1, so rising, strain H1N1, Panama, 2016-06-27.",
+        "Step 10 (G3-G5, 9.7): each country has one trend item; no fallbacks needed.",
+        "Step 11 (Section 11): items exist, so useful."
       ],
       "useful": true,
-      "reason": "Useful: WHO flu levels for six countries.",
+      "reason": "Useful: the WHO's recent update gives current flu levels or directions for Australia, Brazil, Bolivia, Colombia, New Zealand and Panama.",
       "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "Australia",
+          "start_date": "2016-06-27",
+          "end_date": "2016-06-27",
+          "words": "low",
+          "evidence": [
+            "In contrast, flu levels in Australia were at or just above baseline levels, with New Zealand also reporting low flu activity.",
+            "South America and southern Africa have reported steady rises in flu activity over the past few weeks, but disease activity is rising more slowly in other Southern Hemisphere countries such as Australia, the World Health Organization (WHO) said in its latest global flu update.",
+            " Jun 27 WHO global flu update"
+          ]
+        },
         {
           "kind": "trend",
           "number": null,
@@ -451,8 +503,8 @@
           "end_date": "2016-06-27",
           "words": "falling",
           "evidence": [
-            "In South America, flu activity in Brazil seems to have peaked earlier than usual and at a high level that was similar to 2013, when 2009 H1N1 was the dominant strain. Of Brazil's deaths from severe respiratory infection, almost 71% of patients had underlying health conditions, the WHO said.",
-            "Jun 27 WHO global flu update"
+            "In South America, flu activity in Brazil seems to have peaked earlier than usual and at a high level that was similar to 2013, when 2009 H1N1 was the dominant strain.",
+            " Jun 27 WHO global flu update"
           ]
         },
         {
@@ -469,7 +521,7 @@
           "words": "rising",
           "evidence": [
             "Elsewhere, flu levels increased in Bolivia and Colombia.",
-            "Jun 27 WHO global flu update"
+            " Jun 27 WHO global flu update"
           ]
         },
         {
@@ -486,24 +538,7 @@
           "words": "rising",
           "evidence": [
             "Elsewhere, flu levels increased in Bolivia and Colombia.",
-            "Jun 27 WHO global flu update"
-          ]
-        },
-        {
-          "kind": "trend",
-          "number": null,
-          "count_type": null,
-          "status": null,
-          "strain": null,
-          "city": null,
-          "state": null,
-          "country": "Australia",
-          "start_date": "2016-06-27",
-          "end_date": "2016-06-27",
-          "words": "low",
-          "evidence": [
-            "In contrast, flu levels in Australia were at or just above baseline levels, with New Zealand also reporting low flu activity.",
-            "Jun 27 WHO global flu update"
+            " Jun 27 WHO global flu update"
           ]
         },
         {
@@ -520,7 +555,7 @@
           "words": "low",
           "evidence": [
             "In contrast, flu levels in Australia were at or just above baseline levels, with New Zealand also reporting low flu activity.",
-            "Jun 27 WHO global flu update"
+            " Jun 27 WHO global flu update"
           ]
         },
         {
@@ -537,7 +572,7 @@
           "words": "rising",
           "evidence": [
             "Flu activity from 2009 H1N1 is still under way in some parts of Central America, with levels rising in Panama, the WHO reported.",
-            "Jun 27 WHO global flu update"
+            " Jun 27 WHO global flu update"
           ]
         }
       ]
@@ -553,16 +588,16 @@
     "link": "https://www.thehindu.com/news/international/no-respite-for-brazils-yanomami-group-facing-illegal-mining-linked-crisis/article67752560.ece",
     "article": "The Yanomami Indigenous group is again facing a severe humanitarian crisis blamed on illegal gold miners, despite Brazil’s President deploying the military to wrest back control of their territory.\nA year after Luiz Inacio Lula da Silva declared a state of emergency over the isolated group’s plight, images emerging from their Amazon rainforest reservation remain desolate: severely malnourished children being fed through IV tubes in hospital and their staple food source, fish, decimated by the toxic mercury used in the mines.\nBleak figures\nAt least 308 Yanomami died from January to November 2023, half of them children under five, according to health officials.\nThat is little better than the 343 deaths recorded in 2022. Cases of malaria among the Yanomami increased by 61% last year, and influenza by 640% compared to 2022. Those bleak figures are a problem for Lula, who came to office in January 2023 vowing to do a far better job protecting Brazil’s Indigenous peoples than far-right predecessor Jair Bolsonaro. One of the veteran leftist’s first actions in office was to deploy the military to expel an estimated 20,000 illegal miners from the Yanomami reservation, a sprawling northern territory bigger than Portugal.\nIndigenous leaders and rights activists accuse miners of raping and killing Yanomami inhabitants, poisoning their water with mercury, spreading disease, tearing down virgin rainforest and triggering a food crisis.\nLula ordered the air force to impose a no-fly zone to cut off supplies to the mines, and sent hundreds of police and soldiers to evict the invaders.\nThousands of miners fled as the authorities carried out a total of 400 operations last year, seizing 600 million reais ($120 million) from criminal groups involved with the mines, according to official figures.\nShort-lived success\nBut critics say the plan’s successes were short-lived, leaving the 30,000 Yanomami vulnerable. According to the Hutukara Yanomami Association, an Indigenous rights group, 815 acres of reservation were razed last year by mining.\n“The Lula administration wasn’t prepared. There should have been better organisation to address the health crisis,” said the group’s leader, Davi Kopenawa.\nLula admitted last week that his government has been losing what he called the “war on illegal mining.”\nHis administration vowed to redouble efforts and spend $250 million this year to set up a permanent police and military force to protect the reservation.\n“I hope the new operation starts this month and not next,” Mr. Kopenawa said. “It’s urgent.”\nPublished - January 19, 2024 07:37 am IST",
     "answer": {
-      "summary": "Brazil's Yanomami again face a humanitarian crisis blamed on illegal gold miners.",
+      "summary": "Brazil's Yanomami face a renewed humanitarian crisis blamed on illegal gold miners despite military deployment.",
       "reasoning": [
-        "Step 0 (summary): Brazil's Yanomami again face a humanitarian crisis blamed on illegal gold miners.",
-        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'influenza by 640% compared to 2022'.",
-        "Step 2 (4.7, 9.3.9): S1 is a finished year compared with the year before. No item.",
-        "Step 3 (9.7): the article has no item, and no statement shows current flu activity with a tied place, so no fallback.",
-        "Step 4 (Section 11): no valid item, so not useful."
+        "Step 0 (summary): an AFP report on the continuing Yanomami health and humanitarian crisis in Brazil.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 cases of influenza among the Yanomami increased by 640 percent last year compared to 2022.",
+        "Step 2 (4.7, 9.3.9): S1 covers last year (2023), a finished calendar year, and is a comparison with a past year; it does not show flu circulating now, so no item, not even the comparison fallback.",
+        "Step 3 (G3-G5, 9.7): no items, so no fallback applies.",
+        "Step 4 (Section 11): no items, so not useful."
       ],
       "useful": false,
-      "reason": "Not useful: a finished year's comparison.",
+      "reason": "Not useful: the influenza figure is a comparison of 2023 with 2022, a finished year.",
       "items": []
     }
   }

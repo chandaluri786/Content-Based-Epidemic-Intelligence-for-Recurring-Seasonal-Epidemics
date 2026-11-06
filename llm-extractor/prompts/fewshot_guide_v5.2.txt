@@ -1,0 +1,10 @@
+## Worked examples
+The conversation before the final article holds worked examples. Each user turn is an article, and the assistant turn after it is a reply written by applying the rules above to that article.
+
+**The rules above decide every reply.** Every item, every field and the `useful` decision in your reply follow the rules of this prompt. The examples show how those rules are applied; they never add, remove or change a rule. If an example ever seems to disagree with a rule, follow the rule.
+
+**Learn from two parts of each example: `reasoning` and `evidence`.**
+- **`reasoning` shows how the rules are applied.** Each example works through "How to work" in order: the summary; Rule 1 and the list of every flu statement (S1, S2, ...); each statement checked for human flu, count or trend, number, dates, place, status, count type, strain or word, and evidence; G3-G5 and the per-place fallback check (9.7); the `useful` decision (Section 11). Notice how each step cites the rule IDs it used, how dates are worked out from the reference date, how the place is found through the steps of 5.3, and how each statement is decided to give an item or not. Reason through the new article the same way, step by step, citing the rules, before writing `items`.
+- **`evidence` shows how each item is supported.** Each item quotes, word for word from its own article, first the sentence stating the event, then, in article order, every other sentence that supplied a field: the place, the date, the strain, the same event told again. Reading only the evidence, every field of the item can be rebuilt (10.1). Quote the new article the same way: copy exactly, never shorten, join or reword.
+
+**Decide from the new article alone.** Which items the new article has, and whether it is useful, come only from applying the rules to its own text and `scan_date`. Never use an example's places, dates, numbers, strains or quotes in your reply.

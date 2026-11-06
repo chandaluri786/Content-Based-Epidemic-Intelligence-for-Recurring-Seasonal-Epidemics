@@ -1,7 +1,7 @@
 """Command-line tool: run the model over articles and save every reply to a run folder.
 
 Examples (from the llm-extractor folder, with the virtual environment active):
-    python run_extraction.py --ids Jahnavi:6                   # one article, by its set and row
+    python run_extraction.py --ids Jahnavi:192                   # one article, by its set and row
     python run_extraction.py --ids 20161230170000-2179         # one article, by its id
     python run_extraction.py --ids-file my_ids.txt             # the articles listed in a file
     python run_extraction.py --limit 10                        # the first 10 articles
@@ -69,7 +69,7 @@ def sha256(path: Path) -> str:
 def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--ids", help="articles to run, comma separated: article ids or set positions "
-                                      "such as Jahnavi:6. Bypasses the exclusions.")
+                                      "such as Jahnavi:192. Bypasses the exclusions.")
     parser.add_argument("--ids-file", type=Path,
                         help="text file of articles to run, one per line ('#' starts a comment). "
                              "Example articles are still left out.")
@@ -89,7 +89,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_argument_parser().parse_args()
 
-    # Stop before any API call if the input files are not in the format the pipeline and v5.1 need.
+    # Stop before any API call if the input files are not in the format the pipeline and the prompt need.
     problems = check_input_files(config.ARTICLES_PATH, config.GOLD_LABELS_PATH, config.EXAMPLES_PATH)
     if problems:
         raise SystemExit(f"The input files have {len(problems)} problems, e.g.:\n" + "\n".join(problems[:20]))

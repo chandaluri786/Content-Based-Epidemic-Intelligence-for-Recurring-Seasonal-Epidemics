@@ -20,7 +20,7 @@ Steps:
 Writes the one example set the prompt uses, prompts/examples_<PROMPT_VERSION>.json (the first k
 picks, default 8), and few_shot_selection.md (the review sheet: all 12 picks in order, coverage at
 k = 4, 8, 12, and up to 3 alternates per slot). The set is checked with flu_extractor/data_checks.py
-(v5.1 format, exact evidence, "How to work" steps) before it is written.
+(reply format, exact evidence, "How to work" steps) before it is written.
 """
 
 import argparse
@@ -33,10 +33,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from flu_extractor import config  # noqa: E402
+from flu_extractor import config
+from flu_extractor.data_loading import read_label_records  # noqa: E402
 from flu_extractor.data_checks import check_examples  # noqa: E402
 
-LABELERS = ("Jahnavi", "Aditya", "Manoj")  # the sets with chain-of-thought v2 records
+LABELERS = ("Jahnavi", "Aditya", "Manoj", "Thanya")  # the labeling sets; those without a record file are skipped
 MAX_ARTICLE_CHARS, MAX_REPLY_CHARS = 6000, 5000
 MAX_HARD_CASE_ARTICLE_CHARS = 10000  # a hard_case record may be longer: it is favoured on purpose
 # Weight of hardness in a pick (one new slot is worth 10). A hard_case (hardness 2) is worth more
@@ -63,7 +64,7 @@ STAGES = ((4, 2, (1, 2)), (8, 3, (3, 3)), (12, 4, (4, 4)))
 
 
 def answer(record: dict) -> dict:
-    """The assistant turn: the record's reply in the key order v5.1 asks for ("Your reply")."""
+    """The assistant turn: the record's reply in the key order the prompt asks for ("Your reply")."""
     output = record["output"]
     return {"summary": record["summary"], "reasoning": record["reasoning"], "useful": output["useful"],
             "reason": output["reason"], "items": output["items"]}
@@ -113,12 +114,12 @@ def build_pool(records_dir: Path, hard_runs: list[Path] = ()) -> tuple[list[dict
     misses = model_misses(list(hard_runs))
     records, copies = {}, collections.Counter()
     for name in LABELERS:
-        with (records_dir / f"{name}{config.RECORDS_SUFFIX}").open(encoding="utf-8") as file:
-            for line in file:
-                if line.strip():
-                    record = json.loads(line)
-                    copies[record["article_id"]] += 1
-                    records.setdefault(record["article_id"], (name, record))  # one copy per article
+        path = records_dir / f"{name}{config.RECORDS_SUFFIX}"
+        if not path.exists():
+            continue
+        for record in read_label_records(path):
+            copies[record["article_id"]] += 1
+            records.setdefault(record["article_id"], (name, record))  # one copy per article
 
     pool, excluded = [], collections.Counter()
     for article_id, (name, record) in records.items():
@@ -176,9 +177,9 @@ def select(pool: list[dict]) -> list[dict]:
             left = k - len(chosen)
             not_useful = sum(not c["useful"] for c in chosen)
             per_labeler = collections.Counter(c["labeler"] for c in chosen)
-            # Every stage spans all three sets: once the picks left are only enough for the
-            # labelers still missing, the next pick must come from one of them.
-            missing = [n for n in LABELERS if not per_labeler[n]]
+            # Every stage spans all the sets in the pool: once the picks left are only enough for
+            # the labelers still missing, the next pick must come from one of them.
+            missing = [n for n in sorted({c["labeler"] for c in pool}) if not per_labeler[n]]
 
             def allowed(c: dict) -> bool:
                 after = not_useful + (not c["useful"])
@@ -206,9 +207,10 @@ def prompt_order(examples: list[dict]) -> list[dict]:
 def review_sheet(chosen: list[dict], pool: list[dict], excluded: collections.Counter) -> str:
     frequency = collections.Counter(rule for c in pool for rule in c["rules"])
     lines = [
-        "# Few-shot example candidates (prompt v5.1)",
+        f"# Few-shot example candidates (prompt {config.PROMPT_VERSION})",
         "",
-        "Written by `scripts/select_examples.py`. The k = 8 set is the active `prompts/examples_v5.1.json`. "
+        "Written by `scripts/select_examples.py`. "
+        f"The chosen set is the active `prompts/examples_{config.PROMPT_VERSION}.json`. "
         "Picks favour hard cases: a `hard_case` note and articles the model got wrong in earlier runs.",
         "",
         f"Pool: {len(pool)} labelled records after exclusions "
@@ -267,7 +269,7 @@ def main() -> None:
     examples = [c["example"] for c in prompt_order(chosen[:args.k])]
     problems = check_examples(examples, json.loads(config.ARTICLES_PATH.read_text(encoding="utf-8")))
     if problems:
-        raise SystemExit(f"k={args.k}: the chosen examples fail the v5.1 checks:\n" + "\n".join(problems[:10]))
+        raise SystemExit(f"k={args.k}: the chosen examples fail the {config.PROMPT_VERSION} checks:\n" + "\n".join(problems[:10]))
     path.write_text(json.dumps(examples, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote {path.name} (k = {args.k}): {', '.join(e['source'] for e in examples)}")
     sheet = config.PROJECT_DIR / "few_shot_selection.md"

@@ -26,6 +26,24 @@
     "osm_id": "node/245733956",
     "top_match": "Prayagraj, Allahabad, Prayagraj, Uttar Pradesh, 211001, India"
   },
+  "city: ann arbor | state: michigan | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ann Arbor",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135130",
+    "top_match": "Ann Arbor, Washtenaw County, Michigan, United States"
+  },
+  "city: ann arbor | state: michigan | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ann Arbor",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135130",
+    "top_match": "Ann Arbor, Washtenaw County, Michigan, United States"
+  },
   "city: barnstable | state: massachusetts | country: united states": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -152,6 +170,24 @@
     "osm_id": "relation/21180767",
     "top_match": "Delhi, Old Delhi, Delhi, India"
   },
+  "city: detroit | state: michigan | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Detroit",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/134591",
+    "top_match": "Detroit, Wayne County, Michigan, United States"
+  },
+  "city: detroit | state: michigan | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Detroit",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/134591",
+    "top_match": "Detroit, Wayne County, Michigan, United States"
+  },
   "city: dhaulpur | state: rajasthan | country: india": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -179,6 +215,15 @@
     "osm_id": "relation/12996399",
     "top_match": "Dobrich, Bulgaria"
   },
+  "city: dunedin | state: otago | country: new zealand": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Dunedin",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/1037917163",
+    "top_match": "Dunedin, Dunedin City, Otago, 9054, New Zealand"
+  },
   "city: gabrovo | state: gabrovo | country: bulgaria": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -196,6 +241,15 @@
     "language": "en",
     "osm_id": "node/2313653794",
     "top_match": "Godhra, Godhra Taluka, Panchmahal, Gujarat, 389001, India"
+  },
+  "city: greater london | state: england | country: united kingdom": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Greater London",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/175342",
+    "top_match": "Greater London, England, United Kingdom"
   },
   "city: greencastle | state: indiana | country: united states": {
     "addresstype": "town",
@@ -224,6 +278,33 @@
     "osm_id": "relation/3577685",
     "top_match": "Gurgaon, Haryana, India"
   },
+  "city: gurugram | state: haryana | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Gurgaon",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3577685",
+    "top_match": "Gurgaon, Haryana, India"
+  },
+  "city: harmanli | state: haskovo | country: bulgaria": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Harmanli",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/273488742",
+    "top_match": "Harmanli, Haskovo, 6450, Bulgaria"
+  },
+  "city: haskovo | state: haskovo | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Haskovo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/11002776",
+    "top_match": "Haskovo, Bulgaria"
+  },
   "city: hillsdale | state: michigan | country: united states": {
     "addresstype": "town",
     "checked_on": "2026-11-06",
@@ -250,6 +331,24 @@
     "language": "en",
     "osm_id": "relation/20044132",
     "top_match": "Hong Kong, China"
+  },
+  "city: honolulu | state: hawaii | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Honolulu",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/119231",
+    "top_match": "Honolulu, Honolulu County, Hawaii, United States"
+  },
+  "city: honolulu | state: hawaii | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Honolulu",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/119231",
+    "top_match": "Honolulu, Honolulu County, Hawaii, United States"
   },
   "city: houston | state: texas | country: united states": {
     "addresstype": "city",
@@ -278,6 +377,42 @@
     "osm_id": "relation/7868535",
     "top_match": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
   },
+  "city: idaho falls | state: idaho | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Idaho Falls",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/121455",
+    "top_match": "Idaho Falls, Bonneville County, Idaho, United States"
+  },
+  "city: idaho falls | state: idaho | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Idaho Falls",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/121455",
+    "top_match": "Idaho Falls, Bonneville County, Idaho, United States"
+  },
+  "city: inglewood | state: california | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Inglewood",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/112090",
+    "top_match": "Inglewood, Los Angeles County, California, United States"
+  },
+  "city: inglewood | state: california | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Inglewood",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/112090",
+    "top_match": "Inglewood, Los Angeles County, California, United States"
+  },
   "city: jaipur | state: rajasthan | country: india": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -286,6 +421,24 @@
     "language": "en",
     "osm_id": "node/315734346",
     "top_match": "Jaipur, Jaipur Municipal Corporation, Jaipur Tehsil, Jaipur, Rajasthan, 302001, India"
+  },
+  "city: jieyang city | state: guangdong | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Jieyang City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3282749",
+    "top_match": "Jieyang City, Guangdong, China"
+  },
+  "city: jieyang | state: guangdong | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Jieyang City",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3282749",
+    "top_match": "Jieyang City, Guangdong, China"
   },
   "city: jodhpur | state: rajasthan | country: india": {
     "addresstype": "city",
@@ -305,6 +458,24 @@
     "osm_id": "node/1180652177",
     "top_match": "Kanpur, Kanpur Nagar, Uttar Pradesh, 208012, India"
   },
+  "city: kettering | state: ohio | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kettering",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/182150",
+    "top_match": "Kettering, Montgomery County, Ohio, United States"
+  },
+  "city: kettering | state: ohio | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kettering",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/182150",
+    "top_match": "Kettering, Montgomery County, Ohio, United States"
+  },
   "city: kharkiv | state: kharkiv oblast | country: ukraine": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -313,6 +484,33 @@
     "language": "en",
     "osm_id": "relation/3154746",
     "top_match": "Kharkiv, Kharkiv Urban Hromada, Kharkiv Raion, Kharkiv Oblast, Ukraine"
+  },
+  "city: knoxville | state: tennessee | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Knoxville",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/197353",
+    "top_match": "Knoxville, Knox County, East Tennessee, Tennessee, United States"
+  },
+  "city: knoxville | state: tennessee | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Knoxville",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/197353",
+    "top_match": "Knoxville, Knox County, East Tennessee, Tennessee, United States"
+  },
+  "city: kolhapur | state: maharashtra | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Kolhapur",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/593878343",
+    "top_match": "Kolhapur, Karvir, Kolhapur District, Maharashtra, 416003, India"
   },
   "city: kolkata | state: west bengal | country: india": {
     "addresstype": "city",
@@ -332,6 +530,24 @@
     "osm_id": "",
     "top_match": "Old Kyiv, Shevchenkivskyi district, Kyiv, Ukraine"
   },
+  "city: landrum | state: south carolina | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Landrum",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/193956",
+    "top_match": "Landrum, Spartanburg County, South Carolina, United States"
+  },
+  "city: landrum | state: south carolina | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Landrum",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/193956",
+    "top_match": "Landrum, Spartanburg County, South Carolina, United States"
+  },
   "city: las vegas | state: nevada | country: united states": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -349,6 +565,51 @@
     "language": "en",
     "osm_id": "relation/170117",
     "top_match": "Las Vegas, Clark County, Nevada, United States"
+  },
+  "city: lincoln | state: nebraska | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Lincoln",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/169588",
+    "top_match": "Lincoln, Lancaster County, Nebraska, United States"
+  },
+  "city: lincoln | state: nebraska | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Lincoln",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/169588",
+    "top_match": "Lincoln, Lancaster County, Nebraska, United States"
+  },
+  "city: london | state: england | country: united kingdom": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Greater London",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/175342",
+    "top_match": "Greater London, England, United Kingdom"
+  },
+  "city: los angeles | state: california | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Los Angeles",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/207359",
+    "top_match": "Los Angeles, Los Angeles County, California, United States"
+  },
+  "city: los angeles | state: california | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Los Angeles",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/207359",
+    "top_match": "Los Angeles, Los Angeles County, California, United States"
   },
   "city: ludhiana | state: punjab | country: india": {
     "addresstype": "city",
@@ -377,6 +638,24 @@
     "osm_id": "node/245612641",
     "top_match": "Mangaluru, Mangaluru taluk, Dakshina Kannada, Karnataka, 575001, India"
   },
+  "city: medway | state: massachusetts | country: united states": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Medway",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1948253",
+    "top_match": "Medway, Norfolk County, Massachusetts, 02053, United States"
+  },
+  "city: medway | state: massachusetts | country: usa": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Medway",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1948253",
+    "top_match": "Medway, Norfolk County, Massachusetts, 02053, United States"
+  },
   "city: meizhou | state: guangdong | country: china": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -395,6 +674,24 @@
     "osm_id": "relation/4246124",
     "top_match": "Melbourne, Victoria, Australia"
   },
+  "city: memphis | state: tennessee | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Memphis",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/197239",
+    "top_match": "Memphis, Shelby County, West Tennessee, Tennessee, United States"
+  },
+  "city: memphis | state: tennessee | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Memphis",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/197239",
+    "top_match": "Memphis, Shelby County, West Tennessee, Tennessee, United States"
+  },
   "city: mexico city | state: mexico city | country: mexico": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -403,6 +700,24 @@
     "language": "en",
     "osm_id": "relation/17483459",
     "top_match": "Mexico City, Cuauhtémoc, Mexico City, Mexico"
+  },
+  "city: missoula | state: montana | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Missoula",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/142429",
+    "top_match": "Missoula, Missoula County, Montana, United States"
+  },
+  "city: missoula | state: montana | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Missoula",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/142429",
+    "top_match": "Missoula, Missoula County, Montana, United States"
   },
   "city: montana | state: montana | country: bulgaria": {
     "addresstype": "city",
@@ -557,6 +872,15 @@
     "osm_id": "node/25841904",
     "top_match": "Newcastle, Newcastle-Maitland, New South Wales, 2300, Australia"
   },
+  "city: ningbo | state: zhejiang | country: china": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ningbo",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/3478607",
+    "top_match": "Ningbo, Zhejiang, China"
+  },
   "city: odesa | state: odesa oblast | country: ukraine": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -574,6 +898,24 @@
     "language": "en",
     "osm_id": "relation/6058037",
     "top_match": "Orange, New South Wales, 2800, Australia"
+  },
+  "city: palm springs | state: california | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Palm Springs",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2866485",
+    "top_match": "Palm Springs, Riverside County, California, United States"
+  },
+  "city: palm springs | state: california | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Palm Springs",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/2866485",
+    "top_match": "Palm Springs, Riverside County, California, United States"
   },
   "city: pazardzhik | state: pazardzhik | country: bulgaria": {
     "addresstype": "city",
@@ -656,6 +998,24 @@
     "osm_id": "node/16174445",
     "top_match": "Pune, Pune City Subdistrict, Pune District, Maharashtra, 411001, India"
   },
+  "city: putnamville | state: indiana | country: united states": {
+    "addresstype": "hamlet",
+    "checked_on": "2026-11-06",
+    "english_name": "Putnamville",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/153343923",
+    "top_match": "Putnamville, Putnam County, Indiana, 46170, United States"
+  },
+  "city: putnamville | state: indiana | country: usa": {
+    "addresstype": "hamlet",
+    "checked_on": "2026-11-06",
+    "english_name": "Putnamville",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/153343923",
+    "top_match": "Putnamville, Putnam County, Indiana, 46170, United States"
+  },
   "city: ranchi | state: jharkhand | country: india": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -682,6 +1042,60 @@
     "language": "en",
     "osm_id": "relation/188481",
     "top_match": "Reading, Berks County, Pennsylvania, United States"
+  },
+  "city: rockford | state: illinois | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Rockford",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/127020",
+    "top_match": "Rockford, Rockford Township, Winnebago County, Illinois, United States"
+  },
+  "city: rockford | state: illinois | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Rockford",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/127020",
+    "top_match": "Rockford, Rockford Township, Winnebago County, Illinois, United States"
+  },
+  "city: rome | state: lazio | country: italy": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Rome",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/41485",
+    "top_match": "Rome, Roma Capitale, Lazio, Italy"
+  },
+  "city: royal oak | state: michigan | country: united states": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Royal Oak",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/134546",
+    "top_match": "Royal Oak, Oakland County, Michigan, United States"
+  },
+  "city: royal oak | state: michigan | country: usa": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Royal Oak",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/134546",
+    "top_match": "Royal Oak, Oakland County, Michigan, United States"
+  },
+  "city: saint cloud | state: minnesota | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Saint Cloud",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/137238",
+    "top_match": "Saint Cloud, Stearns County, Minnesota, United States"
   },
   "city: saint petersburg | state: saint petersburg | country: russia": {
     "addresstype": "city",
@@ -710,6 +1124,42 @@
     "osm_id": "relation/198770",
     "top_match": "Salt Lake City, Salt Lake County, Utah, United States"
   },
+  "city: san diego | state: california | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "San Diego",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/253832",
+    "top_match": "San Diego, San Diego County, California, United States"
+  },
+  "city: san diego | state: california | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "San Diego",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/253832",
+    "top_match": "San Diego, San Diego County, California, United States"
+  },
+  "city: sana'a | state: amanat al asimah | country: yemen": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sana'a",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/258013552",
+    "top_match": "Sana'a, Sana'a City, At Tahrir District, Amanat Al Asimah, Yemen"
+  },
+  "city: sanaa | state: amanat al asimah | country: yemen": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sana'a",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/258013552",
+    "top_match": "Sana'a, Sana'a City, At Tahrir District, Amanat Al Asimah, Yemen"
+  },
   "city: secunderabad | state: telangana | country: india": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -727,6 +1177,24 @@
     "language": "en",
     "osm_id": "relation/3316522",
     "top_match": "Shaoxing, Zhejiang, China"
+  },
+  "city: shreveport | state: louisiana | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Shreveport",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/132139",
+    "top_match": "Shreveport, Caddo Parish, Louisiana, United States"
+  },
+  "city: shreveport | state: louisiana | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Shreveport",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/132139",
+    "top_match": "Shreveport, Caddo Parish, Louisiana, United States"
   },
   "city: silchar | state: assam | country: india": {
     "addresstype": "city",
@@ -755,6 +1223,33 @@
     "osm_id": "relation/4283101",
     "top_match": "Sofia, Sredets District, Stolichna, Sofia-City, Bulgaria"
   },
+  "city: southfield | state: michigan | country: united states": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Southfield",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135057",
+    "top_match": "Southfield, Oakland County, Michigan, United States"
+  },
+  "city: southfield | state: michigan | country: usa": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Southfield",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135057",
+    "top_match": "Southfield, Oakland County, Michigan, United States"
+  },
+  "city: st. cloud | state: minnesota | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Saint Cloud",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/137238",
+    "top_match": "Saint Cloud, Stearns County, Minnesota, United States"
+  },
   "city: stara zagora | state: stara zagora | country: bulgaria": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -763,6 +1258,15 @@
     "language": "en",
     "osm_id": "node/836529193",
     "top_match": "Stara Zagora, 6000, Bulgaria"
+  },
+  "city: surat | state: gujarat | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Surat",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/10029899747",
+    "top_match": "Surat, Katargam Taluka, Surat, Gujarat, 395008, India"
   },
   "city: sydney | state: new south wales | country: australia": {
     "addresstype": "city",
@@ -817,6 +1321,15 @@
     "language": "en",
     "osm_id": "relation/7120000",
     "top_match": "Thane, Thane Subdistrict, Thane, Maharashtra, India"
+  },
+  "city: tiruchirappalli | state: tamil nadu | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Tiruchirappalli",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/10318360",
+    "top_match": "Tiruchirappalli, Tiruchchirāppalli, Tiruchirappalli, Tamil Nadu, India"
   },
   "city: tonk | state: rajasthan | country: india": {
     "addresstype": "city",
@@ -908,6 +1421,15 @@
     "osm_id": "relation/129814",
     "top_match": "Wichita, Sedgwick County, Kansas, United States"
   },
+  "city: yekaterinburg | state: sverdlovsk oblast | country: russia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Yekaterinburg",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/6564910",
+    "top_match": "Yekaterinburg, Yekaterinburg Municipality, Sverdlovsk Oblast, Ural Federal District, Russia"
+  },
   "city: yongzhou | state: hunan | country: china": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -916,6 +1438,42 @@
     "language": "en",
     "osm_id": "node/244081152",
     "top_match": "Yongzhou, Lengshuitan District, Yongzhou, Hunan, China"
+  },
+  "city: ypsilanti | state: michigan | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ypsilanti",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135135",
+    "top_match": "Ypsilanti, Washtenaw County, Michigan, United States"
+  },
+  "city: ypsilanti | state: michigan | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ypsilanti",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/135135",
+    "top_match": "Ypsilanti, Washtenaw County, Michigan, United States"
+  },
+  "city: yuma | state: arizona | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Yuma",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/16326705",
+    "top_match": "Yuma, Yuma County, Arizona, United States"
+  },
+  "city: yuma | state: arizona | country: usa": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Yuma",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/16326705",
+    "top_match": "Yuma, Yuma County, Arizona, United States"
   },
   "country: argentina": {
     "addresstype": "country",
@@ -1232,6 +1790,15 @@
     "osm_id": "relation/62273",
     "top_match": "Ireland"
   },
+  "country: italy": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Italy",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/365331",
+    "top_match": "Italy"
+  },
   "country: ivory coast": {
     "addresstype": "country",
     "checked_on": "2026-11-06",
@@ -1268,6 +1835,15 @@
     "osm_id": "relation/571178",
     "top_match": "Kiribati"
   },
+  "country: kyrgyzstan": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Kyrgyzstan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/178009",
+    "top_match": "Kyrgyzstan"
+  },
   "country: laos": {
     "addresstype": "country",
     "checked_on": "2026-11-06",
@@ -1276,6 +1852,15 @@
     "language": "en",
     "osm_id": "relation/49903",
     "top_match": "Laos"
+  },
+  "country: maldives": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Maldives",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/536773",
+    "top_match": "Maldives"
   },
   "country: marshall islands": {
     "addresstype": "country",
@@ -1448,6 +2033,24 @@
     "osm_id": "relation/307756",
     "top_match": "South Korea"
   },
+  "country: spain": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Spain",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1311341",
+    "top_match": "Spain"
+  },
+  "country: taiwan": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Taiwan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/449220",
+    "top_match": "Taiwan"
+  },
   "country: thailand": {
     "addresstype": "country",
     "checked_on": "2026-11-06",
@@ -1529,6 +2132,15 @@
     "osm_id": "relation/148838",
     "top_match": "United States"
   },
+  "country: uzbekistan": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Uzbekistan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/196240",
+    "top_match": "Uzbekistan"
+  },
   "country: vanuatu": {
     "addresstype": "country",
     "checked_on": "2026-11-06",
@@ -1547,6 +2159,15 @@
     "osm_id": "relation/49915",
     "top_match": "Vietnam"
   },
+  "country: yemen": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Yemen",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/305092",
+    "top_match": "Yemen"
+  },
   "state: abu dhabi emirate | country: united arab emirates": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -1564,6 +2185,15 @@
     "language": "en",
     "osm_id": "relation/3766481",
     "top_match": "Abu Dhabi Emirate, United Arab Emirates"
+  },
+  "state: adygea | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Republic of Adygea",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/253256",
+    "top_match": "Republic of Adygea, Southern Federal District, Russia"
   },
   "state: alabama | country: united states": {
     "addresstype": "state",
@@ -1591,6 +2221,15 @@
     "language": "en",
     "osm_id": "relation/391186",
     "top_match": "Alberta, Canada"
+  },
+  "state: amanat al asimah | country: yemen": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Amanat Al Asimah",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/8894341",
+    "top_match": "Amanat Al Asimah, Yemen"
   },
   "state: american samoa | country: united states": {
     "addresstype": "state",
@@ -1691,6 +2330,15 @@
     "osm_id": "relation/165475",
     "top_match": "California, United States"
   },
+  "state: central luzon | country: philippines": {
+    "addresstype": "region",
+    "checked_on": "2026-11-06",
+    "english_name": "Central Luzon",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1552195",
+    "top_match": "Central Luzon, Philippines"
+  },
   "state: colorado | country: united states": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -1781,6 +2429,15 @@
     "osm_id": "relation/162069",
     "top_match": "District of Columbia, United States"
   },
+  "state: dobrich province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "state: dobrich | country: bulgaria": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -1789,6 +2446,15 @@
     "language": "en",
     "osm_id": "relation/1739528",
     "top_match": "Dobrich, Bulgaria"
+  },
+  "state: england | country: united kingdom": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "England",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/58447",
+    "top_match": "England, United Kingdom"
   },
   "state: federal district | country: brazil": {
     "addresstype": "state",
@@ -1825,6 +2491,15 @@
     "language": "en",
     "osm_id": "relation/3412620",
     "top_match": "French Polynesia, France"
+  },
+  "state: gabrovo province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: gabrovo | country: bulgaria": {
     "addresstype": "state",
@@ -1898,6 +2573,15 @@
     "osm_id": "relation/1942601",
     "top_match": "Haryana, India"
   },
+  "state: haskovo province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "state: haskovo | country: bulgaria": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -1906,6 +2590,24 @@
     "language": "en",
     "osm_id": "relation/1739545",
     "top_match": "Haskovo, Bulgaria"
+  },
+  "state: hawaii | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Hawaii",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/166563",
+    "top_match": "Hawaii, United States"
+  },
+  "state: hawaii | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Hawaii",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/166563",
+    "top_match": "Hawaii, United States"
   },
   "state: hong kong | country: china": {
     "addresstype": "region",
@@ -1924,6 +2626,24 @@
     "language": "en",
     "osm_id": "relation/913073",
     "top_match": "Hunan, China"
+  },
+  "state: ibb governorate | country: yemen": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Ibb Governorate",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/383900",
+    "top_match": "Ibb Governorate, Yemen"
+  },
+  "state: ibb | country: yemen": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Ibb Governorate",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/383900",
+    "top_match": "Ibb Governorate, Yemen"
   },
   "state: idaho | country: united states": {
     "addresstype": "state",
@@ -2150,6 +2870,15 @@
     "osm_id": "relation/421866",
     "top_match": "Kyiv, Ukraine"
   },
+  "state: lazio | country: italy": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Lazio",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/40784",
+    "top_match": "Lazio, Italy"
+  },
   "state: louisiana | country: united states": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2311,6 +3040,15 @@
     "language": "en",
     "osm_id": "relation/161638",
     "top_match": "Missouri, United States"
+  },
+  "state: montana province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: montana | country: bulgaria": {
     "addresstype": "state",
@@ -2573,6 +3311,24 @@
     "osm_id": "relation/165476",
     "top_match": "Oregon, United States"
   },
+  "state: otago | country: new zealand": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Otago",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1640138",
+    "top_match": "Otago, New Zealand"
+  },
+  "state: pazardzhik province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "state: pazardzhik | country: bulgaria": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2600,6 +3356,15 @@
     "osm_id": "relation/162109",
     "top_match": "Pennsylvania, United States"
   },
+  "state: pernik province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "state: pernik | country: bulgaria": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2608,6 +3373,15 @@
     "language": "en",
     "osm_id": "relation/1739534",
     "top_match": "Pernik, Bulgaria"
+  },
+  "state: plovdiv province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: plovdiv | country: bulgaria": {
     "addresstype": "state",
@@ -2636,6 +3410,15 @@
     "osm_id": "relation/357988",
     "top_match": "Punjab, Pakistan"
   },
+  "state: quebec | country: canada": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Quebec",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/61549",
+    "top_match": "Quebec, Canada"
+  },
   "state: queensland | country: australia": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2653,6 +3436,33 @@
     "language": "en",
     "osm_id": "relation/1942920",
     "top_match": "Rajasthan, India"
+  },
+  "state: republic of adygea | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Republic of Adygea",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/253256",
+    "top_match": "Republic of Adygea, Southern Federal District, Russia"
+  },
+  "state: rhode island | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Rhode Island",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/392915",
+    "top_match": "Rhode Island, United States"
+  },
+  "state: rhode island | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Rhode Island",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/392915",
+    "top_match": "Rhode Island, United States"
   },
   "state: rostov oblast | country: russia": {
     "addresstype": "state",
@@ -2681,6 +3491,15 @@
     "osm_id": "relation/86539",
     "top_match": "Salzburg, Austria"
   },
+  "state: sichuan | country: china": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Sichuan",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/913068",
+    "top_match": "Sichuan, China"
+  },
   "state: sistan and baluchestan province | country: iran": {
     "addresstype": "province",
     "checked_on": "2026-11-06",
@@ -2698,6 +3517,15 @@
     "language": "en",
     "osm_id": "relation/537693",
     "top_match": "Sistan and Baluchestan Province, Iran"
+  },
+  "state: sofia city province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: sofia city | country: bulgaria": {
     "addresstype": "state",
@@ -2762,6 +3590,15 @@
     "osm_id": "relation/161652",
     "top_match": "South Dakota, United States"
   },
+  "state: stara zagora province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "state: stara zagora | country: bulgaria": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2779,6 +3616,15 @@
     "language": "en",
     "osm_id": "relation/35183",
     "top_match": "Styria, Austria"
+  },
+  "state: sverdlovsk oblast | country: russia": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Sverdlovsk Oblast",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/79379",
+    "top_match": "Sverdlovsk Oblast, Ural Federal District, Russia"
   },
   "state: tambov oblast | country: russia": {
     "addresstype": "state",
@@ -2933,6 +3779,24 @@
     "osm_id": "relation/90726",
     "top_match": "Vinnytsia Oblast, Ukraine"
   },
+  "state: virginia | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Virginia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224042",
+    "top_match": "Virginia, United States"
+  },
+  "state: virginia | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Virginia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/224042",
+    "top_match": "Virginia, United States"
+  },
   "state: volgograd oblast | country: russia": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2941,6 +3805,15 @@
     "language": "en",
     "osm_id": "relation/77665",
     "top_match": "Volgograd Oblast, Southern Federal District, Russia"
+  },
+  "state: vratsa province | country: bulgaria": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: vratsa | country: bulgaria": {
     "addresstype": "state",
@@ -3004,6 +3877,24 @@
     "language": "en",
     "osm_id": "relation/165466",
     "top_match": "Wisconsin, United States"
+  },
+  "state: wyoming | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Wyoming",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161991",
+    "top_match": "Wyoming, United States"
+  },
+  "state: wyoming | country: usa": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Wyoming",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/161991",
+    "top_match": "Wyoming, United States"
   },
   "state: zhejiang | country: china": {
     "addresstype": "state",

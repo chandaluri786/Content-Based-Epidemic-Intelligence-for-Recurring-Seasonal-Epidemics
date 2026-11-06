@@ -1,7 +1,7 @@
 """Run the model on one article and turn its reply into a log record.
 
 Every reply is validated before it is accepted: it must be complete (not cut off at MAX_TOKENS),
-parse as one JSON object (after a safe repair of stray quotes), follow the v5.1 reply format with
+parse as one JSON object (after a safe repair of stray quotes), follow the prompt's reply format with
 every fixed value (checks.find_format_errors), and quote its evidence exactly from the article
 (checks.find_evidence_errors). An invalid reply is asked for again with a note naming the problems,
 up to MAX_VALIDATION_RETRIES times; the last time it asks for a compact reply. The decoding

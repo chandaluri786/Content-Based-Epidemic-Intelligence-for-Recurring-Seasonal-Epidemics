@@ -1,8 +1,9 @@
-"""Checks on a reply (the model's, a gold record's or a few-shot example's) against prompt v5.1.
+"""Checks on a reply (the model's, a gold record's or a few-shot example's) against the prompt
+(v5.2; v5.1 has the same reply format and fixed values).
 
 Three layers:
 
-  1. find_format_errors(reply): the reply follows the v5.1 format, with every value the prompt fixes.
+  1. find_format_errors(reply): the reply follows the prompt's format, with every value it fixes.
      A reply with a format error cannot be scored. During a run it is sent back to the model with a
      note naming the problem (extractor.py).
   2. find_evidence_errors(reply, article_text): every evidence quote is copied exactly from the
@@ -10,8 +11,9 @@ Three layers:
      has one, it is scored and the quote is reported as rule (a).
   3. find_rule_violations(reply, article_text, scan_date, place_checker): rules that need the article,
      the scan date or the geocoder: recency (4.7), evidence order (10.1), the reasoning steps ("How to
-     work"), and places that are real and written in their agreed form (5.1). They are reported, never
-     used to reject a reply.
+     work"), places that are real and written in their agreed form (5.1), and, from v5.2, overlapping
+     counts within one place (G4) and contradicting trend words (G5). They are reported, never used to
+     reject a reply.
 """
 
 import re
@@ -19,7 +21,7 @@ from datetime import date, timedelta
 
 from flu_extractor.places import PLACE_FIELDS, PlaceChecker
 
-# --- The values v5.1 fixes ---------------------------------------------------
+# --- The values the prompt fixes (2.2, the same in v5.1 and v5.2) ----------------
 
 REPLY_KEYS = ("summary", "reasoning", "useful", "reason", "items")                    # "Your reply"
 ITEM_FIELDS = ("kind", "number", "count_type", "status", "strain", "city", "state", "country",
@@ -112,7 +114,7 @@ def _item_format_errors(item, label: str) -> list[str]:
 
 
 def find_format_errors(reply) -> list[str]:
-    """Layer 1: everything the v5.1 reply format fixes. An empty list means the format is valid."""
+    """Layer 1: everything the reply format fixes. An empty list means the format is valid."""
     if not isinstance(reply, dict):
         return ["the reply is not a JSON object"]
     missing = [key for key in REPLY_KEYS if key not in reply]
@@ -236,13 +238,38 @@ def find_place_problems(item: dict, place_checker: PlaceChecker) -> list[str]:
     return problems
 
 
+def _overlap_problems(items: list[dict]) -> list[str]:
+    """G4 and G5 of prompt v5.2, where a script can decide them from the fields alone.
+
+    G4: two counts of the same kind, place fields, period, strain and status count the same people
+        (a count and its parts, or one count recorded twice). Counts that differ in any of these
+        are allowed (a total and a shorter period, influenza A and B, confirmed among suspected).
+    G5: two trend items with the same place fields, strain and period have different words.
+    """
+    problems, seen_counts, seen_trends = [], {}, {}
+    for index, item in enumerate(items, start=1):
+        where = tuple(item[f] for f in ("city", "state", "country", "start_date", "end_date", "strain"))
+        if item["kind"] == "trend":
+            earlier = seen_trends.setdefault(where, (index, item["words"]))
+            if earlier[0] != index and earlier[1] != item["words"]:
+                problems.append(f"(G5) items {earlier[0]} and {index}: trend words '{earlier[1]}' and "
+                                f"'{item['words']}' for the same place, strain and period")
+        else:
+            key = (item["kind"], item["status"], *where)
+            earlier = seen_counts.setdefault(key, index)
+            if earlier != index:
+                problems.append(f"(G4) items {earlier} and {index}: two {item['kind']} counts with the same "
+                                f"place, period, strain and status overlap")
+    return problems
+
+
 def find_rule_violations(reply: dict, article_text: str, scan_date: str,
                          place_checker: PlaceChecker) -> list[str]:
-    """Layers 2 and 3 for a reply with a valid format: rules (a), (d), (i), (j), (k).
+    """Layers 2 and 3 for a reply with a valid format: rules (a), (d), (i), (j), (k), G4 and G5.
 
     (a) evidence copied exactly from the article; (d) places real and in their agreed form; (i) end date
     recent; (j) evidence after the first quote in article order; (k) reasoning starts with
-    Step 0 and Step 1 cites Rule 1.
+    Step 0 and Step 1 cites Rule 1; G4 and G5 as in _overlap_problems.
     """
     violations = list(find_evidence_errors(reply, article_text))
     steps = reply["reasoning"]
@@ -256,6 +283,7 @@ def find_rule_violations(reply: dict, article_text: str, scan_date: str,
             violations.append(f"(j) {label}: evidence after the first quote is out of article order")
         violations += [f"(i) {label}: {p}" for p in _recency_problems(item, scan_date)]
         violations += [f"(d) {label}: {p}" for p in find_place_problems(item, place_checker)]
-    # Items identical except evidence are not a violation here: two different people can give two
-    # identical items. duplicates.py reports them as candidates for review instead.
+    # v5.2 G4: two counts that would count the same people (same kind, place, period, strain and
+    # status) are never both recorded, so identical counts are reported. duplicates.py also lists them.
+    violations += _overlap_problems(reply["items"])
     return violations

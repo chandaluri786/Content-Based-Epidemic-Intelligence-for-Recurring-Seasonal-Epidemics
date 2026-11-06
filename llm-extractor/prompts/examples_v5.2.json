@@ -1,0 +1,1526 @@
+[
+  {
+    "article_id": "20180828031500-1501",
+    "source": "Aditya:316",
+    "slots": [],
+    "difficulty": "not_useful",
+    "why_chosen": "Rule 1: text never mentions flu, exact Rule 1 reply",
+    "scan_date": "2018-08-28",
+    "link": "https://www.deccanchronicle.com/nation/current-affairs/280818/hyderabad-climate-change-makes-pathogens-potent.html",
+    "article": "Top",
+    "answer": {
+      "summary": "The stored text holds only the word 'Top'; the article is about climate change making pathogens potent in Hyderabad.",
+      "reasoning": [
+        "Step 0 (summary): the stored text is only a page fragment.",
+        "Step 1 (Rule 1): the article never mentions flu, influenza, a flu strain, a flu drug or vaccine, or a flu-like illness, so it is not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: the article never mentions flu, influenza, a flu strain, a flu drug or vaccine, or a flu-like illness.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20170610021500-970",
+    "source": "Thanya:307",
+    "slots": [
+      4
+    ],
+    "difficulty": "easy",
+    "why_chosen": "1.3 animal flu tied to food (egg shortage) -> inactive fallback, strain avian influenza",
+    "scan_date": "2017-06-10",
+    "link": "http://jakartaglobe.id/asia-pacific/south-korea-open-eggs-trade-thailand-next-week/",
+    "article": "South Korea to Open Eggs Trade With Thailand From Next Week\nSeoul. South Korea's food ministry said on Friday (09/06) it will allow imports of Thai eggs for the first time from next week to help ease a shortage caused by the country's worst-ever bird flu outbreak.\nThe two countries have finalized negotiations over terms of clearing egg imports including health certificates, the Ministry of Food and Drug Safety said in a statement.\nIn the aftermath of the country's birdflu epidemic which began in November last year, South Korea has been importing eggs from overseas to stabilize rising local egg prices sparked by tightening egg supplies.\nA fresh case of avian influenza occurred on a small farm last week. As of Friday a total of 11 bird flu cases had been confirmed, mostly on small farms.\nThe ministry expected the egg shipments from Thailand to help South Korea cope with a shortfall.\nSouth Korea can import fresh eggs from seven countries, including Australia and Spain, however, egg imports from the United States are banned after a bird flu outbreak there.\nThe average retail price of 30 eggs was at 7,967 won ($7.11) as of Thursday, up 52.7 percent from a year ago, according to data from state-run Korea Agro-Fisheries & Food Corp. But that was 16.5 percent lower from 9,543 won on January 12 when the price hit the highest.\nReuters\nTags: Keywords:",
+    "answer": {
+      "summary": "South Korea will import Thai eggs to ease a shortage caused by its worst-ever bird flu outbreak in poultry.",
+      "reasoning": [
+        "Step 0 (summary): South Korea opens egg imports from Thailand to ease a bird flu egg shortage.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 egg shortage caused by bird flu outbreak, ministry said Friday; S2 rising egg prices after the bird flu epidemic; S3 fresh avian influenza case on a farm, 11 cases on farms; S4 US egg imports banned after a bird flu outbreak there.",
+        "Step 2 (1.3): S1 and S2 are flu in animals linked to food for people (shortage, price rise) in South Korea; one inactive fallback for South Korea, strain avian influenza (8.1), dated to the ministry's Friday statement, 9 June 2017 (4.1, 4.4).",
+        "Step 3 (1.3): S3 is flu in farm birds only; no item.",
+        "Step 4 (1.3): S4 is a bird flu outbreak in the USA with no food shortage stated there; no item.",
+        "Step 5 (G3, G4, G5, 9.7): South Korea has no other item, so the inactive fallback stands; no other place has items.",
+        "Step 6 (Section 11): one valid item, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: a bird flu egg shortage in South Korea gives an inactive animal-food fallback.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "avian influenza",
+          "city": null,
+          "state": null,
+          "country": "South Korea",
+          "start_date": "2017-06-09",
+          "end_date": "2017-06-09",
+          "words": "inactive",
+          "evidence": [
+            "South Korea's food ministry said on Friday (09/06) it will allow imports of Thai eggs for the first time from next week to help ease a shortage caused by the country's worst-ever bird flu outbreak.",
+            "In the aftermath of the country's birdflu epidemic which began in November last year, South Korea has been importing eggs from overseas to stabilize rising local egg prices sparked by tightening egg supplies."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20220720123000-684",
+    "source": "Manoj:303",
+    "slots": [
+      1
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "1.2 'stomach flu' is not flu",
+    "scan_date": "2022-07-20",
+    "link": "https://www.mid-day.com/mumbai/mumbai-news/article/mumbai-reports-340-gastroenteritis-cases-within-two-weeks-23236885",
+    "article": "Mumbai reports 340 gastroenteritis cases within two weeks\nGastroenteritis or stomach flu, can be termed as an inflammation (irritation) of the intestines. It spreads by contact with an infected person or through contaminated food or water. Common symptoms include diarrhoea, vomiting and fever\nRepresentative image. Pic/Istock\nMumbai has recorded around 340 cases of gastroenteritis in the first two weeks of July month. According to the Brihanmumbai Municipal Corporation (BMC) epidemiology cell data, they have been reporting rising cases of gastroenteritis followed by malaria (243 cases).\nGastroenteritis or stomach flu, can be termed as an inflammation (irritation) of the intestines. It spreads by contact with an infected person or through contaminated food or water. Common symptoms include diarrhoea, vomiting and fever. In June, the city reported 543 gastroenteritis cases.\nADVERTISEMENT\nADVERTISEMENT",
+    "answer": {
+      "summary": "Mumbai recorded about 340 gastroenteritis (stomach flu) cases in the first two weeks of July, plus malaria cases.",
+      "reasoning": [
+        "Step 0 (summary): gastroenteritis and malaria cases in Mumbai.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 gastroenteritis or stomach flu definition (twice).",
+        "Step 2 (1.2): stomach flu is not flu; no item.",
+        "Step 3 (G3-G5, 9.7): no flu items, no place with flu activity, no fallback.",
+        "Step 4 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: only stomach flu (gastroenteritis), which is not influenza.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20170118030000-2605",
+    "source": "Manoj:178",
+    "slots": [],
+    "difficulty": "easy",
+    "why_chosen": "9.3.5 amount word 'a couple of deaths' -> low, strain H1N1 from context (8.2)",
+    "scan_date": "2017-01-18",
+    "link": "http://www.thehindu.com/news/cities/Vijayawada/Swine-flu-Elisa-kits-to-be-available-at-more-places/article17053841.ece",
+    "article": "Reports of positive Swine Flu cases and a couple of deaths in Telangana have raised concern in Vijayawada, the gateway to Andhra Pradesh.\nAndhra Group of Hospitals’ pulmonology and intensive care division head M. Ravindranath said efforts were being made to ensure availability of Elisa Test Kits at three places in the State. As of now, the kits are available in the required numbers only in Hyderabad. The new centres will probably be Tirupati, Visakhapatnam and either Guntur or Vijayawada.\nAn Elisa Kit for identifying Swine flu costs between Rs.2,000 and Rs.2,500 and two to three days are required for the test results to come, he said.\n“Since Swine flu is an airborne disease, it is better for people to avoid large gatherings. Those with cold and cough should cover their noses and mouths either with handkerchief or even better face masks,” he said.\nMinister for Health Kamineni Srinivas is expected to make announcements about the preparedness for Swine flu in Tirupati on Wednesday.\nSpecial wards planned\nGeneral instructions have been issued to prepare special wards for patients suspected of having Swine flu in all the teaching and district headquarters hospitals.\nFlu spreads among humans when infected people cough or sneeze. Also if people breathe in the virus or touch something with the virus on it and then touch their face. Avoid touching your eyes, nose or mouth. Germs spread this way.\nSwine flu is not spread by pork products as it is not transmitted through food.\nIt is most contagious during the first five days of the illness, though some people, most commonly children, can remain contagious for up to 10 days.\nDiagnosis can be made by sending a specimen, collected during the first five days, for analysis.\nPublished - January 18, 2017 07:38 am IST",
+    "answer": {
+      "summary": "Swine flu cases and a couple of deaths in Telangana raise concern in Vijayawada; Andhra Pradesh plans more Elisa test kits and special wards.",
+      "reasoning": [
+        "Step 0 (summary): concern in Vijayawada after swine flu cases and deaths in Telangana; Andhra Pradesh prepares test kits and wards.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 reports of positive swine flu cases and a couple of deaths in Telangana have raised concern in Vijayawada; S2 efforts to make Elisa test kits available at three places in Andhra Pradesh; S3 the Health Minister is expected to announce swine flu preparedness in Tirupati; S4 instructions to prepare special wards for suspected swine flu patients; S5 general facts on how flu spreads.",
+        "Step 2 (1.1, 2.3, 3.2, 9.2, 9.3.5): S1 is human swine flu in Telangana with no number of people ('positive Swine Flu cases', 'a couple of deaths'), so it is a trend, not a count. 'A couple of deaths' is an amount word for few: low. Strain: swine flu → H1N1 (8.1).",
+        "Step 3 (4.2, 4.3.5): no period is stated; report with no announcement date → the scan date 2017-01-18. Recent (4.7).",
+        "Step 4 (5.3.1, 5.5): place in the sentence: Telangana → state Telangana, country India.",
+        "Step 5 (9.3.2, 9.5): S2, S3 and S4 are preparedness in Andhra Pradesh; they describe the response, not flu in Andhra Pradesh, and the article reports no flu there, so no item. S5 is general background: no item.",
+        "Step 6 (G3-G5, 9.7): one trend item for Telangana; Andhra Pradesh has no current flu shown, so no fallback.",
+        "Step 7 (Section 11): an item exists, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: a current low-level swine flu trend (cases and a couple of deaths) reported for Telangana.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "H1N1",
+          "city": null,
+          "state": "Telangana",
+          "country": "India",
+          "start_date": "2017-01-18",
+          "end_date": "2017-01-18",
+          "words": "low",
+          "evidence": [
+            "Reports of positive Swine Flu cases and a couple of deaths in Telangana have raised concern in Vijayawada, the gateway to Andhra Pradesh."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20180713050000-509",
+    "source": "Jahnavi:80",
+    "slots": [
+      5,
+      10,
+      11,
+      12
+    ],
+    "difficulty": "medium",
+    "why_chosen": "death 'new' on report day; 19 admissions at one hospital since April -> cumulative_subset, city from institution (5.3.3)",
+    "scan_date": "2018-07-13",
+    "link": "https://www.2gb.com/child-influenza-death-sparks-flu-vaccine-warning/",
+    "article": "Child influenza death sparks flu vaccine warning\nOne child has died and more than a dozen others have been hospitalised after coming down with the flu.\n19 children have been admitted to Westmead Children’s hospital with influenza since April.\nNSW Health is urging parents to vaccinate their children after only 20% of eligible children received the shot, despite a free vaccine on offer for those under five.\nThe dominant flu strain in New South Wales this year hits young children and pregnant women the hardest.\nNSW Health Director of Communicable Diseases Dr Vicky Sheppeard tells Warren Moore certain strains have different impacts on people of different ages.\n“It’s partly because of the immunity that they hold.”\nDr Sheppeard tells Warren the flu season has yet to start but is expected to begin “in the next week or two”, and will peak in late August.\nShe says NSW Health is “renewing the call” for parents to vaccinate their kids.\n“We’re really renewing the call for parents of children under five, and for other highly susceptible people like pregnant women, to make sure they get vaccinated now before flu season takes off in a couple of weeks.”\nClick PLAY below to hear the full interview",
+    "answer": {
+      "summary": "A child has died of flu in NSW and 19 children were admitted to Westmead Children's hospital since April; NSW Health urges vaccination.",
+      "reasoning": [
+        "Step 0 (summary): child flu death and child admissions in NSW prompt a vaccine call.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline child influenza death, S2 one child died and more than a dozen hospitalised, S3 19 children admitted to Westmead since April, S4 NSW Health urging vaccination, S5 dominant strain this year, S6 season yet to start, expected in a week or two.",
+        "Step 2 (2.3, 2.4, 4.3.5): S1/S2 death is human flu, a count of 1 with no date, so the scan date 2018-07-13; new (7.2).",
+        "Step 3 (5.3.2, 5.3.6, 6.3.5, 8.1): place New South Wales from the passage and NSW Health; confirmed; strain null. Evidence S1, S2, S4.",
+        "Step 4 (G3, 2.4, 4.6, 7.2): the 'more than a dozen hospitalised' in S2 are taken as the same children as the 19 in S3; hospitalized 19, since April: 2018-04-01 to 2018-07-13; one institution, so cumulative_subset.",
+        "Step 5 (5.3.3, 5.5): Westmead Children's hospital is in Sydney, New South Wales, Australia; confirmed; strain null.",
+        "Step 6 (9.5.2, 9.7): S4 vaccine call after the death gives only 'present', and New South Wales already has an item. No item.",
+        "Step 7 (9.6, 9.3.8): S5 names no strain; S6 is a forecast. No item.",
+        "Step 8 (G3-G5, 9.7): no duplicates; both places have items, so no fallback.",
+        "Step 9 (Section 11): two valid items, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: a recent child flu death in NSW and 19 child flu admissions at Westmead since April.",
+      "items": [
+        {
+          "kind": "deaths",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2018-07-13",
+          "end_date": "2018-07-13",
+          "words": null,
+          "evidence": [
+            "Child influenza death sparks flu vaccine warning",
+            "One child has died and more than a dozen others have been hospitalised after coming down with the flu.",
+            "NSW Health is urging parents to vaccinate their children after only 20% of eligible children received the shot, despite a free vaccine on offer for those under five."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 19,
+          "count_type": "cumulative_subset",
+          "status": "confirmed",
+          "strain": null,
+          "city": "Sydney",
+          "state": "New South Wales",
+          "country": "Australia",
+          "start_date": "2018-04-01",
+          "end_date": "2018-07-13",
+          "words": null,
+          "evidence": [
+            "19 children have been admitted to Westmead Children’s hospital with influenza since April.",
+            "One child has died and more than a dozen others have been hospitalised after coming down with the flu."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20220906121500-1430",
+    "source": "Manoj:109",
+    "slots": [
+      3
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "9.5 routine pre-season vaccine advice and a forecast -> no item",
+    "scan_date": "2022-09-06",
+    "link": "https://www.nbcnews.com/health/health-news/flu-shots-kids-child-need-one-dose-year-rcna46165",
+    "article": "Ahead of what may be an intense flu season, the American Academy of Pediatrics urged parents on Tuesday to make sure their children are vaccinated against the flu this fall, adding that some kids may need more than one flu shot.\nThe recommendation that some children need two flu shots is not new, but experts say it's particularly important after two years of the Covid pandemic.\nChildren ages 6 months through 8 years old who've either never received a flu shot or who've only ever had a single flu shot should get two this year, a month apart, for maximum protection.\nThe recommendation comes from the Centers for Disease Control and Prevention, which has advised this strategy since the 2009 H1N1 epidemic. Last month, the agency reminded parents that some children may need a second shot.\nThis strategy may have an even greater impact during the 2022-2023 flu season, experts said, because the number of children getting flu shots and other recommended vaccines has slowed in recent years.\nSpread of flu dropped precipitously once the pandemic began — likely because of social distancing measures, said Dr. Buddy Creech, a pediatric infectious disease expert at Vanderbilt University Medical Center in Nashville, Tennessee.\nThe ensuing decrease in flu activity, Creech surmised, meant families were less likely to get their kids to regular wellness checks.\n\"Folks weren't going in for routine vaccines,\" he said. \"The sense of urgency wasn't there.\"\nDr. Mark Kline, physician-in-chief at Children's Hospital New Orleans, agreed. \"We haven't had much flu, so people haven't really been motivated to go out and get their kids vaccinated.\"\nThe gap has left a large proportion of children unexposed to influenza and therefore vulnerable to the virus.\nBut flu activity in the Southern Hemisphere has surged recently, which could be an early indicator of what the United States might experience.\nThe American Academy of Pediatrics recommends that all children 6 months and older get vaccinated for influenza this fall, preferably by the end of October.\n\"Vaccines remain the best way to prevent severe illness and keep kids in classrooms,\" according to the AAP.\nDoctors also encourage pregnant women to get flu shots, as they've been shown to provide lasting protection to their newborn infants up to six months of age.\nFollow NBC HEALTH on Twitter & Facebook.",
+    "answer": {
+      "summary": "AAP urges parents to vaccinate children against flu ahead of a possibly intense 2022-23 season; some kids need two shots.",
+      "reasoning": [
+        "Step 0 (summary): a pre-season flu vaccination recommendation for US children.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 ahead of what may be an intense flu season, AAP urges vaccination; S2 spread of flu dropped once the pandemic began; S3 flu activity in the Southern Hemisphere has surged recently.",
+        "Step 2 (9.3.8, 9.5): S1 is a forecast and a routine pre-season campaign; no item.",
+        "Step 3 (4.7): S2 is about past pandemic years; no item.",
+        "Step 4 (5.5): S3 has no recordable place (a hemisphere); no item.",
+        "Step 5 (G3-G5, 9.7): no items and no place with current flu.",
+        "Step 6 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: routine pre-season vaccine advice and a forecast, with no current flu in a real place.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20160130104500-564",
+    "source": "Jahnavi:42",
+    "slots": [
+      11,
+      12
+    ],
+    "difficulty": "medium",
+    "why_chosen": "6.3.1-6.3.2 samples split: 2 confirmed, 10 pending -> suspected, negatives dropped",
+    "scan_date": "2016-01-30",
+    "link": "http://www.business-standard.com/article/pti-stories/two-cases-of-h1n1-flu-detected-in-j-k-measures-put-in-place-116013000483_1.html",
+    "article": "Two cases of H1N1 flu detected in J&K; measures put in place\nTwo cases of H1N1 Influenza have been reported in Jammu and Kashmir, prompting the government to step up measures in place to tackle the flu.\nThe Jammu and Kashmir Health department collected 43 samples of suspected H1N1 patients yesterday, out of which two turned out to be positive.\n\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said.\nAlso Read\nIn view of these reports, Governor N N Vohra yesterday reviewed the preparedness of the Health and Medical Education Department in dealing with the problem.\n\"The state has geared up to deal with H1N1 flu. The preparedness to tackle H1N1 flu in the State has been reviewed and measures put in place\", Commissioner Secretary Health and Medical Education department, Dr Mandeep Bhandari said.\nAs per the situation report on H1N1 Flu status provided by the Secretary Health and Medical Education, a total of 32 samples of suspected patients were collected in Jammu division and 11 in Kashmir division, the department officer said.\n\"Out of 32 collected samples in Jammu Division, 23 cases have been found negative, two positive and reports of seven cases are pending.\nIn Kashmir Division, out of 11 samples collected, 8 are negative and results of the rest are awaited\", he added.\nBhandari said that a Control Room has been established in the Directorates of Health Services at Jammu and Srinagar; an advisory has been circulated to all districts for the sensitization of health\ncare professional and para professionals, including ASHAs and Anganwadi workers, regarding the disease.\nBesides, screening and sample collection centres have been established at Government Medical College, Jammu, SKIMS Soura, GMC Srinagar, hospitals in Gandhinagar and Sarwal for drawing samples of the persons suspected to have Influenza-A.\nMore From This Section\nFirst Published: Jan 30 2016 | 3:22 PM IST",
+    "answer": {
+      "summary": "Two H1N1 cases are confirmed in Jammu and Kashmir out of 43 samples collected; ten results are awaited and preparedness measures are set up.",
+      "reasoning": [
+        "Step 0 (summary): Jammu and Kashmir reports two H1N1 positives among 43 samples collected yesterday, with 10 results awaited, and describes preparedness measures.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline 'Two cases of H1N1 flu detected in J&K'; S2 two H1N1 cases reported in Jammu and Kashmir; S3 43 samples collected yesterday, two positive; S4 officer: two positive, 31 negative, reports of 10 awaited; S5 governor reviewed preparedness; S6 state geared up, measures put in place; S7 32 samples in Jammu division and 11 in Kashmir division; S8 Jammu division: 23 negative, two positive, seven pending; S9 Kashmir division: 8 negative, rest awaited; S10 control rooms and an advisory circulated; S11 screening centres for persons suspected to have Influenza-A.",
+        "Step 2 (1.1, G3): S1-S4 describe the same two positive people (one event): human H1N1 cases.",
+        "Step 3 (2.3, 3.2, 6.3.1, 6.3.2): the 43 samples split by result: 2 positive gives cases confirmed 2; 10 awaited gives cases suspected 10; the 31 negatives get no item.",
+        "Step 4 (4.3.2, 4.4, 7.2): 'collected ... yesterday' counts from the scan date 2016-01-30, so 2016-01-29, one day; both counts are new.",
+        "Step 5 (5.3.1, 5.5): 'in Jammu and Kashmir' gives state Jammu and Kashmir, country India. Strain H1N1 (8.1).",
+        "Step 6 (G4 parts rule, 5.1): S7-S9 split the same samples into Jammu and Kashmir divisions; divisions are below the first level and are not cities, so no field tells the parts apart: not recorded.",
+        "Step 7 (9.3.2, 9.5): S5, S6, S10 and S11 describe preparedness and measures; they give no level word, so at most a fallback present, and the state already has items: no item.",
+        "Step 8 (G3-G5, 9.7): one place, Jammu and Kashmir, with two count items; no trends, no fallback.",
+        "Step 9 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: two confirmed and ten suspected H1N1 cases in Jammu and Kashmir on 29 January 2016.",
+      "items": [
+        {
+          "kind": "cases",
+          "number": 2,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Jammu and Kashmir",
+          "country": "India",
+          "start_date": "2016-01-29",
+          "end_date": "2016-01-29",
+          "words": null,
+          "evidence": [
+            "The Jammu and Kashmir Health department collected 43 samples of suspected H1N1 patients yesterday, out of which two turned out to be positive.",
+            "Two cases of H1N1 flu detected in J&K; measures put in place",
+            "Two cases of H1N1 Influenza have been reported in Jammu and Kashmir, prompting the government to step up measures in place to tackle the flu.",
+            "\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said."
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 10,
+          "count_type": "new",
+          "status": "suspected",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Jammu and Kashmir",
+          "country": "India",
+          "start_date": "2016-01-29",
+          "end_date": "2016-01-29",
+          "words": null,
+          "evidence": [
+            "\"We collected 43 samples of suspected H1N1 patients in Jammu and Kashmir yesterday. Of these two are positive and 31 negative and reports of 10 samples are awaited\", a senior officer of the Health department said."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20221025141500-417",
+    "source": "Thanya:56",
+    "slots": [
+      10
+    ],
+    "difficulty": "easy",
+    "why_chosen": "9.1 one institution ('as of today' at St Jude) -> fallback present at its city; forecasts dropped (9.3.8)",
+    "scan_date": "2022-10-25",
+    "link": "https://news.yahoo.com/scientists-fear-us-faces-twindemic-133154288.html",
+    "article": "- Doctors warn of a potential \"twindemic\" or \"tripledemic\" this winter in the US if Covid-19 coincides with rising cases of influenza and respiratory syncytial virus (RSV).\nDoctors and disease experts are warning that America could suffer a \"twindemic\" or even a \"tripledemic\" this winter if another wave of Covid-19 coincides with rising influenza and other viral infections.\nThe US Centers for Disease Control and Prevention (CDC) said last week that cases of respiratory syncytial virus (RSV), which is particularly dangerous to children, have increased rapidly across the US since August.\nMeanwhile, the widespread relaxation of Covid-19 precautions such as mask-wearing and social distancing is likely to boost the coming flu season, which was suppressed during the last two winters.\nScientists also warned of a possible \"twindemic\" in both of those winters, and it did not occur. New Covid cases are currently flat across the US, according to CDC data, although some states are experiencing spikes.\nNevertheless, recent polling suggests that support for anti-infection measures and booster vaccines has dropped since then, and new variants and subvariants are also circulating.\n\"We anticipate a normal flu season, which can be anywhere between 4,000 to 36,000 deaths in the US,\" epidemiologist Thomas Duszynski told FOX Weather last week.\n\"There is influenza which we see every year. And unfortunately, now we're seeing Covid-19 infections every year as well. So this idea that they're both going to maybe surge over the winter months, that's why we're calling this a twindemic.\"\nDr Alpana Waghmare, an infectious disease expert at Fred Hutchinson Cancer Center in Seattle, told The New York Times: \"We're seeing everything come back with a vengeance.\"\nAnother disease specialist, Dr Diego Hijano of Tennessee's St Jude Children's Research Hospital, said: \"As of today, we are seeing equal numbers of Covid, flu and RSV. That's really concerning, because we are very early for flu and RSV activity... it's going to be a rough winter.\"\nOne big question is whether each different disease will weaken people's resistance to the others, or whether they will actually impede infection by putting immune systems in a heightened state of alarm.\nIt is possible to get both Covid-19 and flu at the same time, known colloquially as \"flurona\", but its likelihood and severity is not yet clear.\nMeanwhile, hospitals across the country have reported being overwhelmed by an \"unprecedented\" wave of RSV infections among children, leading some to consider calling for help from the National Guard.\n\"RSV admissions have skyrocketed at Connecticut Children's [Hospital],\" a spokesperson told CNN. \"October has been like never before for this virus.\"\nThe hospital's executive vice president Dr Juan Salazar added: \"I've been doing this for a long time, I've been at Connecticut Children's for 25 years, and I have never seen this level of surge – specifically of RSV – coming into our hospital.\"\nHe said that children's relative lack of exposure to other viruses during the Covid pandemic may have weakened their resistance.\nYale New Haven Children's Hospital in Connecticut also reported a spike in RSV cases.",
+    "answer": {
+      "summary": "Doctors warn the US could face a 'twindemic' or 'tripledemic' this winter as Covid-19, influenza and RSV coincide; RSV surges in children's hospitals.",
+      "reasoning": [
+        "Step 0 (summary): experts warn of a possible winter twindemic of Covid-19, flu and RSV in the US, while RSV is surging now.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 warning of a twindemic this winter if Covid coincides with rising influenza and RSV; S2 relaxation of precautions likely to boost the coming flu season; S3 'We anticipate a normal flu season' with 4,000-36,000 deaths; S4 influenza and Covid may both surge over the winter; S5 Fred Hutch expert: 'We're seeing everything come back with a vengeance'; S6 St Jude's Dr Hijano: 'As of today, we are seeing equal numbers of Covid, flu and RSV... we are very early for flu and RSV activity'; S7 'flurona' possible.",
+        "Step 2 (9.3.8, 4.7): S1, S2, S3 and S4 are warnings and predictions about the coming winter: no item.",
+        "Step 3 (5.2, 2.3): S5 does not say which illnesses or which place it refers to: no item.",
+        "Step 4 (9.1, 5.3.3, 5.5): S6 is about one institution, St Jude Children's Research Hospital in Tennessee, which has one location, Memphis: Memphis, Tennessee, USA. Flu is being seen there now ('As of today'), mixed with Covid and RSV and with no flu amount: at most a fallback present (9.3.6). No period: the scan date 2022-10-25. Strain null.",
+        "Step 5 (1.2): RSV and Covid statements are other diseases: no item. S7 is general: no item.",
+        "Step 6 (G3-G5, 9.7): Memphis has no other item, so the fallback present is recorded; the United States has no current flu statement.",
+        "Step 7 (Section 11): an item exists, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: a Memphis children's hospital reports seeing flu now, alongside Covid and RSV.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": "Memphis",
+          "state": "Tennessee",
+          "country": "United States",
+          "start_date": "2022-10-25",
+          "end_date": "2022-10-25",
+          "words": "present",
+          "evidence": [
+            "Another disease specialist, Dr Diego Hijano of Tennessee's St Jude Children's Research Hospital, said: \"As of today, we are seeing equal numbers of Covid, flu and RSV. That's really concerning, because we are very early for flu and RSV activity... it's going to be a rough winter.\""
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20180802063000-508",
+    "source": "Jahnavi:126",
+    "slots": [
+      1,
+      3
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "4.1 undated personal story told to promote vaccination -> past story, no item",
+    "scan_date": "2018-08-02",
+    "link": "https://au.news.yahoo.com/mothers-warning-toddler-came-within-hours-death-flu-131448195.html",
+    "article": "A Perth mother has told how her two-year-old boy came within hours of death after catching the flu, and urged other families to get their children vaccinated before the flu season hit hard.\nLittle Danny Bousaid found it difficult to breathe and didn't get better after contracting the flu. He became so sick he was moved to the intensive care unit at Perth Children's Hospital.\nHe needed a lot of oxygen and his mother Lily Bousaid thought she might lose her little boy.\nShe described it as a \"very hard moment\".\nDanny is immunised against most illnesses, but his parents underestimated the seriousness of this highly contagious virus and how quickly it can become deadly.\nThe Hamilton Hill parents didn't know a simple shot could have protected him.\nMs Bousaid said she thought her boy's flu would pass after a few days of a runny nose and fever, but it almost killed the toddler.\nThe true danger of the flu is a message still not getting through to most Perth parents, with only 19 per cent of children under age of five currently immunised against the virus.\nDr Chris Blyth, who divides his time as a paediatrician at Perth Children's Hospital and as an infectious diseases researcher at the Telethon Kids Institute, said the flu is often underestimated.\n\"People don't think about flu as a significant disease,\" Dr Blyth said.\n\"Each year hundreds of children get admitted to hospital with the flu and it is preventable through vaccination.\"\nHe said the worst of the flu season is yet to hit, so there is still time to protect children from a potentially deadly case of the flu.\nThe vaccination is free for children under five – the ages most at risk.\nMs Bousaid's advice to parents is: \"Just do it, don't wait.\"",
+    "answer": {
+      "summary": "A Perth mother tells how her toddler nearly died of flu in intensive care and urges parents to vaccinate before the flu season hits hard.",
+      "reasoning": [
+        "Step 0 (summary): a vaccination awareness story built around a Perth toddler's severe flu and a paediatrician's advice.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 a Perth two-year-old came within hours of death after catching the flu; S2 he was moved to intensive care at Perth Children's Hospital; S3 only 19 per cent of children under five immunised; S4 each year hundreds of children are admitted with flu; S5 the worst of the flu season is yet to hit, so there is still time to vaccinate.",
+        "Step 2 (4.1, 4.3.6): S1+S2 are one boy's illness and ICU stay (G3), told by his mother to urge vaccination. The article gives no date or time frame for it, so it is a personal story told to make a general point: a past story, no item.",
+        "Step 3 (1.2, 9.5): S3 is vaccine coverage, a prevention topic: no item. S4 is a yearly generality (4.7): no item.",
+        "Step 4 (9.3.8): S5 is a forward-looking phrase about the season, used to say there is still time to vaccinate, and the article gives nothing dated saying flu is active now: a prediction, no item (the 9.3.8 example).",
+        "Step 5 (G3-G5, 9.7): no current, dated flu activity in any place, so no fallback.",
+        "Step 6 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: an undated personal flu story told to promote vaccination, plus a forecast of the season's peak.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20181217000000-385",
+    "source": "Aditya:81",
+    "slots": [
+      7,
+      11
+    ],
+    "difficulty": "medium",
+    "why_chosen": "'about two weeks ago' (4.4) case; 'a lot of people have the flu' -> high for this month (4.5)",
+    "scan_date": "2018-12-17",
+    "link": "https://www.wrdw.com/content/news/Georgia-flu-activity-highest-in-country-502886822.html",
+    "article": "Sunday, December 16, 2018\nNews 12 at 11\nAUGUSTA, Ga. (WRDW/WAGT) -- It's that time of the year. December through March, flu season is at its peak.\n\"My throat started getting itchy,\" Jaleia Neal said. \"I started throwing up a lot and I was really warm.\"\nJaleia Neal says she didn't get the flu shot. About two weeks ago, she ended up at the hospital where she learned she had the flu.\nLast year was one of the worst flu season's on record. Nationwide, 30,000 people were hospitalized and 185 children died. 80% of those children were not vaccinated.\n\"That's the thing. You can be an otherwise healthy young individual with no comorbidities, but if you get the flu you can end up on a ventilator and possibly dead. We've seen it happen,\" Brett Hausauer said.\nBrett Hausauer is a radiology resident at Augusta University Medical Center.\n\"Being a radiologist, we review a lot of x-ray films every day,\" Hausauer said. \"Especially for kids that have flu-like viral symptoms.\"\nHe says he sees first-hand how bad it can get.\n\"Growing up too, I thought the flu was like more of an intestinal bug. You throw up and you get over it, but really it starts with myalgias, headaches and muscles aches and it really is a respiratory illness.\"\nGeorgia has some of the most flu activity.\nIn fact, the highest flu-like illness activity in the nation this month.\nDoctors at Augusta University say while the shot can sometimes cause side-affects, it cannot give you the flu.\n\"If you get the flu after having gotten the vaccine it's probably, you came down with one of the flavors the vaccine didn't cover,\" Hausauer said.\nJaleia says she's learned her lesson.\n\"People should get the flu shot. In Georgia we have a lot of people that have the flu, so it would be better if they got the flu shot,\" Jaleia Neal said.",
+    "answer": {
+      "summary": "Augusta, Georgia report: a young woman caught flu, Georgia has the nation's highest flu-like illness activity this month; doctors urge flu shots.",
+      "reasoning": [
+        "Step 0 (summary): a local Augusta news story on flu in Georgia with a patient's account.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 December through March flu season is at its peak, S2 Jaleia Neal learned at the hospital about two weeks ago she had the flu, S3 last year 30,000 hospitalized and 185 children died, S4 Georgia has some of the most flu activity, the highest flu-like illness activity this month, S5 in Georgia a lot of people have the flu.",
+        "Step 2 (9.3.8): S1 is a general statement of the usual season timing, not a current level; no separate item.",
+        "Step 3 (2.4, 4.4, 5.3, 6.2, 7.2): S2 one person diagnosed with flu: cases 1 confirmed; about two weeks ago = 14 days before 2018-12-17 = 2018-12-03; new; place from the Augusta, Ga. passage, the larger place Georgia, United States (5.3.6). A hospital visit with no admission stated, so no hospitalized item.",
+        "Step 4 (4.7): S3 is last season, not recent; no item.",
+        "Step 5 (9.2, 9.3.5, 4.5): S4 and S5 say flu activity is among the highest and a lot of people have flu in Georgia: trend high, this month 2018-12-01 to 2018-12-17; one item (G3).",
+        "Step 6 (G3-G5, 9.7): Georgia has items, no fallback.",
+        "Step 7 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Georgia has high flu activity this month and a recent confirmed flu case.",
+      "items": [
+        {
+          "kind": "cases",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": "Georgia",
+          "country": "United States",
+          "start_date": "2018-12-03",
+          "end_date": "2018-12-03",
+          "words": null,
+          "evidence": [
+            "About two weeks ago, she ended up at the hospital where she learned she had the flu.",
+            "AUGUSTA, Ga. (WRDW/WAGT) -- It's that time of the year.",
+            "Jaleia Neal says she didn't get the flu shot."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "Georgia",
+          "country": "United States",
+          "start_date": "2018-12-01",
+          "end_date": "2018-12-17",
+          "words": "high",
+          "evidence": [
+            "Georgia has some of the most flu activity.",
+            "In fact, the highest flu-like illness activity in the nation this month.",
+            "In Georgia we have a lot of people that have the flu, so it would be better if they got the flu shot,\" Jaleia Neal said."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20161209003000-994",
+    "source": "Aditya:100",
+    "slots": [
+      11
+    ],
+    "difficulty": "medium",
+    "why_chosen": "CDC scale (9.3.4): 'local' -> low; 'medium-high' -> moderate, different periods so no G5 clash",
+    "scan_date": "2016-12-09",
+    "link": "http://www.WAFB.com/story/34009662/la-health-officials-offer-drive-thru-flu-shot-clinic",
+    "article": "BATON ROUGE, LA (WAFB) - Residents will be able to get flu shots on Saturday without having to leave their cars.\nThe Louisiana Department of Health is hosting a drive-thru flu vaccination clinic for people of all ages.\nDoctors warn, December through February is peak time for the cough, cold and flu. Dr. Tony Martinez with Lake After Hours said when patients come in with influenza, their description of the body aches, cough and fever are often the same.\n\"People walk in and say, 'I feel like I got hit by a truck,'\" Martinez said. \"That's one of the first things they tell you.\"\nThe virus can take up to two weeks to treat. The Centers for Disease Control Weekly Influenza Surveillance Report, this week, put Louisiana in the medium-high category for risk of spreading.\nMartinez said that means the cases are climbing.\n\"Recently, Louisiana was upgraded to what they call local spread status by the CDC, which means that we are starting to see a lot more flu cases showing up and it is spreading across various parts of the state,\" Martinez explained.\nThe good news is you can do something now to help prevent it. On Saturday, LDH is making getting a flu shot as quick and easy as grabbing a burger and fries in the drive thru line at your favorite fast food restaurant.\n\"We're testing the limits,\" said Parham Jaberi, assistant state health officer with the Louisiana Department of Health. \"We want to see how conveniently we can bring this to our consumers, and more so, this is just one opportunity for us to ensure our citizens here in the Baton Rouge area are getting their flu shot.\"\nThe state will have four nurses and 500 doses of the vaccine available at the Bon Carre Business Center. All you have to do is show up and roll up your sleeve. You don't even have to get out of your car. It's free with proof of health insurance. It will cost you $10 if you do not have insurance.\n\"There are so many resources to get a flu shot now that anybody should be able to get it,\" Martinez added.\nThe flu shots will be available at the Bon Carre Business Center, located at 7241 Florida Boulevard, on Saturday from 10 a.m. to 2 p.m.\nCopyright 2016 WAFB. All rights reserved.",
+    "answer": {
+      "summary": "Louisiana Department of Health hosts a drive-thru flu shot clinic in Baton Rouge as CDC rates Louisiana medium-high for flu spread.",
+      "reasoning": [
+        "Step 0 (summary): the article is about a drive-thru flu vaccination clinic in Baton Rouge.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 drive-thru flu shot clinic, S2 December through February is peak time, S3 CDC report this week put Louisiana in the medium-high category, S4 cases are climbing, S5 Louisiana recently upgraded to local spread status, seeing a lot more flu cases.",
+        "Step 2 (9.5): S1 is a routine vaccination clinic; no item.",
+        "Step 3 (9.3.8): S2 is general season timing; no item.",
+        "Step 4 (4.5, 9.2, 9.3.1): S3 is a trend for Louisiana, United States; 'this week' is Monday 2016-12-05 to 2016-12-09; 'medium-high' gives moderate; S4 explains S3 and a stated level beats direction (G3).",
+        "Step 5 (4.4, 9.3.4): S5 'recently' gives 2016-12-09; CDC local spread is low; a different period from S3, so no G5 conflict.",
+        "Step 6 (G3-G5, 9.7): two trends for Louisiana with different periods; no fallback.",
+        "Step 7 (Section 11): valid items, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: CDC rates Louisiana medium-high for flu spread this week, with local spread status.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "Louisiana",
+          "country": "United States",
+          "start_date": "2016-12-05",
+          "end_date": "2016-12-09",
+          "words": "moderate",
+          "evidence": [
+            "The Centers for Disease Control Weekly Influenza Surveillance Report, this week, put Louisiana in the medium-high category for risk of spreading.",
+            "Martinez said that means the cases are climbing."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "Louisiana",
+          "country": "United States",
+          "start_date": "2016-12-09",
+          "end_date": "2016-12-09",
+          "words": "low",
+          "evidence": [
+            "Recently, Louisiana was upgraded to what they call local spread status by the CDC, which means that we are starting to see a lot more flu cases showing up and it is spreading across various parts of the state"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20160128204500-2120",
+    "source": "Manoj:244",
+    "slots": [
+      2
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "1.3 avian flu in poultry only, no food or people link -> no item",
+    "scan_date": "2016-01-28",
+    "link": "http://wishtv.com/2016/01/28/expert-grocery-store-prices-steady-despite-avian-flu/",
+    "article": "Expert: Grocery store prices steady despite avian flu\nWEST LAFAYETTE, Ind. (WISH) – An avian flu outbreak at a southern Indiana farm has had little to no effect on the price of poultry and eggs purchased at the grocery store, a Purdue University expert said.\nHundreds of thousands of birds were euthanized as a result of the avian flu discovery, which was the first avian flu outbreak at a commercial poultry farm in Indiana.\nPurdue agricultural economist Phillip Paarlberg said market estimates show the price for poultry and eggs in grocery stores changed by plus or minus 1 percent, which is standard any time of year.\n“With these price changes there will be very little impact on consumers,” he said. “At least that is how it stands now.”\nPart of the reason prices haven’t increased locally is because of decreased demand in exports. Multiple countries have imposed restrictions on importing Indiana poultry as a result of the avian flu scare.\nExperts said if the avian flu issue expands or continues, the market could change more substantially.",
+    "answer": {
+      "summary": "A Purdue economist says an avian flu outbreak at a southern Indiana poultry farm has had little to no effect on grocery prices.",
+      "reasoning": [
+        "Step 0 (summary): an avian flu outbreak at a commercial poultry farm in southern Indiana led to culling, but poultry and egg prices in stores stayed steady.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline, prices steady despite avian flu; S2 avian flu outbreak at a southern Indiana farm with little to no effect on prices; S3 hundreds of thousands of birds euthanized; S4 prices changed by plus or minus 1 percent, standard any time of year; S5 countries restrict imports of Indiana poultry; S6 prices could change if the issue expands.",
+        "Step 2 (1.3): S2 and S3 are flu in animals only, with no people exposed or infected.",
+        "Step 3 (1.3): the food-link row needs contaminated food, testing of food, recalls, shortages, price rises or a stated loss of food supply. S4 says prices did not rise (a standard plus or minus 1 percent), S5 is an export restriction, not food for people, and S6 is a forecast (4.7): none gives the inactive fallback.",
+        "Step 4 (G3-G5, 9.7): no items and no fallback applies.",
+        "Step 5 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: avian flu in Indiana poultry only, with no human flu and no price rise or shortage of food.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20180622131500-1587",
+    "source": "Thanya:89",
+    "slots": [
+      10,
+      11
+    ],
+    "difficulty": "medium",
+    "why_chosen": "running total since January (4.5) plus zero cases in Mumbai -> inactive (9.3.3)",
+    "scan_date": "2018-06-22",
+    "link": "https://www.indiatoday.in/pti-feed/story/mh-monsoon-diseases-1267278-2018-06-22",
+    "article": "MH-MONSOON DISEASES\nMinister warns against late reporting of diseases during monsoon\nMumbai, Jun 22 (PTI) Late reporting of illness has been found to be the main cause of deaths due to diseases during the last year's monsoon, Maharashtra Health Minister Deepak Sawant said today.\nTalking to PTI, Sawant said an audit of the deaths last monsoon found that in most cases, patients did not seek the medical help immediately.\nWith the onset of monsoon, he has instructed municipal corporations and local bodies to ensure adequate medicine stocks, he said.\nAuthorities have also been asked to prepare isolation wards for patients of swine flu, malaria, dengue and leptospirosis, he said.\nThe number of dengue cases in Mumbai has halved compared to the last year, he said.\nLeptospirosis is found more commonly in coastal areas during the rains, he said.\nLast year 18 persons died of leptospirosis in the state, while this year 19 cases have been found in Mumbai, Ratnagiri and Sindhudurg, but no death has been reported so far, the health minister said.\nBetween January and June this year, eight lakh patients were screened for swine flu out of which 34 tested positive. In Mumbai, no cases of swine flu infection were found, he said.\nHe has also instructed officials to ensure cleanliness at construction sites, and those violating the directives to prevent accumulation of rainwater -- which leads to mosquito breeding -- will face action, he said. PTI MR KRK KRK KRK",
+    "answer": {
+      "summary": "Maharashtra's health minister warns against late reporting of monsoon diseases; 34 swine flu cases this year and none in Mumbai.",
+      "reasoning": [
+        "Step 0 (summary): Health Minister Deepak Sawant talks about monsoon disease preparedness in Maharashtra and gives swine flu, dengue and leptospirosis figures.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 isolation wards to be prepared for patients of swine flu and other diseases; S2 between January and June eight lakh patients were screened for swine flu, of which 34 tested positive; S3 in Mumbai, no cases of swine flu infection were found.",
+        "Step 2 (9.3.2, 9.5): S1 is preparedness for the monsoon, not a signal of current flu: no item.",
+        "Step 3 (2.3, 4.5, 5.3.2, 6.2, 7.2): S2 is a count: cases 34, confirmed (tested positive), strain H1N1 (swine flu, 8.1). 'Between January and June this year' gives 2018-01-01 to 2018-06-22 (an end date is never after the scan date). Place: the Maharashtra Health Minister's figures for the state: Maharashtra, India. A total for a period, complete for the state: cumulative_region. The period is under 6 months, so 4.7's wide-total test does not apply. The 8 lakh screened are not cases.",
+        "Step 4 (2.5, 9.3.3): S3 zero swine flu cases in Mumbai is a trend, inactive, H1N1, for Mumbai, Maharashtra, India, same period 2018-01-01 to 2018-06-22.",
+        "Step 5 (G3-G5, 9.7): Maharashtra and Mumbai each have one item; no fallback.",
+        "Step 6 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: Maharashtra's 34 confirmed swine flu cases this year and zero cases in Mumbai.",
+      "items": [
+        {
+          "kind": "cases",
+          "number": 34,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2018-01-01",
+          "end_date": "2018-06-22",
+          "words": null,
+          "evidence": [
+            "Between January and June this year, eight lakh patients were screened for swine flu out of which 34 tested positive.",
+            "Mumbai, Jun 22 (PTI) Late reporting of illness has been found to be the main cause of deaths due to diseases during the last year's monsoon, Maharashtra Health Minister Deepak Sawant said today."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "H1N1",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2018-01-01",
+          "end_date": "2018-06-22",
+          "words": "inactive",
+          "evidence": [
+            "In Mumbai, no cases of swine flu infection were found, he said.",
+            "Between January and June this year, eight lakh patients were screened for swine flu out of which 34 tested positive."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20220524070000-271",
+    "source": "Aditya:65",
+    "slots": [
+      9,
+      11
+    ],
+    "difficulty": "medium",
+    "why_chosen": "9.6 general rise + strain named -> rising (no strain) and present (influenza A)",
+    "scan_date": "2022-05-24",
+    "link": "https://www.kenyans.co.ke/news/75815-medics-explain-countrywide-flu-outbreak",
+    "article": "Over the last few weeks, Kenya has experienced a spike in cases of flu and the common cold, causing fear and unprecedented challenges that come with its uptick.\nMedical experts state that for the last two years, the country has not experienced a typical flu season owing to the containment measures that were imposed by the government during the pandemic.\nStatistics point to a surge in cases of flu which are clocking the 10,000 cases mark per day across the country, forcing a section of Kenyans to restart wearing masks in public areas.\nOne of the biggest concerns is the potential for patients to contract both Covid-19 and flu at the same time, an unlucky combination known as flurona.\nNonetheless, medical experts ruled out the possibility of another pandemic outbreak in the country.\n\"We haven’t experienced a typical flu season for the past two years as the country was under lockdown thus the minimal spread of viruses in the community.\n\"The number of patients with flu-like symptoms being admitted to hospital has increased,\" a report on the flu outbreak explained.\nDoctor Ahmed Yakub Kalebi while speaking to Citizen TV on Monday, May 23, noted that the flu might be caused by other viruses including influenza.\nKalebi is a specialist in General Anatomical Pathology and Lab Medicine.\n\"There are hundreds of viruses that can potentially cause flu. Interestingly in many countries and certainly here in Kenya, the respiratory infection we are seeking is linked to Influenza A,\" Kalebi explained.\nMost people, the doctor stated, have acquired immunity against Covid-19 and the increased uptake of the vaccine has shielded the citizens from contracting the virus.\n\"I don't expect us to get into another serious wave because of the understanding of the disease. Almost 80 per cent of the people have been exposed to the virus so as a result, most people have developed immunity.\n\"Notably, the increased understanding especially among the frontline workers has helped the country shield itself from the virus,\" he assured.\nAMREF CEO Githinji Gitahi on the other hand urged the government to increase its campaign on vaccine uptake to prevent the country from cases of virus surge in the country.\nParents were also asked to be careful and protect their kids from contracting the virus causing flu considering that they have had little exposure in the last two years.\n\"This can be very serious, especially for young children who have had little to no exposure to flu over the last two years,\" the medic explained.",
+    "answer": {
+      "summary": "Kenya sees a countrywide spike in flu cases, about 10,000 a day, linked to influenza A after two years without a typical flu season.",
+      "reasoning": [
+        "Step 0 (summary): medics explain a surge in flu cases across Kenya over recent weeks, with more flu-like admissions, linked to influenza A.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 over the last few weeks Kenya has experienced a spike in cases of flu and the common cold; S2 no typical flu season for two years; S3 a surge in flu cases clocking 10,000 per day across the country, forcing some Kenyans to restart wearing masks; S4 concern about flurona; S5 the number of patients with flu-like symptoms admitted to hospital has increased; S6 Dr Kalebi on Monday May 23: the respiratory infection here in Kenya is linked to Influenza A; S7 calls to protect children and increase vaccine uptake.",
+        "Step 2 (2.3, 9.3.7, 9.4, G3): S1, S3 and S5 describe the same current rise in Kenya (G3): a trend, not a count (10,000 per day is a rate, 3.1). S1 is a mixed flu and cold spread statement, allowed (9.3.7); S3 'surge… clocking the 10,000 cases mark per day' gives rising (9.4). No level is stated, so rising (9.3.1).",
+        "Step 3 (4.6, 5.3.1): 'over the last few weeks' gives 21 days back from the scan date: 2022-05-03 to 2022-05-24. Place: Kenya ('across the country'). Strain null for the general statement.",
+        "Step 4 (9.6, 4.4, 5.3.1): S6 ties the current respiratory infection in Kenya to influenza A: a trend about flu and a strain gives a second item, present, influenza A, dated to the statement on Monday 2022-05-23.",
+        "Step 5 (9.5.3, G5): the mask-wearing in S3 is part of the same rise and gives the same word for the same place and period, so no separate item. S2 is a comparison with past years (9.3.9) and S4, S7 are concerns and advice: no item.",
+        "Step 6 (G3-G5, 9.7): Kenya has items; no fallback.",
+        "Step 7 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: a current countrywide rise in flu in Kenya, linked to influenza A.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "Kenya",
+          "start_date": "2022-05-03",
+          "end_date": "2022-05-24",
+          "words": "rising",
+          "evidence": [
+            "Over the last few weeks, Kenya has experienced a spike in cases of flu and the common cold, causing fear and unprecedented challenges that come with its uptick.",
+            "Statistics point to a surge in cases of flu which are clocking the 10,000 cases mark per day across the country, forcing a section of Kenyans to restart wearing masks in public areas.",
+            "\"The number of patients with flu-like symptoms being admitted to hospital has increased,\" a report on the flu outbreak explained."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "influenza A",
+          "city": null,
+          "state": null,
+          "country": "Kenya",
+          "start_date": "2022-05-23",
+          "end_date": "2022-05-23",
+          "words": "present",
+          "evidence": [
+            "\"There are hundreds of viruses that can potentially cause flu. Interestingly in many countries and certainly here in Kenya, the respiratory infection we are seeking is linked to Influenza A,\" Kalebi explained.",
+            "Doctor Ahmed Yakub Kalebi while speaking to Citizen TV on Monday, May 23, noted that the flu might be caused by other viruses including influenza."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20220930110000-1396",
+    "source": "Thanya:75",
+    "slots": [
+      1,
+      3
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "1.2 flu only as a research comparison",
+    "scan_date": "2022-09-30",
+    "link": "https://english.news.cn/20220930/aa2ab6c1c8d345c5b88bcd8115a92339/c.html",
+    "article": "SYDNEY, Sept. 30 (Xinhua) -- A new research led by Australia's University of Queensland (UQ) has discovered how COVID-19 damages the heart, opening the door to future treatments.\nThe study, published in Immunology, has found that while both COVID-19 and influenza are severe respiratory viruses, they appeared to affect cardiac tissue very differently.\nThe research used actual cardiac tissues collected during autopsies from seven COVID-19 patients from Brazil, two people who died from influenza and six control patients.\nInitial study found that COVID-19 damaged the DNA in cardiac tissue, which wasn't detected in influenza samples.\n\"When we looked at the influenza cardiac tissue samples, we identified that it caused excess inflammation,\" UQ Professor John Fraser said in a statement issued by the university on Friday.\n\"Whereas we found COVID-19 attacked the heart's DNA, probably directly and not just as a knock-on from inflammation,\" he said.\n\"Our study has highlighted that the two viruses appear to affect cardiac tissue very differently, which we want to get a better understand of in larger cohort studies.\"\nUQ Diamantina Institute researcher Arutha Kulasinghe said that during the study the researchers couldn't detect viral particles in the cardiac tissues of COVID-19 patients, but they found tissue changes associated with DNA damage and repair.\n\"DNA damage and repair mechanisms foster genomic instability and are related to chronic diseases such as diabetes, cancer, atherosclerosis and neurodegenerative disorders, so understanding why this is happening in COVID-19 patients is important,\" Kulasinghe said.\nHe said that in comparison to the 2009 flu pandemic, COVID-19 has led to more severe and long-term cardiovascular disease but what was causing that at a molecular level wasn't known.\n\"What we have categorically shown is that COVID is not 'just like the flu',\" said Fraser.\n\"This study helps us understand how COVID-19 affects that heart, and that is the first step in working out what treatments might be best to repair that heart.\" ■",
+    "answer": {
+      "summary": "University of Queensland research finds COVID-19 damages heart tissue differently from influenza.",
+      "reasoning": [
+        "Step 0 (summary): the article is about a study comparing COVID-19 and influenza effects on heart tissue.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 autopsy tissue from two people who died from influenza, S2 the 2009 flu pandemic comparison, S3 COVID is not just like the flu.",
+        "Step 2 (4.1, 4.7): S1 is undated research material, a past story; no item.",
+        "Step 3 (1.2): S2 and S3 are comparisons; no item.",
+        "Step 4 (G3-G5, 9.7): no items, no fallback.",
+        "Step 5 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: flu appears only in research samples and comparisons.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20241018211500-1604",
+    "source": "Aditya:186",
+    "slots": [
+      11
+    ],
+    "difficulty": "easy",
+    "why_chosen": "9.4/9.5.4 flu figures in wastewater with no level word -> present",
+    "scan_date": "2024-10-18",
+    "link": "https://www.infohaiti.net/free-flu-and-covid-19-vaccines-available-throughout-boston/",
+    "article": "Boston Public Health Commission recommends all eligible residents get vaccinated to protect themselves and their communities\nBOSTON – October 18, 2024 – The Boston Public Health Commission (BPHC) is encouraging all Boston residents ages 6 months and older to get vaccinated for Influenza (flu) and COVID-19 ahead of the peak of respiratory virus season. Vaccines are especially recommended for residents who are ages 65 and older, at high risk for severe COVID-19, or have never received a COVID-19 vaccine.\nTo increase access to vaccinations, the Boston Public Health Commission in partnership with the City of Boston and Boston Centers for Youth and Families (BCYF) are hosting several free flu and COVID-19 vaccine clinics across the city. Appointments are not necessary, and residents are encouraged to bring their health insurance cards if they have one. However, insurance and identification are not required.\nThe dates and locations are:\n- Monday, October 21, from 9:00 AM to 1:00 PM at City Hall Room 801\n- Thursday, October 24, from 1:00 PM to 5:00 PM at City Hall Room 115\n- Tuesday, October 29, from 3:00 PM to 7:00 PM at the BCYF Hyde Park Community Center\n- Saturday, November 2, from 12:00 PM to 4:00 PM at the BCYF Mattahunt Community Center\n- Monday, November 4, from 4:00 PM to 8:00 PM at the BCYF Paris Street Community Center\n- Thursday, November 7, from 10:00 AM to 2:00 PM at the BCYF Curley Community Center\nMore dates and locations will be added, and residents can visit boston.gov/respiratory-protection for the latest information and additional resources.\n“Vaccination remains the most effective way to prevent serious illness, hospitalization, and death from COVID-19 and the flu,” said Dr. Bisola Ojikutu, Commissioner of Public Health for the City of Boston. “During the fall and winter months, we strongly recommend all Boston residents receive updated vaccines and stay home if they have symptoms of respiratory viral illness.”\n“We are happy to continue our partnership with BPHC on these clinics to ensure that Boston residents have access to these vaccines in their own neighborhoods,” said Marta E. Rivera, Commissioner of Boston Centers for Youth and Families.\nThe Boston Public Health Commission is also launching a new multilingual campaign that features community members providing tips about how to stay healthy. The Stay Healthy Boston campaign will be in MBTA subways and buses this fall and winter and include information about the small, daily choices that residents can make to keep their bodies healthy and prevent illness.\nThe Commission continues to monitor COVID-19 and flu levels in wastewater. Wastewater monitoring helps with early detection and provides an early warning of severe infections that can lead to hospitalization and death in high-risk populations. Current data show COVID-19 levels are low or moderate in all Boston neighborhoods except Allston-Brighton, where COVID-19 wastewater levels are currently considered high. In the past week, BPHC found the flu virus in wastewater from Mattapan and Roxbury, indicating that the flu virus is already in Boston and people should get vaccinated before it spreads more widely.\nBecause there are now effective vaccines and better treatment options for viral respiratory illnesses such as the flu, COVID-19, and RSV, the Centers for Disease Control and Prevention (CDC) recently updated its recommendations. Everyone ages six months and older is encouraged to get the updated flu and COVID-19 vaccines. This includes those who received previous vaccinations or had COVID-19 because protection and natural immunity wanes over time. Pregnant parents, babies, and older adults should consult their health care professional about RSV vaccinations.\nSymptoms like fever, chills, cough, sore throat, stuffy or runny nose, muscle or body aches, headache, fatigue are commonly associated with viral respiratory illnesses such as the flu and COVID-19. Adults aged 65 and older, children younger than 5 years old, pregnant people, and people with chronic medical conditions are at higher risk for severe infections. Anyone who is recovering from a respiratory illness or is high-risk should take additional precautions including:\n- Wear a mask:\n  - For five days after being sick.\n  - If you must leave the house while sick.\n  - If you are at high risk of severe illness.\n- Have COVID-19 rapid test kits available at home to test if you have symptoms of COVID-19. Pharmacies are currently the best place to pick up COVID-19 rapid test kits.\n- Seek treatment from a trusted healthcare provider if you test positive for COVID-19 or flu and are at high risk for severe disease and/or illness.\n- Regularly disinfect and clean high-touch surfaces.\n- Increase indoor ventilation and air circulation; even cracking open a window helps increase airflow.\nEach household can order four free COVID-19 tests at covidtests.gov. For more information on flu and COVID-19 vaccines, contact a healthcare provider, visit a local pharmacy, or visit the CDC’s Vaccine Finder to find an accessible vaccine clinic.\nABOUT THE BOSTON PUBLIC HEALTH COMMISSION\nBoston Public Health Commission (BPHC) is the country’s oldest health department. We envision a thriving Boston where all residents live healthy and fulfilling lives. To accomplish this, BPHC works in partnership with communities to protect and promote the health and well-being of all Boston residents, especially those impacted by racism and systemic inequities. Learn more about our work at boston.gov/bphc.",
+    "answer": {
+      "summary": "Boston Public Health Commission offers free flu and COVID-19 vaccine clinics and reports flu virus found in Boston wastewater.",
+      "reasoning": [
+        "Step 0 (summary): Boston vaccine clinics and respiratory surveillance update.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 residents urged to vaccinate ahead of the peak; S2 free flu and COVID-19 clinics; S3 BPHC monitors flu in wastewater; S4 flu virus found in wastewater from Mattapan and Roxbury in the past week, flu already in Boston.",
+        "Step 2 (9.5): S1 and S2 are routine pre-season vaccination: no item. S3 is monitoring only.",
+        "Step 3 (9.5.4, 9.4, 4.6, 5.5): S4 flu in wastewater with no level or direction: present, Boston, Massachusetts, United States (neighbourhoods give the city), past week 2024-10-11 to 2024-10-18.",
+        "Step 4 (G3-G5, 9.7): one item; no other places.",
+        "Step 5 (Section 11): an item exists, so useful."
+      ],
+      "useful": true,
+      "reason": "Flu virus detected in Boston wastewater in the past week.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": "Boston",
+          "state": "Massachusetts",
+          "country": "United States",
+          "start_date": "2024-10-11",
+          "end_date": "2024-10-18",
+          "words": "present",
+          "evidence": [
+            "In the past week, BPHC found the flu virus in wastewater from Mattapan and Roxbury, indicating that the flu virus is already in Boston and people should get vaccinated before it spreads more widely."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20221107220000-1",
+    "source": "Aditya:73",
+    "slots": [
+      5,
+      7,
+      11
+    ],
+    "difficulty": "hard",
+    "why_chosen": "CDC 'widespread' -> high (9.3.4); first pediatric death; national year-to-date totals and a season rise",
+    "scan_date": "2022-11-07",
+    "link": "https://www.abccolumbia.com/2022/11/07/dhec-is-asking-residents-to-help-stop-the-spread-of-the-flu/",
+    "article": "DHEC asks residents to help stop the spread of the flu\nState Health officials say South Carolina is already seeing widespread flu activity.\nCOLUMBIA, S.C. (WOLO)— State Health officials say South Carolina is already seeing widespread flu activity.\nLast week the Department of Health and Environmental Control reported the state’s first pediatric flu related death.\nNearly half of the U.S. is already experiencing a flu surge this fall.\nAccording to the CDC, there have been more than 1.5 million illnesses and 730 deaths from the flu so far this year.",
+    "answer": {
+      "summary": "South Carolina has widespread flu activity and its first pediatric flu death; nearly half the US faces a flu surge.",
+      "reasoning": [
+        "Step 0 (summary): DHEC asks South Carolina residents to help stop flu spread as the state sees widespread activity and its first pediatric flu death.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline: DHEC asks residents to help stop the spread of the flu; S2 South Carolina is already seeing widespread flu activity (headline-style line and body); S3 last week DHEC reported the state's first pediatric flu related death; S4 nearly half of the U.S. is already experiencing a flu surge this fall; S5 CDC: more than 1.5 million illnesses and 730 deaths from the flu so far this year.",
+        "Step 2 (G3, 9.3.4, 5.3.1): S2 appears twice; one item (G3). 'Widespread' is high on the CDC scale (9.3.4). Place South Carolina, United States. No period: the scan date 2022-11-07 (4.2). Strain null.",
+        "Step 3 (2.4, 4.5, 6.3.5, 7.2): S3 is one death, confirmed (flu related death). No day: placed only before the report made 'last week' (2.4 row 5), a rough frame, so the last day of the previous calendar week: Sunday 2022-11-06 (scan date Monday 2022-11-07). count_type new (one person). Place: 'the state's' with the Department of Health and Environmental Control, South Carolina (5.3.2, 5.3.4).",
+        "Step 4 (9.2, 4.5): S4 'flu surge' is rising for the United States; 'this fall' gives 1 September 2022 to the reference date 2022-11-07 (Northern Hemisphere autumn). Strain null.",
+        "Step 5 (3.2, 4.5, 4.7, 7.2): S5 gives cases 1500000 ('more than 1.5 million') and deaths 730 for the United States (CDC), confirmed (stated as fact), 'so far this year': 2022-01-01 to 2022-11-07, cumulative_region. The total spans over 6 months, but the article shows flu activity now (S2, S4), so it is recorded (4.7).",
+        "Step 6 (G3-G5, 9.7): South Carolina and United States each have items; no G5 conflict (one word per place); no fallback.",
+        "Step 7 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: widespread flu and a pediatric flu death in South Carolina, and a national flu surge with CDC totals.",
+      "items": [
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "South Carolina",
+          "country": "United States",
+          "start_date": "2022-11-07",
+          "end_date": "2022-11-07",
+          "words": "high",
+          "evidence": [
+            "State Health officials say South Carolina is already seeing widespread flu activity.",
+            "COLUMBIA, S.C. (WOLO)— State Health officials say South Carolina is already seeing widespread flu activity."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": "South Carolina",
+          "country": "United States",
+          "start_date": "2022-11-06",
+          "end_date": "2022-11-06",
+          "words": null,
+          "evidence": [
+            "Last week the Department of Health and Environmental Control reported the state’s first pediatric flu related death.",
+            "COLUMBIA, S.C. (WOLO)— State Health officials say South Carolina is already seeing widespread flu activity."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2022-09-01",
+          "end_date": "2022-11-07",
+          "words": "rising",
+          "evidence": [
+            "Nearly half of the U.S. is already experiencing a flu surge this fall."
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 1500000,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2022-01-01",
+          "end_date": "2022-11-07",
+          "words": null,
+          "evidence": [
+            "According to the CDC, there have been more than 1.5 million illnesses and 730 deaths from the flu so far this year.",
+            "Nearly half of the U.S. is already experiencing a flu surge this fall."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 730,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2022-01-01",
+          "end_date": "2022-11-07",
+          "words": null,
+          "evidence": [
+            "According to the CDC, there have been more than 1.5 million illnesses and 730 deaths from the flu so far this year.",
+            "Nearly half of the U.S. is already experiencing a flu surge this fall."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20220531134500-410",
+    "source": "Jahnavi:282",
+    "slots": [
+      1
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "9.5 company business line / comparison with COVID -> not a signal",
+    "scan_date": "2022-05-31",
+    "link": "https://www.chemistryworld.com/news/what-is-the-future-of-covid-19-pharmaceuticals/4015690.article",
+    "article": "Firms anticipate long-term markets for prevention and treatment\nSars-CoV-2 continues to infect millions of people worldwide and cause an estimated 10,000 deaths per day, as the US alone approaches one million dead. It is widely expected to become endemic, remaining in circulation for the foreseeable future, and continuing to cause substantial numbers of hospitalisations and deaths, especially among vulnerable groups. ‘Covid kills about tenfold more people than flu, based on historical information,’ says Penny Ward, professor of pharmaceutical medicine at King’s College London, UK.",
+    "answer": {
+      "summary": "Drug firms anticipate long-term markets for COVID-19 prevention and treatment as the virus becomes endemic.",
+      "reasoning": [
+        "Step 0 (summary): the future of COVID-19 pharmaceuticals.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 'Covid kills about tenfold more people than flu, based on historical information'.",
+        "Step 2 (1.2): S1 names flu only as a comparison for COVID-19; no item.",
+        "Step 3 (G3-G5, 9.7): no current flu in any place, so no fallback.",
+        "Step 4 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: flu is named only as a comparison with COVID-19.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20150717011500-230",
+    "source": "Jahnavi:50",
+    "slots": [
+      5,
+      7,
+      10,
+      11
+    ],
+    "difficulty": "hard",
+    "why_chosen": "G4 overlaps: city toll vs new deaths, state month totals vs running totals, admissions dated by 2.4",
+    "scan_date": "2015-07-17",
+    "link": "http://timesofindia.indiatimes.com/city/mumbai/2-women-in-30s-die-of-H1N1-Mumbai-toll-touches-25/articleshow/48106535.cms",
+    "article": "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday. The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25.\n According to civic records, the Juhu resident was admitted to Nair hospital, Mumbai Central. She reached the hospital only after developing breathing difficulty. The other woman, a Worli resident, had been admitted to Global Hospital, Parel.\nA spokesperson for Global Hospital said, \"The patient was morbidly obese, suffering from obstructive sleep apnea and fever and was admitted to ICUâ¦ Her condition was continuously deteriorating.\"\n After a lull throughout June, the respiratory virus has come back to claim four lives. So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours. \"There is a slight increase in cases across the state but we are vigilant,\" said a state official. Across the state, over eight-10 cases of new infections are being reported everyday. Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.\n At the civic-run Kasturba Hospital, eight patients are undergoing treatment, including three members from the same family. An 80-year-old man from Vikhroli is a serious condition and breathing with the help of ventilator.\n Infectious disease consultant Dr Om Srivastava said that patients with fever and sore throat should not delay seeing a doctor. State government has already recommended vaccination for people who are immune-compromised and pregnant women.\n \"We are surprised to see many healthy individuals get the infection and die of it,\" the state expert said.\n Besides swine flu, the civic body has also been reporting a steady flow of leptospirosis. On Thursday, three more people tested positive taking the count of cases in July to 63.",
+    "answer": {
+      "summary": "Two women die of H1N1 in Mumbai, taking the city's toll to 25; Maharashtra reports about 60 July cases and a slight rise.",
+      "reasoning": [
+        "Step 0 (summary): Mumbai and Maharashtra swine flu deaths, cases and patients in treatment.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 two women died of H1N1 on Thursday, S2 they died within four days of hospitalization, S3 the city's death toll is 25, S4 the virus claimed four lives after a lull in June, S5 around 60 tested positive in July, S6 seven over the last 24 hours, S7 a slight increase in cases across the state, S8 8-10 new cases daily, S9 Maharashtra over 5,300 cases and 546 deaths, S10 eight patients undergoing treatment at Kasturba Hospital, S11 an 80-year-old man on a ventilator, S12 many healthy individuals get the infection.",
+        "Step 2 (2.4, 4.4, 5.3.1, 7.2): S1 deaths 2 confirmed, Thursday 2015 = 2015-07-16, new, Mumbai (dateline), H1N1.",
+        "Step 3 (4.3.4, 2.4): S2 admission 4 days before 16 July = 2015-07-12: hospitalized 2 confirmed, new, Mumbai, H1N1.",
+        "Step 4 (4.6, 7.2): S3 the city's running toll 25, start null, end 2015-07-16, cumulative_region, Mumbai.",
+        "Step 5 (5.2, 4.5, 7.2): S4 and S5 are the state's July figures (5.2 example): deaths 4 and cases 60, 2015-07-01 to 2015-07-17, cumulative_region, Maharashtra, H1N1 (8.2.2).",
+        "Step 6 (4.6, 7.2): S6 seven in the last 24 hours, 2015-07-16, new, Maharashtra (G4: a day inside the month).",
+        "Step 7 (9.2, 9.4): S7 slight increase across the state: trend rising, Maharashtra, scan date, H1N1; S8 is a rate that adds only detail, no fallback.",
+        "Step 8 (4.6, 4.7): S9 running totals for Maharashtra, start null, end scan date, current activity under way: cases 5300 and deaths 546, cumulative_region.",
+        "Step 9 (2.4, 5.3.3, 7.2): S10 eight patients in treatment now at Kasturba Hospital, Mumbai: hospitalized 8 confirmed, report date = scan date, new. S11 is part of that hospital's patients (G4 parts), no separate item.",
+        "Step 10 (9.1): S12 is about one group; Maharashtra has items, no fallback.",
+        "Step 11 (G3-G5, 9.7): leptospirosis is not flu (1.2); every place has items, no fallbacks.",
+        "Step 12 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "The article reports current H1N1 deaths, hospitalizations, cases and a rise in Mumbai and Maharashtra.",
+      "items": [
+        {
+          "kind": "deaths",
+          "number": 2,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-16",
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday.",
+            "The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 2,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-12",
+          "end_date": "2015-07-12",
+          "words": null,
+          "evidence": [
+            "The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday.",
+            "According to civic records, the Juhu resident was admitted to Nair hospital, Mumbai Central.",
+            "The other woman, a Worli resident, had been admitted to Global Hospital, Parel."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 25,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "The residents of Worli and Juhu died within four days of hospitalization, taking the city's death toll to 25.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 4,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-01",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "After a lull throughout June, the respiratory virus has come back to claim four lives.",
+            "\"There is a slight increase in cases across the state but we are vigilant,\" said a state official.",
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 60,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-01",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours.",
+            "\"There is a slight increase in cases across the state but we are vigilant,\" said a state official.",
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 7,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-16",
+          "end_date": "2015-07-16",
+          "words": null,
+          "evidence": [
+            "So far, around 60 people have tested positive for the infection in July, including seven people over the last 24 hours.",
+            "\"There is a slight increase in cases across the state but we are vigilant,\" said a state official.",
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-17",
+          "end_date": "2015-07-17",
+          "words": "rising",
+          "evidence": [
+            "\"There is a slight increase in cases across the state but we are vigilant,\" said a state official.",
+            "Across the state, over eight-10 cases of new infections are being reported everyday.",
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 5300,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 546,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": null,
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": null,
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "Maharashtra has been one of the worst-hit states reporting over 5,300 cases and 546 deaths.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 8,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H1N1",
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "country": "India",
+          "start_date": "2015-07-17",
+          "end_date": "2015-07-17",
+          "words": null,
+          "evidence": [
+            "At the civic-run Kasturba Hospital, eight patients are undergoing treatment, including three members from the same family.",
+            "MUMBAI: Two women in their thirties died of H1N1 infection on Thursday."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20161106151500-1403",
+    "source": "Jahnavi:96",
+    "slots": [
+      3
+    ],
+    "difficulty": "not_useful",
+    "why_chosen": "9.3.8 preparedness for a coming season and past-year figures -> no item",
+    "scan_date": "2016-11-06",
+    "link": "http://www.mangalorean.com/odisha-asks-health-officials-prepare-h1n1-influenza/",
+    "article": "Odisha asks health officials to prepare for H1N1 influenza\nBhubaneswar, Nov 6 (IANS) The Odisha government has asked its Chief District Medical Officers (CDMOs) to remain prepared to deal with the H1N1 influenza in the state, said an official on Sunday.\n“In view of the coming transmission season and behaviour of Influenza A H1N1 in recent past, the health administration needs to remain prepared in terms of infrastructure, logistics and trained personnel,” said Health Secretary Arti Ahuja in a letter to the CDMOs.\nDuring the year 2015, it was observed that a large number of death cases were reported across the country due to seasonal influenza which was more than the number recorded during the time of pandemic, said Ahuja.\nA total of 75 cases with 13 deaths were reported in Odisha in 2015 while in the year 2016, only one case has been reported so far, she added.\nIn another letter, the Health Secretary asked the CDMOs to take steps to eliminate vector-borne disease dengue.\n“The state experienced an explosive outbreak of dengue during monsoon period, particularly in industrial and urban areas of the state. Though it is a fact that the incidence has declined considerably, sporadic cases are still being reported from rural areas of different districts,” Ahuja said.",
+    "answer": {
+      "summary": "Odisha asks district medical officers to prepare for H1N1 influenza ahead of the coming transmission season.",
+      "reasoning": [
+        "Step 0 (summary): Odisha preparedness letter for the coming H1N1 season.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 prepare for H1N1, S2 many deaths in 2015 across the country, S3 75 cases and 13 deaths in Odisha in 2015, S4 only one case so far in 2016.",
+        "Step 2 (9.3.8, 9.5): S1 is preparedness for a coming season. No item.",
+        "Step 3 (4.7): S2 and S3 are a finished year. No item.",
+        "Step 4 (4.5, 4.7): S4 is a running total from 1 January 2016, over 6 months, and the context shows no current activity (season still coming). No item.",
+        "Step 5 (G3-G5, 9.7): no current activity, so no fallback.",
+        "Step 6 (Section 11): no items, so not useful."
+      ],
+      "useful": false,
+      "reason": "Not useful: only preparedness for a coming season, past-year figures and a year-long total without current activity.",
+      "items": []
+    }
+  },
+  {
+    "article_id": "20221104220000-721",
+    "source": "Manoj:80",
+    "slots": [
+      6,
+      7,
+      11,
+      12
+    ],
+    "difficulty": "hard",
+    "why_chosen": "national CDC totals with null start, children deaths as cumulative_subset, rising trend, Tamiflu hotspots (9.5.1) -> high per place",
+    "scan_date": "2022-11-04",
+    "link": "https://www.wxow.com/news/health/flu-and-other-respiratory-virus-activity-continues-to-ramp-up-across-the-us/article_02357577-f23e-5ced-82d4-d82d5573b088.html",
+    "article": "Seventeen states, Washington, DC, and New York City, are reporting high or very high respiratory illness activity amid a flu season that's hitting harder and earlier than usual, according to data published Friday by the US Centers for Disease Control and Prevention.\nInfluenza activity continues to increase in the US -- the number of flu illnesses, hospitalizations and deaths so far this season nearly doubled in the past week. The CDC now estimates that there have been at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths from influenza, including two reported deaths among children so far this season. About one in 11 tests for flu were positive last week.\nIt has been more than a decade -- since the H1N1 swine flu pandemic -- since flu hospitalization rates have been this high at this point in the season. The latest CDC update tracks data through October 29.\nFlu activity is highest in the South, followed by the Mid-Atlantic and parts of the West Coast. Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans.\nRSV hospitalizations were also significantly higher than usual, according to another weekly update published by the CDC on Thursday.\nRSV, or respiratory syncytial virus, is a common respiratory infection that typically causes mild, cold-like symptoms, but it can cause serious illness, particularly in older adults and infants.\nCumulative RSV hospitalization rates have already reached levels that are typically not seen until December in the US. They're rising among all age groups, but especially among children.\nAbout four out of every 1,000 babies under 6 months old have been hospitalized with RSV so far this season -- just about a month in. More than two in every 1,000 babies between 6 months and one year have been hospitalized with RSV so far this season, as have more than one in every 1,000 children between age one and two.\nOverall in the US, nearly one in five PCR tests for RSV were positive for the week ending October 29, nearly doubling over the course of the month.\nWeekly cases counts are less complete for the most current weeks, but there have been more RSV cases detected by PCR tests each week in October 2022 than any other week in at least the past two years. Weekly case counts for the week ending October 22 were more than double any other week in 2020 or 2021.\nThere are signs that RSV cases are slowing in the southern region of the US, but test positivity rates and cases continue to rise in other regions, especially the Midwest.\nAnd pediatric hospitals remain more full than average with patients with RSV and other conditions. According to data from the US Department of Health and Human Services, more than three-quarters of pediatric hospital beds and pediatric ICU beds are currently in use nationwide, compared with an average of about two-thirds full over the past two years.\nAs of Friday, seventeen states have less than one in five beds available. Five of them are more than 90% full: Rhode Island, Arizona, Maine, Minnesota and Delaware, along with Washington, DC.\nThe-CNN-Wire\n™ & © 2022 Cable News Network, Inc., a Warner Bros. Discovery Company. All rights reserved.",
+    "answer": {
+      "summary": "CDC data show US flu activity rising early and hard, with 1.6 million illnesses, 13,000 hospitalizations and 730 deaths so far; RSV also high.",
+      "reasoning": [
+        "Step 0 (summary): a CNN report on CDC data published Friday 2022-11-04 (through October 29) showing an early, intense flu season, antiviral prescription hotspots, and high RSV.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 seventeen states, DC and NYC report high respiratory illness activity amid a flu season hitting harder and earlier than usual; S2 influenza activity continues to increase, illnesses, hospitalizations and deaths nearly doubled in the past week; S3 CDC estimates at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths, including two child deaths, so far this season; S4 about one in 11 flu tests positive last week; S5 hospitalization rates highest in more than a decade at this point; S6 data through October 29; S7 flu activity highest in the South, Mid-Atlantic and parts of the West Coast; S8 Walgreens antiviral (Tamiflu) prescriptions suggest hotspots in Mississippi, Alabama, the Gulf Coast, Houston and New Orleans; S9 RSV statements.",
+        "Step 2 (2.3, 3.2, 6.2): S3 gives counts for the United States (CDC, 5.3.2): cases 1600000 ('at least 1.6 million'), hospitalized 13000, deaths 730, all stated as flu, so confirmed; strain null.",
+        "Step 3 (4.5, 4.6, 4.2): 'so far this season' with no stated season start: start null; the CDC update tracks data through October 29 (S6), so end 2022-10-29 ('up to a date'). Within 30 days of the scan date 2022-11-04; the season is under way and growing (4.7).",
+        "Step 4 (7.2, G4): each is a period total for the whole country: cumulative_region. The two child deaths are one category of people counted on its own: deaths 2, cumulative_subset, same period; it differs in count_type from the 730, so both are kept (G4).",
+        "Step 5 (9.2, 9.3.1, 4.6): S2 is a national trend: activity continues to increase and counts nearly doubled in the past week, a direction with no level word stated: rising. Period: the past week of the data, ending 2022-10-29: 2022-10-23 to 2022-10-29. S4 positivity (about 9%) is for the same week, but a change is stated, so the figure does not set a separate word (9.4); one word for this place and period (G5).",
+        "Step 6 (9.3.9, 1.1): S1 'harder and earlier than usual' and S5 are comparisons with past seasons: not used. S1's 'respiratory illness activity' is not called flu or flu-like, so DC and NYC get no flu item. S7 names regions with no single containing unit below the United States (5.5): no item.",
+        "Step 7 (9.5.1, 9.2): S8 is an indirect signal: high antiviral (Tamiflu) prescriptions tied to flu now, with the word 'hotspots' (high). Places (5.5): Mississippi, United States; Alabama, United States; Houston, Texas, United States; New Orleans, Louisiana, United States; the 'Gulf Coast area' is a loose region with no single unit: no item. No date of its own: the report date, the scan date 2022-11-04.",
+        "Step 8 (G3-G5, 9.7): no duplicate counts; one trend word per place and period. Every place with flu activity has an item; no fallback.",
+        "Step 9 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: current CDC season totals and a rising trend for the United States, plus antiviral prescription hotspots in four places.",
+      "items": [
+        {
+          "kind": "cases",
+          "number": 1600000,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2022-10-29",
+          "words": null,
+          "evidence": [
+            "The CDC now estimates that there have been at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths from influenza, including two reported deaths among children so far this season.",
+            "The latest CDC update tracks data through October 29."
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 13000,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2022-10-29",
+          "words": null,
+          "evidence": [
+            "The CDC now estimates that there have been at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths from influenza, including two reported deaths among children so far this season.",
+            "The latest CDC update tracks data through October 29."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 730,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2022-10-29",
+          "words": null,
+          "evidence": [
+            "The CDC now estimates that there have been at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths from influenza, including two reported deaths among children so far this season.",
+            "The latest CDC update tracks data through October 29."
+          ]
+        },
+        {
+          "kind": "deaths",
+          "number": 2,
+          "count_type": "cumulative_subset",
+          "status": "confirmed",
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2022-10-29",
+          "words": null,
+          "evidence": [
+            "The CDC now estimates that there have been at least 1.6 million illnesses, 13,000 hospitalizations and 730 deaths from influenza, including two reported deaths among children so far this season.",
+            "The latest CDC update tracks data through October 29."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2022-10-23",
+          "end_date": "2022-10-29",
+          "words": "rising",
+          "evidence": [
+            "Influenza activity continues to increase in the US -- the number of flu illnesses, hospitalizations and deaths so far this season nearly doubled in the past week.",
+            "The latest CDC update tracks data through October 29.",
+            "Seventeen states, Washington, DC, and New York City, are reporting high or very high respiratory illness activity amid a flu season that's hitting harder and earlier than usual, according to data published Friday by the US Centers for Disease Control and Prevention."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "Mississippi",
+          "country": "United States",
+          "start_date": "2022-11-04",
+          "end_date": "2022-11-04",
+          "words": "high",
+          "evidence": [
+            "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": null,
+          "state": "Alabama",
+          "country": "United States",
+          "start_date": "2022-11-04",
+          "end_date": "2022-11-04",
+          "words": "high",
+          "evidence": [
+            "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": "Houston",
+          "state": "Texas",
+          "country": "United States",
+          "start_date": "2022-11-04",
+          "end_date": "2022-11-04",
+          "words": "high",
+          "evidence": [
+            "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": null,
+          "city": "New Orleans",
+          "state": "Louisiana",
+          "country": "United States",
+          "start_date": "2022-11-04",
+          "end_date": "2022-11-04",
+          "words": "high",
+          "evidence": [
+            "Data from Walgreens that tracks prescriptions for antiviral treatments -- such as Tamiflu -- suggest there are hotspots in Mississippi and Alabama, as well as the Gulf Coast area, including Houston and New Orleans."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "article_id": "20171007013000-1494",
+    "source": "Manoj:51",
+    "slots": [
+      5,
+      6,
+      7,
+      11,
+      12
+    ],
+    "difficulty": "hard",
+    "why_chosen": "H3N2v vs H1N2v strains (8.1), new vs running totals, suspected vs confirmed, multiple states, hospitalisations",
+    "scan_date": "2017-10-07",
+    "link": "http://www.cidrap.umn.edu/news-perspective/2017/10/flu-scan-oct-06-2017",
+    "article": "CDC: 9 more H3N2v cases reported in Maryland, Michigan\nIn its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.\nThe CDC said all nine patients reported exposure to pigs at two fairs in the week before they became ill. Eight are children and one is an adult older than 50. One of the patients was hospitalized, but all are recovering or have recovered. Investigators have found no human-to-human transmission. Six of the eight cases have been confirmed as H3N2v and three are presumed positive based on testing at Maryland's public health lab.\nMaryland has reported several human cases since the middle of September, and the CDC said the state's number of cases is declining. The CDC said the Michigan case isn't related to the ongoing investigation in Maryland. The Michigan patient is a child who had recently visited the Allegan County Fair, which took place Sep 8 through Sep 16, according to a statement from the Allegan County Health Department (ACHD). Allegan is in southwestern Michigan.\nThe Maryland Department of Health (MDH) in its latest update said 40 presumptive positive and confirmed cases have been detected as of Oct 4. The total reflects an increase of 3 cases since an update earlier this week. Two people were hospitalized.\nSo far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing.\nOct 6 CDC FluView report\nOct 6 ACHD statement\nOct 6 MDH case count\nH7N9 features keep CDC experts on high alert\nIn an update on H7N9 avian influenza in China at the ID Week meeting in San Diego this week, Tim Uyeki, MD, MPH, an expert with the CDC's influenza division, pointed out several features of the virus and the disease that have the CDC closely following the developments.\nHe said the CDC has identified three viruses as highest risk, and H7N9 raises the greatest concerns. The other two are H5N6 and H5N1, according to a report yesterday from Infectious Disease Special Edition. When H7N9 emerged in humans 2013, it was the first time a low-pathogenic virus caused fatal infections in humans, raising alarm at the CDC and elsewhere.\nUyeki said that, of 40 clusters reported so far, a little more than a third involved secondary infections with a close contact, usually in a household member without poultry exposure. No transmission beyond two generations have been reported, he said. H7N9's appearance in health settings in unrelated people, including patients and health workers, underscores the important of carefully following infection control protocols, he added.\nUntil the fifth wave, which wound down over the summer, experts had seen little antigenic drift, but the most recent surge of activity last winter was marked by the emergence of a highly pathogenic form, which has so far been confirmed in 28 patients in five of China's provinces.\n\"We really need to keep our eye on this,\" he said, adding that another concern is increased receptor binding. H7N9 is unusual, because it can infect both lower and upper respiratory tracts. \"This is a significant pandemic advantage for the virus.\"\nOther worries are that resistance to neuraminidase inhibitors isn't present in the poultry viruses, but it has evolved during patient treatment. Though resistance has increased from 4% to 10%, it is still uncommon, and clinicians recommend early treatment with neuraminidase inhibitors, he said.\nUyeki, however, said high-dose corticosteroids should be avoided, because they have been associated with prolonged viral shedding, nosocomial infection, ventilator-associated pneumonia, and increased mortality at 30 and 60 days.\nOct 5 Infectious Disease Special Edition story",
+    "answer": {
+      "summary": "CIDRAP flu scan: CDC reports nine more H3N2v cases in Maryland and Michigan, Maryland's total reaches 40, and CDC experts discuss H7N9 risks.",
+      "reasoning": [
+        "Step 0 (summary): a news digest dated Oct 6 on new variant H3N2v cases linked to fairs in Maryland and Michigan, the year's variant flu total, and a CDC talk on H7N9 in China.",
+        "Step 1 (Rule 1): the article mentions flu, so Rule 1 is passed. Statements: S1 headline '9 more H3N2v cases reported in Maryland, Michigan'; S2 CDC FluView today: nine more H3N2v cases, eight from Maryland and one from Michigan; S3 one of the patients was hospitalized; S4 six confirmed, three presumed positive at Maryland's lab; S5 Maryland has reported several cases since mid-September and its number of cases is declining; S6 the Michigan patient is a child who visited the Allegan County Fair; S7 MDH: 40 presumptive positive and confirmed cases as of Oct 4, an increase of 3 since an update earlier this week; S8 two people hospitalized in Maryland; S9 so far this year 61 variant flu cases, 56 H3N2v, 3 H1N2v, 3 presumed H3N2v from Maryland; S10 H7N9 in China: fifth wave wound down over the summer, highly pathogenic form confirmed in 28 patients so far.",
+        "Step 2 (1.1, 8.1): H3N2v is a human infection with a swine-origin strain, so human flu; strain H3N2v as written.",
+        "Step 3 (2.3, 6.2, 6.3.3, G4, 7.2, 4.1, 4.3.5): S1+S2+S4 are one event (G3). The 'today' report is the Oct 6 CDC FluView report (source label), so the report date is 2017-10-06, one day, new. S4 splits the nine by status: six confirmed and three presumed positive, and the three presumed are from Maryland's lab; with Michigan's one case among the confirmed, Maryland has 5 confirmed and 3 suspected (presumptive is suspected, 6.3.3), Michigan 1 confirmed. Place: Maryland, United States and Michigan, United States (5.3.1; Allegan County is in Michigan, 5.5).",
+        "Step 4 (2.3, 2.4, 5.5, 7.2): S3 'One of the patients was hospitalized' is an admission tied to H3N2v flu; the article does not say in which of the two states, so the smallest place containing both is United States (5.5). No admission date: the report date 2017-10-06 (2.4 row 8), new, confirmed (one of the reported H3N2v cases), strain H3N2v.",
+        "Step 5 (9.2, 4.2, 5.3.1): S5 'the state's number of cases is declining' is a decline with no level: falling, Maryland, USA, strain H3N2v (the story is about H3N2v). No period for the decline itself, so the report date 2017-10-06. 'Several human cases since the middle of September' only adds detail to this Maryland story and is the same cases as S7, so no separate trend.",
+        "Step 6 (3.2, 4.6, 6.3.3, 6.3.6, 7.2): S7 is the MDH running total: 40 cases as of Oct 4, start not stated (null), end 2017-10-04, Maryland's complete count, cumulative_region; the total mixes presumptive and confirmed cases with no split, and the hedging word 'presumptive' makes the count suspected. Strain H3N2v (the Maryland H3N2v investigation, 8.2). The increase of 3 'since an update earlier this week' is a shorter period inside it (G4): earlier this week of Wednesday Oct 4 is Monday Oct 2 to Wednesday Oct 4 (4.5), cumulative_region, suspected, H3N2v.",
+        "Step 7 (2.4, 7.2): S8 'Two people were hospitalized' is part of the same MDH update: hospitalized 2, Maryland, running total start null to 2017-10-04, cumulative_region, suspected like the cases it belongs to, strain H3N2v.",
+        "Step 8 (G4 parts by strain, 4.5, 4.7, 7.2): S9 is a year-to-date national total with parts told apart by strain, so the parts are recorded, not the 61: H3N2v 56 confirmed and H1N2v 3 confirmed for United States, cumulative_region; the 3 presumed H3N2v positives are from Maryland, so they are recorded once at Maryland, suspected, cumulative_subset (only the presumed positives). 'So far this year' from the Oct 6 report: 2017-01-01 to 2017-10-06. The total covers over 6 months, but variant cases are still being reported this week, so it shows current activity (4.7).",
+        "Step 9 (4.7, 1.3): S10 H7N9 in China: the fifth wave wound down over the summer and the 28-patient figure is a total since last winter with no current activity stated, so no item; the CDC's alert is about risk, not current flu.",
+        "Step 10 (G3-G5, 9.7): one trend only (Maryland falling); every place (Maryland, Michigan, United States) has items, so no fallback.",
+        "Step 11 (Section 11): items exist, so useful."
+      ],
+      "useful": true,
+      "reason": "Useful: new H3N2v cases in Maryland and Michigan, Maryland's running total and hospitalizations, and the national variant flu totals are current.",
+      "items": [
+        {
+          "kind": "cases",
+          "number": 5,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": "2017-10-06",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan",
+            "Six of the eight cases have been confirmed as H3N2v and three are presumed positive based on testing at Maryland's public health lab.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 3,
+          "count_type": "new",
+          "status": "suspected",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": "2017-10-06",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "Six of the eight cases have been confirmed as H3N2v and three are presumed positive based on testing at Maryland's public health lab.",
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Michigan",
+          "country": "United States",
+          "start_date": "2017-10-06",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan",
+            "The Michigan patient is a child who had recently visited the Allegan County Fair, which took place Sep 8 through Sep 16, according to a statement from the Allegan County Health Department (ACHD).",
+            "Allegan is in southwestern Michigan.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 1,
+          "count_type": "new",
+          "status": "confirmed",
+          "strain": "H3N2v",
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2017-10-06",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "One of the patients was hospitalized, but all are recovering or have recovered.",
+            "In its latest weekly FluView report today, the US Centers for Disease Control and Prevention (CDC) said it has received reports of nine more variant H3N2 (H3N2v) influenza cases, eight from Maryland and one from Michigan, its first of the year.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "trend",
+          "number": null,
+          "count_type": null,
+          "status": null,
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": "2017-10-06",
+          "end_date": "2017-10-06",
+          "words": "falling",
+          "evidence": [
+            "Maryland has reported several human cases since the middle of September, and the CDC said the state's number of cases is declining.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 40,
+          "count_type": "cumulative_region",
+          "status": "suspected",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2017-10-04",
+          "words": null,
+          "evidence": [
+            "The Maryland Department of Health (MDH) in its latest update said 40 presumptive positive and confirmed cases have been detected as of Oct 4.",
+            "The CDC said the Michigan case isn't related to the ongoing investigation in Maryland.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 3,
+          "count_type": "cumulative_region",
+          "status": "suspected",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": "2017-10-02",
+          "end_date": "2017-10-04",
+          "words": null,
+          "evidence": [
+            "The total reflects an increase of 3 cases since an update earlier this week.",
+            "The Maryland Department of Health (MDH) in its latest update said 40 presumptive positive and confirmed cases have been detected as of Oct 4.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan"
+          ]
+        },
+        {
+          "kind": "hospitalized",
+          "number": 2,
+          "count_type": "cumulative_region",
+          "status": "suspected",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": null,
+          "end_date": "2017-10-04",
+          "words": null,
+          "evidence": [
+            "Two people were hospitalized.",
+            "The Maryland Department of Health (MDH) in its latest update said 40 presumptive positive and confirmed cases have been detected as of Oct 4.",
+            "CDC: 9 more H3N2v cases reported in Maryland, Michigan"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 56,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H3N2v",
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2017-01-01",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "So far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 3,
+          "count_type": "cumulative_region",
+          "status": "confirmed",
+          "strain": "H1N2v",
+          "city": null,
+          "state": null,
+          "country": "United States",
+          "start_date": "2017-01-01",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "So far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing.",
+            "Oct 6 CDC FluView report"
+          ]
+        },
+        {
+          "kind": "cases",
+          "number": 3,
+          "count_type": "cumulative_subset",
+          "status": "suspected",
+          "strain": "H3N2v",
+          "city": null,
+          "state": "Maryland",
+          "country": "United States",
+          "start_date": "2017-01-01",
+          "end_date": "2017-10-06",
+          "words": null,
+          "evidence": [
+            "So far this year, 61 variant flu cases have been reported to the CDC, 56 of them involving H3N2v, 3 due to H1N2v, and 3 presumed H3N2v positives from Maryland undergoing further CDC testing.",
+            "Oct 6 CDC FluView report"
+          ]
+        }
+      ]
+    }
+  }
+]

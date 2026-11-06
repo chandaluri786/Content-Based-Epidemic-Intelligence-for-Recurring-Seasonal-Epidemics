@@ -30,6 +30,11 @@ Reply with **one JSON object and nothing else**, with the keys in this order:
 ## How to work
 **Context decides.** Read the whole article first. Whether statements are the same event or a new one, and what period, place, kind and strain they have, all come from context, whether stated directly or not. The rules and examples show the reasoning; they are not a list of exact wordings.
 
+**Order of priority.**
+1. **Context first.** The context decides what the article says: which events and statements there are, whether two statements are the same event, and their period, place, kind and strain.
+2. **Then the stated rules.** Every item extracted from that reading follows the rules in this prompt (Sections 1–11).
+3. **The general rules G1–G5 apply to every item**, together with those rules.
+
 Write `reasoning` as a list of short steps in this order. In each step, cite the rules you used in brackets, e.g. `"Step 3 (9.3.5): ..."`.
 
 - **Step 0, summary:** say in one sentence what the article is about.
@@ -61,26 +66,38 @@ An article that never mentions flu, influenza, a flu strain, a flu drug or vacci
 
 **G2. An end date is mandatory.** Every item must have an end date (Section 4). No end date means no item. An article with no items is **not useful**.
 
-**G3. No duplicate items.** Two items whose fields are identical except `evidence` are one item: keep one, and combine their evidence.
+**G3. The same event stated more than once is one item.** When a headline and the body, or a summary sentence and a detail sentence, describe the same people (the same event), record one item. Keep the most specific place, the clearest date and the most specific strain, and put every one of those sentences in `evidence`. The exception is a `cumulative_region` total that is the complete count of more than one place: it is recorded at each of those places (7.2). **Use the context to decide** whether two statements describe the same event (the same people, the same count, the same rise) or different ones. If the context does not show they are the same, they are different items.
 
-**G4. The same event stated more than once is one item.** When a headline and the body, or a summary sentence and a detail sentence, describe the same people (the same event), record one item. Keep the most specific place, the clearest date and the most specific strain, and put every one of those sentences in `evidence`. **Use the context to decide** whether two statements describe the same event (the same people, the same count, the same rise) or different ones. If the context does not show they are the same, they are different items.
+**Details about the same event are combined.** When the article reports an event and then describes it further in other statements (the person's age, home town, hospital, strain, date), all those statements are combined as the evidence for that event. The items are then decided from that evidence by applying every rule in this prompt, not only some of them.
 
-**G5. Different counts each get their own item.** Every count stated in the article gets its own item, even when it overlaps another count. Nothing is dropped because of an overlap.
+**G4. Different counts each get their own item, and counts never overlap within one place.** Every count stated in the article gets its own item, unless it would count the same people as another item of the same kind, the same place fields and the same period. Counts that differ in kind, in place fields or in period are all recorded, even when one sits inside the other.
 
 | Overlap | Example | Items |
 |---|---|---|
-| A region total broken down by place | "1,000 cases in the USA, 500 in Texas and 200 in Seattle so far this year" | 3 items: United States; Texas, United States; Seattle, Washington, United States |
+| Totals at different levels of the place hierarchy | "1,000 cases in the USA, 500 in Texas and 200 in Seattle so far this year" | 3 items: United States; Texas, United States; Seattle, Washington, United States |
+| One total that is the complete count of more than one place (`cumulative_region` only, 7.2) | "Telangana recorded 2 cases in the last 10 days; both were reported from Karimnagar" | 2 items, both `cumulative_region`: Telangana, India; Karimnagar, Telangana, India |
 | A shorter period inside a longer one | "Fifty H1N1 cases… in the past four weeks, including 17 cases between June 25 and 28" | 50 and 17 |
 | A single-day count inside a period count | "around 60… in July, including seven people over the last 24 hours" | 60 and 7 |
 | A new count updating a running total | "Seven more people have succumbed… in the last four days taking the death toll… to 31" | 7 and 31 |
+| A weekly count and a running total | "150 cases at the school last week, now 196" | 150 and 196: the 150 is the previous calendar week's count (4.5); the 196 is the running total, ending on its own date |
 | Different kinds about the same people | "161 influenza cases this flu season… These flu cases include 95 hospitalizations" | cases 161 and hospitalized 95 |
 | The same place in consecutive periods | "856 cases… in the week ending Oct. 22 compared with 591 cases the week prior" | 856 and 591, each dated to what it covers (4.2): weekly counts cover their own week; running totals share the same start and end on their own week's last day |
-| Suspected and confirmed counts in one sentence | "183 suspected cases of H1N1… out of which 57 cases were found positive" | 183 suspected and 57 confirmed |
+| Confirmed cases among suspected ones | "183 suspected cases of H1N1… out of which 57 cases were found positive" | confirmed 57 only: the rest tested negative, and negative results are not recorded (6.3.2). People still awaiting results are suspected (6.3.1) |
+| Parts told apart by strain | "43 new confirmed cases… comprising 42 cases of Influenza A and 1 case of Influenza B" | influenza A 42 and influenza B 1, not the 43 |
 | The same fact in two copied articles | "Maharashtra… reporting over 5,300 cases" in two articles | recorded in each article |
 
-**A breakdown into areas below the recorded place is not recorded.** When a count is split into areas that cannot be stored in the place fields (counties, districts, divisions or talukas inside the recorded state), the parts would sit under the same place as the total and add up to more than happened. Record only the total. Example: "Five cases… in Missoula and Lewis and Clark Counties… three cases in Missoula County and two in Lewis and Clark County" → cases 5 for Montana only. A breakdown into places that are stored at their own level (cities, states, countries) is recorded, as in the first row above. The same applies to a breakdown of a count into parts by strain, age group or ICU that would sit under the same place and dates as the total ("43 new confirmed cases… comprising 42 cases of Influenza A and 1 case of Influenza B"; "22 were hospitalised, including two in the ICU"): record only the total.
+**Parts that no field tells apart are not recorded.** When a count's parts would get the same kind, place fields and period as the count itself, the parts would add up to more than happened. Record only the count. This holds for every `count_type`. Such parts are areas below the lowest recordable place (counties, districts, divisions, talukas, neighbourhoods), groups of people (age groups, students and teachers, ICU patients), and parts of an institution's count:
+- "Five cases… in Missoula and Lewis and Clark Counties… three cases in Missoula County and two in Lewis and Clark County" → cases 5 for Montana only.
+- "196 cases at the school: 182 students and 15 teachers" → 196 only.
+- "22 were hospitalised, including two in the ICU" → hospitalized 22 only.
+- "8 deaths in the district, 5 of them children" → deaths 8 only.
+- "2 cases in Gachibowli, 1 of them at a school there" (both stored as Hyderabad) → 2 only.
 
-G4 is about one event told twice; G5 is about different counts.
+**One count is recorded at one place, except a complete total.** A `new` or `cumulative_subset` count is recorded once, at the most specific place the context gives. Only a `cumulative_region` total that the context shows is the complete count of more than one place is recorded at each of those places (7.2).
+
+**G5. One trend word for one place and period.** Two trend items with the same place fields, the same strain and the same period (the same start and end dates) never have different words. Use the context to decide which statement holds for that place and period, and record only that one.
+
+G3 is about one event told twice; G4 is about different counts; G5 is about trends that contradict each other.
 
 ---
 
@@ -104,7 +121,7 @@ G4 is about one event told twice; G5 is about different counts.
 | The article reports | Item |
 |---|---|
 | flu in animals only (poultry, cattle, pigs, dogs, horses, wild birds), even farm animals, with no link to food or water for people and no people exposed, including a statement that no people have been infected | no item |
-| flu in animals linked to **food or water for people**: contaminated eggs, meat or milk; testing of milk or food for the virus; food recalls; food shortages or price rises caused by flu in animals, also when flu is one of several stated causes | one trend item, **inactive**, for the place of that event, **only if that place has no other item** (a fallback, 9.7) |
+| flu in animals linked to **food or water for people**: contaminated eggs, meat or milk; testing of milk or food for the virus; food recalls; food shortages or price rises caused by flu in animals, also when flu is one of several stated causes; a producer's stated loss of food supply caused by flu in its flocks or herds ("10% of its controlled supply of eggs impacted by HPAI"; an egg facility closed and production moved to other sites to limit disruption to customers), for the place of the affected flocks; with no place stated, no item | one trend item, **inactive**, for the place of that event, **only if that place has no other item** (a fallback, 9.7) |
 | people **only monitored** after exposure to infected animals, with no symptoms and no tests ("20 farm workers under monitoring") | one trend item, **inactive**, **only if that place has no other item** (a fallback, 9.7) |
 | people **with flu symptoms tested** after contact with infected animals ("samples from 5 farm workers sent for testing") | a `cases` item, **suspected** |
 | a person **infected** with an animal strain | human flu (1.1) |
@@ -140,6 +157,15 @@ Flu named as an animal flu counts as flu in animals unless the context shows peo
 
 "Counts" are `cases`, `hospitalized` and `deaths` items. On a trend item, `number`, `count_type` and `status` are null. On a count item, `words` is null.
 
+**Fixed values.** A field with a fixed set of values takes only those values, written exactly as shown:
+- `kind`: `cases`, `hospitalized`, `deaths`, `trend` (2.3);
+- `count_type`: `new`, `cumulative_region`, `cumulative_subset` (Section 7);
+- `status`: `confirmed`, `suspected` (Section 6);
+- `words`: `rising`, `falling`, `high`, `moderate`, `low`, `inactive`, `present` (9.2);
+- `strain`: only the forms in 8.1, or null.
+
+Never another word, a synonym, a different spelling or capitalisation, or a combination ("confirmed/suspected").
+
 ### 2.3 `kind`: count or trend, and the four kinds
 **Definition.** `kind` says what the item records: people ill with flu (`cases`), admitted to hospital for flu (`hospitalized`), dead of flu (`deaths`), or a statement about flu spread (`trend`). Exactly one of these four values, required for every item. Decide it in two steps: count or trend, then which kind.
 
@@ -152,20 +178,51 @@ Flu named as an animal flu counts as flu in animals unless the context shows peo
 | Kind | Definition | Examples | Not this kind |
 |---|---|---|---|
 | **cases** | People **ill with flu**: tested positive, diagnosed, reported as flu cases, a named person who "has the flu" or is "battling the flu", suspected flu and pending samples (Section 6), and the animal-contact case in 1.3 | "Six cases of swine flu were confirmed on Monday"; "A trader… is suffering from swine flu"; "418 suspected H1N1 cases" | negative results (no item); vaccinations |
-| **hospitalized** | People **admitted to hospital** for flu, including ICU. The item stands for the **admission**, never the stay. People stated to be in hospital or discharged are handled as a hint of hospitalisation (2.4). | "Five more patients… were shifted to Nishtar Hospital… on Wednesday"; "12,000 hospitalizations… so far" | a discharge itself (see 2.4); outpatient or emergency-room visits with no admission |
-| **deaths** | People who **died of flu**, or whose death is suspected to be flu | "Two women in their thirties died of H1N1 infection on Thursday"; "the death toll… has risen to 31" | a death with flu but another stated cause, even when the article counts it in a flu toll; a person with confirmed flu whose cause of death is unknown or "yet to be categorised" (a `cases` item only); death rates or case-fatality percentages |
+| **hospitalized** | People **admitted to hospital** for flu, including ICU. The item stands for the **admission**, never the stay; its date follows 2.4. People stated to be in hospital or discharged are handled as a hint of hospitalisation (2.4). | "Five more patients… were shifted to Nishtar Hospital… on Wednesday"; "12,000 hospitalizations… so far" | a discharge itself (see 2.4); outpatient or emergency-room visits with no admission |
+| **deaths** | People who **died with flu**: flu stated as the cause, flu present with another stated cause or with the cause unknown, or flu found by a test after death (2.4). A death only suspected to be flu is not recorded | "Two women in their thirties died of H1N1 infection on Thursday"; "the death toll… has risen to 31" | a death only suspected to be flu; death rates or case-fatality percentages |
 | **trend** | A statement about the spread or severity of human flu **across a region**, or an indirect signal | "Flu cases on the rise in Wisconsin" | a statement about **one group or one institution** (9.1) |
 
-### 2.4 Several kinds for the same people
-Every stage the article **states** for the same people (case, admission, death) gets its own item, even on the same date. Don't create a stage the article doesn't state; a hint of hospitalisation counts only as the last bullet says.
-- "A woman tested positive and was admitted on Monday" → cases 1 and hospitalized 1.
-- "Two women died of H1N1" → deaths 2 only.
-- **Identification is its own stage.** A `cases` item records that flu was identified in a person. An admission or a death does not show this by itself, whatever words describe the person. Record the `cases` item only when the context ties the identification to a time: the article gives its day, or the order of events lets you work it out. If the context shows flu was identified but not when, there is no `cases` item.
-- **A hint of hospitalisation.** The article says people are in hospital now or have been discharged or recovered from hospital ("eight patients are undergoing treatment", "has recovered and gone home from hospital"), gives no admission date, and no direct hospitalisation is recorded for them. Decide by meaning, not by these words: "in the ICU" or "on a ventilator" also means in hospital now. Record one `hospitalized` item, only for a valid, recent event:
-  - still in hospital → the report date (4.3.5);
-  - discharged or recovered → the date of those people's `cases` item (their test or detection day).
+### 2.4 Cases, hospitalizations and deaths: what to record and which date
 
-  A date the article lets you work out comes first ("in the ICU for the past 10 days"). A count over a period keeps the period's dates (Section 4). If a direct hospitalisation is recorded, ignore the hint. The discharge itself is never recorded, and its date is never used.
+**Record a kind only when the article ties it to flu or flu-like illness.** Each kind comes from the article's own mention of it, never worked back from another kind. There is no `cases` item for every admission or death, and no `hospitalized` item for every case or death. Each kind the article states for the same people gets its own item, even on the same date.
+- **`cases`**: flu or suspected flu is identified in a person: tested positive, diagnosed, confirmed, samples sent, flu-like symptoms reported, "has the flu".
+- **`hospitalized`**: an admission to hospital that the context ties to flu or flu-like illness, confirmed or suspected. This includes an admission for the illness that the article then shows was flu (treated for flu, tested positive during the stay, died of flu). An admission for something else counts only once flu is found during the stay.
+- **`deaths`**: a death of a person with flu: flu stated as the cause, flu present with another stated cause, flu present with the cause unknown or "yet to be categorised", or flu found by a test after death. Always confirmed: a death only suspected to be flu gets no item.
+
+**The date is the day that event is tied to flu:** the identification day for `cases`; the admission day for `hospitalized` (for an admission for something else, the day flu was found); the day of death for `deaths`.
+
+**Finding that day.** Use the first row that applies. Whatever date you find, the dates never reverse the order of events the context gives.
+
+| # | What the article gives | `cases` | `hospitalized` | `deaths` |
+|---|---|---|---|---|
+| 1 | The day is stated, or can be worked out from a phrase or a stated distance ("yesterday", "two days after admission", "within four days of" a dated death, "in the ICU for the past 10 days") | that day | that day | that day |
+| 2 | A vague time ("a few days ago", "earlier this week") | worked out with 4.4 and 4.5 | worked out with 4.4 and 4.5 | worked out with 4.4 and 4.5 |
+| 3 | One person placed in a rough time frame ("last week", "over Easter", "while undergoing treatment" during a stay with known dates) | the last day of the frame or stay | the last day of the frame | the last day of the frame |
+| 4 | No day, placed only after a dated event (after death, after arrival, after an announcement) | that event's date | that event's date | that event's date |
+| 5 | No day, placed only before a dated event that is not a later stage of the same person (an announcement, a trip, a report) | that event's date | that event's date | that event's date |
+| 6 | No day, and the context implies it came before a later stage of the same person ("tested positive", then died on 16 July; "had been admitted", then died) | no item | no item | the death keeps its own date (rows 1–5, 8–9) |
+| 7 | No day, picked out of a tally for a stated period ("five cases since Dec. 8, including the two who died") | the end of the period or the report date, whichever is first | the end of the period or the report date, whichever is first | the end of the period or the report date, whichever is first |
+| 8 | No day and nothing to place it against, but officials report it | the report date | the report date | the report date |
+| 9 | Nothing at all | the scan date | the scan date | the scan date |
+| 10 | A worked-out date falls after the scan date, or a weekday contradicts the article's data period | the scan date | the scan date | the scan date |
+
+**Suspected and confirmed** (`cases` and `hospitalized`). When a suspected stage turns confirmed, both items are recorded: the suspected item on the day the suspicion was identified, the confirmed item on the day of confirmation. The context decides whether a suspected item is reported at all.
+
+**Negative results never get an item** (6.3.2). One person's suspected item already recorded stays, even if they later test negative. When one statement splits a count by result, each part gets its own status, and the negative part gets nothing: "183 suspected cases… out of which 57 cases were found positive" → cases confirmed 57 only (G4); "10 admitted with flu symptoms; 4 tested positive and 6 are awaiting results" → hospitalized confirmed 4 and suspected 6, and cases confirmed 4 and suspected 6.
+
+**A hint of hospitalisation.** People stated to be in hospital now (in treatment, in the ICU, on a ventilator, in an isolation ward), with no admission date and no direct hospitalisation recorded for them: one `hospitalized` item on the report date (4.1). "Under treatment", "undergoing treatment" or "being treated" for flu counts as being in hospital now, even when no hospital is named, unless the context shows treatment at home, as an outpatient or with medicine alone ("treated at home", "treated from the OPD", "being treated with antiviral medication"). "Under treatment since <date>" is an admission on that date. When the article gives two figures for the people in treatment now, use the one it states as current ("Currently, 7 patients are under treatment"). People stated to be discharged or recovered from hospital: one `hospitalized` item on the date of their `cases` item; if they have no `cases` item, no item. A condition alone ("critical", "serious"), with no hospital stated, is not a hospitalisation. Decide by meaning, not by these words. A count over a period keeps the period's dates (Section 4). The discharge itself is never recorded, and its date is never used.
+
+**Worked examples**
+- "Tested positive Monday, admitted Tuesday, died Thursday" → cases Monday, hospitalized Tuesday, deaths Thursday.
+- "Admitted on 25 July, given Tamiflu, died of H1N1 pneumonia on 30 July" → hospitalized 25 July and deaths 30 July; no cases item, because no identification is stated.
+- "Admitted with flu-like symptoms on 3 March; positive on 5 March" → cases and hospitalized suspected on 3 March, and cases and hospitalized confirmed on 5 March.
+- "Admitted for surgery on 3 March; tested positive for flu on 10 March" → cases and hospitalized confirmed on 10 March.
+- "Both women tested positive" (no day), "died on 16 July" → deaths 16 July only: the identification has no day and came before the death (row 6).
+- "Admitted to hospital a few days ago, she died of swine flu on Sunday 8 January" (scan date 11 January) → hospitalized 7 January (row 2) and deaths 8 January.
+- "She had been admitted to Gandhi Hospital and died of swine flu on Sunday" → deaths only (row 6).
+- "Died of a heart attack on 5 March while infected with flu" → deaths 5 March.
+- "Died of suspected swine flu; samples were sent for testing after her death" → cases suspected on the death date (row 4); no deaths or hospitalized item.
+- "Anhui has reported five cases of H7N9 since Dec. 8, including the two people who died", in a statement dated Dec. 21 → cases 5, 8 to 21 December; deaths 2 on 21 December (row 7).
 
 ### 2.5 Zero
 No zero-count item of any kind is recorded ("no deaths were reported", "no hospitalizations"). Zero **cases** for a region is a trend item with the word **inactive** (9.3.3).
@@ -198,29 +255,47 @@ The number must count flu alone. A combined figure ("1,200 patients with flu, CO
 ## 4. Dates (`start_date`, `end_date`) and recency
 
 ### 4.1 Terms
-- **Scan date:** the date GDELT scanned the article, treated as its publication date. It is in UTC.
+
+**The dates the rules count from**
+- **Scan date:** the date GDELT scanned the article, treated as its publication date. It is in UTC. It is never moved: a report with no date takes the scan date itself, not the day before.
 - **Reference date:** the date a time phrase is counted from.
   - If the article ties the phrase to a stated date or a dated event, that date is the reference date: "four days before 23 July" → 23 July; "two days after she was admitted on 3 March" → 3 March.
+  - A source label in the article text that dates the announcement ("Dec 11 WHO update", "Jan 28 CHP news release") is a stated date: "yesterday", "today" and similar phrases in that story count from it.
   - Otherwise the reference date is the **scan date**: "yesterday", "N days ago", "this month", "so far".
+  - **A phrase inside a dated statement** counts from the statement's date, using the same tables. Calendar phrases give calendar periods; rolling phrases end on that date. "Said on Thursday that 5 died in the past week" → the 7 days back from Thursday, Thursday minus 7 days → Thursday (4.6). "Said on Thursday … in the past 5 days" or "in the past few days" → the days ending on Thursday (4.6). "Said on Thursday … since the beginning of the year" → 1 January of Thursday's year → Thursday.
   - Every calculation in 4.3–4.6 starts from the reference date. Two things always use the scan date: the limit that an end date is never after the scan date (4.2), and recency (4.7).
+- **Report date:** the date of the announcement that carries the event.
+  - The article dates the announcement: "officials said on Thursday" → Thursday; "the bulletin released on 12 January" → 12 January.
+  - The announcement covers a period and has no date of its own (a weekly bulletin, "in the week ending 23 January"): the last day of that period.
+  - No announcement date: the scan date.
+  - When the article quotes several announcements, each event takes the date of the announcement that carries it.
+  - It is never after the scan date, and it is never moved a day for time zones.
+
+**Reports and past stories**
 - **Report:** the article's announcement that an event happened (people ill, admitted or dead, or a trend). An announcement date or period may or may not be given.
 - **Past story:** an event the article retells from the past, such as a personal story told for awareness or a look-back. It isn't current news.
   - A **first-person or personal story told to make a general point** (for example, why vaccinated people can still get flu) is a past story even when written in the present tense, unless the article gives a date or time frame that places it in the recent period (4.7). Figures mentioned only to place that story ("meaning I'm now one of 1,696 South Australians who've come down with the bug this year") belong to it: no item.
   - Recency comes only from what the article states. Never assume an event is recent because of anything the article does not say.
   - An undated event told only as background to the article's main story ("Tensions were heightened when a child… was confirmed") is not a report: no item.
   - This differs from a **report or announcement** of current figures (an official release, a health authority's update, or a running total given as the current situation): those are dated as reports (4.3.5), and a running total ending on the scan date is recent (4.7).
+
+**Calendar terms**
 - **Calendar week:** Monday to Sunday. **Calendar month:** the 1st to the last day. **Calendar year:** 1 January to 31 December.
 - **Current period:** the calendar week, month or year that contains the reference date. **Previous period:** the one just before it.
-- **One day or a period.** An item covers **one day** unless the article states a period.
-  - **One day:** wording that points to a moment: "on <date or weekday>", "yesterday", "in the last 24 hours" (the day before the reference date, 4.6), "N days ago", "before X", "after X", "N days before or after X", "within N days of X". "Died four days after admission" is one day, four days after the admission; it is not a four-day period. One person's event placed only roughly in time ("over Easter", "last month") is also one day: the last day of that time frame (7.2). When the phrase itself names a period ("the week before", "the month after"), it is a period (4.6).
+
+**One day or a period**
+- An item covers **one day** unless the article states a period.
+  - **One day:** wording that points to a moment: "on <date or weekday>", "yesterday", "in the last 24 hours" (the day before the reference date, 4.6), "N days ago", "before X", "after X", "N days before or after X", "within N days of X". "Died four days after admission" is one day, four days after the admission; it is not a four-day period. One person's event placed only roughly in time ("over Easter", "last month") is also one day (the next bullet). When the phrase itself names a period ("the week before", "the month after"), it is a period (4.6).
   - **A period:** wording that says the event or count spread over time: "during", "over", "through", "throughout", "in the past or last N days, weeks or months", "last week", "last month", "this week, month, year or season", "so far", "since X", "from X to Y", "in <month>", a toll or a total. "Four deaths over the past four days" is a four-day period.
+  - **One person, a rough time frame.** When one person's case, admission or death is placed only within a time frame, the event is one day: the last day of that frame, never after the scan date. "Fell ill over the weekend" → that Sunday; "was admitted in the past week" or "in the past month" → the reference date, the last day of that rolling period (4.6); "died last month" → the previous calendar month's last day; "over Easter" → Easter Sunday; "this week" → the scan date if the week has not ended. A count of several people over a period stays a period.
   - **These lists are examples, not a complete list.** For any other wording, decide by its meaning: does it point to one moment (one day), or does it say the event or count spread over time (a period)? The same holds for the phrase tables in 4.4–4.6: convert other phrases by the same logic, from the reference date.
 
 ### 4.2 Definition: the two date fields
-- **`end_date`** (required, G2): the last day the item covers, YYYY-MM-DD, on or before the scan date.
-- **`start_date`**: the first day the item covers, on or before the end date. Null when the start isn't stated ("this season", "till date", "the death toll has risen to 31").
-- **One day:** start date = end date = that day.
-- **Trend items:** start date = end date = scan date, unless the statement or its report gives a date or period of its own ("rose over the past week", "WHO's May 16 update", "data released Friday"); then use the order in 4.3.
+- **`end_date`** (required, G2): the last day the item covers, YYYY-MM-DD, on or before the scan date. It is never null. A computed end date after the scan date is set to the scan date; a stated future date is a forecast (no item, 4.7).
+- **`start_date`**: the first day the item covers, on or before the end date. Null only for a running total whose start the article does not state and the context does not give ("this season", "the death toll has risen to 31").
+- **One day:** start date = end date = that day. A one-day item never has a null start.
+- **Trend items** cover the whole period the statement describes: a week gives that week ("during week 43" → that ISO week), a month gives that month, "rose over the past week" gives the 7 days back from the reference date (4.6); "rose last week" gives the previous calendar week (4.5). With no period, start date = end date = the report date (4.1): "WHO's May 16 update" → 16 May; "data released Friday" → that Friday; no announcement date → the scan date. Use the order in 4.3.
+- **An earlier figure of the same running total** takes the same start as the later figure and ends on its own date. "The death toll [is] six since August 2016… 116 people were affected so far" and "by January 5… 107 were found positive. Till then number of deaths was 5" → 116 and 6: 1 August 2016 → the scan date; 107 and 5: 1 August 2016 → 5 January 2017.
 - **The dates describe exactly what the count covers.** A count for one week covers that week. A running total covers from its start (null if not stated) to the day it was counted. "856 cases in the week ending Oct. 22, compared with 591 the week prior" → 856: Oct. 16–22; 591: Oct. 9–15. "856 cases so far this season, up from 591 a week earlier" → both start null; 856 ends Oct. 22, 591 ends Oct. 15.
 
 ### 4.3 Where the date comes from: use the first rule that applies
@@ -230,19 +305,23 @@ The number must count flu alone. A combined figure ("1,200 patients with flu, CO
 2. **A time phrase in the event's own sentence**, converted from the reference date (4.1) with 4.4–4.6.
 3. **A date in another sentence that is certainly about this same event**, such as an earlier sentence about the same patient or count. A time given for how a case came about dates the case when nothing later is dated.
 4. **A date counted from another dated event in the article.** The reference date is that event's date (4.1). These phrases only lead back to the event's own day; they give **one day**, never a period.
-   - "N days after X", "N days before X", "within N days of X" → X's date plus or minus N days. "Died within four days of hospitalization", with the deaths on 16 July, gives the admission on **12 July**. "Four days before 23 July 2020" → **19 July 2020**. A vague offset is counted with 4.4: "hospitalised on April 28 and diagnosed after a month" → the diagnosis on **28 May** (30 days later).
-   - An event the article places only **before** another dated event, with no date of its own, takes **that event's date**. "Had been admitted", for a patient who died on 16 July → admitted 16 July. An announcement or request made after an event ("urging parents to vaccinate after a child died") → the event takes the announcement's date, or its period if the announcement covers one. A discharged person's admission is dated by 2.4, not by the discharge. This does not date an identification that could have happened on any earlier day (2.4).
+   - "N days after X", "N days before X", "within N days of X" → X's date plus or minus N days. "Died within four days of hospitalization", for an admission for flu (2.4), with the deaths on 16 July, gives the admission on **12 July**. "Four days before 23 July 2020" → **19 July 2020**. A vague offset is counted with 4.4: "hospitalised on April 28 and diagnosed after a month" → the diagnosis on **28 May** (30 days later).
+   - An event the article places only **before** another dated event, with no date of its own, takes **that event's date**, unless it is an earlier stage of the same person before a later one (an admission or identification before a death), which gets no item (2.4, row 6). An announcement or request made after an event ("urging parents to vaccinate after a child died") → the event takes the announcement's date, or its period if the announcement covers one. A discharged person's admission is dated by 2.4, not by the discharge. An identification with no date of its own is dated by 2.4.
    - An event the article places only **after** another dated event, with no date of its own, also takes **that event's date**. "The diagnosis was received only after her death" on July 23 → the diagnosis takes July 23.
 5. **A report** with an announcement date or period → that date or period. With none → the **scan date**. Rules 1–4 come first: if the article gives the event's own date ("died last week… officials said Thursday"), the announcement date is not used.
 6. **A past story** → no item.
+
+**A part with its own report date.** When a count is part of a larger total (G4) and the article gives the part its own announcement, rule 2 applies before rule 3: the part ends on its own report date (4.1). Its start still comes from the total it belongs to, when the context ties it to that total. "Swine flu has killed nearly 40 people in Russia since last month" and "'Eleven people died…,' health authorities in the southern region of Volgograd told state news agency RIA Novosti on Friday" (scan date Saturday 23 January 2016) → Russia 39: 1 December 2015 → 23 January 2016; Volgograd Oblast 11: 1 December 2015 → Friday 22 January 2016. Parts with no announcement of their own take the total's period (rule 3).
 
 ### 4.4 Single days
 All dates are counted from the reference date (4.1), which is the scan date unless the article ties the phrase to another date.
 
 | Group | Phrases | Date |
 |---|---|---|
-| **Now** | today, this morning, tonight, overnight, recently, lately, currently, now, at present, right now | the reference date |
-| **Days back** | yesterday, last night (1); the day before yesterday (2); N days ago, N days before (N); a week ago (7); two weeks ago (14); about a month ago (30) | that many days before the reference date |
+| **Now** | today, this morning, tonight, overnight, recently, lately, these days, currently, now, at present, right now | the reference date |
+| **Days back** | yesterday, last night (1); the day before yesterday (2); N days ago, N days before (N); a week ago (7); two weeks ago, a fortnight ago (14); about a month ago (30) | that many days before the reference date |
+| **Vague moments** | a few, a couple of or several days ago (4); a few or a couple of weeks ago (21); a few or some months ago (90) | that many days before the reference date: one day. "Over the past few days" is a period (4.6) |
+| **About** | about N, around N, N or so (days, weeks or months ago) | as if exact: N |
 | **Days forward** | N days after, the next day, the following day | that many days after the reference date (a dated event in the article), never past the scan date |
 | **Weekday** | "on <weekday>", "<weekday>" ("on Monday", "Friday") | the closest such weekday **on or before** the reference date (the reference date itself if it is that weekday). **For a report or announcement:** if this date contradicts other dates in the article (for example, it falls before the end of a data period that already includes the event) or would fall after the scan date (the scan date is in UTC, so a local "Friday" can be after it), use the scan date. A future event stays a forecast with no item (4.7). |
 | | "last <weekday>" ("last Sunday") | the closest such weekday **before** the reference date; if the reference date is that weekday, the same weekday 7 days earlier |
@@ -259,7 +338,7 @@ All periods are counted from the reference date (4.1). An end date is never afte
 | **This named season** | this winter, this summer, this spring, this autumn or fall | 1st day of that season in the place's hemisphere (table below) → reference date. If the season has already ended, its last day. |
 | | this monsoon (South Asia) | 1 June → reference date; if it has ended, 30 September |
 | **This season** (start unknown) | this season, this flu season, the current season, so far this season | null → reference date; if the article states when the season began, that date → reference date |
-| **Last or past period** | last week, past week, previous week; last month, past month, previous month (one week or month) | 1st → last day of the previous calendar week or month. For two or more ("past three weeks"), see 4.6. |
+| **Last or previous period** | last week, previous week, the week before this one; last month, previous month (one calendar week or month, named as the one before the current one) | 1st → last day of the previous calendar week or month. Example, reference date Thursday 10 March 2022: "cases rose last week" → Monday 28 February → Sunday 6 March. "The past week", "the last week", "the past month", "the past N weeks or months" and "the past few weeks or months" are rolling periods counted back from the reference date (4.6). |
 | **Weekend** | over the weekend, this weekend, last weekend | Saturday → Sunday of the weekend meant ("this weekend" = the one in the reference date's week, never past the scan date; "last weekend" and "over the weekend" = the most recent one before the reference date). If the article names the day ("on Saturday"), use that day. |
 | **Early part** | early <period>, earlier this <period>, the beginning or start of <period> | the **first half** of the period (month: days 1–15; year: January–June; week: Monday–Wednesday), never past the scan date |
 | **Middle part** | mid <period>, the middle of <period> | the **middle third** (month: days 11–20; year: May–August), never past the scan date |
@@ -286,15 +365,16 @@ All periods are counted back from the reference date (4.1). An end date is never
 | **Hours** | in the last 24 hours, over the past 24 hours | the day before the reference date → the same day. The 24 hours are one whole day before the time of writing, not the reference date itself. |
 | | past N hours (48, 72…) | N ÷ 24 whole days ending on the day before the reference date |
 | **N days** | past or last N days | N days ending on the reference date |
-| **N weeks** | past or last N weeks (N of 2 or more) | N × 7 days ending on the reference date |
-| **N months** | past or last N months (N of 2 or more) | from the day after the same date N months earlier → the reference date |
+| **N weeks** | the past week, the last week, past or last N weeks | the reference date minus N × 7 days → the reference date. Reference date Thursday 10 March 2022: "in the past week" → 3 March → 10 March; "in the past 2 weeks" → 24 February → 10 March |
+| **N months** | the past month, the last month, past or last N months | the same date N months earlier → the reference date. Reference date 10 March 2022: "in the past month" → 10 February → 10 March; "the past 3 months" → 10 December 2021 → 10 March 2022 |
+| **Vague weeks** | the past or last few weeks; a few, a couple of, several or recent weeks | counted as 3 weeks: the reference date minus 21 days → the reference date. Reference date 10 March 2022 → 17 February → 10 March |
+| **Vague months** | the past or last few months; a few, a couple of, several or recent months | counted as 3 months: the same date 3 months earlier → the reference date. Reference date 10 March 2022 → 10 December 2021 → 10 March 2022 |
 | **Year** | past year, past 12 months | from the day after the same date a year earlier → the reference date |
 | **Vague days** | a few, a couple of, several or recent days | 4 days ending on the reference date |
-| **Vague weeks** | a few, a couple of, several or recent weeks | 21 days ending on the reference date |
-| **Vague months** | a few, a couple of, several or recent months | 90 days ending on the reference date |
+| **Fortnight** | past fortnight, last fortnight | 14 days ending on the reference date |
 | **Since** | since X (a date, a month, "the beginning of the year") | X → reference date |
 | | since the outbreak began, since the start of the season | null → reference date; if the context states when it began, that date → reference date (a month or other period: its first day) |
-| **Running total** | till date, so far, to date, until now, "the toll stands at / has risen to" | null → reference date |
+| **Running total** | till date, so far, to date, until now, "the toll stands at / has risen to" | the start the article states or the context gives (a season or outbreak start, an earlier sentence about the same total, 4.2), else null → reference date |
 | **Up to a date** | till, until, through, as of, by X | (from the article, or null) → X |
 | **Stated range** | from X to Y, between X and Y | X → Y |
 | | week ending X | 6 days before X → X |
@@ -302,7 +382,7 @@ All periods are counted back from the reference date (4.1). An end date is never
 | | the same period, the same time | the period already stated in the sentence |
 | **Week numbers** | EpiWeek N, Week N | Monday → Sunday of that ISO week, in the reference date's year or the year stated |
 | | weeks N to M | Monday of week N → Sunday of week M |
-| **No period** | "in the past" | no date, so no item |
+| **No period** | "in the past", "a while ago", "some time ago", "before" with nothing to count from | no date, so no item |
 
 ### 4.7 What counts as recent
 An item is recorded only if its **end date is within the 30 days ending on the scan date** (on or after 30 days before the scan date, and on or before the scan date). A running total or trend ending on the scan date is recent **when it is reported as current figures** (a report or announcement, 4.1); a figure that belongs to a past story is not. **Not recorded:**
@@ -332,7 +412,7 @@ The place is **where the event happened**, written in three fields.
 - **A place the context does tie to the event is used.** That is not an assumption, and it is not dropped. Example: in a Mumbai report, "After a lull throughout June, the respiratory virus has come back to claim four lives. So far, around 60 people have tested positive for the infection in July…" sits in a paragraph with "There is a slight increase in cases across the state" and "Maharashtra has been one of the worst-hit states". The July figures are the state's figures, so the place is Maharashtra.
 
 ### 5.3 Finding the event's place: use the first step that gives a place tied to the event
-Use the steps in order. If a later step gives a **more specific place for the same event** that lies inside the place already found (a city inside the country named in the event's sentence), use the more specific place. A person's home area counts as a place tied to the event at any step only when 5.4 accepts it as local.
+Use the steps in order. If a later step gives a **more specific place for the same event** that lies inside the place already found (a city inside the country named in the event's sentence), use the more specific place. A `cumulative_region` total that the context shows is the complete count of more than one place is recorded at each of those places (7.2). A person's home area counts as a place tied to the event at any step only when 5.4 accepts it as local.
 
 
 | Step | Source | Use only when | Example |
@@ -398,7 +478,7 @@ Use the steps in order. If a later step gives a **more specific place for the sa
 ## 6. `status`
 
 ### 6.1 Definition
-Whether the article treats the illness, admission or death as **caused by flu** (`confirmed`) or only **suspected** to be flu (`suspected`). Required for every count, never null.
+Whether the article treats the illness, admission or death as **caused by flu** (`confirmed`) or only **suspected** to be flu (`suspected`). Required for every count, never null. `deaths` items are always confirmed (6.3.5).
 
 ### 6.2 Values
 
@@ -412,7 +492,7 @@ Whether the article treats the illness, admission or death as **caused by flu** 
 2. **Negative results are not recorded.** In the same example, the 31 negatives get no item.
 3. **Probable and presumptive positive are suspected.** "Presumptive positive" is a local lab result still waiting for confirmation.
 4. **Flu-like illness and ILI counts are suspected**, unless the article names another cause, in which case there's no item (1.2).
-5. **Deaths:** flu stated as the cause → confirmed; flu suspected as the cause → suspected.
+5. **Deaths:** a death with flu (2.4) → confirmed. A death only suspected to be flu gets no `deaths` item (2.4), so `deaths` items are always confirmed.
 6. **Strain doesn't decide status.** A strain or plain "flu" stated as fact is confirmed; hedging words make either suspected.
 
 ---
@@ -421,31 +501,56 @@ Whether the article treats the illness, admission or death as **caused by flu** 
 
 ### 7.1 Definition
 `count_type` says what kind of number the count is. Required for every count. Exactly one of:
-- **`new`**: events that happened **on one day**, one person or many.
-- **`cumulative_region`**: a **total reported for a period**, for the **whole** lowest recorded place and **all** its people.
-- **`cumulative_subset`**: a **total reported for a period**, for only **part** of the lowest recorded place or **part** of its people.
+- **`new`**: a count of events (cases, admissions or deaths) that the article places on one single day, one person or many. This is the only test. `new` does not mean newly reported: a number reported today that counts events over a period (a week, this season, so far, a toll) is cumulative.
+- **`cumulative_region`**: a **total reported for a period** that is the **complete** count for its lowest recorded place.
+- **`cumulative_subset`**: a **total reported for a period** for only **part** of its lowest recorded place, or for **one category of people** counted on its own.
+
+**The count type categories apply consistently to every count.** The definitions of `new`, `cumulative_region` and `cumulative_subset`, and every rule in this section and in G4, are applied in the same way whether the item is `cases`, `hospitalized` or `deaths`. "Three people admitted on Monday" is `new`; "112 hospitalizations in the state since September" is `cumulative_region`; "five admissions at one hospital this month" and "seven children died this season" are `cumulative_subset`.
+
+**Where a count sits.** Every count item belongs to the **lowest place it fills**: the city if `city` is filled, else the state, else the country. `count_type` says how the count relates to that place:
+
+| `count_type` | Meaning for its lowest filled place |
+|---|---|
+| `new` | events on one single day at that place |
+| `cumulative_region` | the complete total for that place over the period |
+| `cumulative_subset` | a total over the period for only part of that place, or for one category of people counted on its own |
+
+Places nest: a city's total is inside its state's total, and a state's total is inside its country's. A `cumulative_region` item for a city and one for its state can both be recorded; they are never added together. Every valid, recent count is recorded, each with the `count_type` its own context gives (G4).
 
 ### 7.2 Deciding the value: two questions
 
-**Question 1. Is the number events on one day, or a total reported for a period?** (Use the dates from Section 4.)
+**Question 1. Does the article place all the events of the count on one single day, or is it a total reported for a period?** (Use the dates from Section 4.)
 - **One day → `new`.** The people fell ill, were tested, admitted or died on one day. One day is any of these:
   - a stated day ("on Thursday", "on 16 July");
   - a day counted from another dated event ("within four days of hospitalization", 4.3.4);
   - "in the last 24 hours": the day before the reference date (4.6);
   - a report with no date: the scan date (4.3.5);
   - **one person's event that the article places only roughly in time** ("she contracted the illness over Easter", "a child tested positive in November", "a woman died last month"). The event still happened on one day; the time frame only says the article does not know which day. Use **the last day of that time frame, not after the scan date** (Easter Sunday; the last day of the month; for "this week", the scan date if the week has not ended).
-- **A total for a period → cumulative.** The article reports how many happened during an observation period: a week ("in EpiWeek 18"), "this season", "since January", "so far", "in July", "the last three weeks", a toll. It is cumulative **even if the number is 1** ("In EpiWeek 18… one death occurred"; "one known flu-related death in the county this flu season"; "only one case in the last three weeks") and even if the text says "new". Go to question 2.
-- **A tally.** One event picked out of a tally for a stated period keeps that period and is cumulative. With no period stated, it is a report on the scan date and `new`.
-- **The test:** is the article reporting **how many happened during a period** (a tally: cumulative), or telling **one person's story** and placing it roughly in time (`new`)?
 
-**Question 2 (cumulative only). Is the count limited to part of the place or part of its people?**
-- **No → `cumulative_region`.** This is the **default**: the total for all of the lowest recorded place (city, else state, else country) and all its people, whenever the article gives no clue that the count is limited.
+  A one-day count is `new` wherever it happened, including at one institution or in one group of people ("almost 200 students and staff sick on Thursday" at one school is `new`).
+- **A total for a period → cumulative.** The article reports how many happened during an observation period: a week ("in EpiWeek 18"), "this season", "since January", "so far", "in July", "the last three weeks", a toll. It is cumulative **even if the number is 1** ("In EpiWeek 18… one death occurred"; "one known flu-related death in the county this flu season"; "only one case in the last three weeks") and even if the text says "new". Go to question 2.
+- **A tally.** One event picked out of a tally for a stated period is one day: the end of that period or the report date, whichever is first, and `new` (2.4). With no period stated, it is a report on the report date and `new`.
+- **The test:** is the article reporting **how many happened during a period** (a tally: cumulative), or **events placed on one day**, including one person's event placed roughly in time (`new`)?
+
+**Question 2 (cumulative only). Is the total the complete count for its lowest recorded place?**
+- **Yes → `cumulative_region`.** This is the **default**: the total for all of the lowest recorded place (city, else state, else country) and all its people, whenever the context gives no sign that the count is limited.
+  - **A total stays complete when its events happen to be confined.** "Telangana recorded 2 cases in the last 10 days; both were reported from Karimnagar" is Telangana's complete total, even though both cases were in one city.
   - **Details about the people counted do not limit the count.** "One death occurred in a person aged over 60", "the four who died were over 65", "including senior adults", "also citizens of other countries" describe who was counted; the count is still the whole place's total.
-- **Yes → `cumulative_subset`.** The article's count is limited to:
-  - **part of the place**: a smaller area inside the recorded place (county, district, taluka), or only some named parts of it: "Douglas County has already seen more than 20 confirmed cases" (recorded as Nebraska); "the CDC listed 41 cases in six states" (recorded as United States); numbers given for only a few districts of a state;
-  - **an institution** (school, college, hospital, clinic, care home, prison, workplace): "182 students and 15 teachers sick" at one Brisbane school; "19 children… admitted to Westmead Children's hospital since April";
+  - **One total, several places.** When the context shows the same total is the complete count for more than one recorded place, record one `cumulative_region` item for each place: in the Telangana example, cases 2 for Telangana, India and cases 2 for Karimnagar, Telangana, India.
+- **No → `cumulative_subset`.** The article gives the total only for:
+  - **part of the place**: a smaller area inside the lowest recorded place that cannot be stored in the place fields (county, district, taluka, neighbourhood), or only some named parts of it: "Douglas County has already seen more than 20 confirmed cases" (recorded as Nebraska); "2 cases in Gachibowli" (a neighbourhood, recorded as Hyderabad); "the CDC listed 41 cases in six states" (recorded as United States); numbers given for only a few districts of a state;
+  - **an institution** (school, college, hospital, clinic, care home, prison, workplace): "196 cases at a Hyderabad school this term"; "19 children… admitted to Westmead Children's hospital since April";
   - **one category of people counted on its own** (an age group, one gender, students, teachers, farm workers, travellers, ICU patients), even across the whole place: "seven children" died this season in the USA. Here the article gives the total for that group only, not for the whole population;
-  - **a sample** (one doctor's patients, one batch of tests).
+  - **a selection of people** (one doctor's patients, a survey). Laboratory samples are not a selection: positive samples reported for a whole place are that place's count.
+
+**Example: every part recorded.** "10 cases in Telangana this month: 2 in Gachibowli, 3 in Karimnagar and 5 in Warangal" gives four items:
+
+| Place | Number | `count_type` | Why |
+|---|---|---|---|
+| Telangana, India | 10 | `cumulative_region` | the state's complete total |
+| Hyderabad, Telangana, India | 2 | `cumulative_subset` | Gachibowli is part of the city |
+| Karimnagar, Telangana, India | 3 | `cumulative_region` | the city's whole count |
+| Warangal, Telangana, India | 5 | `cumulative_region` | the city's whole count |
 
 ### 7.3 Common phrasings
 
@@ -463,6 +568,10 @@ Whether the article treats the illness, admission or death as **caused by flu** 
 | "only one lab-confirmed case in the last three weeks"; "In EpiWeek 18… one death occurred in a person aged over 60" (the period's total) | `cumulative_region` |
 | "one known flu-related death in the county this flu season" (recorded as the state) | `cumulative_subset` (part of the place) |
 | "seven children" died this season (a category counted on its own) | `cumulative_subset` |
+| "almost 200 students and staff sick on Thursday" at one school (one day) | `new` |
+| "196 cases at a Hyderabad school this term" (an institution, a period) | `cumulative_subset` |
+| "Telangana recorded 2 cases in the last 10 days; both were reported from Karimnagar" | `cumulative_region` for Telangana and for Karimnagar |
+| "107 of 2,717 samples tested positive by January 5" (lab samples for the whole state) | `cumulative_region` |
 
 ---
 
@@ -483,7 +592,7 @@ The flu type or subtype the article names for the event. Null if none is named.
 
 ### 8.2 The strain for the event, from the sentence or the context
 The strain may be named in the event's own sentence, or only in the context. Find it in this order:
-1. **Named for this event:** in the item's own sentence, or in another sentence about the same event (G4).
+1. **Named for this event:** in the item's own sentence, or in another sentence about the same event (G3).
 2. **From the context:** the statement continues a story about one strain without naming it ("the infection", "the virus", "cases across the state" in an article about H1N1) → that strain.
 3. **Not settled by the context** (the article covers several strains, or plain flu) → null.
 
@@ -499,7 +608,7 @@ A count naming several strains takes the strain that count is about. (Trend stat
 ### 9.1 Definition (trend items and `words`)
 A trend item records a statement about the **spread or severity of human flu across a region** (a city, county, district, state, province, country or wider), current (within the 30 days ending on the scan date, 4.7), or an indirect signal (9.5). `words` holds exactly one of the seven words in 9.2; the article's own wording stays in `evidence`. `number`, `count_type` and `status` are null. Dates: 4.2. Place: Section 5. Strain: Section 8 and 9.6.
 
-**One group or one institution is not a trend.** A statement about only one group of people (an age group, a gender, an occupation such as students or farm workers) or one institution (school, hospital, prison, care home, team) is not a trend, whatever its wording ("outbreak at the prison", "beds are all occupied at his facility", "many healthy individuals get the infection"). With a number, it is a count (`cumulative_subset`, Section 7). Without a number, it can give only a fallback **present** (9.7).
+**One group or one institution is not a trend.** A statement about only one group of people (an age group, a gender, an occupation such as students or farm workers) or one institution (school, hospital, prison, care home, team) is not a trend, whatever its wording ("outbreak at the prison", "beds are all occupied at his facility", "many healthy individuals get the infection"). With a number, it is a count (Section 7). Without a number, it can give only a fallback **present** (9.7).
 
 ### 9.2 The seven words
 
@@ -536,7 +645,7 @@ A word from a forecast is never the trend word. If the context shows flu is acti
 
 **Decide by the context, not by the phrase alone.** "Flu is circulating, and the worst is yet to come" gives a fallback present; "the worst of the flu season is yet to hit, so there is still time to vaccinate" gives no item.
 
-A season named only to show the timing of something else ("overlaps with the onset of the cold and flu season", said of a COVID-19 surge) says nothing about flu activity: no item.
+A season named only to show the timing of something else ("overlaps with the onset of the cold and flu season", said of a COVID-19 surge) says nothing about flu activity: no item. This holds whenever the flu season is only the time frame for another topic in the sentence, such as a remedy trend, another virus or a joke ("As flu season begins, sufferers turn to salt caves"; "where flu season is just getting underway, RSV cases have doubled"). When flu activity itself is the subject ("the flu season has started in Victoria"), it is a season phase and gives present.
 
 9. **Comparisons with past years, seasons or averages** ("23% higher than a year ago", "worst season in years", "about the 5-year average") are not recorded, except as the comparison fallback (9.7). A level stays a level even when softened; a comparison needs a stated past period or average.
 
@@ -589,10 +698,12 @@ After all statements are handled, check each place separately, because trends ar
 ## 10. `evidence`
 
 ### 10.1 Definition and order
+- **Every quote is part of the original article text**, word for word. It is never altered or modified in any way.
 - A **list of quotes copied exactly** from the stored article text: whole sentences, typos kept, no paraphrase, no translation. Headlines and bullet lines are quoted as printed. Text already cut short in the stored article is kept as stored, never completed.
 - **First part:** the sentence stating the event.
-- **Further parts, in article order:** every other sentence used for the item: the other sentences of the same event (G4), the sentences that gave its place (5.3 steps 2–6: the authority sentence, the institution's city, the earlier mention, the data source, the passage's place), the sentences that gave its date (4.3 rules 3–5), and the sentences that gave its strain (8.2).
+- **Further parts, in article order:** every other sentence used for the item: the other sentences of the same event (G3), the sentences that gave its place (5.3 steps 2–6: the authority sentence, the institution's city, the earlier mention, the data source, the passage's place), the sentences that gave its date (4.3 rules 3–5), and the sentences that gave its strain (8.2).
 - **The evidence must be enough to rebuild the item.** Reading only the evidence, you must be able to find every field: the number, the place (inferring upward by 5.5 is allowed), the date, the status, the strain, and the kind or word. If a field comes from another sentence, quote that sentence, even when the sentence stating the event is already quoted.
+- **The evidence shows how the item was made.** It holds every sentence the item's decisions rest on: its fields, its count type, its period, and whether it is a separate event or the same one told again. Add as many sentences as the item needs.
 
 ### 10.2 Format
 `evidence` is a list of strings. (In the label sheets, parts are joined with ` || `.)
@@ -609,7 +720,7 @@ An article is useful when it tells us something about **current human flu activi
 3. It has a place tied to the event, with at least a country (Section 5, G1).
 4. It has an end date that is recent (Section 4, G2).
 5. Its fields follow their rules: counts have a number, `count_type` and `status`; trends have one word; evidence is quoted exactly.
-6. It isn't a duplicate (G3, G4).
+6. It isn't a duplicate (G3), and it doesn't contradict another trend (G5).
 
 **`useful = true`** when at least one valid item exists; otherwise **`useful = false`**, with `items` empty.
 

@@ -1,5 +1,10 @@
 # Few-shot example candidates (prompt v5.1)
 
+> **Not the active set.** Since 6 Nov 2026 (prompt v5.2) the active `prompts/examples_v5.2.json` holds
+> the 22 examples chosen with the v5.2 labels (`fewshot_examples_v5.2.json` in the labels' folder; see the
+> README, section 4.1). This sheet records how the earlier 8 examples were chosen for v5.1 from the
+> chain-of-thought v2 records.
+
 Written by `scripts/select_examples.py`. The k = 8 set is the active `prompts/examples_v5.1.json`. Picks favour hard cases: a `hard_case` note and articles the model got wrong in earlier runs.
 
 Pool: 573 labelled records after exclusions (article over 6000 characters (10000 for hard_case): 197, in more than one labeling set: 80, fails the keyword gate: 44, reply over 5000 characters: 25, garbled text: 1).

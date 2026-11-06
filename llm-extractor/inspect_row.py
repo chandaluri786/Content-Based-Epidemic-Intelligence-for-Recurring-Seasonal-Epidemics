@@ -3,10 +3,10 @@
 Use it to see exactly why an item matched or did not. Nothing is abbreviated.
 
 Examples (from the llm-extractor folder, with the virtual environment active):
-    python inspect_row.py results/run_20261101_165443 Jahnavi:6
+    python inspect_row.py results/run_20261101_165443 Jahnavi:192
     python inspect_row.py results/run_20261101_165443 20161230170000-2179 --article   # also print the text
-    python inspect_row.py results/run_20261101_165443 Jahnavi:6 --reasoning           # also print the steps
-    python inspect_row.py results/run_20261101_165443 Jahnavi:6 --offline             # no place lookups
+    python inspect_row.py results/run_20261101_165443 Jahnavi:192 --reasoning           # also print the steps
+    python inspect_row.py results/run_20261101_165443 Jahnavi:192 --offline             # no place lookups
 """
 
 import argparse
@@ -53,7 +53,7 @@ def main() -> None:
     sys.stdout.reconfigure(errors="replace")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("run_dir", type=Path, help="run folder created by run_extraction.py")
-    parser.add_argument("article", help="article id, or a set position such as Jahnavi:6")
+    parser.add_argument("article", help="article id, or a set position such as Jahnavi:192")
     parser.add_argument("--article", dest="show_article", action="store_true", help="also print the article text")
     parser.add_argument("--reasoning", action="store_true", help="also print the model's summary and reasoning steps")
     parser.add_argument("--offline", action="store_true", help="do not look up place names online; use only the saved answers")

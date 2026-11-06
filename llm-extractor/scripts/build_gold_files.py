@@ -1,4 +1,4 @@
-"""Build data/articles.json and data/gold_labels.json from the chain-of-thought v2 records.
+"""Build data/articles.json and data/gold_labels.json from the label records.
 
 The extractor itself reads only files inside this folder (`prompts/` and `data/`). Run this
 script when the records change. It is the only code that knows where the capstone files live.
@@ -7,10 +7,11 @@ script when the records change. It is the only code that knows where the capston
 
 Reads:
     <records-dir>/<Name><RECORDS_SUFFIX>              the gold records (config.py; default
-                                                    data/chain_of_thought/<Name>_chain_of_thought_v2.jsonl),
-                                                    for every <Name> that has such a file
+                                                    data/chain_of_thought/<Name>_labels_v5.2.jsonl),
+                                                    for every <Name> that has such a file, in either
+                                                    layout read by data_loading.read_label_records
     <labeling-dir>/<Name>_texts.txt                  the article texts of all four labeling sets
-                                                    (the v2 records hold no article text)
+                                                    (the records hold no article text)
     prompt_versions/llm_extraction_prompt_<PROMPT_VERSION>.md   the prompt document (config.py)
 
 Writes:
@@ -35,6 +36,7 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_DIR))
 from flu_extractor import config  # noqa: E402
 from flu_extractor.data_checks import check_articles, check_gold  # noqa: E402
+from flu_extractor.data_loading import read_label_records  # noqa: E402
 
 # The labeling sets whose article texts are read. All four are read, so that an article repeated in
 # another set (Thanya rows 1-40) is found and removed, even though only some sets have gold records.
@@ -86,12 +88,6 @@ def convert_articles(texts_path: Path) -> list[dict]:
     return articles
 
 
-def read_records(path: Path) -> list[dict]:
-    """Read a chain-of-thought file (one JSON record per line)."""
-    with path.open(encoding="utf-8") as file:
-        return [json.loads(line) for line in file if line.strip()]
-
-
 # --- Build -------------------------------------------------------------------
 
 def build(labeling_dir: Path, records_dir: Path) -> tuple[list[dict], list[dict], dict]:
@@ -115,7 +111,7 @@ def build(labeling_dir: Path, records_dir: Path) -> tuple[list[dict], list[dict]
     gold: dict[str, dict] = {}
     record_count = 0
     for path in record_files:
-        for record in read_records(path):
+        for record in read_label_records(path):
             record_count += 1
             article_id, output = record["article_id"], record["output"]
             if article_id not in texts:
@@ -167,7 +163,7 @@ def main() -> None:
     articles, labels, counts = build(labeling_dir, args.records_dir)
     problems = check_articles(articles) + check_gold(labels, articles)
     if problems:
-        print(f"Not written: {len(problems)} problems with the v5.1 format or the evidence, e.g.:", file=sys.stderr)
+        print(f"Not written: {len(problems)} problems with the {config.PROMPT_VERSION} format or the evidence, e.g.:", file=sys.stderr)
         print("\n".join(problems[:20]), file=sys.stderr)
         raise SystemExit(1)
     write_json(DATA_DIR / "articles.json", articles)

@@ -1,11 +1,11 @@
-"""Check that the input files are in the format the pipeline and prompt v5.1 need.
+"""Check that the input files are in the format the pipeline and prompt need.
 
     data/articles.json        list of {article_id, scan_date, link, sources, article}
     data/gold_labels.json     list of {article_id, useful, labelers, items}, one per article in articles.json
     prompts/examples_*.json   list of {article_id, source, slots, scan_date, link, article, answer}
 
 The gold items and the example answers are checked with the same code as the model's replies
-(checks.py): the v5.1 reply format with every fixed value, and every evidence quote copied exactly
+(checks.py): the reply format with every fixed value, and every evidence quote copied exactly
 from its article. A few-shot example teaches the model, so its answer must also follow "How to
 work" (Step 0, then Step 1 citing Rule 1), and its article must be the same text as in
 articles.json.

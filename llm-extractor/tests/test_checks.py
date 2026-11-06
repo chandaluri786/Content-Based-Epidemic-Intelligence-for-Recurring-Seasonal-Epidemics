@@ -1,5 +1,5 @@
-"""Tests for the three check layers of checks.py against prompt v5.1: the reply format with every
-fixed value, the evidence copied from the article, and the rule checks. No API and no internet.
+"""Tests for the three check layers of checks.py against the prompt (v5.2): the reply format with every
+fixed value, the evidence copied from the article, and the rule checks (with v5.2's G4 and G5). No API and no internet.
 
 The place lookup itself is tested in test_places.py.
 
@@ -35,7 +35,7 @@ EVERY_PLACE_IS_REAL = PlaceChecker(lookup=lambda place: {"found": True, "top_mat
 
 
 def count_item(**changes):
-    """A valid v5.1 count item; keyword arguments replace fields."""
+    """A valid count item; keyword arguments replace fields."""
     item = {
         "kind": "cases", "number": 12, "count_type": "new", "status": "confirmed", "strain": None,
         "city": "Springfield", "state": "Illinois", "country": "USA",
@@ -46,13 +46,13 @@ def count_item(**changes):
 
 
 def trend_item(**changes):
-    """A valid v5.1 trend item; keyword arguments replace fields."""
+    """A valid trend item; keyword arguments replace fields."""
     return count_item(**{"kind": "trend", "number": None, "count_type": None, "status": None,
                          "words": "rising", **changes})
 
 
 def reply(items=None, useful=None, **changes):
-    """A minimal valid v5.1 reply. `useful` defaults to whether there are items."""
+    """A minimal valid reply. `useful` defaults to whether there are items."""
     items = [count_item()] if items is None else items
     parsed = {"summary": "Flu cases in Springfield.", "reasoning": ["Step 0 (summary): x", "Step 1 (Rule 1): y"],
               "useful": bool(items) if useful is None else useful, "reason": "x", "items": items}
@@ -69,7 +69,7 @@ def violations(parsed):
 
 
 class FormatTest(unittest.TestCase):
-    """Layer 1: the reply format and every value v5.1 fixes."""
+    """Layer 1: the reply format and every value the prompt fixes."""
 
     def test_valid_replies_have_no_format_errors(self):
         self.assertEqual(find_format_errors(reply()), [])
@@ -189,9 +189,24 @@ class RuleTest(unittest.TestCase):
         self.assertTrue(any(v.startswith("(k)") for v in violations(reply(reasoning=["Step 0 (summary): x",
                                                                                      "Step 1: y"]))))
 
-    def test_identical_items_and_overlapping_counts_are_not_violations(self):
-        self.assertEqual(violations(reply([count_item(), count_item()])), [])
-        self.assertEqual(violations(reply([count_item(), count_item(number=85, count_type="cumulative_region")])), [])
+    def test_counts_that_differ_in_period_strain_or_status_are_not_violations(self):
+        total = count_item(number=85, count_type="cumulative_region", start_date="2016-12-01")
+        self.assertEqual(violations(reply([count_item(), total])), [])                        # G4 table rows
+        self.assertEqual(violations(reply([count_item(strain="influenza A"),
+                                           count_item(number=1, strain="influenza B")])), [])
+        self.assertEqual(violations(reply([count_item(), count_item(number=30, status="suspected")])), [])
+
+    def test_counts_of_the_same_people_are_rule_g4(self):
+        # Same kind, place, period, strain and status: a count and its part, or one count twice.
+        part = count_item(number=2, count_type="cumulative_subset")
+        self.assertTrue(any(v.startswith("(G4)") for v in violations(reply([count_item(), part]))))
+        self.assertTrue(any(v.startswith("(G4)") for v in violations(reply([count_item(), count_item()]))))
+
+    def test_contradicting_trend_words_are_rule_g5(self):
+        rising, falling = trend_item(), trend_item(words="falling")
+        self.assertTrue(any(v.startswith("(G5)") for v in violations(reply([rising, falling]))))
+        self.assertEqual(violations(reply([rising, trend_item(words="falling", strain="influenza B")])), [])
+        self.assertEqual(violations(reply([rising, trend_item()])), [])   # the same word twice is not G5
 
 
 if __name__ == "__main__":
