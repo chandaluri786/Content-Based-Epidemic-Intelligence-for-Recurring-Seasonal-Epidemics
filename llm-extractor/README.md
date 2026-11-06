@@ -226,7 +226,7 @@ Every request, retries included, uses the same settings (`flu_extractor/config.p
 | `temperature` | 0 | greedy decoding: always the most likely next token |
 | `top_p` | 1 | no extra sampling cut-off (irrelevant at temperature 0, sent so the server does not apply its own default) |
 | `seed` | 20261101 | fixes any sampling left on the server |
-| `extra_body` | `{"chat_template_kwargs": {"thinking": false}}` | no hidden thinking pass: the v5 reply carries its reasoning in the JSON, and thinking adds tokens, time and variation (verified: 0 reasoning tokens) |
+| `extra_body` | `{"chat_template_kwargs": {"thinking": false}}` (NVIDIA); `{"thinking": {"type": "disabled"}}` on DeepSeek's own API, set with `EXTRA_BODY_JSON` (8.4) | no hidden thinking pass: the v5 reply carries its reasoning in the JSON, and thinking adds tokens, time and variation (verified on NVIDIA: 0 reasoning tokens). The switch depends on the API: DeepSeek's own API ignores NVIDIA's and thinks by default |
 | `max_tokens` | 8000 | the longest gold reply is about 5,000 tokens |
 | no penalties | defaults | presence and frequency penalties are 0 |
 
@@ -508,7 +508,8 @@ Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in 
 | `EXAMPLES_PATH` | `.env` | `prompts/examples_<PROMPT_VERSION>.json` (the one set; 22 examples for v5.2) |
 | `RECORDS_SUFFIX` | `.env` | `_labels_v5.2.jsonl`: the gold record files read from `data/chain_of_thought/` |
 | `RESULTS_DIR` | `.env` | `results/` |
-| `TEMPERATURE`, `TOP_P`, `SEED`, `EXTRA_BODY`, `MAX_TOKENS` | `config.py` | 0, 1, 20261101, thinking off, 8000 |
+| `EXTRA_BODY_JSON` | `.env` | the model's request options as a JSON object; unset = NVIDIA's thinking switch, off (4.2, 8.4) |
+| `TEMPERATURE`, `TOP_P`, `SEED`, `MAX_TOKENS` | `config.py` | 0, 1, 20261101, 8000 |
 | `MAX_RETRIES`, `MAX_VALIDATION_RETRIES`, `STOP_AFTER_CONSECUTIVE_API_ERRORS` | `config.py` | 4, 3, 5 |
 | `PLACE_NAME_LANGUAGE` | `.env` | `en`: the language of the agreed place names (5.6); `PLACE_NAME_SOURCE` in `config.py` is `openstreetmap` |
 | match threshold, normalization, recency window | `matching.py`, `normalization.py`, `checks.py` | 0.8, `norm_v3`, 30 days |
@@ -584,6 +585,26 @@ itself changes. After any change: `python -m unittest discover tests`, then a on
    the longest article (about 35,000 tokens).
 6. Run one article, read the reply with `inspect_row.py`, then run the rest.
 
+**DeepSeek's own API** (cheaper than NVIDIA's queue for a full run: off-peak prices and a prompt cache). In `.env`:
+
+```
+NVIDIA_API_KEY=<DeepSeek platform key>
+NVIDIA_BASE_URL=https://api.deepseek.com
+NVIDIA_MODEL_ID=deepseek-flash
+EXTRA_BODY_JSON={"thinking": {"type": "disabled"}}
+```
+
+- `deepseek-flash` is DeepSeek V4.1 Flash; the old `deepseek-v4-flash` name routes to the same model.
+- **Thinking is on by default there**, so `EXTRA_BODY_JSON` is required; check that `reasoning_tokens` is 0 in
+  `raw_results.jsonl` after a one-article run.
+- **Prompt cache:** automatic for an identical prefix. Every request starts with the same rules and examples
+  (about 48,000 tokens) and puts the article last, so later requests read the prefix from the cache. The
+  first article is sent alone (warm-up) before the workers start, so the first wave does not miss the
+  cache. Each record logs `cache_hit_tokens` and `cache_miss_tokens`, and the run ends with the totals and
+  the hit share.
+- **Off-peak:** DeepSeek bills less outside its peak hours; check the hours on its pricing page and
+  start the run in that window.
+
 ### 8.5 Place names
 
 The agreed form of every place (5.6) comes from OpenStreetMap; no name list is kept in the code.
@@ -608,7 +629,7 @@ Per run, in `results/run_<date>_<time>/` (ignored by git):
 
 | File | Content |
 |---|---|
-| `raw_results.jsonl` | one line per article: model, raw reply, parsed reply, finish reason, tokens, seconds, requests, validation retries and problems, errors |
+| `raw_results.jsonl` | one line per article: model, raw reply, parsed reply, finish reason, tokens (with cache hits, misses and thinking tokens when the API reports them), seconds, requests, validation retries and problems, errors |
 | `run_config.json` | model, base URL, decoding settings, prompt, guide and examples files with SHA-256 hashes, rate limit, selection, start time |
 | `report.md` | 1 task 1 table; 2 recall, precision, F1; 3 accuracy, exact rate, field accuracy (each as mean, interval, median, quartiles, share at 1 and 0, articles covered); 4 article outcomes; 5 where misses and extras come from; 6 coverage and checks |
 | `plot_article_counts.png`, `plot_article_metrics.png`, `plot_field_accuracy.png`, `plot_article_buckets.png` | the charts of section 5.3 |
@@ -628,15 +649,15 @@ Read `report.md` section 6 first (what could not be scored), then sections 2-4 a
 python -m unittest discover tests
 ```
 
-99 tests, no API key and no internet needed (the geocoder is faked). They cover the three check
+120 tests, no API key and no internet needed (the geocoder is faked). They cover the three check
 layers: the format with every fixed value, the evidence, and the rule checks (`test_checks.py`); normalization, the pairing,
 the 0.8 threshold, best-partners-first pairing with its tie rule, field results, duplicates, per-article metrics and their summaries, which articles each metric covers,
 article outcomes, the charts, bootstrap and evidence checks (`test_evaluation.py`); the 40-per-minute limiter
-and API retries (`test_llm_client.py`); the whole-chain place check, the agreed form of any place
+API retries, the cache and thinking token counts and `EXTRA_BODY_JSON` (`test_llm_client.py`); the whole-chain place check, the agreed form of any place
 (two spellings of one place become one value and score as the same place), the saved answers, offline mode
 (`test_places.py`); and the request format, validation retries (format and
 evidence problems are sent back), articles without flu being sent, article selection, scoring a run,
-the data build with duplicate removal, and the real `data/` and `prompts/` files passing the input
+the warm-up before the workers, the stop after API errors, the token totals, the data build with duplicate removal, and the real `data/` and `prompts/` files passing the input
 checks (`test_pipeline.py`).
 
 The live API is not covered by tests: check it with a one-article run (section 1, step 2).

@@ -28,6 +28,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import build_gold_files  # noqa: E402
 import select_examples  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+import run_extraction  # noqa: E402
+
 EVERY_PLACE_IS_REAL = PlaceChecker(lookup=lambda place: {"found": True, "top_match": "", "english_name": "", "addresstype": "city"})
 
 
@@ -187,6 +190,85 @@ class ValidationRetryTest(unittest.TestCase):
     def test_an_api_failure_is_recorded_not_raised(self):
         record, _ = self.run_with_replies(openai.APIConnectionError(request=None))
         self.assertIn("APIConnectionError", record["api_error"])
+
+    def test_cache_and_reasoning_tokens_are_summed_over_the_retries(self):
+        replies = iter([("{\"useful\": tru", 1_000), (VALID_REPLY, 48_000)])
+
+        def fake_ask(client, messages):
+            text, hit = next(replies)
+            return ModelReply(text=text, finish_reason="stop", prompt_tokens=50_000, completion_tokens=10,
+                              seconds=1.0, cache_hit_tokens=hit, cache_miss_tokens=50_000 - hit, reasoning_tokens=0)
+
+        with mock.patch("flu_extractor.extractor.ask_model", fake_ask):
+            record = extract_article(client=None, prefix_messages=[], article=article())
+        self.assertEqual((record["cache_hit_tokens"], record["cache_miss_tokens"], record["reasoning_tokens"]),
+                         (49_000, 51_000, 0))
+
+    def test_cache_tokens_stay_none_when_the_api_reports_none(self):
+        record, _ = self.run_with_replies((VALID_REPLY, "stop"))
+        self.assertEqual((record["cache_hit_tokens"], record["cache_miss_tokens"], record["reasoning_tokens"]),
+                         (None, None, None))
+
+
+def log_record(article_id, api_error=None, hit=None, miss=None, out=10, reasoning=None):
+    return {"article_id": article_id, "api_error": api_error, "parse_error": None, "invalid": None,
+            "parsed": None if api_error else {"useful": False}, "finish_reason": "stop", "seconds": 1.0,
+            "attempts": 1, "repaired": False, "validation_retries": 0, "completion_tokens": out,
+            "cache_hit_tokens": hit, "cache_miss_tokens": miss, "reasoning_tokens": reasoning}
+
+
+class RunArticlesTest(unittest.TestCase):
+    """run_extraction.run_articles: one warm-up article alone, then the pool; stop after API errors."""
+
+    def run_all(self, ids, run_one, workers=4):
+        import io
+        log = io.StringIO()
+        with mock.patch("builtins.print"):
+            records, stopped = run_extraction.run_articles(ids, run_one, log, workers)
+        return records, stopped, log.getvalue().splitlines()
+
+    def test_the_first_article_finishes_before_any_other_starts(self):
+        import threading
+        import time
+        events, lock = [], threading.Lock()
+
+        def run_one(article_id):
+            with lock:
+                events.append(("start", article_id))
+            time.sleep(0.02)
+            with lock:
+                events.append(("end", article_id))
+            return log_record(article_id)
+
+        records, stopped, lines = self.run_all(["a1", "a2", "a3", "a4", "a5"], run_one)
+        self.assertEqual(events[:2], [("start", "a1"), ("end", "a1")])
+        self.assertEqual((len(records), stopped, len(lines)), (5, False, 5))
+        self.assertEqual(json.loads(lines[0])["article_id"], "a1")
+
+    def test_stops_after_api_errors_in_a_row(self):
+        import time
+
+        def failing(article_id):
+            time.sleep(0.01)  # a real call takes seconds; the pending ones are cancelled meanwhile
+            return log_record(article_id, api_error="RateLimitError: quota")
+
+        ids = [f"a{i}" for i in range(40)]
+        records, stopped, _ = self.run_all(ids, failing, workers=1)
+        self.assertTrue(stopped)
+        self.assertLess(len(records), len(ids))
+
+    def test_token_totals_give_the_cache_hit_share(self):
+        records = [log_record("a1", hit=0, miss=50_000, out=400, reasoning=0),
+                   log_record("a2", hit=48_000, miss=2_000, out=600, reasoning=0)]
+        totals = run_extraction.token_totals(records)
+        self.assertEqual(totals, {"cache_hit_tokens": 48_000, "cache_miss_tokens": 52_000,
+                                  "completion_tokens": 1_000, "reasoning_tokens": 0, "cache_reported": True})
+        self.assertIn("48.0%", run_extraction.format_token_totals(totals))
+
+    def test_token_totals_say_when_the_api_reports_no_cache(self):
+        totals = run_extraction.token_totals([log_record("a1"), log_record("a2", api_error="x", out=None)])
+        self.assertFalse(totals["cache_reported"])
+        self.assertIn("no cache", run_extraction.format_token_totals(totals))
 
 
 class SelectionTest(unittest.TestCase):

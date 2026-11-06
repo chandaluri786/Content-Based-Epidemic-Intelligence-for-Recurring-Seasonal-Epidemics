@@ -8,6 +8,7 @@ All inputs live inside the project folder, so nothing depends on where the capst
 files are on disk (see scripts/build_gold_files.py for how they were produced).
 """
 
+import json
 import os
 from pathlib import Path
 
@@ -93,10 +94,29 @@ STOP_AFTER_CONSECUTIVE_API_ERRORS = 5
 REQUESTS_PER_MINUTE = int(os.getenv("NVIDIA_REQUESTS_PER_MINUTE", "40"))
 RATE_WINDOW_SECONDS = 61.0
 # Model-specific request options. No separate thinking block: the v5 reply carries its reasoning
-# inside the JSON, and a hidden thinking pass adds tokens, time and variation. DeepSeek's chat
-# template on NVIDIA reads "thinking" (verified: 0 reasoning tokens). Another model may need another
-# switch (Nemotron: {"chat_template_kwargs": {"enable_thinking": False}}); see the model card.
-EXTRA_BODY = {"chat_template_kwargs": {"thinking": False}}
+# inside the JSON, and a hidden thinking pass adds tokens, time and variation. The switch depends on
+# the API, so EXTRA_BODY_JSON in .env can replace the default:
+#   NVIDIA (default): DeepSeek's chat template reads "thinking" (verified: 0 reasoning tokens).
+#   DeepSeek's own API: thinking is ON by default there; EXTRA_BODY_JSON={"thinking": {"type": "disabled"}}.
+#   Nemotron on NVIDIA: {"chat_template_kwargs": {"enable_thinking": false}}.
+DEFAULT_EXTRA_BODY = {"chat_template_kwargs": {"thinking": False}}
+
+
+def parse_extra_body(text: str | None) -> dict:
+    """The request options from EXTRA_BODY_JSON, or the default when it is unset or blank."""
+    if text is None or not text.strip():
+        return DEFAULT_EXTRA_BODY
+    try:
+        value = json.loads(text)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(f"EXTRA_BODY_JSON in .env is not valid JSON ({error}): {text!r}") from error
+    if not isinstance(value, dict):
+        raise RuntimeError(f"EXTRA_BODY_JSON in .env must be a JSON object such as "
+                           f'{{"thinking": {{"type": "disabled"}}}}, not {text!r}')
+    return value
+
+
+EXTRA_BODY = parse_extra_body(os.getenv("EXTRA_BODY_JSON"))
 
 
 def get_api_key() -> str:

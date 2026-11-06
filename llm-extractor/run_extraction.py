@@ -15,6 +15,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
+from typing import Callable, TextIO
 
 from flu_extractor import config
 from flu_extractor.checks import find_format_errors
@@ -26,6 +27,8 @@ from flu_extractor.llm_client import create_client
 from flu_extractor.prompt import build_prefix_messages, load_examples, load_system_prompt
 
 RAW_LOG_NAME = "raw_results.jsonl"
+# Articles sent alone before the workers start, so the prompt prefix is cached first.
+WARM_UP_ARTICLES = 1
 
 
 def read_id_file(path: Path) -> list[str]:
@@ -64,6 +67,92 @@ def _still_invalid(record: dict) -> bool:
 def sha256(path: Path) -> str:
     """Fingerprint of a file, so a run can be traced to the exact prompt text it used."""
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def describe_outcome(record: dict) -> str:
+    """One line on how an article went, for the progress output."""
+    outcome = (record["api_error"] or record["parse_error"]
+               or (f"STILL INVALID, {record['invalid']}" if record.get("invalid") else None)
+               or f"useful={record['parsed'].get('useful')}")
+    outcome += f" (finish={record['finish_reason']}, {record['seconds']}s"
+    outcome += f", {record['attempts']} requests" if (record["attempts"] or 1) > 1 else ""
+    outcome += ", JSON repaired" if record.get("repaired") else ""
+    outcome += f", re-asked {record['validation_retries']}x" if record.get("validation_retries") else ""
+    if record.get("cache_hit_tokens") is not None:
+        outcome += f", cache hit {record['cache_hit_tokens']}"
+    return outcome + ")"
+
+
+def run_articles(ids: list[str], run_one: Callable[[str], dict], log_file: TextIO,
+                 workers: int) -> tuple[list[dict], bool]:
+    """Run every article and append each record to the log. Returns (records, stopped early).
+
+    Warm-up: the first WARM_UP_ARTICLES are sent alone, so the shared prefix (rules and examples) is
+    in the API's prompt cache before the workers send the rest at once; otherwise every request in the
+    first wave would miss the cache. Records are written by this (main) thread only, one line each,
+    so the log is never interleaved.
+    """
+    records: list[dict] = []
+    consecutive_api_errors = 0
+
+    def keep(record: dict) -> bool:
+        """Log one record; True when the run must stop (many API failures in a row)."""
+        nonlocal consecutive_api_errors
+        records.append(record)
+        log_file.write(json.dumps(record, ensure_ascii=False) + "\n")
+        log_file.flush()  # keep finished work on disk even if the run is interrupted
+        print(f"[{len(records)}/{len(ids)}] {record['article_id']}: {describe_outcome(record)}")
+        consecutive_api_errors = consecutive_api_errors + 1 if record["api_error"] else 0
+        return consecutive_api_errors >= config.STOP_AFTER_CONSECUTIVE_API_ERRORS
+
+    warm_up, rest = ids[:WARM_UP_ARTICLES], ids[WARM_UP_ARTICLES:]
+    for article_id in warm_up:
+        if keep(run_one(article_id)):
+            return records, True
+    if not rest:
+        return records, False
+    print(f"Warm-up done; sending the other {len(rest)} articles with {workers} workers.")
+
+    # Many API failures in a row usually mean the daily quota is used up: stop instead of failing
+    # every remaining article. Finished work is kept; the run can be resumed with --run-dir.
+    stopped = False
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [pool.submit(run_one, article_id) for article_id in rest]
+        for future in as_completed(futures):
+            if future.cancelled():
+                continue
+            if keep(future.result()) and not stopped:
+                stopped = True
+                for pending in futures:
+                    pending.cancel()
+                print(f"Stopping: {consecutive_api_errors} API errors in a row "
+                      f"(last: {records[-1]['api_error'][:200]}).")
+    return records, stopped
+
+
+def token_totals(records: list[dict]) -> dict:
+    """Prompt-cache, output and thinking tokens added over the records of this session."""
+    def total(field: str) -> int:
+        return sum(record.get(field) or 0 for record in records)
+
+    return {
+        "cache_hit_tokens": total("cache_hit_tokens"),
+        "cache_miss_tokens": total("cache_miss_tokens"),
+        "completion_tokens": total("completion_tokens"),
+        "reasoning_tokens": total("reasoning_tokens"),
+        "cache_reported": any(record.get("cache_hit_tokens") is not None for record in records),
+    }
+
+
+def format_token_totals(totals: dict) -> str:
+    """The end-of-run token line: did the prompt cache work, and was thinking really off?"""
+    line = f"Tokens: output {totals['completion_tokens']:,}, thinking {totals['reasoning_tokens']:,}"
+    if not totals["cache_reported"]:
+        return line + "; the API reported no cache tokens (only DeepSeek's own API does)."
+    prompt = totals["cache_hit_tokens"] + totals["cache_miss_tokens"]
+    share = totals["cache_hit_tokens"] / prompt if prompt else 0.0
+    return (line + f"; prompt {prompt:,}, of which cache hits {totals['cache_hit_tokens']:,} ({share:.1%})"
+                   f" and misses {totals['cache_miss_tokens']:,}.")
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
@@ -145,38 +234,15 @@ def main() -> None:
     prefix_messages = build_prefix_messages(load_system_prompt(config.SYSTEM_PROMPT_PATH), examples, fewshot_guide)
     client = create_client()
 
-    # Replies are written by this (main) thread only, one line each, so the log is never interleaved.
-    consecutive_api_errors, stopped = 0, False
-    with ThreadPoolExecutor(max_workers=args.workers) as pool, \
-            log_path.open("a", encoding="utf-8") as log_file:
-        futures = [pool.submit(extract_article, client, prefix_messages, articles[a]) for a in ids]
-        for number, future in enumerate(as_completed(futures), start=1):
-            if future.cancelled():
-                continue
-            record = future.result()
-            log_file.write(json.dumps(record, ensure_ascii=False) + "\n")
-            log_file.flush()  # keep finished work on disk even if the run is interrupted
-            outcome = (record["api_error"] or record["parse_error"]
-                       or (f"STILL INVALID, {record['invalid']}" if record.get("invalid") else None)
-                       or f"useful={record['parsed'].get('useful')}")
-            outcome += f" (finish={record['finish_reason']}, {record['seconds']}s"
-            outcome += f", {record['attempts']} requests" if (record["attempts"] or 1) > 1 else ""
-            outcome += ", JSON repaired" if record.get("repaired") else ""
-            outcome += f", re-asked {record['validation_retries']}x" if record.get("validation_retries") else ""
-            outcome += ")"
-            print(f"[{number}/{len(ids)}] {record['article_id']}: {outcome}")
+    def run_one(article_id: str) -> dict:
+        return extract_article(client, prefix_messages, articles[article_id])
 
-            # Many API failures in a row usually mean the daily quota is used up: stop instead of
-            # failing every remaining article. Finished work is kept; resume later with --run-dir.
-            consecutive_api_errors = consecutive_api_errors + 1 if record["api_error"] else 0
-            if consecutive_api_errors >= config.STOP_AFTER_CONSECUTIVE_API_ERRORS and not stopped:
-                stopped = True
-                for pending in futures:
-                    pending.cancel()
-                print(f"Stopping: {consecutive_api_errors} API errors in a row (last: {record['api_error'][:200]}). "
-                      f"Resume with: python run_extraction.py --run-dir {run_dir} (same options)")
-
-    if not stopped:
+    with log_path.open("a", encoding="utf-8") as log_file:
+        records, stopped = run_articles(ids, run_one, log_file, args.workers)
+    print(format_token_totals(token_totals(records)))
+    if stopped:
+        print(f"Resume with: python run_extraction.py --run-dir {run_dir} (same options)")
+    else:
         print(f"Done. Now run: python evaluate_run.py {run_dir}")
 
 

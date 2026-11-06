@@ -139,5 +139,47 @@ class RetryTest(unittest.TestCase):
         self.assertEqual((client.calls, self.slept), (1, []))
 
 
+class UsageDetailsTest(unittest.TestCase):
+    """DeepSeek's own API reports cache hits and misses; NVIDIA's does not. Both must work."""
+
+    def ask_with_usage(self, usage):
+        answer = SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="{}"), finish_reason="stop")],
+                                 usage=usage)
+        client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=lambda **_: answer)))
+        limiter = RateLimiter(40, window=61, clock=FakeClock(), sleep=lambda _: None)
+        return ask_model(client, [{"role": "user", "content": "x"}], limiter=limiter, sleep=lambda _: None)
+
+    def test_cache_and_reasoning_tokens_are_recorded_when_reported(self):
+        usage = SimpleNamespace(prompt_tokens=50_000, completion_tokens=400, prompt_cache_hit_tokens=48_000,
+                                prompt_cache_miss_tokens=2_000,
+                                completion_tokens_details=SimpleNamespace(reasoning_tokens=0))
+        result = self.ask_with_usage(usage)
+        self.assertEqual((result.cache_hit_tokens, result.cache_miss_tokens, result.reasoning_tokens),
+                         (48_000, 2_000, 0))
+
+    def test_missing_usage_details_are_none(self):
+        result = self.ask_with_usage(SimpleNamespace(prompt_tokens=10, completion_tokens=5))
+        self.assertEqual((result.cache_hit_tokens, result.cache_miss_tokens, result.reasoning_tokens),
+                         (None, None, None))
+        self.assertIsNone(self.ask_with_usage(None).cache_hit_tokens)
+
+
+class ExtraBodyTest(unittest.TestCase):
+    """EXTRA_BODY_JSON in .env switches the model's request options (DeepSeek's thinking switch)."""
+
+    def test_unset_keeps_the_nvidia_default(self):
+        self.assertEqual(config.parse_extra_body(None), config.DEFAULT_EXTRA_BODY)
+        self.assertEqual(config.parse_extra_body("  "), config.DEFAULT_EXTRA_BODY)
+
+    def test_a_json_object_is_used(self):
+        self.assertEqual(config.parse_extra_body('{"thinking": {"type": "disabled"}}'),
+                         {"thinking": {"type": "disabled"}})
+
+    def test_bad_values_stop_with_a_clear_message(self):
+        for bad in ('{"thinking": ', '["thinking"]', '"disabled"'):
+            with self.subTest(bad=bad), self.assertRaisesRegex(RuntimeError, "EXTRA_BODY_JSON"):
+                config.parse_extra_body(bad)
+
+
 if __name__ == "__main__":
     unittest.main()

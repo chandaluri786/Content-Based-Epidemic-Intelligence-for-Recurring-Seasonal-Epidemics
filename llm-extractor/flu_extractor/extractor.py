@@ -122,6 +122,17 @@ def parse_reply(reply_text: str) -> tuple[dict | None, str | None, bool]:
 
 EVIDENCE_PROBLEM = "evidence not copied exactly"
 
+USAGE_DETAIL_FIELDS = ("cache_hit_tokens", "cache_miss_tokens", "reasoning_tokens")
+
+
+def _add_usage_details(totals: dict, reply) -> dict:
+    """New totals with this reply's cache and reasoning counts added; a field never reported stays None."""
+    added = {}
+    for field in USAGE_DETAIL_FIELDS:
+        value = getattr(reply, field, None)
+        added[field] = totals[field] if value is None else (totals[field] or 0) + value
+    return added
+
 
 def _problem_and_note(reply, article_text: str) -> tuple[dict | None, str | None, bool, str]:
     """Validate one reply. Returns (parsed, problem or None, repaired, note for the next request)."""
@@ -153,6 +164,9 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         "finish_reason": None,
         "prompt_tokens": None,
         "completion_tokens": None,
+        "cache_hit_tokens": None,       # prompt tokens served from the API's prefix cache (DeepSeek API only)
+        "cache_miss_tokens": None,      # prompt tokens not served from it
+        "reasoning_tokens": None,       # hidden thinking tokens; 0 or None when thinking is off
         "seconds": None,
         "attempts": None,               # requests sent, including rate-limit and validation retries
         "validation_retries": 0,        # requests repeated because the reply was invalid
@@ -165,6 +179,7 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         "api_error": None,
     }
     note, prompt_tokens, completion_tokens, seconds, attempts = "", 0, 0, 0.0, 0
+    usage_details = dict.fromkeys(USAGE_DETAIL_FIELDS)  # stays None unless the API reports the field
     for validation_round in range(config.MAX_VALIDATION_RETRIES + 1):
         last_round = validation_round == config.MAX_VALIDATION_RETRIES and validation_round > 0
         if last_round:  # the same kind of request has failed before: ask for a compact reply
@@ -178,6 +193,7 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         completion_tokens += reply.completion_tokens or 0
         seconds += reply.seconds
         attempts += reply.attempts
+        usage_details = _add_usage_details(usage_details, reply)
         parsed, problem, repaired, note = _problem_and_note(reply, article.text)
         record.update(finish_reason=reply.finish_reason, raw_reply=reply.text, parsed=parsed,
                       parse_error=problem if parsed is None else None, repaired=repaired,
@@ -188,5 +204,6 @@ def extract_article(client, prefix_messages: list[dict], article: Article) -> di
         record["validation_problems"].append(problem)
 
     record.update(prompt_tokens=prompt_tokens or None, completion_tokens=completion_tokens or None,
-                  seconds=round(seconds, 2) if attempts else None, attempts=attempts or None)
+                  seconds=round(seconds, 2) if attempts else None, attempts=attempts or None,
+                  **usage_details)
     return record

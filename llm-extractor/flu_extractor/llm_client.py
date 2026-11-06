@@ -32,6 +32,21 @@ class ModelReply:
     completion_tokens: int | None # tokens the model wrote
     seconds: float                # wall-clock time for the call, including waits and retries
     attempts: int = 1             # requests sent for this reply (1 = no retry)
+    # Reported by DeepSeek's own API only (None elsewhere): prompt tokens served from its prefix cache
+    # and the rest, and hidden thinking tokens (0 when thinking is off).
+    cache_hit_tokens: int | None = None
+    cache_miss_tokens: int | None = None
+    reasoning_tokens: int | None = None
+
+
+def _usage_details(usage) -> dict:
+    """The cache and reasoning token counts of a reply's usage, None where the API gives none."""
+    details = getattr(usage, "completion_tokens_details", None)
+    return {
+        "cache_hit_tokens": getattr(usage, "prompt_cache_hit_tokens", None),
+        "cache_miss_tokens": getattr(usage, "prompt_cache_miss_tokens", None),
+        "reasoning_tokens": getattr(details, "reasoning_tokens", None),
+    }
 
 
 class RateLimiter:
@@ -125,5 +140,6 @@ def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMI
             completion_tokens=usage.completion_tokens if usage else None,
             seconds=round(time.time() - started, 2),
             attempts=attempt,
+            **_usage_details(usage),
         )
     raise AssertionError("unreachable: the loop returns or raises")
