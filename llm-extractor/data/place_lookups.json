@@ -134,6 +134,15 @@
     "osm_id": "relation/14027280",
     "top_match": "Brisbane, Queensland, Australia"
   },
+  "city: charlotte | state: north carolina | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Charlotte",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/177415",
+    "top_match": "Charlotte, Mecklenburg County, North Carolina, United States"
+  },
   "city: chennai | state: tamil nadu | country: india": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -160,6 +169,15 @@
     "language": "en",
     "osm_id": "node/245686722",
     "top_match": "Dahanu, Dahanu Taluka, Palghar, Maharashtra, 401600, India"
+  },
+  "city: danlí | state: el paraíso | country: honduras": {
+    "addresstype": "municipality",
+    "checked_on": "2026-11-06",
+    "english_name": "Danlí",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/15738166",
+    "top_match": "Danlí, El Paraíso, 13201, Honduras"
   },
   "city: delhi | state: delhi | country: india": {
     "addresstype": "city",
@@ -287,6 +305,15 @@
     "osm_id": "relation/3577685",
     "top_match": "Gurgaon, Haryana, India"
   },
+  "city: hailakandi | state: assam | country: india": {
+    "addresstype": "town",
+    "checked_on": "2026-11-06",
+    "english_name": "Hailakandi",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/245725264",
+    "top_match": "Hailakandi, Hailakandi district, Assam, 788151, India"
+  },
   "city: harmanli | state: haskovo | country: bulgaria": {
     "addresstype": "town",
     "checked_on": "2026-11-06",
@@ -377,6 +404,15 @@
     "osm_id": "relation/7868535",
     "top_match": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
   },
+  "city: ibb | state: ibb | country: yemen": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Ibb",
+    "found": true,
+    "language": "en",
+    "osm_id": "node/268256784",
+    "top_match": "Ibb, Al Dhihar District, Ibb Governorate, Yemen"
+  },
   "city: idaho falls | state: idaho | country: united states": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -422,6 +458,15 @@
     "osm_id": "node/315734346",
     "top_match": "Jaipur, Jaipur Municipal Corporation, Jaipur Tehsil, Jaipur, Rajasthan, 302001, India"
   },
+  "city: jakarta | state: jakarta | country: indonesia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "North Jakarta",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/7626002",
+    "top_match": "North Jakarta, Special Capital Region of Jakarta, Indonesia"
+  },
   "city: jieyang city | state: guangdong | country: china": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -457,6 +502,15 @@
     "language": "en",
     "osm_id": "node/1180652177",
     "top_match": "Kanpur, Kanpur Nagar, Uttar Pradesh, 208012, India"
+  },
+  "city: karur | state: tamil nadu | country: india": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Karur",
+    "found": true,
+    "language": "en",
+    "osm_id": "way/82623598",
+    "top_match": "Karur, Tamil Nadu, India"
   },
   "city: kettering | state: ohio | country: united states": {
     "addresstype": "city",
@@ -845,6 +899,15 @@
     "osm_id": "relation/131885",
     "top_match": "New Orleans, Orleans Parish, Louisiana, United States"
   },
+  "city: new york city | state: new york | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "New York",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/175905",
+    "top_match": "New York, United States"
+  },
   "city: new york | state: new york | country: united states": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -1214,6 +1277,15 @@
     "osm_id": "relation/4283101",
     "top_match": "Sofia, Sredets District, Stolichna, Sofia-City, Bulgaria"
   },
+  "city: sofia | state: sofia | country: bulgaria": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/4283101",
+    "top_match": "Sofia, Sredets District, Stolichna, Sofia-City, Bulgaria"
+  },
   "city: sofia | state: sofia-city | country: bulgaria": {
     "addresstype": "city",
     "checked_on": "2026-11-06",
@@ -1240,6 +1312,15 @@
     "language": "en",
     "osm_id": "relation/135057",
     "top_match": "Southfield, Oakland County, Michigan, United States"
+  },
+  "city: st. cloud | state: minnesota | country: united states": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Saint Cloud",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/137238",
+    "top_match": "Saint Cloud, Stearns County, Minnesota, United States"
   },
   "city: st. cloud | state: minnesota | country: usa": {
     "addresstype": "city",
@@ -1475,6 +1556,15 @@
     "osm_id": "relation/16326705",
     "top_match": "Yuma, Yuma County, Arizona, United States"
   },
+  "country: american samoa": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
+  },
   "country: argentina": {
     "addresstype": "country",
     "checked_on": "2026-11-06",
@@ -1555,6 +1645,15 @@
     "language": "en",
     "osm_id": "relation/186382",
     "top_match": "Bulgaria"
+  },
+  "country: burkina faso": {
+    "addresstype": "country",
+    "checked_on": "2026-11-06",
+    "english_name": "Burkina Faso",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/192783",
+    "top_match": "Burkina Faso"
   },
   "country: cambodia": {
     "addresstype": "country",
@@ -1906,6 +2005,15 @@
     "language": "en",
     "osm_id": "relation/184633",
     "top_match": "Nepal"
+  },
+  "country: new caledonia": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "country: new zealand": {
     "addresstype": "country",
@@ -2447,6 +2555,15 @@
     "osm_id": "relation/1739528",
     "top_match": "Dobrich, Bulgaria"
   },
+  "state: el paraíso | country: honduras": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "El Paraíso",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/4627316",
+    "top_match": "El Paraíso, Honduras"
+  },
   "state: england | country: united kingdom": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
@@ -2464,6 +2581,15 @@
     "language": "en",
     "osm_id": "relation/421151",
     "top_match": "Federal District, Central-West Region, Brazil"
+  },
+  "state: fiji | country: fiji": {
+    "addresstype": "",
+    "checked_on": "2026-11-06",
+    "english_name": "",
+    "found": false,
+    "language": "en",
+    "osm_id": "",
+    "top_match": ""
   },
   "state: florida | country: united states": {
     "addresstype": "state",
@@ -2716,6 +2842,15 @@
     "language": "en",
     "osm_id": "relation/161650",
     "top_match": "Iowa, United States"
+  },
+  "state: jakarta | country: indonesia": {
+    "addresstype": "city",
+    "checked_on": "2026-11-06",
+    "english_name": "Special Capital Region of Jakarta",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/6362934",
+    "top_match": "Special Capital Region of Jakarta, Indonesia"
   },
   "state: jammu and kashmir | country: india": {
     "addresstype": "state",
@@ -3535,6 +3670,15 @@
     "language": "en",
     "osm_id": "relation/1739543",
     "top_match": "Sofia-City, Bulgaria"
+  },
+  "state: sofia | country: bulgaria": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "Sofia",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/1739542",
+    "top_match": "Sofia, Bulgaria"
   },
   "state: sofia-city | country: bulgaria": {
     "addresstype": "state",
