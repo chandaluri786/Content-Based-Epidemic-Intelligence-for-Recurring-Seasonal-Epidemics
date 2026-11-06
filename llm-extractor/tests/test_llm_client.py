@@ -157,11 +157,36 @@ class UsageDetailsTest(unittest.TestCase):
         self.assertEqual((result.cache_hit_tokens, result.cache_miss_tokens, result.reasoning_tokens),
                          (48_000, 2_000, 0))
 
+    def test_openai_style_cached_tokens_are_read_too(self):
+        # Fireworks (and OpenAI) report usage.prompt_tokens_details.cached_tokens
+        usage = SimpleNamespace(prompt_tokens=50_000, completion_tokens=400,
+                                prompt_tokens_details=SimpleNamespace(cached_tokens=47_500))
+        result = self.ask_with_usage(usage)
+        self.assertEqual((result.cache_hit_tokens, result.cache_miss_tokens), (47_500, 2_500))
+
     def test_missing_usage_details_are_none(self):
         result = self.ask_with_usage(SimpleNamespace(prompt_tokens=10, completion_tokens=5))
         self.assertEqual((result.cache_hit_tokens, result.cache_miss_tokens, result.reasoning_tokens),
                          (None, None, None))
         self.assertIsNone(self.ask_with_usage(None).cache_hit_tokens)
+
+
+class SessionAffinityTest(unittest.TestCase):
+    """SESSION_AFFINITY sends one x-session-affinity header on every request (Fireworks: same replica, so
+    the prompt cache is hit); unset, no header is sent."""
+
+    def headers(self, affinity):
+        from unittest import mock
+        from flu_extractor import llm_client
+        with mock.patch.object(config, "SESSION_AFFINITY", affinity), \
+                mock.patch.object(config, "get_api_key", lambda: "test-key"):
+            return dict(llm_client.create_client().default_headers)
+
+    def test_header_sent_when_set(self):
+        self.assertEqual(self.headers("flu-v5.2").get("x-session-affinity"), "flu-v5.2")
+
+    def test_no_header_when_unset(self):
+        self.assertNotIn("x-session-affinity", self.headers(""))
 
 
 class ExtraBodyTest(unittest.TestCase):

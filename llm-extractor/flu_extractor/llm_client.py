@@ -42,11 +42,14 @@ class ModelReply:
 def _usage_details(usage) -> dict:
     """The cache and reasoning token counts of a reply's usage, None where the API gives none."""
     details = getattr(usage, "completion_tokens_details", None)
-    return {
-        "cache_hit_tokens": getattr(usage, "prompt_cache_hit_tokens", None),
-        "cache_miss_tokens": getattr(usage, "prompt_cache_miss_tokens", None),
-        "reasoning_tokens": getattr(details, "reasoning_tokens", None),
-    }
+    hit = getattr(usage, "prompt_cache_hit_tokens", None)       # DeepSeek's own API
+    miss = getattr(usage, "prompt_cache_miss_tokens", None)
+    if hit is None:                                             # OpenAI style (Fireworks, OpenAI)
+        hit = getattr(getattr(usage, "prompt_tokens_details", None), "cached_tokens", None)
+        prompt = getattr(usage, "prompt_tokens", None)
+        miss = prompt - hit if hit is not None and prompt is not None else None
+    return {"cache_hit_tokens": hit, "cache_miss_tokens": miss,
+            "reasoning_tokens": getattr(details, "reasoning_tokens", None)}
 
 
 class RateLimiter:
@@ -85,12 +88,18 @@ _LIMITER = RateLimiter(config.REQUESTS_PER_MINUTE, window=config.RATE_WINDOW_SEC
 
 
 def create_client() -> OpenAI:
-    """Create the API client. NVIDIA's API follows OpenAI's format, so we reuse OpenAI's library."""
+    """Create the API client. The APIs follow OpenAI's format, so we reuse OpenAI's library.
+
+    With SESSION_AFFINITY set, every request carries the same x-session-affinity header, so a
+    multi-replica API (Fireworks) sends them to one replica, where the shared prefix is cached.
+    """
+    headers = {"x-session-affinity": config.SESSION_AFFINITY} if config.SESSION_AFFINITY else None
     return OpenAI(
         base_url=config.BASE_URL,
         api_key=config.get_api_key(),
         timeout=config.REQUEST_TIMEOUT_SECONDS,
         max_retries=0,  # retries go through ask_model, so each one is counted by the rate limiter
+        default_headers=headers,
     )
 
 

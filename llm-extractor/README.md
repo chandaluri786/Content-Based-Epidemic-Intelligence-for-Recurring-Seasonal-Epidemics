@@ -508,6 +508,7 @@ Secrets and overrides go in `.env` (copy `.env.example`). Everything else is in 
 | `EXAMPLES_PATH` | `.env` | `prompts/examples_<PROMPT_VERSION>.json` (the one set; 22 examples for v5.2) |
 | `RECORDS_SUFFIX` | `.env` | `_labels_v5.2.jsonl`: the gold record files read from `data/chain_of_thought/` |
 | `RESULTS_DIR` | `.env` | `results/` |
+| `SESSION_AFFINITY` | `.env` | unset; when set, sent as the `x-session-affinity` header on every request (Fireworks: one replica, so the prefix cache is hit) |
 | `EXTRA_BODY_JSON` | `.env` | the model's request options as a JSON object; unset = NVIDIA's thinking switch, off (4.2, 8.4) |
 | `TEMPERATURE`, `TOP_P`, `SEED`, `MAX_TOKENS` | `config.py` | 0, 1, 20261101, 8000 |
 | `MAX_RETRIES`, `MAX_VALIDATION_RETRIES`, `STOP_AFTER_CONSECUTIVE_API_ERRORS` | `config.py` | 4, 3, 5 |
@@ -605,6 +606,25 @@ EXTRA_BODY_JSON={"thinking": {"type": "disabled"}}
 - **Off-peak:** DeepSeek bills less outside its peak hours; check the hours on its pricing page and
   start the run in that window.
 
+**Fireworks AI** (serverless; checked 2026-11-06 with a 5-article run). In `.env`:
+
+```
+NVIDIA_API_KEY=<Fireworks key>
+NVIDIA_BASE_URL=https://api.fireworks.ai/inference/v1
+NVIDIA_MODEL_ID=accounts/fireworks/models/deepseek-v4p1-flash
+SESSION_AFFINITY=flu-extractor-v5.2
+EXTRA_BODY_JSON={"reasoning_effort": "none"}
+```
+
+- V4 Flash is not on Fireworks serverless; V4.1 Flash is. Prices per 1M tokens: input $0.30, cached
+  input $0.006, output $1.20 (a `-spot` router is 30% cheaper but may answer 503 when busy). No off-peak prices.
+- **Thinking is on by default** (a test call used 14 thinking tokens). `reasoning_effort: "none"`,
+  `{"thinking": {"type": "disabled"}}` and `chat_template_kwargs` all gave 0.
+- **The cache works only inside one replica**, so `SESSION_AFFINITY` sends the same `x-session-affinity`
+  header on every request. In the 5-article check, requests 2-5 each read 50,046 prompt tokens from the
+  cache (`usage.prompt_tokens_details.cached_tokens`). Without cache hits a full run costs about $16
+  instead of about $2.
+
 ### 8.5 Place names
 
 The agreed form of every place (5.6) comes from OpenStreetMap; no name list is kept in the code.
@@ -649,11 +669,11 @@ Read `report.md` section 6 first (what could not be scored), then sections 2-4 a
 python -m unittest discover tests
 ```
 
-120 tests, no API key and no internet needed (the geocoder is faked). They cover the three check
+123 tests, no API key and no internet needed (the geocoder is faked). They cover the three check
 layers: the format with every fixed value, the evidence, and the rule checks (`test_checks.py`); normalization, the pairing,
 the 0.8 threshold, best-partners-first pairing with its tie rule, field results, duplicates, per-article metrics and their summaries, which articles each metric covers,
 article outcomes, the charts, bootstrap and evidence checks (`test_evaluation.py`); the 40-per-minute limiter
-API retries, the cache and thinking token counts and `EXTRA_BODY_JSON` (`test_llm_client.py`); the whole-chain place check, the agreed form of any place
+API retries, the cache and thinking token counts (DeepSeek and OpenAI style), the session-affinity header and `EXTRA_BODY_JSON` (`test_llm_client.py`); the whole-chain place check, the agreed form of any place
 (two spellings of one place become one value and score as the same place), the saved answers, offline mode
 (`test_places.py`); and the request format, validation retries (format and
 evidence problems are sent back), articles without flu being sent, article selection, scoring a run,

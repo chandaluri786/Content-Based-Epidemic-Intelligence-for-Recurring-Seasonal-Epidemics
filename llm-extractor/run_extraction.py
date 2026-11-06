@@ -216,7 +216,7 @@ def main() -> None:
         "example_count": len(examples), "temperature": config.TEMPERATURE, "top_p": config.TOP_P,
         "max_tokens": config.MAX_TOKENS,
         "extra_body": config.EXTRA_BODY, "seed": config.SEED, "max_validation_retries": config.MAX_VALIDATION_RETRIES,
-        "requests_per_minute": config.REQUESTS_PER_MINUTE,
+        "requests_per_minute": config.REQUESTS_PER_MINUTE, "session_affinity": config.SESSION_AFFINITY or None,
         "selection": "ids" if args.ids else ("ids_file" if args.ids_file else "all labelled articles except the examples"),
         "ids_file": str(args.ids_file) if args.ids_file else None,
         "started": datetime.now().isoformat(timespec="seconds"), "articles_requested_this_session": len(ids),

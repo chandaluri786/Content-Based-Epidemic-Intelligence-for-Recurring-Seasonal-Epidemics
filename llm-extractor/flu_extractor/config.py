@@ -117,6 +117,10 @@ def parse_extra_body(text: str | None) -> dict:
 
 
 EXTRA_BODY = parse_extra_body(os.getenv("EXTRA_BODY_JSON"))
+# Sent as the x-session-affinity header on every request when set. Fireworks caches a prompt prefix
+# only inside one replica; one fixed value sends every request of a run to the same replica, so the
+# shared prefix (rules and examples) is a cache hit. Empty = no header (NVIDIA, DeepSeek's own API).
+SESSION_AFFINITY = os.getenv("SESSION_AFFINITY", "").strip()
 
 
 def get_api_key() -> str:
