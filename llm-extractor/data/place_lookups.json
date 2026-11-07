@@ -3860,6 +3860,15 @@
     "osm_id": "relation/286898",
     "top_match": "United States Virgin Islands, United States"
   },
+  "state: us virgin islands | country: united states": {
+    "addresstype": "state",
+    "checked_on": "2026-11-06",
+    "english_name": "United States Virgin Islands",
+    "found": true,
+    "language": "en",
+    "osm_id": "relation/286898",
+    "top_match": "United States Virgin Islands, United States"
+  },
   "state: us virgin islands | country: usa": {
     "addresstype": "state",
     "checked_on": "2026-11-06",
