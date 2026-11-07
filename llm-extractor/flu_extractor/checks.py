@@ -287,3 +287,10 @@ def find_rule_violations(reply: dict, article_text: str, scan_date: str,
     # status) are never both recorded, so identical counts are reported. duplicates.py also lists them.
     violations += _overlap_problems(reply["items"])
     return violations
+
+
+def record_is_invalid(record: dict) -> bool:
+    """A logged reply that was cut off, unparseable or malformed after all its retries."""
+    if record.get("parse_error") or record.get("invalid"):
+        return True
+    return bool(record.get("parsed")) and bool(find_format_errors(record["parsed"]))  # logs written before `invalid`

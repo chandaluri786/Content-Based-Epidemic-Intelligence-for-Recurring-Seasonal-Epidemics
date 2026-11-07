@@ -74,7 +74,24 @@ MODEL_ID = os.getenv("NVIDIA_MODEL_ID", "deepseek-ai/deepseek-v4.1-flash")
 TEMPERATURE = 0
 TOP_P = 1
 # Upper limit for the reply only. The longest gold reply is 15,683 characters, roughly 5,000 tokens.
-MAX_TOKENS = 8000
+# MAX_TOKENS in .env raises it, e.g. for one article whose reply was cut off.
+DEFAULT_MAX_TOKENS = 8000
+
+
+def parse_max_tokens(text: str | None) -> int:
+    """The reply limit from MAX_TOKENS, or the default when it is unset or blank."""
+    if text is None or not text.strip():
+        return DEFAULT_MAX_TOKENS
+    try:
+        tokens = int(text)
+    except ValueError as error:
+        raise RuntimeError(f"MAX_TOKENS in .env must be a whole number of tokens, not {text!r}") from error
+    if tokens < 1:
+        raise RuntimeError(f"MAX_TOKENS in .env must be at least 1, not {text!r}")
+    return tokens
+
+
+MAX_TOKENS = parse_max_tokens(os.getenv("MAX_TOKENS"))
 # Seconds to wait for one reply. NVIDIA's queue for this model is slow: a 15-token test request
 # took 153 s on 2026-11-05, and a real request carries ~30k prompt tokens with the examples.
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("REQUEST_TIMEOUT_SECONDS", "900"))

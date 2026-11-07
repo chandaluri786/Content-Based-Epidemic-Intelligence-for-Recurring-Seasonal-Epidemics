@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Callable, TextIO
 
 from flu_extractor import config
-from flu_extractor.checks import find_format_errors
+from flu_extractor.checks import record_is_invalid
 from flu_extractor.data_checks import check_input_files
 from flu_extractor.data_loading import Article, GoldLabel, load_articles, load_gold_labels, resolve_article_id
 from flu_extractor.evaluation import default_articles_to_run
@@ -55,14 +55,7 @@ def ids_already_done(log_path: Path, retry_invalid: bool = False) -> set[str]:
                 record = json.loads(line)
                 latest[record["article_id"]] = record
     return {article_id for article_id, record in latest.items()
-            if not record["api_error"] and not (retry_invalid and _still_invalid(record))}
-
-
-def _still_invalid(record: dict) -> bool:
-    """The record's last reply was cut off, unparseable or malformed after all its retries."""
-    if record["parse_error"] or record.get("invalid"):
-        return True
-    return bool(record["parsed"]) and bool(find_format_errors(record["parsed"]))  # logs written before `invalid`
+            if not record["api_error"] and not (retry_invalid and record_is_invalid(record))}
 
 
 def sha256(path: Path) -> str:

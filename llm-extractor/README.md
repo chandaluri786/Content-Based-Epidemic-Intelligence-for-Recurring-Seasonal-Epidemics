@@ -488,6 +488,7 @@ Articles can be named by `article_id` or by labeling set and row, such as `Jahna
 | `... --articles-file FILE` | send articles without gold labels (same format as `data/articles.json`, e.g. the pool) instead of the gold set; every article in it except the examples; not scored. Pass it again when resuming |
 | `... --run-dir DIR` | resume a run: articles that already have a reply are skipped, API failures are retried |
 | `... --retry-invalid` | with `--run-dir`: also rerun articles whose reply was still invalid |
+| `python scripts/combine_runs.py --out DIR [--articles-file FILE] RUN_DIR...` | one reply per article from several runs (later folders win, but only with a valid reply); adds `source_run` and `status` |
 | `python evaluate_run.py RUN_DIR [--offline]` | score a run; writes `report.md` and the files of section 9 |
 | `python inspect_row.py RUN_DIR ARTICLE [--article] [--reasoning] [--offline]` | one article, gold vs model, field by field, with the matching shown |
 | `python compare_runs.py RUN_DIR...` | headline scores of several evaluated runs side by side; mean and range; with two runs a paired bootstrap difference |
