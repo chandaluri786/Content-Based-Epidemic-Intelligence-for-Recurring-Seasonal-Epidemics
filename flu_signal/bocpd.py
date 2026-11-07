@@ -74,7 +74,7 @@ def run_length_posterior(counts) -> list[np.ndarray]:
     return posteriors
 
 
-def prospective(counts, cutoff: float, sustain_weeks: int = 1) -> Detection:
+def prospective(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0) -> Detection:
     """The earliest confirmed alarm. A candidate is a week t whose run probably began in the last
     RECENT_WEEKS weeks (at `start`), with the level going up. It is confirmed at week
     max(t, start + sustain_weeks - 1) if the rise has lasted `sustain_weeks` weeks by then; the check
@@ -90,7 +90,7 @@ def prospective(counts, cutoff: float, sustain_weeks: int = 1) -> Detection:
         start = t - int(np.argmax(run_probability[:RECENT_WEEKS]))
         alarm = max(t, start + sustain_weeks - 1)
         if (alarm < len(values) and values[start:t + 1].mean() > values[:start].mean()
-                and is_sustained(values, start, sustain_weeks)):
+                and is_sustained(values, start, sustain_weeks, margin)):
             confirmed.append(Detection(alarm, start, recent))
     # A later candidate can be confirmed sooner than an earlier one when sustain_weeks is 3.
     return min(confirmed, key=lambda d: d.alarm_index, default=NO_DETECTION)

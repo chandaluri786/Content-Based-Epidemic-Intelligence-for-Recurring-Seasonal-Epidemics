@@ -13,6 +13,7 @@ Without the floor, integer series with repeated values (0, 0, 0, 1, 1) have spli
 weight is infinite, and those splits win however unlikely they are.
 """
 
+import functools
 import itertools
 
 import numpy as np
@@ -50,7 +51,15 @@ def posterior(counts) -> tuple[np.ndarray, np.ndarray]:
 
     change_probability[i] is the posterior probability that a new block starts at position i
     (index 0 is always 0). posterior_mean is on the Anscombe scale.
+    Cached on the series: the cut-off, sustain and margin do not change it, so the step 4 grid reuses it.
+    Copies are returned so a caller cannot change the cached arrays.
     """
+    change_probability, posterior_mean = _posterior_cached(tuple(float(c) for c in counts))
+    return change_probability.copy(), posterior_mean.copy()
+
+
+@functools.lru_cache(maxsize=None)
+def _posterior_cached(counts: tuple[float, ...]) -> tuple[np.ndarray, np.ndarray]:
     values = anscombe(counts)
     n = len(values)
     if n < 2:
@@ -73,29 +82,30 @@ def posterior(counts) -> tuple[np.ndarray, np.ndarray]:
     return change_probability, posterior_mean
 
 
-def first_rising_change(counts, cutoff: float, sustain_weeks: int = 1) -> Detection:
+def first_rising_change(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0) -> Detection:
     """The first position whose change probability reaches `cutoff`, with the mean going up there and
-    the rise lasting `sustain_weeks` weeks within the series. Positions that fail are skipped."""
+    the rise lasting `sustain_weeks` weeks (at least `margin` above the earlier level) within the series.
+    Positions that fail are skipped."""
     change_probability, posterior_mean = posterior(counts)
     values = anscombe(counts)
     for i in range(1, len(change_probability)):
         if (change_probability[i] >= cutoff and posterior_mean[i] > posterior_mean[i - 1]
-                and is_sustained(values, i, sustain_weeks)):
+                and is_sustained(values, i, sustain_weeks, margin)):
             return Detection(i, i, float(change_probability[i]))
     return NO_DETECTION
 
 
-def retrospective(counts, cutoff: float, sustain_weeks: int = 1) -> Detection:
+def retrospective(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0) -> Detection:
     """Run on the whole window at once, as Ganser did. It uses weeks after the change."""
-    return first_rising_change(counts, cutoff, sustain_weeks)
+    return first_rising_change(counts, cutoff, sustain_weeks, margin)
 
 
-def prospective(counts, cutoff: float, sustain_weeks: int = 1) -> Detection:
+def prospective(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0) -> Detection:
     """Rerun on the weeks seen so far, week by week. The alarm is raised at the first week whose
     data so far show a rising change point that has lasted `sustain_weeks` weeks; the change itself
     lies at least sustain_weeks - 1 weeks earlier."""
     for seen in range(MIN_WEEKS, len(counts) + 1):
-        found = first_rising_change(counts[:seen], cutoff, sustain_weeks)
+        found = first_rising_change(counts[:seen], cutoff, sustain_weeks, margin)
         if found.change_index is not None:
             return Detection(seen - 1, found.change_index, found.probability)
     return NO_DETECTION

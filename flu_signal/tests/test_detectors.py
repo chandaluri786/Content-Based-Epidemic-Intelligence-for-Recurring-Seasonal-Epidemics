@@ -92,6 +92,34 @@ class SustainDetectorTest(unittest.TestCase):
                 self.assertEqual(detect(changed_tail, CUTOFF, sustain).alarm_index, found.alarm_index, name)
 
 
+class MarginTest(unittest.TestCase):
+    # Week 4 jumps to 11, then the level is only just above the earlier mean: the AUS-2018 shape.
+    BARELY = [3, 2, 3, 4, 11, 3, 3, 3, 3, 3, 3, 3]
+
+    def test_margin_1_stops_a_rise_that_is_only_barely_above_the_earlier_level(self):
+        values = anscombe(self.BARELY)
+        self.assertTrue(is_sustained(values, 4, 2, margin=0.0))
+        self.assertFalse(is_sustained(values, 4, 2, margin=1.0))
+
+    def test_margin_1_keeps_a_real_rise(self):
+        self.assertTrue(is_sustained(anscombe(STEP_UP), 8, 3, margin=1.0))
+        for name, detect in PROSPECTIVE.items():
+            self.assertEqual(detect(STEP_UP, CUTOFF, 2, 1.0).alarm_index, 9, name)
+
+    def test_a_negative_margin_is_refused(self):
+        with self.assertRaises(ValueError):
+            is_sustained(anscombe(STEP_UP), 8, 1, margin=-1.0)
+
+
+class BcpCacheTest(unittest.TestCase):
+    def test_the_cached_posterior_equals_a_fresh_one_and_cannot_be_changed_by_a_caller(self):
+        fresh = bcp._posterior_cached.__wrapped__(tuple(float(c) for c in STEP_UP))
+        first = bcp.posterior(STEP_UP)
+        first[0][:] = -1.0                       # a caller changes its copy
+        np.testing.assert_allclose(bcp.posterior(STEP_UP)[0], fresh[0])
+        np.testing.assert_allclose(bcp.posterior(STEP_UP)[1], fresh[1])
+
+
 class BcpMathTest(unittest.TestCase):
     def test_the_exact_sum_matches_a_second_calculation_with_quad(self):
         for counts in ([3, 5, 4, 12, 14], [0, 1, 0, 6, 7, 5]):

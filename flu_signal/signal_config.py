@@ -78,6 +78,13 @@ ACTIVITY_WORDS = ("present", "moderate", "high", "rising")
 RISING_WORDS = ("rising", "high")
 COUNT_KINDS = ("cases", "deaths", "hospitalized")
 
+# Step 4: tuning on calibration seasons (decided with the user 2026-11-07).
+# hit = alarm in weeks -EARLY_LIMIT .. LAST_WEEK; false alarm = earlier; miss = none. Score = hits - false alarms.
+EARLY_LIMIT = 4
+CUTOFF_GRID = (0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+TUNING_PATH = OUTPUT_DIR / "tuning_calibration.csv"
+FROZEN_SETTINGS_PATH = OUTPUT_DIR / "frozen_settings.json"
+
 # Item fields copied to items.csv, in order.
 ITEM_FIELDS = ("kind", "number", "count_type", "status", "strain", "city", "state", "country",
                "start_date", "end_date", "words")

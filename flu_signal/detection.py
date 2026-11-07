@@ -29,20 +29,24 @@ NO_DETECTION = Detection(None, None, None)
 
 
 SUSTAIN_CHOICES = (1, 2, 3)   # weeks a rise must stay up; tuned on calibration seasons (step 4)
+MARGIN_CHOICES = (0.0, 1.0)   # how far above the earlier level, on the Anscombe scale (1 = one Poisson noise unit)
 
 
-def is_sustained(values: np.ndarray, change_index: int, sustain_weeks: int) -> bool:
-    """True when each of the `sustain_weeks` weeks from `change_index` is above the mean of the weeks before it.
+def is_sustained(values: np.ndarray, change_index: int, sustain_weeks: int, margin: float = 0.0) -> bool:
+    """True when each of the `sustain_weeks` weeks from `change_index` is above the mean of the weeks
+    before it plus `margin`.
 
     `values` are Anscombe-transformed. Only values[:change_index + sustain_weeks] are read, so a caller that
     has seen that many weeks uses no later data. With sustain 1 only the change week itself is checked.
     """
     if sustain_weeks not in SUSTAIN_CHOICES:
         raise ValueError(f"sustain_weeks must be one of {SUSTAIN_CHOICES}, got {sustain_weeks}")
+    if margin < 0:
+        raise ValueError(f"margin must be 0 or more, got {margin}")
     after = values[change_index:change_index + sustain_weeks]
     if change_index < 1 or len(after) < sustain_weeks:
         return False
-    return bool((after > values[:change_index].mean()).all())
+    return bool((after > values[:change_index].mean() + margin).all())
 
 
 def anscombe(counts) -> np.ndarray:
