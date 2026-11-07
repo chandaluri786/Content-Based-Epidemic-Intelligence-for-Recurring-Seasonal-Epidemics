@@ -51,6 +51,33 @@ SOURCE_NOT_SENT = "not_sent"                 # dropped by the keyword filter: no
 
 DROPPED_LAYER = "drop_no_flu_word"
 
+# Step 2: weekly signals.
+WEEKLY_PATH = OUTPUT_DIR / "weekly_signals.csv"
+WEEKLY_REPORT_PATH = OUTPUT_DIR / "weekly_report.json"
+
+# Week index = whole weeks from the FluNet onset (week 0 starts on the onset date). A window runs from
+# onset - 70 days to onset + 14 days, both included: weeks -10 .. +1, plus one day (onset + 14) that is
+# folded into week +1. So every season has 12 weeks.
+FIRST_WEEK = -10
+LAST_WEEK = 1
+
+# Season split (decided 2026-11-07): by season year, held out from 2022 on.
+HELD_OUT_FROM_YEAR = 2022
+SPLIT_CALIBRATION = "calibration"
+SPLIT_HELD_OUT = "held_out"
+# The headline comparison. BRA, KEN and IDN have almost no content and go to the all-38 table only.
+HEADLINE_COUNTRIES = ("USA", "AUS", "IND")
+
+# Items that are not a signal of seasonal human flu: bird flu and other animal-origin strains
+# (prompt 1.3 makes trend items for animal outbreaks linked to food), and swine-origin variant
+# viruses ("v" suffix). Matched on the lower-cased strain.
+NON_SEASONAL_STRAIN_PREFIXES = ("h5", "h7", "h9", "h10", "avian")
+NON_SEASONAL_STRAIN_SUFFIX = "v"
+# Trend words that report flu activity going on. inactive, low and falling do not.
+ACTIVITY_WORDS = ("present", "moderate", "high", "rising")
+RISING_WORDS = ("rising", "high")
+COUNT_KINDS = ("cases", "deaths", "hospitalized")
+
 # Item fields copied to items.csv, in order.
 ITEM_FIELDS = ("kind", "number", "count_type", "status", "strain", "city", "state", "country",
                "start_date", "end_date", "words")

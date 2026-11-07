@@ -1,0 +1,4 @@
+# flu_signal runs in the extractor's venv (../llm-extractor/.venv, Python 3.12). Steps 1-2 use only the
+# standard library; the change-point detectors need these.
+numpy==2.5.4
+scipy==1.18.1
