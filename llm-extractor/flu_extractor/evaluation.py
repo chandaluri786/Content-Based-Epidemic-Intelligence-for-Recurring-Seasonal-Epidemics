@@ -402,12 +402,15 @@ def _evaluate_row(record: dict, article: Article, label: GoldLabel,
 
 def default_articles_to_run(
     articles: dict[str, Article],
-    gold_labels: dict[str, GoldLabel],
+    gold_labels: dict[str, GoldLabel] | None,
     example_ids: frozenset[str],
     extra_excluded_ids: frozenset[str] = frozenset(),
 ) -> list[str]:
     """Every article with a gold label, except the few-shot examples (the model sees their answers
-    in the prompt) and any article in the extra exclusion set. Sorted by article id."""
+    in the prompt) and any article in the extra exclusion set. Sorted by article id.
+
+    With no gold labels (gold_labels is None, a run on unlabelled articles such as the pool), every
+    article counts as selected, with the same exclusions."""
     skipped = example_ids | extra_excluded_ids
     return sorted(article_id for article_id in articles
-                  if article_id in gold_labels and article_id not in skipped)
+                  if (gold_labels is None or article_id in gold_labels) and article_id not in skipped)

@@ -395,5 +395,55 @@ class InputFilesTest(unittest.TestCase):
         self.assertTrue(any("Step 1" in p for p in problems))
         self.assertTrue(any("differs" in p for p in problems))
 
+
+class UnlabelledRunTest(unittest.TestCase):
+    """--articles-file: run articles that have no gold labels (the pool), with nothing to score."""
+
+    def write_articles(self, folder: str, records: list[dict]) -> Path:
+        path = Path(folder) / "pool_articles.json"
+        path.write_text(json.dumps(records), encoding="utf-8")
+        return path
+
+    def pool_record(self, article_id="p1", text="Officials confirmed 12 new flu cases on Friday."):
+        return {"article_id": article_id, "scan_date": "2019-01-04", "link": "http://x", "sources": [],
+                "article": text}
+
+    def test_without_gold_every_article_runs_except_examples_and_exclusions(self):
+        articles = {a.article_id: a for a in (article("p3"), article("p1"), article("p2"), article("p4"))}
+        self.assertEqual(default_articles_to_run(articles, None, frozenset({"p2"}), frozenset({"p4"})),
+                         ["p1", "p3"])
+
+    def test_the_parser_takes_an_articles_file(self):
+        args = run_extraction.build_argument_parser().parse_args(["--articles-file", "x.json"])
+        self.assertEqual(args.articles_file, Path("x.json"))
+        self.assertIsNone(run_extraction.build_argument_parser().parse_args([]).articles_file)
+
+    def test_an_articles_file_is_checked_and_loaded_without_gold(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = self.write_articles(folder, [self.pool_record("p1"), self.pool_record("p2")])
+            articles, gold, examples = run_extraction.load_inputs(path)
+        self.assertEqual(sorted(articles), ["p1", "p2"])
+        self.assertIsNone(gold)
+        self.assertTrue(examples)
+
+    def test_a_bad_articles_file_stops_before_any_call(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = self.write_articles(folder, [self.pool_record("p1", text="  ")])
+            with self.assertRaises(SystemExit) as stop:
+                run_extraction.load_inputs(path)
+        self.assertIn("the article text is empty", str(stop.exception))
+
+    def test_without_an_articles_file_the_gold_set_is_loaded(self):
+        articles, gold, _ = run_extraction.load_inputs(None)
+        self.assertTrue(gold)
+        self.assertTrue(set(gold) <= set(articles))
+
+    def test_the_closing_line_suggests_scoring_only_for_a_gold_run(self):
+        self.assertIn("evaluate_run.py", run_extraction.closing_line(Path("results/r"), is_scored=True))
+        line = run_extraction.closing_line(Path("results/r"), is_scored=False)
+        self.assertNotIn("evaluate_run.py", line)
+        self.assertIn("raw_results.jsonl", line)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -78,6 +78,27 @@ MAX_TOKENS = 8000
 # Seconds to wait for one reply. NVIDIA's queue for this model is slow: a 15-token test request
 # took 153 s on 2026-11-05, and a real request carries ~30k prompt tokens with the examples.
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("REQUEST_TIMEOUT_SECONDS", "900"))
+# Hard limit on the total time of one request. The timeout above counts only the wait between two
+# pieces of data, so a server that keeps a connection open (e.g. sends keep-alive bytes) without ever
+# answering never trips it: on 2026-11-07 a DeepSeek run waited over an hour that way. A request
+# past this limit is given up and retried like a timeout. REQUEST_DEADLINE_SECONDS in .env changes it.
+DEFAULT_REQUEST_DEADLINE_SECONDS = 600.0
+
+
+def parse_deadline(text: str | None) -> float:
+    """The deadline in seconds from REQUEST_DEADLINE_SECONDS, or the default when it is unset or blank."""
+    if text is None or not text.strip():
+        return DEFAULT_REQUEST_DEADLINE_SECONDS
+    try:
+        seconds = float(text)
+    except ValueError as error:
+        raise RuntimeError(f"REQUEST_DEADLINE_SECONDS in .env must be a number of seconds, not {text!r}") from error
+    if seconds <= 0:
+        raise RuntimeError(f"REQUEST_DEADLINE_SECONDS in .env must be above 0, not {text!r}")
+    return seconds
+
+
+REQUEST_DEADLINE_SECONDS = parse_deadline(os.getenv("REQUEST_DEADLINE_SECONDS"))
 # Retries after a rate-limit, timeout, connection or server error (done in llm_client.ask_model).
 MAX_RETRIES = 4
 # Requests repeated, with a note naming the problem, when a reply is cut off, not valid JSON, breaks

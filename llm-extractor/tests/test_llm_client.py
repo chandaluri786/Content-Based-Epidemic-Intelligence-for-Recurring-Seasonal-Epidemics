@@ -19,7 +19,9 @@ except ImportError:
     import httpx
 
 from flu_extractor import config
-from flu_extractor.llm_client import RateLimiter, ask_model
+from unittest import mock
+
+from flu_extractor.llm_client import RateLimiter, RequestDeadlineExceeded, ask_model, call_with_deadline
 
 
 class FakeClock:
@@ -137,6 +139,70 @@ class RetryTest(unittest.TestCase):
         with self.assertRaises(openai.BadRequestError):
             self.ask(client)
         self.assertEqual((client.calls, self.slept), (1, []))
+
+
+
+class HangingClient(FakeClient):
+    """The first `hangs` requests never answer (a connection kept open with no reply), then it answers."""
+
+    def __init__(self, hangs=1):
+        super().__init__()
+        self.hangs, self.release = hangs, threading.Event()
+
+    def create(self, **_):
+        self.calls += 1
+        if self.calls <= self.hangs:
+            self.release.wait(5)  # far past the test deadline; released at the end of the test
+        return reply()
+
+
+class DeadlineTest(unittest.TestCase):
+    """A request has a hard limit on its total time, so a stuck connection cannot stall a worker."""
+
+    def setUp(self):
+        self.clock = FakeClock()
+        self.limiter = RateLimiter(40, window=61, clock=self.clock, sleep=self.clock.sleep)
+        self.slept = []
+
+    def ask(self, client):
+        with mock.patch.object(config, "REQUEST_DEADLINE_SECONDS", 0.05):
+            return ask_model(client, [{"role": "user", "content": "x"}], limiter=self.limiter, sleep=self.slept.append)
+
+    def test_a_call_past_the_deadline_stops_waiting(self):
+        release = threading.Event()
+        started = time.monotonic()
+        with self.assertRaises(RequestDeadlineExceeded):
+            call_with_deadline(lambda: release.wait(5), 0.05)
+        self.assertLess(time.monotonic() - started, 1.0)
+        release.set()
+
+    def test_a_call_within_the_deadline_returns_its_value_or_its_error(self):
+        self.assertEqual(call_with_deadline(lambda: 42, 1.0), 42)
+        with self.assertRaises(ValueError):
+            call_with_deadline(lambda: int("x"), 1.0)
+
+    def test_a_stuck_request_is_retried(self):
+        client = HangingClient(hangs=1)
+        started = time.monotonic()
+        result = self.ask(client)
+        client.release.set()
+        self.assertEqual((client.calls, result.attempts, self.slept), (2, 2, [5.0]))
+        self.assertLess(time.monotonic() - started, 1.0)
+
+    def test_a_request_stuck_every_time_gives_up_after_max_retries(self):
+        client = HangingClient(hangs=config.MAX_RETRIES + 1)
+        with self.assertRaises(RequestDeadlineExceeded):
+            self.ask(client)
+        client.release.set()
+        self.assertEqual(client.calls, config.MAX_RETRIES + 1)
+
+    def test_the_deadline_is_set_in_config(self):
+        self.assertGreater(config.REQUEST_DEADLINE_SECONDS, 0)
+        self.assertEqual(config.parse_deadline(None), config.DEFAULT_REQUEST_DEADLINE_SECONDS)
+        self.assertEqual(config.parse_deadline("300"), 300.0)
+        for bad in ("0", "-5", "soon"):
+            with self.assertRaises(RuntimeError):
+                config.parse_deadline(bad)
 
 
 class UsageDetailsTest(unittest.TestCase):

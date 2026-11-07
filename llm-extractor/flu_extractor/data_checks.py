@@ -96,11 +96,15 @@ def check_examples(examples: list, articles: list) -> list[str]:
     return problems
 
 
-def check_input_files(articles_path: Path, gold_path: Path, examples_path: Path) -> list[str]:
-    """All problems with the three input files; an empty list means they are ready to use."""
+def check_input_files(articles_path: Path, gold_path: Path | None, examples_path: Path) -> list[str]:
+    """All problems with the input files; an empty list means they are ready to use.
+
+    gold_path is None for articles that have no gold labels (a run on the pool): then only the
+    articles and the examples are checked."""
     read = lambda path: json.loads(path.read_text(encoding="utf-8"))  # noqa: E731
     articles = read(articles_path)
     problems = check_articles(articles)
     if problems:
         return problems
-    return check_gold(read(gold_path), articles) + check_examples(read(examples_path), articles)
+    gold_problems = check_gold(read(gold_path), articles) if gold_path is not None else []
+    return gold_problems + check_examples(read(examples_path), articles)

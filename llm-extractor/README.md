@@ -485,6 +485,7 @@ Articles can be named by `article_id` or by labeling set and row, such as `Jahna
 | `... --limit N` | only the first N of the selected articles |
 | `... --exclude-file FILE` | leave out more articles |
 | `... --workers N` | requests in flight at once (default 16); the 40-per-minute limit holds for any N |
+| `... --articles-file FILE` | send articles without gold labels (same format as `data/articles.json`, e.g. the pool) instead of the gold set; every article in it except the examples; not scored. Pass it again when resuming |
 | `... --run-dir DIR` | resume a run: articles that already have a reply are skipped, API failures are retried |
 | `... --retry-invalid` | with `--run-dir`: also rerun articles whose reply was still invalid |
 | `python evaluate_run.py RUN_DIR [--offline]` | score a run; writes `report.md` and the files of section 9 |

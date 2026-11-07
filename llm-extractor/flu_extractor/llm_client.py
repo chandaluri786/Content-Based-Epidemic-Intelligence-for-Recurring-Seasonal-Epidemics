@@ -17,9 +17,41 @@ from openai import OpenAI
 
 from flu_extractor import config
 
-# Errors worth another attempt: rate limit (429), timeouts, lost connections and server errors (5xx).
+
+
+class RequestDeadlineExceeded(Exception):
+    """A request ran past config.REQUEST_DEADLINE_SECONDS in total and was given up."""
+
+
+# Errors worth another attempt: rate limit (429), timeouts, lost connections, server errors (5xx)
+# and requests past the hard deadline.
 RETRYABLE_ERRORS = (openai.RateLimitError, openai.APITimeoutError, openai.APIConnectionError,
-                    openai.InternalServerError)
+                    openai.InternalServerError, RequestDeadlineExceeded)
+
+
+def call_with_deadline(call: Callable[[], object], seconds: float) -> object:
+    """Run call() and return its value or raise its error, but stop waiting after `seconds`.
+
+    The call runs in a daemon thread. Past the deadline that thread is left behind (Python cannot
+    stop a thread blocked on a socket); it ends when its connection does, or when the program exits.
+    """
+    outcome: dict = {}
+    finished = threading.Event()
+
+    def run() -> None:
+        try:
+            outcome["value"] = call()
+        except BaseException as error:  # handed to the waiting thread, which raises it
+            outcome["error"] = error
+        finally:
+            finished.set()
+
+    threading.Thread(target=run, daemon=True, name="model-request").start()
+    if not finished.wait(seconds):
+        raise RequestDeadlineExceeded(f"no complete reply within {seconds:g} s")
+    if "error" in outcome:
+        raise outcome["error"]
+    return outcome["value"]
 
 
 @dataclass(frozen=True)
@@ -118,7 +150,8 @@ def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMI
     """Send one request (a list of chat messages) and return the reply.
 
     Every request uses the same decoding settings (config.TEMPERATURE, TOP_P, SEED, EXTRA_BODY).
-    Retries rate-limit, timeout, connection and server errors up to MAX_RETRIES times, each
+    Each attempt has a hard limit on its total time (config.REQUEST_DEADLINE_SECONDS).
+    Retries rate-limit, timeout, deadline, connection and server errors up to MAX_RETRIES times, each
     attempt waiting for its turn under the rate limit. Raises openai.OpenAIError when all
     attempts fail, or at once for errors that a retry cannot fix (e.g. a request that is too long).
     """
@@ -126,7 +159,7 @@ def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMI
     for attempt in range(1, config.MAX_RETRIES + 2):
         limiter.wait_for_turn()
         try:
-            response = client.chat.completions.create(
+            response = call_with_deadline(lambda: client.chat.completions.create(
                 model=config.MODEL_ID,
                 messages=messages,
                 temperature=config.TEMPERATURE,
@@ -134,7 +167,7 @@ def ask_model(client: OpenAI, messages: list[dict], limiter: RateLimiter = _LIMI
                 max_tokens=config.MAX_TOKENS,
                 seed=config.SEED,
                 extra_body=config.EXTRA_BODY,
-            )
+            ), config.REQUEST_DEADLINE_SECONDS)
         except RETRYABLE_ERRORS as error:
             if attempt > config.MAX_RETRIES:
                 raise

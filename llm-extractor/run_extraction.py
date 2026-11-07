@@ -7,6 +7,7 @@ Examples (from the llm-extractor folder, with the virtual environment active):
     python run_extraction.py --limit 10                        # the first 10 articles
     python run_extraction.py                                   # every labelled article except the examples
     python run_extraction.py --run-dir results/run_X           # resume an interrupted run
+    python run_extraction.py --articles-file pool.json         # articles without gold labels (not scored)
 """
 
 import argparse
@@ -20,7 +21,7 @@ from typing import Callable, TextIO
 from flu_extractor import config
 from flu_extractor.checks import find_format_errors
 from flu_extractor.data_checks import check_input_files
-from flu_extractor.data_loading import load_articles, load_gold_labels, resolve_article_id
+from flu_extractor.data_loading import Article, GoldLabel, load_articles, load_gold_labels, resolve_article_id
 from flu_extractor.evaluation import default_articles_to_run
 from flu_extractor.extractor import extract_article
 from flu_extractor.llm_client import create_client
@@ -155,6 +156,28 @@ def format_token_totals(totals: dict) -> str:
                    f" and misses {totals['cache_miss_tokens']:,}.")
 
 
+def load_inputs(articles_file: Path | None) -> tuple[dict[str, Article], dict[str, GoldLabel] | None, list[dict]]:
+    """The articles, their gold labels and the examples, checked before any API call.
+
+    With an articles file (articles without gold labels, such as the pool) no gold is loaded, so
+    gold is None and the run is not scored. Otherwise the gold set in data/ is used.
+    """
+    articles_path = articles_file or config.ARTICLES_PATH
+    gold_path = None if articles_file else config.GOLD_LABELS_PATH
+    problems = check_input_files(articles_path, gold_path, config.EXAMPLES_PATH)
+    if problems:
+        raise SystemExit(f"The input files have {len(problems)} problems, e.g.:\n" + "\n".join(problems[:20]))
+    gold = load_gold_labels(gold_path) if gold_path else None
+    return load_articles(articles_path), gold, load_examples(config.EXAMPLES_PATH)
+
+
+def closing_line(run_dir: Path, is_scored: bool) -> str:
+    """What to do once every article has a reply."""
+    if is_scored:
+        return f"Done. Now run: python evaluate_run.py {run_dir}"
+    return f"Done. The replies are in {run_dir / RAW_LOG_NAME} (no gold labels, so nothing to score)."
+
+
 def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--ids", help="articles to run, comma separated: article ids or set positions "
@@ -170,6 +193,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
                              "so several are needed in flight; the 40-per-minute limit holds for any value.")
     parser.add_argument("--run-dir", type=Path,
                         help="existing run folder to resume; default is a new timestamped folder.")
+    parser.add_argument("--articles-file", type=Path,
+                        help="articles without gold labels to run instead of data/articles.json, in the same "
+                             "format (e.g. the pool). Every article in it runs except the examples; "
+                             "nothing is scored. Pass it again when resuming.")
     parser.add_argument("--retry-invalid", action="store_true",
                         help="when resuming, also rerun articles whose reply was still invalid after the retries.")
     return parser
@@ -179,12 +206,8 @@ def main() -> None:
     args = build_argument_parser().parse_args()
 
     # Stop before any API call if the input files are not in the format the pipeline and the prompt need.
-    problems = check_input_files(config.ARTICLES_PATH, config.GOLD_LABELS_PATH, config.EXAMPLES_PATH)
-    if problems:
-        raise SystemExit(f"The input files have {len(problems)} problems, e.g.:\n" + "\n".join(problems[:20]))
-    articles = load_articles(config.ARTICLES_PATH)
-    gold = load_gold_labels(config.GOLD_LABELS_PATH)
-    examples = load_examples(config.EXAMPLES_PATH)
+    articles, gold, examples = load_inputs(args.articles_file)
+    articles_path = args.articles_file or config.ARTICLES_PATH
 
     # The examples' answers are in the prompt, so those articles are never scored.
     example_ids = frozenset(example["article_id"] for example in examples)
@@ -214,10 +237,13 @@ def main() -> None:
         "fewshot_guide": config.FEWSHOT_GUIDE_PATH.name if use_guide else None,
         "fewshot_guide_sha256": sha256(config.FEWSHOT_GUIDE_PATH) if use_guide else None,
         "example_count": len(examples), "temperature": config.TEMPERATURE, "top_p": config.TOP_P,
-        "max_tokens": config.MAX_TOKENS,
+        "max_tokens": config.MAX_TOKENS, "request_deadline_seconds": config.REQUEST_DEADLINE_SECONDS,
         "extra_body": config.EXTRA_BODY, "seed": config.SEED, "max_validation_retries": config.MAX_VALIDATION_RETRIES,
         "requests_per_minute": config.REQUESTS_PER_MINUTE, "session_affinity": config.SESSION_AFFINITY or None,
-        "selection": "ids" if args.ids else ("ids_file" if args.ids_file else "all labelled articles except the examples"),
+        "articles_file": str(articles_path), "articles_sha256": sha256(articles_path), "scored": gold is not None,
+        "selection": "ids" if args.ids else ("ids_file" if args.ids_file else
+                                             "all articles in the file except the examples" if gold is None
+                                             else "all labelled articles except the examples"),
         "ids_file": str(args.ids_file) if args.ids_file else None,
         "started": datetime.now().isoformat(timespec="seconds"), "articles_requested_this_session": len(ids),
     }, indent=2), encoding="utf-8")
@@ -243,7 +269,7 @@ def main() -> None:
     if stopped:
         print(f"Resume with: python run_extraction.py --run-dir {run_dir} (same options)")
     else:
-        print(f"Done. Now run: python evaluate_run.py {run_dir}")
+        print(closing_line(run_dir, is_scored=gold is not None))
 
 
 if __name__ == "__main__":
