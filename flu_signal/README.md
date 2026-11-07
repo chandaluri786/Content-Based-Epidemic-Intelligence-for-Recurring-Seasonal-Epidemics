@@ -152,6 +152,30 @@ git commit (`-dirty` when the code was not committed). `tune.py` will not replac
 week-by-week method and values from the grid), then runs only those two settings, on the held-out seasons
 and on all 20 calibration seasons (for the all-38 table). It refuses to run without the file.
 
+## Step 5: the held-out run (`evaluate.py`, `report_results.py`, `loso.py`)
+
+These rules were agreed and coded on made-up seasons before any held-out season was run.
+
+- **Headline:** the 9 held-out seasons of USA, AUS and IND (2022–2024), with the two frozen settings.
+- **Per season and signal:** hit (alarm in weeks −4 to +1), false alarm (earlier) or miss, as in step 4.
+- **Lead time, two ways:**
+  - `lead_days` = 7 × (−alarm week): an alarm in week −2 is 14 days early;
+  - `lead_days_known` counts from the end of the alarm week, when all its articles are in: week −2 is 7 days early.
+
+  The content − frequency difference is the same either way.
+- **Who wins a season:** hit = +1, miss = 0, false alarm = −1. The higher one wins. When both hit, the earlier
+  alarm wins. The same week, both missing, or both false is a tie.
+- **Content is "better"** when its score (hits − false alarms) is at least frequency's AND it wins more
+  seasons than it loses. An exact sign test on wins vs losses is reported too; with 9 seasons it has little
+  power, so the result is mostly descriptive.
+- **Also reported:** Ganser's "timely" detection (an alarm in weeks −2 to +1), and the all-38 table (every
+  season; calibration seasons flagged `tuned_on`).
+- **Robustness:** leave one season out over the 22 headline seasons. Each time, the whole step 4 tuning is
+  redone on the other 21, and the chosen settings are scored on the one left out.
+
+Order: `run_detectors.py --final` (writes `held_out_run.json`, a record of the one run), then
+`report_results.py`, then `loso.py`.
+
 ## Inputs
 
 Read only, from the other worktrees: `llm-extractor/results/pool_combined/raw_results.jsonl`,
@@ -164,10 +188,12 @@ and `season_windows.json`. Paths are in `signal_config.py`.
 Run from this folder, with the extractor's venv:
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 65 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 79 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py
 ../llm-extractor/.venv/bin/python build_weekly.py
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only
 ../llm-extractor/.venv/bin/python tune.py                       # writes the frozen settings
 ../llm-extractor/.venv/bin/python run_detectors.py --final      # held-out, once (step 5)
+../llm-extractor/.venv/bin/python report_results.py
+../llm-extractor/.venv/bin/python loso.py
 ```

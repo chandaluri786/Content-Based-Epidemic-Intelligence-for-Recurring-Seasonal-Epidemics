@@ -13,6 +13,7 @@ import argparse
 import json
 import sys
 from collections import defaultdict
+from datetime import datetime
 
 import bcp
 import bocpd
@@ -102,6 +103,22 @@ def detect_frozen(seasons: dict[str, dict], frozen: dict) -> list[dict]:
     return rows
 
 
+HELD_OUT_RUN_RECORD = cfg.OUTPUT_DIR / "held_out_run.json"
+
+
+def record_held_out_run(frozen: dict, path=HELD_OUT_RUN_RECORD) -> None:
+    """Append this held-out run to the record. The run is meant to happen once; a second run is flagged."""
+    from tune import git_commit   # tune imports this module, so import here
+    runs = json.loads(path.read_text(encoding="utf-8"))["runs"] if path.exists() else []
+    if runs:
+        print(f"WARNING: the held-out seasons were already run {len(runs)} time(s); see {path}")
+    runs.append({"time": datetime.now().isoformat(timespec="seconds"), "git_commit": git_commit(),
+                 "frozen_settings_commit": frozen.get("git_commit"),
+                 "content": {k: frozen["content"][k] for k in ("signal", "method", "cutoff", "sustain_weeks", "margin")},
+                 "frequency": {k: frozen["frequency"][k] for k in ("signal", "method", "cutoff", "sustain_weeks", "margin")}})
+    path.write_text(json.dumps({"runs": runs}, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--cutoff", type=float, default=0.5, help="posterior probability needed for an alarm")
@@ -124,6 +141,7 @@ def main() -> int:
             out_path = cfg.OUTPUT_DIR / f"detections_{split}_frozen.csv"
             write_csv(out_path, detect_frozen(seasons, frozen))
             print(f"{len(seasons)} {split} seasons, frozen settings -> {out_path}")
+        record_held_out_run(frozen)
         return 0
 
     seasons = series_by_season(weekly_rows, cfg.SPLIT_CALIBRATION)
