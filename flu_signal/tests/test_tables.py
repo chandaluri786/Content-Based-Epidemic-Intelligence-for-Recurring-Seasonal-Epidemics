@@ -7,7 +7,7 @@ import unittest
 from datetime import date
 
 import signal_config as cfg
-from tables import article_answer, build_tables, item_rows, parse_windows, season_for
+from tables import article_answer, build_tables, frequency_seasons, item_rows, parse_windows, season_for
 
 RAW_WINDOWS = [
     {"season_id": "USA-2018", "country": "USA", "season_year": 2018, "onset_date": "2018-12-10",
@@ -41,6 +41,20 @@ class WindowTest(unittest.TestCase):
                                   "window_end": "2019-02-01"}]
         with self.assertRaises(ValueError):
             parse_windows(overlap)
+
+
+class FrequencySeasonsTest(unittest.TestCase):
+    def test_a_season_counts_only_when_the_article_mentions_its_country(self):
+        # A US article dated inside both the USA and the KEN window, mentioning only the US.
+        self.assertEqual(frequency_seasons(["KEN-2018", "USA-2018"], {"USA"}, "USA-2018"), ["USA-2018"])
+
+    def test_every_mentioned_active_season_counts(self):
+        self.assertEqual(frequency_seasons(["IND-2018", "USA-2018"], {"USA", "IND", "AUS"}, "USA-2018"),
+                         ["IND-2018", "USA-2018"])
+
+    def test_a_sampling_season_the_article_does_not_mention_stops_the_run(self):
+        with self.assertRaises(ValueError):
+            frequency_seasons(["USA-2018"], set(), "USA-2018")
 
 
 class AnswerTest(unittest.TestCase):
@@ -78,24 +92,27 @@ class ItemRowsTest(unittest.TestCase):
 class BuildTablesTest(unittest.TestCase):
     def test_frequency_uses_every_mentioned_season_and_content_uses_item_countries(self):
         buckets = [bucket("a"), bucket("b"), bucket("c")]
-        assignments = {"a": ["USA-2018", "IND-2018"], "b": ["USA-2018"], "c": ["USA-2018"]}
+        assignments = {"a": ["IND-2018", "USA-2018"], "b": ["IND-2018", "USA-2018"], "c": ["USA-2018"]}
+        mentions = {"a": {"USA", "IND"}, "b": {"USA"}, "c": {"USA"}}
         gold = {"a": {"useful": True, "items": [item("United States")], "status": "gold"}}
         llm = {"b": {"useful": False, "items": [], "status": "valid"}}
-        articles, items, report = build_tables(buckets, {"c": cfg.DROPPED_LAYER}, assignments, gold, llm, WINDOWS)
+        articles, items, report = build_tables(buckets, {"c": cfg.DROPPED_LAYER}, assignments, mentions, gold, llm,
+                                               WINDOWS)
         self.assertEqual([(r["source"], r["frequency_seasons"], r["content_seasons"]) for r in articles],
-                         [("gold", "USA-2018;IND-2018", "USA-2018"), ("llm", "USA-2018", ""), ("not_sent", "USA-2018", "")])
+                         [("gold", "IND-2018;USA-2018", "USA-2018"), ("llm", "USA-2018", ""), ("not_sent", "USA-2018", "")])
         self.assertEqual(len(items), 1)
         self.assertEqual(report["by_source"], {"gold": 1, "llm": 1, "not_sent": 1})
 
     def test_an_article_missing_from_the_assignments_stops_the_run(self):
         with self.assertRaises(ValueError):
-            build_tables([bucket("a")], {}, {}, {"a": {"useful": False, "items": [], "status": "gold"}}, {}, WINDOWS)
+            build_tables([bucket("a")], {}, {}, {"a": {"USA"}}, {"a": {"useful": False, "items": [], "status": "gold"}},
+                         {}, WINDOWS)
 
     def test_an_llm_reply_for_an_article_outside_the_pool_stops_the_run(self):
         llm = {"a": {"useful": False, "items": [], "status": "valid"},
                "zz": {"useful": False, "items": [], "status": "valid"}}
         with self.assertRaises(ValueError):
-            build_tables([bucket("a")], {}, {"a": ["USA-2018"]}, {}, llm, WINDOWS)
+            build_tables([bucket("a")], {}, {"a": ["USA-2018"]}, {"a": {"USA"}}, {}, llm, WINDOWS)
 
 
 if __name__ == "__main__":

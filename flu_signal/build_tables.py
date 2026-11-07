@@ -39,12 +39,14 @@ def per_country_counts(articles: list[dict], items: list[dict]) -> dict[str, dic
 def main() -> int:
     bucket_rows = data_io.load_pool_buckets()
     layers = data_io.load_filter_layers()
-    assignments = data_io.load_season_assignments({row["record_id"] for row in bucket_rows})
+    pool_ids = {row["record_id"] for row in bucket_rows}
+    assignments = data_io.load_season_assignments(pool_ids)
+    mentions = data_io.load_mentioned_countries(pool_ids)
     gold = data_io.load_gold_answers()
     llm = data_io.load_llm_answers()
     windows = parse_windows(data_io.load_season_windows())
 
-    articles, items, report = build_tables(bucket_rows, layers, assignments, gold, llm, windows)
+    articles, items, report = build_tables(bucket_rows, layers, assignments, mentions, gold, llm, windows)
     report["per_country"] = per_country_counts(articles, items)
 
     cfg.OUTPUT_DIR.mkdir(exist_ok=True)

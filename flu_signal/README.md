@@ -15,8 +15,10 @@ Step 1: two tables, written to `output/` (gitignored).
 
 An article can mention several countries. The two signals count it differently.
 
-- **Frequency signal:** the article counts in every cohort country-season it mentions
-  (`country_seasons` in `repo/output/pool/season_assignments.jsonl`). Column `frequency_seasons`.
+- **Frequency signal:** the article counts in a country-season when the season's window holds the article's
+  date AND the article's GDELT locations mention that country. Column `frequency_seasons`.
+  `country_seasons` in `repo/output/pool/season_assignments.jsonl` alone is not enough: it lists every window
+  holding the date, mentioned or not. The mentions come from `locations` in `pooled_articles.jsonl`.
 - **Content signal:** each item counts toward its own `country` field, in that country's season whose
   window holds the article's scan date. Column `content_seasons`. Items about other countries are left out.
 
@@ -37,12 +39,12 @@ Items kept: 19,129. Left out: 2,479 about other countries, 674 dated outside the
 
 | Country | Frequency articles | Articles with items | Items |
 | --- | --- | --- | --- |
-| USA | 41,482 | 7,310 | 16,619 |
-| AUS | 4,975 | 604 | 1,104 |
-| IND | 12,823 | 536 | 1,334 |
-| BRA | 8,474 | 42 | 58 |
-| KEN | 6,200 | 5 | 8 |
-| IDN | 3,757 | 6 | 6 |
+| USA | 40,693 | 7,310 | 16,619 |
+| AUS | 4,115 | 604 | 1,104 |
+| IND | 4,964 | 536 | 1,334 |
+| BRA | 920 | 42 | 58 |
+| KEN | 238 | 5 | 8 |
+| IDN | 448 | 6 | 6 |
 
 BRA, KEN and IDN have almost no content (0–4 articles per season, except BRA-2023 with 35). So the main
 lead-time comparison uses USA, AUS and IND (22 seasons). A second table covers all 38 seasons, with no
@@ -60,6 +62,6 @@ and `season_windows.json`. Paths are in `signal_config.py`.
 Run from this folder, with the extractor's venv:
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 11 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 14 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py
 ```

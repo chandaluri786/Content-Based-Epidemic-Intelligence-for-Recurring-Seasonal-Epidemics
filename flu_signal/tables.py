@@ -1,7 +1,8 @@
 """Build the article table and the item table from the pool, the LLM replies and the gold labels.
 
 Article table: one row per pool article (50,640). It says where the answer came from (gold, llm or
-not_sent), whether it is useful, and every cohort country-season it counts in for the frequency signal.
+not_sent), whether it is useful, and the cohort country-seasons it counts in for the frequency signal:
+the seasons whose window holds its date AND whose country its GDELT locations mention.
 
 Item table: one row per item about a cohort country. Each item counts toward its own country (not the
 article's sampling country), in that country's season whose window holds the article's scan date.
@@ -44,6 +45,14 @@ def season_for(country: str, scan_date: date, windows: dict[str, list[Window]]) 
         if window.window_start <= scan_date <= window.window_end:
             return window.season_id
     return None
+
+
+def frequency_seasons(active_seasons: list[str], mentioned: set[str], sampling_season: str) -> list[str]:
+    """The date-active seasons whose country the article mentions. Its sampling season must be one of them."""
+    seasons = [season for season in active_seasons if season.split("-")[0] in mentioned]
+    if sampling_season not in seasons:
+        raise ValueError(f"sampling season {sampling_season} is not among the mentioned active seasons {seasons}")
+    return seasons
 
 
 def article_answer(record_id: str, gold: dict[str, dict], llm: dict[str, dict], layer: str | None) -> tuple[str, dict]:
@@ -97,8 +106,9 @@ def article_row(bucket_row: dict, source: str, answer: dict, country_seasons: li
 
 
 def build_tables(bucket_rows: list[dict], layers: dict[str, str], assignments: dict[str, list[str]],
-                 gold: dict[str, dict], llm: dict[str, dict], windows: dict[str, list[Window]]) -> tuple[list, list, dict]:
-    """(article rows, item rows, report). Every pool article must have an answer and a season list."""
+                 mentions: dict[str, set[str]], gold: dict[str, dict], llm: dict[str, dict],
+                 windows: dict[str, list[Window]]) -> tuple[list, list, dict]:
+    """(article rows, item rows, report). Every pool article must have an answer, a season list and its mentions."""
     articles, items = [], []
     skipped: dict[str, int] = {}
     sources: dict[str, int] = {}
@@ -106,11 +116,14 @@ def build_tables(bucket_rows: list[dict], layers: dict[str, str], assignments: d
         record_id = bucket_row["record_id"]
         if record_id not in assignments:
             raise ValueError(f"article {record_id} is missing from season_assignments.jsonl")
+        if record_id not in mentions:
+            raise ValueError(f"article {record_id} is missing from pooled_articles.jsonl")
+        freq_seasons = frequency_seasons(assignments[record_id], mentions[record_id], bucket_row["season"])
         source, answer = article_answer(record_id, gold, llm, layers.get(record_id))
         sources[source] = sources.get(source, 0) + 1
         rows = item_rows(record_id, date.fromisoformat(bucket_row["scan_date"]), answer["items"], windows, skipped)
         content_seasons = sorted({row["season_id"] for row in rows})
-        articles.append(article_row(bucket_row, source, answer, assignments[record_id], content_seasons))
+        articles.append(article_row(bucket_row, source, answer, freq_seasons, content_seasons))
         items.extend(rows)
     unused_llm = set(llm) - {row["record_id"] for row in articles}
     if unused_llm:

@@ -18,8 +18,10 @@ GOLD_LABELS_PATH = REPO_DIR / "llm-extractor" / "data" / "gold_labels.json"
 POOL_BUCKETS_PATH = CAPSTONE_DIR / "repo-sampling" / "sampling" / "output" / "all_articles_buckets.csv"
 # The keyword filter's layer for each pool article (drop_no_flu_word = not sent, counted as not useful).
 FILTER_DECISIONS_PATH = REPO_DIR / "usefulness_filter" / "output" / "filter_decisions.csv"
-# Every cohort country-season whose window holds the article and whose country it mentions.
+# Every cohort country-season whose window holds the article's date, mentioned or not (season_assign.py).
 SEASON_ASSIGNMENTS_PATH = CAPSTONE_DIR / "repo" / "output" / "pool" / "season_assignments.jsonl"
+# The pooled corpus (2 GB, streamed): each article's GDELT locations, used for the countries it mentions.
+POOLED_ARTICLES_PATH = CAPSTONE_DIR / "repo" / "output" / "pool" / "pooled_articles.jsonl"
 # The 38 country-seasons: onset date and window (both ends included). One writer: prepare_pool.py windows.
 SEASON_WINDOWS_PATH = CAPSTONE_DIR / "repo" / "output" / "pool" / "season_windows.json"
 
@@ -38,6 +40,9 @@ COHORT_COUNTRIES = {
     "Kenya": "KEN",
     "Indonesia": "IDN",
 }
+
+# GDELT location codes (FIPS 10-4, not ISO) of the cohort -> ISO3. Same as repo/config.py TARGET_COUNTRIES.
+COHORT_FIPS = {"US": "USA", "AS": "AUS", "BR": "BRA", "IN": "IND", "KE": "KEN", "ID": "IDN"}
 
 # Where an article's answer came from.
 SOURCE_GOLD = "gold"

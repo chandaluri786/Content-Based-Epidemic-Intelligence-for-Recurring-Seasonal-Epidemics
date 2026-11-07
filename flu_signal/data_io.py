@@ -40,6 +40,19 @@ def load_season_assignments(wanted_ids: set[str], path: Path = cfg.SEASON_ASSIGN
     return found
 
 
+def load_mentioned_countries(wanted_ids: set[str], path: Path = cfg.POOLED_ARTICLES_PATH) -> dict[str, set[str]]:
+    """{record_id: {cohort ISO3 its GDELT locations mention}} for the wanted articles. Streams the 2 GB file."""
+    found: dict[str, set[str]] = {}
+    with open(_require(path), encoding="utf-8") as f:
+        for line in f:
+            record = json.loads(line)
+            if record["gkg_record_id"] in wanted_ids:
+                found[record["gkg_record_id"]] = {cfg.COHORT_FIPS[loc["country_fips"]]
+                                                  for loc in record.get("locations") or []
+                                                  if loc.get("country_fips") in cfg.COHORT_FIPS}
+    return found
+
+
 def load_season_windows(path: Path = cfg.SEASON_WINDOWS_PATH) -> list[dict]:
     """The 38 country-seasons: season_id, country, season_year, onset_date, window_start, window_end."""
     return json.loads(_require(path).read_text(encoding="utf-8"))
