@@ -1,0 +1,392 @@
+{
+  "seasons": 38,
+  "weeks_per_season": 12,
+  "seasons_by_split": {
+    "calibration/headline": 13,
+    "calibration/other": 7,
+    "held_out/headline": 9,
+    "held_out/other": 9
+  },
+  "per_season": {
+    "AUS-2016": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 480,
+      "content_articles": 22,
+      "seasonal_articles": 22,
+      "activity_articles": 20,
+      "rising_articles": 6,
+      "avian_articles": 0
+    },
+    "AUS-2017": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 433,
+      "content_articles": 37,
+      "seasonal_articles": 36,
+      "activity_articles": 31,
+      "rising_articles": 20,
+      "avian_articles": 1
+    },
+    "AUS-2018": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 492,
+      "content_articles": 55,
+      "seasonal_articles": 55,
+      "activity_articles": 53,
+      "rising_articles": 13,
+      "avian_articles": 0
+    },
+    "AUS-2022": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 840,
+      "content_articles": 71,
+      "seasonal_articles": 70,
+      "activity_articles": 69,
+      "rising_articles": 38,
+      "avian_articles": 1
+    },
+    "AUS-2023": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 773,
+      "content_articles": 123,
+      "seasonal_articles": 123,
+      "activity_articles": 121,
+      "rising_articles": 89,
+      "avian_articles": 0
+    },
+    "AUS-2024": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 1097,
+      "content_articles": 296,
+      "seasonal_articles": 116,
+      "activity_articles": 110,
+      "rising_articles": 67,
+      "avian_articles": 181
+    },
+    "BRA-2019": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 92,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "BRA-2021": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 279,
+      "content_articles": 3,
+      "seasonal_articles": 3,
+      "activity_articles": 3,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "BRA-2022": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 154,
+      "content_articles": 1,
+      "seasonal_articles": 1,
+      "activity_articles": 1,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "BRA-2023": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 256,
+      "content_articles": 35,
+      "seasonal_articles": 35,
+      "activity_articles": 35,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "BRA-2024": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 139,
+      "content_articles": 3,
+      "seasonal_articles": 3,
+      "activity_articles": 3,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "IDN-2018": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 37,
+      "content_articles": 4,
+      "seasonal_articles": 1,
+      "activity_articles": 1,
+      "rising_articles": 0,
+      "avian_articles": 3
+    },
+    "IDN-2021": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 118,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "IDN-2022": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 99,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "IDN-2023": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 110,
+      "content_articles": 2,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 2
+    },
+    "IDN-2024": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 84,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "IND-2015": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 393,
+      "content_articles": 36,
+      "seasonal_articles": 34,
+      "activity_articles": 33,
+      "rising_articles": 6,
+      "avian_articles": 2
+    },
+    "IND-2016": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 489,
+      "content_articles": 108,
+      "seasonal_articles": 108,
+      "activity_articles": 106,
+      "rising_articles": 18,
+      "avian_articles": 0
+    },
+    "IND-2017": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 808,
+      "content_articles": 111,
+      "seasonal_articles": 68,
+      "activity_articles": 64,
+      "rising_articles": 14,
+      "avian_articles": 43
+    },
+    "IND-2018": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 264,
+      "content_articles": 17,
+      "seasonal_articles": 17,
+      "activity_articles": 16,
+      "rising_articles": 3,
+      "avian_articles": 0
+    },
+    "IND-2021": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 1236,
+      "content_articles": 62,
+      "seasonal_articles": 18,
+      "activity_articles": 14,
+      "rising_articles": 5,
+      "avian_articles": 44
+    },
+    "IND-2022": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 455,
+      "content_articles": 67,
+      "seasonal_articles": 67,
+      "activity_articles": 66,
+      "rising_articles": 33,
+      "avian_articles": 0
+    },
+    "IND-2023": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 618,
+      "content_articles": 40,
+      "seasonal_articles": 33,
+      "activity_articles": 33,
+      "rising_articles": 19,
+      "avian_articles": 7
+    },
+    "IND-2024": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 701,
+      "content_articles": 95,
+      "seasonal_articles": 31,
+      "activity_articles": 24,
+      "rising_articles": 7,
+      "avian_articles": 67
+    },
+    "KEN-2018": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 44,
+      "content_articles": 1,
+      "seasonal_articles": 1,
+      "activity_articles": 1,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "KEN-2019": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 35,
+      "content_articles": 1,
+      "seasonal_articles": 1,
+      "activity_articles": 1,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "KEN-2021": {
+      "split": "calibration",
+      "headline": false,
+      "freq_articles": 45,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "KEN-2022": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 54,
+      "content_articles": 2,
+      "seasonal_articles": 2,
+      "activity_articles": 2,
+      "rising_articles": 2,
+      "avian_articles": 0
+    },
+    "KEN-2023": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 33,
+      "content_articles": 1,
+      "seasonal_articles": 1,
+      "activity_articles": 1,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "KEN-2024": {
+      "split": "held_out",
+      "headline": false,
+      "freq_articles": 27,
+      "content_articles": 0,
+      "seasonal_articles": 0,
+      "activity_articles": 0,
+      "rising_articles": 0,
+      "avian_articles": 0
+    },
+    "USA-2015": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 3740,
+      "content_articles": 328,
+      "seasonal_articles": 292,
+      "activity_articles": 232,
+      "rising_articles": 76,
+      "avian_articles": 37
+    },
+    "USA-2016": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 3926,
+      "content_articles": 374,
+      "seasonal_articles": 353,
+      "activity_articles": 312,
+      "rising_articles": 107,
+      "avian_articles": 23
+    },
+    "USA-2017": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 3834,
+      "content_articles": 633,
+      "seasonal_articles": 606,
+      "activity_articles": 555,
+      "rising_articles": 204,
+      "avian_articles": 32
+    },
+    "USA-2018": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 5998,
+      "content_articles": 659,
+      "seasonal_articles": 659,
+      "activity_articles": 595,
+      "rising_articles": 109,
+      "avian_articles": 0
+    },
+    "USA-2019": {
+      "split": "calibration",
+      "headline": true,
+      "freq_articles": 4052,
+      "content_articles": 645,
+      "seasonal_articles": 645,
+      "activity_articles": 585,
+      "rising_articles": 190,
+      "avian_articles": 0
+    },
+    "USA-2022": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 6358,
+      "content_articles": 1098,
+      "seasonal_articles": 930,
+      "activity_articles": 891,
+      "rising_articles": 573,
+      "avian_articles": 171
+    },
+    "USA-2023": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 6332,
+      "content_articles": 1105,
+      "seasonal_articles": 1021,
+      "activity_articles": 959,
+      "rising_articles": 676,
+      "avian_articles": 84
+    },
+    "USA-2024": {
+      "split": "held_out",
+      "headline": true,
+      "freq_articles": 6453,
+      "content_articles": 2468,
+      "seasonal_articles": 556,
+      "activity_articles": 444,
+      "rising_articles": 196,
+      "avian_articles": 1952
+    }
+  }
+}

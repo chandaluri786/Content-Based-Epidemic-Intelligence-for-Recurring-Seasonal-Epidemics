@@ -1,2 +1,4 @@
-output/
+# Big tables rebuilt by build_tables.py; every other output is small and kept in git.
+output/articles.csv
+output/items.csv
 __pycache__/

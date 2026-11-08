@@ -1,0 +1,122 @@
+{
+  "created": "2026-11-07",
+  "git_commit": "891318b",
+  "seasons": [
+    "AUS-2016",
+    "AUS-2017",
+    "AUS-2018",
+    "IND-2015",
+    "IND-2016",
+    "IND-2017",
+    "IND-2018",
+    "IND-2021",
+    "USA-2015",
+    "USA-2016",
+    "USA-2017",
+    "USA-2018",
+    "USA-2019"
+  ],
+  "rule": {
+    "hit": "alarm in weeks -4..1",
+    "false_alarm": "before week -4",
+    "score": "hits - false alarms",
+    "chosen_among": [
+      "bcp_prospective",
+      "bocpd_prospective"
+    ]
+  },
+  "content": {
+    "signal": "rising_articles",
+    "method": "bcp_prospective",
+    "cutoff": 0.4,
+    "sustain_weeks": 1,
+    "margin": 0.0,
+    "tie_break": {
+      "best_ranked_cutoff": 0.3,
+      "plateau_cutoffs": [
+        0.3,
+        0.4,
+        0.5
+      ],
+      "rule": "middle cut-off of the plateau"
+    },
+    "calibration": {
+      "score": 8,
+      "hits": 8,
+      "false_alarms": 0,
+      "misses": 5,
+      "median_hit_week": 0.0,
+      "alarm_weeks": {
+        "AUS-2016": null,
+        "AUS-2017": 0,
+        "AUS-2018": null,
+        "IND-2015": null,
+        "IND-2016": null,
+        "IND-2017": 1,
+        "IND-2018": 1,
+        "IND-2021": 0,
+        "USA-2015": null,
+        "USA-2016": -2,
+        "USA-2017": 0,
+        "USA-2018": 0,
+        "USA-2019": -1
+      },
+      "score_by_cutoff": {
+        "0.3": 8,
+        "0.4": 8,
+        "0.5": 8,
+        "0.6": 7,
+        "0.7": 7,
+        "0.8": 6,
+        "0.9": 5
+      }
+    }
+  },
+  "frequency": {
+    "signal": "freq_articles",
+    "method": "bocpd_prospective",
+    "cutoff": 0.4,
+    "sustain_weeks": 1,
+    "margin": 0.0,
+    "tie_break": {
+      "best_ranked_cutoff": 0.3,
+      "plateau_cutoffs": [
+        0.3,
+        0.4,
+        0.5
+      ],
+      "rule": "middle cut-off of the plateau"
+    },
+    "calibration": {
+      "score": 4,
+      "hits": 5,
+      "false_alarms": 1,
+      "misses": 7,
+      "median_hit_week": -2.0,
+      "alarm_weeks": {
+        "AUS-2016": null,
+        "AUS-2017": null,
+        "AUS-2018": null,
+        "IND-2015": -7,
+        "IND-2016": -2,
+        "IND-2017": -1,
+        "IND-2018": -4,
+        "IND-2021": null,
+        "USA-2015": -2,
+        "USA-2016": null,
+        "USA-2017": 1,
+        "USA-2018": null,
+        "USA-2019": null
+      },
+      "score_by_cutoff": {
+        "0.3": 4,
+        "0.4": 4,
+        "0.5": 4,
+        "0.6": 3,
+        "0.7": 1,
+        "0.8": 0,
+        "0.9": 0
+      }
+    }
+  }
+}

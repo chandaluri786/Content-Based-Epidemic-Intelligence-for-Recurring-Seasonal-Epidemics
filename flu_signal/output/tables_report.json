@@ -1,0 +1,46 @@
+{
+  "articles": 50640,
+  "by_source": {
+    "llm": 39248,
+    "not_sent": 10272,
+    "gold": 1120
+  },
+  "useful_articles": 9688,
+  "items_kept": 19129,
+  "items_skipped": {
+    "not_cohort_country": 2479,
+    "outside_country_window": 674
+  },
+  "per_country": {
+    "USA": {
+      "frequency_articles": 40693,
+      "articles_with_items": 7310,
+      "items": 16619
+    },
+    "AUS": {
+      "frequency_articles": 4115,
+      "articles_with_items": 604,
+      "items": 1104
+    },
+    "BRA": {
+      "frequency_articles": 920,
+      "articles_with_items": 42,
+      "items": 58
+    },
+    "IND": {
+      "frequency_articles": 4964,
+      "articles_with_items": 536,
+      "items": 1334
+    },
+    "KEN": {
+      "frequency_articles": 238,
+      "articles_with_items": 5,
+      "items": 8
+    },
+    "IDN": {
+      "frequency_articles": 448,
+      "articles_with_items": 6,
+      "items": 6
+    }
+  }
+}

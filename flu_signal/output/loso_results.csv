@@ -1,0 +1,23 @@
+season_id,country,trained_on,content_alarm_week,content_outcome,content_lead_days,content_lead_days_known,content_timely,frequency_alarm_week,frequency_outcome,frequency_lead_days,frequency_lead_days_known,frequency_timely,winner,content_setting,frequency_setting
+AUS-2016,AUS,21,,miss,,,False,,miss,,,False,tie,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+AUS-2017,AUS,21,1,hit,-7,-14,True,,miss,,,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+AUS-2018,AUS,21,,miss,,,False,-7,false_alarm,49,42,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bocpd_prospective cutoff 0.3 sustain 1 margin 0.0
+AUS-2022,AUS,21,-3,hit,21,14,False,,miss,,,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+AUS-2023,AUS,21,0,hit,0,-7,True,,miss,,,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+AUS-2024,AUS,21,-1,hit,7,0,True,-3,hit,21,14,False,frequency,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2015,IND,21,,miss,,,False,-7,false_alarm,49,42,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bocpd_prospective cutoff 0.3 sustain 1 margin 0.0
+IND-2016,IND,21,,miss,,,False,,miss,,,False,tie,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2017,IND,21,0,hit,0,-7,True,-1,hit,7,0,True,frequency,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2018,IND,21,,miss,,,False,,miss,,,False,tie,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2021,IND,21,-1,hit,7,0,True,,miss,,,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2022,IND,21,-4,hit,28,21,False,1,hit,-7,-14,True,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+IND-2023,IND,21,-2,hit,14,7,True,-6,false_alarm,42,35,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bocpd_prospective cutoff 0.3 sustain 1 margin 0.0
+IND-2024,IND,21,,miss,,,False,,miss,,,False,tie,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2015,USA,21,,miss,,,False,-1,hit,7,0,True,frequency,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2016,USA,21,-1,hit,7,0,True,,miss,,,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2017,USA,21,,miss,,,False,1,hit,-7,-14,True,frequency,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2018,USA,21,,miss,,,False,,miss,,,False,tie,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2019,USA,21,-3,hit,21,14,False,-5,false_alarm,35,28,False,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0
+USA-2022,USA,21,-2,hit,14,7,True,-1,hit,7,0,True,content,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2023,USA,21,-5,false_alarm,35,28,False,,miss,,,False,frequency,content_articles bcp_prospective cutoff 0.3 sustain 2 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0
+USA-2024,USA,21,-1,hit,7,0,True,-3,hit,21,14,False,frequency,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0

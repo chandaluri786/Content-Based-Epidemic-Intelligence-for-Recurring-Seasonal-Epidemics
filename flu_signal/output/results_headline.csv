@@ -1,0 +1,10 @@
+season_id,country,split,headline,tuned_on,content_alarm_week,content_outcome,content_lead_days,content_lead_days_known,content_timely,frequency_alarm_week,frequency_outcome,frequency_lead_days,frequency_lead_days_known,frequency_timely,winner
+AUS-2022,AUS,held_out,True,False,-5,false_alarm,35,28,False,,miss,,,False,frequency
+AUS-2023,AUS,held_out,True,False,0,hit,0,-7,True,,miss,,,False,content
+AUS-2024,AUS,held_out,True,False,-4,hit,28,21,False,-3,hit,21,14,False,content
+IND-2022,IND,held_out,True,False,-1,hit,7,0,True,0,hit,0,-7,True,content
+IND-2023,IND,held_out,True,False,-6,false_alarm,42,35,False,-5,false_alarm,35,28,False,tie
+IND-2024,IND,held_out,True,False,,miss,,,False,,miss,,,False,tie
+USA-2022,USA,held_out,True,False,-5,false_alarm,35,28,False,-2,hit,14,7,True,frequency
+USA-2023,USA,held_out,True,False,-5,false_alarm,35,28,False,-3,hit,21,14,False,frequency
+USA-2024,USA,held_out,True,False,-3,hit,21,14,False,,miss,,,False,content

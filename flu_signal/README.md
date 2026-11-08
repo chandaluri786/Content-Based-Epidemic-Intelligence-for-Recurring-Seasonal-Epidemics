@@ -1,10 +1,66 @@
 # flu_signal
 
-Written for: the capstone team, to see how the LLM replies become weekly signals for change-point detection.
+Written for: the capstone team, to see how the LLM replies become weekly signals for change-point detection,
+what the test found, and how to check it yourself.
 
-## What is built so far
+## In short
 
-Step 1: two tables, written to `output/` (gitignored).
+**Question:** does the *content* of flu news (what the LLM extracted) show a seasonal flu onset earlier than a
+plain *count* of flu news? WHO FluNet onset dates are the truth.
+
+| Step | What it does | Script |
+| --- | --- | --- |
+| 1 | LLM replies become one row per article and one per item | `build_tables.py` |
+| 2 | 12 weekly counts per country-season, weeks −10 to +1 around the onset | `build_weekly.py` |
+| 3 | BCP and BOCPD look for the week the counts jump | `bcp.py`, `bocpd.py`, `run_detectors.py` |
+| 4 | Pick the best setting for content and for counts on 2015–2021, and freeze it | `tune.py` |
+| 5 | Test the frozen settings once on 2022–2024; leave one season out | `run_detectors.py --final`, `report_results.py`, `loso.py` |
+| after | Post-hoc checks, designed after seeing the results | `post_hoc.py` |
+
+**Result:** by the pre-registered rule, content is **not** better: score 0 vs 3 on the 9 held-out seasons.
+Leaving one season out, content leads 11 vs 3, but that is not significant (p = 0.33). Content alarms earlier
+than counts. With an early limit of −5 or wider it wins most seasons, but that limit was picked after the results,
+so it is a description, not a test.
+
+**Key terms**
+
+- **Setting:** signal + method (BCP or BOCPD) + cut-off + sustain + margin. Tuning picks one per side, and the
+  test uses exactly that one.
+- **Cut-off:** how sure the detector must be (the probability that the level just jumped) before it alarms.
+  Lower alarms earlier and more often.
+- **Sustain** (1, 2 or 3 weeks): how many weeks the rise must stay above the earlier mean. It stops one-week spikes.
+- **Margin** (0 or 1): how far above the earlier mean, on the Anscombe noise scale. All frozen settings use 0.
+- **Early limit** (−4): part of the score, not of the detector. An alarm in weeks −4 to +1 is a hit (+1), an
+  earlier one a false alarm (−1), no alarm a miss (0). **Score** = hits − false alarms.
+- **Wins – losses – ties:** season by season, content against counts (rules in step 5).
+- **Pre-set vs post hoc:** rules fixed before the held-out run (the −4 limit, the frozen settings) vs checks
+  designed after it. Only the pre-set result is a test.
+
+## Start here (teammates)
+
+`output/` is in git, except `articles.csv` and `items.csv` (big; step 1 rebuilds them). So with git alone you can
+run the tests and redo steps 3–5 and the post-hoc checks from `weekly_signals.csv` and `frozen_settings.json`:
+
+```bash
+cd repo-llm-v2/flu_signal
+python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt   # or reuse ../llm-extractor/.venv
+.venv/bin/python -m unittest discover tests      # 86 tests, offline
+.venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
+git status --short output/                       # nothing listed = you got the same numbers
+```
+
+Steps 1–2 need the big gitignored inputs (see Inputs); ask Aditya for them. Please don't:
+
+- run `run_detectors.py --final` again: it appends a second run to `output/held_out_run.json`, which marks the
+  one-time test as rerun;
+- run `tune.py --force`, or retune with 2022–2024 and call the result a test. Those seasons are spent. Any new
+  rule (another limit, another signal) is post hoc and must be labelled so.
+
+`HANDOFF.md` (next to this file) is a short brief for a new Claude Code session.
+
+## Step 1: tables (`build_tables.py`)
+
+Two tables, written to `output/`.
 
 - `articles.csv`: one row per pool article (50,640). It says where the answer came from (`gold`, `llm`
   or `not_sent`), whether the article is useful, and which country-seasons it counts in.
@@ -66,13 +122,16 @@ adds 1 to a column in the week of its scan date if at least one of its items for
 | `rising_articles` | a seasonal item is a trend that is rising or high |
 | `avian_articles` | it has a bird flu or variant item. A check, not a candidate. |
 
-Bird flu is left out because prompt rule 1.3 makes items for animal outbreaks linked to food. They are not
-a sign of the seasonal epidemic (IND-2021 has 42 avian articles in week -3).
+The signals nest: `content_articles` ⊃ `seasonal_articles` ⊃ `activity_articles` ⊃ `rising_articles`.
+`content_articles` keeps bird flu; the three below it leave it out. Prompt v5.2 gives a bird-flu item when
+people are infected or tested, or as an "inactive" trend for food or monitoring news. Those items are real, but
+they do not follow the seasonal epidemic (IND-2021 has 42 avian articles in week -3).
 
 ## Step 3: change-point detectors (`bcp.py`, `bocpd.py`, `run_detectors.py`)
 
 Both work on Anscombe-transformed counts, 2·sqrt(x + 3/8), so that count noise is about the same at 3 or
-300 articles a week. Both look only for a rise.
+300 articles a week. Both look only for a rise. There is no smoothing (no moving average): the transform
+changes each week on its own, and the sustain rule below is a check, not a filter.
 
 - **BCP** (Barry & Hartigan, as in Ganser et al. 2022). Every split of the 12 weeks into blocks
   (2,048 splits) is weighed exactly, so there is no MCMC. Priors p0 = w0 = 0.2 as in R `bcp`.
@@ -275,8 +334,10 @@ seasonal onset (in USA-2024, the H5N1 outbreak in US dairy cattle). That shows h
 
 **3. Bird flu inside `content_articles`.** `content_articles` counts any flu item, bird flu included. Over the
 held-out seasons 46% of it is bird flu, and in USA-2024 it is 79% (1,952 of 2,468 articles). The other three
-content signals leave bird flu out. People did catch H5N1 in the US in 2024, but only a few dozen, and FluNet's
-onset follows seasonal flu, so bird-flu news is noise for this question.
+content signals leave bird flu out. Keeping it in `content_articles` is by design: the prompt gives bird-flu
+items when people are affected. Of the 5,032 bird-flu items, 3,371 count people (cases, hospitalised, deaths)
+and 1,287 are "inactive" food or monitoring trends. But FluNet's onset follows seasonal flu, so for this
+question bird-flu news is mostly noise.
 
 To see what bird flu itself changes, LOSO was locked to one signal: `content_articles` (with bird flu) and
 `seasonal_articles` (the same articles minus bird flu). The frequency side is retuned as usual.
@@ -290,6 +351,8 @@ To see what bird flu itself changes, LOSO was locked to one signal: `content_art
 
 - **Bird flu does not explain content's LOSO win.** Without it, content still beats counts at every limit
   from −4 on. Bird flu helps at some limits and hurts at −6, with no steady direction.
+- At −4 both locked runs hit 12 seasons. The 1-point gap is one false alarm fewer with bird flu (USA-2022: week
+  −2 instead of −6), from a different tuned setting. 10 of the 22 seasons change, in both directions.
 - A third run let the tuning choose among the bird-flu-free signals only (seasonal, activity, rising). At −4 it
   scores 3 vs 3, because most folds pick `rising_articles` (cut-off 0.6). That drop comes from the choice of
   signal, not from leaving bird flu out. (An earlier version of this README said the LOSO win depended on bird
@@ -301,22 +364,29 @@ Collect more than 10 weeks before onset, so that very early alarms can be checke
 
 ## Inputs
 
-Read only, from the other worktrees: `llm-extractor/results/pool_combined/raw_results.jsonl`,
-`llm-extractor/data/gold_labels.json`, `usefulness_filter/output/filter_decisions.csv`,
-`repo-sampling/sampling/output/all_articles_buckets.csv`, and `repo/output/pool/season_assignments.jsonl`
-and `season_windows.json`. Paths are in `signal_config.py`.
+Step 1 reads these, read only. Paths are in `signal_config.py` and assume the worktrees sit side by side as
+`repo/`, `repo-sampling/` and `repo-llm-v2/` in one folder.
+
+| File | Size | In git |
+| --- | --- | --- |
+| `repo-llm-v2/llm-extractor/results/pool_combined/raw_results.jsonl` (LLM replies) | 126 MB | no |
+| `repo-llm-v2/llm-extractor/data/gold_labels.json` | 0.8 MB | yes |
+| `repo-llm-v2/usefulness_filter/output/filter_decisions.csv` | 4 MB | no |
+| `repo-sampling/sampling/output/all_articles_buckets.csv` | 11 MB | no |
+| `repo/output/pool/season_assignments.jsonl` and `season_windows.json` | 55 MB | no |
+| `repo/output/pool/pooled_articles.jsonl` (GDELT locations) | 2 GB | no |
 
 ## Use
 
-Run from this folder, with the extractor's venv:
+Run from this folder, with the extractor's venv (or a venv from `requirements.txt`):
 
 ```bash
 ../llm-extractor/.venv/bin/python -m unittest discover tests   # 86 tests, offline
-../llm-extractor/.venv/bin/python build_tables.py
-../llm-extractor/.venv/bin/python build_weekly.py
+../llm-extractor/.venv/bin/python build_tables.py              # needs the big inputs
+../llm-extractor/.venv/bin/python build_weekly.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only
-../llm-extractor/.venv/bin/python tune.py                       # writes the frozen settings
-../llm-extractor/.venv/bin/python run_detectors.py --final      # held-out, once (step 5)
+../llm-extractor/.venv/bin/python tune.py                       # refuses: the settings are frozen
+../llm-extractor/.venv/bin/python run_detectors.py --final      # held-out, once: already done, don't rerun
 ../llm-extractor/.venv/bin/python report_results.py
 ../llm-extractor/.venv/bin/python loso.py
 ../llm-extractor/.venv/bin/python post_hoc.py                   # post-hoc checks, after the results

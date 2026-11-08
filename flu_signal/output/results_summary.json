@@ -1,0 +1,284 @@
+{
+  "headline_held_out": {
+    "seasons": 9,
+    "content": {
+      "hits": 4,
+      "false_alarms": 4,
+      "misses": 1,
+      "score": 0,
+      "timely": 2,
+      "median_lead_days": 14.0,
+      "median_lead_days_known": 7.0
+    },
+    "frequency": {
+      "hits": 4,
+      "false_alarms": 1,
+      "misses": 4,
+      "score": 3,
+      "timely": 2,
+      "median_lead_days": 17.5,
+      "median_lead_days_known": 10.5
+    },
+    "content_wins": 4,
+    "frequency_wins": 3,
+    "ties": 2,
+    "sign_test_p": 1.0,
+    "both_hit_seasons": 2,
+    "median_lead_difference_days_when_both_hit": 7.0,
+    "content_better": false
+  },
+  "held_out_all_countries": {
+    "seasons": 18,
+    "content": {
+      "hits": 4,
+      "false_alarms": 4,
+      "misses": 10,
+      "score": 0,
+      "timely": 2,
+      "median_lead_days": 14.0,
+      "median_lead_days_known": 7.0
+    },
+    "frequency": {
+      "hits": 6,
+      "false_alarms": 2,
+      "misses": 10,
+      "score": 4,
+      "timely": 3,
+      "median_lead_days": 17.5,
+      "median_lead_days_known": 10.5
+    },
+    "content_wins": 5,
+    "frequency_wins": 5,
+    "ties": 8,
+    "sign_test_p": 1.0,
+    "both_hit_seasons": 2,
+    "median_lead_difference_days_when_both_hit": 7.0,
+    "content_better": false
+  },
+  "all_38": {
+    "seasons": 38,
+    "content": {
+      "hits": 12,
+      "false_alarms": 4,
+      "misses": 22,
+      "score": 8,
+      "timely": 10,
+      "median_lead_days": 0.0,
+      "median_lead_days_known": -7.0
+    },
+    "frequency": {
+      "hits": 11,
+      "false_alarms": 3,
+      "misses": 24,
+      "score": 8,
+      "timely": 7,
+      "median_lead_days": 14,
+      "median_lead_days_known": 7
+    },
+    "content_wins": 12,
+    "frequency_wins": 9,
+    "ties": 17,
+    "sign_test_p": 0.6636,
+    "both_hit_seasons": 5,
+    "median_lead_difference_days_when_both_hit": 7,
+    "content_better": true
+  },
+  "all_38_not_tuned_on": {
+    "seasons": 25,
+    "content": {
+      "hits": 4,
+      "false_alarms": 4,
+      "misses": 17,
+      "score": 0,
+      "timely": 2,
+      "median_lead_days": 14.0,
+      "median_lead_days_known": 7.0
+    },
+    "frequency": {
+      "hits": 6,
+      "false_alarms": 2,
+      "misses": 17,
+      "score": 4,
+      "timely": 3,
+      "median_lead_days": 17.5,
+      "median_lead_days_known": 10.5
+    },
+    "content_wins": 5,
+    "frequency_wins": 5,
+    "ties": 15,
+    "sign_test_p": 1.0,
+    "both_hit_seasons": 2,
+    "median_lead_difference_days_when_both_hit": 7.0,
+    "content_better": false
+  },
+  "per_country_all_38": {
+    "AUS": {
+      "seasons": 6,
+      "content": {
+        "hits": 3,
+        "false_alarms": 1,
+        "misses": 2,
+        "score": 2,
+        "timely": 2,
+        "median_lead_days": 0,
+        "median_lead_days_known": -7
+      },
+      "frequency": {
+        "hits": 1,
+        "false_alarms": 0,
+        "misses": 5,
+        "score": 1,
+        "timely": 0,
+        "median_lead_days": 21,
+        "median_lead_days_known": 14
+      },
+      "content_wins": 3,
+      "frequency_wins": 1,
+      "ties": 2,
+      "sign_test_p": 0.625,
+      "both_hit_seasons": 1,
+      "median_lead_difference_days_when_both_hit": 7,
+      "content_better": true
+    },
+    "BRA": {
+      "seasons": 5,
+      "content": {
+        "hits": 0,
+        "false_alarms": 0,
+        "misses": 5,
+        "score": 0,
+        "timely": 0,
+        "median_lead_days": null,
+        "median_lead_days_known": null
+      },
+      "frequency": {
+        "hits": 1,
+        "false_alarms": 1,
+        "misses": 3,
+        "score": 0,
+        "timely": 0,
+        "median_lead_days": 28,
+        "median_lead_days_known": 21
+      },
+      "content_wins": 1,
+      "frequency_wins": 1,
+      "ties": 3,
+      "sign_test_p": 1.0,
+      "both_hit_seasons": 0,
+      "median_lead_difference_days_when_both_hit": null,
+      "content_better": false
+    },
+    "IDN": {
+      "seasons": 5,
+      "content": {
+        "hits": 0,
+        "false_alarms": 0,
+        "misses": 5,
+        "score": 0,
+        "timely": 0,
+        "median_lead_days": null,
+        "median_lead_days_known": null
+      },
+      "frequency": {
+        "hits": 1,
+        "false_alarms": 0,
+        "misses": 4,
+        "score": 1,
+        "timely": 1,
+        "median_lead_days": -7,
+        "median_lead_days_known": -14
+      },
+      "content_wins": 0,
+      "frequency_wins": 1,
+      "ties": 4,
+      "sign_test_p": 1.0,
+      "both_hit_seasons": 0,
+      "median_lead_difference_days_when_both_hit": null,
+      "content_better": false
+    },
+    "IND": {
+      "seasons": 8,
+      "content": {
+        "hits": 4,
+        "false_alarms": 1,
+        "misses": 3,
+        "score": 3,
+        "timely": 4,
+        "median_lead_days": -3.5,
+        "median_lead_days_known": -10.5
+      },
+      "frequency": {
+        "hits": 4,
+        "false_alarms": 2,
+        "misses": 2,
+        "score": 2,
+        "timely": 3,
+        "median_lead_days": 10.5,
+        "median_lead_days_known": 3.5
+      },
+      "content_wins": 3,
+      "frequency_wins": 3,
+      "ties": 2,
+      "sign_test_p": 1.0,
+      "both_hit_seasons": 3,
+      "median_lead_difference_days_when_both_hit": -14,
+      "content_better": false
+    },
+    "KEN": {
+      "seasons": 6,
+      "content": {
+        "hits": 0,
+        "false_alarms": 0,
+        "misses": 6,
+        "score": 0,
+        "timely": 0,
+        "median_lead_days": null,
+        "median_lead_days_known": null
+      },
+      "frequency": {
+        "hits": 0,
+        "false_alarms": 0,
+        "misses": 6,
+        "score": 0,
+        "timely": 0,
+        "median_lead_days": null,
+        "median_lead_days_known": null
+      },
+      "content_wins": 0,
+      "frequency_wins": 0,
+      "ties": 6,
+      "sign_test_p": 1.0,
+      "both_hit_seasons": 0,
+      "median_lead_difference_days_when_both_hit": null,
+      "content_better": false
+    },
+    "USA": {
+      "seasons": 8,
+      "content": {
+        "hits": 5,
+        "false_alarms": 2,
+        "misses": 1,
+        "score": 3,
+        "timely": 4,
+        "median_lead_days": 7,
+        "median_lead_days_known": 0
+      },
+      "frequency": {
+        "hits": 4,
+        "false_alarms": 0,
+        "misses": 4,
+        "score": 4,
+        "timely": 3,
+        "median_lead_days": 14.0,
+        "median_lead_days_known": 7.0
+      },
+      "content_wins": 5,
+      "frequency_wins": 3,
+      "ties": 0,
+      "sign_test_p": 0.7266,
+      "both_hit_seasons": 1,
+      "median_lead_difference_days_when_both_hit": 7,
+      "content_better": false
+    }
+  }
+}

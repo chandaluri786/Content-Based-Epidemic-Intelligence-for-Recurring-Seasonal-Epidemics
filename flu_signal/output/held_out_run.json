@@ -1,0 +1,23 @@
+{
+  "runs": [
+    {
+      "time": "2026-11-07T16:07:20",
+      "git_commit": "9a76851",
+      "frozen_settings_commit": "891318b",
+      "content": {
+        "signal": "rising_articles",
+        "method": "bcp_prospective",
+        "cutoff": 0.4,
+        "sustain_weeks": 1,
+        "margin": 0.0
+      },
+      "frequency": {
+        "signal": "freq_articles",
+        "method": "bocpd_prospective",
+        "cutoff": 0.4,
+        "sustain_weeks": 1,
+        "margin": 0.0
+      }
+    }
+  ]
+}
