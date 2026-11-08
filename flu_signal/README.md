@@ -276,15 +276,27 @@ seasonal onset (in USA-2024, the H5N1 outbreak in US dairy cattle). That shows h
 **3. Bird flu inside `content_articles`.** `content_articles` counts any flu item, bird flu included. Over the
 held-out seasons 46% of it is bird flu, and in USA-2024 it is 79% (1,952 of 2,468 articles). The other three
 content signals leave bird flu out. People did catch H5N1 in the US in 2024, but only a few dozen, and FluNet's
-onset follows seasonal flu, so bird-flu news is noise for this question. LOSO was rerun with only the bird-flu-free
-signals:
+onset follows seasonal flu, so bird-flu news is noise for this question.
 
-- At −4, content's LOSO lead disappears: 3 vs 3, wins 7 – 6 – 9 (most folds pick `rising_articles`, cut-off 0.6).
-  So the 11 vs 3 LOSO result at −4 depends on `content_articles`, and with it on bird-flu news.
-- From −5 on, the result is the same with or without `content_articles` (−5: 13 vs 3; −7: 17 vs 14).
+To see what bird flu itself changes, LOSO was locked to one signal: `content_articles` (with bird flu) and
+`seasonal_articles` (the same articles minus bird flu). The frequency side is retuned as usual.
+
+| Early limit | LOSO locked to `content_articles`: content vs counts | LOSO locked to `seasonal_articles`: content vs counts |
+| --- | --- | --- |
+| −4 | 11 vs 3 (wins 11 – 6 – 5) | 10 vs 3 (wins 10 – 6 – 6) |
+| −5 | 13 vs 3 (wins 13 – 4 – 5) | 10 vs 3 (wins 11 – 5 – 6) |
+| −6 | 7 vs 9 (wins 8 – 10 – 4) | 14 vs 9 (wins 11 – 7 – 4) |
+| −7 | 18 vs 14 (wins 12 – 5 – 5) | 15 vs 14 (wins 10 – 8 – 4) |
+
+- **Bird flu does not explain content's LOSO win.** Without it, content still beats counts at every limit
+  from −4 on. Bird flu helps at some limits and hurts at −6, with no steady direction.
+- A third run let the tuning choose among the bird-flu-free signals only (seasonal, activity, rising). At −4 it
+  scores 3 vs 3, because most folds pick `rising_articles` (cut-off 0.6). That drop comes from the choice of
+  signal, not from leaving bird flu out. (An earlier version of this README said the LOSO win depended on bird
+  flu; the locked runs show it does not.)
 
 **Lessons for a next study.** Pre-register a wider early limit, or report lead time without a hit/false cut.
-Pre-register a bird-flu-free signal (`seasonal_articles` or `rising_articles`) as the main content signal.
+Pre-register one broad, bird-flu-free signal (`seasonal_articles`) as the main content signal: it held up in LOSO.
 Collect more than 10 weeks before onset, so that very early alarms can be checked against a real "no flu" period.
 
 ## Inputs

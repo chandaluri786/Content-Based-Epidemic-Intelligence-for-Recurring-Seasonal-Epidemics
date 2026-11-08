@@ -10,8 +10,9 @@ It only shows how much that result depends on choices we made:
 2. Per-signal table (limit -4): each content signal with its own best 2015-2021 setting, scored on 2022-2024
    against the frozen frequency setting. This is a description, not a new choice of winner.
    avian_articles (bird flu) is a negative control: it should not track seasonal onset.
-3. LOSO without content_articles: content_articles includes bird-flu items (79% of them in USA-2024),
-   so LOSO is rerun with only the bird-flu-free content signals.
+3. Bird flu: content_articles includes bird-flu items (79% of them in USA-2024). LOSO is rerun three more
+   ways: choosing only among the bird-flu-free signals, locked to content_articles, and locked to
+   seasonal_articles (content_articles minus bird flu). The locked pair shows what bird flu itself changes.
 
 Nothing here writes the frozen settings or the frozen detections. Run from flu_signal/:
 
@@ -35,6 +36,9 @@ AVIAN_SIGNAL = "avian_articles"
 ALL_SIGNALS = DETECTED_SIGNALS + (AVIAN_SIGNAL,)
 BIRD_FLU_FREE_SIGNALS = tuple(signal for signal in CONTENT_SIGNALS if signal != "content_articles")
 EARLY_LIMITS = (2, 3, 4, 5, 6, 7)
+LOSO_VARIANTS = (("loso", CONTENT_SIGNALS), ("loso_no_content_articles", BIRD_FLU_FREE_SIGNALS),
+                 ("loso_only_content_articles", ("content_articles",)),
+                 ("loso_only_seasonal_articles", ("seasonal_articles",)))
 WHOLE_WINDOW_LIMIT = 7   # earliest possible week-by-week alarm: week FIRST_WEEK + MIN_WEEKS - 1 = -7
 
 EARLY_LIMIT_PATH = cfg.OUTPUT_DIR / "post_hoc_early_limit.csv"
@@ -93,7 +97,7 @@ def early_limit_table(weeks: dict, seasons: dict[str, dict]) -> tuple[list[dict]
         content, frequency, rows = by_year(weeks, seasons, limit, CONTENT_SIGNALS)
         table.append(summary_row("by_year", limit, rows, setting_label(content), setting_label(frequency)))
         season_rows += [{"evaluation": "by_year", "early_limit": -limit, **row} for row in rows]
-        for evaluation, signals in (("loso", CONTENT_SIGNALS), ("loso_no_content_articles", BIRD_FLU_FREE_SIGNALS)):
+        for evaluation, signals in LOSO_VARIANTS:
             folds = run_loso(seasons, limit, signals, weeks)
             table.append(summary_row(evaluation, limit, folds, most_chosen(folds, CONTENT), most_chosen(folds, FREQUENCY)))
             season_rows += [{"evaluation": evaluation, "early_limit": -limit, **row} for row in folds]
