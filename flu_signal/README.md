@@ -176,6 +176,117 @@ These rules were agreed and coded on made-up seasons before any held-out season 
 Order: `run_detectors.py --final` (writes `held_out_run.json`, a record of the one run), then
 `report_results.py`, then `loso.py`.
 
+### Results (held-out run of 2026-11-07, code `9a76851`, frozen settings `891318b`)
+
+**Headline: by the pre-registered rule, content is not better.** Content scored 0 (4 hits − 4 false alarms),
+frequency 3 (4 hits − 1 false alarm). Content wins 4 seasons, frequency 3, with 2 ties (sign test p = 1.0).
+
+| Season | Content alarm | Frequency alarm | Winner |
+| --- | --- | --- | --- |
+| AUS-2022 | −5 (false) | none (miss) | frequency |
+| AUS-2023 | 0 (hit) | none (miss) | content |
+| AUS-2024 | −4 (hit) | −3 (hit) | content |
+| IND-2022 | −1 (hit) | 0 (hit) | content |
+| IND-2023 | −6 (false) | −5 (false) | tie |
+| IND-2024 | none | none | tie |
+| USA-2022 | −5 (false) | −2 (hit) | frequency |
+| USA-2023 | −5 (false) | −3 (hit) | frequency |
+| USA-2024 | −3 (hit) | none (miss) | content |
+
+Content misses 1 season, frequency 4. Both are timely (weeks −2 to +1) in 2 seasons. When both hit, content
+was 7 days earlier (median of 2 seasons).
+
+**Why content lost: most of its "false alarms" are real early rises, not noise.** In USA-2022 the rising
+articles in weeks −7 to −1 go 1, 4, **6, 13, 33, 57, 134** (alarm at week −5). In USA-2023, weeks −7 to −3 go
+5, 12, **15, 62, 81** (alarm at week −5). These rises last, and they start about 5 weeks before the FluNet onset. The −4 limit, set before the run, counts them
+as false. AUS-2022 is different: a short blip (5 in week −5, then 2 and 0), which sustain 1 lets through.
+The rule is not changed after the fact. Looser limits are in the post-hoc checks below, labelled as such.
+
+**All 38 seasons** (frozen settings): content 12 hits / 4 false / 22 misses, frequency 11 / 3 / 24 (both score 8).
+In the 25 seasons not tuned on: content 4 / 4 / 17 (score 0), frequency 6 / 2 / 17 (score 4). BRA, KEN and IDN
+give content no hits at all (0 of 16 seasons); frequency gets 2.
+
+**The two evaluations, side by side.** Both were planned before the run. By year is listed first because it
+copies real use: tune on the past, test on the future. Leave one season out (LOSO) uses all 22 headline
+seasons, so it has more data, but it trains on seasons that come later than the one it tests.
+
+| Early limit −4 (pre-set) | By year: tune 2015–2021, test 2022–2024 | LOSO: 22 folds, tune on 21, test 1 |
+| --- | --- | --- |
+| Content hits / false / misses | 4 / 4 / 1 | 12 / 1 / 9 |
+| Content score | 0 | 11 |
+| Frequency hits / false / misses | 4 / 1 / 4 | 7 / 4 / 11 |
+| Frequency score | 3 | 3 |
+| Wins – losses – ties (content) | 4 – 3 – 2 | 11 – 6 – 5 |
+| Sign test p | 1.0 | 0.33 |
+| Content "better" by the rule | no | yes |
+
+In LOSO, 21 of 22 folds pick `content_articles`, BCP, cut-off 0.3, sustain 3. On the 9 held-out seasons alone,
+LOSO content scores 6 vs 3.
+
+**They disagree, and the disagreement is the finding.** The settings tuned on 2015–2021 did not carry over to
+2022–2024: post-COVID seasons rose earlier and more steeply in the news, so the 2015–2021 choice (sustain 1,
+`rising_articles`) rang too early. When the tuning also sees seasons like 2022–2024, content does better than
+frequency. Neither p-value is small. With 9 and 22 seasons, no result here is statistically strong.
+
+### Post-hoc checks (`post_hoc.py`)
+
+These were designed on 2026-11-07, **after** the held-out results were seen. They describe how much the result
+depends on our choices. They do not replace the pre-set result, and nothing here changes the frozen settings.
+
+**1. The early limit.** The hit window starts at week −4 because we set it that way. Here it starts at −2 to −7
+instead. At each limit, the settings are retuned on 2015–2021 with that limit and then tested, so tuning and
+testing use the same rule. Week −7 is the earliest week a week-by-week detector can alarm, because it needs 4
+weeks of history. So the −7 row is the same as "every week before onset counts". In that row a false alarm is
+impossible, so the score only counts whether the detector rang at all: it cannot fail, which is why it is not
+the main rule.
+
+| Early limit | By year: content vs frequency score | Wins – losses – ties | p | LOSO: content vs frequency score | Wins – losses – ties | p |
+| --- | --- | --- | --- | --- | --- | --- |
+| −2 | −4 vs 0 | 2 – 5 – 2 | 0.45 | −1 vs −1 | 7 – 6 – 9 | 1.0 |
+| −3 | −2 vs 2 | 3 – 5 – 1 | 0.73 | 3 vs 1 | 8 – 8 – 6 | 1.0 |
+| **−4 (pre-set)** | **0 vs 3** | **4 – 3 – 2** | **1.0** | **11 vs 3** | **11 – 6 – 5** | **0.33** |
+| −5 | 6 vs 5 | 7 – 1 – 1 | 0.07 | 13 vs 3 | 15 – 2 – 5 | 0.002 |
+| −6 | 5 vs 6 | 6 – 1 – 2 | 0.13 | 13 vs 9 | 14 – 4 – 4 | 0.03 |
+| −7 (whole window) | 7 vs 6 | 7 – 0 – 2 | 0.02 | 18 vs 14 | 12 – 5 – 5 | 0.14 |
+
+- With a narrow window (−2, −3), content loses: it rings early, and early counts as false.
+- From −5 on, content wins most seasons in both evaluations. Its median lead grows too (by year: 28 days at
+  −5, 35 at −7, against 21 for frequency).
+- At −5, LOSO picks the same setting as the frozen one (`rising_articles`, BCP, 0.4, sustain 1) in 20 of 22 folds.
+- The by-year score is not steady: content leads at −5 and −7 but trails by one at −6. The early limit we pick
+  decides the winner. In plain words: content alarms earlier than frequency; whether that counts as a success
+  depends on how much early warning you call useful.
+
+**2. Every content signal on 2022–2024** (limit −4). Each signal uses its own best 2015–2021 setting and is
+compared with the frozen frequency setting (score 3). This is a description, not a new choice of winner:
+picking the best of these afterwards would be choosing on the test seasons.
+
+| Signal | Content hits / false / misses | Score | Wins – losses – ties | Bird-flu share |
+| --- | --- | --- | --- | --- |
+| `content_articles` (≈ useful = yes) | 4 / 4 / 1 | 0 | 3 – 4 – 2 | 46% |
+| `seasonal_articles` (useful, no bird flu) | 3 / 3 / 3 | 0 | 3 – 4 – 2 | 0% |
+| `activity_articles` | 5 / 3 / 1 | 2 | 4 – 4 – 1 | 0% |
+| `rising_articles` (the frozen one) | 4 / 4 / 1 | 0 | 4 – 3 – 2 | 0% |
+| `avian_articles` (negative control) | 3 / 1 / 5 | 2 | 3 – 3 – 3 | 100% |
+
+No content signal beats frequency at −4. The negative control, bird-flu news alone, scores about as well as the
+content signals. Its 3 "hits" (AUS-2024, USA-2023, USA-2024) are bird-flu news that happened to rise near the
+seasonal onset (in USA-2024, the H5N1 outbreak in US dairy cattle). That shows how easily 9 seasons can be matched by chance.
+
+**3. Bird flu inside `content_articles`.** `content_articles` counts any flu item, bird flu included. Over the
+held-out seasons 46% of it is bird flu, and in USA-2024 it is 79% (1,952 of 2,468 articles). The other three
+content signals leave bird flu out. People did catch H5N1 in the US in 2024, but only a few dozen, and FluNet's
+onset follows seasonal flu, so bird-flu news is noise for this question. LOSO was rerun with only the bird-flu-free
+signals:
+
+- At −4, content's LOSO lead disappears: 3 vs 3, wins 7 – 6 – 9 (most folds pick `rising_articles`, cut-off 0.6).
+  So the 11 vs 3 LOSO result at −4 depends on `content_articles`, and with it on bird-flu news.
+- From −5 on, the result is the same with or without `content_articles` (−5: 13 vs 3; −7: 17 vs 14).
+
+**Lessons for a next study.** Pre-register a wider early limit, or report lead time without a hit/false cut.
+Pre-register a bird-flu-free signal (`seasonal_articles` or `rising_articles`) as the main content signal.
+Collect more than 10 weeks before onset, so that very early alarms can be checked against a real "no flu" period.
+
 ## Inputs
 
 Read only, from the other worktrees: `llm-extractor/results/pool_combined/raw_results.jsonl`,
@@ -188,7 +299,7 @@ and `season_windows.json`. Paths are in `signal_config.py`.
 Run from this folder, with the extractor's venv:
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 79 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 86 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py
 ../llm-extractor/.venv/bin/python build_weekly.py
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only
@@ -196,4 +307,5 @@ Run from this folder, with the extractor's venv:
 ../llm-extractor/.venv/bin/python run_detectors.py --final      # held-out, once (step 5)
 ../llm-extractor/.venv/bin/python report_results.py
 ../llm-extractor/.venv/bin/python loso.py
+../llm-extractor/.venv/bin/python post_hoc.py                   # post-hoc checks, after the results
 ```

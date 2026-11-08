@@ -54,12 +54,25 @@ def alarm_weeks(setting: Setting, seasons: dict[str, dict]) -> dict[str, int | N
             for season_id, season in sorted(seasons.items())}
 
 
-def score_grid(settings: list[Setting], seasons: dict[str, dict]) -> list[tuple[Setting, Score, dict]]:
+def score_weeks(weeks_by_setting: dict[Setting, dict], season_ids: list[str],
+                early_limit: int = cfg.EARLY_LIMIT) -> list[tuple[Setting, Score, dict]]:
+    """Score already worked-out alarm weeks on some seasons only. Alarms in one season never depend on another."""
     scored = []
-    for setting in settings:
-        weeks = alarm_weeks(setting, seasons)
-        scored.append((setting, score_setting(list(weeks.values())), weeks))
+    for setting, weeks in weeks_by_setting.items():
+        kept = {season_id: weeks[season_id] for season_id in sorted(season_ids)}
+        scored.append((setting, score_setting(list(kept.values()), early_limit), kept))
     return scored
+
+
+def score_grid(settings: list[Setting], seasons: dict[str, dict],
+               early_limit: int = cfg.EARLY_LIMIT) -> list[tuple[Setting, Score, dict]]:
+    weeks_by_setting = {setting: alarm_weeks(setting, seasons) for setting in settings}
+    return score_weeks(weeks_by_setting, list(seasons), early_limit)
+
+
+def choose(scored: list[tuple[Setting, Score, dict]], signals: tuple[str, ...]) -> tuple[Setting, Score, dict]:
+    """The step 4 choice: the best-ranked selectable setting among `signals`, moved to its plateau's middle."""
+    return plateau_middle(best(scored, signals), scored)
 
 
 def best(scored: list[tuple[Setting, Score, dict]], signals: tuple[str, ...]) -> tuple[Setting, Score, dict]:

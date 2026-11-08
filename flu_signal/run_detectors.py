@@ -35,13 +35,13 @@ SELECTABLE_METHODS = ("bcp_prospective", "bocpd_prospective")
 ROLES = ("content", "frequency")
 
 
-def series_by_season(rows: list[dict], split: str) -> dict[str, dict]:
+def series_by_season(rows: list[dict], split: str, signals: tuple[str, ...] = DETECTED_SIGNALS) -> dict[str, dict]:
     """{season_id: {"country", "headline", signal: [12 counts in week order]}} for one split."""
-    seasons: dict[str, dict] = defaultdict(lambda: {signal: [] for signal in DETECTED_SIGNALS})
+    seasons: dict[str, dict] = defaultdict(lambda: {signal: [] for signal in signals})
     for row in sorted((r for r in rows if r["split"] == split), key=lambda r: (r["season_id"], int(r["week"]))):
         season = seasons[row["season_id"]]
         season["country"], season["headline"] = row["country"], row["headline"] == "True"
-        for signal in DETECTED_SIGNALS:
+        for signal in signals:
             season[signal].append(int(row[signal]))
     expected_weeks = cfg.LAST_WEEK - cfg.FIRST_WEEK + 1
     for season_id, season in seasons.items():

@@ -18,8 +18,8 @@ from build_tables import write_csv
 from build_weekly import read_table
 from evaluate import season_row, summarize
 from run_detectors import series_by_season
-from scoring import score_setting
-from tune import CONTENT_SIGNALS, FREQUENCY_SIGNAL, alarm_weeks, best, grid, plateau_middle
+from scoring import Setting
+from tune import CONTENT_SIGNALS, FREQUENCY_SIGNAL, alarm_weeks, choose, grid, score_weeks
 
 LOSO_PATH = cfg.OUTPUT_DIR / "loso_results.csv"
 LOSO_SUMMARY_PATH = cfg.OUTPUT_DIR / "loso_summary.json"
@@ -30,26 +30,34 @@ def headline_seasons(weekly_rows: list[dict]) -> dict[str, dict]:
     return {season_id: season for season_id, season in seasons.items() if season["headline"]}
 
 
-def fold(left_out: str, weeks_by_setting: dict, seasons: dict[str, dict]) -> dict:
+def fold(left_out: str, weeks_by_setting: dict, seasons: dict[str, dict], early_limit: int = cfg.EARLY_LIMIT,
+         content_signals: tuple[str, ...] = CONTENT_SIGNALS) -> dict:
     """Tune on every season but `left_out`, then score the two chosen settings on `left_out`."""
     training = [season_id for season_id in sorted(seasons) if season_id != left_out]
-    scored = []
-    for setting, weeks in weeks_by_setting.items():
-        training_weeks = {season_id: weeks[season_id] for season_id in training}
-        scored.append((setting, score_setting(list(training_weeks.values())), training_weeks))
-    chosen = {role: plateau_middle(best(scored, signals), scored)[0]
-              for role, signals in (("content", CONTENT_SIGNALS), ("frequency", (FREQUENCY_SIGNAL,)))}
+    scored = score_weeks(weeks_by_setting, training, early_limit)
+    chosen = {role: choose(scored, signals)[0]
+              for role, signals in (("content", content_signals), ("frequency", (FREQUENCY_SIGNAL,)))}
     row = season_row(left_out, seasons[left_out]["country"], weeks_by_setting[chosen["content"]][left_out],
-                     weeks_by_setting[chosen["frequency"]][left_out], trained_on=len(training))
+                     weeks_by_setting[chosen["frequency"]][left_out], early_limit, trained_on=len(training))
     for role, setting in chosen.items():
-        row[f"{role}_setting"] = (f"{setting.signal} {setting.method} cutoff {setting.cutoff} "
-                                  f"sustain {setting.sustain_weeks} margin {setting.margin}")
+        row[f"{role}_setting"] = setting_label(setting)
     return row
 
 
-def run_loso(seasons: dict[str, dict]) -> list[dict]:
-    weeks_by_setting = {setting: alarm_weeks(setting, seasons) for setting in grid(CONTENT_SIGNALS + (FREQUENCY_SIGNAL,))}
-    return [fold(season_id, weeks_by_setting, seasons) for season_id in sorted(seasons)]
+def setting_label(setting: Setting) -> str:
+    return (f"{setting.signal} {setting.method} cutoff {setting.cutoff} "
+            f"sustain {setting.sustain_weeks} margin {setting.margin}")
+
+
+def headline_weeks(seasons: dict[str, dict], signals: tuple[str, ...] = CONTENT_SIGNALS + (FREQUENCY_SIGNAL,)) -> dict:
+    """Every grid setting's alarm week in every season, worked out once."""
+    return {setting: alarm_weeks(setting, seasons) for setting in grid(signals)}
+
+
+def run_loso(seasons: dict[str, dict], early_limit: int = cfg.EARLY_LIMIT,
+             content_signals: tuple[str, ...] = CONTENT_SIGNALS, weeks_by_setting: dict | None = None) -> list[dict]:
+    weeks = weeks_by_setting if weeks_by_setting is not None else headline_weeks(seasons)
+    return [fold(season_id, weeks, seasons, early_limit, content_signals) for season_id in sorted(seasons)]
 
 
 def main() -> int:

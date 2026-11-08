@@ -15,6 +15,7 @@ Rules (agreed 2026-11-07, before the held-out run):
 import math
 from statistics import median
 
+import signal_config as cfg
 from scoring import FALSE_ALARM, HIT, MISS, classify
 
 CONTENT, FREQUENCY, TIE = "content", "frequency", "tie"
@@ -32,15 +33,16 @@ def lead_days_known(alarm_week: int | None) -> int | None:
 
 
 def is_timely(alarm_week: int | None) -> bool:
-    return alarm_week is not None and classify(alarm_week) == HIT and alarm_week >= TIMELY_FIRST_WEEK
+    return alarm_week is not None and TIMELY_FIRST_WEEK <= alarm_week <= cfg.LAST_WEEK
 
 
-def compare_season(content_week: int | None, frequency_week: int | None) -> str:
+def compare_season(content_week: int | None, frequency_week: int | None,
+                   early_limit: int = cfg.EARLY_LIMIT) -> str:
     """Which signal did better in one season: content, frequency or tie."""
-    content_utility, frequency_utility = UTILITY[classify(content_week)], UTILITY[classify(frequency_week)]
-    if content_utility != frequency_utility:
-        return CONTENT if content_utility > frequency_utility else FREQUENCY
-    if classify(content_week) == HIT and content_week != frequency_week:
+    content_outcome, frequency_outcome = classify(content_week, early_limit), classify(frequency_week, early_limit)
+    if UTILITY[content_outcome] != UTILITY[frequency_outcome]:
+        return CONTENT if UTILITY[content_outcome] > UTILITY[frequency_outcome] else FREQUENCY
+    if content_outcome == HIT and content_week != frequency_week:
         return CONTENT if content_week < frequency_week else FREQUENCY
     return TIE
 
@@ -55,16 +57,16 @@ def sign_test(wins: int, losses: int) -> float:
 
 
 def season_row(season_id: str, country: str, content_week: int | None, frequency_week: int | None,
-               **extra) -> dict:
-    """One season of the results table."""
+               early_limit: int = cfg.EARLY_LIMIT, **extra) -> dict:
+    """One season of the results table. early_limit other than 4 is only for the post-hoc checks."""
     row = {"season_id": season_id, "country": country, **extra}
     for role, week in ((CONTENT, content_week), (FREQUENCY, frequency_week)):
         row[f"{role}_alarm_week"] = week
-        row[f"{role}_outcome"] = classify(week)
+        row[f"{role}_outcome"] = classify(week, early_limit)
         row[f"{role}_lead_days"] = lead_days(week)
         row[f"{role}_lead_days_known"] = lead_days_known(week)
         row[f"{role}_timely"] = is_timely(week)
-    row["winner"] = compare_season(content_week, frequency_week)
+    row["winner"] = compare_season(content_week, frequency_week, early_limit)
     return row
 
 

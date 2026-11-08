@@ -49,6 +49,19 @@ class CompareTest(unittest.TestCase):
         self.assertEqual(compare_season(-7, -6), TIE)
 
 
+class EarlyLimitTest(unittest.TestCase):
+    def test_a_wider_limit_turns_a_week_minus_5_false_alarm_into_a_hit(self):
+        self.assertEqual(season_row("USA-2022", "USA", -5, None)["content_outcome"], "false_alarm")
+        self.assertEqual(season_row("USA-2022", "USA", -5, None, 6)["content_outcome"], "hit")
+
+    def test_the_winner_follows_the_limit(self):
+        self.assertEqual(compare_season(-5, None), FREQUENCY)     # false alarm loses to a miss at -4
+        self.assertEqual(compare_season(-5, None, 6), CONTENT)    # a hit beats a miss at -6
+
+    def test_timely_does_not_move_with_the_limit(self):
+        self.assertEqual(season_row("USA-2022", "USA", -3, None, 6)["content_timely"], False)
+
+
 class SignTestTest(unittest.TestCase):
     def test_exact_two_sided_values(self):
         self.assertAlmostEqual(sign_test(7, 1), 18 / 256)
