@@ -10,7 +10,7 @@ from scipy.integrate import quad
 
 import bcp
 import bocpd
-from detection import anscombe, is_sustained
+from detection import TRANSFORMS, anscombe, is_sustained, transformed
 
 CUTOFF = 0.5
 # 12 weeks: flat around 30, then a jump to about 90 at position 8 (week -2 in a real season).
@@ -51,6 +51,27 @@ class TransformTest(unittest.TestCase):
         self.assertTrue(np.all(np.diff(values) > 0))
         with self.assertRaises(ValueError):
             anscombe([1, -1])
+
+    def test_the_default_transform_is_anscombe_everywhere(self):
+        np.testing.assert_array_equal(transformed([0, 3, 30]), 2.0 * np.sqrt(np.array([0, 3, 30]) + 3.0 / 8.0))
+        self.assertEqual(bcp.W_FLOOR_PER_WEEK, 0.1)
+        self.assertEqual(bocpd.MIN_VARIANCE, 1.0)
+        for name, detect in PROSPECTIVE.items():
+            self.assertEqual(detect(STEP_UP, CUTOFF), detect(STEP_UP, CUTOFF, transform="anscombe"), name)
+
+    def test_log_and_raw_transforms_are_used_and_still_find_a_clear_step(self):
+        np.testing.assert_allclose(transformed([0, 9], "log"), [0.0, np.log(10)])
+        np.testing.assert_array_equal(transformed([0, 9], "raw"), [0.0, 9.0])
+        self.assertEqual(set(TRANSFORMS), {"anscombe", "log", "raw"})
+        for transform in ("log", "raw"):
+            for name, detect in PROSPECTIVE.items():
+                found = detect(STEP_UP, CUTOFF, transform=transform)
+                self.assertIsNotNone(found.alarm_index, (name, transform))
+                self.assertGreaterEqual(found.alarm_index, 8, (name, transform))
+
+    def test_an_unknown_transform_is_refused(self):
+        with self.assertRaises(ValueError):
+            transformed([1, 2], "sqrt")
 
 
 class SustainedTest(unittest.TestCase):
@@ -113,7 +134,7 @@ class MarginTest(unittest.TestCase):
 
 class BcpCacheTest(unittest.TestCase):
     def test_the_cached_posterior_equals_a_fresh_one_and_cannot_be_changed_by_a_caller(self):
-        fresh = bcp._posterior_cached.__wrapped__(tuple(float(c) for c in STEP_UP))
+        fresh = bcp._posterior_cached.__wrapped__(tuple(float(c) for c in STEP_UP), "anscombe")
         first = bcp.posterior(STEP_UP)
         first[0][:] = -1.0                       # a caller changes its copy
         np.testing.assert_allclose(bcp.posterior(STEP_UP)[0], fresh[0])

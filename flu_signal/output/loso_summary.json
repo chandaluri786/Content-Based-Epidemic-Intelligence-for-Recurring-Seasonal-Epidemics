@@ -13,17 +13,17 @@
     },
     "frequency": {
       "hits": 7,
-      "false_alarms": 4,
-      "misses": 11,
-      "score": 3,
+      "false_alarms": 2,
+      "misses": 13,
+      "score": 5,
       "timely": 5,
       "median_lead_days": 7,
       "median_lead_days_known": 0
     },
-    "content_wins": 11,
+    "content_wins": 9,
     "frequency_wins": 6,
-    "ties": 5,
-    "sign_test_p": 0.3323,
+    "ties": 7,
+    "sign_test_p": 0.6072,
     "both_hit_seasons": 5,
     "median_lead_difference_days_when_both_hit": -7,
     "content_better": true

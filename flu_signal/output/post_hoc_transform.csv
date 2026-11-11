@@ -1,0 +1,7 @@
+evaluation,early_limit,transform,content_setting,frequency_setting,seasons,content_hits,content_false_alarms,content_misses,content_score,content_median_lead_days,frequency_hits,frequency_false_alarms,frequency_misses,frequency_score,frequency_median_lead_days,content_wins,frequency_wins,ties,sign_test_p,content_better
+by_year,-4,anscombe,rising_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0,freq_articles bocpd_prospective cutoff 0.4 sustain 1 margin 0.0,9,4,4,1,0,14.0,4,1,4,3,17.5,4,3,2,1.0,False
+loso,-4,anscombe,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0 (21/22 folds),freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0 (20/22 folds),22,12,1,9,11,7.0,7,2,13,5,7,9,6,7,0.6072,True
+by_year,-4,log,rising_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0,freq_articles bocpd_prospective cutoff 0.3 sustain 1 margin 0.0,9,3,4,2,-1,14,3,1,5,2,7,3,3,3,1.0,False
+loso,-4,log,rising_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0 (20/22 folds),freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0 (18/22 folds),22,10,2,10,8,7.0,3,3,16,0,7,11,4,7,0.1185,True
+by_year,-4,raw,rising_articles bcp_prospective cutoff 0.6 sustain 1 margin 0.0,freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0,9,4,2,3,2,24.5,5,0,4,5,21,4,3,2,1.0,False
+loso,-4,raw,content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0 (13/22 folds),freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0 (22/22 folds),22,3,4,15,-1,7,12,2,8,10,14.0,3,14,5,0.0127,False

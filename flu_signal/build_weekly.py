@@ -35,7 +35,7 @@ def season_totals(rows: list[dict]) -> dict[str, dict]:
 
 def main() -> int:
     windows = parse_windows(data_io.load_season_windows())
-    rows = build_weekly(read_table(cfg.ARTICLES_PATH), read_table(cfg.ITEMS_PATH), windows)
+    rows, dropped = build_weekly(read_table(cfg.ARTICLES_PATH), read_table(cfg.ITEMS_PATH), windows)
     write_csv(cfg.WEEKLY_PATH, rows)
 
     totals = season_totals(rows)
@@ -43,6 +43,8 @@ def main() -> int:
     report = {
         "seasons": len(totals),
         "weeks_per_season": cfg.LAST_WEEK - cfg.FIRST_WEEK + 1,
+        "week_rule": "ISO weeks wholly inside the window; days of a partial ISO week are dropped",
+        "dropped_partial_week_counts": dropped,
         "seasons_by_split": {f"{split}/{group}": n for (split, group), n in sorted(groups.items())},
         "per_season": totals,
     }

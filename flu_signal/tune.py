@@ -15,6 +15,12 @@ Run from flu_signal/:
 
     ../llm-extractor/.venv/bin/python tune.py           # refuses to replace an existing frozen file
     ../llm-extractor/.venv/bin/python tune.py --force   # only before the held-out run
+    ../llm-extractor/.venv/bin/python tune.py --check   # writes nothing: is the frozen result still what the
+                                                        # current weekly table gives?
+
+--check retunes in memory and confirms the same two settings as frozen_settings.json, then reruns the frozen
+settings and confirms the alarm weeks in detections_*_frozen.csv. It was added when the weeks became strict
+ISO weeks (2026-11-10): the frozen files were made with the window's last day folded into week +1.
 """
 
 import argparse
@@ -27,7 +33,7 @@ from datetime import date
 import signal_config as cfg
 from build_tables import write_csv
 from build_weekly import read_table
-from detection import MARGIN_CHOICES, SUSTAIN_CHOICES
+from detection import DEFAULT_TRANSFORM, MARGIN_CHOICES, SUSTAIN_CHOICES
 from run_detectors import METHODS, SELECTABLE_METHODS, series_by_season, to_week
 from scoring import Score, Setting, rank, score_setting
 
@@ -47,10 +53,11 @@ def grid(signals: tuple[str, ...]) -> list[Setting]:
                 signals, METHODS, cfg.CUTOFF_GRID, SUSTAIN_CHOICES, MARGIN_CHOICES)]
 
 
-def alarm_weeks(setting: Setting, seasons: dict[str, dict]) -> dict[str, int | None]:
+def alarm_weeks(setting: Setting, seasons: dict[str, dict],
+                transform: str = DEFAULT_TRANSFORM) -> dict[str, int | None]:
     detect = METHODS[setting.method]
     return {season_id: to_week(detect(season[setting.signal], setting.cutoff, setting.sustain_weeks,
-                                      setting.margin).alarm_index)
+                                      setting.margin, transform).alarm_index)
             for season_id, season in sorted(seasons.items())}
 
 
@@ -136,6 +143,43 @@ def frozen_entry(best_ranked: tuple[Setting, Score, dict], scored: list[tuple[Se
                             "alarm_weeks": weeks, "score_by_cutoff": neighbour_scores(setting, scored)}}
 
 
+def choice_problems(scored: list[tuple[Setting, Score, dict]], frozen: dict) -> list[str]:
+    """Where the step 4 choice on `scored` differs from the frozen settings (empty when it is the same)."""
+    problems = []
+    for role, signals in (("content", CONTENT_SIGNALS), ("frequency", (FREQUENCY_SIGNAL,))):
+        entry = frozen[role]
+        frozen_setting = Setting(entry["signal"], entry["method"], entry["cutoff"], entry["sustain_weeks"],
+                                 entry["margin"])
+        chosen = choose(scored, signals)[0]
+        if chosen != frozen_setting:
+            problems.append(f"{role}: tuning now chooses {chosen}, frozen is {frozen_setting}")
+    return problems
+
+
+def alarm_problems(recomputed: list[dict], recorded: list[dict]) -> list[str]:
+    """Where the frozen settings' alarm weeks now differ from the recorded detections."""
+    def weeks(rows: list[dict]) -> dict[tuple[str, str], str]:
+        return {(row["season_id"], row["role"]): "" if row["alarm_week"] in (None, "") else str(row["alarm_week"])
+                for row in rows}
+    now, then = weeks(recomputed), weeks(recorded)
+    if set(now) != set(then):
+        return [f"the seasons differ: {sorted(set(now) ^ set(then))}"]
+    return [f"{key}: alarm week now {now[key] or 'none'}, recorded {then[key] or 'none'}"
+            for key in sorted(now) if now[key] != then[key]]
+
+
+def check_frozen(weekly_rows: list[dict]) -> list[str]:
+    """Every way the current weekly table no longer gives the frozen result. Writes nothing."""
+    from run_detectors import detect_frozen, load_frozen_settings   # run_detectors imports this module lazily
+    frozen = load_frozen_settings()
+    scored = score_grid(grid(CONTENT_SIGNALS + (FREQUENCY_SIGNAL,)), calibration_headline_seasons(weekly_rows))
+    problems = choice_problems(scored, frozen)
+    for split in (cfg.SPLIT_CALIBRATION, cfg.SPLIT_HELD_OUT):
+        recorded = read_table(cfg.OUTPUT_DIR / f"detections_{split}_frozen.csv")
+        problems += alarm_problems(detect_frozen(series_by_season(weekly_rows, split), frozen), recorded)
+    return problems
+
+
 def git_commit() -> str:
     """The commit of the code that ran, with '-dirty' when there were uncommitted changes."""
     result = subprocess.run(["git", "describe", "--always", "--dirty"], cwd=cfg.SIGNAL_DIR,
@@ -155,7 +199,14 @@ def print_top(scored: list[tuple[Setting, Score, dict]], signals: tuple[str, ...
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--force", action="store_true", help="replace an existing frozen_settings.json")
+    parser.add_argument("--check", action="store_true",
+                        help="confirm the frozen settings and alarm weeks on the current weekly table; writes nothing")
     args = parser.parse_args()
+    if args.check:
+        problems = check_frozen(read_table(cfg.WEEKLY_PATH))
+        print("\n".join(problems) if problems else
+              "OK: tuning gives the frozen settings and their alarm weeks match detections_*_frozen.csv")
+        return 1 if problems else 0
     if cfg.FROZEN_SETTINGS_PATH.exists() and not args.force:
         print(f"{cfg.FROZEN_SETTINGS_PATH} exists: the settings are frozen. Use --force only before the held-out run.")
         return 1

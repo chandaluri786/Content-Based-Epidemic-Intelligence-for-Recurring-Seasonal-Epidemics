@@ -7,7 +7,9 @@ and the new run's level is above what came before.
 Model: Normal with unknown mean and variance (Normal-Gamma prior, Student-t predictive) on
 Anscombe-transformed counts. A Poisson model was planned, but weekly news counts vary far more than
 Poisson allows (USA frequency moves between 250 and 360 with no real change), so it would alarm almost
-every week. This model learns the noise level from the data.
+every week. This model learns the noise level of each run from the data, so it does not need the transform
+to make the noise 1. The transform still helps: small counts (0-3 a week) are skewed and stop at 0, and the
+square root makes them closer to Normal; and both detectors then read the same values.
 
 The prior is set from the first PRIOR_WEEKS weeks, and no alarm is raised before that, so the run
 uses only weeks already seen. A new run's first week is scored under the prior predictive.
@@ -16,14 +18,14 @@ uses only weeks already seen. A new run's first week is scored under the prior p
 import numpy as np
 from scipy.special import gammaln, logsumexp
 
-from detection import NO_DETECTION, Detection, anscombe, is_sustained
+from detection import DEFAULT_TRANSFORM, NO_DETECTION, TRANSFORMS, Detection, is_sustained, transformed
 
 HAZARD = 1.0 / 10.0       # prior chance of a change in any week (expected run of 10 weeks)
 PRIOR_WEEKS = 3           # weeks used to set the prior; no alarm before the week after them
 RECENT_WEEKS = 2          # an alarm needs the run to have started in the last 2 weeks
 KAPPA0 = 1.0              # prior weight of the mean, in weeks
 ALPHA0 = 1.0              # prior shape of the precision
-MIN_VARIANCE = 1.0        # Anscombe variance of Poisson counts; floor of the prior variance
+MIN_VARIANCE = TRANSFORMS[DEFAULT_TRANSFORM].bocpd_min_variance   # 1.0: Anscombe variance of Poisson counts
 
 
 def _student_t_logpdf(x: float, mu: np.ndarray, kappa: np.ndarray, alpha: np.ndarray, beta: np.ndarray) -> np.ndarray:
@@ -33,18 +35,18 @@ def _student_t_logpdf(x: float, mu: np.ndarray, kappa: np.ndarray, alpha: np.nda
             - (df + 1.0) / 2.0 * np.log1p((x - mu) ** 2 / (df * scale2)))
 
 
-def _prior(values: np.ndarray) -> tuple[float, float, float, float]:
+def _prior(values: np.ndarray, min_variance: float = MIN_VARIANCE) -> tuple[float, float, float, float]:
     head = values[:PRIOR_WEEKS]
-    variance = max(float(head.var()), MIN_VARIANCE)
+    variance = max(float(head.var()), min_variance)
     return float(head.mean()), KAPPA0, ALPHA0, ALPHA0 * variance
 
 
-def run_length_posterior(counts) -> list[np.ndarray]:
+def run_length_posterior(counts, transform: str = DEFAULT_TRANSFORM) -> list[np.ndarray]:
     """P(run length = r | weeks so far) after each week; entry t has t + 1 values (r = 0 .. t)."""
-    values = anscombe(counts)
+    values = transformed(counts, transform)
     if len(values) < PRIOR_WEEKS:
         raise ValueError(f"need at least {PRIOR_WEEKS} weeks, got {len(values)}")
-    mu0, kappa0, alpha0, beta0 = _prior(values)
+    mu0, kappa0, alpha0, beta0 = _prior(values, TRANSFORMS[transform].bocpd_min_variance)
     mu, kappa = np.array([mu0]), np.array([kappa0])
     alpha, beta = np.array([alpha0]), np.array([beta0])
     log_joint = np.array([0.0])          # before week 0 nothing has been seen
@@ -74,14 +76,15 @@ def run_length_posterior(counts) -> list[np.ndarray]:
     return posteriors
 
 
-def prospective(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0) -> Detection:
+def prospective(counts, cutoff: float, sustain_weeks: int = 1, margin: float = 0.0,
+                transform: str = DEFAULT_TRANSFORM) -> Detection:
     """The earliest confirmed alarm. A candidate is a week t whose run probably began in the last
     RECENT_WEEKS weeks (at `start`), with the level going up. It is confirmed at week
     max(t, start + sustain_weeks - 1) if the rise has lasted `sustain_weeks` weeks by then; the check
     reads no week after the confirmation week. Candidates that fail are skipped."""
-    values = anscombe(counts)
+    values = transformed(counts, transform)
     confirmed = []
-    for t, run_probability in enumerate(run_length_posterior(counts)):
+    for t, run_probability in enumerate(run_length_posterior(counts, transform)):
         if t < PRIOR_WEEKS:
             continue
         recent = float(run_probability[:RECENT_WEEKS].sum())

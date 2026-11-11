@@ -55,9 +55,9 @@ DROPPED_LAYER = "drop_no_flu_word"
 WEEKLY_PATH = OUTPUT_DIR / "weekly_signals.csv"
 WEEKLY_REPORT_PATH = OUTPUT_DIR / "weekly_report.json"
 
-# Week index = whole weeks from the FluNet onset (week 0 starts on the onset date). A window runs from
-# onset - 70 days to onset + 14 days, both included: weeks -10 .. +1, plus one day (onset + 14) that is
-# folded into week +1. So every season has 12 weeks.
+# Weeks are ISO weeks (Monday to Sunday) from the scan date (weekly.py). A window runs from onset - 70 days
+# to onset + 14 days, both included; FluNet onsets are ISO week starts, so the window holds 12 whole ISO weeks,
+# labelled -10 .. +1 against the onset's ISO week (0), plus one Monday (onset + 14) that is dropped.
 FIRST_WEEK = -10
 LAST_WEEK = 1
 

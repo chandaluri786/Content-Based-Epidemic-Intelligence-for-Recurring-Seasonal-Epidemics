@@ -14,6 +14,7 @@ import json
 import sys
 
 import signal_config as cfg
+from detection import DEFAULT_TRANSFORM
 from build_tables import write_csv
 from build_weekly import read_table
 from evaluate import season_row, summarize
@@ -49,9 +50,10 @@ def setting_label(setting: Setting) -> str:
             f"sustain {setting.sustain_weeks} margin {setting.margin}")
 
 
-def headline_weeks(seasons: dict[str, dict], signals: tuple[str, ...] = CONTENT_SIGNALS + (FREQUENCY_SIGNAL,)) -> dict:
+def headline_weeks(seasons: dict[str, dict], signals: tuple[str, ...] = CONTENT_SIGNALS + (FREQUENCY_SIGNAL,),
+                   transform: str = DEFAULT_TRANSFORM) -> dict:
     """Every grid setting's alarm week in every season, worked out once."""
-    return {setting: alarm_weeks(setting, seasons) for setting in grid(signals)}
+    return {setting: alarm_weeks(setting, seasons, transform) for setting in grid(signals)}
 
 
 def run_loso(seasons: dict[str, dict], early_limit: int = cfg.EARLY_LIMIT,

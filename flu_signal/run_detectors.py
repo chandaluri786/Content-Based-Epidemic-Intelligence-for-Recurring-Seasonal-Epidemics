@@ -125,7 +125,8 @@ def main() -> int:
     parser.add_argument("--sustain-weeks", type=int, default=1, choices=SUSTAIN_CHOICES,
                         help="weeks a rise must stay up before it alarms")
     parser.add_argument("--margin", type=float, default=0.0, choices=MARGIN_CHOICES,
-                        help="how far above the earlier level the rise must be (Anscombe scale)")
+                        help="how far above the earlier level the rise must be (Anscombe scale; "
+                             "1 = one Poisson noise unit)")
     parser.add_argument("--final", action="store_true", help="run the held-out seasons with the frozen settings")
     args = parser.parse_args()
     if not 0.0 < args.cutoff < 1.0:

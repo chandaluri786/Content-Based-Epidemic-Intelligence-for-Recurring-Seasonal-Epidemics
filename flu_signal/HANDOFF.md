@@ -3,14 +3,22 @@
 Written for: a teammate, or a new Claude Code session, picking up the change-point work. Read this first, then
 `README.md` (every rule and every number) when you need detail.
 
-## Where things stand (2026-11-08)
+## Where things stand (2026-11-10)
 
 - Steps 1–5 are done, and the one held-out run is spent (`output/held_out_run.json`, 2026-11-07).
-- **Pre-registered result:** content is not better. On the 9 held-out USA/AUS/IND seasons (2022–2024), content
-  (`rising_articles`, BCP, cut-off 0.4, sustain 1) scores 0 vs frequency's 3 (`freq_articles`, BOCPD, 0.4, sustain 1).
-- **Leave one season out (22 seasons, planned in advance):** content 11 vs 3, wins 11–6–5, p = 0.33.
-- **Post hoc (`post_hoc.py`, designed after the results):** content alarms earlier. From an early limit of −5 it
-  wins most seasons in both evaluations. Bird flu does not explain the LOSO win.
+- **Weeks are strict ISO weeks** (since 2026-11-10), taken from the scan date. The window's last day, a lone
+  Monday, is dropped instead of being added to week +1. `tune.py --check` confirms the frozen settings and their
+  alarm weeks are unchanged.
+- **Main evaluation, leave one season out (22 seasons):** content 11 vs frequency 5, wins 9–6–7, p = 0.61.
+  It was 11 vs 3 (p = 0.33) before the ISO-week switch. LOSO was made the main evaluation after the results,
+  because the data are per season (not year round) and by year has only 13 tuning seasons with a COVID gap.
+- **Pre-registered by-year test:** content is not better. On the 9 held-out USA/AUS/IND seasons (2022–2024),
+  content (`rising_articles`, BCP, cut-off 0.4, sustain 1) scores 0 vs frequency's 3 (`freq_articles`, BOCPD,
+  0.4, sustain 1). Always report it next to LOSO: it was named the main test before the run.
+- **Post hoc (`post_hoc.py`, `transform_check.py`, designed after the results):**
+  - Content alarms earlier. From an early limit of −5 it wins most seasons (LOSO −5: 14–2–6, p = 0.004).
+  - Bird flu does not explain the LOSO win.
+  - Log counts agree with Anscombe, but on raw counts frequency wins LOSO (−1 vs 10).
 - Still to do: a methods/results write-up that replaces the stale parts of `repo/capstone_proposal.md`.
 
 ## Check it yourself (git only, no big data)
@@ -18,8 +26,10 @@ Written for: a teammate, or a new Claude Code session, picking up the change-poi
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m unittest discover tests      # 86 tests
+.venv/bin/python -m unittest discover tests      # 98 tests
+.venv/bin/python tune.py --check                 # frozen result still holds; writes nothing
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
+.venv/bin/python transform_check.py              # about 90 s
 git status --short output/                       # nothing listed = same numbers
 ```
 
@@ -42,7 +52,11 @@ stops with an error.
   (BCP, 0.3, sustain 3) in 21 of 22 folds. LOSO retunes in every fold; it never reuses the frozen setting.
 - **No alarm can come before week −7:** the detectors need 4 weeks of history. So the −7 row of the post-hoc
   table means "every week before onset counts", and false alarms are impossible there.
-- **No smoothing.** Detectors read raw weekly counts after the Anscombe transform.
+- **No smoothing.** Detectors read raw weekly counts after the Anscombe transform. The transform makes Poisson
+  noise about 1, but real news is noisier: big USA series have noise about 2–4 on that scale. That's fine for
+  the detectors (README step 3), but don't call the noise "1 at any level".
+- **The windows are built around the onset.** Every series starts 10 weeks before onset, so "always alarm in
+  week 8" would hit every season. Scores only mean something as content vs frequency (README, Limitations).
 - **BRA, KEN and IDN have almost no content** (0 content hits in 16 seasons), so the headline uses USA/AUS/IND.
 - **Paths assume the worktree layout:** `repo/`, `repo-sampling/` and `repo-llm-v2/` side by side in one folder
   (see `signal_config.py`). Steps 1–2 need about 2.2 GB of gitignored inputs; ask Aditya.
