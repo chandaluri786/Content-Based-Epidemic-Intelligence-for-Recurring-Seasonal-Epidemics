@@ -141,5 +141,101 @@
       "sign_test_p": 0.0127,
       "content_better": false
     }
-  ]
+  ],
+  "diagnostics": {
+    "anscombe": {
+      "in_sample_note": "scored on all 22 seasons at once; diagnostic only, not an evaluation",
+      "content": {
+        "best_in_sample": "content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0",
+        "best_hits_false_misses": "13/0/9",
+        "best_score": 13,
+        "settings_within_1_point": 1,
+        "loso_different_picks": 2,
+        "loso_folds_missing_where_best_hits": [
+          "USA-2023"
+        ]
+      },
+      "frequency": {
+        "best_in_sample": "freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0",
+        "best_hits_false_misses": "9/0/13",
+        "best_score": 9,
+        "settings_within_1_point": 8,
+        "loso_different_picks": 3,
+        "loso_folds_missing_where_best_hits": [
+          "IND-2023",
+          "USA-2019"
+        ]
+      },
+      "fixed_settings": {
+        "freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0": "9/0/13",
+        "freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0": "8/1/13",
+        "content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0": "13/0/9"
+      }
+    },
+    "log": {
+      "in_sample_note": "scored on all 22 seasons at once; diagnostic only, not an evaluation",
+      "content": {
+        "best_in_sample": "rising_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0",
+        "best_hits_false_misses": "12/0/10",
+        "best_score": 12,
+        "settings_within_1_point": 1,
+        "loso_different_picks": 2,
+        "loso_folds_missing_where_best_hits": [
+          "AUS-2022",
+          "USA-2022"
+        ]
+      },
+      "frequency": {
+        "best_in_sample": "freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0",
+        "best_hits_false_misses": "6/0/16",
+        "best_score": 6,
+        "settings_within_1_point": 8,
+        "loso_different_picks": 3,
+        "loso_folds_missing_where_best_hits": [
+          "IND-2023",
+          "USA-2019",
+          "USA-2024"
+        ]
+      },
+      "fixed_settings": {
+        "freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0": "4/0/18",
+        "freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0": "6/0/16",
+        "content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0": "11/2/9"
+      }
+    },
+    "raw": {
+      "in_sample_note": "scored on all 22 seasons at once; diagnostic only, not an evaluation",
+      "content": {
+        "best_in_sample": "content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0",
+        "best_hits_false_misses": "12/1/9",
+        "best_score": 11,
+        "settings_within_1_point": 17,
+        "loso_different_picks": 6,
+        "loso_folds_missing_where_best_hits": [
+          "AUS-2017",
+          "AUS-2022",
+          "IND-2017",
+          "IND-2021",
+          "IND-2022",
+          "IND-2023",
+          "USA-2019",
+          "USA-2022",
+          "USA-2023"
+        ]
+      },
+      "frequency": {
+        "best_in_sample": "freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0",
+        "best_hits_false_misses": "12/2/8",
+        "best_score": 10,
+        "settings_within_1_point": 4,
+        "loso_different_picks": 1,
+        "loso_folds_missing_where_best_hits": []
+      },
+      "fixed_settings": {
+        "freq_articles bcp_prospective cutoff 0.5 sustain 1 margin 0.0": "9/0/13",
+        "freq_articles bcp_prospective cutoff 0.4 sustain 1 margin 0.0": "12/2/8",
+        "content_articles bcp_prospective cutoff 0.3 sustain 3 margin 0.0": "12/1/9"
+      }
+    }
+  }
 }

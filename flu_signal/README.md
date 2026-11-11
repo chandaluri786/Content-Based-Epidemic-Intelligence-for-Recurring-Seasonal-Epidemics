@@ -22,8 +22,8 @@ plain *count* of flu news? WHO FluNet onset dates are the truth.
 - **Main evaluation, leave one season out (LOSO, 22 seasons):** content leads 11 vs 5, but it is not
   significant (wins 9 – 6 – 7, p = 0.61).
 - **Pre-registered by-year test (9 held-out seasons):** content is **not** better, 0 vs 3.
-- **Content alarms earlier than counts.** With an early limit of −5 or wider it wins most seasons (LOSO p ≈ 0.004).
-  But that limit was picked after the results, so it is a description, not a test.
+- **Content alarms earlier than counts.** With an early limit of −5 or wider it wins most seasons (LOSO p ≈ 0.004
+  at −5 and −6). But that limit was picked after the results, so it is a description, not a test.
 - **The advantage needs the variance stabiliser.** On raw counts frequency wins instead (post-hoc check 4).
 
 **Key terms**
@@ -49,7 +49,7 @@ run the tests and redo steps 3–5 and the post-hoc checks from `weekly_signals.
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt   # or reuse ../llm-extractor/.venv
-.venv/bin/python -m unittest discover tests      # 98 tests, offline
+.venv/bin/python -m unittest discover tests      # 99 tests, offline
 .venv/bin/python tune.py --check                 # the frozen result still holds on today's weekly table
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
 .venv/bin/python transform_check.py              # about 90 s
@@ -125,8 +125,10 @@ that holds the FluNet onset (0). FluNet onsets are always ISO week starts (Monda
 
 The window's last day (onset + 14, a Monday) starts a 13th ISO week that has only 1 of its 7 days, so it is
 dropped. That is 583 frequency counts and 193 content counts (`weekly_report.json`). Before 2026-11-10 that day
-was added to week +1, which then held 8 days. The change touched only week +1 of 32 seasons. The columns count articles, not items: an article
-adds 1 to a column in the week of its scan date if at least one of its items for that season passes the test.
+was added to week +1, which then held 8 days. The change touched only week +1 of 32 seasons.
+
+The columns count articles, not items: an article adds 1 to a column in the week of its scan date if at least one
+of its items for that season passes the test.
 
 | Column | An article counts when |
 | --- | --- |
@@ -382,7 +384,7 @@ content signals. Its 3 "hits" (AUS-2024, USA-2023, USA-2024) are bird-flu news t
 seasonal onset (in USA-2024, the H5N1 outbreak in US dairy cattle). That shows how easily 9 seasons can be matched by chance.
 
 **3. Bird flu inside `content_articles`.** `content_articles` counts any flu item, bird flu included. Over the
-held-out seasons 46% of it is bird flu, and in USA-2024 it is 79% (1,952 of 2,468 articles). The other three
+held-out seasons 46% of it is bird flu, and in USA-2024 it is 79% (1,926 of 2,422 articles). The other three
 content signals leave bird flu out. Keeping it in `content_articles` is by design: the prompt gives bird-flu
 items when people are affected. Of the 5,032 bird-flu items, 3,371 count people (cases, hospitalised, deaths)
 and 1,287 are "inactive" food or monitoring trends. But FluNet's onset follows seasonal flu, so for this
@@ -417,13 +419,34 @@ in place of the Anscombe transform, at the pre-set limit −4. Both evaluations 
 | raw counts | 2 vs 5 | 4 – 3 – 2 | 1.0 | −1 vs 10 | 3 – 14 – 5 | 0.01 |
 
 - **Log agrees with Anscombe.** Content leads in LOSO and trails by year.
-- **Raw counts reverse LOSO.** Frequency wins 14 of 22 seasons. On raw counts the noise grows with the level,
-  which breaks BCP's one-noise-level assumption (both raw-count picks are BCP), so raw is the weakest of the
-  three. That is the likely reason, but it is not tested. In particular, it doesn't explain why frequency gets
-  *better* on raw counts (12 hits vs 7). Either way, the content advantage is not robust to this choice. The Anscombe transform was chosen before any result was seen, for the reason in
-  step 3; we did not pick it because it wins.
 - Floors per scale are in `detection.TRANSFORMS` (log: set for about 10 articles a week). Margin 1 means a
   different step on each scale, but no chosen setting used it.
+- **Raw counts reverse LOSO.** Frequency wins 14 of 22 seasons. The Anscombe transform was chosen before any
+  result was seen, for the reason in step 3; we did not pick it because it wins. Still, the content advantage is
+  not robust to this choice.
+
+**Why raw counts flip LOSO** (the `diagnostics` block in `output/post_hoc_transform.json`). It is not that
+content is a weaker signal on raw counts. Raw counts change two other things:
+
+1. **Content: the tuning becomes unstable.**
+   - The detector itself is fine. `content_articles`, BCP 0.3, sustain 3 scores 12 / 1 / 9 on raw counts and
+     13 / 0 / 9 on Anscombe (all 22 seasons; in-sample, so a diagnostic, not a test).
+   - But on raw counts 17 content settings score within 1 point of the best. On Anscombe only 1 does.
+   - With so many near-ties, LOSO keeps switching. Leaving out a season that the best setting hits lowers that
+     setting's training score by 1, so a rival that misses the season wins the fold.
+   - Raw LOSO picks 6 different settings (Anscombe: 2). In 9 folds it picks one that misses where the best
+     setting would hit (Anscombe: 1). That is how content falls to 3 hits.
+2. **Frequency: BCP alarms more easily on raw counts, and our scoring rewards that.**
+   - At cut-off 0.5, raw and Anscombe give the same result (9 / 0 / 13).
+   - At cut-off 0.4, raw gives 12 / 2 / 8 against Anscombe's 8 / 1 / 13. On raw counts BCP's change
+     probabilities come out about 0.05–0.15 higher (IND-2015: 0.41 to 0.55; IND-2018: 0.27 to 0.44), so small
+     bumps pass 0.4.
+   - The hit zone (weeks −4 to +1, 6 weeks) is twice the false-alarm zone (−7 to −5, 3 weeks). So a detector
+     that alarms more easily gains more hits than false alarms. LOSO picks 0.4 in all 22 folds.
+   - This is the window-design limitation again (see Limitations): the score rewards alarming more.
+
+So BCP's one-noise-level assumption is not the whole story. On raw counts the tuning on the content side becomes
+fragile, and frequency's BCP becomes quicker to alarm.
 
 **Lessons for a next study.** Pre-register a wider early limit, or report lead time without a hit/false cut.
 Pre-register one broad, bird-flu-free signal (`seasonal_articles`) as the main content signal: it held up in LOSO.
@@ -442,7 +465,8 @@ Collect more than 10 weeks before onset, so that very early alarms can be checke
 - **Three countries.** BRA, KEN and IDN have almost no content. No other country can replace them with the
   data we have: the GDELT gate kept only articles that mention one of the six cohort countries, and only inside
   their windows. Canada has the most items of the rest, but only 3–31 seasonal articles per season.
-- **The transform matters** (post-hoc check 4).
+- **The transform matters** (post-hoc check 4). On raw counts the content tuning becomes unstable, and a
+  quicker-to-alarm frequency detector is rewarded by the scoring.
 
 ## Inputs
 
@@ -463,7 +487,7 @@ Step 1 reads these, read only. Paths are in `signal_config.py` and assume the wo
 Run from this folder, with the extractor's venv (or a venv from `requirements.txt`):
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 98 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 99 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python build_weekly.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only
