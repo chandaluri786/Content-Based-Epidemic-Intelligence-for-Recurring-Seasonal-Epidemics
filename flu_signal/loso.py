@@ -93,15 +93,11 @@ def main() -> int:
 ITEM_ONSET = "item_onset"                                  # 5: the earliest alarm of the five item series
 ITEM_ONSET_NO_SUSPICION = "item_onset_no_suspicion"        # 8: the same without the suspicion series
 ARTICLE_SIGNALS = (FREQUENCY_SIGNAL, "content_articles")   # read from weekly_signals.csv
-BASELINES = (FREQUENCY_SIGNAL, cfg.FLU_WORD_FREQUENCY_SIGNAL)
+BASELINES = (FREQUENCY_SIGNAL,)                           # the performance baseline: GDELT tag frequency
 CANDIDATES = ("content_articles", *cfg.ITEM_SERIES, ITEM_ONSET, ITEM_ONSET_NO_SUSPICION)
 MAIN = {"candidate": ITEM_ONSET, "baseline": FREQUENCY_SIGNAL, "early_limit": cfg.EARLY_LIMIT}
 ITEMS_NOTE = ("post hoc: designed 2026-11-19, after the held-out results; exploratory. Rules: "
               "COUNT_SIGNAL_RULES.md and COMBINED_SIGNAL_RULES.md.")
-# Reported, but not to be used as a baseline: its score flipped from 7 to -1 when the weeks became strict ISO
-# weeks (db5acf3), with the same articles. Comparisons against it are kept for transparency only.
-UNSTABLE_BASELINES = {cfg.FLU_WORD_FREQUENCY_SIGNAL: "unstable: score 7 with folded weeks, -1 with strict ISO weeks; "
-                                                     "reported for transparency, not used as a baseline"}
 
 
 def _rise_in_data_so_far(method: str, seen: list[int], cutoff: float, sustain_weeks: int, margin: float) -> bool:
@@ -141,16 +137,12 @@ def item_seasons(weekly_rows: list[dict], item_weekly_rows: list[dict], vintage_
         series = {signal: season[signal] for signal in ARTICLE_SIGNALS}
         seasons[season_id] = {"country": season["country"], "headline": True,
                               "vintages": {signal: [values] * weeks for signal, values in series.items()}}
-    flu_word: dict[str, list] = {}
-    for row in sorted(item_weekly_rows, key=lambda r: (r["season_id"], int(r["week"]))):
-        flu_word.setdefault(row["season_id"], []).append(int(row[cfg.FLU_WORD_FREQUENCY_SIGNAL]))
+    item_weekly_seasons = {row["season_id"] for row in item_weekly_rows}
     vintage_seasons = {row["season_id"] for row in vintage_rows}
-    stale = sorted(set(seasons) - (set(flu_word) & vintage_seasons))
+    stale = sorted(set(seasons) - (item_weekly_seasons & vintage_seasons))
     if stale:
         raise ValueError(f"{cfg.ITEM_WEEKLY_PATH.name} / {cfg.ITEM_VINTAGES_PATH.name} have no rows for {stale}: "
                          f"they are older than {cfg.WEEKLY_PATH.name}; run build_weekly.py again")
-    for season_id, season in seasons.items():
-        season["vintages"][cfg.FLU_WORD_FREQUENCY_SIGNAL] = [flu_word[season_id]] * weeks
     grid_rows: dict[tuple, list] = {}
     for row in vintage_rows:
         if row["season_id"] in seasons:
@@ -306,7 +298,6 @@ def items_summary(fold_rows: list[dict], calendar: dict | None = None) -> dict:
         summary = summarize(rows)
         comparisons.append({
             "candidate": candidate, "baseline": baseline, "early_limit_week": limit,
-            **({"baseline_note": UNSTABLE_BASELINES[baseline]} if baseline in UNSTABLE_BASELINES else {}),
             "decision": decision(summary), **summary,
             "candidate_sustain_chosen": dict(sorted(Counter(r["candidate_sustain"] for r in rows).items())),
             "candidate_settings_chosen": dict(Counter(r["candidate_setting"] for r in rows).most_common()),
@@ -316,7 +307,7 @@ def items_summary(fold_rows: list[dict], calendar: dict | None = None) -> dict:
     main = next(c for c in comparisons if (c["candidate"], c["baseline"], c["early_limit_week"])
                 == (MAIN["candidate"], MAIN["baseline"], -MAIN["early_limit"]))
     summary = {"post_hoc": True, "note": ITEMS_NOTE, "main_comparison": MAIN, "main_decision": main["decision"],
-               "unstable_baselines": UNSTABLE_BASELINES, "comparisons": comparisons}
+               "comparisons": comparisons}
     if calendar is not None:
         summary["calendar_reference"] = calendar
     return summary

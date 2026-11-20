@@ -46,7 +46,7 @@ The change-point detector (BCP or BOCPD) finds weeks where the pattern of a seri
 | Test | Rule |
 |---|---|
 | **Growth** | the change is a rise: each lasting week is **above the average of all the weeks before the change** |
-| **Lasting** | the existing rule (`detection.is_sustained`): the rise holds for `sustain` weeks in a row, with `sustain` = 1, 2 or 3, tuned with the detector settings (Section 6) |
+| **Lasting** | the existing rule (`detection.is_sustained`): the change week and the next `sustain` − 1 weeks are all above the average of the weeks before the change, with `sustain` = 1, 2 or 3, tuned with the detector settings (Section 6). Sustain 1 checks only the change week, so it is no persistence check |
 
 - The alarm is raised in the week the rise is confirmed: the change week itself with `sustain` 1, one week later
   with 2, two weeks later with 3.
@@ -128,13 +128,16 @@ Both hold: better. Neither: not better, reported as the finding. One: mixed.
 - useful articles (Test 1) vs the baseline, the same way;
 - early limit −5 (post hoc);
 - the `sustain` value chosen in each fold;
-- the baseline both as it is and counting only articles that contain a flu word (REDESIGN_PLAN task 1);
+- a calendar reference with no news: alarm in the ISO week of the country's usual onset date (median of its other
+  seasons, leave one season out), to show what knowing the usual timing alone scores;
 - results by country (USA, Australia, India).
 
 ## 9. Cautions to state with the result
 
 - **Small sample:** 22 seasons, so differences of a season or two are descriptive, not proof.
-- **Exploratory:** the held-out seasons were already used. Firm confirmation needs new seasons (2025 onward).
+- **Exploratory:** the held-out seasons were already used. Firm confirmation needs seasons the settings were not
+  chosen on. New seasons (2025 onward) would need new GDELT downloads and a paid extractor run, so the next checks
+  use the data here (Section 10).
 - **Seasons overlap:** seasons of the same year in different countries share news events, so they are not fully
   independent.
 - **False alarms are visible only in weeks −7 to −5.** The data start 10 weeks before each onset, so alarms in quiet
@@ -153,5 +156,8 @@ Both hold: better. Neither: not better, reported as the finding. One: mixed.
   before any results are seen.
 - **A longer history before each season,** so false alarms in quiet months can be measured. This needs a new data
   pull and extraction run.
-- **New seasons (2025 onward)** as a true test.
+- **Persistence check:** `sustain` fixed at 2 (and 3) for every signal, so "lasting" is literally true.
+- **By-year split:** tune on 2015–2021 only and score 2022–2024 once, the same split as the pre-registered test
+  (still post hoc, since the item design came after those results).
+- **New seasons (2025 onward)** as a true test, if new GDELT data and an extractor run become possible.
 - **Multi-series detectors,** if more data become available.

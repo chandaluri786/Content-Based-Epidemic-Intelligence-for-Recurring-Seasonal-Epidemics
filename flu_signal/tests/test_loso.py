@@ -111,7 +111,7 @@ class ItemExperimentTest(unittest.TestCase):
     def test_item_onset_is_the_earliest_series_alarm_and_the_chain_runs_end_to_end(self):
         windows, articles, items = made_up_tables()
         weekly_rows = as_csv_rows(build_weekly(articles, items, windows)[0])
-        out = build_item_weekly(articles, items, windows)
+        out = build_item_weekly(items, windows)
         seasons = item_seasons(weekly_rows, as_csv_rows(out["weekly_rows"]), as_csv_rows(out["vintage_rows"]))
         weeks = item_alarm_weeks(seasons)
         for setting in item_grid((ITEM_ONSET,)):
@@ -140,8 +140,7 @@ class StaleItemFilesTest(unittest.TestCase):
         windows, articles, items = made_up_tables()
         weekly_rows = as_csv_rows(build_weekly(articles, items, windows)[0])
         older = dict(windows, USA=windows["USA"][:2])                  # item files built before one more season
-        kept = {w.season_id for w in older["USA"]}
-        out = build_item_weekly([a for a in articles if a["frequency_seasons"] in kept], items, older)
+        out = build_item_weekly(items, older)
         with self.assertRaisesRegex(ValueError, "run build_weekly.py again"):
             item_seasons(weekly_rows, as_csv_rows(out["weekly_rows"]), as_csv_rows(out["vintage_rows"]))
 

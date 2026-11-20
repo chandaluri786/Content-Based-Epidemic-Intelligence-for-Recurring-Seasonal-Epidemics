@@ -136,7 +136,7 @@ class BuildWeeklyTest(unittest.TestCase):
 
 from weekly import (CLOSED_BY_HIGHER_REGION, COVERED_OR_PARTIAL, INVALID, NEW_INSIDE_SUBSET, NULL_START,
                     REGION_NOT_USED, SAME_ARTICLE_GUARD, SPANS_WEEKS, USED, build_item_weekly, count_item,
-                    country_week_values, flu_word_frequency, item_series, item_vintages, screen_item, week_monday,
+                    country_week_values, item_series, item_vintages, screen_item, week_monday,
                     week_value)
 
 W06 = date(2015, 2, 2)          # Monday of ISO week 2015-W06
@@ -230,7 +230,7 @@ class CountStageOneTest(unittest.TestCase):
         self.assertIn("number", problem)
         rows = [count_row("1", "new", "2018-12-10", number=3, kind="cases", code="USA", scan="2018-12-10"),
                 {**count_row("2", "new", "2018-12-10", kind="cases", code="USA", scan="2018-12-10"), "count_type": ""}]
-        out = build_item_weekly([{**article("1", "2018-12-10"), "source": "llm"}], rows, WINDOWS)
+        out = build_item_weekly(rows, WINDOWS)
         self.assertEqual([(i["record_id"], i["kind"]) for i in out["invalid_items"]], [("2", "cases")])
         self.assertEqual(out["report"]["cases_confirmed"]["decisions"], {INVALID: 1, USED: 1})
 
@@ -318,30 +318,15 @@ class ItemSeriesTest(unittest.TestCase):
         self.assertEqual(as_of[-2][-4 - cfg.FIRST_WEEK], 5)       # week -2 ends 2015-02-22: now known
         self.assertEqual(as_of[cfg.LAST_WEEK], item_series(items, IND_2015)["cases_confirmed"])
 
-    def test_the_flu_word_baseline_leaves_out_articles_the_keyword_filter_dropped(self):
-        articles = [{**article("1", "2018-12-10"), "source": "llm"},
-                    {**article("2", "2018-12-11"), "source": cfg.SOURCE_NOT_SENT}]
-        self.assertEqual(flu_word_frequency(articles, WINDOWS)[("USA-2018", 0)], 1)
-
-    def test_the_flu_word_baseline_uses_the_same_strict_iso_weeks_as_freq_articles(self):
-        articles = [{**article("1", "2018-12-23"), "source": "llm"},      # Sunday: week +1
-                    {**article("2", "2018-12-24"), "source": "llm"}]      # lone last Monday: dropped
-        counts = flu_word_frequency(articles, WINDOWS)
-        self.assertEqual(counts[("USA-2018", 1)], 1)
-        self.assertEqual(sum(counts.values()), 1)
-        rows, _ = build_weekly(articles, [], WINDOWS)
-        self.assertEqual(sum(row["freq_articles"] for row in rows), 1)
-
     def test_build_item_weekly_writes_every_season_week_and_vintage(self):
-        articles = [{**article("1", "2018-12-10"), "source": "llm"}]
         rows = [count_row("1", "new", "2018-12-10", number=3, kind="cases", country="United States",
                           code="USA", scan="2018-12-10")]
-        out = build_item_weekly(articles, rows, WINDOWS)
+        out = build_item_weekly(rows, WINDOWS)
         weeks = cfg.LAST_WEEK - cfg.FIRST_WEEK + 1
         self.assertEqual(len(out["weekly_rows"]), 2 * weeks)
         self.assertEqual(len(out["vintage_rows"]), 2 * weeks * weeks * len(cfg.ITEM_SERIES))
         week0 = next(r for r in out["weekly_rows"] if r["season_id"] == "USA-2018" and r["week"] == 0)
-        self.assertEqual((week0["cases_confirmed"], week0[cfg.FLU_WORD_FREQUENCY_SIGNAL]), (3, 1))
+        self.assertEqual(week0["cases_confirmed"], 3)
         self.assertEqual(out["count_rows"][0]["iso_week"], "2018-W50")
         self.assertEqual(out["report"]["cases_confirmed"]["decisions"], {USED: 1})
 

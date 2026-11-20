@@ -115,8 +115,5 @@ ITEM_SERIES = {
 ITEM_GRADES = {"cases_suspected": 1, "hospitalized_suspected": 1, "cases_confirmed": 2,
                "hospitalized_confirmed": 3, "deaths_confirmed": 4}
 SUSPICION_SERIES = ("cases_suspected", "hospitalized_suspected")
-# Frequency counting only articles that contain a flu word (REDESIGN_PLAN task 1). Reported, but unstable
-# (score 7 -> -1 when the weeks became strict ISO weeks), so not used as a baseline (loso.UNSTABLE_BASELINES).
-FLU_WORD_FREQUENCY_SIGNAL = "freq_flu_word_articles"
 ITEM_MARGIN = 0.0                     # growth only: no size test yet (COMBINED_SIGNAL_RULES 6)
 ITEM_EARLY_LIMITS = (4, 5)            # -4 set in advance, -5 post hoc

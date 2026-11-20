@@ -25,8 +25,7 @@ Written for: a teammate, or a new Claude Code session, picking up the change-poi
   hospitalisation and death series from the items, and one item onset alarm (the earliest of the five). It scores
   18 vs frequency's 5 at −4 (19/1/2 vs 7/2/13, wins 14–4–4, p = 0.031), on reliability rather than lead time;
   suspicion items drive most alarms, and without them it scores 9. Its tuned sustain is 1 (no persistence check).
-  A calendar reference (usual onset date) also scores 5. The flu-word baseline is unstable (7 → −1 with ISO
-  weeks) and is not used. Rules: `COUNT_SIGNAL_RULES.md`, `COMBINED_SIGNAL_RULES.md`; results:
+  A calendar reference (usual onset date) also scores 5. Rules: `COUNT_SIGNAL_RULES.md`, `COMBINED_SIGNAL_RULES.md`; results:
   `ITEM_SIGNAL_RESULTS.md`.
 - Still to do: a methods/results write-up that replaces the stale parts of `repo/capstone_proposal.md`.
 
@@ -35,7 +34,7 @@ Written for: a teammate, or a new Claude Code session, picking up the change-poi
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m unittest discover tests      # 128 tests
+.venv/bin/python -m unittest discover tests      # 126 tests
 .venv/bin/python tune.py --check                 # frozen result still holds; writes nothing
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
 .venv/bin/python transform_check.py              # about 90 s

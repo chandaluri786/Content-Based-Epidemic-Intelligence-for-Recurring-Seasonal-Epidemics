@@ -55,7 +55,7 @@ def main() -> int:
     print(json.dumps(report["seasons_by_split"], indent=2))
 
     # Item signals (post hoc, COUNT_SIGNAL_RULES.md): their own files, so the outputs above stay as they were.
-    item_outputs = build_item_weekly(articles, items, windows)
+    item_outputs = build_item_weekly(items, windows)
     if not item_outputs["count_rows"]:
         raise ValueError("no cases, hospitalized or deaths item was used: check output/items.csv")
     write_csv(cfg.COUNT_SIGNALS_PATH, item_outputs["count_rows"])

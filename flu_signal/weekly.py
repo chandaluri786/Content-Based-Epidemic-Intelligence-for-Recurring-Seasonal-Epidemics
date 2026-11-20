@@ -18,8 +18,8 @@ The candidates are chosen on calibration seasons only (step 4). Nothing here loo
 onset date that names the weeks.
 
 Item signals (post hoc, added 2026-11-19, at the end of this file): the five case, hospitalisation and death
-series built by COUNT_SIGNAL_RULES.md, their "as known at week t" versions for the replay, and the flu-word
-frequency baseline. They are written to their own files; the signals above are unchanged.
+series built by COUNT_SIGNAL_RULES.md and their "as known at week t" versions for the replay. They are written
+to their own files; the signals above are unchanged.
 """
 
 from collections import Counter, defaultdict
@@ -423,22 +423,7 @@ def item_vintages(items: list[CountItem], window: Window) -> dict[str, list[list
     return {name: [vintage[name] for vintage in known] for name in cfg.ITEM_SERIES}
 
 
-def flu_word_frequency(articles: list[dict], windows: dict[str, list[Window]]) -> dict[tuple[str, int], int]:
-    """freq_articles counted only over articles the keyword filter sent on (source != not_sent)."""
-    by_season = {window.season_id: window for country_windows in windows.values() for window in country_windows}
-    labels = {season_id: season_weeks(window) for season_id, window in by_season.items()}
-    counts: Counter = Counter()
-    for article in articles:
-        if article["source"] == cfg.SOURCE_NOT_SENT:
-            continue
-        for season_id in filter(None, article["frequency_seasons"].split(";")):
-            week = week_label(date.fromisoformat(article["scan_date"]), by_season[season_id], labels[season_id])
-            if week is not None:          # same strict ISO weeks as freq_articles: partial-week days dropped
-                counts[(season_id, week)] += 1
-    return counts
-
-
-def build_item_weekly(articles: list[dict], item_rows: list[dict], windows: dict[str, list[Window]]) -> dict:
+def build_item_weekly(item_rows: list[dict], windows: dict[str, list[Window]]) -> dict:
     """Everything step 2 writes for the item signals: count_signals rows, the report, item_weekly_signals rows
     and item_vintages rows."""
     items, invalid = [], []
@@ -450,7 +435,6 @@ def build_item_weekly(articles: list[dict], item_rows: list[dict], windows: dict
             invalid.append({"record_id": row.get("record_id"), "item_index": row.get("item_index"),
                             "kind": row.get("kind"), "status": row.get("status"), "problem": problem})
     values = country_week_values(items)
-    flu_word = flu_word_frequency(articles, windows)
     weekly_rows, vintage_rows = [], []
     for window in sorted((w for ws in windows.values() for w in ws), key=lambda w: w.season_id):
         season_year = int(window.season_id.split("-")[1])
@@ -459,7 +443,6 @@ def build_item_weekly(articles: list[dict], item_rows: list[dict], windows: dict
             weekly_rows.append({"season_id": window.season_id, "country": window.country, "season_year": season_year,
                                 "split": split_of(season_year), "headline": window.country in cfg.HEADLINE_COUNTRIES,
                                 "onset_date": window.onset_date.isoformat(), "week": week,
-                                cfg.FLU_WORD_FREQUENCY_SIGNAL: flu_word[(window.season_id, week)],
                                 **{name: final[name][position] for name in cfg.ITEM_SERIES}})
         for name, vintages in item_vintages(items, window).items():
             for as_of, vintage in zip(range(cfg.FIRST_WEEK, cfg.LAST_WEEK + 1), vintages):

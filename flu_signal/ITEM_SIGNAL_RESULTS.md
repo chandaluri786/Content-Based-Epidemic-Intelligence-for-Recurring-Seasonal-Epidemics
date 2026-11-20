@@ -47,7 +47,7 @@ What looks promising, and what it does not show yet:
 - **Weeks:** strict ISO weeks.
   - Article signals sit in the week of the scan date.
   - Item numbers sit in the week their events happened.
-  - So the ISO-week change (`db5acf3`) moved the frequency baselines but left every item series unchanged.
+  - So the ISO-week change (`db5acf3`) moved the frequency baseline but left every item series unchanged.
 
 ## 2. Head-to-head, all signals
 
@@ -55,9 +55,8 @@ Each cell is hits / false alarms / misses → score.
 
 | Family | Signal | −4..+1 (main) | −5..+1 | Median lead (days) | Lead as known |
 |---|---|---|---|---|---|
-| Frequency | **`freq_articles`** (all articles, the baseline) | 7/2/13 → **5** | 6/2/14 → 4 | 7 | 0 |
-| Frequency | `freq_flu_word_articles` (**unstable**, see 5) | 3/4/15 → −1 | 3/4/15 → −1 | 7 | 0 |
-| Reference | `calendar_usual_onset` (no news, see 5) | 9/4/9 → 5 | 9/4/9 → 5 | | |
+| Frequency | **`freq_articles`** (GDELT tag count, the performance baseline) | 7/2/13 → **5** | 6/2/14 → 4 | 7 | 0 |
+| Reference | `calendar_usual_onset` (no news, see 5.4) | 9/4/9 → 5 | 9/4/9 → 5 | | |
 | Useful articles | `content_articles` | 12/1/9 → **11** | 13/0/9 → 13 | 7 | 0 |
 | Item series | `cases_suspected` | 12/1/9 → 11 | 12/1/9 → 11 | 0 | −7 |
 | Item series | `hospitalized_suspected` | 4/1/17 → 3 | 4/1/17 → 3 | 17.5 | 10.5 |
@@ -90,7 +89,6 @@ The lead columns are for the −4 range.
 | Signal | AUS (6) | IND (8) | USA (8) |
 |---|---|---|---|
 | `freq_articles` | 1/0/5 | 2/1/5 | 4/1/3 |
-| `freq_flu_word_articles` (unstable) | 1/1/4 | 1/2/5 | 1/1/6 |
 | `calendar_usual_onset` (reference) | 2/1/3 | 2/2/4 | 5/1/2 |
 | `content_articles` | 4/0/2 | 4/0/4 | 4/1/3 |
 | `cases_suspected` | 3/0/3 | 3/1/4 | 6/0/2 |
@@ -172,48 +170,45 @@ How much data each item series has (weeks with a value, summed over the country'
 - The `item_onset` and "no suspicion" columns use one shared setting for all five series.
 - The single-series columns use each series' own tuned setting, so they can be earlier than `item_onset`.
 
-| Season | freq | flu-word (unstable) | calendar | **item_onset** | no suspicion | useful | cases susp. | hosp. susp. | cases conf. | hosp. conf. | deaths conf. |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| AUS-2016 | − | − | −3 | **−1** | −2 | − | − | − | −2 | − | − |
-| AUS-2017 | − | − | −4 | **0** | 0 | 1 | 1 | − | 0 | − | − |
-| AUS-2018 | − | −7 | −10 | **−3** | −6 | − | −3 | − | −3 | − | −6 |
-| AUS-2022 | − | − | − | **1** | 1 | −3 | 1 | − | 1 | − | 0 |
-| AUS-2023 | − | − | − | **0** | −5 | 0 | − | − | −5 | 0 | − |
-| AUS-2024 | −3 | −3 | − | **−2** | −2 | −1 | − | − | −3 | −2 | 1 |
-| IND-2015 | − | −7 | −3 | **−** | − | − | − | − | − | − | − |
-| IND-2016 | − | − | − | **−1** | −3 | − | −1 | −7 | −1 | −3 | 0 |
-| IND-2017 | −1 | 1 | − | **0** | 0 | 0 | 1 | −4 | −4 | −4 | 0 |
-| IND-2018 | − | − | −8 | **−** | 1 | − | − | − | 1 | −1 | − |
-| IND-2021 | − | − | −6 | **−3** | −3 | −1 | 1 | − | − | −3 | −3 |
-| IND-2022 | 1 | − | −3 | **−6** | − | −4 | −6 | − | − | −7 | 1 |
-| IND-2023 | −6 | −6 | − | **−1** | −4 | −2 | − | − | −4 | − | − |
-| IND-2024 | − | − | − | **0** | − | − | − | − | − | − | −3 |
-| USA-2015 | −1 | −1 | −7 | **0** | 0 | − | 1 | 0 | −3 | −5 | − |
-| USA-2016 | − | − | −2 | **1** | 0 | −1 | − | − | 0 | 1 | −3 |
-| USA-2017 | 1 | − | 1 | **1** | − | − | 1 | − | − | − | 1 |
-| USA-2018 | − | − | 0 | **−3** | − | − | −3 | − | − | − | − |
-| USA-2019 | −5 | − | − | **−1** | −1 | −3 | −1 | − | −3 | − | −3 |
-| USA-2022 | −1 | −6 | − | **−3** | −3 | −2 | −3 | −2 | −3 | −2 | −3 |
-| USA-2023 | − | − | −1 | **−4** | −6 | −5 | −4 | − | −1 | −4 | −7 |
-| USA-2024 | −3 | − | 0 | **−3** | −5 | −1 | − | −3 | −5 | 1 | − |
+| Season | freq | calendar | **item_onset** | no suspicion | useful | cases susp. | hosp. susp. | cases conf. | hosp. conf. | deaths conf. |
+|---|---|---|---|---|---|---|---|---|---|---|
+| AUS-2016 | − | −3 | **−1** | −2 | − | − | − | −2 | − | − |
+| AUS-2017 | − | −4 | **0** | 0 | 1 | 1 | − | 0 | − | − |
+| AUS-2018 | − | −10 | **−3** | −6 | − | −3 | − | −3 | − | −6 |
+| AUS-2022 | − | − | **1** | 1 | −3 | 1 | − | 1 | − | 0 |
+| AUS-2023 | − | − | **0** | −5 | 0 | − | − | −5 | 0 | − |
+| AUS-2024 | −3 | − | **−2** | −2 | −1 | − | − | −3 | −2 | 1 |
+| IND-2015 | − | −3 | **−** | − | − | − | − | − | − | − |
+| IND-2016 | − | − | **−1** | −3 | − | −1 | −7 | −1 | −3 | 0 |
+| IND-2017 | −1 | − | **0** | 0 | 0 | 1 | −4 | −4 | −4 | 0 |
+| IND-2018 | − | −8 | **−** | 1 | − | − | − | 1 | −1 | − |
+| IND-2021 | − | −6 | **−3** | −3 | −1 | 1 | − | − | −3 | −3 |
+| IND-2022 | 1 | −3 | **−6** | − | −4 | −6 | − | − | −7 | 1 |
+| IND-2023 | −6 | − | **−1** | −4 | −2 | − | − | −4 | − | − |
+| IND-2024 | − | − | **0** | − | − | − | − | − | − | −3 |
+| USA-2015 | −1 | −7 | **0** | 0 | − | 1 | 0 | −3 | −5 | − |
+| USA-2016 | − | −2 | **1** | 0 | −1 | − | − | 0 | 1 | −3 |
+| USA-2017 | 1 | 1 | **1** | − | − | 1 | − | − | − | 1 |
+| USA-2018 | − | 0 | **−3** | − | − | −3 | − | − | − | − |
+| USA-2019 | −5 | − | **−1** | −1 | −3 | −1 | − | −3 | − | −3 |
+| USA-2022 | −1 | − | **−3** | −3 | −2 | −3 | −2 | −3 | −2 | −3 |
+| USA-2023 | − | −1 | **−4** | −6 | −5 | −4 | − | −1 | −4 | −7 |
+| USA-2024 | −3 | 0 | **−3** | −5 | −1 | − | −3 | −5 | 1 | − |
 
 ## 5. Cautions
 
 1. **The pre-registered test favoured frequency.**
    - In the by-year test (settings frozen in advance, 9 held-out seasons), content scored 0 against frequency's 3.
    - Every result in this file is post hoc and must be reported next to it.
-2. **Many comparisons were run:** 10 candidates, 2 baselines and 2 hit ranges. A single p = 0.03 is weaker evidence than it looks.
+2. **Many comparisons were run:** 8 candidates and 2 hit ranges against one baseline. A single p = 0.03 is weaker evidence than it looks.
 3. **22 seasons is small:** a swing of one or two seasons turns a win into a tie.
-4. **The flu-word baseline is unstable and is not used as a baseline.**
-   - With the same articles, its −4 score went from 7 (old weeks, with the window's last Monday folded into week +1) to −1 (strict ISO weeks).
-   - A small change in how weeks are cut flips it, so its comparisons are reported for transparency only (`unstable_baselines` in `loso_items_summary.json`).
-5. **Calendar reference (in `loso.py --items`, `calendar_reference` in the summary):**
+4. **Calendar reference (in `loso.py --items`, `calendar_reference` in the summary):**
    - How it works: alarm in the ISO week of the country's usual onset date (the median from its other seasons, leave one season out).
    - It scores 9/4/9 → 5, the same as `freq_articles`. So frequency does no better than knowing the usual date.
    - `item_onset` (18) does far better, so the item result is not just "flu starts around the same time each year".
    - Because the windows are built around the onset, absolute scores only mean something against references like this one (README, Limitations).
-6. **18 items left out:** all are `new` counts covering 2–7 days, against prompt 4.2. Whether to count those that fall inside one ISO week is still open.
-7. **Weak India data:** India has the least content, and its results carry the least weight.
+5. **18 items left out:** all are `new` counts covering 2–7 days, against prompt 4.2. Whether to count those that fall inside one ISO week is still open.
+6. **Weak India data:** India has the least content, and its results carry the least weight.
 
 ## 6. Parameters
 
@@ -250,7 +245,6 @@ These are the settings most of the 22 leave-one-season-out folds chose. Each is 
 | `deaths_confirmed` | BCP / 0.3 / 1 | 22 of 22 | BCP / 0.3 / 1 | 22 of 22 |
 | `content_articles` | BCP / 0.3 / 3 | 21 of 22 | BCP / 0.3 / 2 | 22 of 22 |
 | `freq_articles` (baseline) | BCP / 0.5 / 1 | 20 of 22 | | |
-| `freq_flu_word_articles` (unstable) | BCP / 0.6 / 1 | 16 of 22 | | |
 
 ## 7. Next steps (no new data needed)
 

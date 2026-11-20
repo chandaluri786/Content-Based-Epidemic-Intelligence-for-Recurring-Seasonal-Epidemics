@@ -52,7 +52,7 @@ run the tests and redo steps 3–5 and the post-hoc checks from `weekly_signals.
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt   # or reuse ../llm-extractor/.venv
-.venv/bin/python -m unittest discover tests      # 128 tests, offline
+.venv/bin/python -m unittest discover tests      # 126 tests, offline
 .venv/bin/python tune.py --check                 # the frozen result still holds on today's weekly table
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
 .venv/bin/python transform_check.py              # about 90 s
@@ -481,14 +481,15 @@ the comparison). The results are in `ITEM_SIGNAL_RESULTS.md`. Nothing here chang
 - **Step 2** (`build_weekly.py`, code in `weekly.py`) also writes `count_signals.csv` (country × ISO week × kind ×
   status), `count_signals_report.json` (items dropped per rule, overlap risk), `item_weekly_signals.csv` (the five
   series `cases_suspected`, `hospitalized_suspected`, `cases_confirmed`, `hospitalized_confirmed`,
-  `deaths_confirmed`, plus `freq_flu_word_articles`) and `item_vintages.csv` (each series as known at the end of
-  each week, for the replay). Item numbers sit in the week their events happened, not the scan week.
+  `deaths_confirmed`) and `item_vintages.csv` (each series as known at the end of each week, for the replay).
+  Item numbers sit in the week their events happened, not the scan week.
 - **`loso.py --items`** replays each season week by week on the series as known then, so a late report never
   raises an alarm before it was published. The **item onset alarm** is the first week any of the five series alarms
   (one shared setting, margin 0, sustain/method/cut-off chosen on the other 21 seasons). It is compared with
-  `freq_articles` (main, early limit −4), `freq_flu_word_articles` (unstable, reported only), `content_articles`
-  and each series alone, at −4 and −5, plus a calendar reference. Writes `loso_items_seasons.csv`, `loso_items_summary.json` (`main_decision`), `loso_items_triggers.csv`
-  (trigger series and grade 1–4 per season) and `loso_items_coverage.csv`.
+  `freq_articles` (the performance baseline, early limit −4 main), `content_articles` and each series alone, at −4
+  and −5, plus a calendar reference. Writes `loso_items_seasons.csv`, `loso_items_summary.json`
+  (`main_decision`), `loso_items_triggers.csv` (trigger series and grade 1–4 per season) and
+  `loso_items_coverage.csv`.
 
 ```bash
 .venv/bin/python build_weekly.py      # needs output/articles.csv, output/items.csv and season_windows.json
@@ -514,8 +515,6 @@ were chosen with all 22 seasons in view and are not validated.
 
 - **Calendar reference** (`calendar_reference` in `loso_items_summary.json`): alarming in the ISO week of the
   country's usual onset date (median of its other seasons) scores 5, the same as `freq_articles`.
-- **`freq_flu_word_articles` is unstable** (score 7 with the old weeks, −1 with strict ISO weeks, same articles).
-  It is reported, but not used as a baseline (`unstable_baselines` in the summary).
 - **No 2025+ seasons:** they would need new GDELT downloads and a paid extractor run. The next checks use the data
   here: sustain fixed at 2–3, and a by-year split (tune on 2015–2021, score 2022–2024 once).
 
@@ -540,7 +539,7 @@ Step 1 reads these, read only. Paths are in `signal_config.py` and assume the wo
 Run from this folder, with the extractor's venv (or a venv from `requirements.txt`):
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 128 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 126 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python build_weekly.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only
