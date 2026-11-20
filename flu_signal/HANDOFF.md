@@ -3,7 +3,7 @@
 Written for: a teammate, or a new Claude Code session, picking up the change-point work. Read this first, then
 `README.md` (every rule and every number) when you need detail.
 
-## Where things stand (2026-11-10)
+## Where things stand (2026-11-19)
 
 - Steps 1–5 are done, and the one held-out run is spent (`output/held_out_run.json`, 2026-11-07).
 - **Weeks are strict ISO weeks** (since 2026-11-10), taken from the scan date. The window's last day, a lone
@@ -21,6 +21,13 @@ Written for: a teammate, or a new Claude Code session, picking up the change-poi
   - Log counts agree with Anscombe, but on raw counts frequency wins LOSO (−1 vs 10).
     That is not a weaker content signal. On raw counts, content's tuning becomes unstable (17 near-tied
     settings), and frequency's BCP alarms more easily, which the wide hit zone rewards. See README, check 4.
+- **Item signals (2026-11-19, post hoc, `loso.py --items`): exploratory, they look promising.** Case,
+  hospitalisation and death series from the items, and one item onset alarm (the earliest of the five). It scores
+  18 vs frequency's 5 at −4 (19/1/2 vs 7/2/13, wins 14–4–4, p = 0.031), on reliability rather than lead time;
+  suspicion items drive most alarms, and without them it scores 9. Its tuned sustain is 1 (no persistence check).
+  A calendar reference (usual onset date) also scores 5. The flu-word baseline is unstable (7 → −1 with ISO
+  weeks) and is not used. Rules: `COUNT_SIGNAL_RULES.md`, `COMBINED_SIGNAL_RULES.md`; results:
+  `ITEM_SIGNAL_RESULTS.md`.
 - Still to do: a methods/results write-up that replaces the stale parts of `repo/capstone_proposal.md`.
 
 ## Check it yourself (git only, no big data)
@@ -28,10 +35,11 @@ Written for: a teammate, or a new Claude Code session, picking up the change-poi
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m unittest discover tests      # 99 tests
+.venv/bin/python -m unittest discover tests      # 128 tests
 .venv/bin/python tune.py --check                 # frozen result still holds; writes nothing
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
 .venv/bin/python transform_check.py              # about 90 s
+.venv/bin/python loso.py --items                 # item signals, about 3 minutes
 git status --short output/                       # nothing listed = same numbers
 ```
 

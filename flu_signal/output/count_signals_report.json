@@ -1,0 +1,209 @@
+{
+  "post_hoc": true,
+  "rules": "COUNT_SIGNAL_RULES.md",
+  "per_series": {
+    "cases_confirmed": {
+      "items": 5079,
+      "decisions": {
+        "closed_by_higher_region": 459,
+        "covered_or_partial": 227,
+        "invalid": 10,
+        "new_inside_subset": 7,
+        "null_start": 1179,
+        "region_not_used": 35,
+        "same_article_guard": 7,
+        "spans_weeks": 2145,
+        "used": 1010
+      },
+      "overlap_risk_place_days": 39
+    },
+    "cases_suspected": {
+      "items": 528,
+      "decisions": {
+        "closed_by_higher_region": 7,
+        "covered_or_partial": 65,
+        "invalid": 1,
+        "new_inside_subset": 1,
+        "null_start": 46,
+        "region_not_used": 3,
+        "same_article_guard": 2,
+        "spans_weeks": 54,
+        "used": 349
+      },
+      "overlap_risk_place_days": 12
+    },
+    "deaths_confirmed": {
+      "items": 2316,
+      "decisions": {
+        "closed_by_higher_region": 53,
+        "covered_or_partial": 45,
+        "invalid": 6,
+        "new_inside_subset": 1,
+        "null_start": 604,
+        "region_not_used": 7,
+        "same_article_guard": 4,
+        "spans_weeks": 504,
+        "used": 1092
+      },
+      "overlap_risk_place_days": 112
+    },
+    "deaths_suspected": {
+      "items": 1,
+      "decisions": {
+        "spans_weeks": 1
+      },
+      "overlap_risk_place_days": 0
+    },
+    "hospitalized_confirmed": {
+      "items": 1421,
+      "decisions": {
+        "closed_by_higher_region": 15,
+        "covered_or_partial": 1,
+        "invalid": 1,
+        "null_start": 347,
+        "region_not_used": 12,
+        "spans_weeks": 457,
+        "used": 588
+      },
+      "overlap_risk_place_days": 16
+    },
+    "hospitalized_suspected": {
+      "items": 66,
+      "decisions": {
+        "null_start": 4,
+        "same_article_guard": 1,
+        "spans_weeks": 20,
+        "used": 41
+      },
+      "overlap_risk_place_days": 0
+    }
+  },
+  "invalid_items": [
+    {
+      "record_id": "20160203053000-323",
+      "item_index": "5",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20160203053000-323:5: a new count must cover one day (prompt 4.2), got 2016-02-01 to 2016-02-03"
+    },
+    {
+      "record_id": "20170921144500-1111",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20170921144500-1111:0: a new count must cover one day (prompt 4.2), got 2017-09-16 to 2017-09-17"
+    },
+    {
+      "record_id": "20181005151500-980",
+      "item_index": "1",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20181005151500-980:1: a new count must cover one day (prompt 4.2), got 2018-10-01 to 2018-10-05"
+    },
+    {
+      "record_id": "20181103023000-851",
+      "item_index": "0",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20181103023000-851:0: a new count must cover one day (prompt 4.2), got 2018-10-29 to 2018-11-03"
+    },
+    {
+      "record_id": "20181110020000-1105",
+      "item_index": "0",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20181110020000-1105:0: a new count must cover one day (prompt 4.2), got 2018-11-05 to 2018-11-10"
+    },
+    {
+      "record_id": "20181201150000-998",
+      "item_index": "1",
+      "kind": "hospitalized",
+      "status": "confirmed",
+      "problem": "item 20181201150000-998:1: a new count must cover one day (prompt 4.2), got 2018-11-19 to 2018-11-25"
+    },
+    {
+      "record_id": "20191014220000-1134",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20191014220000-1134:0: a new count must cover one day (prompt 4.2), got 2019-10-07 to 2019-10-13"
+    },
+    {
+      "record_id": "20221109184500-1462",
+      "item_index": "0",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20221109184500-1462:0: a new count must cover one day (prompt 4.2), got 2022-10-17 to 2022-10-23"
+    },
+    {
+      "record_id": "20220623033000-199",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20220623033000-199:0: a new count must cover one day (prompt 4.2), got 2022-06-20 to 2022-06-23"
+    },
+    {
+      "record_id": "20240613174500-2438",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20240613174500-2438:0: a new count must cover one day (prompt 4.2), got 2024-06-10 to 2024-06-13"
+    },
+    {
+      "record_id": "20240614090000-458",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20240614090000-458:0: a new count must cover one day (prompt 4.2), got 2024-06-10 to 2024-06-14"
+    },
+    {
+      "record_id": "20241021234500-1432",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "suspected",
+      "problem": "item 20241021234500-1432:0: a new count must cover one day (prompt 4.2), got 2024-10-19 to 2024-10-20"
+    },
+    {
+      "record_id": "20241122181500-696",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20241122181500-696:0: a new count must cover one day (prompt 4.2), got 2024-11-18 to 2024-11-22"
+    },
+    {
+      "record_id": "20241125034500-593",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20241125034500-593:0: a new count must cover one day (prompt 4.2), got 2024-11-18 to 2024-11-24"
+    },
+    {
+      "record_id": "20241001113000-376",
+      "item_index": "0",
+      "kind": "deaths",
+      "status": "confirmed",
+      "problem": "item 20241001113000-376:0: a new count must cover one day (prompt 4.2), got 2024-09-23 to 2024-09-29"
+    },
+    {
+      "record_id": "20241009211500-1242",
+      "item_index": "2",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20241009211500-1242:2: a new count must cover one day (prompt 4.2), got 2024-09-30 to 2024-10-06"
+    },
+    {
+      "record_id": "20241010153000-992",
+      "item_index": "0",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20241010153000-992:0: a new count must cover one day (prompt 4.2), got 2024-10-07 to 2024-10-10"
+    },
+    {
+      "record_id": "20241221141500-11",
+      "item_index": "1",
+      "kind": "cases",
+      "status": "confirmed",
+      "problem": "item 20241221141500-11:1: a new count must cover one day (prompt 4.2), got 2024-12-16 to 2024-12-21"
+    }
+  ]
+}

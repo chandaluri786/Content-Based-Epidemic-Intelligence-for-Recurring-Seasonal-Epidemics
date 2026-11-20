@@ -88,3 +88,35 @@ FROZEN_SETTINGS_PATH = OUTPUT_DIR / "frozen_settings.json"
 # Item fields copied to items.csv, in order.
 ITEM_FIELDS = ("kind", "number", "count_type", "status", "strain", "city", "state", "country",
                "start_date", "end_date", "words")
+
+# Item signals (post hoc, 2026-11-19): COUNT_SIGNAL_RULES.md and COMBINED_SIGNAL_RULES.md.
+# Step 2 writes the country-week values, the item series per season and their "as known at week t" versions;
+# `loso.py --items` runs the comparison. None of these replace an earlier output.
+COUNT_SIGNALS_PATH = OUTPUT_DIR / "count_signals.csv"
+COUNT_SIGNALS_REPORT_PATH = OUTPUT_DIR / "count_signals_report.json"
+ITEM_WEEKLY_PATH = OUTPUT_DIR / "item_weekly_signals.csv"
+ITEM_VINTAGES_PATH = OUTPUT_DIR / "item_vintages.csv"
+LOSO_ITEMS_SEASONS_PATH = OUTPUT_DIR / "loso_items_seasons.csv"
+LOSO_ITEMS_SUMMARY_PATH = OUTPUT_DIR / "loso_items_summary.json"
+LOSO_ITEMS_TRIGGERS_PATH = OUTPUT_DIR / "loso_items_triggers.csv"
+LOSO_ITEMS_COVERAGE_PATH = OUTPUT_DIR / "loso_items_coverage.csv"
+
+COUNT_TYPES = ("new", "cumulative_region", "cumulative_subset")
+STATUSES = ("confirmed", "suspected")
+# The five item series: name -> (kind, status), with the grade of its evidence (COMBINED_SIGNAL_RULES 5).
+# No deaths_suspected: prompt v5.2 (2.4) never records a suspected death.
+ITEM_SERIES = {
+    "cases_suspected": ("cases", "suspected"),
+    "hospitalized_suspected": ("hospitalized", "suspected"),
+    "cases_confirmed": ("cases", "confirmed"),
+    "hospitalized_confirmed": ("hospitalized", "confirmed"),
+    "deaths_confirmed": ("deaths", "confirmed"),
+}
+ITEM_GRADES = {"cases_suspected": 1, "hospitalized_suspected": 1, "cases_confirmed": 2,
+               "hospitalized_confirmed": 3, "deaths_confirmed": 4}
+SUSPICION_SERIES = ("cases_suspected", "hospitalized_suspected")
+# Frequency counting only articles that contain a flu word (REDESIGN_PLAN task 1). Reported, but unstable
+# (score 7 -> -1 when the weeks became strict ISO weeks), so not used as a baseline (loso.UNSTABLE_BASELINES).
+FLU_WORD_FREQUENCY_SIGNAL = "freq_flu_word_articles"
+ITEM_MARGIN = 0.0                     # growth only: no size test yet (COMBINED_SIGNAL_RULES 6)
+ITEM_EARLY_LIMITS = (4, 5)            # -4 set in advance, -5 post hoc

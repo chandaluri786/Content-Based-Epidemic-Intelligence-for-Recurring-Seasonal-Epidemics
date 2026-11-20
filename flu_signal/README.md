@@ -16,6 +16,7 @@ plain *count* of flu news? WHO FluNet onset dates are the truth.
 | 4 | Pick the best setting for content and for counts on 2015–2021, and freeze it | `tune.py` |
 | 5 | Test the frozen settings once on 2022–2024; leave one season out | `run_detectors.py --final`, `report_results.py`, `loso.py` |
 | after | Post-hoc checks, designed after seeing the results | `post_hoc.py`, `transform_check.py` |
+| after | Item signals (post hoc): case, hospitalisation and death series and one item onset alarm, against the counts | `build_weekly.py` (also writes them), `loso.py --items` |
 
 **Result:**
 
@@ -32,7 +33,9 @@ plain *count* of flu news? WHO FluNet onset dates are the truth.
   test uses exactly that one.
 - **Cut-off:** how sure the detector must be (the probability that the level just jumped) before it alarms.
   Lower alarms earlier and more often.
-- **Sustain** (1, 2 or 3 weeks): how many weeks the rise must stay above the earlier mean. It stops one-week spikes.
+- **Sustain** (1, 2 or 3 weeks): how many weeks, counting the change week itself, must be above the mean of the
+  weeks before it. Sustain 1 checks only the change week (alarm at once, no persistence check, so a one-week spike
+  can pass); 2 and 3 wait 1 and 2 more weeks and stop one-week spikes.
 - **Margin** (0 or 1): how far above the earlier mean, on the Anscombe scale (1 = one Poisson noise unit). All
   chosen settings use 0.
 - **Early limit** (−4): part of the score, not of the detector. An alarm in weeks −4 to +1 is a hit (+1), an
@@ -49,10 +52,11 @@ run the tests and redo steps 3–5 and the post-hoc checks from `weekly_signals.
 ```bash
 cd repo-llm-v2/flu_signal
 python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt   # or reuse ../llm-extractor/.venv
-.venv/bin/python -m unittest discover tests      # 99 tests, offline
+.venv/bin/python -m unittest discover tests      # 128 tests, offline
 .venv/bin/python tune.py --check                 # the frozen result still holds on today's weekly table
 .venv/bin/python report_results.py && .venv/bin/python loso.py && .venv/bin/python post_hoc.py
 .venv/bin/python transform_check.py              # about 90 s
+.venv/bin/python loso.py --items                 # item signals (post hoc), about 3 minutes
 git status --short output/                       # nothing listed = you got the same numbers
 ```
 
@@ -468,6 +472,55 @@ Collect more than 10 weeks before onset, so that very early alarms can be checke
 - **The transform matters** (post-hoc check 4). On raw counts the content tuning becomes unstable, and a
   quicker-to-alarm frequency detector is rewarded by the scoring.
 
+## Item signals (post hoc, 2026-11-19)
+
+Designed after the held-out results, so exploratory. The rules are in two files next to this one:
+`COUNT_SIGNAL_RULES.md` (items to weekly country numbers) and `COMBINED_SIGNAL_RULES.md` (the alarm, the grade and
+the comparison). The results are in `ITEM_SIGNAL_RESULTS.md`. Nothing here changes an earlier output.
+
+- **Step 2** (`build_weekly.py`, code in `weekly.py`) also writes `count_signals.csv` (country × ISO week × kind ×
+  status), `count_signals_report.json` (items dropped per rule, overlap risk), `item_weekly_signals.csv` (the five
+  series `cases_suspected`, `hospitalized_suspected`, `cases_confirmed`, `hospitalized_confirmed`,
+  `deaths_confirmed`, plus `freq_flu_word_articles`) and `item_vintages.csv` (each series as known at the end of
+  each week, for the replay). Item numbers sit in the week their events happened, not the scan week.
+- **`loso.py --items`** replays each season week by week on the series as known then, so a late report never
+  raises an alarm before it was published. The **item onset alarm** is the first week any of the five series alarms
+  (one shared setting, margin 0, sustain/method/cut-off chosen on the other 21 seasons). It is compared with
+  `freq_articles` (main, early limit −4), `freq_flu_word_articles` (unstable, reported only), `content_articles`
+  and each series alone, at −4 and −5, plus a calendar reference. Writes `loso_items_seasons.csv`, `loso_items_summary.json` (`main_decision`), `loso_items_triggers.csv`
+  (trigger series and grade 1–4 per season) and `loso_items_coverage.csv`.
+
+```bash
+.venv/bin/python build_weekly.py      # needs output/articles.csv, output/items.csv and season_windows.json
+.venv/bin/python loso.py --items      # about 3 minutes: every setting is replayed week by week
+```
+
+`loso.py --items` reads only `weekly_signals.csv`, `item_weekly_signals.csv` and `item_vintages.csv`, which are in
+git, so it can be rerun without the big inputs.
+
+- A count item with a value the prompt cannot produce (empty or fractional `number`, unknown `count_type` or
+  `status`, bad date, start after end, a `new` count covering more than one day, empty country or end date) is
+  left out, counted as `invalid` and listed with its problem under `invalid_items` in `count_signals_report.json`;
+  the run goes on and prints a warning. Nothing is guessed. The first run had 18, all multi-day `new` counts.
+- The eight new outputs are small and kept in git like the others.
+
+**Results (2026-11-19, post hoc, strict ISO weeks): exploratory, item signals look promising.** Report them
+next to the pre-registered by-year result (content 0 vs frequency 3) and the LOSO result (content 11 vs 5).
+`item_onset` scores 19/1/2 (score 18) against `freq_articles` 7/2/13 (score 5) at −4: wins 14–4–4, p = 0.031.
+It wins on reliability, not lead time (median lead 7 days, about 0 as known). Suspicion items triggered 13 of the
+20 alarms; without them the score is 9. In 21 of 22 folds the tuning picks BCP, cut-off 0.9, sustain 1, margin 0;
+sustain 1 means no persistence check, so the alarm is "first upward change", not a sustained rise. These settings
+were chosen with all 22 seasons in view and are not validated.
+
+- **Calendar reference** (`calendar_reference` in `loso_items_summary.json`): alarming in the ISO week of the
+  country's usual onset date (median of its other seasons) scores 5, the same as `freq_articles`.
+- **`freq_flu_word_articles` is unstable** (score 7 with the old weeks, −1 with strict ISO weeks, same articles).
+  It is reported, but not used as a baseline (`unstable_baselines` in the summary).
+- **No 2025+ seasons:** they would need new GDELT downloads and a paid extractor run. The next checks use the data
+  here: sustain fixed at 2–3, and a by-year split (tune on 2015–2021, score 2022–2024 once).
+
+Full comparison, per-season alarm weeks and every chosen setting: `ITEM_SIGNAL_RESULTS.md`.
+
 ## Inputs
 
 Step 1 reads these, read only. Paths are in `signal_config.py` and assume the worktrees sit side by side as
@@ -487,7 +540,7 @@ Step 1 reads these, read only. Paths are in `signal_config.py` and assume the wo
 Run from this folder, with the extractor's venv (or a venv from `requirements.txt`):
 
 ```bash
-../llm-extractor/.venv/bin/python -m unittest discover tests   # 99 tests, offline
+../llm-extractor/.venv/bin/python -m unittest discover tests   # 128 tests, offline
 ../llm-extractor/.venv/bin/python build_tables.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python build_weekly.py              # needs the big inputs
 ../llm-extractor/.venv/bin/python run_detectors.py --cutoff 0.5 --sustain-weeks 2 --margin 1   # calibration only

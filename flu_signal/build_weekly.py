@@ -1,4 +1,6 @@
-"""Write output/weekly_signals.csv and output/weekly_report.json from the step 1 tables. Run from flu_signal/:
+"""Write output/weekly_signals.csv and output/weekly_report.json from the step 1 tables, then the item signals
+(post hoc): output/count_signals.csv, count_signals_report.json, item_weekly_signals.csv and item_vintages.csv.
+Run from flu_signal/:
 
     ../llm-extractor/.venv/bin/python build_weekly.py
 """
@@ -12,7 +14,7 @@ import data_io
 import signal_config as cfg
 from build_tables import write_csv
 from tables import parse_windows
-from weekly import SIGNALS, build_weekly
+from weekly import SIGNALS, build_item_weekly, build_weekly
 
 
 def read_table(path) -> list[dict]:
@@ -35,7 +37,8 @@ def season_totals(rows: list[dict]) -> dict[str, dict]:
 
 def main() -> int:
     windows = parse_windows(data_io.load_season_windows())
-    rows, dropped = build_weekly(read_table(cfg.ARTICLES_PATH), read_table(cfg.ITEMS_PATH), windows)
+    articles, items = read_table(cfg.ARTICLES_PATH), read_table(cfg.ITEMS_PATH)
+    rows, dropped = build_weekly(articles, items, windows)
     write_csv(cfg.WEEKLY_PATH, rows)
 
     totals = season_totals(rows)
@@ -50,6 +53,25 @@ def main() -> int:
     }
     cfg.WEEKLY_REPORT_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["seasons_by_split"], indent=2))
+
+    # Item signals (post hoc, COUNT_SIGNAL_RULES.md): their own files, so the outputs above stay as they were.
+    item_outputs = build_item_weekly(articles, items, windows)
+    if not item_outputs["count_rows"]:
+        raise ValueError("no cases, hospitalized or deaths item was used: check output/items.csv")
+    write_csv(cfg.COUNT_SIGNALS_PATH, item_outputs["count_rows"])
+    write_csv(cfg.ITEM_WEEKLY_PATH, item_outputs["weekly_rows"])
+    write_csv(cfg.ITEM_VINTAGES_PATH, item_outputs["vintage_rows"])
+    invalid = item_outputs["invalid_items"]
+    cfg.COUNT_SIGNALS_REPORT_PATH.write_text(json.dumps({"post_hoc": True, "rules": "COUNT_SIGNAL_RULES.md",
+                                                         "per_series": item_outputs["report"],
+                                                         "invalid_items": invalid}, indent=2) + "\n",
+                                             encoding="utf-8")
+    print(json.dumps(item_outputs["report"], indent=2))
+    if invalid:
+        print(f"WARNING: {len(invalid)} count items have values the prompt cannot produce; they are left out and "
+              f"listed under invalid_items in {cfg.COUNT_SIGNALS_REPORT_PATH.name}")
+    for path in (cfg.COUNT_SIGNALS_PATH, cfg.ITEM_WEEKLY_PATH, cfg.ITEM_VINTAGES_PATH, cfg.COUNT_SIGNALS_REPORT_PATH):
+        print(f"-> {path}")
     return 0
 
 
